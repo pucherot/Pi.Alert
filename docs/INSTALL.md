@@ -105,11 +105,11 @@ Estimated time: 20'
 2 - Install Python & packages
   ```
   sudo apt-get install python-setuptools
-  sudo apt install python-pip
+  sudo apt install python3-pip
 
-  pip install netaddr
-  pip install dpkt
-  pip install MacLookup
+  pip3 install netaddr
+  pip3 install dpkt
+  pip3 install MacLookup
   ```
 
 
