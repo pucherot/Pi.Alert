@@ -86,9 +86,17 @@ main() {
 # Ask config questions
 # ------------------------------------------------------------------------------
 ask_config() {
-  # Ask installation
+  # Ask about directory
   ask_yesno "This script will install Pi.Alert in this system using this path:\n$PIALERT_HOME" \
-           "Do you want to continue ?"
+           "Do you want to change this directory ?"
+  if $ANSWER ; then
+    ask_input "" "Install dir:" "~/pialert"
+    $PIALERT_HOME=$ANSWER
+  fi
+
+  # Ask installation
+  ask_yesno "This script will now install Pi.Alert in this system using this path:\n$PIALERT_HOME" \
+           "Are you sure you want to continue ?"
   if ! $ANSWER ; then
     exit 1
   fi
