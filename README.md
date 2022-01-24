@@ -71,6 +71,8 @@ Initially designed to run on a Raspberry Pi, probably it can run on many other
 Linux distributions.
 
 - One-step Automated Install:
+  #### `curl -sSL https://github.com/skechywolf/Pi.Alert/raw/main/install/pialert_install.sh | bash`
+- Parent Repository
   #### `curl -sSL https://github.com/pucherot/Pi.Alert/raw/main/install/pialert_install.sh | bash`
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
