@@ -83,7 +83,7 @@ Linux distributions.
 
 # Uninstall process
 <!--- --------------------------------------------------------------------- --->
-  - [Unistall process](docs/UNINSTALL.md)
+  - [Uninstall process](docs/UNINSTALL.md)
 
 
 # Device Management
