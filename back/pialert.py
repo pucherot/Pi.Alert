@@ -1413,12 +1413,19 @@ def send_email (pText, pHTML):
     # Send mail
     smtp_connection = smtplib.SMTP (SMTP_SERVER, SMTP_PORT)
     smtp_connection.ehlo()
-    smtp_connection.starttls()
-    smtp_connection.ehlo()
-    smtp_connection.login (SMTP_USER, SMTP_PASS)
+    if not SafeParseGlobalBool("SMTP_SKIP_TLS"):
+        smtp_connection.starttls()
+        smtp_connection.ehlo()
+    if not SafeParseGlobalBool("SMTP_SKIP_LOGIN"):
+        smtp_connection.login (SMTP_USER, SMTP_PASS)
     smtp_connection.sendmail (REPORT_FROM, REPORT_TO, msg.as_string())
     smtp_connection.quit()
 
+#-------------------------------------------------------------------------------
+def SafeParseGlobalBool(boolVariable):
+    if boolVariable in globals():
+        return eval(boolVariable)
+    return False
 
 #===============================================================================
 # DB
