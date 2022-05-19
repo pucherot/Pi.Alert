@@ -51,6 +51,8 @@
 
   <!-- Page Icon -->
   <link rel="icon" type="image/png" sizes="160x160" href="img/pialertLogoGray80.png" />
+  <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
+  <link rel="manifest" href="img/manifest.json">
 </head>
 
 <!-- ----------------------------------------------------------------------- -->
