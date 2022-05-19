@@ -91,7 +91,7 @@ Linux distributions.
   - [Device Management instructions](docs/DEVICE_MANAGEMENT.md)
 
 
-# Add Darkmode to be consistend with the dark themed pi-hole
+# Converted to Dark-Mode to be consistend with the dark pi-hole
 <!--- --------------------------------------------------------------------- --->
 ![screen 5][screen5]
 
