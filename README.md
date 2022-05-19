@@ -7,6 +7,9 @@ Scan the devices connected to your WIFI / LAN and alert you the connection of
 unknown devices. It also warns the disconnection of "always connected" devices.
 
 ![screen 5][screen5]
+*(Forced Dark-Mode)*
+
+
 
 ![Main screen][main]
 
