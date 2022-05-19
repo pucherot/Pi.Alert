@@ -308,7 +308,7 @@
                         <label class="col-sm-5 control-label">Scan Cycle</label>
                         <div class="col-sm-7">
                           <div class="input-group">
-                            <input class="form-control" id="txtScanCycle" type="text" value="--" readonly>
+                            <input class="form-control" id="txtScanCycle" type="text" value="--" readonly >
                             <div class="input-group-btn">
                               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonScanCycle">
                                 <span class="fa fa-caret-down"></span></button>
@@ -343,7 +343,7 @@
                         <label class="col-sm-5 control-label" style="padding-top: 0px; padding-left: 0px;">Skip repeated notifications during</label>
                         <div class="col-sm-7">
                           <div class="input-group">
-                            <input class="form-control" id="txtSkipRepeated" type="text" value="--" readonly>
+                            <input class="form-control" id="txtSkipRepeated" type="text" value="--" readonly >
                             <div class="input-group-btn">
                               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonSkipRepeated">
                                 <span class="fa fa-caret-down"></span></button>
@@ -505,6 +505,8 @@
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
   <script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
   <script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+  <link rel="stylesheet" href="css/dark-patch-cal.css">
+
 
 
 <!-- page script ----------------------------------------------------------- -->

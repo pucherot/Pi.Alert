@@ -14,6 +14,8 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="img/manifest.json">
   <title>Pi.Alert - <?php echo gethostname();?></title>
 
   <!-- Tell the browser to be responsive to screen width -->
@@ -47,24 +49,24 @@
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 
   <!-- Page Icon -->
   <link rel="icon" type="image/png" sizes="160x160" href="img/pialertLogoGray80.png" />
-  
+
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
 
-  <!-- In addition to the "dark-patch.css" I recommend the use of the theme "skin-blue", 
-       on the basis of which I have created the patch. The "dark-patch.css" is mainly 
-       the darkmode of the pi-hole AdminLTE Dashboard witch some fixes -->
+<!-- In addition to the "dark-patch.css" I recommend the use of the theme "skin-blue", 
+    on the basis of which I have created the patch. The "dark-patch.css" is mainly 
+    the darkmode of the pi-hole AdminLTE Dashboard witch some fixes -->
   <link rel="stylesheet" href="css/dark-patch.css">
-  
+
 </head>
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed Yellow -->
-<body class="hold-transition skin-blue layout-boxed sidebar-mini" style="background-image: url('img/background.png');">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini" style="background-image: url('img/boxed-bg-dark.png');">
 <!-- Site wrapper -->
 <div class="wrapper">
 

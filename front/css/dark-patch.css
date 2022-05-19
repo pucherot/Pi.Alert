@@ -372,7 +372,7 @@ h4 {
 }
 
 .bg-green {
-  background-color: #008623 !important;
+  background-color: #005c32 !important;
 }
 .bg-aqua {
   background-color: #007997 !important;
@@ -643,4 +643,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 .bg-gray {
   background-color: #888888 !important;
+}
+.badge.bg-green {
+    background-color: #00A000 !important;
 }
