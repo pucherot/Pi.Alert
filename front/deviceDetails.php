@@ -56,7 +56,7 @@
             <div class="small-box bg-green pa-small-box-green pa-small-box-2">
               <div class="inner"> <h3 id="deviceSessions"> -- </h3> </div>
               <div class="icon"> <i class="fa fa-plug"></i> </div>
-              <div class="small-box-footer pa-small-box-footer"> Sesions <i class="fa fa-arrow-circle-right"></i> </div>
+              <div class="small-box-footer pa-small-box-footer"> Sessions <i class="fa fa-arrow-circle-right"></i> </div>
             </div>
           </a>
         </div>
