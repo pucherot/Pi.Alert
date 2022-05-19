@@ -34,7 +34,7 @@
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-yellow-light.min.css">
+  <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-blue.min.css">
 
   <!-- Pi.Alert CSS -->
   <link rel="stylesheet" href="css/pialert.css">
@@ -51,13 +51,20 @@
 
   <!-- Page Icon -->
   <link rel="icon" type="image/png" sizes="160x160" href="img/pialertLogoGray80.png" />
+  
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
+
+  <!-- In addition to the "dark-patch.css" I recommend the use of the theme "skin-blue", 
+       on the basis of which I have created the patch. The "dark-patch.css" is mainly 
+       the darkmode of the pi-hole AdminLTE Dashboard witch some fixes -->
+  <link rel="stylesheet" href="css/dark-patch.css">
+  
 </head>
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed Yellow -->
-<body class="hold-transition skin-yellow-light layout-boxed sidebar-mini" style="background-image: url('img/background.png');">
+<body class="hold-transition skin-blue layout-boxed sidebar-mini" style="background-image: url('img/background.png');">
 <!-- Site wrapper -->
 <div class="wrapper">
 
