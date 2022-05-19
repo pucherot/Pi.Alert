@@ -6,15 +6,13 @@ WIFI / LAN intruder detector.
 Scan the devices connected to your WIFI / LAN and alert you the connection of
 unknown devices. It also warns the disconnection of "always connected" devices.
 
-![screen 5][screen5]
-*(Forced Dark-Mode)*
-
-
-
 ![Main screen][main]
 
 *(Apologies for my English and my limited knowledge of Python, php and
 JavaScript)*
+
+![screen 5][screen5]
+*(configurable Dark-Mode, enabled by default)*
 
 ## How it works
 The system continuously scans the network for:
