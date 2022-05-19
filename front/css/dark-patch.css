@@ -647,3 +647,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .badge.bg-green {
     background-color: #00A000 !important;
 }
+#txtRecord {
+  background-color: #353c42;
+  border-color: #888888;
+}
