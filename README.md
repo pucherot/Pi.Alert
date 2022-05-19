@@ -6,6 +6,8 @@ WIFI / LAN intruder detector.
 Scan the devices connected to your WIFI / LAN and alert you the connection of
 unknown devices. It also warns the disconnection of "always connected" devices.
 
+![screen 5][screen5]
+
 ![Main screen][main]
 
 *(Apologies for my English and my limited knowledge of Python, php and
@@ -89,11 +91,6 @@ Linux distributions.
 # Device Management
 <!--- --------------------------------------------------------------------- --->
   - [Device Management instructions](docs/DEVICE_MANAGEMENT.md)
-
-
-# Converted to Dark-Mode to be consistend with the dark pi-hole
-<!--- --------------------------------------------------------------------- --->
-![screen 5][screen5]
 
 
 ## Other useful info
