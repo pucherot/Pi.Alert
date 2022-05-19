@@ -372,7 +372,7 @@ h4 {
 }
 
 .bg-green {
-  background-color: #005c32 !important;
+  background-color: #008623 !important;
 }
 .bg-aqua {
   background-color: #007997 !important;
@@ -591,7 +591,6 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .modal-footer {
   border-top-color: #353c42;
 }
-
 .close {
   color: #383838;
 }
@@ -608,8 +607,6 @@ input[type="password"]::-webkit-caps-lock-indicator {
   background: none;
   border-color: rgb(120, 127, 133);
 }
-
-
 
 /*** Additional fixes For Pi.Alert UI ***/
 .small-box {
@@ -643,4 +640,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 .text-gray-20 {
   color: rgba(20,20,20,30%);
+}
+.bg-gray {
+  background-color: #888888 !important;
 }
