@@ -8,8 +8,6 @@ unknown devices. It also warns the disconnection of "always connected" devices.
 
 ![Main screen][main]
 
-![screen 5][screen5]
-
 *(Apologies for my English and my limited knowledge of Python, php and
 JavaScript)*
 
@@ -93,6 +91,11 @@ Linux distributions.
   - [Device Management instructions](docs/DEVICE_MANAGEMENT.md)
 
 
+# Add Darkmode to be consistend with the dark themed pi-hole
+<!--- --------------------------------------------------------------------- --->
+![screen 5][screen5]
+
+
 ## Other useful info
 <!--- --------------------------------------------------------------------- --->
 
@@ -123,13 +126,14 @@ Linux distributions.
   ***Suggestions and comments are welcome***
 
 
+
 <!--- --------------------------------------------------------------------- --->
 [main]:    ./docs/img/1_devices.jpg           "Main screen"
 [screen1]: ./docs/img/2_1_device_details.jpg  "Screen 1"
 [screen2]: ./docs/img/2_2_device_sessions.jpg "Screen 2"
 [screen3]: ./docs/img/2_3_device_presence.jpg "Screen 3"
 [screen4]: ./docs/img/3_presence.jpg          "Screen 4"
-[screen5]: ./docs/img/4_darkmode.png          "Screen 5"
+[screen5]: ./docs/img/5_darkmode.jpg          "Screen 5"
 [report1]: ./docs/img/4_report_1.jpg          "Report sample 1"
 [report2]: ./docs/img/4_report_2.jpg          "Report sample 2"
 
