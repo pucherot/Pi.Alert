@@ -116,26 +116,6 @@
                 </p>
               </li>
 
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a target="_blank" href="https://github.com/pucherot/Pi.Alert">GitHub Pi.Alert</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="mailto:pi.alert.application@gmail.com">email Support</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a target="_blank" href="https://github.com/pucherot/Pi.Alert/blob/main/LICENSE.txt">GNU GPLv3</a>
-                  </div>
-                  <!--
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Updates</a>
-                  </div>
-                  -->
-                </div>
-                <!-- /.row -->
-              </li>
             </ul>
           </li>
         </ul>
