@@ -58,9 +58,8 @@
   <link rel="manifest" href="img/manifest.json">
 
 <!-- In addition to the "dark-patch.css" I recommend the use of the theme "skin-blue", 
-     on the basis of which I have created the patch. The "dark-patch.css" is mainly 
-     the Dark-Mode of the pi-hole AdminLTE Dashboard with some fixes. Additional Patches 
-     are in "presence.php" (line 157) and "deviceDetails.php" (line 509) to fix the fullcalendar-Plugin. -->
+    on the basis of which I have created the patch. The "dark-patch.css" is mainly 
+    the darkmode of the pi-hole AdminLTE Dashboard witch some fixes -->
   <link rel="stylesheet" href="css/dark-patch.css">
 
 </head>
