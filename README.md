@@ -93,6 +93,14 @@ Linux distributions.
   - [Device Management instructions](docs/DEVICE_MANAGEMENT.md)
 
 
+<<<<<<< HEAD
+=======
+# Add Darkmode to be consistend with the dark themed pi-hole
+<!--- --------------------------------------------------------------------- --->
+![screen 5][screen5]
+
+
+>>>>>>> parent of d1eeb6f (Update Readme)
 ## Other useful info
 <!--- --------------------------------------------------------------------- --->
 
