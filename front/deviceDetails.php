@@ -506,10 +506,11 @@
   <script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
   <script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 
-<!-- Enable or Disable the CSS Patch for Dark-Mode -->
-<!-- Uncomment or Comment below-->
-  <link rel="stylesheet" href="css/dark-patch-cal.css">
-
+<?php
+if ($ENABLED_DARKMODE === True) {
+   echo '<link rel="stylesheet" href="css/dark-patch-cal.css">';
+}
+?>
 
 
 <!-- page script ----------------------------------------------------------- -->
