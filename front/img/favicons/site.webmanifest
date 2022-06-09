@@ -1,6 +1,6 @@
 {
-    "name": "pi.scanner",
-    "short_name": "pi.scanner",
+    "name": "pi.alert",
+    "short_name": "pi.alert",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
