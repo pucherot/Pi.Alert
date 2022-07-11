@@ -3,8 +3,8 @@
 
 WIFI / LAN intruder detector.
 
-Scan the devices connected to your WIFI / LAN and alert you the connection of
-unknown devices. It also warns the disconnection of "always connected" devices.
+Scan the devices connected to your WIFI / LAN and notify you of any unknown devices.
+It also warns the disconnection of "always connected" devices.
 
 ![Main screen][main]
 
