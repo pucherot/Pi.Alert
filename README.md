@@ -4,7 +4,7 @@
 WIFI / LAN intruder detector.
 
 Scan the devices connected to your WIFI / LAN and notify you of any unknown devices.
-It also warns the disconnection of "always connected" devices.
+It also warns users about disconnecting "always connected" devices.
 
 ![Main screen][main]
 
