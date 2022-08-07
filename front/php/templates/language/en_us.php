@@ -265,6 +265,14 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Deleting the network activity';
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'The network activity graph is reset. This does not affect the events.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Delete network activity';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = 'Are you sure you want to reset the network activity?';
+$pia_lang['Maintenance_Tool_ExportCSV'] = 'CSV Export';
+$pia_lang['Maintenance_Tool_ExportCSV_text'] = 'Generate a CSV (comma separated value) file containing the list of Devices including the Network relationships between Network Nodes and connected devices.';
+$pia_lang['Maintenance_Tool_ExportCSV_noti'] = 'CSV Export';
+$pia_lang['Maintenance_Tool_ExportCSV_noti_text'] = 'Are you sure you want to generate a CSV file?';
+$pia_lang['Maintenance_Tool_ImportCSV'] = 'CSV Import';
+$pia_lang['Maintenance_Tool_ImportCSV_text'] = 'Before using this function, please make a backup. Import a CSV (comma separated value) file containing the list of Devices including the Network relationships between Network Nodes and connected devices. To do that place the CSV file named <b>devices.csv</b> into your <b>/config</b> folder.';
+$pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'CSV Import';
+$pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = 'Are you sure you want to import the CSV file? This will completely overwrite the devices in your database.';
 $pia_lang['Maintenance_Github_package_a'] ='The latest Pi.Alert (Fork leiweibau) archive was posted on ';
 
 //////////////////////////////////////////////////////////////////
@@ -292,6 +300,9 @@ $pia_lang['BackDevices_DBTools_UpdDevError'] = 'Error updating device';
 $pia_lang['BackDevices_DBTools_Upgrade'] = 'Database upgraded successfully';
 $pia_lang['BackDevices_DBTools_UpgradeError'] = 'Database upgrade failed';
 $pia_lang['BackDevices_DBTools_Purge'] = 'The oldest backups were deleted';
+$pia_lang['BackDevices_DBTools_ImportCSV'] = 'The devices from the CSV file were imported successfully.';
+$pia_lang['BackDevices_DBTools_ImportCSVError'] = 'The CSV file couldn\'t be imported. Make sure the format is correct.';
+$pia_lang['BackDevices_DBTools_ImportCSVMissing'] = 'The CSV file couldn\'t be found under <b>/config/devices.csv.</b>';
 
 //////////////////////////////////////////////////////////////////
 // Network Page
@@ -324,6 +335,7 @@ $pia_lang['Network_ManageDel_Submit'] = 'Delete';
 $pia_lang['Network_Table_State'] = 'State';
 $pia_lang['Network_Table_Hostname'] = 'Hostname';
 $pia_lang['Network_Table_IP'] = 'IP';
+$pia_lang['Network_UnassignedDevices'] = 'Unassigned devices';
 
 //////////////////////////////////////////////////////////////////
 // Help Page
