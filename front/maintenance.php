@@ -344,29 +344,26 @@ if (submit && isset($_POST['langselector_set'])) {
 </div>
 
 <div class="box">
-    <div class="box-body" style="text-align: center;">
-        <h5 class="text-aqua" style="font-size: 16px;"><?php echo $pia_lang['Maintenance_Github_package_a'];?>
-<?php
-
-$curl_handle=curl_init();
-curl_setopt($curl_handle, CURLOPT_URL,'https://api.github.com/repos/leiweibau/Pi.Alert/commits?path=tar%2Fpialert_latest.tar&page=1&per_page=1');
-curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($curl_handle, CURLOPT_USERAGENT, 'PHP');
-$query = curl_exec($curl_handle);
-curl_close($curl_handle);
-
-$data = json_decode($query, true);
-
-$utc_ts = strtotime($data['0']['commit']['author']['date']);
-$offset = date("Z");
-$local_ts = $utc_ts + $offset;
-$local_time = date("d.m.Y, H:i:s", $utc_ts);
-echo $local_time;
-?>       
-    <?php echo $pia_lang['Maintenance_Github_package_b'];?></h5>
+    <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
+        <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()">Check for Updates</button>
   </div>
 </div>
+
+                  <script>
+                  function check_github_for_updates() {
+                    $( "#updatecheck" ).empty();
+                    $.ajax({
+                      method: "POST",
+                      url: "./php/templates/updatecheck.php",
+                      data: "",
+                      beforeSend: function() { $('#updatecheck').addClass("ajax_scripts_loading"); },
+                      complete: function() { $('#updatecheck').removeClass("ajax_scripts_loading"); },
+                      success: function(data, textStatus) {
+                          $("#updatecheck").html(data);    
+                      }
+                    })
+                  }
+                  </script>
 
 <div style="width: 100%; height: 20px;"></div>
     <!-- ----------------------------------------------------------------------- -->
