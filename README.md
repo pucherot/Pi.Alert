@@ -48,6 +48,7 @@ In charge of:
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify)
   - DB cleanup tasks via cron
+  - a pialert-cli that helps to configure login and password
 
   | ![Report 1][report1] | ![Report 2][report2] |
   | -------------------- | -------------------- |
@@ -78,6 +79,7 @@ A web frontend that allows:
     - Pause arp-scan
     - DB maintenance tools
     - DB Backup and Restore
+  - Help/FAQ Section 
 
   | ![Screen 1][screen1] | ![Screen 2][screen2] |
   | -------------------- | -------------------- |
