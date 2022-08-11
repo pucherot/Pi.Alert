@@ -170,49 +170,72 @@ if (submit && isset($_POST['langselector_set'])) {
 }
 ?>
 
-      <div class="row">
-          <div class="col-md-12">
-          <div class="box" id="Maintain-Status">
-              <div class="box-header with-border">
-                <h3 class="box-title">Status</h3>
-              </div>
-              <div class="box-body" style="padding-bottom: 5px;">
-                <div class="db_info_table">
-                    <div class="db_info_table_row">
-                        <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_database_path'];?></div>
-                        <div class="db_info_table_cell">
-                            <?php echo $pia_db;?>
-                        </div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_size'];?></div>
-                        <div class="db_info_table_cell">
-                            <?php echo $pia_db_size;?>
-                        </div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_lastmod'];?></div>
-                        <div class="db_info_table_cell">
-                            <?php echo $pia_db_mod;?>
-                        </div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_backup'];?></div>
-                        <div class="db_info_table_cell">
-                            <?php echo $Pia_Archive_count.' '.$pia_lang['Maintenance_database_backup_found'].' / '.$pia_lang['Maintenance_database_backup_total'].': '.$Pia_Archive_diskusage;?>
-                        </div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_arp_status'];?></div>
-                        <div class="db_info_table_cell">
-                            <?php echo $pia_arpscans_result;?></div>
-                    </div>
-                </div>                
-              </div>
-              <!-- /.box-body -->
-            </div>
+    <div class="row">
+      <div class="col-md-12">
+      <div class="box" id="Maintain-Status">
+          <div class="box-header with-border">
+            <h3 class="box-title">Status</h3>
           </div>
+          <div class="box-body" style="padding-bottom: 5px;">
+            <div class="db_info_table">
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_database_path'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo $pia_db;?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_size'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo $pia_db_size;?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_lastmod'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo $pia_db_mod;?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_backup'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo $Pia_Archive_count.' '.$pia_lang['Maintenance_database_backup_found'].' / '.$pia_lang['Maintenance_database_backup_total'].': '.$Pia_Archive_diskusage;?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_arp_status'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo $pia_arpscans_result;?></div>
+                </div>
+            </div>                
+          </div>
+          <!-- /.box-body -->
+        </div>
       </div>
+    </div>
+
+    <div class="box">
+        <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
+            <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()">Check for Updates</button>
+      </div>
+    </div>
+
+    <script>
+    function check_github_for_updates() {
+        $("#updatecheck").empty();
+        $.ajax({
+            method: "POST",
+            url: "./php/server/updatecheck.php",
+            data: "",
+            beforeSend: function() { $('#updatecheck').addClass("ajax_scripts_loading"); },
+            complete: function() { $('#updatecheck').removeClass("ajax_scripts_loading"); },
+            success: function(data, textStatus) {
+                $("#updatecheck").html(data);
+            }
+        })
+    }
+    </script>
+
 
     <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
@@ -282,6 +305,27 @@ if (submit && isset($_POST['langselector_set'])) {
                         </div>
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_arpscansw_text'];?></div>
                     </div>
+
+<?php
+
+if (strtolower($_SESSION['WebProtection']) != 'true') {
+    echo '          <div class="db_info_table_row">
+                        <div class="db_tools_table_cell_a">
+                            <button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">'.$pia_lang['Maintenance_Tool_loginenable'].'</button>
+                        </div>
+                        <div class="db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_loginenable_text'].'</div> 
+                    </div>';}
+else {
+        echo '          <div class="db_info_table_row">
+                        <div class="db_tools_table_cell_a">
+                            <button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">'.$pia_lang['Maintenance_Tool_logindisable'].'</button>
+                        </div>
+                        <div class="db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_logindisable_text'].'</div>
+                    </div>'; 
+}
+
+?>
+
                 </div>
         </div>
         <div class="tab-pane" id="tab_DBTools">
@@ -342,28 +386,6 @@ if (submit && isset($_POST['langselector_set'])) {
         </div>
     </div>
 </div>
-
-<div class="box">
-    <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
-        <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()">Check for Updates</button>
-  </div>
-</div>
-
-                  <script>
-                  function check_github_for_updates() {
-                    $( "#updatecheck" ).empty();
-                    $.ajax({
-                      method: "POST",
-                      url: "./php/templates/updatecheck.php",
-                      data: "",
-                      beforeSend: function() { $('#updatecheck').addClass("ajax_scripts_loading"); },
-                      complete: function() { $('#updatecheck').removeClass("ajax_scripts_loading"); },
-                      success: function(data, textStatus) {
-                          $("#updatecheck").html(data);    
-                      }
-                    })
-                  }
-                  </script>
 
 <div style="width: 100%; height: 20px;"></div>
     <!-- ----------------------------------------------------------------------- -->
@@ -508,7 +530,7 @@ function PiaEnableDarkmode()
 }
 
 // Toggle the Arp-Scans 
-function askPiaToggleArpScan () {
+function askPiaToggleArpScan() {
   // Ask 
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_arpscansw_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_arpscansw_noti_text'];?>',
     '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Switch'];?>', 'PiaToggleArpScan');
@@ -521,6 +543,33 @@ function PiaToggleArpScan()
   });
 }
 
+// Enable Login 
+function askPiaLoginEnable() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_loginenable_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_loginenable_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Switch'];?>', 'PiaLoginEnable');
+}
+function PiaLoginEnable()
+{ 
+  // Execute
+  $.get('php/server/devices.php?action=PiaLoginEnable', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Disable Login 
+function askPiaLoginDisable() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_logindisable_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_logindisable_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Switch'];?>', 'PiaLoginDisable');
+}
+function PiaLoginDisable()
+{ 
+  // Execute
+  $.get('php/server/devices.php?action=PiaLoginDisable', function(msg) {
+    showMessage (msg);
+  });
+}
 </script>
 
 

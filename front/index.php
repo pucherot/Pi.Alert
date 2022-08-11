@@ -3,7 +3,7 @@ session_start();
 
 if ($_REQUEST['action'] == 'logout') {
   session_destroy();
-  setcookie("PiAler_SaveLogin", "", time() - 3600);
+  setcookie("PiAlert_SaveLogin", "", time() - 3600);
   header('Location: /pialert/index.php');
 }
 // ##################################################
@@ -32,7 +32,8 @@ $Pia_WebProtection = strtolower(trim($protection_line[1]));
 if ($Pia_WebProtection != 'true')
   {
       header('Location: /pialert/devices.php');
-      $_SESSION["login"] = 1;
+      $_SESSION['login'] = 1;
+      $_SESSION['WebProtection'] = $Pia_WebProtection;
       exit;
   }
 
@@ -49,14 +50,16 @@ if ($Pia_Password == hash('sha256',$_POST["loginpassword"]))
   {
       header('Location: /pialert/devices.php');
       $_SESSION["login"] = 1;
-      if (isset($_POST['PWRemember'])) {setcookie("PiAler_SaveLogin", hash('sha256',$_POST["loginpassword"]), time()+604800);}
+      $_SESSION['WebProtection'] = $Pia_WebProtection;
+      if (isset($_POST['PWRemember'])) {setcookie("PiAlert_SaveLogin", hash('sha256',$_POST["loginpassword"]), time()+604800);}
   }
 
 // active Session or valid cookie (cookie not extends)
-if (($_SESSION["login"] == 1) || ($Pia_Password == $_COOKIE["PiAler_SaveLogin"]))
+if (($_SESSION["login"] == 1) || ($Pia_Password == $_COOKIE["PiAlert_SaveLogin"]))
   {
       header('Location: /pialert/devices.php');
       $_SESSION["login"] = 1;
+      $_SESSION['WebProtection'] = $Pia_WebProtection;
   }
 
 // no active session, cookie not checked

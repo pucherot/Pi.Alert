@@ -1,4 +1,5 @@
 <?php
+session_start();
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector 
@@ -51,6 +52,9 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'PiaPurgeDBBackups':       PiaPurgeDBBackups();                     break;
       case 'PiaEnableDarkmode':       PiaEnableDarkmode();                     break;
       case 'PiaToggleArpScan':        PiaToggleArpScan();                      break;
+
+      case 'PiaLoginEnable':          PiaLoginEnable();                        break;
+      case 'PiaLoginDisable':         PiaLoginDisable();                       break;
 
       case 'getDevicesTotals':        getDevicesTotals();                      break;
       case 'getDevicesList':          getDevicesList();                        break;
@@ -435,13 +439,42 @@ function PiaToggleArpScan() {
 
   if (file_exists($file)) {
       echo $pia_lang['BackDevices_Arpscan_enabled'];
-      unlink($file);
+      // old method
+      //unlink($file);
+      exec('../../../back/pialert-cli enable_scan', $output);
       echo("<meta http-equiv='refresh' content='1'>");
      } else {
       echo $pia_lang['BackDevices_Arpscan_disabled'];
-      $startarpscan = fopen($file, 'w');
+      // old method
+      //$startarpscan = fopen($file, 'w');
+      exec('../../../back/pialert-cli disable_scan', $output);
       echo("<meta http-equiv='refresh' content='1'>");
      }
+  }
+
+//------------------------------------------------------------------------------
+//  Enable Login
+//------------------------------------------------------------------------------
+function PiaLoginEnable() {
+  global $pia_lang;
+
+  session_destroy();
+  exec('../../../back/pialert-cli set_login', $output);
+  echo $pia_lang['BackDevices_Login_enabled'];
+  echo("<meta http-equiv='refresh' content='1; /pialert/index.php?action=logout'>");
+  }
+
+//------------------------------------------------------------------------------
+//  Disable Login
+//------------------------------------------------------------------------------
+function PiaLoginDisable() {
+  global $pia_lang;
+
+  session_destroy();
+  setcookie("PiAlert_SaveLogin", "", time() - 3600);
+  exec('../../../back/pialert-cli unset_login', $output);
+  echo $pia_lang['BackDevices_Login_disabled'];
+  echo("<meta http-equiv='refresh' content='1; /pialert/index.php?action=logout'>");
   }
 
 //------------------------------------------------------------------------------
