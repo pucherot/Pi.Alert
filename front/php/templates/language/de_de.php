@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////////////////////
 $pia_lang['About_Title'] = 'Open Source Network Guard';
 $pia_lang['About_Design'] = 'Designed for:';
-$pia_lang['About_Exit'] = 'Sign out';
+$pia_lang['About_Exit'] = 'Abmelden';
 
 //////////////////////////////////////////////////////////////////
 // General
@@ -271,11 +271,19 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Löschen der Netzwerkaktivität'
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'Der Graph für die Netzwerkaktivität wird zurückgesetzt. Hierbei werden die Events nicht beeinflusst.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Netzwerkaktivität löschen';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = 'Sind Sie sicher, dass Sie die Netzwerkaktivität zurücksetzen möchten?';
-$pia_lang['Maintenance_Github_package_a'] ='Das aktuellst Archiv von Pi.Alert (Fork leiweibau) wurde am ';
-$pia_lang['Maintenance_Github_package_b'] ='Uhr bereitgestellt';
+$pia_lang['Maintenance_Github_package_a'] ='Die neuste Version ist vom ';
+$pia_lang['Maintenance_Github_package_b'] ='Uhr.';
+$pia_lang['Maintenance_Tool_loginenable'] ='Login aktivieren';
+$pia_lang['Maintenance_Tool_loginenable_text'] ='Nach der Aktivierung gelangst du automatisch auf die Anmeldeseite. Wenn du zuvor noch kein Passwort gesetzt hast, ist "123456" das Standardpasswort.';
+$pia_lang['Maintenance_Tool_loginenable_noti'] ='Login aktivieren';
+$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='Bist du dir sicher, dass du den Login aktivieren möchtest?';
+$pia_lang['Maintenance_Tool_logindisable'] ='Login deaktivieren';
+$pia_lang['Maintenance_Tool_logindisable_text'] ='Der Login wird deaktiviert. Jeder Nutzer hat nun wieder die Möglichkeit auf die Pi.Alert-Seite zuzugreifen.';
+$pia_lang['Maintenance_Tool_logindisable_noti'] ='Login deaktivieren';
+$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Bist du dir sicher, dass du den Login deaktivieren möchtest?';
 
 //////////////////////////////////////////////////////////////////
-// Maintenance Page
+// Maintenance Page (Backend)
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Automatischer Arp-Scan deaktiviert.';
@@ -301,6 +309,8 @@ $pia_lang['BackDevices_DBTools_UpgradeError'] = 'Fehler beim Aktualisieren der D
 $pia_lang['BackDevices_DBTools_Purge'] = 'Die ältesten Backups wurden gelöscht.';
 $pia_lang['BackDevices_DBTools_DelActHistory'] = 'Die Anzeige der Netzwerkaktivität wurde zurückgesetzt.';
 $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Fehler beim Zurücksetzen der Netzwerkaktivitätsanzeige.';
+$pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
+$pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

@@ -278,6 +278,14 @@ $pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'Importación CSV';
 $pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = '¿Está seguro de que quiere importar el archivo CSV? Esto sobrescribirá completamente los dispositivos de su base de datos.';
 $pia_lang['Maintenance_Github_package_a'] ='La última versión de Pi.Alert (Fork leiweibau) se publicó en ';
 $pia_lang['Maintenance_Github_package_b'] ='';
+$pia_lang['Maintenance_Tool_loginenable'] ='';
+$pia_lang['Maintenance_Tool_loginenable_text'] ='';
+$pia_lang['Maintenance_Tool_loginenable_noti'] ='';
+$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='';
+$pia_lang['Maintenance_Tool_logindisable'] ='';
+$pia_lang['Maintenance_Tool_logindisable_text'] ='';
+$pia_lang['Maintenance_Tool_logindisable_noti'] ='';
+$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page - Update by @TeroRERO 25jul2022
@@ -304,6 +312,8 @@ $pia_lang['BackDevices_DBTools_UpdDevError'] = 'Error al actualizar el dispositi
 $pia_lang['BackDevices_DBTools_Upgrade'] = 'Base de datos actualizada correctamente';
 $pia_lang['BackDevices_DBTools_UpgradeError'] = 'Falló la actualización de la base de datos';
 $pia_lang['BackDevices_DBTools_Purge'] = 'Las copias de seguridad más antiguas fueron eliminadas';
+$pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
+$pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page - Update by @TeroRERO 01ago2022

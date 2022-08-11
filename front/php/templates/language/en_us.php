@@ -281,9 +281,17 @@ $pia_lang['Maintenance_Tool_ImportCSV_text'] = 'Before using this function, plea
 $pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'CSV Import';
 $pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = 'Are you sure you want to import the CSV file? This will completely overwrite the devices in your database.';
 $pia_lang['Maintenance_Github_package_a'] ='The latest Pi.Alert (Fork leiweibau) archive was posted on ';
+$pia_lang['Maintenance_Tool_loginenable'] ='Enable Login';
+$pia_lang['Maintenance_Tool_loginenable_text'] ='After activation, you will automatically be taken to the login page. If you have not set a password before, "123456" is the default password.';
+$pia_lang['Maintenance_Tool_loginenable_noti'] ='Enable Login';
+$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='Are you sure you want to activate the login?';
+$pia_lang['Maintenance_Tool_logindisable'] ='Disable Login';
+$pia_lang['Maintenance_Tool_logindisable_text'] ='The login will be deactivated. Every user now has the possibility to access the Pi.Alert page again.';
+$pia_lang['Maintenance_Tool_logindisable_noti'] ='Disable Login';
+$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Are you sure you want to deactivate the login?';
 
 //////////////////////////////////////////////////////////////////
-// Maintenance Page
+// Maintenance Page (Backend)
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Disabled';
@@ -310,6 +318,8 @@ $pia_lang['BackDevices_DBTools_Purge'] = 'The oldest backups were deleted';
 $pia_lang['BackDevices_DBTools_ImportCSV'] = 'The devices from the CSV file were imported successfully.';
 $pia_lang['BackDevices_DBTools_ImportCSVError'] = 'The CSV file couldn\'t be imported. Make sure the format is correct.';
 $pia_lang['BackDevices_DBTools_ImportCSVMissing'] = 'The CSV file couldn\'t be found under <b>/config/devices.csv.</b>';
+$pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
+$pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page
