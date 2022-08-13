@@ -78,6 +78,19 @@ if ($_SESSION["login"] != 1)
             </div>
           </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse104">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_104_head'];?></a>
+            </h4>
+          </div>
+          <div id="collapse104" class="panel-collapse collapse" style="font-size: 16px;">
+            <div class="panel-body">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_104_text'];?>
+            </div>
+          </div>
+        </div>
       </div> 
 
 <h4><?php echo $pia_lang['Navigation_Devices'];?></h4>

@@ -381,6 +381,8 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if 
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'The login page does not appear, even after changing the password.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'In addition to the password, the configuration file must contain <span class="text-danger help_faq_code">~/pialert/config/pialert.conf</span> 
               								 also the parameter <span class="text-danger help_faq_code">PIALERT_WEB_PROTECTION</span> must set to <span class="text-danger help_faq_code">True</span>.';
+$pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes on migrating from pucherot to this fork.';
+$pia_lang['HelpFAQ_Cat_General_104_text'] = 'Several fields have been added to the database in this fork. Part of the database extension is done with a patch script in the "install" directory. The 2nd part of the extension takes place automatically with the opening with the "network" page.';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and 
          									delete the DHCP lease if necessary. Then, also in Pi-hole, look under Tools -> Network to see if you can find the recurring hosts there. 
