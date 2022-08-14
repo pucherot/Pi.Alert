@@ -38,8 +38,8 @@ echo $local_time;
                     <span aria-hidden="true">×</span></button>
                 <h4 class="modal-title">Update notes from Github</h4>
             </div>
-            <div class="modal-body">
-                <p><?php echo $data['0']['commit']['message'];?></p>
+            <div class="modal-body" style="text-align: left;">
+                <pre style="border: none"><?php echo $data['0']['commit']['message'];?></pre>
             </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
