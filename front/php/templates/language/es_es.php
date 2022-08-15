@@ -28,7 +28,7 @@ $pia_lang['Login_Remember_small'] = '(válido por 7 días)';
 $pia_lang['Login_Submit'] = 'Ingresar';
 $pia_lang['Login_Psw_run'] = 'Para cambiar contraseña ejecute:';
 $pia_lang['Login_Psw_new'] = 'nueva_contraseña';
-$pia_lang['Login_Psw_folder'] = 'en la carpeta config.';
+$pia_lang['Login_Psw_folder'] = 'en la carpeta back.';
 $pia_lang['Login_Psw_alert'] = '¡Alerta de Contraseña!';
 $pia_lang['Login_Psw-box'] = 'Contraseña';
 $pia_lang['Login_Toggle_Info'] = 'Información sobre la contraseña';
@@ -375,7 +375,8 @@ $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La página de inicio de sesión no 
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Además de la contraseña, el archivo de configuración debe contener <span class="text-danger help_faq_code">~/pialert/config/pialert.conf</span> 
               								 además el parámetro <span class="text-danger help_faq_code">PIALERT_WEB_PROTECTION</span> debe ajustarse a <span class="text-danger help_faq_code">True</span>.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes on migrating from pucherot to this fork.';
-$pia_lang['HelpFAQ_Cat_General_104_text'] = 'Several fields have been added to the database in this fork. Part of the database extension is done with a patch script in the "install" directory. The 2nd part of the extension takes place automatically with the opening with the "network" page.';
+$pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been extended by some fields. To take over the database from the original Pi.Alert (pucherot), an update function is available via the "pialert-cli" in the directory <span class="text-danger help_faq_code">~/pialert/back</span>. 
+											 The command is then <span class="text-danger help_faq_code">./pialert-cli update_db</span>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Tengo dispositivos en mi lista que no conozco. Después de borrarlos, siempre vuelven a aparecer.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Si utiliza Pi-hole, tenga en cuenta que Pi.Alert recupera información de Pi-hole. Ponga en pausa Pi.Alert, vaya a la página de configuración de Pi-hole y 
 											elimine la concesión DHCP si es necesario. Luego, también en Pi-hole, revise en Herramientas -> Red para ver si puede encontrar los hosts recurrentes allí. 

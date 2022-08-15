@@ -27,7 +27,7 @@ $pia_lang['Login_Remember_small'] = '(valid for 7 days)';
 $pia_lang['Login_Submit'] = 'Log in';
 $pia_lang['Login_Psw_run'] = 'To change password run:';
 $pia_lang['Login_Psw_new'] = 'new_password';
-$pia_lang['Login_Psw_folder'] = 'in the config folder.';
+$pia_lang['Login_Psw_folder'] = 'in the back folder.';
 $pia_lang['Login_Psw_alert'] = 'Password Alert!';
 $pia_lang['Login_Psw-box'] = 'Password';
 $pia_lang['Login_Toggle_Info'] = 'Password Information';
@@ -382,7 +382,8 @@ $pia_lang['HelpFAQ_Cat_General_103_head'] = 'The login page does not appear, eve
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'In addition to the password, the configuration file must contain <span class="text-danger help_faq_code">~/pialert/config/pialert.conf</span> 
               								 also the parameter <span class="text-danger help_faq_code">PIALERT_WEB_PROTECTION</span> must set to <span class="text-danger help_faq_code">True</span>.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes on migrating from pucherot to this fork.';
-$pia_lang['HelpFAQ_Cat_General_104_text'] = 'Several fields have been added to the database in this fork. Part of the database extension is done with a patch script in the "install" directory. The 2nd part of the extension takes place automatically with the opening with the "network" page.';
+$pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been extended by some fields. To take over the database from the original Pi.Alert (pucherot), an update function is available via the "pialert-cli" in the directory <span class="text-danger help_faq_code">~/pialert/back</span>. 
+											 The command is then <span class="text-danger help_faq_code">./pialert-cli update_db</span>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and 
          									delete the DHCP lease if necessary. Then, also in Pi-hole, look under Tools -> Network to see if you can find the recurring hosts there. 

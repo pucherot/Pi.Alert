@@ -671,3 +671,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
   color: #bec5cb;
   background-color: #272c30;
 }
+
+#modal-warning-title {
+  color: #fff;
+}

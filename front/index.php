@@ -161,7 +161,7 @@ if ($ENABLED_DARKMODE === True) {
       <div class="alert alert-<?php echo $login_mode;?> alert-dismissible">
           <h4><i class="icon fa <?php echo $login_icon;?>"></i><?php echo $login_headline;?></h4>
           <p><?php echo $login_info;?></p>
-          <p><?php echo $pia_lang['Login_Psw_run'];?><br><span style="border: solid 1px yellow; padding: 2px;">./pialert-cli <?php echo $pia_lang['Login_Psw_new'];?></span><br><?php echo $pia_lang['Login_Psw_folder'];?></p>
+          <p><?php echo $pia_lang['Login_Psw_run'];?><br><span style="border: solid 1px yellow; padding: 2px;">./pialert-cli set_password <?php echo $pia_lang['Login_Psw_new'];?></span><br><?php echo $pia_lang['Login_Psw_folder'];?></p>
       </div>
   </div>
 

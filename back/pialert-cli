@@ -1,18 +1,21 @@
 #!/bin/bash
+SCRIPTVERSION='v0.3'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
+PIA_DB_FILE=${SCRIPTPATH}'/../db/pialert.db'
+PIA_DB_FILE_PATH=${SCRIPTPATH}'/../db'
 
 case $1 in
 
   help)
-    echo "pialert-cli v0.1 (https://github.com/leiweibau/Pi.Alert)"
+    echo "pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)"
     echo "Usage: pialert-cli <command>"
     echo ""
     echo "The is a list of supported commands:"
     echo ""
     echo " set_login                - Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE"
-    echo "                          - If the parameter is not present, it will be created. Additionally the" 
+    echo "                          - If the parameter is not present, it will be created. Additionally the"
     echo "                            default password '123456' is set."
     echo ""
     echo " unset_login              - Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE"
@@ -33,6 +36,8 @@ case $1 in
     echo ""
     echo " enable_scan              - Stops all active scans"
     echo "                          - Prevents new scans from starting"
+    echo ""
+    echo " update_db                - The script tries to make the database compatible for this fork"
     echo ""
     echo ""
     ;;
@@ -134,8 +139,20 @@ case $1 in
     echo "The arp-scan is enabled"
     ;;
 
+  update_db)
+    ## stop active scans
+    echo "Create backup before insert new table"
+    cp $PIA_DB_FILE ${PIA_DB_FILE_PATH}/pialert.db.bak
+    echo "Insert new table 'Online_History' to $PIA_DB_FILE"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE 'Online_History' ('Index' INTEGER, 'Scan_Date' TEXT, 'Online_Devices' INTEGER, 'Down_Devices' INTEGER, 'All_Devices' INTEGER, 'Archived_Devices' INTEGER, PRIMARY KEY('Index' AUTOINCREMENT));"
+    echo "Insert new table 'network_infrastructure' to $PIA_DB_FILE"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_infrastructure' ('device_id' INTEGER, 'net_device_name' TEXT NOT NULL, 'net_device_typ' TEXT NOT NULL, 'net_device_port' INTEGER, PRIMARY KEY('device_id' AUTOINCREMENT));"
+    sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD 'dev_Infrastructure' INTEGER;"
+    sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD 'dev_Infrastructure_port' INTEGER;"
+    ;;
+
   *)
-    echo "pialert-cli v0.1 (https://github.com/leiweibau/Pi.Alert)"
+    echo "pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)"
     echo "Use \"pialert-cli help\" for a list of supported commands."
 esac
 
