@@ -55,7 +55,7 @@ In charge of:
   | -------------------- | -------------------- |
 
 ### Front
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file ~/pialert/config/pialert.conf.
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file ~/pialert/config/pialert.conf or via pialert-cli.
 
 A web frontend that allows:
   - Manage the devices inventory and the characteristics
