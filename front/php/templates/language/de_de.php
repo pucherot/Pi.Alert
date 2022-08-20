@@ -181,10 +181,10 @@ $pia_lang['DevDetail_EveandAl_Archived'] = 'Archivierung';
 $pia_lang['DevDetail_EveandAl_RandomMAC'] = 'Zufällige MAC';
 $pia_lang['DevDetail_EveandAl_ScanCycle_a'] = 'Gerät scannen (1 min)';
 $pia_lang['DevDetail_EveandAl_ScanCycle_z'] = 'Gerät nicht scannen (0 min)';
-$pia_lang['DevDetail_button_Delete'] = 'Lösche Gerät';
-$pia_lang['DevDetail_button_Reset'] = 'Verwerfen';
+$pia_lang['DevDetail_button_Delete'] = 'Gerät löschen';
+$pia_lang['DevDetail_button_Reset'] = 'Abbruch';
 $pia_lang['DevDetail_button_Save'] = 'Speichern';
-$pia_lang['DevDetail_button_DeleteEvents'] = 'Lösche Events';
+$pia_lang['DevDetail_button_DeleteEvents'] = 'Events löschen';
 $pia_lang['DevDetail_button_DeleteEvents_Warning'] = 'Sind Sie sicher, dass Sie alle Ereignisse dieses Geräts löschen möchten? (dies löscht den Ereignisverlauf und die Sitzungen und könnte bei ständigen (anhaltenden) Benachrichtigungen helfen)';
 $pia_lang['DevDetail_SessionTable_Order'] = 'Order';
 $pia_lang['DevDetail_SessionTable_Connection'] = 'Verbindung';
@@ -374,6 +374,44 @@ $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Kon
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Hinweise zur Migrating von pucherot zu diesem Fork.';
 $pia_lang['HelpFAQ_Cat_General_104_text'] = 'Die Datenbank in diesem Fork wurde um einige Felder erweitert. Um die Datenbank vom originalen Pi.Alert <b>(pucherot)</b> zu übernehmen, steht über die "pialert-cli" im Verzeichnis 
 											 <span class="text-danger help_faq_code">~/pialert/back</span> eine Update-Funktion zur Verfügung. Der Befehl lautet dann <span class="text-danger help_faq_code">./pialert-cli update_db</span>';
+$pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
+$pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class="text-danger help_faq_code">pialert-cli</span> befindet sich im Verzeichnis <span class="text-danger help_faq_code">~/pialert/back</span> und bietet die Möglichkeit, Einstellungen an Pi.Alert ohne Webseite oder Veränderung an der 
+                                             Konfigurationsdatei vornehmen zu können. Mit dem Kommando <span class="text-danger help_faq_code">./pialert-cli help</span> kann eine Liste mit den unterstützen Funktionen aufgerufen werden.
+											 <table style="margin-top: 20px;" border="1">
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_login</td>
+											        <td style="padding-left:5px;">- Setzt den Parameter PIALERT_WEB_PROTECTION in der Konfigurationsdatei auf TRUE<br>
+											            - Wenn der Parameter nicht vorhanden ist, wird er erstellt. Zusätzlich wird dann das Standard-Passwort "123456" festgelegt.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">unset_login</td>
+											        <td style="padding-left:5px;">- Setzt den Parameter PIALERT_WEB_PROTECTION in der Konfigurationsdatei auf FALSE<br>
+											            - Wenn der Parameter nicht vorhanden ist, wird er erstellt. Zusätzlich wird dann das Standard-Passwort "123456" festgelegt.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_password &lt;password&gt;</td>
+											        <td style="padding-left:5px;">- Legt das neue Passwort als Hash-Wert fest.<br>
+											            - Wenn der Parameter PIALERT_WEB_PROTECTION noch nicht vorhanden ist, wird er erstellt und auf "TRUE" gesetzt (Anmeldung aktiviert)<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_autopassword</td>
+											        <td style="padding-left:5px;">- Legt ein neues Zufallspasswort als Hashwert fest und zeigt es im Klartext in der der Konsole an.<br>
+											            - Wenn der Parameter PIALERT_WEB_PROTECTION noch nicht vorhanden ist, wird er erstellt und auf "TRUE" gesetzt (Anmeldung aktiviert)<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">disable_scan </td>
+											        <td style="padding-left:5px;">- Stoppt alle aktiven Scans.<br>
+											            - Verhindert den Start neuer Scans.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">enable_scan</td>
+											        <td style="padding-left:5px;">- Erlaubt wieder den Start neuer Scans.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
+											        <td style="padding-left:5px;">- Erstellt die benötigten Datenbankfelder, welche für diesen Fork benötigt werden.<br>&nbsp;</td>
+											    </tr>
+											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe, mir nicht bekannte, Geräte in meiner Liste. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und 
          									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen. 

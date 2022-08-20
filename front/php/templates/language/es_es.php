@@ -377,6 +377,44 @@ $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Además de la contraseña, el archi
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes on migrating from pucherot to this fork.';
 $pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been extended by some fields. To take over the database from the original Pi.Alert (pucherot), an update function is available via the "pialert-cli" in the directory <span class="text-danger help_faq_code">~/pialert/back</span>. 
 											 The command is then <span class="text-danger help_faq_code">./pialert-cli update_db</span>';
+$pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
+$pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-danger help_faq_code">pialert-cli</span> is located in the directory <span class="text-danger help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert 
+                                             without web page or change to the configuration file. With the command <span class="text-danger help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
+											 <table style="margin-top: 20px;" border="1">
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_login</td>
+											        <td style="padding-left:5px;">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE<br>
+											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">unset_login</td>
+											        <td style="padding-left:5px;">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE<br>
+											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_password &lt;password&gt;</td>
+											        <td style="padding-left:5px;">- Sets the new password as a hashed value.<br>
+											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_autopassword</td>
+											        <td style="padding-left:5px;">- Sets a new random password as a hashed value and show it plaintext in the console.<br>
+											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">disable_scan </td>
+											        <td style="padding-left:5px;">- Stops all active scans.<br>
+											            - Prevents new scans from starting.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">enable_scan</td>
+											        <td style="padding-left:5px;">- Allows the start of new scans again.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
+											        <td style="padding-left:5px;">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
+											    </tr>
+											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Tengo dispositivos en mi lista que no conozco. Después de borrarlos, siempre vuelven a aparecer.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Si utiliza Pi-hole, tenga en cuenta que Pi.Alert recupera información de Pi-hole. Ponga en pausa Pi.Alert, vaya a la página de configuración de Pi-hole y 
 											elimine la concesión DHCP si es necesario. Luego, también en Pi-hole, revise en Herramientas -> Red para ver si puede encontrar los hosts recurrentes allí. 
