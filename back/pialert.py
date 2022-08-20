@@ -1431,9 +1431,14 @@ def email_reporting ():
 #-------------------------------------------------------------------------------
 
 def send_pushsafer (_Text):
+    # Remove one linebrake between "Server" and the headline of the event type
+    _Text = _Text.replace('\n\n\n', '\n\n')
+    # extract event type headline to use it in the notification headline
+    findsubheadline = _Text.split('\n')
+    subheadline = findsubheadline[3]
     url = 'https://www.pushsafer.com/api'
     post_fields = {
-        "t" : 'Pi.Alert Message',
+        "t" : 'Pi.Alert Message - '+subheadline,
         "m" : _Text,
         "s" : 11,
         "v" : 3,
@@ -1446,9 +1451,6 @@ def send_pushsafer (_Text):
         }
     
     requests.post(url, data=post_fields)
-    #request = Request(url, urlencode(post_fields).encode())
-    #json = urlopen(request).read().decode()
-    # print(json)
 
 #-------------------------------------------------------------------------------
 
