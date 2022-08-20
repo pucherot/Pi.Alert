@@ -1,4 +1,5 @@
 <?php
+unset($pia_lang);
 //////////////////////////////////////////////////////////////////
 // About - Update by @TeroRERO 07ago2022
 //////////////////////////////////////////////////////////////////
@@ -342,7 +343,7 @@ $pia_lang['Network_ManageDel_Name_text'] = '-- Gerät wählen --';
 $pia_lang['Network_ManageDel_Submit'] = 'Löschen';
 $pia_lang['Network_Table_State'] = 'Status';
 $pia_lang['Network_Table_Hostname'] = 'Gerätename';
-$pia_lang['Network_Table_IP'] = 'IP';
+$pia_lang['Network_Table_IP'] = 'Host IP';
 
 //////////////////////////////////////////////////////////////////
 // Help Page
