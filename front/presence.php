@@ -110,6 +110,10 @@ if ($_SESSION["login"] != 1)
       </div>
 
 <!-- Activity Chart ------------------------------------------------------- -->
+
+<?php
+If ($ENABLED_HISTOY_GRAPH !== False) {
+?>
       <div class="row">
           <div class="col-md-12">
           <div class="box" id="clients">
@@ -138,6 +142,9 @@ if ($_SESSION["login"] != 1)
       </script>
   
       <!-- /.row -->
+<?php
+}
+?>
 
 <!-- Calendar -------------------------------------------------------------- -->
       <div class="row">

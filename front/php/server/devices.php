@@ -33,39 +33,39 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
   if (isset ($_REQUEST['action']) && !empty ($_REQUEST['action'])) {
     $action = $_REQUEST['action'];
     switch ($action) {
-      case 'getDeviceData':           getDeviceData();                         break;
-      case 'setDeviceData':           setDeviceData();                         break;
-      case 'deleteDevice':            deleteDevice();                          break;
-      case 'getNetworkNodes':         getNetworkNodes();                       break;
-      case 'deleteAllWithEmptyMACs':  deleteAllWithEmptyMACs();                break;
-      case 'createBackupDB':          createBackupDB();                        break;
-      case 'restoreBackupDB':         restoreBackupDB();                       break;
-      case 'deleteAllDevices':        deleteAllDevices();                      break;
-      case 'runScan15min':            runScan15min();                          break;
-      case 'runScan1min':             runScan1min();                           break;
-      case 'deleteUnknownDevices':    deleteUnknownDevices();                  break;
-      case 'deleteEvents':            deleteEvents();                          break;
-      case 'deleteActHistory':        deleteActHistory();                      break;
-      case 'deleteDeviceEvents':      deleteDeviceEvents();                    break;
-      case 'PiaBackupDBtoArchive':    PiaBackupDBtoArchive();                  break;
-      case 'PiaRestoreDBfromArchive': PiaRestoreDBfromArchive();               break;
-      case 'PiaPurgeDBBackups':       PiaPurgeDBBackups();                     break;
-      case 'PiaEnableDarkmode':       PiaEnableDarkmode();                     break;
-      case 'PiaToggleArpScan':        PiaToggleArpScan();                      break;
+      case 'getDeviceData':                getDeviceData();                         break;
+      case 'setDeviceData':                setDeviceData();                         break;
+      case 'deleteDevice':                 deleteDevice();                          break;
+      case 'getNetworkNodes':              getNetworkNodes();                       break;
+      case 'deleteAllWithEmptyMACs':       deleteAllWithEmptyMACs();                break;
+      case 'createBackupDB':               createBackupDB();                        break;
+      case 'restoreBackupDB':              restoreBackupDB();                       break;
+      case 'deleteAllDevices':             deleteAllDevices();                      break;
+      case 'runScan15min':                 runScan15min();                          break;
+      case 'runScan1min':                  runScan1min();                           break;
+      case 'deleteUnknownDevices':         deleteUnknownDevices();                  break;
+      case 'deleteEvents':                 deleteEvents();                          break;
+      case 'deleteActHistory':             deleteActHistory();                      break;
+      case 'deleteDeviceEvents':           deleteDeviceEvents();                    break;
+      case 'PiaBackupDBtoArchive':         PiaBackupDBtoArchive();                  break;
+      case 'PiaRestoreDBfromArchive':      PiaRestoreDBfromArchive();               break;
+      case 'PiaPurgeDBBackups':            PiaPurgeDBBackups();                     break;
+      case 'PiaEnableDarkmode':            PiaEnableDarkmode();                     break;
+      case 'PiaEnableOnlineHistoryGraph':  PiaEnableOnlineHistoryGraph();           break;
+      case 'PiaToggleArpScan':             PiaToggleArpScan();                      break;
+      case 'PiaLoginEnable':               PiaLoginEnable();                        break;
+      case 'PiaLoginDisable':              PiaLoginDisable();                       break;
 
-      case 'PiaLoginEnable':          PiaLoginEnable();                        break;
-      case 'PiaLoginDisable':         PiaLoginDisable();                       break;
+      case 'getDevicesTotals':             getDevicesTotals();                      break;
+      case 'getDevicesList':               getDevicesList();                        break;
+      case 'getDevicesListCalendar':       getDevicesListCalendar();                break;
 
-      case 'getDevicesTotals':        getDevicesTotals();                      break;
-      case 'getDevicesList':          getDevicesList();                        break;
-      case 'getDevicesListCalendar':  getDevicesListCalendar();                break;
-
-      case 'getOwners':               getOwners();                             break;
-      case 'getDeviceTypes':          getDeviceTypes();                        break;
-      case 'getGroups':               getGroups();                             break;
+      case 'getOwners':                    getOwners();                             break;
+      case 'getDeviceTypes':               getDeviceTypes();                        break;
+      case 'getGroups':                    getGroups();                             break;
       case 'getLocations':            getLocations();                          break;
-
-      default:                        logServerConsole ('Action: '. $action);  break;
+     
+      default:                             logServerConsole ('Action: '. $action);  break;
     }
   }
 
@@ -429,6 +429,23 @@ function PiaEnableDarkmode() {
      }
   }
 
+//------------------------------------------------------------------------------
+//  Toggle History Graph Themes
+//------------------------------------------------------------------------------
+function PiaEnableOnlineHistoryGraph() {
+  $file = '../../../db/setting_noonlinehistorygraph';
+  global $pia_lang;
+
+  if (file_exists($file)) {
+      echo $pia_lang['BackDevices_onlinehistorygraph_enabled'];
+      unlink($file);
+      echo("<meta http-equiv='refresh' content='1'>");
+     } else {
+      echo $pia_lang['BackDevices_onlinehistorygraph_disabled'];
+      $darkmode = fopen($file, 'w');
+      echo("<meta http-equiv='refresh' content='1'>");
+     }
+  }
 
 //------------------------------------------------------------------------------
 //  Toggle on/off Arp-Scans

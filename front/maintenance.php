@@ -295,6 +295,12 @@ if (submit && isset($_POST['langselector_set'])) {
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a">
+                            <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>
+                        </div>
+                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_text'];?></div>
+                    </div>
+                    <div class="db_info_table_row">
+                        <div class="db_tools_table_cell_a">
                             <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
                         </div>
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_darkmode_text'];?></div>
@@ -525,6 +531,20 @@ function PiaEnableDarkmode()
 { 
   // Execute
   $.get('php/server/devices.php?action=PiaEnableDarkmode', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Toggle Graph 
+function askPiaEnableOnlineHistoryGraph() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Switch'];?>', 'PiaEnableOnlineHistoryGraph');
+}
+function PiaEnableOnlineHistoryGraph()
+{ 
+  // Execute
+  $.get('php/server/devices.php?action=PiaEnableOnlineHistoryGraph', function(msg) {
     showMessage (msg);
   });
 }

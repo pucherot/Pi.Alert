@@ -14,6 +14,9 @@
 if (file_exists('../db/setting_darkmode')) {
     $ENABLED_DARKMODE = True;
 }
+if (file_exists('../db/setting_noonlinehistorygraph')) {
+    $ENABLED_HISTOY_GRAPH = False;
+}
 foreach (glob("../db/setting_skin*") as $filename) {
     $pia_skin_selected = str_replace('setting_','',basename($filename));
 }
@@ -78,6 +81,7 @@ require 'php/templates/language/'.$pia_lang_selected.'.php';
 
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
+  
   <!-- Dark-Mode Patch -->
 <?php
 if ($ENABLED_DARKMODE === True) {

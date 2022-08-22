@@ -110,6 +110,9 @@ if ($_SESSION["login"] != 1)
 
 <!-- Activity Chart ------------------------------------------------------- -->
 
+<?php
+If ($ENABLED_HISTOY_GRAPH !== False) {
+?>
       <div class="row">
           <div class="col-md-12">
           <div class="box" id="clients">
@@ -134,6 +137,10 @@ if ($_SESSION["login"] != 1)
         var pia_js_online_history_ardev = [<?php pia_graph_devices_data($Pia_Graph_Device_Arch); ?>];
         pia_draw_graph_online_history(pia_js_online_history_time, pia_js_online_history_ondev, pia_js_online_history_dodev, pia_js_online_history_ardev);
       </script>
+
+<?php
+}
+?>
 
 <!-- datatable ------------------------------------------------------------- -->
       <div class="row">
