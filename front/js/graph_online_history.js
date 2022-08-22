@@ -1,4 +1,4 @@
-function pia_draw_graph_online_history(pia_js_graph_online_history_time, pia_js_graph_online_history_ondev, pia_js_graph_online_history_dodev, pia_js_graph_online_history_ardev) {
+function pia_draw_graph_online_history(pia_js_graph_online_history_time, pia_js_graph_online_history_ondev, pia_js_graph_online_history_dodev) {
         var xValues = pia_js_graph_online_history_time;
         new Chart("OnlineChart", {
           type: "bar",
@@ -19,12 +19,6 @@ function pia_draw_graph_online_history(pia_js_graph_online_history_time, pia_js_
               borderColor: "rgba(222, 74, 56)",
               fill: true,
               backgroundColor: "rgba(222, 74, 56, .6)",
-            }, {
-              label: 'Archived',
-              data: pia_js_graph_online_history_ardev,
-              borderColor: "rgba(220,220,220)",
-              fill: true,
-              backgroundColor: "rgba(220,220,220, .6)",
             }]
           },
           options: {

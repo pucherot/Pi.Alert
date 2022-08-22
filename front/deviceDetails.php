@@ -438,13 +438,17 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                   <!-- Buttons -->
                   <div class="col-xs-12">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;"
+                        <!-- <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;" -->
+                        <button type="button" class="btn btn-warning"  style="margin-left:6px; margin-top:6px;"
                           id="btnDeleteEvents"   onclick="askDeleteDeviceEvents()">   <?php echo $pia_lang['DevDetail_button_DeleteEvents'];?> </button>
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;"
+                        <!-- <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;" -->
+                        <button type="button" class="btn btn-danger"  style="margin-left:6px; margin-top:6px;"
                           id="btnDelete"   onclick="askDeleteDevice()">   <?php echo $pia_lang['DevDetail_button_Delete'];?> </button>
-                        <button type="button" class="btn btn-default pa-btn" style="margin-left:6px;" 
+                        <!-- <button type="button" class="btn btn-default pa-btn" style="margin-left:6px;"  -->
+                        <button type="button" class="btn btn-default" style="margin-left:6px; margin-top:6px;" 
                           id="btnRestore"  onclick="getDeviceData(true)"> <?php echo $pia_lang['DevDetail_button_Reset'];?> </button>
-                        <button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px; " 
+                        <!-- <button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px;"  -->
+                        <button type="button" disabled class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
                           id="btnSave"     onclick="setDeviceData()" >     <?php echo $pia_lang['DevDetail_button_Save'];?> </button>
                     </div>
                   </div>

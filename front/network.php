@@ -73,9 +73,6 @@ if ($_REQUEST['Networkdelete'] == "yes") {
       </h1>
     </section>
 
-<?php
-echo $_REQUEST['device_id'];
-?>
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 		<div class="box box-default collapsed-box"> <!-- collapsed-box -->
@@ -207,7 +204,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
     <table class="table table-striped">
       <tbody><tr>
         <th style="width: 40px">Port</th>
-        <th style="width: 100px">'.$pia_lang['Network_Table_State'].'</th>
+        <th style="width: 75px">'.$pia_lang['Network_Table_State'].'</th>
         <th>'.$pia_lang['Network_Table_Hostname'].'</th>
         <th>'.$pia_lang['Network_Table_IP'].'</th>
       </tr>';
