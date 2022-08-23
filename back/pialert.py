@@ -462,6 +462,10 @@ def scan_network ():
     print ('    Skipping repeated notifications...')
     skip_repeated_notifications ()
   
+    # Calc Activity History
+    print ('    Calculate Activity History...')
+    calculate_activity_history ()
+
     # Commit changes
     sql_connection.commit()
     closeDB()
@@ -739,19 +743,23 @@ def print_scan_stats ():
                     (cycle,))
     print ('        IP Changes.........: ' + str ( sql.fetchone()[0]) )
 
+
+#------------------------------------------------------------------------------
+
+def calculate_activity_history ():
     # Add to History
-    sql.execute("SELECT * FROM Devices")
-    History_All = sql.fetchall()
-    History_All_Devices  = len(History_All)
-    # sql.execute("SELECT * FROM Devices WHERE dev_Archived = 1")
-    # History_Archived = sql.fetchall()
-    History_Archived_Devices = 0
-    sql.execute("SELECT * FROM CurrentScan")
-    History_Online = sql.fetchall()
-    History_Online_Devices = len(History_Online)
-    History_Offline_Devices = History_All_Devices - History_Online_Devices
+    sql.execute("SELECT * FROM Devices WHERE dev_Archived = 0 AND dev_PresentLastScan = 1")
+    Querry_Online_Devices = sql.fetchall()
+    History_Online_Devices  = len(Querry_Online_Devices)
+    sql.execute("SELECT * FROM Devices WHERE dev_Archived = 0 AND dev_PresentLastScan = 0")
+    Querry_Offline_Devices = sql.fetchall()
+    History_Offline_Devices  = len(Querry_Offline_Devices)
+    sql.execute("SELECT * FROM Devices WHERE dev_Archived = 1")
+    Querry_Archived_Devices = sql.fetchall()
+    History_Archived_Devices  = len(Querry_Archived_Devices)
+    History_ALL_Devices = History_Online_Devices + History_Offline_Devices + History_Archived_Devices
     sql.execute ("INSERT INTO Online_History (Scan_Date, Online_Devices, Down_Devices, All_Devices, Archived_Devices ) "+
-                 "VALUES ( ?, ?, ?, ?, ?)", (startTime, History_Online_Devices, History_Offline_Devices, History_All_Devices, History_Archived_Devices ) )
+                 "VALUES ( ?, ?, ?, ?, ?)", (startTime, History_Online_Devices, History_Offline_Devices, History_ALL_Devices, History_Archived_Devices ) )
 
 #-------------------------------------------------------------------------------
 def create_new_devices ():
