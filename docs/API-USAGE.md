@@ -11,25 +11,25 @@ The API key must be transmitted with "post", at least that's how it's written on
 ## Example of a query with PHP (mac-status)
 
 #### Prepare post fields
-`$api_url = 'https://[URL]/pialert/api/'; //Pi.Alert URL
-$api_key = 'YourApi-Key'; //api-key
-$api_action = 'mac-status'; //mac-status, all-online, all-offline
-$api_macquery = '00:0d:93:89:15:90'; // single mac address`
+`$api_url = 'https://[URL]/pialert/api/'; //Pi.Alert URL`
+`$api_key = 'YourApi-Key'; //api-key`
+`$api_action = 'mac-status'; //mac-status, all-online, all-offline`
+`$api_macquery = '00:0d:93:89:15:90'; // single mac address`
 
-### Set post fields
+#### Set post fields
 `$post = ['api-key' => $api_key, 'get' => $api_action,  'mac' => $api_macquery];`
 
-### Init PHP curl
+#### Init PHP curl
 `$apicall = curl_init($api_url);
 curl_setopt($apicall, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($apicall, CURLOPT_POSTFIELDS, $post);
 curl_setopt($apicall, CURLOPT_SSL_VERIFYPEER, false);`
 
-### Execute PHP curl
+#### Execute PHP curl
 `$response = curl_exec($apicall);`
 
-### Close the PHP curl connection
+#### Close the PHP curl connection
 `curl_close($apicall);`
 
-### Demo output
+#### Demo output
 `print_r(json_decode($response));`
