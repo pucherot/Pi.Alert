@@ -233,11 +233,15 @@ $pia_lang['Maintenance_Tool_darkmode'] = 'Darstellungswechsel (Dunkel/Hell)';
 $pia_lang['Maintenance_Tool_darkmode_text'] = 'Wechselt zwischen der hellen und der dunklen Darstellung. Wenn der Wechsel nicht richtig funktionieren sollte, versuchen Sie den Browsercache zu löschen. Die Änderung findet serverseitig statt, betrifft also alle verwendeten Geräte.';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Darstellungswechsel';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Wechselt zwischen der hellen und der dunklen Darstellung. Wenn die Umschaltung nicht ordentlich funktionieren sollte, versuchen Sie den Browsercache zu löschen.';
-$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Aktivitätsverlauf de-/aktivieren';
-$pia_lang['Maintenance_Tool_onlinehistorygraph_text'] = 'De-/Aktiviert den Graph zur Darstellung des Online/Offline Verlaufes über die letzen 12h.';
-$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Graph-Darstellung';
-$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'De-/Aktiviert den Graph zur Darstellung des Online/Offline Verlaufes über die letzen 12h.';
-
+$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Aktivitätsverlauf<br>de-/aktivieren';
+$pia_lang['Maintenance_Tool_onlinehistorygraph_text'] = 'De-/Aktiviert den Aktivitätsverlauf über die letzen 12h auf der Geräte- und der Anwesenheitsseite. Die Änderung findet serverseitig statt, betrifft also alle verwendeten Geräte. ';
+$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Aktivitätsverlauf';
+$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'De-/Aktiviert den Aktivitätsverlauf auf der Geräte- und der Anwesenheitsseite.';
+$pia_lang['Maintenance_Tool_setapikey_false'] = 'Kein API-Key gesetzt';
+$pia_lang['Maintenance_Tool_setapikey'] = 'Setzte API-Key';
+$pia_lang['Maintenance_Tool_setapikey_text'] = 'Mit dem API-Key ist es möglich, Abfragen an die Datenbank zu stellen ohne die Webseite verwenden zu müssen. Die kann der Fall sein wenn ein anderer Service auf die Daten dieser Datenbank zugreifen soll. Existiert bereits ein API-Key, wird dieser ersetzt.';
+$pia_lang['Maintenance_Tool_setapikey_noti'] = 'Setzte API-Key';
+$pia_lang['Maintenance_Tool_setapikey_noti_text'] = 'Möchtest du einen eventuell bestehenden API-Key durch einen neuen Key ersetzen? Bestehende Keys sind dann nicht mehr verwendbar.';
 $pia_lang['Maintenance_Tool_arpscansw'] = 'arp-Scan stoppen/starten';
 $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet den arp-Scan an oder aus. Wenn der Scan aus ist, bleibt er so lange aus bis er wieder aktiviert wird. Bereits laufende Scans werden dabei nicht beendet.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'arp-Scan stoppen/starten';
@@ -294,6 +298,7 @@ $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Bist du dir sicher, dass 
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Automatischer Arp-Scan deaktiviert.';
 $pia_lang['BackDevices_Arpscan_enabled'] = 'Automatischer Arp-Scan aktiviert.';
+$pia_lang['BackDevices_setapikey'] = 'API-Key wurde gesetzt.';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Heller Modus aktiviert.';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Dunkler Modus aktiviert.';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Aktivitätsverlauf deaktiviert.';
@@ -418,6 +423,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
 											        <td style="padding-left:5px;">- Erstellt die benötigten Datenbankfelder, welche für diesen Fork benötigt werden.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_apikey</td>
+											        <td style="padding-left:5px;">- Mit dem API-Schlüssel ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Webseite zu benutzen. Wenn bereits ein API-Schlüssel existiert, wird er ersetzt.<br>&nbsp;</td>
 											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe, mir nicht bekannte, Geräte in meiner Liste. Nach dem Löschen tauchen diese immer wieder auf.';

@@ -52,6 +52,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'PiaPurgeDBBackups':            PiaPurgeDBBackups();                     break;
       case 'PiaEnableDarkmode':            PiaEnableDarkmode();                     break;
       case 'PiaEnableOnlineHistoryGraph':  PiaEnableOnlineHistoryGraph();           break;
+      case 'PiaSetAPIKey':                 PiaSetAPIKey();                          break;
       case 'PiaToggleArpScan':             PiaToggleArpScan();                      break;
       case 'PiaLoginEnable':               PiaLoginEnable();                        break;
       case 'PiaLoginDisable':              PiaLoginDisable();                       break;
@@ -63,7 +64,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'getOwners':                    getOwners();                             break;
       case 'getDeviceTypes':               getDeviceTypes();                        break;
       case 'getGroups':                    getGroups();                             break;
-      case 'getLocations':            getLocations();                          break;
+      case 'getLocations':                 getLocations();                          break;
      
       default:                             logServerConsole ('Action: '. $action);  break;
     }
@@ -446,6 +447,20 @@ function PiaEnableOnlineHistoryGraph() {
       echo("<meta http-equiv='refresh' content='1'>");
      }
   }
+
+
+//------------------------------------------------------------------------------
+//  Set API-Key
+//------------------------------------------------------------------------------
+function PiaSetAPIKey() {
+  //$file = '../../../db/setting_noonlinehistorygraph';
+  global $pia_lang;
+
+    exec('../../../back/pialert-cli set_apikey', $output);
+    echo $pia_lang['BackDevices_setapikey'];
+    echo("<meta http-equiv='refresh' content='2'>");
+  }
+
 
 //------------------------------------------------------------------------------
 //  Toggle on/off Arp-Scans
