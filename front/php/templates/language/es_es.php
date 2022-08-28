@@ -288,14 +288,14 @@ $pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'Importación CSV';
 $pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = '¿Está seguro de que quiere importar el archivo CSV? Esto sobrescribirá completamente los dispositivos de su base de datos.';
 $pia_lang['Maintenance_Github_package_a'] ='La última versión de Pi.Alert (Fork leiweibau) se publicó en ';
 $pia_lang['Maintenance_Github_package_b'] ='';
-$pia_lang['Maintenance_Tool_loginenable'] ='';
-$pia_lang['Maintenance_Tool_loginenable_text'] ='';
-$pia_lang['Maintenance_Tool_loginenable_noti'] ='';
-$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='';
-$pia_lang['Maintenance_Tool_logindisable'] ='';
-$pia_lang['Maintenance_Tool_logindisable_text'] ='';
-$pia_lang['Maintenance_Tool_logindisable_noti'] ='';
-$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='';
+$pia_lang['Maintenance_Tool_loginenable'] ='Enable Login';
+$pia_lang['Maintenance_Tool_loginenable_text'] ='After activation, you will automatically be taken to the login page. If you have not set a password before, "123456" is the default password.';
+$pia_lang['Maintenance_Tool_loginenable_noti'] ='Enable Login';
+$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='Are you sure you want to activate the login?';
+$pia_lang['Maintenance_Tool_logindisable'] ='Disable Login';
+$pia_lang['Maintenance_Tool_logindisable_text'] ='The login will be deactivated. Every user now has the possibility to access the Pi.Alert page again.';
+$pia_lang['Maintenance_Tool_logindisable_noti'] ='Disable Login';
+$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Are you sure you want to deactivate the login?';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page - Update by @TeroRERO 25jul2022
