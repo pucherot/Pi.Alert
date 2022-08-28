@@ -10,7 +10,7 @@ The API key must be transmitted with "post", at least that's how it's written on
 
 ## Example of a query with PHP (mac-status)
 
-### Prepare post fields
+#### Prepare post fields
 `$api_url = 'https://[URL]/pialert/api/'; //Pi.Alert URL
 $api_key = 'YourApi-Key'; //api-key
 $api_action = 'mac-status'; //mac-status, all-online, all-offline
