@@ -93,7 +93,8 @@ A possibility to send a request to the Pi.Alert backend via different ways. Curr
   - All online devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port).
   - All offline devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)
   - Information about a specific device (all information, without events and presence)
-  - [Pi.Alert API Usage and Examples](docs/API-USAGE.md)
+
+[Pi.Alert API Usage and Examples](docs/API-USAGE.md)
 
 # Installation
 <!--- --------------------------------------------------------------------- --->
