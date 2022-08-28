@@ -40,7 +40,7 @@ Up to three scanning methods are used:
         that were not discovered by the other methods.
 
 ## Components
-The system consists of two parts:
+The system consists of three parts:
 
 ### Back
 In charge of:
@@ -87,6 +87,13 @@ A web frontend that allows:
   | ![Screen 3][screen3] | ![Screen 4][screen4] |
 
 ![Maintain screen dark][maintain_dark]
+
+### API
+A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 3 things:
+  - All online devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port).
+  - All offline devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)
+  - Information about a specific device (all information, without events and presence)
+  - [Pi.Alert API Usage and Examples](docs/API-USAGE.md)
 
 # Installation
 <!--- --------------------------------------------------------------------- --->
