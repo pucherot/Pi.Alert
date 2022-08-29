@@ -194,9 +194,9 @@ $pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Escaneo rápido: escanee menos pu
 $pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Escaneo predeterminado: NMAP escanea los 1,000 puertos principales para cada protocolo de escaneo solicitado. Esto atrapa aproximadamente el 93% de los puertos TCP y el 49% de los puertos UDP. (aproximadamente 5 segundos)';
 $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Escaneo detallado: escaneo predeterminado con detección de sistema operativo habilitado, detección de versiones, escaneo de script y traceroute (hasta 30 segundos o más)';
 
-//////////////////////////////////////////////////////////////////
-// Maintenance Page - Update by @TeroRERO 07ago2022
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+// Maintenance Page - Update by @TeroRERO 07ago2022 and leiweibau 29ago2022
+/////////////////////////////////////////////////////////////////////////////
 
 $pia_lang['Maintenance_Title'] = 'Herramientas de mantenimiento';
 $pia_lang['Maintenance_database_path'] = 'Ruta de la base de datos:';
@@ -226,15 +226,15 @@ $pia_lang['Maintenance_Tool_darkmode'] = 'Cambiar Modo (Dark/Light)';
 $pia_lang['Maintenance_Tool_darkmode_text'] = 'Alternar entre el modo oscuro y el modo de luz. Si el interruptor no funciona correctamente, intente borrar el caché del navegador. El cambio tiene lugar en el lado del servidor, por lo que afecta todos los dispositivos en uso.';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Cambiar Modo';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Después del cambio de tema, la página intenta volver a cargar para activar el cambio. Si es necesario, el caché debe ser eliminado.';
-$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Toggle History Graph';
-$pia_lang['Maintenance_Tool_onlinehistorygraph_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h. The change takes place on the server side, so it affects all devices in use.';
-$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Graph display';
-$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h.';
-$pia_lang['Maintenance_Tool_setapikey_false'] = 'No API-Key set';
-$pia_lang['Maintenance_Tool_setapikey'] = 'Set API-Key';
-$pia_lang['Maintenance_Tool_setapikey_text'] = 'With the API key it is possible to make queries to the database without using the web page. This can be the case if another service should access the data of this database. If an API key already exists, it will be replaced.';
-$pia_lang['Maintenance_Tool_setapikey_noti'] = 'Setting API-Key';
-$pia_lang['Maintenance_Tool_setapikey_noti_text'] = 'Do you want to replace an existing API key with a new key? Existing keys are then no longer usable.';
+$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Alternar el gráfico de actividad';
+$pia_lang['Maintenance_Tool_onlinehistorygraph_text'] = 'Activa/desactiva el gráfico para mostrar la actividad online/offline de las últimas 12h. El cambio tiene lugar en el lado del servidor, por lo que afecta a todos los dispositivos en uso.';
+$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Visualización de gráficos';
+$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Activa/desactiva el gráfico para mostrar la actividad online/offline de las últimas 12h.';
+$pia_lang['Maintenance_Tool_setapikey_false'] = 'No hay conjunto de claves API';
+$pia_lang['Maintenance_Tool_setapikey'] = 'Establecer la clave API';
+$pia_lang['Maintenance_Tool_setapikey_text'] = 'Con la clave API es posible realizar consultas a la base de datos sin utilizar la página web. Este puede ser el caso si otro servicio debe acceder a los datos de esta base de datos. Si ya existe una clave API, ésta será sustituida.';
+$pia_lang['Maintenance_Tool_setapikey_noti'] = 'Configuración de la clave API';
+$pia_lang['Maintenance_Tool_setapikey_noti_text'] = '¿Desea sustituir una clave API existente por una nueva clave? Las claves existentes ya no se pueden utilizar.';
 $pia_lang['Maintenance_Tool_arpscansw'] = 'Activar arp-scan (on/off)';
 $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Encender o desactivar el arp-scan. Cuando el escaneo se ha apagado, permanece apagado hasta que se active nuevamente. Los escaneos activos no se cancelan.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'Activar arp-scan on or off';
@@ -288,18 +288,18 @@ $pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'Importación CSV';
 $pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = '¿Está seguro de que quiere importar el archivo CSV? Esto sobrescribirá completamente los dispositivos de su base de datos.';
 $pia_lang['Maintenance_Github_package_a'] ='La última versión de Pi.Alert (Fork leiweibau) se publicó en ';
 $pia_lang['Maintenance_Github_package_b'] ='';
-$pia_lang['Maintenance_Tool_loginenable'] ='Enable Login';
-$pia_lang['Maintenance_Tool_loginenable_text'] ='After activation, you will automatically be taken to the login page. If you have not set a password before, "123456" is the default password.';
-$pia_lang['Maintenance_Tool_loginenable_noti'] ='Enable Login';
-$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='Are you sure you want to activate the login?';
-$pia_lang['Maintenance_Tool_logindisable'] ='Disable Login';
-$pia_lang['Maintenance_Tool_logindisable_text'] ='The login will be deactivated. Every user now has the possibility to access the Pi.Alert page again.';
-$pia_lang['Maintenance_Tool_logindisable_noti'] ='Disable Login';
-$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Are you sure you want to deactivate the login?';
+$pia_lang['Maintenance_Tool_loginenable'] ='Login activado.';
+$pia_lang['Maintenance_Tool_loginenable_text'] ='Después de la activación, se le llevará automáticamente a la página de inicio de sesión. Si no has establecido una contraseña antes, "123456" es la contraseña por defecto.';
+$pia_lang['Maintenance_Tool_loginenable_noti'] ='Login activado.';
+$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='¿Estás seguro de que quieres activar el inicio de sesión?';
+$pia_lang['Maintenance_Tool_logindisable'] ='Login desactivado.';
+$pia_lang['Maintenance_Tool_logindisable_text'] ='El inicio de sesión se desactivará. Ahora, todos los usuarios tienen la posibilidad de acceder de nuevo a la página Pi.Alert.';
+$pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
+$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
 
-//////////////////////////////////////////////////////////////////
-// Maintenance Page - Update by @TeroRERO 25jul2022
-//////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+// Maintenance Page - Update by @TeroRERO 25jul2022 and leiweibau 29ago2022
+/////////////////////////////////////////////////////////////////////////////
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Desactivado';
 $pia_lang['BackDevices_Arpscan_enabled'] = 'Arp-Scan Activado';
@@ -324,8 +324,8 @@ $pia_lang['BackDevices_DBTools_UpdDevError'] = 'Error al actualizar el dispositi
 $pia_lang['BackDevices_DBTools_Upgrade'] = 'Base de datos actualizada correctamente';
 $pia_lang['BackDevices_DBTools_UpgradeError'] = 'Falló la actualización de la base de datos';
 $pia_lang['BackDevices_DBTools_Purge'] = 'Las copias de seguridad más antiguas fueron eliminadas';
-$pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
-$pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
+$pia_lang['BackDevices_Login_disabled'] = 'Login desactivado.';
+$pia_lang['BackDevices_Login_enabled'] = 'Login activado.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page - Update by @TeroRERO 01ago2022

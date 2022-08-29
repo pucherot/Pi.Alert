@@ -139,6 +139,7 @@ Linux distributions.
   | nmap          | Network Scanner                                         |
   | zip           | Filecompression Tool                                    |
   | speedtest-cli | Python SpeedTest https://github.com/sivel/speedtest-cli |
+  | deepl.com     | translation                                             |
 
 ### License
   GPL 3.0
