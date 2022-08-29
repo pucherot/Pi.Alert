@@ -24,7 +24,8 @@ $DBFILE = '../../db/pialert.db';
 ini_set ('max_execution_time','30');
 
 // Secure and verify query
-$mac_address = strtolower($_REQUEST['mac']);
+$mac_address = str_replace('-', ':', strtolower($_REQUEST['mac']));
+if (filter_var($mac_address, FILTER_VALIDATE_MAC) === False) {echo 'Invalid MAC Address.'; exit;}
 //echo "\n";
 
 // Open DB
