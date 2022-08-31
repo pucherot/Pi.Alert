@@ -124,7 +124,7 @@ $latestbackup_date = date ("Y-m-d H:i:s", filemtime($latestbackup));
 
 // Skin selector -----------------------------------------------------------------
 
-if (submit && isset($_POST['skinselector_set'])) {
+if (isset($_POST['skinselector_set']) && isset($_POST['skinselector'])) {
   $pia_skin_set_dir = '../db/';
   $pia_skin_selector = htmlspecialchars($_POST['skinselector']);
   if (in_array($pia_skin_selector, $pia_installed_skins)) {
@@ -152,7 +152,7 @@ if (submit && isset($_POST['skinselector_set'])) {
 
 // Language selector -----------------------------------------------------------------
 
-if (submit && isset($_POST['langselector_set'])) {
+if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
   $pia_lang_set_dir = '../db/';
   $pia_lang_selector = htmlspecialchars($_POST['langselector']);
   if (in_array($pia_lang_selector, $pia_installed_langs)) {
