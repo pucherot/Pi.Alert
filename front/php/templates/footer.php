@@ -59,6 +59,9 @@
 
 <!-- Pi.Alert -------------------------------------------------------------- -->
   <script src="js/pialert_common.js"></script>
+  <script>
+    initCPUtemp();
+  </script>
 
 </body>
 </html>
