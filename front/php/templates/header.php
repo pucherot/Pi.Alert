@@ -191,7 +191,7 @@ function show_pia_servertime() {
                 <div class="logo" style="width:50%; margin:auto;">
                    <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
                 </div>
-                <div class="" style="font-size: smaller; margin-top:10px;">
+                <div class="systemstatusbox" style="font-size: smaller; margin-top:10px;">
                     <?php
                     // (may be less than the number of online processors)
                     $nproc = shell_exec('nproc');

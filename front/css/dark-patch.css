@@ -777,3 +777,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
  background:#22272a;
  border-left-color: #f39c12;
 }
+
+.systemstatusbox {
+  color: #fff;
+}
