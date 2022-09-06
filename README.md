@@ -4,7 +4,7 @@
 WIFI / LAN intruder detector.
 
 Scan the devices connected to your WIFI / LAN and alert you the connection of
-unknown devices. It also warns if a "always connected" devices disconnects.
+unknown devices. It also warns if a "always connected" device disconnects.
 
 ![Main screen][main]
 *(Apologies for my English and my limited knowledge of Python, php and
