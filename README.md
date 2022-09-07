@@ -40,7 +40,7 @@ Up to three scanning methods are used:
         that were not discovered by the other methods.
 
 ## Components
-The system consists of two parts:
+The system consists of three parts:
 
 ### Back
 In charge of:
@@ -88,6 +88,14 @@ A web frontend that allows:
 
 ![Maintain screen dark][maintain_dark]
 
+### API
+A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 3 things:
+  - All online devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port).
+  - All offline devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)
+  - Information about a specific device (all information, without events and presence)
+
+[Pi.Alert API Usage and Examples](docs/API-USAGE.md)
+
 # Installation
 <!--- --------------------------------------------------------------------- --->
 Initially designed to run on a Raspberry Pi, probably it can run on many other
@@ -131,6 +139,7 @@ Linux distributions.
   | nmap          | Network Scanner                                         |
   | zip           | Filecompression Tool                                    |
   | speedtest-cli | Python SpeedTest https://github.com/sivel/speedtest-cli |
+  | deepl.com     | translation                                             |
 
 ### License
   GPL 3.0

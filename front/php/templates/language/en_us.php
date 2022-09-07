@@ -231,9 +231,14 @@ $pia_lang['Maintenance_Tool_darkmode_text'] = 'Toggle between dark mode and ligh
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Toggle Modes';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'After the theme switch, the page tries to reload itself to activate the change. If necessary, the cache must be cleared.';
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Toggle History Graph';
-$pia_lang['Maintenance_Tool_onlinehistorygraph_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h.';
+$pia_lang['Maintenance_Tool_onlinehistorygraph_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h. The change takes place on the server side, so it affects all devices in use.';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Graph display';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h.';
+$pia_lang['Maintenance_Tool_setapikey_false'] = 'No API-Key set';
+$pia_lang['Maintenance_Tool_setapikey'] = 'Set API-Key';
+$pia_lang['Maintenance_Tool_setapikey_text'] = 'With the API key it is possible to make queries to the database without using the web page. This can be the case if another service should access the data of this database. If an API key already exists, it will be replaced.';
+$pia_lang['Maintenance_Tool_setapikey_noti'] = 'Setting API-Key';
+$pia_lang['Maintenance_Tool_setapikey_noti_text'] = 'Do you want to replace an existing API key with a new key? Existing keys are then no longer usable.';
 $pia_lang['Maintenance_Tool_arpscansw'] = 'Toggle arp-Scan (on/off)';
 $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Switching the arp-scan on or off. When the scan has been switched off it remains off until it is activated again. Active scans are not canceled.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'Toggle arp-Scan on or off';
@@ -427,6 +432,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
 											        <td style="padding-left:5px;">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">set_apikey</td>
+											        <td style="padding-left:5px;">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td>
 											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';

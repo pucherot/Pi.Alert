@@ -81,7 +81,6 @@ require 'php/templates/language/'.$pia_lang_selected.'.php';
 
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
-  
   <!-- Dark-Mode Patch -->
 <?php
 if ($ENABLED_DARKMODE === True) {
@@ -184,9 +183,125 @@ function show_pia_servertime() {
 
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
-        <a href="." class="logo">
+
+<!--         <a href="." class="logo">
           <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
-        </a>
+        </a> -->
+
+                <div class="logo" style="width:50%; margin:auto;">
+                   <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
+                </div>
+                <div class="systemstatusbox" style="font-size: smaller; margin-top:10px;">
+                    <?php
+                    // (may be less than the number of online processors)
+                    $nproc = shell_exec('nproc');
+                    if (!is_numeric($nproc)) {
+                        $cpuinfo = file_get_contents('/proc/cpuinfo');
+                        preg_match_all('/^processor/m', $cpuinfo, $matches);
+                        $nproc = count($matches[0]);
+                    }
+
+                    $loaddata = sys_getloadavg();
+                    echo '<span title="Detected '.$nproc.' cores"><i class="fa fa-w fa-circle ';
+                    if ($loaddata[0] > $nproc) {
+                        echo 'text-red';
+                    } else {
+                        echo 'text-green-light';
+                    }
+                    echo '"></i> Load:&nbsp;&nbsp;'.$loaddata[0].'&nbsp;&nbsp;'.$loaddata[1].'&nbsp;&nbsp;'.$loaddata[2].'</span>';
+                    ?>
+                    <br/>
+                    <?php
+
+                    function getMemUsage()
+                    {
+                        $data = explode("\n", file_get_contents('/proc/meminfo'));
+                        $meminfo = array();
+                        if (count($data) > 0) {
+                            foreach ($data as $line) {
+                                $expl = explode(':', $line);
+                                if (count($expl) == 2) {
+                                    // remove " kB" from the end of the string and make it an integer
+                                    $meminfo[$expl[0]] = intval(trim(substr($expl[1], 0, -3)));
+                                }
+                            }
+                            $memused = $meminfo['MemTotal'] - $meminfo['MemFree'] - $meminfo['Buffers'] - $meminfo['Cached'];
+                            $memusage = $memused / $meminfo['MemTotal'];
+                        } else {
+                            $memusage = -1;
+                        }
+
+                        return $memusage;
+                    }
+
+                    $memory_usage = getMemUsage();
+                    echo '<span><i class="fa fa-w fa-circle ';
+                    if ($memory_usage > 0.75 || $memory_usage < 0.0) {
+                        echo 'text-red';
+                    } else {
+                        echo 'text-green-light';
+                    }
+                    if ($memory_usage > 0.0) {
+                        echo '"></i> Memory usage:&nbsp;&nbsp;'.sprintf('%.1f', 100.0 * $memory_usage).'&thinsp;%</span>';
+                    } else {
+                        echo '"></i> Memory usage:&nbsp;&nbsp; N/A</span>';
+                    }
+                    ?>
+                    <br/>
+                    <?php
+
+
+                    function getTemperature()
+                    {
+                        if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
+                            $output = rtrim(file_get_contents('/sys/class/thermal/thermal_zone0/temp'));
+                        } elseif (file_exists('/sys/class/hwmon/hwmon0/temp1_input')) {
+                            $output = rtrim(file_get_contents('/sys/class/hwmon/hwmon0/temp1_input'));
+                        } else {
+                            $output = '';
+                        }
+
+                        // Test if we succeeded in getting the temperature
+                        if (is_numeric($output)) {
+                            // $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5
+                            // ex. 39007 vs 39
+                            $celsius = intval($output);
+                            // If celsius is greater than 1 degree and is in the 4-5 digit format
+                            if ($celsius > 1000) {
+                                // Use multiplication to get around the division-by-zero error
+                                $celsius *= 1e-3;
+                            }
+                            $limit = 60;
+                            
+                        } else {
+                            // Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin)
+                            // This is the minimum temperature possible (AKA absolute zero)
+                            $celsius = -273.16;
+                            // Set templimit to null if no tempsensor was found
+                            $limit = null;
+                        }
+                        return array($celsius, $limit);
+                    }
+
+                    list($celsius, $temperaturelimit) = getTemperature();
+
+                    if ($celsius >= -273.15) {
+                        // Only show temp info if any data is available -->
+                        $tempcolor = 'text-vivid-blue';
+                        if (isset($temperaturelimit) && $celsius > $temperaturelimit) {
+                            $tempcolor = 'text-red';
+                        }
+                        echo '<span id="temperature"><i class="fa fa-w fa-fire '.$tempcolor.'" style="width: 1em !important"></i> ';
+                        echo 'Temp:&nbsp;<span id="rawtemp" hidden>'.$celsius.'</span>';
+                        echo '<span id="tempdisplay"></span></span>';
+                    }
+                    ?>
+                </div>
+
+
+
+
+
       </div>
 
       <!-- search form (Optional) -->
@@ -197,6 +312,7 @@ function show_pia_servertime() {
 <!--
         <li class="header">MAIN MENU</li>
 -->
+        <li class="header text-uppercase" style="font-size: 0; padding: 1px;">MAIN MENU</li>
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devices.php', 'deviceDetails.php') ) ){ echo 'active'; } ?>">
           <a href="devices.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Devices'];?></span></a>
@@ -214,6 +330,9 @@ function show_pia_servertime() {
           <a href="events.php"><i class="fa fa-bolt"></i> <span><?php echo $pia_lang['Navigation_Events'];?></span></a>
         </li>
 
+        <li class="header text-uppercase" style="font-size: 0; padding: 1px;">Maintain and Settings</li>
+
+
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('network.php') ) ){ echo 'active'; } ?>">
           <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network'];?></span></a>
         </li>
@@ -221,6 +340,8 @@ function show_pia_servertime() {
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('maintenance.php') ) ){ echo 'active'; } ?>">
           <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Maintenance'];?></span></a>
         </li>
+
+        <li class="header text-uppercase" style="font-size: 0; padding: 1px;">Help</li>
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('help_faq.php') ) ){ echo 'active'; } ?>">
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ'];?></span></a>

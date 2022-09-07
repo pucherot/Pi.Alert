@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.3'
+SCRIPTVERSION='v0.4'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -38,6 +38,9 @@ case $1 in
     echo ""
     echo " update_db                - The script tries to make the database compatible for this fork."
     echo ""
+    echo " set_apikey               - With the API key it is possible to make queries to the database"
+    echo "                            without using the web page. If an API key already exists, it will be"
+    echo "                            replaced."
     echo ""
     ;;
 
@@ -148,6 +151,23 @@ case $1 in
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_infrastructure' ('device_id' INTEGER, 'net_device_name' TEXT NOT NULL, 'net_device_typ' TEXT NOT NULL, 'net_device_port' INTEGER, PRIMARY KEY('device_id' AUTOINCREMENT));"
     sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD 'dev_Infrastructure' INTEGER;"
     sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD 'dev_Infrastructure_port' INTEGER;"
+    ;;
+
+  set_apikey)
+    ## Create API-Key
+    ##PIA_APIKEY_RAND="Test"
+    PIA_APIKEY_RAND=$(head -c 4096 /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 60 | head -n 1)
+    ## Check if PIALERT_APIKEY exists
+    CHECK_API=$(grep "PIALERT_APIKEY" $PIA_CONF_FILE | wc -l)
+    if [ $CHECK_API -eq 0 ]
+    then
+        ## Create PIALERT_APIKEY
+        sed -i "/^VENDORS_DB.*/a PIALERT_APIKEY = '$PIA_APIKEY_RAND'" $PIA_CONF_FILE
+    else
+        ## Change PIALERT_APIKEY
+        sed -i "/PIALERT_APIKEY/c\PIALERT_APIKEY = '$PIA_APIKEY_RAND'" $PIA_CONF_FILE
+    fi
+    echo "API-Key set"
     ;;
 
   *)

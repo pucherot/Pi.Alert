@@ -73,6 +73,15 @@ $pia_installed_skins = array('skin-black-light',
 
 
   <?php
+// Get API-Key ------------------------------------------------------------------
+
+$config_file = "../config/pialert.conf";
+$config_file_lines = file($config_file);
+$config_file_lines_bypass = array_values(preg_grep('/^PIALERT_APIKEY\s.*/', $config_file_lines));
+if ($config_file_lines_bypass != False) {
+    $apikey_line = explode("'", $config_file_lines_bypass[0]);
+    $pia_apikey = trim($apikey_line[1]);
+} else {$pia_apikey = $pia_lang['Maintenance_Tool_setapikey_false'];}
 
 // Size and last mod of DB ------------------------------------------------------
 
@@ -115,7 +124,7 @@ $latestbackup_date = date ("Y-m-d H:i:s", filemtime($latestbackup));
 
 // Skin selector -----------------------------------------------------------------
 
-if (submit && isset($_POST['skinselector_set'])) {
+if (isset($_POST['skinselector_set']) && isset($_POST['skinselector'])) {
   $pia_skin_set_dir = '../db/';
   $pia_skin_selector = htmlspecialchars($_POST['skinselector']);
   if (in_array($pia_skin_selector, $pia_installed_skins)) {
@@ -143,7 +152,7 @@ if (submit && isset($_POST['skinselector_set'])) {
 
 // Language selector -----------------------------------------------------------------
 
-if (submit && isset($_POST['langselector_set'])) {
+if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
   $pia_lang_set_dir = '../db/';
   $pia_lang_selector = htmlspecialchars($_POST['langselector']);
   if (in_array($pia_lang_selector, $pia_installed_langs)) {
@@ -206,6 +215,12 @@ if (submit && isset($_POST['langselector_set'])) {
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_arp_status'];?></div>
                     <div class="db_info_table_cell">
                         <?php echo $pia_arpscans_result;?></div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell" style="min-width: 140px">Api-Key</div>
+                    <div class="db_info_table_cell" style="overflow-wrap: anywhere;">
+                        <?php echo $pia_apikey;?>
+                    </div>
                 </div>
             </div>                
           </div>
@@ -304,6 +319,12 @@ if (submit && isset($_POST['langselector_set'])) {
                             <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
                         </div>
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_darkmode_text'];?></div>
+                    </div>
+                    <div class="db_info_table_row">
+                        <div class="db_tools_table_cell_a">
+                            <button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button>
+                        </div>
+                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></div>
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a">
@@ -545,6 +566,20 @@ function PiaEnableOnlineHistoryGraph()
 { 
   // Execute
   $.get('php/server/devices.php?action=PiaEnableOnlineHistoryGraph', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Set API-Key 
+function askPiaSetAPIKey() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_setapikey_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_setapikey_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Okay'];?>', 'PiaSetAPIKey');
+}
+function PiaSetAPIKey()
+{ 
+  // Execute
+  $.get('php/server/devices.php?action=PiaSetAPIKey', function(msg) {
     showMessage (msg);
   });
 }

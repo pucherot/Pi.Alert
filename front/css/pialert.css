@@ -552,3 +552,37 @@ body.modal-open {
     position:fixed;
     width: 100%;
 }
+
+.skin-blue .systemstatusbox, 
+.skin-red .systemstatusbox, 
+.skin-black .systemstatusbox,
+.skin-green .systemstatusbox,
+.skin-purple .systemstatusbox,
+.skin-yellow .systemstatusbox {
+  color: #fff;
+}
+
+.skin-blue-light .systemstatusbox, 
+.skin-red-light .systemstatusbox, 
+.skin-black-light .systemstatusbox, 
+.skin-green-light .systemstatusbox, 
+.skin-purple-light .systemstatusbox, 
+.skin-yellow-light .systemstatusbox {
+  color: #000;
+}
+
+.text-green-light {
+  color: #5ca314 !important;
+}
+.text-green {
+  color: #00aa60 !important;
+}
+.text-orange {
+  color: #b1720c !important;
+}
+.text-red {
+  color: #bd2c19 !important;
+}
+.text-vivid-blue {
+  color: #007997 !important;
+}
