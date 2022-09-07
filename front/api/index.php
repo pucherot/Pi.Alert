@@ -24,16 +24,17 @@ $DBFILE = '../../db/pialert.db';
 ini_set ('max_execution_time','30');
 
 // Secure and verify query
-$mac_address = str_replace('-', ':', strtolower($_REQUEST['mac']));
-if (filter_var($mac_address, FILTER_VALIDATE_MAC) === False) {echo 'Invalid MAC Address.'; exit;}
-//echo "\n";
+if (isset($_REQUEST['mac'])) {
+    $mac_address = str_replace('-', ':', strtolower($_REQUEST['mac']));
+    if (filter_var($mac_address, FILTER_VALIDATE_MAC) === False) {echo 'Invalid MAC Address.'; exit;}
+}
 
 // Open DB
 OpenDB();
 
 
 // Action functions
-if (isset ($_REQUEST['get']) && !empty ($_REQUEST['get'])) {
+if (isset($_REQUEST['get']) && !empty($_REQUEST['get'])) {
     $action = $_REQUEST['get'];
     switch ($action) {
       case 'mac-status':           getStatusofMAC($mac_address);            break;
