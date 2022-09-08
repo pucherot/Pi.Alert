@@ -358,6 +358,7 @@ $pia_lang['Network_ManageDel_Submit'] = 'Eliminar';
 $pia_lang['Network_Table_State'] = 'Estado';
 $pia_lang['Network_Table_Hostname'] = 'Nombre de host';
 $pia_lang['Network_Table_IP'] = 'Dirección IP';
+$pia_lang['Network_UnassignedDevices'] = 'Unassigned devices';
 
 //////////////////////////////////////////////////////////////////
 // Help Page - Update by @TeroRERO 07ago2022

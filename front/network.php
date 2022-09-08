@@ -191,6 +191,16 @@ if ($_REQUEST['Networkdelete'] == "yes") {
 // #####################################
 // ## Start Function Setup
 // #####################################
+function unassigned_devices() {
+  global $db;
+  $func_sql = 'SELECT * FROM "Devices" WHERE "dev_Infrastructure" = "" OR "dev_Infrastructure" IS NULL';
+  $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
+  while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
+    //echo $func_res['dev_Name'].'-'.$func_res['dev_MAC'].'<br>';
+    echo '<a href="./deviceDetails.php?mac='.$func_res['dev_MAC'].'"><div style="display: inline-block; padding: 5px 15px; font-weight: bold;">'.$func_res['dev_Name'].'</div></a>';
+  }
+}
+
 function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
 	echo '<li class="'.$activetab.'"><a href="#'.$pia_func_netdevid.'" data-toggle="tab">'.$pia_func_netdevname.' / '.$pia_func_netdevtyp;
   if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
@@ -328,7 +338,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 $sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port" FROM "network_infrastructure"'; 
 $result = $db->query($sql);//->fetchArray(SQLITE3_ASSOC); 
 ?>
-      <div class="nav-tabs-custom" style="margin-bottom: 0px;">
+      <div class="nav-tabs-custom" style="">
             <ul class="nav nav-tabs">
 <?php
 $i = 0;
@@ -358,6 +368,21 @@ unset($i);
             </div>
             <!-- /.tab-content -->
   </div>
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa"></i><?php echo $pia_lang['Network_UnassignedDevices'];?></h3>
+    </div>
+    <div class="box-body">
+<?php
+unassigned_devices();
+?>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+
+
   <div style="width: 100%; height: 20px;"></div>
 </section>
 

@@ -356,6 +356,7 @@ $pia_lang['Network_ManageDel_Submit'] = 'Löschen';
 $pia_lang['Network_Table_State'] = 'Status';
 $pia_lang['Network_Table_Hostname'] = 'Gerätename';
 $pia_lang['Network_Table_IP'] = 'Host IP';
+$pia_lang['Network_UnassignedDevices'] = 'Nicht zugewiesene Geräte';
 
 //////////////////////////////////////////////////////////////////
 // Help Page
@@ -432,7 +433,7 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe, mir nicht bekannte, Geräte in meiner Liste. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und 
          									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen. 
-         									Wenn ja, lösche diese dort ebenfalls. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen.';
+         									Wenn ja, lösche diese dort ebenfalls. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen. Auch ein Neustart des Dienstes <span class="text-danger help_faq_code">pihole-FTL</span> kann das Problem unter Umständen beseitigen.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = 'Was bedeutet ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'meint ein Netzwerkgerät, welches über die Netzwerk-Seite erstellt wurde.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'bezeichnet die Anschlussnummer/Portnummer, an der das gerade bearbeitete Gerät mit diesem Netzwerkgerät verbunden ist.';
