@@ -330,10 +330,10 @@ $pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Network_Title'] = 'Netzwerkübersicht';
-$pia_lang['Network_ManageDevices'] = 'Geräte verwalten';
-$pia_lang['Network_ManageAdd'] = 'Gerät hinzufügen';
-$pia_lang['Network_ManageEdit'] = 'Gerät bearbeiten';
-$pia_lang['Network_ManageDel'] = 'Gerät löschen';
+$pia_lang['Network_ManageDevices'] = 'Netzwerkelemente verwalten';
+$pia_lang['Network_ManageAdd'] = 'Element hinzufügen';
+$pia_lang['Network_ManageEdit'] = 'Element bearbeiten';
+$pia_lang['Network_ManageDel'] = 'Element löschen';
 $pia_lang['Network_ManageAdd_Name'] = 'Name des Gerätes';
 $pia_lang['Network_ManageAdd_Name_text'] = 'Name ohne Sonderzeichen';
 $pia_lang['Network_ManageAdd_Type'] = 'Gerätetyp';

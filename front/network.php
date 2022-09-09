@@ -353,7 +353,7 @@ while($res = $result->fetchArray(SQLITE3_ASSOC)){
 			<div class="tab-content">
 <?php
 // #####################################
-// ## Ctreate Tab Content
+// ## Create Tab Content
 // #####################################
 $i = 0;
 while($res = $result->fetchArray(SQLITE3_ASSOC)){
@@ -369,9 +369,12 @@ unset($i);
             <!-- /.tab-content -->
   </div>
 
-<div class="box box-default">
-    <div class="box-header with-border">
+<div class="box box-default collapsed-box">
+    <div class="box-header with-border" data-widget="collapse">
         <h3 class="box-title"><i class="fa"></i><?php echo $pia_lang['Network_UnassignedDevices'];?></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+          </div>        
     </div>
     <div class="box-body">
 <?php
@@ -380,8 +383,6 @@ unassigned_devices();
     </div>
     <!-- /.box-body -->
 </div>
-
-
 
   <div style="width: 100%; height: 20px;"></div>
 </section>
