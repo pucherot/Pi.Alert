@@ -177,6 +177,17 @@ if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
     }    
   }
 }
+
+// Set Tab ----------------------------------------------------------------------------
+
+if ($_REQUEST['tab'] == '1') {
+    $pia_tab_setting = 'active';
+} elseif ($_REQUEST['tab'] == '2') {
+    $pia_tab_tool = 'active';
+} elseif ($_REQUEST['tab'] == '3') {
+    $pia_tab_backup = 'active';
+} else {$pia_tab_setting = 'active';}
+
 ?>
 
     <div class="row">
@@ -254,12 +265,12 @@ if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
 
     <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#tab_Settings" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings'];?></a></li>
-        <li><a href="#tab_DBTools" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_Tools'];?></a></li>
-        <li><a href="#tab_BackupRestore" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_BackupRestore'];?></a></li>
+        <li class="<?php echo $pia_tab_setting; ?>"><a href="#tab_Settings" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings'];?></a></li>
+        <li class="<?php echo $pia_tab_tool; ?>"><a href="#tab_DBTools" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_Tools'];?></a></li>
+        <li class="<?php echo $pia_tab_backup; ?>"><a href="#tab_BackupRestore" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_BackupRestore'];?></a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="tab_Settings">
+        <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
                 <div class="db_info_table">
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="text-align:center;">
@@ -355,7 +366,7 @@ else {
 
                 </div>
         </div>
-        <div class="tab-pane" id="tab_DBTools">
+        <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
                 <div class="db_info_table">
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="">
@@ -389,7 +400,7 @@ else {
                     </div>
                 </div>
         </div>
-        <div class="tab-pane" id="tab_BackupRestore">
+        <div class="tab-pane <?php echo $pia_tab_backup; ?>" id="tab_BackupRestore">
                 <div class="db_info_table">
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="">

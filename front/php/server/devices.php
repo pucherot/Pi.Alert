@@ -345,7 +345,7 @@ function PiaBackupDBtoArchive() {
     if (file_exists($Pia_Archive_Path.$Pia_Archive_Name) && filesize($Pia_Archive_Path.$Pia_Archive_Name) > 0) {
       echo $pia_lang['BackDevices_Backup_okay'].': ('.$Pia_Archive_Name.')';
       unlink($newfile);
-      echo("<meta http-equiv='refresh' content='1'>");
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
     } else {
       echo $pia_lang['BackDevices_Backup_Failed'].' (pialert.db.latestbackup)';
     }
@@ -373,7 +373,7 @@ function PiaRestoreDBfromArchive() {
     if (file_exists($file)) {
        echo $pia_lang['BackDevices_Restore_okay'];
        unlink($oldfile);
-       echo("<meta http-equiv='refresh' content='1'>");
+       echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
      } else {
        echo $pia_lang['BackDevices_Restore_Failed'];
      }
@@ -408,7 +408,7 @@ function PiaPurgeDBBackups() {
         }
   }
   echo $pia_lang['BackDevices_DBTools_Purge'];
-  echo("<meta http-equiv='refresh' content='1'>");
+  echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
     
 }
 
@@ -422,11 +422,11 @@ function PiaEnableDarkmode() {
   if (file_exists($file)) {
       echo $pia_lang['BackDevices_darkmode_disabled'];
       unlink($file);
-      echo("<meta http-equiv='refresh' content='1'>");
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
      } else {
       echo $pia_lang['BackDevices_darkmode_enabled'];
       $darkmode = fopen($file, 'w');
-      echo("<meta http-equiv='refresh' content='1'>");
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
      }
   }
 
@@ -440,11 +440,11 @@ function PiaEnableOnlineHistoryGraph() {
   if (file_exists($file)) {
       echo $pia_lang['BackDevices_onlinehistorygraph_enabled'];
       unlink($file);
-      echo("<meta http-equiv='refresh' content='1'>");
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
      } else {
       echo $pia_lang['BackDevices_onlinehistorygraph_disabled'];
       $darkmode = fopen($file, 'w');
-      echo("<meta http-equiv='refresh' content='1'>");
+      echo("<meta http-equiv='refresh'content='2; URL=./maintenance.php?tab=1'>");
      }
   }
 
@@ -458,7 +458,7 @@ function PiaSetAPIKey() {
 
     exec('../../../back/pialert-cli set_apikey', $output);
     echo $pia_lang['BackDevices_setapikey'];
-    echo("<meta http-equiv='refresh' content='2'>");
+    echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
   }
 
 
@@ -474,13 +474,13 @@ function PiaToggleArpScan() {
       // old method
       //unlink($file);
       exec('../../../back/pialert-cli enable_scan', $output);
-      echo("<meta http-equiv='refresh' content='1'>");
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
      } else {
       echo $pia_lang['BackDevices_Arpscan_disabled'];
       // old method
       //$startarpscan = fopen($file, 'w');
       exec('../../../back/pialert-cli disable_scan', $output);
-      echo("<meta http-equiv='refresh' content='1'>");
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
      }
   }
 
