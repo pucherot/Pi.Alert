@@ -39,6 +39,8 @@ require 'php/templates/language/'.$pia_lang_selected.'.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="x-dns-prefetch-control" content="off">
+  <meta http-equiv="cache-control" content="max-age=60,private">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <link rel="manifest" href="img/manifest.json">
   <title>Pi.Alert - <?php echo gethostname();?></title>
@@ -105,6 +107,14 @@ function show_pia_servertime() {
     if (pia_second <= 9) { pia_second = "0" + pia_second; } realtime_pia_servertime = "(" + pia_hour + ":" + pia_minute + ":" + pia_second + ")";
     if (document.getElementById) { document.getElementById("PIA_Servertime_place").innerHTML = realtime_pia_servertime; } setTimeout("show_pia_servertime()", 1000);
 }
+
+
+document.addEventListener("visibilitychange",()=>{
+   if(document.visibilityState==="visible"){
+       window.location.href = window.location.href.split('#')[0];
+   }
+})
+
 </script>
 
 </head>
