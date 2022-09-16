@@ -203,6 +203,27 @@ document.addEventListener("visibilitychange",()=>{
                 </div>
                 <div class="systemstatusbox" style="font-size: smaller; margin-top:10px;">
                     <?php
+
+// Pause Arp Scan ---------------------------------------------------------------
+
+if (!file_exists('../db/setting_stoparpscan')) {
+  $execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
+  $pia_arpscans = "";
+  exec($execstring, $pia_arpscans);
+  $pia_arpscans_result = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
+  $pia_arpscans_sidebarstate = 'Active';
+  $pia_arpscans_sidebarstate_light = 'green-light';
+} else {
+  $pia_arpscans_result = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
+  $pia_arpscans_sidebarstate = 'Disabled';
+  $pia_arpscans_sidebarstate_light = 'red';
+}
+
+                    echo '<span id="status">
+                            <i class="fa fa-w fa-circle text-'.$pia_arpscans_sidebarstate_light.'"></i> '.$pia_arpscans_sidebarstate.'&nbsp;&nbsp;
+                          </span><br>';
+
+
                     // (may be less than the number of online processors)
                     $nproc = shell_exec('nproc');
                     if (!is_numeric($nproc)) {

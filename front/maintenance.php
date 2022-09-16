@@ -89,17 +89,6 @@ $pia_db = str_replace('front', 'db', getcwd()).'/pialert.db';
 $pia_db_size = number_format((filesize($pia_db) / 1000000),2,",",".") . ' MB';
 $pia_db_mod = date ("d.m.Y, H:i:s", filemtime($pia_db)).' Uhr';
 
-// Pause Arp Scan ---------------------------------------------------------------
-
-if (!file_exists('../db/setting_stoparpscan')) {
-  $execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
-  $pia_arpscans = "";
-  exec($execstring, $pia_arpscans);
-  $pia_arpscans_result = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
-} else {
-  $pia_arpscans_result = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
-}
-
 // Count and Calc Backups -------------------------------------------------------
 
 $Pia_Archive_Path = str_replace('front', 'db', getcwd()).'/';
