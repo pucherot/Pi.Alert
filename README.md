@@ -70,17 +70,20 @@ A web frontend that allows:
     - IP's
     - ...
   - Manual Nmap scans
-  - Speedtest for Device "Internet" in the details view
-  - Simple Network relationship display
-  - Maintenance tasks and Settings like:
-    - Status Infos (active scans, database size, backup counter)
-    - Theme Selection (blue, red, green, yellow, black, purple)
-    - Language Selection (english, german, spanish)
-    - Light/Dark-Mode Switch
+  - Speedtest for device "Internet" in the details view
+  - Simple network relationship display
+  - Maintenance tasks and settings like:
+    - Status information (active scans, database size, backup counter)
+    - Theme selection (blue, red, green, yellow, black, purple)
+    - Language selection (english, german, spanish)
+    - Light/Dark-Mode switch
+    - Enable/Disable network activity graph 
     - Pause arp-scan
+    - Set API-key
+    - Enable/Disable login
     - DB maintenance tools
-    - DB Backup and Restore
-  - Help/FAQ Section 
+    - DB backup, restore and cleanup
+  - Help/FAQ section 
 
   | ![Screen 1][screen1] | ![Screen 2][screen2] |
   | -------------------- | -------------------- |
