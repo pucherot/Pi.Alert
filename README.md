@@ -89,7 +89,7 @@ A web frontend that allows:
   | -------------------- | -------------------- |
   | ![Screen 3][screen3] | ![Screen 4][screen4] |
 
-  |![Maintain screen dark][maintain_dark] | ![helpfaq_dark][HelpFAQ screen dark] |
+  |![Maintain screen dark][maintain_dark] | ![HelpFAQ screen dark][helpfaq_dark] |
   | ------------------------------------- | ------------------------------------ |
 
 ### API
