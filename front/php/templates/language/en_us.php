@@ -36,7 +36,7 @@ $pia_lang['Login_Toggle_Info_headline'] = 'Password Information';
 $pia_lang['Login_Toggle_Alert_headline'] = 'Password Alert!';
 
 //////////////////////////////////////////////////////////////////
-// Device Page
+// Sidebar
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Devices';
@@ -45,6 +45,11 @@ $pia_lang['Navigation_Events'] = 'Events';
 $pia_lang['Navigation_Maintenance'] = 'Maintenance';
 $pia_lang['Navigation_Network'] = 'Network';
 $pia_lang['Navigation_HelpFAQ'] = 'Help / FAQ';
+
+//////////////////////////////////////////////////////////////////
+// Device Page
+//////////////////////////////////////////////////////////////////
+
 $pia_lang['Device_Title'] = 'Devices';
 $pia_lang['Device_Shortcut_AllDevices'] = 'All Devices';
 $pia_lang['Device_Shortcut_Connected'] = 'Connected';
@@ -53,7 +58,8 @@ $pia_lang['Device_Shortcut_NewDevices'] = 'New Devices';
 $pia_lang['Device_Shortcut_DownAlerts'] = 'Down Alerts';
 $pia_lang['Device_Shortcut_Archived'] = 'Archived';
 $pia_lang['Device_Shortcut_Devices'] = 'Devices';
-$pia_lang['Device_Shortcut_OnlineChart'] = 'Device presence over time';
+$pia_lang['Device_Shortcut_OnlineChart_a'] = 'Device presence over time (';
+$pia_lang['Device_Shortcut_OnlineChart_b'] = 'h)';
 $pia_lang['Device_TableHead_Name'] = 'Name';
 $pia_lang['Device_TableHead_Owner'] = 'Owner';
 $pia_lang['Device_TableHead_Type'] = 'Type';
