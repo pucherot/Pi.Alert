@@ -89,7 +89,8 @@ A web frontend that allows:
   | -------------------- | -------------------- |
   | ![Screen 3][screen3] | ![Screen 4][screen4] |
 
-![Maintain screen dark][maintain_dark]
+  |![Maintain screen dark][maintain_dark] | ![helpfaq_dark][HelpFAQ screen dark] |
+  | ------------------------------------- | ------------------------------------ |
 
 ### API
 A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 3 things:
