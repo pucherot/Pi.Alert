@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Turn off php errors
+error_reporting(0);
+
 if ($_SESSION["login"] != 1)
   {
       header('Location: /pialert/index.php');
@@ -158,10 +161,10 @@ if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
     }
     if ($pia_lang_error == False) {
       $testlang = fopen($pia_lang_set_dir.'setting_language_'.$pia_lang_selector, 'w');
-      $pia_lang_test = '';
+      //$pia_lang_test = '';
       echo("<meta http-equiv='refresh' content='1'>"); 
     } else {
-      $pia_lang_test = '';
+      //$pia_lang_test = '';
       echo("<meta http-equiv='refresh' content='1'>");
     }    
   }
@@ -170,12 +173,12 @@ if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
 // Set Tab ----------------------------------------------------------------------------
 
 if ($_REQUEST['tab'] == '1') {
-    $pia_tab_setting = 'active';
+    $pia_tab_setting = 'active'; $pia_tab_tool = ''; $pia_tab_backup = '';
 } elseif ($_REQUEST['tab'] == '2') {
-    $pia_tab_tool = 'active';
+    $pia_tab_setting = ''; $pia_tab_tool = 'active'; $pia_tab_backup = '';
 } elseif ($_REQUEST['tab'] == '3') {
-    $pia_tab_backup = 'active';
-} else {$pia_tab_setting = 'active';}
+    $pia_tab_setting = ''; $pia_tab_tool = ''; $pia_tab_backup = 'active';
+} else { $pia_tab_setting = 'active'; $pia_tab_tool = ''; $pia_tab_backup = '';}
 
 ?>
 
@@ -272,7 +275,7 @@ if ($_REQUEST['tab'] == '1') {
                                     <option value="es_es"><?php echo $pia_lang['Maintenance_lang_es_es'];?></option>
                                 </select></div>
                             <div style="display: block;"><input type="submit" name="langselector_set" value="<?php echo $pia_lang['Maintenance_lang_selector_apply'];?>" class="btn bg-green" style="width:160px;">
-                                <?php echo $pia_lang_test; ?>
+                                <?php // echo $pia_lang_test; ?>
                             </div>
                             </form>
                         </div>
@@ -300,12 +303,12 @@ if ($_REQUEST['tab'] == '1') {
                                     <option value="skin-yellow">yellow</option>
                                 </select></div>
                             <div style="display: block;"><input type="submit" name="skinselector_set" value="<?php echo $pia_lang['Maintenance_themeselector_apply'];?>" class="btn bg-green" style="width:160px;">
-                                <?php echo $pia_skin_test; ?>
+                                <?php // echo $pia_skin_test; ?>
                             </div>
                             </form>
                         </div>
                         <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
-                            <?php echo $pia_lang['Maintenance_themeselector_text'];?>
+                            <?php echo $pia_lang['Maintenance_themeselector_text']; ?>
                         </div>    
                     </div>
                     <div class="db_info_table_row">
