@@ -376,9 +376,9 @@ $pia_lang['Network_UnassignedDevices'] = 'Unassigned devices';
 // Help Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['HelpFAQ_Title'] = 'Hilfe / FAQ';
-$pia_lang['HelpFAQ_Cat_General'] = 'Allgemein';
-$pia_lang['HelpFAQ_Cat_Detail'] = 'Detailsansicht';
+$pia_lang['HelpFAQ_Title'] = 'Help / FAQ';
+$pia_lang['HelpFAQ_Cat_General'] = 'General';
+$pia_lang['HelpFAQ_Cat_Detail'] = 'Detail View';
 $pia_lang['HelpFAQ_Cat_General_100_head'] = 'The clock on the top right and the times of the events/presence are not correct (time difference).';
 $pia_lang['HelpFAQ_Cat_General_100_text_a'] = 'On your PC the following time zone is set for the PHP environment:';
 $pia_lang['HelpFAQ_Cat_General_100_text_b'] = 'If this is not the timezone you are in, you should change the timezone in the PHP configuration file. You can find it in this directory:';
