@@ -92,6 +92,19 @@ A web frontend that allows:
   |![Maintain screen dark][maintain_dark] | ![HelpFAQ screen dark][helpfaq_dark] |
   | ------------------------------------- | ------------------------------------ |
 
+I have created icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
+
+```https://github.com/leiweibau/Pi.Alert/blob/main/favicons/glass_black_white.png```
+
+Instead of 'glass_black_white.png' you can use one of the following file names.
+
+ | ![glass_black_white.png][glass_black_white]   | ![glass_blue_white.png][glass_blue_white] | ![glass_green_white.png][glass_green_white] | ![glass_red_white.png][glass_red_white] | ![glass_purple_white.png][glass_purple_white] | ![glass_yellow_white.png][glass_yellow_white] |
+ | --------------------------------------------- | ----------------------------------------- | ------------------------------------------- | --------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+ | glass_black_white.png                         | glass_blue_white.png                      | glass_green_white.png                       | glass_red_white.png                     | glass_purple_white.png                        | glass_yellow_white.png                        | 
+ | ![glass_yellow_black.png][glass_yellow_black] | ![glass_blue_black.png][glass_blue_black] | ![glass_green_black.png][glass_green_black] | ![glass_red_black.png][glass_red_black] | ![glass_purple_black.png][glass_purple_black] |
+ | glass_yellow_black.png                        | glass_blue_black.png                      | glass_green_black.png                       | glass_red_black.png                     | glass_purple_black.png                        |
+
+
 ### API
 A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 3 things:
   - All online devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port).
@@ -180,3 +193,14 @@ Linux distributions.
 [report2]: ./docs/img/4_report_2.jpg          "Report sample 2"
 [maintain_dark]: /docs/img/5_maintain.jpg     "Maintain screen dark"
 [helpfaq_dark]: /docs/img/6_helpfaq.jpg       "HelpFAQ screen dark"
+[glass_black_white]: /favicons/glass_black_white.png       "glass_black_white.png"
+[glass_blue_white]: /favicons/glass_blue_white.png       "glass_blue_white.png"
+[glass_green_white]: /favicons/glass_green_white.png       "glass_green_white.png"
+[glass_red_white]: /favicons/glass_red_white.png       "glass_red_white.png"
+[glass_purple_white]: /favicons/glass_purple_white.png       "glass_purple_white.png"
+[glass_yellow_white]: /favicons/glass_yellow_white.png       "glass_yellow_white.png"
+[glass_blue_black]: /favicons/glass_blue_black.png       "glass_blue_black.png"
+[glass_green_black]: /favicons/glass_green_black.png       "glass_green_black.png"
+[glass_red_black]: /favicons/glass_red_black.png       "glass_red_black.png"
+[glass_purple_black]: /favicons/glass_purple_black.png       "glass_purple_black.png"
+[glass_yellow_black]: /favicons/glass_yellow_black.png       "glass_yellow_black.png"
