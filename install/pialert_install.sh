@@ -568,13 +568,20 @@ add_jobs_to_crontab() {
 publish_pialert() {
   if [ -e "$WEBROOT/pialert" ] || [ -L "$WEBROOT/pialert" ] ; then
     print_msg "- Deleting previous Pi.Alert site"
-    sudo rm -r "$WEBROOT/pialert"                                 2>&1 >> "$LOG"
+    sudo rm -r "$WEBROOT/pialert"                                            2>&1 >> "$LOG"
   fi
 
   print_msg "- Setting permissions..."
-  sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
-  chmod -R g+rwx $PIALERT_HOME/db                                 2>&1 >> "$LOG"
-  chmod go+x $INSTALL_DIR                                         2>&1 >> "$LOG"
+  sudo chgrp -R www-data $PIALERT_HOME/db                                    2>&1 >> "$LOG"
+  chmod -R g+rwx $PIALERT_HOME/db                                            2>&1 >> "$LOG"
+  chmod go+x $INSTALL_DIR
+  DEFAULTUSER=$(whoami)
+  sudo usermod -a -G www-data ${DEFAULTUSER}                                 2>&1 >> "$LOG"
+  sudo usermod -a -G ${DEFAULTUSER} www-data                                 2>&1 >> "$LOG"
+  sudo chown www-data:${DEFAULTUSER} $PIALERT_HOME/config/pialert.conf       2>&1 >> "$LOG"
+  sudo chmod 660 $PIALERT_HOME/config/pialert.conf                           2>&1 >> "$LOG"
+  chmod 770 $PIALERT_HOME/db                                                 2>&1 >> "$LOG"
+  chmod 770 $PIALERT_HOME/config                                             2>&1 >> "$LOG"
 
   print_msg "- Publishing Pi.Alert web..."
   sudo ln -s "$PIALERT_HOME/front" "$WEBROOT/pialert"             2>&1 >> "$LOG"
