@@ -37,8 +37,8 @@ main() {
 
   check_packages
   download_pialert
-  update_config
-  update_db
+ # update_config
+ # update_db
 
   test_pialert
   
@@ -74,7 +74,7 @@ move_files() {
 }
 
 # ------------------------------------------------------------------------------
-# Move files to the new directory
+# Remove old files
 # ------------------------------------------------------------------------------
 clean_files() {
   print_msg "- Cleaning previous version..."
@@ -142,13 +142,13 @@ update_config() {
     echo "PIALERT_PATH    = '$PIALERT_HOME'" >> "$PIALERT_HOME/config/pialert.conf"
   fi      
 
-  if ! grep -Fq QUERY_MYIP_SERVER "$PIALERT_HOME/config/pialert.conf" ; then
-    echo "QUERY_MYIP_SERVER = 'http://ipv4.icanhazip.com'" >> "$PIALERT_HOME/config/pialert.conf"
-  fi      
+  # if ! grep -Fq QUERY_MYIP_SERVER "$PIALERT_HOME/config/pialert.conf" ; then
+  #   echo "QUERY_MYIP_SERVER = 'http://ipv4.icanhazip.com'" >> "$PIALERT_HOME/config/pialert.conf"
+  # fi      
 
-  if ! grep -Fq SCAN_SUBNETS "$PIALERT_HOME/config/pialert.conf" ; then
-    echo "SCAN_SUBNETS      = '--localnet'" >> "$PIALERT_HOME/config/pialert.conf"
-  fi      
+  # if ! grep -Fq SCAN_SUBNETS "$PIALERT_HOME/config/pialert.conf" ; then
+  #   echo "SCAN_SUBNETS      = '--localnet'" >> "$PIALERT_HOME/config/pialert.conf"
+  # fi      
 }
 
 # ------------------------------------------------------------------------------
