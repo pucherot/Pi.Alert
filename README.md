@@ -105,6 +105,9 @@ Instead of 'glass_black_white.png' you can use one of the following file names.
  | glass_yellow_black.png                        | glass_blue_black.png                      | glass_green_black.png                       | glass_red_black.png                     | glass_purple_black.png                        |
 
 
+[List of Favicons/Homescreen icons](docs/ICONS.md)
+
+
 ### API
 A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 3 things:
   - All online devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port).
