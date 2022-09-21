@@ -94,7 +94,7 @@ A web frontend that allows:
 
 I have created icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
-```https://github.com/leiweibau/Pi.Alert/blob/main/favicons/glass_black_white.png```
+```https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/favicons/glass_black_white.png```
 
 Instead of 'glass_black_white.png' you can use one of the following file names.
 
