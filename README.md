@@ -96,14 +96,7 @@ I have created icons according to the skins. Since I made the experience that iO
 
 ```https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/favicons/glass_black_white.png```
 
-Instead of 'glass_black_white.png' you can use one of the following file names.
-
- | ![glass_black_white.png][glass_black_white]   | ![glass_blue_white.png][glass_blue_white] | ![glass_green_white.png][glass_green_white] | ![glass_red_white.png][glass_red_white] | ![glass_purple_white.png][glass_purple_white] | ![glass_yellow_white.png][glass_yellow_white] |
- | --------------------------------------------- | ----------------------------------------- | ------------------------------------------- | --------------------------------------- | --------------------------------------------- | --------------------------------------------- |
- | glass_black_white.png                         | glass_blue_white.png                      | glass_green_white.png                       | glass_red_white.png                     | glass_purple_white.png                        | glass_yellow_white.png                        | 
- | ![glass_yellow_black.png][glass_yellow_black] | ![glass_blue_black.png][glass_blue_black] | ![glass_green_black.png][glass_green_black] | ![glass_red_black.png][glass_red_black] | ![glass_purple_black.png][glass_purple_black] |
- | glass_yellow_black.png                        | glass_blue_black.png                      | glass_green_black.png                       | glass_red_black.png                     | glass_purple_black.png                        |
-
+Instead of 'glass_black_white.png' you can use one of the following files.
 
 [List of Favicons/Homescreen icons](docs/ICONS.md)
 
