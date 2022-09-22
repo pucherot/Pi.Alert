@@ -575,11 +575,13 @@ publish_pialert() {
   sudo chgrp -R www-data $PIALERT_HOME/db                                    2>&1 >> "$LOG"
   chmod -R g+rwx $PIALERT_HOME/db                                            2>&1 >> "$LOG"
   chmod go+x $INSTALL_DIR
-  DEFAULTUSER=$(whoami)
-  sudo usermod -a -G www-data ${DEFAULTUSER}                                 2>&1 >> "$LOG"
-  sudo usermod -a -G ${DEFAULTUSER} www-data                                 2>&1 >> "$LOG"
-  sudo chown www-data:${DEFAULTUSER} $PIALERT_HOME/config/pialert.conf       2>&1 >> "$LOG"
-  sudo chmod 660 $PIALERT_HOME/config/pialert.conf                           2>&1 >> "$LOG"
+  #DEFAULTUSER=$(whoami)
+  #sudo usermod -a -G www-data ${DEFAULTUSER}                                 2>&1 >> "$LOG"
+  #sudo usermod -a -G ${DEFAULTUSER} www-data                                 2>&1 >> "$LOG"
+  #sudo chown www-data:${DEFAULTUSER} $PIALERT_HOME/config/pialert.conf       2>&1 >> "$LOG"
+  #sudo chmod 660 $PIALERT_HOME/config/pialert.conf                           2>&1 >> "$LOG"
+  sudo chgrp www-data $PIALERT_HOME/config                                    2>&1 >> "$LOG"
+  sudo chgrp www-data $PIALERT_HOME/config/pialert.conf                                   2>&1 >> "$LOG"
   chmod 770 $PIALERT_HOME/db                                                 2>&1 >> "$LOG"
   chmod 770 $PIALERT_HOME/config                                             2>&1 >> "$LOG"
 
