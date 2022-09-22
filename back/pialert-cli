@@ -167,9 +167,6 @@ case $1 in
         ## Change PIALERT_APIKEY
         sed -i "/PIALERT_APIKEY/c\PIALERT_APIKEY = '$PIA_APIKEY_RAND'" $PIA_CONF_FILE
     fi
-    DEFAULTUSER=$(echo $SCRIPTPATH | /bin/sed "s/\\/home\\///g" | /bin/sed "s/\\/pialert\\/back//g")
-    sudo chown www-data:${DEFAULTUSER} $PIA_CONF_FILE
-    sudo chmod 660 $PIA_CONF_FILE
     echo "API-Key set"
     ;;
 
