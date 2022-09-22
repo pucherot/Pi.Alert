@@ -92,7 +92,7 @@ A web frontend that allows:
   |![Maintain screen dark][maintain_dark] | ![HelpFAQ screen dark][helpfaq_dark] |
   | ------------------------------------- | ------------------------------------ |
 
-I have created icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
+Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
 ```https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_black_white.png```
 
