@@ -303,6 +303,7 @@ $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que qu
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Desactivado';
 $pia_lang['BackDevices_Arpscan_enabled'] = 'Arp-Scan Activado';
+$pia_lang['BackDevices_setapikey'] = 'API-Key set';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Darkmode Desactivado';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Darkmode Activado';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Graph disabled.';
@@ -321,9 +322,9 @@ $pia_lang['BackDevices_DBTools_DelDevError_a'] = 'Error de eliminación del disp
 $pia_lang['BackDevices_DBTools_DelDevError_b'] = 'Error de eliminación de dispositivos';
 $pia_lang['BackDevices_DBTools_UpdDev'] = 'Dispositivo actualizado con éxito';
 $pia_lang['BackDevices_DBTools_UpdDevError'] = 'Error al actualizar el dispositivo';
-$pia_lang['BackDevices_DBTools_Upgrade'] = 'Base de datos actualizada correctamente';
-$pia_lang['BackDevices_DBTools_UpgradeError'] = 'Falló la actualización de la base de datos';
 $pia_lang['BackDevices_DBTools_Purge'] = 'Las copias de seguridad más antiguas fueron eliminadas';
+$pia_lang['BackDevices_DBTools_DelActHistory'] = 'Network aktivity reset successful';
+$pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Network aktivity reset not successful';
 $pia_lang['BackDevices_Login_disabled'] = 'Login desactivado.';
 $pia_lang['BackDevices_Login_enabled'] = 'Login activado.';
 

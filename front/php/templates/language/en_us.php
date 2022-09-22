@@ -312,6 +312,7 @@ $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Are you sure you want to 
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Disabled';
 $pia_lang['BackDevices_Arpscan_enabled'] = 'Arp-Scan Enabled';
+$pia_lang['BackDevices_setapikey'] = 'API-Key set';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Darkmode Disabled';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Darkmode Enabled';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Graph disabled.';
@@ -330,12 +331,12 @@ $pia_lang['BackDevices_DBTools_DelDevError_a'] = 'Error deleting Device';
 $pia_lang['BackDevices_DBTools_DelDevError_b'] = 'Error deleting Devices';
 $pia_lang['BackDevices_DBTools_UpdDev'] = 'Device updated successfully';
 $pia_lang['BackDevices_DBTools_UpdDevError'] = 'Error updating device';
-$pia_lang['BackDevices_DBTools_Upgrade'] = 'Database upgraded successfully';
-$pia_lang['BackDevices_DBTools_UpgradeError'] = 'Database upgrade failed';
 $pia_lang['BackDevices_DBTools_Purge'] = 'The oldest backups were deleted';
 $pia_lang['BackDevices_DBTools_ImportCSV'] = 'The devices from the CSV file were imported successfully.';
 $pia_lang['BackDevices_DBTools_ImportCSVError'] = 'The CSV file couldn\'t be imported. Make sure the format is correct.';
 $pia_lang['BackDevices_DBTools_ImportCSVMissing'] = 'The CSV file couldn\'t be found under <b>/config/devices.csv.</b>';
+$pia_lang['BackDevices_DBTools_DelActHistory'] = 'Network aktivity reset successful';
+$pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Network aktivity reset not successful';
 $pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
 $pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
 
