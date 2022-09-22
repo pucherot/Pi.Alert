@@ -582,6 +582,7 @@ publish_pialert() {
   #sudo chmod 660 $PIALERT_HOME/config/pialert.conf                           2>&1 >> "$LOG"
   sudo chgrp www-data $PIALERT_HOME/config                                    2>&1 >> "$LOG"
   sudo chgrp www-data $PIALERT_HOME/config/pialert.conf                                   2>&1 >> "$LOG"
+  chmod -R g+rwx $PIALERT_HOME/config/pialert.conf                                           2>&1 >> "$LOG"
   chmod 770 $PIALERT_HOME/db                                                 2>&1 >> "$LOG"
   chmod 770 $PIALERT_HOME/config                                             2>&1 >> "$LOG"
 
