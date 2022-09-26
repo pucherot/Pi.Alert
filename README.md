@@ -117,6 +117,12 @@ Linux distributions.
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
+# Update
+<!--- --------------------------------------------------------------------- --->
+This update script is only recommended for an already existing installation of this fork. The script is still being tested.
+
+- One-step Automated Update:
+  #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh | bash`
 
 # Uninstall process
 <!--- --------------------------------------------------------------------- --->
