@@ -40,9 +40,10 @@ main() {
  # update_config
  # update_db
 
-  test_pialert
+ test_pialert
   
   print_header "Update process finished"
+ # test_pialert
   print_msg ""
 
   move_logfile
@@ -158,6 +159,10 @@ update_db() {
   print_msg "- Updating DB permissions..."
   sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
   chmod -R 770 $PIALERT_HOME/db                                   2>&1 >> "$LOG"
+  sudo chgrp www-data $PIALERT_HOME/config                        2>&1 >> "$LOG"
+  sudo chgrp www-data $PIALERT_HOME/config/pialert.conf           2>&1 >> "$LOG"
+  chmod 770 $PIALERT_HOME/config                                  2>&1 >> "$LOG"
+  chmod g+rw $PIALERT_HOME/config/pialert.conf                    2>&1 >> "$LOG"
 
   print_msg "- Installing sqlite3..."
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
