@@ -444,6 +444,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td style="vertical-align: top; padding-left:5px;">set_apikey</td>
 											        <td style="padding-left:5px;">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td>
 											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">reporting_test</td>
+											        <td style="padding-left:5px;">- Test reporting for all activated services.<br>&nbsp;</td>
+											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and 

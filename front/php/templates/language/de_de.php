@@ -427,6 +427,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											        <td style="vertical-align: top; padding-left:5px;">set_apikey</td>
 											        <td style="padding-left:5px;">- Mit dem API-Schlüssel ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Webseite zu benutzen. Wenn bereits ein API-Schlüssel existiert, wird er ersetzt.<br>&nbsp;</td>
 											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">reporting_test</td>
+											        <td style="padding-left:5px;">- Testet alle aktiven Benachrichtigungsdienste<br>&nbsp;</td>
+											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe, mir nicht bekannte, Geräte in meiner Liste. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und 

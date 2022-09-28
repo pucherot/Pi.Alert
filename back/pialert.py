@@ -80,6 +80,8 @@ def main ():
         res = check_internet_IP()
     elif cycle == 'cleanup':
         res = cleanup_database()
+    elif cycle == 'reporting_test':
+        res = email_reporting_test()
     elif cycle == 'update_vendors':
         res = update_devices_MAC_vendors()
     elif cycle == 'update_vendors_silent':
@@ -95,7 +97,7 @@ def main ():
         return res
     
     # Reporting
-    if cycle != 'internet_IP' and cycle != 'cleanup':
+    if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_test':
         email_reporting()
 
     # Close SQL
@@ -1462,6 +1464,26 @@ def send_pushsafer (_Text):
 
 #-------------------------------------------------------------------------------
 
+def send_pushsafer_test ():
+    url = 'https://www.pushsafer.com/api'
+    post_fields = {
+        "t" : 'Pi.Alert Message - Test',
+        "m" : 'Test',
+        "s" : 11,
+        "v" : 3,
+        "i" : 148,
+        "c" : '#ef7f7f',
+        "d" : 'a',
+        "u" : REPORT_DASHBOARD_URL,
+        "ut" : 'Open Pi.Alert',
+        "k" : PUSHSAFER_TOKEN,
+        }
+    
+    requests.post(url, data=post_fields)
+
+
+#-------------------------------------------------------------------------------
+
 def send_ntfy (_Text):
     requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
     data=_Text,
@@ -1471,6 +1493,52 @@ def send_ntfy (_Text):
         "Priority": "urgent",
         "Tags": "warning"
     })
+
+#-------------------------------------------------------------------------------
+
+def send_ntfy_test ():
+    requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
+    data="Test",
+    headers={
+        "Title": "Pi.Alert Notification",
+        "Click": REPORT_DASHBOARD_URL,
+        "Priority": "urgent",
+        "Tags": "warning"
+    })
+
+
+#===============================================================================
+# Test REPORTING
+#===============================================================================
+def email_reporting_test ():
+    global mail_text
+    global mail_html
+    
+
+    # Reporting section
+    print ('\nTest Reporting...')
+    # Open text Template
+
+    # Send Mail
+    if REPORT_MAIL :
+        print ('    Sending report by email...')
+        send_email ("mail_text", "mail_html")
+    else :
+        print ('    Skip mail...')
+
+    if REPORT_PUSHSAFER :
+        print ('    Sending report by PUSHSAFER...')
+        send_pushsafer_test ()
+    else :
+        print ('    Skip PUSHSAFER...')
+
+    if REPORT_NTFY :
+        print ('    Sending report by NTFY...')
+        send_ntfy_test ("mail_text")
+    else :
+        print ('    Skip NTFY...')
+        
+    return 0
 
 #-------------------------------------------------------------------------------
 def format_report_section (pActive, pSection, pTable, pText, pHTML):

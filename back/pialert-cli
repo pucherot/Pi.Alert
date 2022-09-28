@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.5'
+SCRIPTVERSION='v0.6'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -41,6 +41,8 @@ case $1 in
     echo " set_apikey               - With the API key it is possible to make queries to the database"
     echo "                            without using the web page. If an API key already exists, it will be"
     echo "                            replaced."
+    echo ""
+    echo " reporting_test           - Test reporting for all activated services."
     echo ""
     ;;
 
@@ -142,7 +144,7 @@ case $1 in
     ;;
 
   update_db)
-    ## stop active scans
+    ## update database
     echo "Create backup before insert new table"
     cp $PIA_DB_FILE ${PIA_DB_FILE_PATH}/pialert.db.bak
     echo "Insert new table 'Online_History' to $PIA_DB_FILE"
@@ -168,6 +170,12 @@ case $1 in
         sed -i "/PIALERT_APIKEY/c\PIALERT_APIKEY = '$PIA_APIKEY_RAND'" $PIA_CONF_FILE
     fi
     echo "API-Key set"
+    ;;
+
+  reporting_test)
+    ## test reporting
+    python3 ${SCRIPTPATH}/pialert.py reporting_test
+    echo "Test executed"
     ;;
 
   *)
