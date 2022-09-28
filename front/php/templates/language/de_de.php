@@ -17,6 +17,7 @@ $pia_lang['Gen_Purge'] = 'Aufräumen';
 $pia_lang['Gen_Backup'] = 'Sichern';
 $pia_lang['Gen_Restore'] = 'Wiederherstellen';
 $pia_lang['Gen_Switch'] = 'Umschalten';
+$pia_lang['Gen_Run'] = 'Ausführen';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - Update by @TeroRERO 03ago2022
@@ -253,6 +254,10 @@ $pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Sind Sie sicher, dass 
 $pia_lang['Maintenance_Tool_upgrade_database_noti'] = 'Aktualisiere Datenbank';
 $pia_lang['Maintenance_Tool_upgrade_database_text'] = 'Mit dieser Schaltfläche wird die Datenbank aktualisiert, um das Diagramm der Netzwerkaktivitäten der letzten 12 Stunden zu aktivieren. Bitte sichern Sie Ihre Datenbank, falls Probleme auftreten.';
 $pia_lang['Maintenance_Tool_upgrade_database_noti_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen.';
+$pia_lang['Maintenance_Tool_test_notification'] = 'Benachrichtigung testen';
+$pia_lang['Maintenance_Tool_test_notification_text'] = 'Führt eine Probe&shy;be&shy;nach&shy;rich&shy;tigung aus, um die korrekte Kon&shy;figu&shy;ration der Dienste zu testen.';
+$pia_lang['Maintenance_Tool_test_notification_noti'] = 'Testbenachrichtigung';
+$pia_lang['Maintenance_Tool_test_notification_noti_text'] = 'Soll eine Testbenachrichtigung über alle konfigurierten und aktivierten Benachrichtigungsdienste durchgeführt werden?';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Alle Geräte löschen';
 $pia_lang['Maintenance_Tool_del_alldev_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht werden. Alle Geräte werden in der Datenbank ge&shy;löscht.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Geräte löschen';
@@ -262,7 +267,7 @@ $pia_lang['Maintenance_Tool_del_unknowndev_text'] = 'Machen Sie ein Backup, bevo
 $pia_lang['Maintenance_Tool_del_unknowndev_noti'] = 'Lösche (unknown) Geräte';
 $pia_lang['Maintenance_Tool_del_unknowndev_noti_text'] = 'Sind Sie sicher, dass Sie alle (unknown) Geräte aus der Datenbank löschen wollen?';
 $pia_lang['Maintenance_Tool_del_allevents'] = 'Alle Ereignisse löschen';
-$pia_lang['Maintenance_Tool_del_allevents_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht werden. Alle Ereignisse werden aus der Datenbank ge&shy;löscht. Dies setzt auch die Anwesenheit zu&shy;rück. Es kann ab dem Moment zu ungültigen Sitzungen kommen. Ein Scan, während das betreffende Gerät "online" ist, sollte das Problem lösen.';
+$pia_lang['Maintenance_Tool_del_allevents_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht werden. Alle Ereignisse werden aus der Daten&shy;bank ge&shy;löscht. Dies setzt auch die Anwesenheit zu&shy;rück. Es kann ab dem Moment zu ungültigen Sitzungen kommen. Ein Scan, während das be&shy;treffen&shy;de Gerät "online" ist, sollte das Problem lösen.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Alle Ereignisse löschen';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = 'Sind Sie sicher, dass Sie alle Ereignisse aus der Datenbank löschen wollen. Dies setzt die Anwesenheit aller Geräte zurück.';
 $pia_lang['Maintenance_Tool_backup'] = 'DB Sicherung';
@@ -299,6 +304,7 @@ $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Bist du dir sicher, dass 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Automatischer Arp-Scan deaktiviert.';
 $pia_lang['BackDevices_Arpscan_enabled'] = 'Automatischer Arp-Scan aktiviert.';
 $pia_lang['BackDevices_setapikey'] = 'API-Key wurde gesetzt.';
+$pia_lang['BackDevices_test_notification'] = 'Testnachricht wurde gesendet';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Heller Modus aktiviert.';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Dunkler Modus aktiviert.';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Aktivitätsverlauf deaktiviert.';

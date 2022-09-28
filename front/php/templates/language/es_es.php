@@ -17,6 +17,7 @@ $pia_lang['Gen_Purge'] = 'Purgar';
 $pia_lang['Gen_Backup'] = 'Ejecutar copia de seguridad';
 $pia_lang['Gen_Restore'] = 'Ejecutar restauración';
 $pia_lang['Gen_Switch'] = 'Cambiar';
+$pia_lang['Gen_Run'] = 'Run';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - Update by @TeroRERO 03ago2022
@@ -239,13 +240,14 @@ $pia_lang['Maintenance_Tool_arpscansw'] = 'Activar arp-scan (on/off)';
 $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Encender o desactivar el arp-scan. Cuando el escaneo se ha apagado, permanece apagado hasta que se active nuevamente. Los escaneos activos no se cancelan.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'Activar arp-scan on or off';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'Cuando el escaneo se ha apagado, permanece apagado hasta que se active nuevamente.';
+$pia_lang['Maintenance_Tool_test_notification'] = 'Test Notifications';
+$pia_lang['Maintenance_Tool_test_notification_text'] = 'Test reporting for all activated services.';
+$pia_lang['Maintenance_Tool_test_notification_noti'] = '';
+$pia_lang['Maintenance_Tool_test_notification_noti_text'] = '';
 $pia_lang['Maintenance_Tool_del_empty_macs'] = 'Eliminar dispositivos con MACs vacíos';
 $pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Todos los dispositivos sin Mac se eliminarán de la base de datos.';
 $pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Eliminar dispositivos';
 $pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = '¿Estás seguro de que quieres eliminar todos los dispositivos con direcciones MAC vacías? <br> (tal vez prefiera archivarlo)';
-$pia_lang['Maintenance_Tool_upgrade_database_noti'] = 'Actualizar la base de datos';
-$pia_lang['Maintenance_Tool_upgrade_database_text'] = 'Este botón actualizará la base de datos para habilitar la actividad de la red en las últimas 12 horas. Haga una copia de seguridad de su base de datos en caso de problemas.';
-$pia_lang['Maintenance_Tool_upgrade_database_noti_text'] = '¿Estás seguro de que quieres actualizar la base de datos? <br> (tal vez prefieras archivarla)';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Eliminar todos los dispositivos';
 $pia_lang['Maintenance_Tool_del_alldev_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Todos los dispositivos se eliminarán de la base de datos.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Eliminar dispositivos';
@@ -304,6 +306,7 @@ $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que qu
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Desactivado';
 $pia_lang['BackDevices_Arpscan_enabled'] = 'Arp-Scan Activado';
 $pia_lang['BackDevices_setapikey'] = 'API-Key set';
+$pia_lang['BackDevices_test_notification'] = 'Notification sent';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Darkmode Desactivado';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Darkmode Activado';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Graph disabled.';

@@ -17,6 +17,7 @@ $pia_lang['Gen_Purge'] = 'Purge';
 $pia_lang['Gen_Backup'] = 'Run Backup';
 $pia_lang['Gen_Restore'] = 'Run Restore';
 $pia_lang['Gen_Switch'] = 'Switch';
+$pia_lang['Gen_Run'] = 'Run';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - Update by @TeroRERO 03ago2022
@@ -256,6 +257,10 @@ $pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Are you sure you want 
 $pia_lang['Maintenance_Tool_upgrade_database_noti'] = 'Upgrade database';
 $pia_lang['Maintenance_Tool_upgrade_database_text'] = 'This button will upgrade the database to enable the Network activity over last 12 hours chart. Please backup your database in case of issues.';
 $pia_lang['Maintenance_Tool_upgrade_database_noti_text'] = 'Are you sure you want to upgrade the database?<br>(maybe you prefer to archive it)';
+$pia_lang['Maintenance_Tool_test_notification'] = 'Test Notifications';
+$pia_lang['Maintenance_Tool_test_notification_text'] = 'Test reporting for all activated services.';
+$pia_lang['Maintenance_Tool_test_notification_noti'] = '';
+$pia_lang['Maintenance_Tool_test_notification_noti_text'] = '';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Delete all Devices';
 $pia_lang['Maintenance_Tool_del_alldev_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All devices will be deleted from the database.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Delete Devices';
@@ -313,6 +318,7 @@ $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Are you sure you want to 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Disabled';
 $pia_lang['BackDevices_Arpscan_enabled'] = 'Arp-Scan Enabled';
 $pia_lang['BackDevices_setapikey'] = 'API-Key set';
+$pia_lang['BackDevices_test_notification'] = 'Notification sent';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Darkmode Disabled';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Darkmode Enabled';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Graph disabled.';

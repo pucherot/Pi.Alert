@@ -268,7 +268,7 @@ if ($_REQUEST['tab'] == '1') {
                         <div class="db_tools_table_cell_a" style="text-align:center;">
                             <form method="post" action="maintenance.php">
                             <div style="display: inline-block;">
-                                <select name="langselector" class="form-control bg-green" style="width:160px; margin-bottom:5px;">
+                                <select name="langselector" class="form-control" style="width:160px; margin-bottom:5px;">
                                     <option value=""><?php echo $pia_lang['Maintenance_lang_selector_empty'];?></option>
                                     <option value="en_us"><?php echo $pia_lang['Maintenance_lang_en_us'];?></option>
                                     <option value="de_de"><?php echo $pia_lang['Maintenance_lang_de_de'];?></option>
@@ -287,7 +287,7 @@ if ($_REQUEST['tab'] == '1') {
                         <div class="db_tools_table_cell_a" style="text-align: center;">
                             <form method="post" action="maintenance.php">
                             <div style="display: inline-block; text-align: center;">
-                                <select name="skinselector" class="form-control bg-green" style="width:160px; margin-bottom:5px;">
+                                <select name="skinselector" class="form-control" style="width:160px; margin-bottom:5px;">
                                     <option value=""><?php echo $pia_lang['Maintenance_themeselector_empty'];?></option>
                                     <option value="skin-black-light">black light</option>
                                     <option value="skin-black">black</option>
@@ -360,6 +360,14 @@ else {
         </div>
         <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
                 <div class="db_info_table">
+
+                    <div class="db_info_table_row">
+                        <div class="db_tools_table_cell_a" style="">
+                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-yellow dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button>
+                        </div>
+                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text'];?></div>
+                    </div>
+
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="">
                             <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs'];?></button>
@@ -443,6 +451,21 @@ function deleteDevicesWithEmptyMACs()
 { 
   // Delete device
   $.get('php/server/devices.php?action=deleteAllWithEmptyMACs', function(msg) {
+    showMessage (msg);
+  });
+}
+
+
+// Test Notifications
+function askTestNotificationSystem () {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_test_notification_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_test_notification_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'TestNotificationSystem');
+}
+function TestNotificationSystem()
+{ 
+  // Delete device
+  $.get('php/server/devices.php?action=TestNotificationSystem', function(msg) {
     showMessage (msg);
   });
 }

@@ -44,6 +44,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'runScan15min':                 runScan15min();                          break;
       case 'runScan1min':                  runScan1min();                           break;
       case 'deleteUnknownDevices':         deleteUnknownDevices();                  break;
+      case 'TestNotificationSystem':       TestNotificationSystem();                break;
       case 'deleteEvents':                 deleteEvents();                          break;
       case 'deleteActHistory':             deleteActHistory();                      break;
       case 'deleteDeviceEvents':           deleteDeviceEvents();                    break;
@@ -459,6 +460,19 @@ function PiaSetAPIKey() {
     exec('../../../back/pialert-cli set_apikey', $output);
     echo $pia_lang['BackDevices_setapikey'];
     echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+  }
+
+
+//------------------------------------------------------------------------------
+//  Test Notification
+//------------------------------------------------------------------------------
+function TestNotificationSystem() {
+  //$file = '../../../db/setting_noonlinehistorygraph';
+  global $pia_lang;
+
+    exec('../../../back/pialert-cli reporting_test', $output);
+    echo $pia_lang['BackDevices_test_notification'];
+    //echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
   }
 
 
