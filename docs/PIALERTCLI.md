@@ -15,4 +15,4 @@ The current commands are:
 | set_apikey | <ul><li>With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.</li></ul> |
 | reporting_test | <ul><li>Test reporting for all activated services.</li></ul> |
 
-[Back](../README.md)
+[Back](https://github.com/leiweibau/Pi.Alert#back)
