@@ -1522,7 +1522,7 @@ def email_reporting_test ():
     # Send Mail
     if REPORT_MAIL :
         print ('    Sending report by email...')
-        send_email ("mail_text", "mail_html")
+        send_email ("Testmail", "Testmail")
     else :
         print ('    Skip mail...')
 
