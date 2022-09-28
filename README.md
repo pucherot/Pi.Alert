@@ -51,6 +51,8 @@ In charge of:
   - DB cleanup tasks via cron
   - a pialert-cli that helps to configure login and password
 
+[Overview of supported commands](docs/PIALERTCLI.md)
+
   | ![Report 1][report1] | ![Report 2][report2] |
   | -------------------- | -------------------- |
 
