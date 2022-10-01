@@ -1250,9 +1250,6 @@ def email_reporting ():
 						)""")
 
     # Open text Template
-
-
-    # Open text Template
     template_file = open(PIALERT_BACK_PATH + '/report_template.txt', 'r') 
     mail_text = template_file.read() 
     template_file.close() 
@@ -1413,6 +1410,11 @@ def email_reporting ():
             send_pushsafer (mail_text)
         else :
             print ('    Skip PUSHSAFER...')
+        if REPORT_TELEGRAM :
+            print ('    Sending report by Telegram...')
+            send_telegram (mail_text)
+        else :
+            print ('    Skip Telegram...')
         if REPORT_NTFY :
             print ('    Sending report by NTFY...')
             send_ntfy (mail_text)
@@ -1420,8 +1422,6 @@ def email_reporting ():
             print ('    Skip NTFY...')
     else :
         print ('    No changes to report...')
-
-    
 
     # Clean Pending Alert Events
     sql.execute ("""UPDATE Devices SET dev_LastNotification = ?
@@ -1442,14 +1442,14 @@ def email_reporting ():
 
 def send_pushsafer (_Text):
     # Remove one linebrake between "Server" and the headline of the event type
-    _Text = _Text.replace('\n\n\n', '\n\n')
+    _pushsafer_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
-    findsubheadline = _Text.split('\n')
+    findsubheadline = _pushsafer_Text.split('\n')
     subheadline = findsubheadline[3]
     url = 'https://www.pushsafer.com/api'
     post_fields = {
         "t" : 'Pi.Alert Message - '+subheadline,
-        "m" : _Text,
+        "m" : _pushsafer_Text,
         "s" : 11,
         "v" : 3,
         "i" : 148,
@@ -1461,26 +1461,6 @@ def send_pushsafer (_Text):
         }
     
     requests.post(url, data=post_fields)
-
-#-------------------------------------------------------------------------------
-
-def send_pushsafer_test ():
-    url = 'https://www.pushsafer.com/api'
-    post_fields = {
-        "t" : 'Pi.Alert Message - Test',
-        "m" : 'Test',
-        "s" : 11,
-        "v" : 3,
-        "i" : 148,
-        "c" : '#ef7f7f',
-        "d" : 'a',
-        "u" : REPORT_DASHBOARD_URL,
-        "ut" : 'Open Pi.Alert',
-        "k" : PUSHSAFER_TOKEN,
-        }
-    
-    requests.post(url, data=post_fields)
-
 
 #-------------------------------------------------------------------------------
 
@@ -1496,16 +1476,13 @@ def send_ntfy (_Text):
 
 #-------------------------------------------------------------------------------
 
-def send_ntfy_test ():
-    requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
-    data="Test",
-    headers={
-        "Title": "Pi.Alert Notification",
-        "Click": REPORT_DASHBOARD_URL,
-        "Priority": "urgent",
-        "Tags": "warning"
-    })
-
+def send_telegram (_Text):
+    # Remove one linebrake between "Server" and the headline of the event type
+    _telegram_Text = _Text.replace('\n\n\n', '\n\n')
+    # extract event type headline to use it in the notification headline
+    findsubheadline = _telegram_Text.split('\n')
+    subheadline = findsubheadline[3]
+    stream = os.popen('~/pialert/back/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_telegram_Text+'" --title "Pi.Alert - '+subheadline+'"')
 
 #===============================================================================
 # Test REPORTING
@@ -1514,7 +1491,6 @@ def email_reporting_test ():
     global mail_text
     global mail_html
     
-
     # Reporting section
     print ('\nTest Reporting...')
     # Open text Template
@@ -1537,8 +1513,50 @@ def email_reporting_test ():
         send_ntfy_test ("mail_text")
     else :
         print ('    Skip NTFY...')
+
+    if REPORT_TELEGRAM :
+        print ('    Sending report by Telegram...')
+        send_telegram_test ()
+    else :
+        print ('    Skip Telegram...')
         
     return 0
+
+#-------------------------------------------------------------------------------
+
+def send_ntfy_test ():
+    requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
+    data="Test",
+    headers={
+        "Title": "Pi.Alert Notification",
+        "Click": REPORT_DASHBOARD_URL,
+        "Priority": "urgent",
+        "Tags": "warning"
+    })
+
+#-------------------------------------------------------------------------------
+
+def send_pushsafer_test ():
+    url = 'https://www.pushsafer.com/api'
+    post_fields = {
+        "t" : 'Pi.Alert Message - Test',
+        "m" : 'Test',
+        "s" : 11,
+        "v" : 3,
+        "i" : 148,
+        "c" : '#ef7f7f',
+        "d" : 'a',
+        "u" : REPORT_DASHBOARD_URL,
+        "ut" : 'Open Pi.Alert',
+        "k" : PUSHSAFER_TOKEN,
+        }
+    
+    requests.post(url, data=post_fields)
+
+#-------------------------------------------------------------------------------
+
+def send_telegram_test ():
+    stream = os.popen('../back/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "Pi.Alert Test" --title "Pi.Alert"')
 
 #-------------------------------------------------------------------------------
 def format_report_section (pActive, pSection, pTable, pText, pHTML):

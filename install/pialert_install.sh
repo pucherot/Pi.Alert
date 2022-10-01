@@ -580,6 +580,10 @@ publish_pialert() {
   chmod 770 $PIALERT_HOME/db                                      2>&1 >> "$LOG"
   chmod 770 $PIALERT_HOME/config                                  2>&1 >> "$LOG"
   chmod g+rw $PIALERT_HOME/config/pialert.conf                    2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/arm64/shoutrrr             2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/armhf/shoutrrr             2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/x64/shoutrrr               2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/x86/shoutrrr               2>&1 >> "$LOG"
 
   print_msg "- Publishing Pi.Alert web..."
   sudo ln -s "$PIALERT_HOME/front" "$WEBROOT/pialert"             2>&1 >> "$LOG"

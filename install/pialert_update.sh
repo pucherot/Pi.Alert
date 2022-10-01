@@ -37,13 +37,12 @@ main() {
 
   check_packages
   download_pialert
- # update_config
+  update_config
  # update_db
 
- test_pialert
+  test_pialert
   
   print_header "Update process finished"
- # test_pialert
   print_msg ""
 
   move_logfile
@@ -136,12 +135,23 @@ update_config() {
   cp "$PIALERT_HOME/config/pialert.conf" "$PIALERT_HOME/config/pialert.conf.back"  2>&1 >> "$LOG"
 
   print_msg "- Updating config file..."
-  sed -i '/VERSION/d' "$PIALERT_HOME/config/pialert.conf"                          2>&1 >> "$LOG"
-  sed -i 's/PA_FRONT_URL/REPORT_DEVICE_URL/g' "$PIALERT_HOME/config/pialert.conf"  2>&1 >> "$LOG"
-  
-  if ! grep -Fq PIALERT_PATH "$PIALERT_HOME/config/pialert.conf" ; then
-    echo "PIALERT_PATH    = '$PIALERT_HOME'" >> "$PIALERT_HOME/config/pialert.conf"
-  fi      
+#  sed -i '/VERSION/d' "$PIALERT_HOME/config/pialert.conf"                          2>&1 >> "$LOG"
+#  sed -i 's/PA_FRONT_URL/REPORT_DEVICE_URL/g' "$PIALERT_HOME/config/pialert.conf"  2>&1 >> "$LOG"
+
+if ! grep -Fq SHOUTRRR_BINARY "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# Shoutrrr
+# ----------------------
+SHOUTRRR_BINARY    = 'armhf'
+
+# Telegram via Shoutrrr
+# ----------------------
+REPORT_TELEGRAM         = False
+TELEGRAM_BOT_TOKEN_URL  = '<Your generated servive URL for telegram - use ~/pialert/back/shoutrrr/<your Systemtyp>/shoutrrr generate telegram>'
+EOF
+
+fi      
 
   # if ! grep -Fq QUERY_MYIP_SERVER "$PIALERT_HOME/config/pialert.conf" ; then
   #   echo "QUERY_MYIP_SERVER = 'http://ipv4.icanhazip.com'" >> "$PIALERT_HOME/config/pialert.conf"
@@ -159,10 +169,6 @@ update_db() {
   print_msg "- Updating DB permissions..."
   sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
   chmod -R 770 $PIALERT_HOME/db                                   2>&1 >> "$LOG"
-  sudo chgrp www-data $PIALERT_HOME/config                        2>&1 >> "$LOG"
-  sudo chgrp www-data $PIALERT_HOME/config/pialert.conf           2>&1 >> "$LOG"
-  chmod 770 $PIALERT_HOME/config                                  2>&1 >> "$LOG"
-  chmod g+rw $PIALERT_HOME/config/pialert.conf                    2>&1 >> "$LOG"
 
   print_msg "- Installing sqlite3..."
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
@@ -204,6 +210,14 @@ update_db() {
 # Test Pi.Alert
 # ------------------------------------------------------------------------------
 test_pialert() {
+  print_msg "- Set Permissions..."
+  chmod +x $PIALERT_HOME/back/shoutrrr/arm64/shoutrrr             2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/armhf/shoutrrr             2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/x64/shoutrrr               2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/x86/shoutrrr               2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/speedtest-cli                       2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/pialert-cli                         2>&1 >> "$LOG"
+
   print_msg "- Testing Pi.Alert HW vendors database update process..."
   print_msg "*** PLEASE WAIT A COUPLE OF MINUTES..."
   stdbuf -i0 -o0 -e0 $PYTHON_BIN $PIALERT_HOME/back/pialert.py update_vendors_silent  2>&1 | tee -ai "$LOG"

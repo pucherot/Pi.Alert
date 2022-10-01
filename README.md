@@ -12,7 +12,7 @@ JavaScript)*
 
 ## Modifications within this Fork
   - Only one scan cycle
-  - Modified scanmethod. If you want to go back to the original method comment line 505 and uncomment line 508 in ~/pialert/back/pialert.py
+  - Modified scanmethod. If you want to go back to the original method comment line 507 and uncomment line 510 in ~/pialert/back/pialert.py
   - Because of the modified scan, the extended scan parameters in the configuration file do not work. For this reason they were removed. 
   - The Backend has the additional option "cleanup"
   - "pialert-cli" that helps to configure login, password and DB migration
