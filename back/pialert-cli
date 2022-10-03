@@ -174,7 +174,7 @@ case $1 in
 
   reporting_test)
     ## test reporting
-    python3 ${SCRIPTPATH}/pialert.py reporting_test
+    /bin/python3 ${SCRIPTPATH}/pialert.py reporting_test
     echo "Test executed"
     ;;
 

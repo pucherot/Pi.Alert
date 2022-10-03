@@ -1482,7 +1482,8 @@ def send_telegram (_Text):
     # extract event type headline to use it in the notification headline
     findsubheadline = _telegram_Text.split('\n')
     subheadline = findsubheadline[3]
-    stream = os.popen('~/pialert/back/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_telegram_Text+'" --title "Pi.Alert - '+subheadline+'"')
+    runningpath = os.path.abspath(os.path.dirname(__file__))
+    stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_telegram_Text+'" --title "Pi.Alert - '+subheadline+'"')
 
 #===============================================================================
 # Test REPORTING
@@ -1556,7 +1557,9 @@ def send_pushsafer_test ():
 #-------------------------------------------------------------------------------
 
 def send_telegram_test ():
-    stream = os.popen('../back/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "Pi.Alert Test" --title "Pi.Alert"')
+    runningpath = os.path.abspath(os.path.dirname(__file__))
+    #print(runningpath)
+    stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "Pi.Alert Test" --title "Pi.Alert"')
 
 #-------------------------------------------------------------------------------
 def format_report_section (pActive, pSection, pTable, pText, pHTML):
