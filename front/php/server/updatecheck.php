@@ -39,9 +39,28 @@ echo $local_time;
                 <h4 class="modal-title">Update notes from Github</h4>
             </div>
             <div class="modal-body" style="text-align: left;">
-                <pre style="border: none"><?php echo $data['0']['commit']['message'];?><br><br></pre>
+                <div style="border: none; overflow-y: scroll;">
+<?php
+
+$updatenotes_array = explode("\n", $data['0']['commit']['message']);
+$updatenotes_array = array_filter($updatenotes_array);
+
+foreach($updatenotes_array as $row) {
+    if (stristr($row, "Update Notes")) {echo '<span style="font-size: 16px; font-weight: bold; text-decoration: underline;">'.$row.'</span><br>';}
+    elseif (stristr($row, "New:")) {echo '<br><span style="font-size: 16px; font-weight: bold;">'.$row.'</span><br>';} 
+    elseif (stristr($row, "Fixed:")) {echo '<br><span style="font-size: 16px; font-weight: bold;">'.$row.'</span><br>';} 
+    elseif (stristr($row, "Updated:")) {echo '<br><span style="font-size: 16px; font-weight: bold;">'.$row.'</span><br>';}
+    elseif (stristr($row, "Changed:")) {echo '<br><span style="font-size: 16px; font-weight: bold;">'.$row.'</span><br>';} 
+    elseif (stristr($row, "Note:")) {echo '<br><span style="font-size: 16px; font-weight: bold;">'.$row.'</span><br>';} 
+    elseif (stristr($row, "Removed:")) {echo '<br><span style="font-size: 16px; font-weight: bold;">'.$row.'</span><br>';} else {echo '<div style="display: list-item; margin-left : 2em;">'.str_replace('* ','',$row).'</div>';}
+}
+
+echo $temp_updatenotes;
+?>
+                <br></div>
             </div>
               <div class="modal-footer">
+                <a class="btn btn-default pull-left" href="https://github.com/leiweibau/Pi.Alert/commits/d83192a4c7a8065b1da35eb607118f7bd206449a/tar/pialert_latest.tar" target="_blank">Github History</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
         </div>
