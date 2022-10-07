@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.6'
+SCRIPTVERSION='v0.7'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -31,8 +31,10 @@ case $1 in
     echo "                          - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be"
     echo "                            created and set to 'True' (login enabled)."
     echo ""
-    echo " disable_scan             - Stops all active scans."
+    echo " disable_scan <MIN>       - Stops all active scans"
     echo "                          - Prevents new scans from starting."
+    echo "                          - You can set a Timeout in minutes. If no timeout is set, Pi.Alert"
+    echo "                            restarts itself with the next scan after 10min."
     echo ""
     echo " enable_scan              - Allows the start of new scans again."
     echo ""
@@ -132,8 +134,14 @@ case $1 in
 
   disable_scan)
     ## stop active scans
+    STOPTIMER=$2
+    re='^[0-9]+$'
+    if ! [[ $STOPTIMER =~ $re ]] ; then
+       echo "No timeout is set. Pi.Alert restarts itself with the next scan after 10min."
+       STOPTIMER=10
+    fi
     sudo killall arp-scan
-    touch ${SCRIPTPATH}/../db/setting_stoparpscan
+    echo $STOPTIMER > ${SCRIPTPATH}/../db/setting_stoparpscan
     echo "The arp-scan is disabled"
     ;;
 

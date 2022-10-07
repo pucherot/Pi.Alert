@@ -243,8 +243,9 @@ $pia_lang['Maintenance_Tool_setapikey'] = 'Setze API-Key';
 $pia_lang['Maintenance_Tool_setapikey_text'] = 'Mit dem API-Key ist es möglich, Abfragen an die Datenbank zu stellen ohne die Webseite verwenden zu müssen. Die kann der Fall sein wenn ein anderer Service auf die Daten dieser Datenbank zugreifen soll. Existiert bereits ein API-Key, wird dieser ersetzt.';
 $pia_lang['Maintenance_Tool_setapikey_noti'] = 'Setze API-Key';
 $pia_lang['Maintenance_Tool_setapikey_noti_text'] = 'Möchtest du einen eventuell bestehenden API-Key durch einen neuen Key ersetzen? Bestehende Keys sind dann nicht mehr verwendbar.';
-$pia_lang['Maintenance_Tool_arpscansw'] = 'arp-Scan stoppen/starten';
-$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet den arp-Scan an oder aus. Wenn der Scan aus ist, bleibt er so lange aus bis er wieder aktiviert wird. Bereits laufende Scans werden dabei nicht beendet.';
+$pia_lang['Maintenance_arpscantimer_empty'] = 'Zeitraum festlegen';
+$pia_lang['Maintenance_Tool_arpscansw'] = 'Scan stoppen/starten';
+$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet den arp-Scan an oder aus. Wenn bei der Deaktivierung kein Zeitraum festgelegt wurde, schaltet sich Pi.Alert nach einer Pause von 10min mit dem nächsten anstehenden Scan wieder ein. Bereits laufende Scans werden dabei nicht beendet.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'arp-Scan stoppen/starten';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'Wenn der Scan aus ist, bleibt er so lange aus bis er wieder aktiviert wird.';
 $pia_lang['Maintenance_Tool_del_empty_macs'] = 'Alle Geräte ohne MAC löschen';
@@ -417,9 +418,9 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											            - Wenn der Parameter PIALERT_WEB_PROTECTION noch nicht vorhanden ist, wird er erstellt und auf "TRUE" gesetzt (Anmeldung aktiviert)<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">disable_scan </td>
+											        <td style="vertical-align: top; padding-left:5px;">disable_scan &lt;MIN&gt;</td>
 											        <td style="padding-left:5px;">- Stoppt alle aktiven Scans.<br>
-											            - Verhindert den Start neuer Scans.<br>&nbsp;</td>
+											            - Verhindert den Start neuer Scans.<br>- Sie können eine Zeitspanne in Minuten festlegen. Wenn keine Zeitspanne festgelegt wird, startet Pi.Alert mit dem nächsten Scan nach 10 Minuten neu.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">enable_scan</td>

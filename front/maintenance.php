@@ -170,6 +170,54 @@ if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
   }
 }
 
+
+// Aprscan Timer -----------------------------------------------------------------
+
+if (isset($_POST['arpscantimer_set']) && isset($_POST['arpscantimer'])) {
+  $pia_lang_set_dir = '../db/';
+
+  $file = '../db/setting_stoparpscan';
+
+  if (file_exists($file)) {
+      echo $pia_lang['BackDevices_Arpscan_enabled'];
+      // old method
+      //unlink($file);
+      exec('../back/pialert-cli enable_scan', $output);
+      echo("<meta http-equiv='refresh' content='1'>"); 
+     } else {
+        if (is_numeric($_POST['arpscantimer'])) {
+         exec('../back/pialert-cli disable_scan '.$_POST['arpscantimer'], $output);
+        } else { 
+         exec('../back/pialert-cli disable_scan', $output);
+        }
+      echo $pia_lang['BackDevices_Arpscan_disabled'];
+      echo("<meta http-equiv='refresh' content='1'>"); 
+     }
+}
+
+// Aprscan read Timer -----------------------------------------------------------------
+
+function read_arpscan_timer() {
+    $pia_lang_set_dir = '../db/';
+    $file = '../db/setting_stoparpscan';
+    if (file_exists($file)) {
+        $timer_arpscan = file_get_contents($file, true);
+        if ($timer_arpscan == 10 || $timer_arpscan == 15 || $timer_arpscan == 30) {
+            $timer_output = ' ('.$timer_arpscan.'min)';
+        }
+        if ($timer_arpscan == 60 || $timer_arpscan == 120 || $timer_arpscan == 720 || $timer_arpscan == 1440) {
+            $timer_arpscan = $timer_arpscan / 60;
+            $timer_output = ' ('.$timer_arpscan.'h)';
+        }
+        if ($timer_arpscan == 1051200) {
+            $timer_output = ' (very long)';
+        }
+    }
+    $timer_output = '<span style="color:red;">'.$timer_output.'</span>';
+    echo $timer_output;
+}
+
+
 // Set Tab ----------------------------------------------------------------------------
 
 if ($_REQUEST['tab'] == '1') {
@@ -217,7 +265,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_arp_status'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $pia_arpscans_result;?></div>
+                        <?php echo $pia_arpscans_result; read_arpscan_timer();?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px">Api-Key</div>
@@ -330,10 +378,26 @@ if ($_REQUEST['tab'] == '1') {
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></div>
                     </div>
                     <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a">
-                            <button type="button" class="btn bg-yellow dbtools-button" id="btnPiaToggleArpScan" onclick="askPiaToggleArpScan()"><?php echo $pia_lang['Maintenance_Tool_arpscansw'];?></button>
+                        <div class="db_tools_table_cell_a" style="text-align: center;">
+                            <form method="post" action="maintenance.php">
+                            <div style="display: inline-block; text-align: center;">
+                                <select name="arpscantimer" class="form-control" style="width:160px; margin-bottom:5px;">
+                                    <option value=""><?php echo $pia_lang['Maintenance_arpscantimer_empty'];?></option>
+                                    <option value="15">15min</option>
+                                    <option value="30">30min</option>
+                                    <option value="60">1h</option>
+                                    <option value="120">2h</option>
+                                    <option value="720">12h</option>
+                                    <option value="1440">24h</option>
+                                    <option value="999999">very long</option>
+                                </select></div>
+                            <div style="display: block;"><input type="submit" name="arpscantimer_set" value="<?php echo $pia_lang['Maintenance_Tool_arpscansw'];?>" class="btn bg-yellow" style="width:160px;">
+                            </div>
+                            </form>
                         </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_arpscansw_text'];?></div>
+                        <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
+                            <?php echo $pia_lang['Maintenance_Tool_arpscansw_text']; ?>
+                        </div>    
                     </div>
 
 <?php
@@ -606,20 +670,6 @@ function PiaSetAPIKey()
 { 
   // Execute
   $.get('php/server/devices.php?action=PiaSetAPIKey', function(msg) {
-    showMessage (msg);
-  });
-}
-
-// Toggle the Arp-Scans 
-function askPiaToggleArpScan() {
-  // Ask 
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_arpscansw_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_arpscansw_noti_text'];?>',
-    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Switch'];?>', 'PiaToggleArpScan');
-}
-function PiaToggleArpScan()
-{ 
-  // Execute
-  $.get('php/server/devices.php?action=PiaToggleArpScan', function(msg) {
     showMessage (msg);
   });
 }

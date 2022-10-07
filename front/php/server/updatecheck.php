@@ -42,14 +42,6 @@ echo $local_time;
                 <div style="border: none; overflow-y: scroll;">
 <?php
 
-## For testing because of wrong line brakes
-#$updatenotes = str_replace("services via\n","services via ",$data['0']['commit']['message']);
-#$updatenotes = str_replace("Telegram based\n","Telegram based ",$updatenotes);
-#$updatenotes = str_replace("to support\n","to support ",$updatenotes);
-#$updatenotes = str_replace("telegram setup is\n","telegram setup is ",$updatenotes);
-#$updatenotes_array = explode("\n", $updatenotes );
-#########
-
 $updatenotes_array = explode("\n", $data['0']['commit']['message']);
 $updatenotes_array = array_filter($updatenotes_array);
 

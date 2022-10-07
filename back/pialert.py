@@ -28,6 +28,7 @@ import io
 import smtplib
 import csv
 import requests
+import time
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -86,9 +87,11 @@ def main ():
         res = update_devices_MAC_vendors()
     elif cycle == 'update_vendors_silent':
         res = update_devices_MAC_vendors('-s')
+    elif os.path.exists(STOPARPSCAN) == True :
+        res = start_arpscan_countdown ()
     elif os.path.exists(STOPARPSCAN) == False :
         res = scan_network()
-    elif os.path.exists(STOPARPSCAN) == True :
+    else:
         res = 0
     
     # Check error
@@ -108,7 +111,42 @@ def main ():
     print ('\nDONE!!!\n\n')
     return 0    
 
-    
+#===============================================================================
+# Countdown
+#===============================================================================
+def start_arpscan_countdown ():
+
+    if os.path.exists(STOPARPSCAN):
+        # get timer from file
+        with open(STOPARPSCAN, 'r') as file:
+            data = int(file.read().rstrip())
+            # print("Timer in min: %s" % data)
+
+        # date of file creation
+        FILETIME = int(os.path.getctime(STOPARPSCAN))
+        # print ("Filetime: %s" % FILETIME)
+
+        # print ("---------------------------")
+
+        # output start and end
+        print("Timer Start: %s" % time.ctime(FILETIME))
+        STOPTIME = FILETIME+data*60
+        print("Timer Ende : %s" % time.ctime(STOPTIME))
+
+        print ("----------------------------------------")
+
+        ACTUALTIME = int(time.time())
+        # print (STOPTIME)
+        # print (ACTUALTIME)
+
+        # print ("----------------------------------------")
+
+        if ( ACTUALTIME > STOPTIME ):
+           print ("File will be deleted")
+           os.remove(STOPARPSCAN)  
+        else:
+           print ("Timer still running")
+
 #===============================================================================
 # INTERNET IP CHANGE
 #===============================================================================

@@ -236,8 +236,9 @@ $pia_lang['Maintenance_Tool_setapikey'] = 'Establecer la clave API';
 $pia_lang['Maintenance_Tool_setapikey_text'] = 'Con la clave API es posible realizar consultas a la base de datos sin utilizar la página web. Este puede ser el caso si otro servicio debe acceder a los datos de esta base de datos. Si ya existe una clave API, ésta será sustituida.';
 $pia_lang['Maintenance_Tool_setapikey_noti'] = 'Configuración de la clave API';
 $pia_lang['Maintenance_Tool_setapikey_noti_text'] = '¿Desea sustituir una clave API existente por una nueva clave? Las claves existentes ya no se pueden utilizar.';
+$pia_lang['Maintenance_arpscantimer_empty'] = 'Período establecido';
 $pia_lang['Maintenance_Tool_arpscansw'] = 'Activar arp-scan (on/off)';
-$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Encender o desactivar el arp-scan. Cuando el escaneo se ha apagado, permanece apagado hasta que se active nuevamente. Los escaneos activos no se cancelan.';
+$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Activa o desactiva el escaneo arp. Si no se ha establecido ningún periodo de tiempo para la desactivación, Pi.Alert se enciende de nuevo tras una pausa de 10 minutos con la siguiente exploración pendiente. Los escaneos que ya están en curso no se terminan.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'Activar arp-scan on or off';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'Cuando el escaneo se ha apagado, permanece apagado hasta que se active nuevamente.';
 $pia_lang['Maintenance_Tool_test_notification'] = 'Test Notifications';
@@ -419,7 +420,7 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">disable_scan </td>
+											        <td style="vertical-align: top; padding-left:5px;">disable_scan &lt;MIN&gt;</td>
 											        <td style="padding-left:5px;">- Stops all active scans.<br>
 											            - Prevents new scans from starting.<br>&nbsp;</td>
 											    </tr>

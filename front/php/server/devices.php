@@ -54,7 +54,6 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'PiaEnableDarkmode':            PiaEnableDarkmode();                     break;
       case 'PiaEnableOnlineHistoryGraph':  PiaEnableOnlineHistoryGraph();           break;
       case 'PiaSetAPIKey':                 PiaSetAPIKey();                          break;
-      case 'PiaToggleArpScan':             PiaToggleArpScan();                      break;
       case 'PiaLoginEnable':               PiaLoginEnable();                        break;
       case 'PiaLoginDisable':              PiaLoginDisable();                       break;
 
@@ -473,29 +472,6 @@ function TestNotificationSystem() {
     exec('../../../back/pialert-cli reporting_test', $output);
     echo $pia_lang['BackDevices_test_notification'];
     //echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
-  }
-
-
-//------------------------------------------------------------------------------
-//  Toggle on/off Arp-Scans
-//------------------------------------------------------------------------------
-function PiaToggleArpScan() {
-  $file = '../../../db/setting_stoparpscan';
-  global $pia_lang;
-
-  if (file_exists($file)) {
-      echo $pia_lang['BackDevices_Arpscan_enabled'];
-      // old method
-      //unlink($file);
-      exec('../../../back/pialert-cli enable_scan', $output);
-      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
-     } else {
-      echo $pia_lang['BackDevices_Arpscan_disabled'];
-      // old method
-      //$startarpscan = fopen($file, 'w');
-      exec('../../../back/pialert-cli disable_scan', $output);
-      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
-     }
   }
 
 //------------------------------------------------------------------------------
