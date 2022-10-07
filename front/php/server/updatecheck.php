@@ -60,7 +60,7 @@ echo $temp_updatenotes;
                 <br></div>
             </div>
               <div class="modal-footer">
-                <a class="btn btn-default pull-left" href="https://github.com/leiweibau/Pi.Alert/commits/d83192a4c7a8065b1da35eb607118f7bd206449a/tar/pialert_latest.tar" target="_blank">Github History</a>
+                <a class="btn btn-default pull-left" href="https://github.com/leiweibau/Pi.Alert/commits/main/tar/pialert_latest.tar" target="_blank">Github History</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
         </div>
