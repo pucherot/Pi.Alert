@@ -82,7 +82,7 @@ def main ():
     elif cycle == 'cleanup':
         res = cleanup_database()
     elif cycle == 'reporting_test':
-        res = email_reporting_test()
+        res = email_reporting_test('Test')
     elif cycle == 'update_vendors':
         res = update_devices_MAC_vendors()
     elif cycle == 'update_vendors_silent':
@@ -141,7 +141,8 @@ def start_arpscan_countdown ():
 
         if ( ACTUALTIME > STOPTIME ):
            print ("File will be deleted")
-           os.remove(STOPARPSCAN)  
+           os.remove(STOPARPSCAN)
+           email_reporting_test("noty_Timerstop")
            scan_network()
         else:
            print ("Timer still running")
@@ -1522,10 +1523,17 @@ def send_telegram (_Text):
 #===============================================================================
 # Test REPORTING
 #===============================================================================
-def email_reporting_test ():
-    global mail_text
-    global mail_html
-    
+def email_reporting_test (_Mode):
+    #global mail_text
+    #global mail_html
+
+    if _Mode == 'Test' :
+        notiMessage = "Test-Notification"
+    elif _Mode == 'noty_Timerstart' :
+        notiMessage = "Pi.Alert is paused"
+    elif _Mode == 'noty_Timerstop' :
+        notiMessage = "Pi.Alert reactivated"
+
     # Reporting section
     print ('\nTest Reporting...')
     # Open text Template
@@ -1533,34 +1541,34 @@ def email_reporting_test ():
     # Send Mail
     if REPORT_MAIL :
         print ('    Sending report by email...')
-        send_email ("Testmail", "Testmail")
+        send_email (notiMessage, notiMessage)
     else :
         print ('    Skip mail...')
 
     if REPORT_PUSHSAFER :
         print ('    Sending report by PUSHSAFER...')
-        send_pushsafer_test ()
+        send_pushsafer_test (notiMessage)
     else :
         print ('    Skip PUSHSAFER...')
 
     if REPORT_NTFY :
         print ('    Sending report by NTFY...')
-        send_ntfy_test ("mail_text")
+        send_ntfy_test (notiMessage)
     else :
         print ('    Skip NTFY...')
 
     if REPORT_TELEGRAM :
         print ('    Sending report by Telegram...')
-        send_telegram_test ()
+        send_telegram_test (notiMessage)
     else :
         print ('    Skip Telegram...')
         
     return 0
 
 #-------------------------------------------------------------------------------
-def send_ntfy_test ():
+def send_ntfy_test (_notiMessage):
     requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
-    data="Test",
+    data=_notiMessage,
     headers={
         "Title": "Pi.Alert Notification",
         "Click": REPORT_DASHBOARD_URL,
@@ -1569,11 +1577,11 @@ def send_ntfy_test ():
     })
 
 #-------------------------------------------------------------------------------
-def send_pushsafer_test ():
+def send_pushsafer_test (_notiMessage):
     url = 'https://www.pushsafer.com/api'
     post_fields = {
-        "t" : 'Pi.Alert Message - Test',
-        "m" : 'Test',
+        "t" : 'Pi.Alert Message',
+        "m" : _notiMessage,
         "s" : 11,
         "v" : 3,
         "i" : 148,
@@ -1583,14 +1591,13 @@ def send_pushsafer_test ():
         "ut" : 'Open Pi.Alert',
         "k" : PUSHSAFER_TOKEN,
         }
-    
+
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
-def send_telegram_test ():
+def send_telegram_test (_notiMessage):
     runningpath = os.path.abspath(os.path.dirname(__file__))
-    #print(runningpath)
-    stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "Pi.Alert Test" --title "Pi.Alert"')
+    stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_notiMessage+'" --title "Pi.Alert"')
 
 #-------------------------------------------------------------------------------
 def format_report_section (pActive, pSection, pTable, pText, pHTML):
