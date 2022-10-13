@@ -72,7 +72,7 @@ def main ():
 
     # Check parameters
     if len(sys.argv) != 2 :
-        print ('usage pialert [scan_cycle] | internet_IP | update_vendors | cleanup' )
+        print ('usage pialert [scan_cycle] | internet_IP | update_vendors | cleanup | reporting_test' )
         return
     cycle = str(sys.argv[1])
 
@@ -126,8 +126,6 @@ def start_arpscan_countdown ():
         FILETIME = int(os.path.getctime(STOPARPSCAN))
         # print ("Filetime: %s" % FILETIME)
 
-        # print ("---------------------------")
-
         # output start and end
         print("Timer Start: %s" % time.ctime(FILETIME))
         STOPTIME = FILETIME+data*60
@@ -144,6 +142,7 @@ def start_arpscan_countdown ():
         if ( ACTUALTIME > STOPTIME ):
            print ("File will be deleted")
            os.remove(STOPARPSCAN)  
+           scan_network()
         else:
            print ("Timer still running")
 
@@ -217,7 +216,6 @@ def get_internet_IP ():
 
     ## BUGFIX #12 - Query IPv4 address (not IPv6)
     ## Using 'curl' instead of 'dig'
-    # curl_args = ['curl', '-s', 'https://myipv4.p1.opendns.com/get_my_ip']
     curl_args = ['curl', '-s', QUERY_MYIP_SERVER]
     cmd_output = subprocess.check_output (curl_args, universal_newlines=True)
 
@@ -317,8 +315,6 @@ def cleanup_database ():
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(730) # 2 years
 
-    #strdaystokeepOH = str(DAYS_TO_KEEP_ONLINEHISTORY)
-    #strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     # Cleanup Online History
     print ('\nCleanup Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
@@ -1562,7 +1558,6 @@ def email_reporting_test ():
     return 0
 
 #-------------------------------------------------------------------------------
-
 def send_ntfy_test ():
     requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
     data="Test",
@@ -1574,7 +1569,6 @@ def send_ntfy_test ():
     })
 
 #-------------------------------------------------------------------------------
-
 def send_pushsafer_test ():
     url = 'https://www.pushsafer.com/api'
     post_fields = {
@@ -1593,7 +1587,6 @@ def send_pushsafer_test ():
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
-
 def send_telegram_test ():
     runningpath = os.path.abspath(os.path.dirname(__file__))
     #print(runningpath)
