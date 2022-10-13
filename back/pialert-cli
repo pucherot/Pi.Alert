@@ -142,12 +142,14 @@ case $1 in
     fi
     sudo killall arp-scan
     echo $STOPTIMER > ${SCRIPTPATH}/../db/setting_stoparpscan
+    /bin/python3 ${SCRIPTPATH}/pialert.py reporting_starttimer
     echo "The arp-scan is disabled"
     ;;
 
   enable_scan)
     ## stop active scans
     rm ${SCRIPTPATH}/../db/setting_stoparpscan
+    /bin/python3 ${SCRIPTPATH}/pialert.py reporting_stoptimer
     echo "The arp-scan is enabled"
     ;;
 

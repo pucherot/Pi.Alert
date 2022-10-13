@@ -83,6 +83,10 @@ def main ():
         res = cleanup_database()
     elif cycle == 'reporting_test':
         res = email_reporting_test('Test')
+    elif cycle == 'reporting_starttimer':
+        res = email_reporting_test('noti_Timerstart')
+    elif cycle == 'reporting_stoptimer':
+        res = email_reporting_test('noti_Timerstop')
     elif cycle == 'update_vendors':
         res = update_devices_MAC_vendors()
     elif cycle == 'update_vendors_silent':
@@ -100,7 +104,7 @@ def main ():
         return res
     
     # Reporting
-    if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_test':
+    if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_test' and cycle != 'reporting_starttimer' and cycle != 'reporting_stoptimer':
         email_reporting()
 
     # Close SQL
@@ -142,7 +146,7 @@ def start_arpscan_countdown ():
         if ( ACTUALTIME > STOPTIME ):
            print ("File will be deleted")
            os.remove(STOPARPSCAN)
-           email_reporting_test("noty_Timerstop")
+           email_reporting_test("noti_Timerstop")
            scan_network()
         else:
            print ("Timer still running")
@@ -1529,9 +1533,9 @@ def email_reporting_test (_Mode):
 
     if _Mode == 'Test' :
         notiMessage = "Test-Notification"
-    elif _Mode == 'noty_Timerstart' :
+    elif _Mode == 'noti_Timerstart' :
         notiMessage = "Pi.Alert is paused"
-    elif _Mode == 'noty_Timerstop' :
+    elif _Mode == 'noti_Timerstop' :
         notiMessage = "Pi.Alert reactivated"
 
     # Reporting section
