@@ -781,3 +781,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .systemstatusbox {
   color: #fff;
 }
+
+.faqhelp_head_color {
+   background-color: #272c30 !important;
+}

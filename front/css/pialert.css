@@ -586,3 +586,7 @@ body.modal-open {
 .text-vivid-blue {
   color: #007997 !important;
 }
+
+.faqhelp_head_color {
+   background-color: #f9f9f9 !important;
+}

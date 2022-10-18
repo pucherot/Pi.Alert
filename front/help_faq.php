@@ -25,7 +25,7 @@ if ($_SESSION["login"] != 1)
       <h4><?php echo $pia_lang['HelpFAQ_Cat_General'];?></h4>
        <div class="panel-group" id="accordion_gen">
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading faqhelp_head_color">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse100">
               <?php echo $pia_lang['HelpFAQ_Cat_General_100_head'];?></a>
@@ -40,7 +40,7 @@ if ($_SESSION["login"] != 1)
           </div>
         </div>
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading faqhelp_head_color">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse101">
               <?php echo $pia_lang['HelpFAQ_Cat_General_101_head'];?></a>
@@ -53,7 +53,7 @@ if ($_SESSION["login"] != 1)
           </div>
         </div>
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading faqhelp_head_color">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse102">
               <?php echo $pia_lang['HelpFAQ_Cat_General_102_head'];?></a>
@@ -66,7 +66,7 @@ if ($_SESSION["login"] != 1)
           </div>
         </div>
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading faqhelp_head_color">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse103">
               <?php echo $pia_lang['HelpFAQ_Cat_General_103_head'];?></a>
@@ -79,7 +79,7 @@ if ($_SESSION["login"] != 1)
           </div>
         </div>
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading faqhelp_head_color">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse104">
               <?php echo $pia_lang['HelpFAQ_Cat_General_104_head'];?></a>
@@ -92,7 +92,7 @@ if ($_SESSION["login"] != 1)
           </div>
         </div>
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading faqhelp_head_color">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse105">
               <?php echo $pia_lang['HelpFAQ_Cat_General_105_head'];?></a>
@@ -109,7 +109,7 @@ if ($_SESSION["login"] != 1)
 <h4><?php echo $pia_lang['Navigation_Devices'];?></h4>
  <div class="panel-group" id="accordion_dev">
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_dev" href="#collapse200">
         <?php echo $pia_lang['HelpFAQ_Cat_Device_200_head'];?></a>
@@ -127,7 +127,7 @@ if ($_SESSION["login"] != 1)
 <h4><?php echo $pia_lang['HelpFAQ_Cat_Detail'];?></h4>
  <div class="panel-group" id="accordion_det">
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse300">
         <?php echo $pia_lang['HelpFAQ_Cat_Detail_300_head'];?> "<?php echo $pia_lang['DevDetail_MainInfo_Network'];?>" / "<?php echo $pia_lang['DevDetail_MainInfo_Network_Port'];?>"?</a>
@@ -141,7 +141,7 @@ if ($_SESSION["login"] != 1)
     </div>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse301">
         <?php echo $pia_lang['HelpFAQ_Cat_Detail_301_head_a'];?> "<?php echo $pia_lang['DevDetail_EveandAl_ScanCycle'];?>" <?php echo $pia_lang['HelpFAQ_Cat_Detail_301_head_b'];?></a>
@@ -154,7 +154,7 @@ if ($_SESSION["login"] != 1)
     </div>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse302">
         <?php echo $pia_lang['HelpFAQ_Cat_Detail_302_head_a'];?> "<?php echo $pia_lang['DevDetail_EveandAl_RandomMAC'];?>" <?php echo $pia_lang['HelpFAQ_Cat_Detail_302_head_b'];?></a>
@@ -167,7 +167,7 @@ if ($_SESSION["login"] != 1)
     </div>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse303">
         <?php echo $pia_lang['HelpFAQ_Cat_Detail_303_head'];?></a>
@@ -184,7 +184,7 @@ if ($_SESSION["login"] != 1)
 <h4><?php echo $pia_lang['Navigation_Presence'];?></h4>
  <div class="panel-group" id="accordion_pre">
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse400">
         <?php echo $pia_lang['HelpFAQ_Cat_Presence_400_head'];?></a>
@@ -197,7 +197,7 @@ if ($_SESSION["login"] != 1)
     </div>
   </div>
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse401">
         <?php echo $pia_lang['HelpFAQ_Cat_Presence_401_head'];?></a>
@@ -214,7 +214,7 @@ if ($_SESSION["login"] != 1)
 <h4><?php echo $pia_lang['Navigation_Network'];?></h4>
  <div class="panel-group" id="accordion_net">
   <div class="panel panel-default">
-    <div class="panel-heading">
+    <div class="panel-heading faqhelp_head_color">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse600">
         <?php echo $pia_lang['HelpFAQ_Cat_Network_600_head'];?></a>
