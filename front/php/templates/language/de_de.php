@@ -216,6 +216,7 @@ $pia_lang['Maintenance_database_backup_total'] = 'Speicherplatz insgesamt';
 $pia_lang['Maintenance_arp_status'] = 'Scan Status';
 $pia_lang['Maintenance_arp_status_off'] = 'ist im Moment deaktiviert';
 $pia_lang['Maintenance_arp_status_on'] = 'Scan(s) sind gerade aktiv';
+$pia_lang['Maintenance_Tools_Updatecheck'] = 'Prüfe auf Updates';
 $pia_lang['Maintenance_themeselector_lable'] = 'Skin Auswahl';
 $pia_lang['Maintenance_themeselector_empty'] = 'Skin wählen';
 $pia_lang['Maintenance_themeselector_text'] = 'Die Änderung findet serverseitig statt, betrifft also alle verwendeten Geräte.';

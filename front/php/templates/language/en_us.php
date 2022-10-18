@@ -219,6 +219,7 @@ $pia_lang['Maintenance_database_backup_total'] = 'total disk usage';
 $pia_lang['Maintenance_arp_status'] = 'Scan Status';
 $pia_lang['Maintenance_arp_status_off'] = 'is currently disabled';
 $pia_lang['Maintenance_arp_status_on'] = 'scan(s) currently running';
+$pia_lang['Maintenance_Tools_Updatecheck'] = 'Check for Updates';
 $pia_lang['Maintenance_themeselector_lable'] = 'Select Skin';
 $pia_lang['Maintenance_themeselector_empty'] = 'Choose a Skin';
 $pia_lang['Maintenance_themeselector_apply'] = 'Apply';

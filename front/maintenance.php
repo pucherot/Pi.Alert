@@ -282,7 +282,7 @@ if ($_REQUEST['tab'] == '1') {
 
     <div class="box">
         <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
-            <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()">Check for Updates</button>
+            <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?php echo $pia_lang['Maintenance_Tools_Updatecheck'];?></button>
       </div>
     </div>
 

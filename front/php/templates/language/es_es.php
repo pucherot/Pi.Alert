@@ -209,6 +209,7 @@ $pia_lang['Maintenance_database_backup_total'] = 'Uso total de disco';
 $pia_lang['Maintenance_arp_status'] = 'Estado de escaneo:';
 $pia_lang['Maintenance_arp_status_off'] = 'está actualmente deshabilitado';
 $pia_lang['Maintenance_arp_status_on'] = 'escaneo(s) actualmente en ejecución';
+$pia_lang['Maintenance_Tools_Updatecheck'] = 'Comprobar las actualizaciones';
 $pia_lang['Maintenance_themeselector_lable'] = 'Seleccionar Skin';
 $pia_lang['Maintenance_themeselector_empty'] = 'Elija un Skin';
 $pia_lang['Maintenance_themeselector_text'] = 'El cambio tiene lugar en el lado del servidor, por lo que afecta todos los dispositivos en uso.';
