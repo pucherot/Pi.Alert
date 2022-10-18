@@ -236,7 +236,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 	$func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
 	while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
     //if(!isset($func_res['dev_Name'])) continue;
-		if ($func_res['dev_PresentLastScan'] == 1) {$port_state = '<div class="badge bg-green text-white" style="width: 60px;">Online</div>';} else {$port_state = '<div class="badge bg-red text-white" style="width: 60px;">Offline</div>';}
+		if ($func_res['dev_PresentLastScan'] == 1) {$port_state = '<div class="badge bg-green text-white" style="width: 60px;">Online</div>';} else {$port_state = '<div class="badge bg-gray text-white" style="width: 60px;">Offline</div>';}
 		// Prepare Table with Port > push values in array
     if ($pia_func_netdevport > 1)
       {
@@ -271,7 +271,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
         {
           // Prepare online/offline badge for later functions
           $online_badge = '<div class="badge bg-green text-white" style="width: 60px;">Online</div>';
-          $offline_badge = '<div class="badge bg-red text-white" style="width: 60px;">Offline</div>';
+          $offline_badge = '<div class="badge bg-gray text-white" style="width: 60px;">Offline</div>';
           // Set online/offline badge
           echo '<tr>';
           echo '<td style="text-align: right; padding-right:16px;">'.$x.'</td>';
