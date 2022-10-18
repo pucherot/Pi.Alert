@@ -47,11 +47,13 @@ In charge of:
   - Scan the network searching connected devices using the scanning methods
     described
   - Store the information in the DB
-  - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify)
+  - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/))
   - DB cleanup tasks via cron
   - a pialert-cli that helps to configure login and password
 
 [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
+
+[shoutrrr - Implementation notes](docs/SHOUTRRR.md)
 
   | ![Report 1][report1] | ![Report 2][report2] |
   | -------------------- | -------------------- |
@@ -158,6 +160,7 @@ This update script is only recommended for an already existing installation of t
   | nmap          | Network Scanner                                         |
   | zip           | Filecompression Tool                                    |
   | speedtest-cli | Python SpeedTest https://github.com/sivel/speedtest-cli |
+  | shoutrrr      | Notification library https://github.com/containrrr/shoutrrr/ |
   | deepl.com     | translation                                             |
 
 ### License
@@ -179,11 +182,7 @@ This update script is only recommended for an already existing installation of t
 
   This code is a collaborative body of work, with special thanks to: 
 
-   - [leiweibau](https://github.com/leiweibau/Pi.Alert): Things
-   - [Macleykun](https://github.com/Macleykun): Help with Dockerfile clean-up
-   - [Final-Hawk](https://github.com/Final-Hawk): Help with NTFY, styling and other fixes
-   - [TeroRERO](https://github.com/terorero): Spanish translation
-   - [jokob-sk](https://github.com/jokob-sk/Pi.Alert): Many more things
+[Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert) and many more
 
 <!--- --------------------------------------------------------------------- --->
 [main]:    ./docs/img/1_devices.jpg           "Main screen"
