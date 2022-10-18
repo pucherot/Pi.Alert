@@ -12,7 +12,7 @@ JavaScript)*
 
 ## Modifications within this Fork
   - Only one scan cycle
-  - Modified scanmethod. If you want to go back to the original method comment line 507 and uncomment line 510 in ~/pialert/back/pialert.py
+  - Modified scanmethod. If you want to go back to the original method comment line 546 and uncomment line 549 in ~/pialert/back/pialert.py
   - Because of the modified scan, the extended scan parameters in the configuration file do not work. For this reason they were removed. 
   - The Backend has the additional option "cleanup"
   - "pialert-cli" that helps to configure login, password and DB migration
@@ -47,13 +47,11 @@ In charge of:
   - Scan the network searching connected devices using the scanning methods
     described
   - Store the information in the DB
-  - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/))
+  - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify)
   - DB cleanup tasks via cron
   - a pialert-cli that helps to configure login and password
 
 [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
-
-[shoutrrr - Implementation notes](docs/SHOUTRRR.md)
 
   | ![Report 1][report1] | ![Report 2][report2] |
   | -------------------- | -------------------- |
@@ -160,7 +158,6 @@ This update script is only recommended for an already existing installation of t
   | nmap          | Network Scanner                                         |
   | zip           | Filecompression Tool                                    |
   | speedtest-cli | Python SpeedTest https://github.com/sivel/speedtest-cli |
-  | shoutrrr      | Notification library https://github.com/containrrr/shoutrrr/ |
   | deepl.com     | translation                                             |
 
 ### License
