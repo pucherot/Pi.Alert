@@ -387,7 +387,7 @@ install_python() {
       print_msg "- Using Python 2"
     else
       print_msg "- Installing Python 2..."
-      sudo apt-get install python -y                              2>&1 >> "$LOG"
+      sudo apt-get install python python-pip -y                              2>&1 >> "$LOG"
     fi
     PYTHON_BIN="python"
   elif [ $USE_PYTHON_VERSION -eq 3 ] ; then
