@@ -94,3 +94,4 @@ curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=mac-status' -F 'mac=00:11:22:aa
 curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=all-offline' https://url/pialert/api/
 ```
 
+[Back](https://github.com/leiweibau/Pi.Alert#api)
