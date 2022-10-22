@@ -40,7 +40,6 @@ if ($_SESSION["login"] != 1)
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
-
   <?php
 // Get API-Key ------------------------------------------------------------------
 
@@ -101,7 +100,6 @@ function read_arpscan_timer() {
     $timer_output = '<span style="color:red;">'.$timer_output.'</span>';
     echo $timer_output;
 }
-
 
 // Set Tab ----------------------------------------------------------------------------
 
@@ -258,14 +256,10 @@ if ($_REQUEST['tab'] == '1') {
                             <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" >
                                 <?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
                             </div>
-
                         </div>
-                            
                         <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_themeselector_text']; ?>
                         </div>
-
-
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a">
@@ -287,7 +281,6 @@ if ($_REQUEST['tab'] == '1') {
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="text-align: center;">
-
                             <div style="display: inline-block; text-align: center;">
                               <div class="form-group" style="width:160px; margin-bottom:5px;">
                                 <!-- <div class="col-sm-7"> -->
@@ -313,7 +306,6 @@ if ($_REQUEST['tab'] == '1') {
                             <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px; height:36px" id="btnSavePiaArpTimer" onclick="setPiAlertArpTimer()" ><div id="Timeralertspinner" class="loader disablespinner"></div> 
                                 <div id="TimeralertText" class=""><?php echo $pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
                             </div>
-
                         </div>
                         <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_Tool_arpscansw_text']; ?>
@@ -344,14 +336,12 @@ else {
         </div>
         <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
                 <div class="db_info_table">
-
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="">
                             <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-yellow dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button>
                         </div>
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text'];?></div>
                     </div>
-
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="">
                             <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs'];?></button>
