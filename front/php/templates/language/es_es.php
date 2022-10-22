@@ -333,6 +333,13 @@ $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Network aktivity reset no
 $pia_lang['BackDevices_Login_disabled'] = 'Login desactivado.';
 $pia_lang['BackDevices_Login_enabled'] = 'Login activado.';
 
+$pia_lang['BackDevices_Theme_set'] = 'Theme applied';
+$pia_lang['BackDevices_Theme_notset'] = 'Theme not applied';
+$pia_lang['BackDevices_Theme_invalid'] = 'Selection invalid';
+$pia_lang['BackDevices_Language_set'] = 'Theme applied';
+$pia_lang['BackDevices_Language_notset'] = 'Theme not applied';
+$pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
+
 //////////////////////////////////////////////////////////////////
 // Network Page - Update by @TeroRERO 01ago2022
 //////////////////////////////////////////////////////////////////

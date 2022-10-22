@@ -56,6 +56,9 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'PiaSetAPIKey':                 PiaSetAPIKey();                          break;
       case 'PiaLoginEnable':               PiaLoginEnable();                        break;
       case 'PiaLoginDisable':              PiaLoginDisable();                       break;
+      case 'setPiAlertTheme':              setPiAlertTheme();                       break;
+      case 'setPiAlertLanguage':           setPiAlertLanguage();                    break;
+      case 'setPiAlertArpTimer':           setPiAlertArpTimer();                    break;
 
       case 'getDevicesTotals':             getDevicesTotals();                      break;
       case 'getDevicesList':               getDevicesList();                        break;
@@ -814,6 +817,125 @@ function getDeviceCondition ($deviceStatus) {
     case 'archived':   return 'WHERE dev_Archived=1';                                                      break;
     default:           return 'WHERE 1=0';                                                                 break;
   }
+}
+
+
+//------------------------------------------------------------------------------
+//  Set Theme
+//------------------------------------------------------------------------------
+function setPiAlertTheme() {
+  global $pia_lang;
+
+  $pia_installed_skins = array('skin-black-light', 
+                               'skin-black', 
+                               'skin-blue-light', 
+                               'skin-blue', 
+                               'skin-green-light', 
+                               'skin-green', 
+                               'skin-purple-light', 
+                               'skin-purple', 
+                               'skin-red-light', 
+                               'skin-red', 
+                               'skin-yellow-light', 
+                               'skin-yellow');
+
+  if (isset($_REQUEST['PiaSkinSelection'])) {
+    $pia_skin_set_dir = '../../../db/';
+    // echo "Enter Level 1";
+    $pia_skin_selector = htmlspecialchars($_REQUEST['PiaSkinSelection']);
+    if (in_array($pia_skin_selector, $pia_installed_skins)) {
+      foreach ($pia_installed_skins as $file) {
+        unlink ($pia_skin_set_dir.'/setting_'.$file);
+      }
+      foreach ($pia_installed_skins as $file) {
+        if (file_exists($pia_skin_set_dir.'/setting_'.$file)) {
+            $pia_skin_error = True;
+            break;
+        } else {
+            $pia_skin_error = False;
+        }
+      }
+      if ($pia_skin_error == False) {
+        $testskin = fopen($pia_skin_set_dir.'setting_'.$pia_skin_selector, 'w');
+        echo "Theme applied";
+        echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+      } else {
+        echo "Theme could not changed";
+        echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+      }    
+    } else {echo "No Theme selected";}
+  } 
+
+}
+
+//------------------------------------------------------------------------------
+//  Set Language
+//------------------------------------------------------------------------------
+function setPiAlertLanguage() {
+  global $pia_lang;
+
+  $pia_installed_langs = array('en_us', 
+                               'de_de',
+                               'es_es');
+
+  if (isset($_REQUEST['PiaLangSelection'])) {
+    $pia_lang_set_dir = '../../../db/';
+    $pia_lang_selector = htmlspecialchars($_REQUEST['PiaLangSelection']);
+    if (in_array($pia_lang_selector, $pia_installed_langs)) {
+      foreach ($pia_installed_langs as $file) {
+        unlink ($pia_lang_set_dir.'/setting_language_'.$file);
+      }
+      foreach ($pia_installed_langs as $file) {
+        if (file_exists($pia_lang_set_dir.'/setting_language_'.$file)) {
+            $pia_lang_error = True;
+            break;
+        } else {
+            $pia_lang_error = False;
+        }
+      }
+      if ($pia_lang_error == False) {
+        $testlang = fopen($pia_lang_set_dir.'setting_language_'.$pia_lang_selector, 'w');
+        echo "Language applied";
+        echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+      } else {
+        echo "Language could not changed";
+        echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+      }    
+    } else {echo "No Lanugage selected";}
+  }
+
+}
+
+//------------------------------------------------------------------------------
+//  Set Timer
+//------------------------------------------------------------------------------
+function setPiAlertArpTimer() {
+  global $pia_lang;
+
+if (isset($_REQUEST['PiaArpTimer'])) {
+  $pia_lang_set_dir = '../../../db/';
+
+  $file = '../../../db/setting_stoparpscan';
+
+  if (file_exists($file)) {
+      echo $pia_lang['BackDevices_Arpscan_enabled'];
+      // old method
+      //unlink($file);
+      exec('../../../back/pialert-cli enable_scan', $output);
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+     } else {
+        if (is_numeric($_REQUEST['PiaArpTimer'])) {
+          //echo 'Timer Enabled ('.$_REQUEST['PiaArpTimer'].')';
+          exec('../../../back/pialert-cli disable_scan '.$_REQUEST['PiaArpTimer'], $output);
+        } else { 
+          //echo 'Timer Enabled (10min)';
+          exec('../../../back/pialert-cli disable_scan', $output);
+        }
+      echo $pia_lang['BackDevices_Arpscan_disabled'];
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+     }
+}
+
 }
 
 ?>

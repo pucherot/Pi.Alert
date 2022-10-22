@@ -20,41 +20,7 @@ if ($_SESSION["login"] != 1)
 //  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
 //  leiweibau  2022        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
-
-// Language selector config ----------------------------------------------------
-//
-// For security reasons, new language files must be entered into this array.
-// The files in the language directory are compared with this array and only 
-// then accepted.
-//
-$pia_installed_langs = array('en_us', 
-                             'de_de',
-                             'es_es');
-//
-// In addition to this, the language must also be added to the select tag in 
-// line 235. Later, the whole thing may become dynamic.
-
-// Skin selector config ----------------------------------------------------
-//
-// For security reasons, new language files must be entered into this array.
-// The files in the language directory are compared with this array and only 
-// then accepted.
-//
-$pia_installed_skins = array('skin-black-light', 
-                             'skin-black', 
-                             'skin-blue-light', 
-                             'skin-blue', 
-                             'skin-green-light', 
-                             'skin-green', 
-                             'skin-purple-light', 
-                             'skin-purple', 
-                             'skin-red-light', 
-                             'skin-red', 
-                             'skin-yellow-light', 
-                             'skin-yellow');
   
-
-//------------------------------------------------------------------------------
 ?>
 
 <?php
@@ -113,87 +79,6 @@ natsort($latestfiles);
 $latestfiles = array_reverse($latestfiles,False);
 $latestbackup = $latestfiles[0];
 $latestbackup_date = date ("Y-m-d H:i:s", filemtime($latestbackup));
-
-// Skin selector -----------------------------------------------------------------
-
-if (isset($_POST['skinselector_set']) && isset($_POST['skinselector'])) {
-  $pia_skin_set_dir = '../db/';
-  $pia_skin_selector = htmlspecialchars($_POST['skinselector']);
-  if (in_array($pia_skin_selector, $pia_installed_skins)) {
-    foreach ($pia_installed_skins as $file) {
-      unlink ($pia_skin_set_dir.'/setting_'.$file);
-    }
-    foreach ($pia_installed_skins as $file) {
-      if (file_exists($pia_skin_set_dir.'/setting_'.$file)) {
-          $pia_skin_error = True;
-          break;
-      } else {
-          $pia_skin_error = False;
-      }
-    }
-    if ($pia_skin_error == False) {
-      $testskin = fopen($pia_skin_set_dir.'setting_'.$pia_skin_selector, 'w');
-      $pia_skin_test = '';
-      echo("<meta http-equiv='refresh' content='1'>"); 
-    } else {
-      $pia_skin_test = '';
-      echo("<meta http-equiv='refresh' content='1'>");
-    }    
-  }
-}
-
-// Language selector -----------------------------------------------------------------
-
-if (isset($_POST['langselector_set']) && isset($_POST['langselector'])) {
-  $pia_lang_set_dir = '../db/';
-  $pia_lang_selector = htmlspecialchars($_POST['langselector']);
-  if (in_array($pia_lang_selector, $pia_installed_langs)) {
-    foreach ($pia_installed_langs as $file) {
-      unlink ($pia_lang_set_dir.'/setting_language_'.$file);
-    }
-    foreach ($pia_installed_langs as $file) {
-      if (file_exists($pia_lang_set_dir.'/setting_language_'.$file)) {
-          $pia_lang_error = True;
-          break;
-      } else {
-          $pia_lang_error = False;
-      }
-    }
-    if ($pia_lang_error == False) {
-      $testlang = fopen($pia_lang_set_dir.'setting_language_'.$pia_lang_selector, 'w');
-      //$pia_lang_test = '';
-      echo("<meta http-equiv='refresh' content='1'>"); 
-    } else {
-      //$pia_lang_test = '';
-      echo("<meta http-equiv='refresh' content='1'>");
-    }    
-  }
-}
-
-
-// Aprscan Timer -----------------------------------------------------------------
-
-if (isset($_POST['arpscantimer_set']) && isset($_POST['arpscantimer'])) {
-  $pia_lang_set_dir = '../db/';
-
-  $file = '../db/setting_stoparpscan';
-
-  if (file_exists($file)) {
-      echo $pia_lang['BackDevices_Arpscan_enabled'];
-      // old method
-      //unlink($file);
-      exec('../back/pialert-cli enable_scan', $output);
-      echo("<meta http-equiv='refresh' content='1'>"); 
-     } else {
-        if (is_numeric($_POST['arpscantimer'])) {
-         exec('../back/pialert-cli disable_scan '.$_POST['arpscantimer'], $output);
-        } else { 
-         exec('../back/pialert-cli disable_scan', $output);
-        }
-      echo $pia_lang['BackDevices_Arpscan_disabled'];
-      echo("<meta http-equiv='refresh' content='1'>"); 
-     }
-}
 
 // Aprscan read Timer -----------------------------------------------------------------
 
@@ -314,18 +199,27 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table">
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="text-align:center;">
-                            <form method="post" action="maintenance.php">
-                            <div style="display: inline-block;">
-                                <select name="langselector" class="form-control" style="width:160px; margin-bottom:5px;">
-                                    <option value=""><?php echo $pia_lang['Maintenance_lang_selector_empty'];?></option>
-                                    <option value="en_us"><?php echo $pia_lang['Maintenance_lang_en_us'];?></option>
-                                    <option value="de_de"><?php echo $pia_lang['Maintenance_lang_de_de'];?></option>
-                                    <option value="es_es"><?php echo $pia_lang['Maintenance_lang_es_es'];?></option>
-                                </select></div>
-                            <div style="display: block;"><input type="submit" name="langselector_set" value="<?php echo $pia_lang['Maintenance_lang_selector_apply'];?>" class="btn bg-green" style="width:160px;">
-                                <?php // echo $pia_lang_test; ?>
+                            <div style="display: inline-block; text-align: center;">
+                              <div class="form-group" style="width:160px; margin-bottom:5px;">
+                                <!-- <div class="col-sm-7"> -->
+                                  <div class="input-group">
+                                    <input class="form-control" id="txtLangSelection" type="text" value="<?php echo $pia_lang['Maintenance_lang_selector_empty'];?>" readonly >
+                                    <div class="input-group-btn">
+                                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonLangSelection">
+                                        <span class="fa fa-caret-down"></span></button>
+                                      <ul id="dropdownLangSelection" class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','en_us');"><?php echo $pia_lang['Maintenance_lang_en_us'];?></a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','de_de');"><?php echo $pia_lang['Maintenance_lang_de_de'];?></a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','es_es');"><?php echo $pia_lang['Maintenance_lang_es_es'];?></a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                              </div>
                             </div>
-                            </form>
+                            <div style="display: block;">
+                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" >
+                                <?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
+                            </div>
                         </div>
                         <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_lang_selector_text'];?>
@@ -333,31 +227,45 @@ if ($_REQUEST['tab'] == '1') {
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="text-align: center;">
-                            <form method="post" action="maintenance.php">
+                            
                             <div style="display: inline-block; text-align: center;">
-                                <select name="skinselector" class="form-control" style="width:160px; margin-bottom:5px;">
-                                    <option value=""><?php echo $pia_lang['Maintenance_themeselector_empty'];?></option>
-                                    <option value="skin-black-light">black light</option>
-                                    <option value="skin-black">black</option>
-                                    <option value="skin-blue-light">blue light</option>
-                                    <option value="skin-blue">blue</option>
-                                    <option value="skin-green-light">green light</option>
-                                    <option value="skin-green">green</option>
-                                    <option value="skin-purple-light">purple light</option>
-                                    <option value="skin-purple">purple</option>
-                                    <option value="skin-red-light">red light</option>
-                                    <option value="skin-red">red</option>
-                                    <option value="skin-yellow-light">yellow light</option>
-                                    <option value="skin-yellow">yellow</option>
-                                </select></div>
-                            <div style="display: block;"><input type="submit" name="skinselector_set" value="<?php echo $pia_lang['Maintenance_themeselector_apply'];?>" class="btn bg-green" style="width:160px;">
-                                <?php // echo $pia_skin_test; ?>
+                              <div class="form-group" style="width:160px; margin-bottom:5px;">
+                                <!-- <div class="col-sm-7"> -->
+                                  <div class="input-group">
+                                    <input class="form-control" id="txtSkinSelection" type="text" value="<?php echo $pia_lang['Maintenance_themeselector_empty'];?>" readonly >
+                                    <div class="input-group-btn">
+                                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonSkinSelection">
+                                        <span class="fa fa-caret-down"></span></button>
+                                      <ul id="dropdownSkinSelection" class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black-light');">Black-light</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black');">Black</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue-light');">Blue-light</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue');">Blue</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green-light');">Green-light</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green');">Green</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple-light');">Purple-light</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple');">Purple</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red-light');">Red-light</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red');">Red</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow-light');">Yellow-light</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow');">Yellow</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                              </div>
                             </div>
-                            </form>
+                            <div style="display: block;">
+                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" >
+                                <?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
+                            </div>
+
                         </div>
+                            
                         <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_themeselector_text']; ?>
-                        </div>    
+                        </div>
+
+
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a">
@@ -379,21 +287,33 @@ if ($_REQUEST['tab'] == '1') {
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="text-align: center;">
-                            <form method="post" action="maintenance.php">
+
                             <div style="display: inline-block; text-align: center;">
-                                <select name="arpscantimer" class="form-control" style="width:160px; margin-bottom:5px;">
-                                    <option value=""><?php echo $pia_lang['Maintenance_arpscantimer_empty'];?></option>
-                                    <option value="15">15min</option>
-                                    <option value="30">30min</option>
-                                    <option value="60">1h</option>
-                                    <option value="120">2h</option>
-                                    <option value="720">12h</option>
-                                    <option value="1440">24h</option>
-                                    <option value="999999">very long</option>
-                                </select></div>
-                            <div style="display: block;"><input type="submit" name="arpscantimer_set" value="<?php echo $pia_lang['Maintenance_Tool_arpscansw'];?>" class="btn bg-yellow" style="width:160px;">
+                              <div class="form-group" style="width:160px; margin-bottom:5px;">
+                                <!-- <div class="col-sm-7"> -->
+                                  <div class="input-group">
+                                    <input class="form-control" id="txtPiaArpTimer" type="text" value="<?php echo $pia_lang['Maintenance_arpscantimer_empty'];?>" readonly >
+                                    <div class="input-group-btn">
+                                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonPiaArpTimer">
+                                        <span class="fa fa-caret-down"></span></button>
+                                      <ul id="dropdownPiaArpTimer" class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtPiaArpTimer','15');">15min</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtPiaArpTimer','30');">30min</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtPiaArpTimer','60');">1h</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtPiaArpTimer','120');">2h</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtPiaArpTimer','720');">12h</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtPiaArpTimer','1440');">24h</a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtPiaArpTimer','999999');">Very long</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                              </div>
                             </div>
-                            </form>
+                            <div style="display: block;">
+                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px; height:36px" id="btnSavePiaArpTimer" onclick="setPiAlertArpTimer()" ><div id="Timeralertspinner" class="loader disablespinner"></div> 
+                                <div id="TimeralertText" class=""><?php echo $pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
+                            </div>
+
                         </div>
                         <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_Tool_arpscansw_text']; ?>
@@ -700,6 +620,50 @@ function PiaLoginDisable()
   $.get('php/server/devices.php?action=PiaLoginDisable', function(msg) {
     showMessage (msg);
   });
+}
+
+
+function setTextValue (textElement, textValue) {
+  $('#'+textElement).val (textValue);
+
+}
+
+// Set Theme 
+function setPiAlertTheme () {
+  // update data to server
+  $.get('php/server/devices.php?action=setPiAlertTheme&PiaSkinSelection='+ $('#txtSkinSelection').val(), function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Set Language 
+function setPiAlertLanguage () {
+  // update data to server
+  $.get('php/server/devices.php?action=setPiAlertLanguage&PiaLangSelection='+ $('#txtLangSelection').val(), function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Set Language 
+function setPiAlertArpTimer () {
+// $("#Timeralertspinner").removeClass("disablespinner");
+//   // update data to server
+//   $.get('php/server/devices.php?action=setPiAlertArpTimer&PiaArpTimer='+ $('#txtPiaArpTimer').val(), function(msg) {
+//     showMessage (msg);
+//   });
+// $("#Timeralertspinner").addClass("disablespinner");
+
+$.ajax({
+        method: "GET",
+        url: "./php/server/devices.php?action=setPiAlertArpTimer&PiaArpTimer=" + $('#txtPiaArpTimer').val(),
+        data: "",
+        beforeSend: function() { $('#Timeralertspinner').removeClass("disablespinner"); $('#TimeralertText').addClass("disablespinner");  },
+        complete: function() { $('#Timeralertspinner').addClass("disablespinner"); $('#TimeralertText').removeClass("disablespinner"); },
+        success: function(data, textStatus) {
+            showMessage (data);
+        }
+    })
+
 }
 </script>
 

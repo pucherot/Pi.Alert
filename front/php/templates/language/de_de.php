@@ -244,7 +244,7 @@ $pia_lang['Maintenance_Tool_setapikey'] = 'Setze API-Key';
 $pia_lang['Maintenance_Tool_setapikey_text'] = 'Mit dem API-Key ist es möglich, Abfragen an die Datenbank zu stellen ohne die Webseite verwenden zu müssen. Die kann der Fall sein wenn ein anderer Service auf die Daten dieser Datenbank zugreifen soll. Existiert bereits ein API-Key, wird dieser ersetzt.';
 $pia_lang['Maintenance_Tool_setapikey_noti'] = 'Setze API-Key';
 $pia_lang['Maintenance_Tool_setapikey_noti_text'] = 'Möchtest du einen eventuell bestehenden API-Key durch einen neuen Key ersetzen? Bestehende Keys sind dann nicht mehr verwendbar.';
-$pia_lang['Maintenance_arpscantimer_empty'] = 'Zeitraum festlegen';
+$pia_lang['Maintenance_arpscantimer_empty'] = 'Timer setzen';
 $pia_lang['Maintenance_Tool_arpscansw'] = 'Scan stoppen/starten';
 $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet den arp-Scan an oder aus. Wenn bei der Deaktivierung kein Zeitraum festgelegt wurde, schaltet sich Pi.Alert nach einer Pause von 10min mit dem nächsten anstehenden Scan wieder ein. Bereits laufende Scans werden dabei nicht beendet.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'arp-Scan stoppen/starten';
@@ -330,6 +330,12 @@ $pia_lang['BackDevices_DBTools_DelActHistory'] = 'Die Anzeige der Netzwerkaktivi
 $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Fehler beim Zurücksetzen der Netzwerkaktivitätsanzeige.';
 $pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
 $pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
+$pia_lang['BackDevices_Theme_set'] = 'Theme wird angewendet';
+$pia_lang['BackDevices_Theme_notset'] = 'Theme wird nicht angewendet';
+$pia_lang['BackDevices_Theme_invalid'] = 'Es wurde kein Theme ausgewählt';
+$pia_lang['BackDevices_Language_set'] = 'Sprache wird angewendet';
+$pia_lang['BackDevices_Language_notset'] = 'Sprache wird nicht angewendet';
+$pia_lang['BackDevices_Language_invalid'] = 'Es wurde kein Sprache ausgewählt';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

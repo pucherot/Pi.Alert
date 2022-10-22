@@ -345,8 +345,14 @@ $pia_lang['BackDevices_DBTools_ImportCSVError'] = 'The CSV file couldn\'t be imp
 $pia_lang['BackDevices_DBTools_ImportCSVMissing'] = 'The CSV file couldn\'t be found under <b>/config/devices.csv.</b>';
 $pia_lang['BackDevices_DBTools_DelActHistory'] = 'Network aktivity reset successful';
 $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Network aktivity reset not successful';
-$pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
-$pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
+$pia_lang['BackDevices_Login_disabled'] = 'Login disabled.';
+$pia_lang['BackDevices_Login_enabled'] = 'Login enabled.';
+$pia_lang['BackDevices_Theme_set'] = 'Theme applied';
+$pia_lang['BackDevices_Theme_notset'] = 'Theme not applied';
+$pia_lang['BackDevices_Theme_invalid'] = 'No theme selected';
+$pia_lang['BackDevices_Language_set'] = 'Language applied';
+$pia_lang['BackDevices_Language_notset'] = 'Language not applied';
+$pia_lang['BackDevices_Language_invalid'] = 'No language selected';
 
 //////////////////////////////////////////////////////////////////
 // Network Page
