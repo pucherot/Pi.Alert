@@ -303,7 +303,7 @@ if ($_REQUEST['tab'] == '1') {
                               </div>
                             </div>
                             <div style="display: block;">
-                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px; height:36px" id="btnSavePiaArpTimer" onclick="setPiAlertArpTimer()" ><div id="Timeralertspinner" class="loader disablespinner"></div> 
+                            <button type="button" class="btn btn-primary bg-yellow" style="margin-top:0px; width:160px; height:36px" id="btnSavePiaArpTimer" onclick="setPiAlertArpTimer()" ><div id="Timeralertspinner" class="loader disablespinner"></div> 
                                 <div id="TimeralertText" class=""><?php echo $pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
                             </div>
                         </div>
@@ -634,16 +634,9 @@ function setPiAlertLanguage () {
   });
 }
 
-// Set Language 
+// Set ArpScanTimer 
 function setPiAlertArpTimer () {
-// $("#Timeralertspinner").removeClass("disablespinner");
-//   // update data to server
-//   $.get('php/server/devices.php?action=setPiAlertArpTimer&PiaArpTimer='+ $('#txtPiaArpTimer').val(), function(msg) {
-//     showMessage (msg);
-//   });
-// $("#Timeralertspinner").addClass("disablespinner");
-
-$.ajax({
+  $.ajax({
         method: "GET",
         url: "./php/server/devices.php?action=setPiAlertArpTimer&PiaArpTimer=" + $('#txtPiaArpTimer').val(),
         data: "",
@@ -653,7 +646,6 @@ $.ajax({
             showMessage (data);
         }
     })
-
 }
 </script>
 
