@@ -15,7 +15,7 @@
     <?php
       $conf_file = '../config/version.conf';
       $conf_data = parse_ini_file($conf_file);
-      echo '<span style="display:inline-block; transform: rotate(180deg)">&copy;</span> '. $conf_data['VERSION_YEAR'] .' Puche';
+      echo '<span style="display:inline-block; transform: rotate(180deg)">&copy;</span> '. $conf_data['VERSION_YEAR'] .' Puche and leiweibau';
     ?>
     <!-- To the right -->
     <div class="pull-right no-hidden-xs">

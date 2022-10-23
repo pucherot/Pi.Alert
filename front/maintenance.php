@@ -219,7 +219,7 @@ if ($_REQUEST['tab'] == '1') {
                                 <?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
                             </div>
                         </div>
-                        <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
+                        <div class="db_tools_table_cell_b" style="padding: 10px; height:40px; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_lang_selector_text'];?>
                         </div>
                     </div>
@@ -257,7 +257,7 @@ if ($_REQUEST['tab'] == '1') {
                                 <?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
                             </div>
                         </div>
-                        <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
+                        <div class="db_tools_table_cell_b" style="padding: 10px; height:40px; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_themeselector_text']; ?>
                         </div>
                     </div>
@@ -307,7 +307,7 @@ if ($_REQUEST['tab'] == '1') {
                                 <div id="TimeralertText" class=""><?php echo $pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
                             </div>
                         </div>
-                        <div class="db_info_table_cell" style="padding: 10px; height:40px; text-align:left; vertical-align: middle;">
+                        <div class="db_tools_table_cell_b" style="padding: 10px; height:40px; vertical-align: middle;">
                             <?php echo $pia_lang['Maintenance_Tool_arpscansw_text']; ?>
                         </div>    
                     </div>
