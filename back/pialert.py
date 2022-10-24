@@ -1486,6 +1486,12 @@ def email_reporting ():
 #-------------------------------------------------------------------------------
 
 def send_pushsafer (_Text):
+    
+    try:
+        notification_target = PUSHSAFER_DEVICE
+    except NameError:
+        notification_target = "a"
+
     # Remove one linebrake between "Server" and the headline of the event type
     _pushsafer_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
@@ -1495,11 +1501,11 @@ def send_pushsafer (_Text):
     post_fields = {
         "t" : 'Pi.Alert Message - '+subheadline,
         "m" : _pushsafer_Text,
-        "s" : 11,
+        "s" : 22,
         "v" : 3,
         "i" : 148,
         "c" : '#ef7f7f',
-        "d" : 'a',
+        "d" : notification_target,
         "u" : REPORT_DASHBOARD_URL,
         "ut" : 'Open Pi.Alert',
         "k" : PUSHSAFER_TOKEN,
@@ -1588,15 +1594,21 @@ def send_ntfy_test (_notiMessage):
 
 #-------------------------------------------------------------------------------
 def send_pushsafer_test (_notiMessage):
+
+    try:
+        notification_target = PUSHSAFER_DEVICE
+    except NameError:
+        notification_target = "a"
+
     url = 'https://www.pushsafer.com/api'
     post_fields = {
         "t" : 'Pi.Alert Message',
         "m" : _notiMessage,
-        "s" : 11,
+        "s" : 22,
         "v" : 3,
         "i" : 148,
         "c" : '#ef7f7f',
-        "d" : 'a',
+        "d" : notification_target,
         "u" : REPORT_DASHBOARD_URL,
         "ut" : 'Open Pi.Alert',
         "k" : PUSHSAFER_TOKEN,
