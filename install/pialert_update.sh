@@ -39,6 +39,7 @@ main() {
   download_pialert
   update_config
   update_db
+  update_permissions
 
   test_pialert
   
@@ -206,18 +207,29 @@ update_db() {
 #  sqlite3 $PIALERT_HOME/db/pialert.db "UPDATE Devices set dev_ScanCycle=1, dev_AlertEvents=1, dev_AlertDeviceDown=1 WHERE dev_MAC='Internet' AND dev_ScanCycle=0;"  2>&1 >> "$LOG"
 }
 
+
+# ------------------------------------------------------------------------------
+#  
+# ------------------------------------------------------------------------------
+update_permissions() {
+  print_msg "- Set Permissions..."
+  sudo chgrp -R www-data "$PIALERT_HOME/db"                         2>&1 >> "$LOG"
+  chmod -R 770 "$PIALERT_HOME/db"                                   2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/shoutrrr/arm64/shoutrrr"             2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/shoutrrr/armhf/shoutrrr"             2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/shoutrrr/x64/shoutrrr"               2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/shoutrrr/x86/shoutrrr"               2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/speedtest-cli"                       2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/pialert-cli"                         2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/pialert.py"                          2>&1 >> "$LOG"
+  chmod +x "$PIALERT_HOME/back/update_vendors.sh"                   2>&1 >> "$LOG"
+
+}
+
 # ------------------------------------------------------------------------------
 # Test Pi.Alert
 # ------------------------------------------------------------------------------
 test_pialert() {
-  print_msg "- Set Permissions..."
-  chmod +x $PIALERT_HOME/back/shoutrrr/arm64/shoutrrr             2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/shoutrrr/armhf/shoutrrr             2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/shoutrrr/x64/shoutrrr               2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/shoutrrr/x86/shoutrrr               2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/speedtest-cli                       2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/pialert-cli                         2>&1 >> "$LOG"
-
   print_msg "- Testing Pi.Alert HW vendors database update process..."
   print_msg "*** PLEASE WAIT A COUPLE OF MINUTES..."
   stdbuf -i0 -o0 -e0 $PYTHON_BIN $PIALERT_HOME/back/pialert.py update_vendors_silent  2>&1 | tee -ai "$LOG"
