@@ -38,7 +38,7 @@ main() {
   check_packages
   download_pialert
   update_config
- # update_db
+  update_db
 
   test_pialert
   
@@ -173,37 +173,37 @@ update_db() {
   print_msg "- Installing sqlite3..."
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
 
-  print_msg "- Checking 'Parameters' table..."
-  TAB=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Parameters' COLLATE NOCASE;"`              2>&1 >> "$LOG"
-  if [ "$TAB" == "0" ] ; then
-    print_msg "  - Creating 'Parameters' table..."
-    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE TABLE Parameters (par_ID STRING (50) PRIMARY KEY NOT NULL COLLATE NOCASE, par_Value STRING (250) );"   2>&1 >> "$LOG"
-    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_par_ID ON Parameters (par_ID COLLATE NOCASE);"                                               2>&1 >> "$LOG"
-  fi
+#  print_msg "- Checking 'Parameters' table..."
+#  TAB=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Parameters' COLLATE NOCASE;"`              2>&1 >> "$LOG"
+#  if [ "$TAB" == "0" ] ; then
+#    print_msg "  - Creating 'Parameters' table..."
+#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE TABLE Parameters (par_ID STRING (50) PRIMARY KEY NOT NULL COLLATE NOCASE, par_Value STRING (250) );"   2>&1 >> "$LOG"
+#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_par_ID ON Parameters (par_ID COLLATE NOCASE);"                                               2>&1 >> "$LOG"
+#  fi
   
-  print_msg "- Checking Devices new columns..."
-  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_NewDevice' COLLATE NOCASE";`            2>&1 >> "$LOG"
-  if [ "$COL" == "0" ] ; then
-    print_msg "  - Adding column 'NewDevice' to 'Devices'..."
-    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_NewDevice BOOLEAN NOT NULL DEFAULT (1) CHECK (dev_NewDevice IN (0, 1) );"  2>&1 >> "$LOG"
-    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_dev_NewDevice ON Devices (dev_NewDevice);"
-  fi
+#  print_msg "- Checking Devices new columns..."
+#  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_NewDevice' COLLATE NOCASE";`            2>&1 >> "$LOG"
+#  if [ "$COL" == "0" ] ; then
+#    print_msg "  - Adding column 'NewDevice' to 'Devices'..."
+#    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_NewDevice BOOLEAN NOT NULL DEFAULT (1) CHECK (dev_NewDevice IN (0, 1) );"  2>&1 >> "$LOG"
+#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_dev_NewDevice ON Devices (dev_NewDevice);"
+#  fi
 
-  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Location' COLLATE NOCASE";`             2>&1 >> "$LOG"
-  if [ "$COL" == "0" ] ; then
-    print_msg "  - Adding column 'Location' to 'Devices'..."
-    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Location STRING(250) COLLATE NOCASE;"                                      2>&1 >> "$LOG"
-  fi
+#  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Location' COLLATE NOCASE";`             2>&1 >> "$LOG"
+#  if [ "$COL" == "0" ] ; then
+#    print_msg "  - Adding column 'Location' to 'Devices'..."
+#    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Location STRING(250) COLLATE NOCASE;"                                      2>&1 >> "$LOG"
+#  fi
 
-  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Archived' COLLATE NOCASE";`               2>&1 >> "$LOG"
-  if [ "$COL" == "0" ] ; then
-    print_msg "  - Adding column 'Archived / Hidden' to 'Devices'..."
-    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Archived BOOLEAN NOT NULL DEFAULT (0) CHECK (dev_Archived IN (0, 1) );"    2>&1 >> "$LOG"
-    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_dev_Archived ON Devices (dev_Archived);"                                                     2>&1 >> "$LOG"
-  fi
+#  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Archived' COLLATE NOCASE";`               2>&1 >> "$LOG"
+#  if [ "$COL" == "0" ] ; then
+#    print_msg "  - Adding column 'Archived / Hidden' to 'Devices'..."
+#    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Archived BOOLEAN NOT NULL DEFAULT (0) CHECK (dev_Archived IN (0, 1) );"    2>&1 >> "$LOG"
+#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_dev_Archived ON Devices (dev_Archived);"                                                     2>&1 >> "$LOG"
+#  fi
 
-  print_msg "- Cheking Internet scancycle..."
-  sqlite3 $PIALERT_HOME/db/pialert.db "UPDATE Devices set dev_ScanCycle=1, dev_AlertEvents=1, dev_AlertDeviceDown=1 WHERE dev_MAC='Internet' AND dev_ScanCycle=0;"  2>&1 >> "$LOG"
+#  print_msg "- Cheking Internet scancycle..."
+#  sqlite3 $PIALERT_HOME/db/pialert.db "UPDATE Devices set dev_ScanCycle=1, dev_AlertEvents=1, dev_AlertDeviceDown=1 WHERE dev_MAC='Internet' AND dev_ScanCycle=0;"  2>&1 >> "$LOG"
 }
 
 # ------------------------------------------------------------------------------
