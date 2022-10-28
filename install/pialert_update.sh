@@ -152,6 +152,12 @@ REPORT_TELEGRAM         = False
 TELEGRAM_BOT_TOKEN_URL  = '<Your generated servive URL for telegram - use ~/pialert/back/shoutrrr/<your Systemtyp>/shoutrrr generate telegram>'
 EOF
 
+
+if ! grep -Fq PUSHSAFER_DEVICE "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+PUSHSAFER_DEVICE = 'a'
+EOF
+
 fi      
 
   # if ! grep -Fq QUERY_MYIP_SERVER "$PIALERT_HOME/config/pialert.conf" ; then
