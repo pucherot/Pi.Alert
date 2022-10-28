@@ -40,7 +40,34 @@ if (isset($_REQUEST['get']) && !empty($_REQUEST['get'])) {
       case 'mac-status':           getStatusofMAC($mac_address);            break;
       case 'all-online':           getAllOnline();                          break;
       case 'all-offline':          getAllOffline();                         break;
+      case 'system-status':        getSystemStatus();                       break;
     }
+}
+
+
+//example curl -k -X POST -F 'api-key=key' -F 'get=system-status' https://url/pialert/api/
+function getSystemStatus() {
+    global $db;
+    $results = $db->query('SELECT * FROM Online_History ORDER BY Scan_Date DESC LIMIT 1');
+    while ($row = $results->fetchArray()) {
+       $time_raw = explode(' ', $row['Scan_Date']);
+       $temp_api_online_devices['Last_Scan'] = $time_raw[1];
+       $temp_api_online_devices['All_Devices'] = $row['All_Devices'];
+       $temp_api_online_devices['Offline_Devices'] = $row['Down_Devices'];
+       $temp_api_online_devices['Online_Devices'] = $row['Online_Devices'];
+       $temp_api_online_devices['Archived_Devices'] = $row['Archived_Devices'];
+    }
+    unset($results, $sql);
+    $sql = 'SELECT * FROM Devices WHERE dev_NewDevice="1"';
+    $results = $db->query($sql);
+    $i = 0;
+    while ($row = $results->fetchArray()) {
+        $i++;
+    }
+    $temp_api_online_devices['New_Devices'] = $i;
+    $api_online_devices = $temp_api_online_devices;
+    $json = json_encode($api_online_devices);
+    echo $json;
 }
 
 

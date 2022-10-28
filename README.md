@@ -49,7 +49,7 @@ In charge of:
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/))
   - DB cleanup tasks via cron
-  - a pialert-cli that helps to configure login and password
+  - a pialert-cli that helps to configure login, password and some other things
 
 [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
 
@@ -87,6 +87,7 @@ A web frontend that allows:
     - Enable/Disable login
     - DB maintenance tools
     - DB backup, restore and cleanup
+    - Send test notifications
   - Help/FAQ section 
 
   | ![Screen 1][screen1]                   | ![Screen 2][screen2]                 |
@@ -104,7 +105,8 @@ Instead of 'glass_black_white.png' you can use one of the following files.
 
 
 ### API
-A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 3 things:
+A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 4 things:
+  - System status (Counts all, online, offline, archived and new devices).
   - All online devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port).
   - All offline devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)
   - Information about a specific device (all information, without events and presence)
