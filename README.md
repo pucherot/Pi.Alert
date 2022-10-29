@@ -113,7 +113,7 @@ A possibility to send a request to the Pi.Alert backend via different ways. Curr
 
 With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Home Assistant. How it works, you can look up in the API documentation.
 
-[Pi.Alert API Usage and Examples](docs/API-USAGE.md)
+[Pi.Alert API Usage and Examples / Home Assistant integration](docs/API-USAGE.md)
 
 # Installation
 <!--- --------------------------------------------------------------------- --->
