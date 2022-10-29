@@ -192,6 +192,6 @@ Restart Home Assistant after the change. Then open the developer tools in Home A
 ![pialert_card.png][pialert_card] 
 
 
-[Back](https://github.com/leiweibau/Pi.Alert#front)
+[Back](https://github.com/leiweibau/Pi.Alert#api)
 
 [pialert_card]:    /docs/img/pialert_card.png       "pialert_card.png"
