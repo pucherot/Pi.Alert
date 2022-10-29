@@ -14,7 +14,7 @@ The API key must be transmitted with "post", at least that's how it's written on
 [Query with curl (system-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-system-status)<br>
 [Query with curl (mac-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-mac-status)<br>
 [Query with curl (all-online or all-offline)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-all-online-or-all-offline)<br><br>
-[Use API-Call for Home-Assistant](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#use-api-call-for-home-assistant)
+[Use API-Call for Home Assistant](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#use-api-call-for-home-assistant)
 <br><hr><br>
 
 ### Example of a query with PHP (system-status)
