@@ -120,9 +120,10 @@ Demo output
 print_r(json_decode($response));
 ```
 
-## Example of a query with the commandline tool curl (mac-status)
+## Example of a query with the commandline tool curl (system-status)
 ```
-curl -k -X POST -F 'api-key=key' -F 'get=system-status' https://[URL]/pialert/api/
+curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/pialert/api/
+```
 
 ## Example of a query with the commandline tool curl (mac-status)
 ```
