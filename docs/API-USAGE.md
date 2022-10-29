@@ -146,7 +146,7 @@ curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=all-offline' https://[URL]/pial
 ```
 <hr>
 
-### Use API-Call for Home-Assistant
+### Use API-Call for Home Assistant
 
 For possibly better integrations in Home Assistant a pull request is welcome. First, the sensors must be added manually to the "configuration.yaml" file. If you don't use HTTPS, you have to replace it with HTTP in the following code.
 ```
