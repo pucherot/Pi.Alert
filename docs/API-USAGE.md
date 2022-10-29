@@ -2,8 +2,8 @@
 <!--- --------------------------------------------------------------------- --->
 This is my first attempt at building an API, so if I've done basic things wrong, I'm happy to see improvements.
 
-For the API, I limited myself to basic things. There are only 3 queries possible at the moment (mac-status, all-online, 
-all-offline). For each query we need a special API key, which can be created via the frontend (maintenance page) or 
+For the API, I limited myself to basic things. There are only 4 queries possible at the moment (system-status, mac-status, all-online, 
+all-offline). For a query we need the API key, which can be created via the frontend (maintenance page) or 
 via the pialer-cli in the "/back" directory.
 The API key must be transmitted with "post", at least that's how it's written on my part at the moment.
 
