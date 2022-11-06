@@ -15,7 +15,7 @@ JavaScript)*
   - Modified scanmethod. If you want to go back to the original method comment line 546 and uncomment line 549 in ~/pialert/back/pialert.py
   - Because of the modified scan, the extended scan parameters in the configuration file do not work. For this reason they were removed. 
   - The Backend has the additional option "cleanup"
-  - "pialert-cli" that helps to configure login, password and DB migration
+  - "[pialert-cli](docs/PIALERTCLI.md)" that helps to configure login, password and DB migration
 
 ## How it works
 The system continuously scans the network for:
@@ -49,7 +49,7 @@ In charge of:
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/))
   - DB cleanup tasks via cron
-  - a pialert-cli that helps to configure login, password and some other things
+  - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
 
 [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
 
@@ -59,7 +59,7 @@ In charge of:
   | -------------------- | -------------------- |
 
 ### Front
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file ~/pialert/config/pialert.conf or via pialert-cli.
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file ~/pialert/config/pialert.conf or via [pialert-cli](docs/PIALERTCLI.md).
 
 A web frontend that allows:
   - Manage the devices inventory and the characteristics
