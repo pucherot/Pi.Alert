@@ -155,36 +155,47 @@ sensor:
     name: "PiAlert - Last Scan"
     command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/pialert/api/
     scan_interval: 200
+    unique_id: pialert.status.lastscan
     value_template: '{{ value_json.Last_Scan }}'
 
   - platform: command_line
     name: "PiAlert - All Devices"
     command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/pialert/api/
     scan_interval: 200
+    unique_id: pialert.status.alldevices
+    unit_of_measurement: ""
     value_template: '{{ value_json.All_Devices }}'
 
   - platform: command_line
     name: "PiAlert - Online Devices"
     command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/pialert/api/
     scan_interval: 200
+    unique_id: pialert.status.onlinedevices
+    unit_of_measurement: ""
     value_template: '{{ value_json.Online_Devices }}'
 
   - platform: command_line
     name: "PiAlert - Offline Devices"
     command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/pialert/api/
     scan_interval: 200
+    unique_id: pialert.status.offlinedevices
+    unit_of_measurement: ""
     value_template: '{{ value_json.Offline_Devices }}'
 
   - platform: command_line
     name: "PiAlert - Archived Devices"
     command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/pialert/api/
     scan_interval: 200
+    unique_id: pialert.status.archiveddevices
+    unit_of_measurement: ""
     value_template: '{{ value_json.Archived_Devices }}'
 
   - platform: command_line
     name: "PiAlert - New Devices"
     command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/pialert/api/
     scan_interval: 200
+    unique_id: pialert.status.newdevices
+    unit_of_measurement: ""
     value_template: '{{ value_json.New_Devices }}'
 ```
 Restart Home Assistant after the change. Then open the developer tools in Home Assistant and switch to the States tab. Here you should now find the PiAlert sensors. Now you can create a new card on the dashboard and add the individual sensors as you wish. For illustration here is a picture of my Pi.Alert Card (It is configured in german for me, but it should be enough for understanding)
