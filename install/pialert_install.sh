@@ -319,7 +319,7 @@ install_lighttpd() {
   sudo apt-get install lighttpd -y                                2>&1 >> "$LOG"
   
   print_msg "- Installing PHP..."
-  sudo apt-get install php php-cgi php-fpm php-sqlite3 -y         2>&1 >> "$LOG"
+  sudo apt-get install php php-cgi php-fpm php-curl php-sqlite3 -y         2>&1 >> "$LOG"
 
   print_msg "- Activating PHP..."
   ERRNO=0
