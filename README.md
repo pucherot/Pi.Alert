@@ -7,8 +7,6 @@ Scan the devices connected to your WIFI / LAN and alert you the connection of
 unknown devices. It also warns if a "always connected" device disconnects.
 
 ![Main screen][main]
-*(Apologies for my English and my limited knowledge of Python, php and
-JavaScript)*
 
 ## Modifications within this Fork
   - Only one scan cycle
@@ -16,15 +14,6 @@ JavaScript)*
   - Because of the modified scan, the extended scan parameters in the configuration file do not work. For this reason they were removed. 
   - The Backend has the additional option "cleanup"
   - "[pialert-cli](docs/PIALERTCLI.md)" that helps to configure login, password and DB migration
-
-## How it works
-The system continuously scans the network for:
-  - New devices
-  - New connections (re-connections)
-  - Disconnections
-  - "Always Connected" devices down
-  - Devices IP changes
-  - Internet IP address changes
 
 ## Scan Methods
 Up to three scanning methods are used:
@@ -63,30 +52,19 @@ There is a configurable login to prevent unauthorized use. The default password 
 
 A web frontend that allows:
   - Manage the devices inventory and the characteristics
-  - Display in a visual way all the information collected by the back
-    - Sessions
-    - Connected devices
-    - Favorites
-    - Events
-    - Presence
-    - Concurrent devices
-    - Down alerts
-    - IP's
-    - ...
+  - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
   - Manual Nmap scans
   - Speedtest for device "Internet" in the details view
   - Simple network relationship display
   - Maintenance tasks and settings like:
-    - Status information (active scans, database size, backup counter)
-    - Theme selection (blue, red, green, yellow, black, purple)
-    - Language selection (english, german, spanish)
-    - Light/Dark-Mode switch
+    - Status information *(active scans, database size, backup counter)*
+    - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
+    - Language selection *(english, german, spanish)*
     - Enable/Disable network activity graph 
     - Pause arp-scan
     - Set API-key
     - Enable/Disable login
-    - DB maintenance tools
-    - DB backup, restore and cleanup
+    - DB maintenance tools Possibility for backup, restore and cleanup of the database
     - Send test notifications
   - Help/FAQ section 
 
@@ -106,10 +84,10 @@ Instead of 'glass_black_white.png' you can use one of the following files.
 
 ### API
 A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 4 things:
-  - System status (Counts all, online, offline, archived and new devices).
-  - All online devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port).
-  - All offline devices (MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)
-  - Information about a specific device (all information, without events and presence)
+  - System status *(Counts all, online, offline, archived and new devices)*
+  - All online devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
+  - All offline devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
+  - Information about a specific device *(all information, without events and presence)*
 
 With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Home Assistant. How it works, you can look up in the API documentation.
 
@@ -118,7 +96,7 @@ With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Ho
 # Installation
 <!--- --------------------------------------------------------------------- --->
 Initially designed to run on a Raspberry Pi, probably it can run on many other
-Linux distributions.
+Linux distributions. A Docker version of Pi.Alert can be found at the fork of [jokob-sk](https://github.com/jokob-sk/Pi.Alert)
 
 - One-step Automated Install:
   #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh | bash`
@@ -150,14 +128,7 @@ This update script is only recommended for an already existing installation of t
 ### Powered by:
   | Product       | Objetive                                                |
   | ------------- | ------------------------------------------------------- |
-  | Python        | Programming language for the Back                       |
-  | PHP           | Programming language for the Front-end                  |
-  | JavaScript    | Programming language for the Front-end                  |
-  | Bootstrap     | Front-end framework                                     |
   | Admin.LTE     | Bootstrap template                                      |
-  | FullCalendar  | Calendar component                                      |
-  | Sqlite        | DB engine                                               |
-  | Lighttpd      | Webserver                                               |
   | arp-scan      | Scan network using arp commands                         |
   | Pi.hole       | DNS Server with Ad-block                                |
   | dnsmasq       | DHCP Server                                             |
@@ -176,11 +147,6 @@ This update script is only recommended for an already existing installation of t
   
   Source of the selfhosted Fonts
   https://github.com/adobe-fonts/source-sans
-
-### Contact
-  pi.alert.application@gmail.com
-  
-  ***Suggestions and comments are welcome***
 
 ### Special thanks 🥇
 
