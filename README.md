@@ -14,6 +14,7 @@ unknown devices. It also warns if a "always connected" device disconnects.
   - Because of the modified scan, the extended scan parameters in the configuration file do not work. For this reason they were removed. 
   - The Backend has the additional option "cleanup"
   - "[pialert-cli](docs/PIALERTCLI.md)" that helps to configure login, password and DB migration
+  - API for basic queries
 
 ## Scan Methods
 Up to three scanning methods are used:
