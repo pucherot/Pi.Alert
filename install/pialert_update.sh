@@ -139,7 +139,7 @@ update_config() {
 #  sed -i '/VERSION/d' "$PIALERT_HOME/config/pialert.conf"                          2>&1 >> "$LOG"
 #  sed -i 's/PA_FRONT_URL/REPORT_DEVICE_URL/g' "$PIALERT_HOME/config/pialert.conf"  2>&1 >> "$LOG"
 
-if ! grep -Fq SHOUTRRR_BINARY "$PIALERT_HOME/config/pialert.conf" ; then
+if ! grep -Fq "# Shoutrrr" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
 # Shoutrrr
@@ -151,22 +151,33 @@ SHOUTRRR_BINARY    = 'armhf'
 REPORT_TELEGRAM         = False
 TELEGRAM_BOT_TOKEN_URL  = '<Your generated servive URL for telegram - use ~/pialert/back/shoutrrr/<your Systemtyp>/shoutrrr generate telegram>'
 EOF
-
+fi
 
 if ! grep -Fq PUSHSAFER_DEVICE "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 PUSHSAFER_DEVICE = 'a'
 EOF
+fi
 
-fi      
+if ! grep -Fq "# Arp-scan Options & Samples" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
-  # if ! grep -Fq QUERY_MYIP_SERVER "$PIALERT_HOME/config/pialert.conf" ; then
-  #   echo "QUERY_MYIP_SERVER = 'http://ipv4.icanhazip.com'" >> "$PIALERT_HOME/config/pialert.conf"
-  # fi      
-
-  # if ! grep -Fq SCAN_SUBNETS "$PIALERT_HOME/config/pialert.conf" ; then
-  #   echo "SCAN_SUBNETS      = '--localnet'" >> "$PIALERT_HOME/config/pialert.conf"
-  # fi      
+# Arp-scan Options & Samples
+# ----------------------
+# Scan local network (default)
+SCAN_SUBNETS    = '--localnet'
+#
+# Scan two subnets
+# SCAN_SUBNETS    = '192.168.11.0/24 192.168.144.0/24'
+#
+# Scan using interface eth0
+# SCAN_SUBNETS    = '--localnet --interface=eth0'
+#
+# Scan multiple interfaces (eth1 and eth0):
+# SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth1', '192.168.1.0/24 --interface=eth0' ]
+EOF
+fi
+   
 }
 
 # ------------------------------------------------------------------------------

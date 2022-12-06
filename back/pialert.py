@@ -109,7 +109,7 @@ def main ():
 
     # Close SQL
     closeDB()
-    closeDB()
+    #closeDB()
 
     # Final menssage
     print ('\nDONE!!!\n\n')
@@ -444,7 +444,7 @@ def scan_network ():
     print ('\nScanning...')
     print ('    arp-scan Method...')
     print_log ('arp-scan starts...')
-    arpscan_devices = execute_arpscan (arpscan_retries)
+    arpscan_devices = execute_arpscan ()
     print_log ('arp-scan ends')
     # DEBUG - print number of rows updated
         # print (arpscan_devices)
@@ -534,30 +534,22 @@ def query_ScanCycle_Data (pOpenCloseDB = False):
     return sqlRow
 
 #-------------------------------------------------------------------------------
-def execute_arpscan (pRetries):
- 
-    # #101 - arp-scan subnet configuration
-    # Prepare command arguments
-    # subnets = SCAN_SUBNETS.strip().split()
+def execute_arpscan ():
 
-    # arp-scan for larger Networks like /16
-    # otherwise the system starts multiple processes. the 15min cronjob isn't necessary.
-    # the scan is about 4min on a /16 network
-    arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--bandwidth=512k', '--retry=3', '--localnet']
+    # output of possible multiple interfaces
+    arpscan_output = ""
 
-    # Default arp-scan
-    # arpscan_args = ['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=' + str(pRetries)]
-    # print (arpscan_args)
+    # multiple interfaces
+    if type(SCAN_SUBNETS) is list:
+        print("    arp-scan: Multiple interfaces")        
+        for interface in SCAN_SUBNETS :            
+            arpscan_output += execute_arpscan_on_interface (interface)
+    # one interface only
+    else:
+        print("    arp-scan: One interface")
+        arpscan_output += execute_arpscan_on_interface (SCAN_SUBNETS)
 
-    # TESTING - Fast Scan
-        # arpscan_args = ['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1']
-
-    # DEBUG - arp-scan command
-        # print (" ".join (arpscan_args))
-
-    # Execute command
-    arpscan_output = subprocess.check_output (arpscan_args, universal_newlines=True)
-
+    
     # Search IP + MAC + Vendor as regular expresion
     re_ip = r'(?P<ip>((2[0-5]|1[0-9]|[0-9])?[0-9]\.){3}((2[0-5]|1[0-9]|[0-9])?[0-9]))'
     re_mac = r'(?P<mac>([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2}))'
@@ -568,9 +560,7 @@ def execute_arpscan (pRetries):
     devices_list = [device.groupdict()
         for device in re.finditer (re_pattern, arpscan_output)]
 
-    # Bugfix #5 - Delete duplicated MAC's with different IP's
-    # TEST - Force duplicated device
-        # devices_list.append(devices_list[0])
+    
     # Delete duplicate MAC
     unique_mac = [] 
     unique_devices = [] 
@@ -590,6 +580,26 @@ def execute_arpscan (pRetries):
 
     # return list
     return unique_devices
+
+#-------------------------------------------------------------------------------
+def execute_arpscan_on_interface (SCAN_SUBNETS):
+    # #101 - arp-scan subnet configuration
+    # Prepare command arguments
+    subnets = SCAN_SUBNETS.strip().split()
+    # Retry is 3 to avoid false offline devices
+    arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--bandwidth=512k', '--retry=3'] + subnets
+    # arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--retry=6'] + subnets
+
+    # Execute command
+    try:
+        # try runnning a subprocess
+        result = subprocess.check_output (arpscan_args, universal_newlines=True)
+    except subprocess.CalledProcessError as e:
+        # An error occured, handle it
+        print(e.output)
+        result = ""
+
+    return result
 
 #-------------------------------------------------------------------------------
 def copy_pihole_network ():
