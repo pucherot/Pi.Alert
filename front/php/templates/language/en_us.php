@@ -249,7 +249,7 @@ $pia_lang['Maintenance_Tool_setapikey_noti'] = 'Setting API-Key';
 $pia_lang['Maintenance_Tool_setapikey_noti_text'] = 'Do you want to replace an existing API key with a new key? Existing keys are then no longer usable.';
 $pia_lang['Maintenance_arpscantimer_empty'] = 'Set period';
 $pia_lang['Maintenance_Tool_arpscansw'] = 'Toggle arp-Scan (on/off)';
-$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Switches the arp scan on or off. If no time period has been defined for deactivation, Pi.Alert switches on again after a pause of 10 min with the next pending scan. Scans that are already running will not be terminated.';
+$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Switches the arp scan on or off. If no time period has been defined for timer activation, Pi.Alert switches on again after a pause of 10 min with the next pending scan. Scans that are already running will not be terminated.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'Toggle arp-Scan on or off';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'When the scan has been switched off it remains off until it is activated again.';
 $pia_lang['Maintenance_Tool_del_empty_macs'] = 'Delete Devices with empty MACs';
@@ -408,6 +408,7 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if 
               								 If the permission is not correct, you can set it again with the following commands in the terminal or the console:<br>
               								 <span class="text-danger help_faq_code">
               								 sudo chgrp -R www-data ~/pialert/db<br>
+              								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
               								 If the database is still read-only, try reinstalling or restoring a database backup from the maintenance page.';

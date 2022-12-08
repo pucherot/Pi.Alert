@@ -391,6 +391,7 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob d
               								 Sollte die Berechtigung nicht stimmen, kannst du sie mit folgenden Befehlen im Terminal oder der Konsole wieder setzen:<br>
               								 <span class="text-danger help_faq_code">
               								 sudo chgrp -R www-data ~/pialert/db<br>
+              								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
               								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zuückspielen eines Datenbank-Backups über die Wartungsseite.';
