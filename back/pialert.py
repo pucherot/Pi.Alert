@@ -29,6 +29,7 @@ import smtplib
 import csv
 import requests
 import time
+import pwd
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -36,6 +37,7 @@ import time
 PIALERT_BACK_PATH = os.path.dirname(os.path.abspath(__file__))
 PIALERT_PATH = PIALERT_BACK_PATH + "/.."
 STOPARPSCAN = PIALERT_PATH + "/db/setting_stoparpscan"
+PIALERT_DB_FILE = PIALERT_PATH + "/db/pialert.db"
 
 if (sys.version_info > (3,0)):
     exec(open(PIALERT_PATH + "/config/version.conf").read())
@@ -59,6 +61,11 @@ def main ():
     print ('\nPi.Alert ' + VERSION +' ('+ VERSION_DATE +')')
     print ('---------------------------------------------------------')
 
+    print("Current User: %s \n" % get_username())
+    
+    # If user is a sudoer, you can uncomment the line below to set the correct db permission every scan
+    # set_pia_file_permissions()
+    
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
 
@@ -114,6 +121,17 @@ def main ():
     # Final menssage
     print ('\nDONE!!!\n\n')
     return 0    
+
+#===============================================================================
+# Set Env (Userpermissions DB-file)
+#===============================================================================
+def get_username():
+
+    return pwd.getpwuid(os.getuid())[0]
+
+def set_pia_file_permissions():
+
+    os.system("sudo chown " + get_username() + ":www-data " + PIALERT_DB_FILE)
 
 #===============================================================================
 # Countdown
