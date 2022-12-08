@@ -63,6 +63,7 @@ main() {
   print_superheader "Pi.Alert Installation"
   log "`date`"
   log "Logfile: $LOG"
+  install_dependencies
 
   check_pialert_home
   ask_config
@@ -72,7 +73,6 @@ main() {
   install_pihole
   activate_DHCP
   add_pialert_DNS
-  install_dependencies
   install_lighttpd
   install_arpscan
   install_python
