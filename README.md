@@ -63,7 +63,7 @@ A web frontend that allows:
     - Pause arp-scan
     - Set API-key
     - Enable/Disable login
-    - DB maintenance tools Possibility for backup, restore and cleanup of the database
+    - DB maintenance tools and a possibility for backup, restore and cleanup of the database
     - Send test notifications
   - Help/FAQ section 
 
