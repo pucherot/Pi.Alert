@@ -10,8 +10,6 @@ unknown devices. It also warns if a "always connected" device disconnects.
 
 ## Modifications within this Fork
   - Only one scan cycle
-  - Modified scanmethod. If you want to go back to the original method comment line 546 and uncomment line 549 in ~/pialert/back/pialert.py
-  - Because of the modified scan, the extended scan parameters in the configuration file do not work. For this reason they were removed. 
   - The Backend has the additional option "cleanup"
   - "[pialert-cli](docs/PIALERTCLI.md)" that helps to configure login, password and DB migration
   - API for basic queries
