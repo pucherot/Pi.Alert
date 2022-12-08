@@ -16,7 +16,7 @@
   
   INSTALL_DIR=~
   PIALERT_HOME="$INSTALL_DIR/pialert"
-  
+
   LIGHTTPD_CONF_DIR="/etc/lighttpd"
   WEBROOT="/var/www/html"
   PIALERT_DEFAULT_PAGE=false
@@ -72,6 +72,7 @@ main() {
   install_pihole
   activate_DHCP
   add_pialert_DNS
+  install_dependencies
   install_lighttpd
   install_arpscan
   install_python
@@ -647,8 +648,16 @@ check_pialert_home() {
   if [ -e "$PIALERT_HOME" ] || [ -L "$PIALERT_HOME" ] ; then
     process_error "Pi.Alert path already exists: $PIALERT_HOME"
   fi
+  sudo apt-get install cron whiptail -y
 }
 
+# ------------------------------------------------------------------------------
+# Check Pi.Alert Installation Path
+# ------------------------------------------------------------------------------
+install_dependencies() {
+  print_msg "- Installing dependencies..."
+  sudo apt-get install cron whiptail -y                          2>&1 >> "$LOG"
+}
 
 # ------------------------------------------------------------------------------
 # Move Logfile
