@@ -203,6 +203,9 @@ Changed:
   - Add "pialert-cli update_db" function to simplify and unify the migration process
   - Update FAQ (Migration notes)
   - Remove pialert/install/pialert_patch_DB.sh
+  - Darkmode
+  - Multilanguage UI
+  - Update AdminLTE
 
 ## Start Fork with v3.5.0
 <!--- --------------------------------------------------------------------- --->
