@@ -1,7 +1,7 @@
 <?php
 // Check API Key
 // Print Api-Key for debugging
-//echo $_POST['api-key'];
+// echo $_POST['api-key'];
 $config_file = "../../config/pialert.conf";
 $config_file_lines = file($config_file);
 $config_file_lines_bypass = array_values(preg_grep('/^PIALERT_APIKEY\s.*/', $config_file_lines));
@@ -47,6 +47,20 @@ if (isset($_REQUEST['get']) && !empty($_REQUEST['get'])) {
 
 //example curl -k -X POST -F 'api-key=key' -F 'get=system-status' https://url/pialert/api/
 function getSystemStatus() {
+
+    # Detect Language
+    foreach (glob("../../db/setting_language*") as $filename) {
+        $pia_lang_selected = str_replace('setting_language_','',basename($filename));
+    }
+    if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
+
+    $en_us = array("On", "Off");
+    $de_de = array("An", "Aus");
+    $es_es = array("En", "Off");
+
+    # Check Scanning Status
+    if (file_exists("../../db/setting_stoparpscan")) {$temp_api_online_devices['Scanning'] = $$pia_lang_selected[1];} else {$temp_api_online_devices['Scanning'] = $$pia_lang_selected[0];}
+
     global $db;
     $results = $db->query('SELECT * FROM Online_History ORDER BY Scan_Date DESC LIMIT 1');
     while ($row = $results->fetchArray()) {
@@ -68,6 +82,7 @@ function getSystemStatus() {
     $api_online_devices = $temp_api_online_devices;
     $json = json_encode($api_online_devices);
     echo $json;
+    echo "\n";
 }
 
 
@@ -79,6 +94,7 @@ function getStatusofMAC($query_mac) {
 	$row = $result -> fetchArray (SQLITE3_ASSOC);
     $json = json_encode($row);
     echo $json;
+    echo "\n";
 }
 
 //example curl -k -X POST -F 'api-key=key' -F 'get=all-online' https://url/pialert/api/
@@ -100,6 +116,7 @@ function getAllOnline() {
     }
     $json = json_encode($api_online_devices);
     echo $json;
+    echo "\n";
 }
 
 //example curl -k -X POST -F 'api-key=key' -F 'get=all-offline' https://url/pialert/api/
@@ -121,6 +138,7 @@ function getAllOffline() {
     }
     $json = json_encode($api_online_devices);
     echo $json;
+    echo "\n";
 }
 
 ?>
