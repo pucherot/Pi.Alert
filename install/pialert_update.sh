@@ -240,6 +240,10 @@ update_permissions() {
   chmod +x "$PIALERT_HOME/back/pialert-cli"                         2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/pialert.py"                          2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/update_vendors.sh"                   2>&1 >> "$LOG"
+  print_msg "- Create Logfile Symlinks..."
+  ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"
+  ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"
+  ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"
 
 }
 
