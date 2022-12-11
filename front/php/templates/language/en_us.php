@@ -410,23 +410,23 @@ $pia_lang['HelpFAQ_Cat_General_101_text'] = 'It may well be that low-powered dev
 											 pause the arp scan on the maintenance page.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'I get the message that the database is read only.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if the database folder (db) has been assigned the correct permissions:<br>
-              								 <span class="text-danger help_faq_code">drwxrwx---  2 (your username) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (your username) www-data</span><br>
               								 If the permission is not correct, you can set it again with the following commands in the terminal or the console:<br>
-              								 <span class="text-danger help_faq_code">
+              								 <span class="text-maroon help_faq_code">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
               								 If the database is still read-only, try reinstalling or restoring a database backup from the maintenance page.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'The login page does not appear, even after changing the password.';
-$pia_lang['HelpFAQ_Cat_General_103_text'] = 'In addition to the password, the configuration file must contain <span class="text-danger help_faq_code">~/pialert/config/pialert.conf</span> 
-              								 also the parameter <span class="text-danger help_faq_code">PIALERT_WEB_PROTECTION</span> must set to <span class="text-danger help_faq_code">True</span>.';
+$pia_lang['HelpFAQ_Cat_General_103_text'] = 'In addition to the password, the configuration file must contain <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span> 
+              								 also the parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> must set to <span class="text-maroon help_faq_code">True</span>.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes on migrating from pucherot to this fork.';
-$pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been extended by some fields. To take over the database from the original Pi.Alert (pucherot), an update function is available via the "pialert-cli" in the directory <span class="text-danger help_faq_code">~/pialert/back</span>. 
-											 The command is then <span class="text-danger help_faq_code">./pialert-cli update_db</span>';
+$pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been extended by some fields. To take over the database from the original Pi.Alert (pucherot), an update function is available via the "pialert-cli" in the directory <span class="text-maroon help_faq_code">~/pialert/back</span>. 
+											 The command is then <span class="text-maroon help_faq_code">./pialert-cli update_db</span>';
 $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
-$pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-danger help_faq_code">pialert-cli</span> is located in the directory <span class="text-danger help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert 
-                                             without web page or change to the configuration file. With the command <span class="text-danger help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
+$pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-maroon help_faq_code">pialert-cli</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert 
+                                             without web page or change to the configuration file. With the command <span class="text-maroon help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
 											 <table style="margin-top: 20px;" border="1">
 											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">set_login</td>
@@ -474,14 +474,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and 
          									delete the DHCP lease if necessary. Then, also in Pi-hole, look under Tools -> Network to see if you can find the recurring hosts there. 
-         									If yes, delete them there as well. Now you can start Pi.Alert again. Now the device(s) should not show up anymore. Restarting the <span class="text-danger help_faq_code">pihole-FTL</span> service may also fix the problem.';
+         									If yes, delete them there as well. Now you can start Pi.Alert again. Now the device(s) should not show up anymore. Restarting the <span class="text-maroon help_faq_code">pihole-FTL</span> service may also fix the problem.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = 'What means ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'means a network device created from the network page.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'designates the port number where the currently edited device is connected to this network device.';
 $pia_lang['HelpFAQ_Cat_Detail_301_head_a'] = 'When is scanning now? At ';
 $pia_lang['HelpFAQ_Cat_Detail_301_head_b'] = ' says 1min but the graph shows 5min intervals.';
 $pia_lang['HelpFAQ_Cat_Detail_301_text'] = 'The time interval between the scans is defined by the "Cronjob", which is set to 5min by default. The designation "1min" refers to the expected duration of the scan. 
-        									Depending on the network configuration, this time may vary. To edit the cronjob, you can use the following command in the terminal/console <span class="text-danger help_faq_code">crontab -e</span>
+        									Depending on the network configuration, this time may vary. To edit the cronjob, you can use the following command in the terminal/console <span class="text-maroon help_faq_code">crontab -e</span>
         									and change the interval.';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_a'] = 'What means ';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_b'] = 'and why can\'t I select that?';

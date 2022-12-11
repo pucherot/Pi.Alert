@@ -386,30 +386,30 @@ $pia_lang['HelpFAQ_Cat_Detail'] = 'Detailansicht';
 $pia_lang['HelpFAQ_Cat_General_100_head'] = 'Die Uhr oben rechts und die Zeiten der Events/Anwesenheit stimmen nicht (Zeitverschiebung).';
 $pia_lang['HelpFAQ_Cat_General_100_text_a'] = 'Aktuell konfigurierte Zeitzone:';
 $pia_lang['HelpFAQ_Cat_General_100_text_b'] = '<br>Sollte dies nicht die Zeitzone sein, in der du dich aufhältst, solltest du die Zeitzone in der PHP Konfigurationsdatei anpassen. Diese findest du in dem Verzeichnis:';
-$pia_lang['HelpFAQ_Cat_General_100_text_c'] = 'Suche in dieser Datei nach dem Eintrag "<span class="text-danger help_faq_code">date.timezone</span>", entferne ggf. das führende "<span class="text-danger help_faq_code">;</span>" und trage die gewünschte Zeitzone ein. Eine Liste mit den unterstützten Zeitzonen findest du hier (<a href="https://www.php.net/manual/de/timezones.php" target="blank">Link</a>).';
+$pia_lang['HelpFAQ_Cat_General_100_text_c'] = 'Suche in dieser Datei nach dem Eintrag "<span class="text-maroon help_faq_code">date.timezone</span>", entferne ggf. das führende "<span class="text-maroon help_faq_code">;</span>" und trage die gewünschte Zeitzone ein. Eine Liste mit den unterstützten Zeitzonen findest du hier (<a href="https://www.php.net/manual/de/timezones.php" target="blank">Link</a>).';
 $pia_lang['HelpFAQ_Cat_General_101_head'] = 'Mein Netzwerk scheint langsamer zu werden, Streaming "ruckelt".';
 $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es kann durchaus sein, dass leistungsschwache Geräte mit der Art und Weise, wie Pi.Alert neue Geräte im Netzwerk erkennt, an ihre Leistungsgrenzen stoßen. Dies verstärkt sich noch einmal, 
 											 wenn diese Geräte per WLAN mit dem Netzwerk kommunizieren. Lösungen wären hier, wenn möglich ein Wechsel auf eine Kabelverbindung oder, falls das Geräte nur einen begrenzten Zeitraum genutzt 
 											 werden soll, den arp-Scan auf der Wartungsseite zu pausieren.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Ich bekomme die Meldung, dass die Datenbank schreibgeschützt (read only) ist.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
-              								 <span class="text-danger help_faq_code">drwxrwx---  2 (dein Username) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (dein Username) www-data</span><br>
               								 Sollte die Berechtigung nicht stimmen, kannst du sie mit folgenden Befehlen im Terminal oder der Konsole wieder setzen:<br>
-              								 <span class="text-danger help_faq_code">
+              								 <span class="text-maroon help_faq_code">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
               								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zuückspielen eines Datenbank-Backups über die Wartungsseite.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
-$pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-danger help_faq_code">~/pialert/config/pialert.conf</span> 
-              								 auch der Parameter <span class="text-danger help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-danger help_faq_code">True</span> gesetzt sein.';
+$pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span> 
+              								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Hinweise zur Migrating von pucherot zu diesem Fork.';
-$pia_lang['HelpFAQ_Cat_General_104_text'] = 'Die Datenbank in diesem Fork wurde um einige Felder erweitert. Um die Datenbank vom originalen Pi.Alert <b>(pucherot)</b> zu übernehmen, steht mit dem Script <span class="text-danger help_faq_code">pialert-cli</span> im Verzeichnis 
-											 <span class="text-danger help_faq_code">~/pialert/back</span> eine Möglichkeit zum Upgrade zur Verfügung. Der Befehl lautet dann <span class="text-danger help_faq_code">./pialert-cli update_db</span>';
+$pia_lang['HelpFAQ_Cat_General_104_text'] = 'Die Datenbank in diesem Fork wurde um einige Felder erweitert. Um die Datenbank vom originalen Pi.Alert <b>(pucherot)</b> zu übernehmen, steht mit dem Script <span class="text-maroon help_faq_code">pialert-cli</span> im Verzeichnis 
+											 <span class="text-maroon help_faq_code">~/pialert/back</span> eine Möglichkeit zum Upgrade zur Verfügung. Der Befehl lautet dann <span class="text-maroon help_faq_code">./pialert-cli update_db</span>';
 $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
-$pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class="text-danger help_faq_code">pialert-cli</span> befindet sich im Verzeichnis <span class="text-danger help_faq_code">~/pialert/back</span> und bietet die Möglichkeit, Einstellungen an Pi.Alert ohne Webseite, oder manuelle Veränderungen an der 
-                                             Konfigurationsdatei vornehmen zu können. Mit dem Kommando <span class="text-danger help_faq_code">./pialert-cli help</span> kann eine Liste mit den unterstützen Funktionen aufgerufen werden.
+$pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class="text-maroon help_faq_code">pialert-cli</span> befindet sich im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> und bietet die Möglichkeit, Einstellungen an Pi.Alert ohne Webseite, oder manuelle Veränderungen an der 
+                                             Konfigurationsdatei vornehmen zu können. Mit dem Kommando <span class="text-maroon help_faq_code">./pialert-cli help</span> kann eine Liste mit den unterstützen Funktionen aufgerufen werden.
 											 <table style="margin-top: 20px;" border="1">
 											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">set_login</td>
@@ -456,14 +456,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und 
          									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen. 
-         									Wenn ja, lösche diese dort ebenfalls. Sollten diese Geräte auch nach dem Löschen in Pi-hole immer wider auftauchen, starte den Dienst <span class="text-danger help_faq_code">pihole-FTL</span> neu. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen.';
+         									Wenn ja, lösche diese dort ebenfalls. Sollten diese Geräte auch nach dem Löschen in Pi-hole immer wider auftauchen, starte den Dienst <span class="text-maroon help_faq_code">pihole-FTL</span> neu. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = 'Was bedeutet ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'meint ein Netzwerkgerät, welches über die Netzwerk-Seite erstellt wurde.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'bezeichnet die Anschlussnummer/Portnummer, an der das gerade bearbeitete Gerät mit diesem Netzwerkgerät verbunden ist.';
 $pia_lang['HelpFAQ_Cat_Detail_301_head_a'] = 'Wann wird nun gescannt? Bei ';
 $pia_lang['HelpFAQ_Cat_Detail_301_head_b'] = ' steht 1min aber der Graph zeigt 5min - Abstände an.';
 $pia_lang['HelpFAQ_Cat_Detail_301_text'] = 'Den zeitlichen Abstand zwischen den Scans legt der "Cronjob" fest, welcher standardmäßig auf 5min eingestellt ist. Die Benennung "1min" bezieht sich auf die zu erwartende Dauer des Scans. 
-        									Abhängig vor der Netzwerkkonfiguration kann diese Zeitangabe variieren. Um den Cronjob zu bearbeiten, kannst du im Terminal/der Konsole <span class="text-danger help_faq_code">crontab -e</span>
+        									Abhängig vor der Netzwerkkonfiguration kann diese Zeitangabe variieren. Um den Cronjob zu bearbeiten, kannst du im Terminal/der Konsole <span class="text-maroon help_faq_code">crontab -e</span>
         									eingeben und den Intervall ändern.';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_a'] = 'Was bedeutet ';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_b'] = ' und warum kann ich das nicht auswählen?';

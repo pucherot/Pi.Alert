@@ -396,23 +396,23 @@ $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es muy posible que los dispositivos
 											pausar el arp scan en la página de mantenimiento.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Me aparece el mensaje de que la base de datos es de sólo de lectura.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Compruebe en el directorio Pi.Alert si la carpeta de la base de datos (db) tiene asignados los permisos correctos:<br>
-              								 <span class="text-danger help_faq_code">drwxrwx---  2 (nombre de usuario) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (nombre de usuario) www-data</span><br>
               								 Si el permiso no es correcto, puede establecerlo de nuevo con los siguientes comandos en la terminal o la consola:<br>
-              								 <span class="text-danger help_faq_code">
+              								 <span class="text-maroon help_faq_code">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
               								 Si la base de datos sigue siendo de sólo lectura, intente reinstalar o restaurar una copia de seguridad de la base de datos desde la página de mantenimiento.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La página de inicio de sesión no aparece, incluso después de cambiar la contraseña.';
-$pia_lang['HelpFAQ_Cat_General_103_text'] = 'Además de la contraseña, el archivo de configuración debe contener <span class="text-danger help_faq_code">~/pialert/config/pialert.conf</span> 
-              								 además el parámetro <span class="text-danger help_faq_code">PIALERT_WEB_PROTECTION</span> debe ajustarse a <span class="text-danger help_faq_code">True</span>.';
+$pia_lang['HelpFAQ_Cat_General_103_text'] = 'Además de la contraseña, el archivo de configuración debe contener <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span> 
+              								 además el parámetro <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> debe ajustarse a <span class="text-maroon help_faq_code">True</span>.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes on migrating from pucherot to this fork.';
-$pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been extended by some fields. To take over the database from the original Pi.Alert (pucherot), an update function is available via the "pialert-cli" in the directory <span class="text-danger help_faq_code">~/pialert/back</span>. 
-											 The command is then <span class="text-danger help_faq_code">./pialert-cli update_db</span>';
+$pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been extended by some fields. To take over the database from the original Pi.Alert (pucherot), an update function is available via the "pialert-cli" in the directory <span class="text-maroon help_faq_code">~/pialert/back</span>. 
+											 The command is then <span class="text-maroon help_faq_code">./pialert-cli update_db</span>';
 $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
-$pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-danger help_faq_code">pialert-cli</span> is located in the directory <span class="text-danger help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert 
-                                             without web page or change to the configuration file. With the command <span class="text-danger help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
+$pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-maroon help_faq_code">pialert-cli</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert 
+                                             without web page or change to the configuration file. With the command <span class="text-maroon help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
 											 <table style="margin-top: 20px;" border="1">
 											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">set_login</td>
@@ -466,7 +466,7 @@ $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'designa el número de puerto en el
 $pia_lang['HelpFAQ_Cat_Detail_301_head_a'] = '¿Cuándo está escaneando ahora? En ';
 $pia_lang['HelpFAQ_Cat_Detail_301_head_b'] = ' dice 1min pero el gráfico muestra intervalos de 5min.';
 $pia_lang['HelpFAQ_Cat_Detail_301_text'] = 'El intervalo de tiempo entre los escaneos está definido por el "Cronjob", que está configurado en 5 minutos de forma predeterminada.  La designación "1min" se refiere a la duración esperada del escaneo. 
-											Dependiendo de la configuración de la red, este tiempo puede variar. Para editar el cronjob, puede utilizar el siguiente comando en la terminal/consola <span class="text-danger help_faq_code">crontab -e</span>
+											Dependiendo de la configuración de la red, este tiempo puede variar. Para editar el cronjob, puede utilizar el siguiente comando en la terminal/consola <span class="text-maroon help_faq_code">crontab -e</span>
         									y cambiar el intervalo.';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_a'] = '¿Qué significa? ';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_b'] = '¿y por qué no puedo seleccionarlo?';
