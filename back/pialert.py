@@ -6,7 +6,7 @@
 #
 #  pialert.py - Back module. Network scanner
 #-------------------------------------------------------------------------------
-#  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  Puche 2021                                              GNU GPLv3
 #-------------------------------------------------------------------------------
 
 
@@ -116,7 +116,6 @@ def main ():
 
     # Close SQL
     closeDB()
-    #closeDB()
 
     # Final menssage
     print ('\nDONE!!!\n\n')
@@ -128,6 +127,8 @@ def main ():
 def get_username():
 
     return pwd.getpwuid(os.getuid())[0]
+
+# ------------------------------------------------------------------------------
 
 def set_pia_file_permissions():
 
@@ -232,13 +233,10 @@ def check_internet_IP ():
 
 #-------------------------------------------------------------------------------
 def get_internet_IP ():
-    # BUGFIX #46 - curl http://ipv4.icanhazip.com repeatedly is very slow
-    # Using 'dig'
+
     # dig_args = ['dig', '+short', '-4', 'myip.opendns.com', '@resolver1.opendns.com']
     # cmd_output = subprocess.check_output (dig_args, universal_newlines=True)
 
-    ## BUGFIX #12 - Query IPv4 address (not IPv6)
-    ## Using 'curl' instead of 'dig'
     curl_args = ['curl', '-s', QUERY_MYIP_SERVER]
     cmd_output = subprocess.check_output (curl_args, universal_newlines=True)
 
@@ -922,16 +920,6 @@ def create_new_devices ():
                                       WHERE dev_MAC = DHCP_MAC) """,
                     (startTime, startTime) ) 
 
-    # sql.execute ("""INSERT INTO Devices (dev_MAC, dev_name, dev_Vendor,
-    #                     dev_LastIP, dev_FirstConnection, dev_LastConnection,
-    #                     dev_ScanCycle, dev_AlertEvents, dev_AlertDeviceDown,
-    #                     dev_PresentLastScan)
-    #                 SELECT DHCP_MAC, DHCP_Name, '(unknown)', DHCP_IP, ?, ?,
-    #                     1, 1, 0, 1
-    #                 FROM DHCP_Leases
-    #                 WHERE NOT EXISTS (SELECT 1 FROM Devices
-    #                                   WHERE dev_MAC = DHCP_MAC) """,
-    #                 (startTime, startTime) ) 
     print_log ('New Devices end')
 
 #-------------------------------------------------------------------------------
@@ -1264,19 +1252,6 @@ def create_sessions_snapshot ():
     sql.execute ("""INSERT INTO Sessions
                     SELECT * FROM Convert_Events_to_Sessions""" )
 
-#    OLD FORMAT INSERT IN TWO PHASES
-#    PERFORMACE BETTER THAN SELECT WITH UNION
-#
-#    # Insert sessions from first query
-#    print_log ('Sessions Snapshot - 2 Query 1')
-#    sql.execute ("""INSERT INTO Sessions
-#                    SELECT * FROM Convert_Events_to_Sessions_Phase1""" )
-#
-#    # Insert sessions from first query
-#    print_log ('Sessions Snapshot - 3 Query 2')
-#    sql.execute ("""INSERT INTO Sessions
-#                    SELECT * FROM Convert_Events_to_Sessions_Phase2""" )
-
     print_log ('Sessions end')
 
 #-------------------------------------------------------------------------------
@@ -1337,20 +1312,8 @@ def email_reporting ():
     mail_text = mail_text.replace ('<REPORT_DATE>', timeFormated)
     mail_html = mail_html.replace ('<REPORT_DATE>', timeFormated)
 
-    # mail_text = mail_text.replace ('<SCAN_CYCLE>', cycle )
-    # mail_html = mail_html.replace ('<SCAN_CYCLE>', cycle )
-
     mail_text = mail_text.replace ('<SERVER_NAME>', socket.gethostname() )
     mail_html = mail_html.replace ('<SERVER_NAME>', socket.gethostname() )
-    
-    # mail_text = mail_text.replace ('<PIALERT_VERSION>', VERSION )
-    # mail_html = mail_html.replace ('<PIALERT_VERSION>', VERSION )
-
-    # mail_text = mail_text.replace ('<PIALERT_VERSION_DATE>', VERSION_DATE )
-    # mail_html = mail_html.replace ('<PIALERT_VERSION_DATE>', VERSION_DATE )
-
-    # mail_text = mail_text.replace ('<PIALERT_YEAR>', VERSION_YEAR )
-    # mail_html = mail_html.replace ('<PIALERT_YEAR>', VERSION_YEAR )
 
     # Compose Internet Section
     print ('    Formating report...')
