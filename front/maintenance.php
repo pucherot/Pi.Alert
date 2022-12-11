@@ -169,6 +169,108 @@ if ($_REQUEST['tab'] == '1') {
       </div>
     </div>
 
+    <div class="box">
+        <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-scan" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Scan'];?></button>
+            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-iplog" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog'];?></button>
+            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-vendor" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="modal-logviewer-scan">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: pialert.1.log</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">
+                    <?php
+                    $file = file_get_contents('./php/server/pialert.1.log', true);
+                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Scan_empty'];}
+                    echo str_replace("\n",'<br>',$file);
+                    ?>
+                    <br></div>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="modal-logviewer-iplog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: pialert.IP.log</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">
+                    <?php
+                    $file = file_get_contents('./php/server/pialert.IP.log', true);
+                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty'];}
+                    echo str_replace("\n",'<br>',$file);
+                    ?>
+                    <br></div>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="modal-logviewer-vendor">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: pialert.vendors.log</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">
+                    <?php
+                    $file = file_get_contents('./php/server/pialert.vendors.log');
+                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Vendor_empty'];} 
+                       else {
+                            $temp_log = explode("\n", $file);
+                            $x=0;
+                            while($x < sizeof($temp_log)) {
+                              if (strlen($temp_log[$x]) == 0) 
+                                {
+                                    $y = $x;
+                                    while($y < sizeof($temp_log)) {
+                                        echo $temp_log[$y].'<br>';
+                                       $y++;
+                                    } 
+                                    break;
+                                }
+                              $x++;
+                            }
+                        }
+                    ?>
+                    <br></div>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
     <script>
     function check_github_for_updates() {
         $("#updatecheck").empty();
