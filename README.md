@@ -63,7 +63,7 @@ A web frontend that allows:
     - Pause arp-scan
     - Set API-key
     - Enable/Disable login
-    - DB maintenance tools and a possibility for backup, restore and cleanup of the database
+    - DB maintenance tools and a possibility for backup, restore and cleanup the database
     - Send test notifications
   - Help/FAQ section 
 
@@ -83,7 +83,7 @@ Instead of 'glass_black_white.png' you can use one of the following files.
 
 ### API
 A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 4 things:
-  - System status *(Counts all, online, offline, archived and new devices)*
+  - System status *(Scan on or off, Counts all, online, offline, archived and new devices)*
   - All online devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
   - All offline devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
   - Information about a specific device *(all information, without events and presence)*

@@ -1,3 +1,17 @@
+## Installation
+
+To set a HomeScreen icon you have to insert the following line in the file `~/pialert/front/php/templates/header.php` between the tags &lt;head&gt; and &lt;/head&gt;.
+
+```
+  <link rel="apple-touch-icon" href="https://[URL]/[YourIcon]">
+```
+
+Example
+
+```
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_black_white.png">
+```
+
 ## Glass icons
 
  | ![glass_black_white.png][glass_black_white] | ![glass_blue_white.png][glass_blue_white] | ![glass_green_white.png][glass_green_white] | ![glass_red_white.png][glass_red_white]     | ![glass_purple_white.png][glass_purple_white] | ![glass_yellow_white.png][glass_yellow_white] |

@@ -144,7 +144,7 @@ block is not necessary
 
 3.4 - Install PHP
   ```
-  sudo apt-get install php php-cgi php-fpm php-sqlite3 -y     
+  sudo apt-get install php php-cgi php-fpm php-curl php-sqlite3 -y     
   ```
 
 3.5 - Activate PHP
@@ -172,7 +172,12 @@ block is not necessary
   sudo apt-get install dnsutils net-tools -y
   ```
 
-4.3 - Test Python
+4.3 - Installing nmap and zip
+  ```
+  sudo apt-get install nmap zip -y
+  ```
+
+4.4 - Test Python
 
   New versions of 'Raspberry Pi OS' includes Python. You can check that 
   Python is installed with the command:
@@ -190,14 +195,16 @@ block is not necessary
   python3 -V
   ```
 
-4.4 - If Python is not installed in your system, you can install it with this
+4.5 - If Python is not installed in your system, you can install it with this
   command:
   ```
-  sudo apt-get install python
+  sudo apt-get install python python-pip
+  pip install requests
   ```
   Or this one if you prefer Python 3:
   ```
-  sudo apt-get install python3
+  sudo apt-get install python3 python3-pip python-is-python3
+  python3 -m pip install requests
   ```
 
 ### Pi.Alert
@@ -297,13 +304,32 @@ block is not necessary
   (crontab -l 2>/dev/null; cat ~/pialert/install/pialert.cron) | crontab -
   ```
 
-5.10 - Add permissions to the web-server user
+5.10 - Add necessary permissions
   ```
   sudo chgrp -R www-data ~/pialert/db
   chmod -R 770 ~/pialert/db
+  chmod go+x ~/pialert
+
+  sudo chgrp -R www-data ~/pialert/db
+  sudo chgrp www-data ~/pialert/config
+  sudo chgrp www-data ~/pialert/config/pialert.conf
+  chmod -R g+rwx ~/pialert/db
+  chmod 770 ~/pialert/config
+  chmod g+rw ~/pialert/config/pialert.conf
+  chmod +x ~/pialert/back/shoutrrr/arm64/shoutrrr
+  chmod +x ~/pialert/back/shoutrrr/armhf/shoutrrr
+  chmod +x ~/pialert/back/shoutrrr/x64/shoutrrr
+  chmod +x ~/pialert/back/shoutrrr/x86/shoutrrr
   ```
 
-5.11 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole
+5.11 - Create Symlinks for the Log-Viewer
+  ```
+  ln -s "~/pialert/log/pialert.vendors.log" "~/pialert/front/php/server/pialert.vendors.log"
+  ln -s "~/pialert/log/pialert.IP.log" "~/pialert/front/php/server/pialert.IP.log"
+  ln -s "~/pialert/log/pialert.1.log" "~/pialert/front/php/server/pialert.1.log"
+  ```
+
+5.12 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole
   installation)
   - Add pi.alert DNS Record
     ```
@@ -317,7 +343,7 @@ block is not necessary
       - pi.alert    192.168.1.x
       - (*replace 192.168.1.x with your Raspberry IP*)
 
-5.12 - Use admin panel to configure the devices
+5.13 - Use admin panel to configure the devices
   - http://pi.alert/
   - http://192.168.1.x/pialert/
     - (*replace 192.168.1.x with your Raspberry IP*)
