@@ -121,8 +121,8 @@ This update script is only recommended for an already existing installation of t
 ## Other useful info
 <!--- --------------------------------------------------------------------- --->
 
-### [Versions History](docs/VERSIONS_HISTORY.md)
-
+### Versions History
+  [Versions History](docs/VERSIONS_HISTORY.md)
   An archive of older versions can be found at https://leiweibau.net/archive
 
 ### License
