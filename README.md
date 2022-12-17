@@ -1,12 +1,10 @@
 # Pi.Alert
 <!--- --------------------------------------------------------------------- --->
 
-WIFI / LAN intruder detector.
 
-Scan the devices connected to your WIFI / LAN and alert you the connection of
-unknown devices. It also warns if a "always connected" device disconnects.
+| WIFI / LAN intruder detector.<br><br>Scan the devices connected to your WIFI / LAN and alert you the connection of unknown devices. It also warns if a "always connected" device disconnects. | ![Main screen][main] |
+| -------------------- | -------------------- |
 
-![Main screen][main]
 
 ## Modifications within this Fork
   - Only one scan cycle
