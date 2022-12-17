@@ -124,18 +124,7 @@ This update script is only recommended for an already existing installation of t
 
 ### [Versions History](docs/VERSIONS_HISTORY.md)
 
-### Powered by:
-  | Product       | Objetive                                                |
-  | ------------- | ------------------------------------------------------- |
-  | Admin.LTE     | Bootstrap template                                      |
-  | arp-scan      | Scan network using arp commands                         |
-  | Pi.hole       | DNS Server with Ad-block                                |
-  | dnsmasq       | DHCP Server                                             |
-  | nmap          | Network Scanner                                         |
-  | zip           | Filecompression Tool                                    |
-  | speedtest-cli | Python SpeedTest https://github.com/sivel/speedtest-cli |
-  | shoutrrr      | Notification library https://github.com/containrrr/shoutrrr/ |
-  | deepl.com     | translation                                             |
+  An archive of older versions can be found at https://leiweibau.net/archive
 
 ### License
   GPL 3.0
