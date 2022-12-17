@@ -67,10 +67,9 @@ A web frontend that allows:
     - Send test notifications
   - Help/FAQ section 
 
-  | ![Screen 1][screen1]                   | ![Screen 2][screen2]                 |
-  | -------------------------------------- | ------------------------------------ |
-  | ![Screen 3][screen3]                   | ![Screen 4][screen4]                 |
-  | ![Maintain screen dark][maintain_dark] | ![HelpFAQ screen dark][helpfaq_dark] |
+  | ![Screen 1][screen1]                   | ![Screen 2][screen2]                   | ![Screen 3][screen3]                   | 
+  | -------------------------------------- | -------------------------------------- | -------------------------------------- |
+  ] ![Screen 4][screen4]                   | ![Maintain screen dark][maintain_dark] | ![HelpFAQ screen dark][helpfaq_dark]   |
 
 Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
