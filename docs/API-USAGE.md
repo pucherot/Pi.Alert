@@ -10,7 +10,7 @@ The API key must be transmitted with "post", at least that's how it's written on
 ## Examples
 [Query with PHP (system-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-system-status)<br>
 [Query with PHP (mac-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-mac-status)<br>
-[Query with PHP (all-online or all-offline)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline)<br>
+[Query with PHP (all-online or all-offline)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline)<br><br>
 [Query with curl (system-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-system-status)<br>
 [Query with curl (mac-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-mac-status)<br>
 [Query with curl (all-online or all-offline)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-all-online-or-all-offline)<br><br>
@@ -128,6 +128,7 @@ Demo output
 ```
 print_r(json_decode($response));
 ```
+<hr>
 
 ### Example of a query with the commandline tool curl (system-status)
 ```
