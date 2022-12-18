@@ -124,7 +124,7 @@ This update script is only recommended for an already existing installation of t
 ### Versions History
   [Versions History](docs/VERSIONS_HISTORY.md)
   
-  An archive of older versions can be found at https://leiweibau.net/archive
+  An archive of older versions can be found at https://leiweibau.net/archive/pialert/
 
 ### License
   GPL 3.0
