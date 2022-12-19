@@ -8,11 +8,17 @@ unknown devices. It also warns if a "always connected" device disconnects.
 
 ![Main screen][main]
 
-## Modifications within this Fork
+## "Under the hood" Modifications within this Fork
   - Only one scan cycle
   - The Backend has the additional option "cleanup"
   - "[pialert-cli](docs/PIALERTCLI.md)" that helps to configure login, password and DB migration
   - API for basic queries
+
+## Obvious modifications within this Fork
+  - Maintenance tasks
+  - Settingspage (Darkmode, Themeselection, Multilanguage)
+  - FAQ page
+  - Additional notifications
 
 ## Scan Methods
 Up to three scanning methods are used:
