@@ -8,6 +8,8 @@
 #--------------------------------------------------------------------------- -->
 
 <?php
+error_reporting(0);
+
 // ###################################
 // ## GUI settings processing start
 // ###################################
@@ -27,6 +29,7 @@ foreach (glob("../db/setting_language*") as $filename) {
 }
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 require 'php/templates/language/'.$pia_lang_selected.'.php';
+
 // ###################################
 // ## GUI settings processing end
 // ###################################
@@ -149,12 +152,12 @@ document.addEventListener("visibilitychange",()=>{
         <ul class="nav navbar-nav">
 
           <!-- Server Name -->
-          <li><a style="pointer-events:none;"><?php echo gethostname();?> <span id="PIA_Servertime_place"></span></a></li>
+          <li><a style="pointer-events:none; display: inline-block; height: 50px; padding-top: 15px"><?php echo gethostname();?> <span id="PIA_Servertime_place"></span></a></li>
 
           <!-- Header right info -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px; padding-top: 15px">
               <!-- The user image in the navbar-->
               <img src="img/pialertLogoWhite.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
@@ -163,7 +166,7 @@ document.addEventListener("visibilitychange",()=>{
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header" style=" height: 100px;">
-                <img src="img/pialertLogoWhite.png" class="img-circle" alt="Pi.Alert Logo" style="border-color:transparent;  height: 50px; width: 50px; margin-top:15px;">
+                <img src="img/pialertLogoWhite.png" class="img-circle" alt="Pi.Alert Logo" style="border-color:transparent; height: 50px; width: 50px; margin-top:15px;">
                 <p style="float: right; width: 200px">
                 <?php echo $pia_lang['About_Title'];?>
                   <small><?php echo $pia_lang['About_Design'];?> Raspberry Pi</small>
@@ -214,8 +217,9 @@ document.addEventListener("visibilitychange",()=>{
                       $pia_arpscans_sidebarstate = 'Active';
                       $pia_arpscans_sidebarstate_light = 'green-light';
                     } else {
+                      $pia_arpscan_timerstart = date ("H:i:s", filectime('../db/setting_stoparpscan'));
                       $pia_arpscans_result = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
-                      $pia_arpscans_sidebarstate = 'Disabled';
+                      $pia_arpscans_sidebarstate = 'Disabled&nbsp;&nbsp;&nbsp;('.$pia_arpscan_timerstart.')';
                       $pia_arpscans_sidebarstate_light = 'red';
                     }
 

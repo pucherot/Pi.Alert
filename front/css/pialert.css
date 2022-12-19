@@ -122,6 +122,10 @@
     }
 }
 
+@media (max-width: 991px) {
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu { right: 0px;}
+}
+
 .sidebar-open .content-wrapper,
 .sidebar-open .main-footer {
     -webkit-transform: translate(150px, 0);
