@@ -16,7 +16,7 @@ unknown devices. It also warns if a "always connected" device disconnects.
 
 ## Obvious modifications within this Fork
   - Maintenance tasks
-  - Settingspage (optional Login, Darkmode, Themeselection, Multilanguage)
+  - Settings page (optional Login, Darkmode, Theme selection, Multilanguage)
   - FAQ page
   - Additional notifications
 
