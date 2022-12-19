@@ -144,9 +144,14 @@ document.addEventListener("visibilitychange",()=>{
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle_systeminfobox()">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <script>
+          function toggle_systeminfobox() {
+            $("#sidebar_systeminfobox").toggleClass("collapse");
+          }
+      </script>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -204,7 +209,7 @@ document.addEventListener("visibilitychange",()=>{
                 <div class="logo" style="width:50%; margin:auto;">
                    <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
                 </div>
-                <div class="systemstatusbox" style="font-size: smaller; margin-top:10px;">
+                <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
                     <?php
 
                     // Pause Arp Scan Section ---------------------------------------------------------------
