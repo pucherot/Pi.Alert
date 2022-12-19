@@ -586,9 +586,13 @@ publish_pialert() {
   chmod +x $PIALERT_HOME/back/shoutrrr/x64/shoutrrr               2>&1 >> "$LOG"
   chmod +x $PIALERT_HOME/back/shoutrrr/x86/shoutrrr               2>&1 >> "$LOG"
   print_msg "- Create Logfile Symlinks..."
+  touch "$PIALERT_HOME/log/pialert.vendors.log"
+  touch "$PIALERT_HOME/log/pialert.1.log"
+  touch "$PIALERT_HOME/log/pialert.cleanup.log"
   ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"
   ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"
   ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"
+  ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"
 
   print_msg "- Publishing Pi.Alert web..."
   sudo ln -s "$PIALERT_HOME/front" "$WEBROOT/pialert"             2>&1 >> "$LOG"

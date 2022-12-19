@@ -153,7 +153,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px">Api-Key</div>
                     <div class="db_info_table_cell" style="overflow-wrap: anywhere;">
-                        <?php echo $pia_apikey;?>
+                        <input readonly value="<?php echo $pia_apikey;?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
                     </div>
                 </div>
             </div>                
@@ -170,10 +170,14 @@ if ($_REQUEST['tab'] == '1') {
     </div>
 
     <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Log Viewer</h3>
+        </div>
         <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
             <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-scan" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Scan'];?></button>
-            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-iplog" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog'];?></button>
-            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-vendor" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
+            <button type="button" id="wefwfwefewdf" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-iplog" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog'];?></button>
+            <button type="button" id="tzhrsreawefw" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-vendor" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
+            <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-cleanup" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup'];?></button>
       </div>
     </div>
 
@@ -270,6 +274,33 @@ if ($_REQUEST['tab'] == '1') {
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+    <div class="modal fade" id="modal-logviewer-cleanup">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: pialert.IP.log</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">
+                    <?php
+                    $file = file_get_contents('./php/server/pialert.cleanup.log', true);
+                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty'];}
+                    echo str_replace("\n",'<br>',$file);
+                    ?>
+                    <br></div>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
 
     <script>
     function check_github_for_updates() {
