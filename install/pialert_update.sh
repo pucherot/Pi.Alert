@@ -186,7 +186,7 @@ fi
 update_db() {
   print_msg "- Updating DB permissions..."
   sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
-  chmod -R 770 $PIALERT_HOME/db                                   2>&1 >> "$LOG"
+  sudo chmod -R 770 $PIALERT_HOME/db                              2>&1 >> "$LOG"
 
   print_msg "- Installing sqlite3..."
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
@@ -231,7 +231,6 @@ update_db() {
 update_permissions() {
   print_msg "- Set Permissions..."
   sudo chgrp -R www-data "$PIALERT_HOME/db"                         2>&1 >> "$LOG"
-  chmod -R 770 "$PIALERT_HOME/db"                                   2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/arm64/shoutrrr"             2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/armhf/shoutrrr"             2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/x64/shoutrrr"               2>&1 >> "$LOG"
