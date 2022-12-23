@@ -240,6 +240,7 @@ update_permissions() {
   chmod +x "$PIALERT_HOME/back/pialert-cli"                         2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/pialert.py"                          2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/update_vendors.sh"                   2>&1 >> "$LOG"
+  sudo chmod -R 664 "$PIALERT_HOME/config"                          2>&1 >> "$LOG"
   print_msg "- Create Logfile Symlinks..."
   touch "$PIALERT_HOME/log/pialert.vendors.log"
   touch "$PIALERT_HOME/log/pialert.1.log"
