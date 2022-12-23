@@ -140,7 +140,7 @@ update_config() {
 #  sed -i 's/PA_FRONT_URL/REPORT_DEVICE_URL/g' "$PIALERT_HOME/config/pialert.conf"  2>&1 >> "$LOG"
 
 if ! grep -Fq "# Shoutrrr" "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+  sudo cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
 # Shoutrrr
 # ----------------------
@@ -154,13 +154,13 @@ EOF
 fi
 
 if ! grep -Fq PUSHSAFER_DEVICE "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+  sudo cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 PUSHSAFER_DEVICE = 'a'
 EOF
 fi
 
 if ! grep -Fq "# Arp-scan Options & Samples" "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+  sudo cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
 # Arp-scan Options & Samples
 # ----------------------
