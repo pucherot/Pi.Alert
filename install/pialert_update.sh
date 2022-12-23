@@ -133,6 +133,7 @@ download_pialert() {
 # ------------------------------------------------------------------------------
 update_config() {
   print_msg "- Config backup..."
+  sudo chmod 666 "$PIALERT_HOME/config/pialert.conf"
   cp "$PIALERT_HOME/config/pialert.conf" "$PIALERT_HOME/config/pialert.conf.back"  2>&1 >> "$LOG"
 
   print_msg "- Updating config file..."
@@ -140,7 +141,7 @@ update_config() {
 #  sed -i 's/PA_FRONT_URL/REPORT_DEVICE_URL/g' "$PIALERT_HOME/config/pialert.conf"  2>&1 >> "$LOG"
 
 if ! grep -Fq "# Shoutrrr" "$PIALERT_HOME/config/pialert.conf" ; then
-  sudo cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
 # Shoutrrr
 # ----------------------
@@ -154,13 +155,13 @@ EOF
 fi
 
 if ! grep -Fq PUSHSAFER_DEVICE "$PIALERT_HOME/config/pialert.conf" ; then
-  sudo cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 PUSHSAFER_DEVICE = 'a'
 EOF
 fi
 
 if ! grep -Fq "# Arp-scan Options & Samples" "$PIALERT_HOME/config/pialert.conf" ; then
-  sudo cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
 # Arp-scan Options & Samples
 # ----------------------
@@ -177,7 +178,7 @@ SCAN_SUBNETS    = '--localnet'
 # SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth1', '192.168.1.0/24 --interface=eth0' ]
 EOF
 fi
-   
+  sudo chmod 664 "$PIALERT_HOME/config/pialert.conf"
 }
 
 # ------------------------------------------------------------------------------
