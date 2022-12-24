@@ -234,7 +234,6 @@ update_permissions() {
   sudo chgrp -R www-data "$PIALERT_HOME/db"                         2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/arm64/shoutrrr"             2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/armhf/shoutrrr"             2>&1 >> "$LOG"
-  chmod +x "$PIALERT_HOME/back/shoutrrr/x64/shoutrrr"               2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/x86/shoutrrr"               2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/speedtest-cli"                       2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/pialert-cli"                         2>&1 >> "$LOG"
