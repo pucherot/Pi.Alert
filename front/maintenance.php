@@ -115,6 +115,9 @@ if ($_REQUEST['tab'] == '1') {
 
     <div class="row">
       <div class="col-md-12">
+
+<!-- Status Box ----------------------------------------------------------------- -->
+
       <div class="box" id="Maintain-Status">
           <div class="box-header with-border">
             <h3 class="box-title">Status</h3>
@@ -163,11 +166,31 @@ if ($_REQUEST['tab'] == '1') {
       </div>
     </div>
 
+<!-- Update Check ----------------------------------------------------------------- -->
+
     <div class="box">
         <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
             <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?php echo $pia_lang['Maintenance_Tools_Updatecheck'];?></button>
       </div>
     </div>
+
+    <script>
+    function check_github_for_updates() {
+        $("#updatecheck").empty();
+        $.ajax({
+            method: "POST",
+            url: "./php/server/updatecheck.php",
+            data: "",
+            beforeSend: function() { $('#updatecheck').addClass("ajax_scripts_loading"); },
+            complete: function() { $('#updatecheck').removeClass("ajax_scripts_loading"); },
+            success: function(data, textStatus) {
+                $("#updatecheck").html(data);
+            }
+        })
+    }
+    </script>
+
+<!-- Log Viewer ----------------------------------------------------------------- -->
 
     <div class="box">
         <div class="box-header with-border">
@@ -178,9 +201,11 @@ if ($_REQUEST['tab'] == '1') {
             <button type="button" id="wefwfwefewdf" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-iplog" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog'];?></button>
             <button type="button" id="tzhrsreawefw" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-vendor" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
             <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-cleanup" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup'];?></button>
+            <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-nmap" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
       </div>
     </div>
 
+<!-- Log Viewer - Modals Scan ----------------------------------------------------------------- -->
 
     <div class="modal fade" id="modal-logviewer-scan">
         <div class="modal-dialog modal-dialog-centered">
@@ -188,7 +213,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.1.log</h4>
+                    <h4 class="modal-title">Viewer: pialert.1.log (File)</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
@@ -203,10 +228,10 @@ if ($_REQUEST['tab'] == '1') {
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
+
+<!-- Log Viewer - Modals IP ----------------------------------------------------------------- -->
 
     <div class="modal fade" id="modal-logviewer-iplog">
         <div class="modal-dialog modal-dialog-centered">
@@ -214,7 +239,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.IP.log</h4>
+                    <h4 class="modal-title">Viewer: pialert.IP.log (File)</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
@@ -229,10 +254,10 @@ if ($_REQUEST['tab'] == '1') {
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
+
+<!-- Log Viewer - Modals Vendor Update ----------------------------------------------------------------- -->
 
     <div class="modal fade" id="modal-logviewer-vendor">
         <div class="modal-dialog modal-dialog-centered">
@@ -240,7 +265,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.vendors.log</h4>
+                    <h4 class="modal-title">Viewer: pialert.vendors.log (File)</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
@@ -270,10 +295,10 @@ if ($_REQUEST['tab'] == '1') {
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
+
+<!-- Log Viewer - Modals Cleanup ----------------------------------------------------------------- -->
 
     <div class="modal fade" id="modal-logviewer-cleanup">
         <div class="modal-dialog modal-dialog-centered">
@@ -281,7 +306,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.IP.log</h4>
+                    <h4 class="modal-title">Viewer: pialert.IP.log (File)</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
@@ -296,28 +321,78 @@ if ($_REQUEST['tab'] == '1') {
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 
+<!-- Log Viewer - Modals Nmap ----------------------------------------------------------------- -->
 
-    <script>
-    function check_github_for_updates() {
-        $("#updatecheck").empty();
-        $.ajax({
-            method: "POST",
-            url: "./php/server/updatecheck.php",
-            data: "",
-            beforeSend: function() { $('#updatecheck').addClass("ajax_scripts_loading"); },
-            complete: function() { $('#updatecheck').removeClass("ajax_scripts_loading"); },
-            success: function(data, textStatus) {
-                $("#updatecheck").html(data);
-            }
-        })
+    <div class="modal fade" id="modal-logviewer-nmap">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: last nmap scan (Memory)</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">
+                    <?php
+                    if (!isset($_SESSION['ScanShortMem'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem'];}
+                    ?>
+                    <br></div>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Config Editor ----------------------------------------------------------------- -->
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Config Editor</h3>
+        </div>
+        <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-config-editor" style="margin: 5px;">Bearbeitung starten</button>
+      </div>
+    </div>
+
+<!-- Config Editor - Modals ----------------------------------------------------------------- -->
+
+    <div class="modal fade" id="modal-config-editor">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form role="form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Config Editor</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+<textarea class="form-control" rows="30" spellcheck="false" data-gramm="false" wrap="off" style="resize: none;">
+<?php
+$file = file_get_contents('../config/pialert.conf');
+if ($file == "") {echo "Ein Problem";} 
+   else {
+echo $file;
     }
-    </script>
+?>
+</textarea>              
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">Restore</button>
+                    <button type="button" class="btn btn-success">Backup</button>
+                    <button type="button" class="btn btn-danger" type="submit">Save</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+              </form>
+            </div>
+        </div>
+    </div>
 
+<!-- Tabs ----------------------------------------------------------------- -->
 
     <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
