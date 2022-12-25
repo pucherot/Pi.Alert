@@ -584,7 +584,6 @@ publish_pialert() {
   chmod g+rw $PIALERT_HOME/config/pialert.conf                    2>&1 >> "$LOG"
   chmod +x $PIALERT_HOME/back/shoutrrr/arm64/shoutrrr             2>&1 >> "$LOG"
   chmod +x $PIALERT_HOME/back/shoutrrr/armhf/shoutrrr             2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/shoutrrr/x64/shoutrrr               2>&1 >> "$LOG"
   chmod +x $PIALERT_HOME/back/shoutrrr/x86/shoutrrr               2>&1 >> "$LOG"
   print_msg "- Create Logfile Symlinks..."
   touch "$PIALERT_HOME/log/pialert.vendors.log"
