@@ -1,11 +1,27 @@
 <?php
 session_start();
 
+// ###################################
+// ## Save Config File
+// ###################################
+
+if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {
+  $pia_config_set_dir = '../config/';
+  $newconfig = fopen($pia_config_set_dir.'temp.conf','w');
+  fwrite($newconfig, $_REQUEST['txtConfigFileEditor']);
+  fclose($newconfig);
+}
+
+// ###################################
+// ## Processing Logout
+// ###################################
+
 if ($_REQUEST['action'] == 'logout') {
   session_destroy();
   setcookie("PiAlert_SaveLogin", "", time() - 3600);
   header('Location: /pialert/index.php');
 }
+
 // ##################################################
 // ## Login Processing start
 // ##################################################

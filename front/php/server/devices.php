@@ -68,6 +68,10 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'getDeviceTypes':               getDeviceTypes();                        break;
       case 'getGroups':                    getGroups();                             break;
       case 'getLocations':                 getLocations();                          break;
+
+      case 'saveNewConfigFile':            saveNewConfigFile();                    break;
+      case 'RestoreConfigFile':            RestoreConfigFile();                    break;
+      case 'BackupConfigFile':             BackupConfigFile();                     break;
      
       default:                             logServerConsole ('Action: '. $action);  break;
     }
@@ -857,13 +861,13 @@ function setPiAlertTheme() {
       }
       if ($pia_skin_error == False) {
         $testskin = fopen($pia_skin_set_dir.'setting_'.$pia_skin_selector, 'w');
-        echo "Theme applied";
+        echo $pia_lang['BackDevices_Theme_set'].': '.$_REQUEST['PiaSkinSelection'];
         echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
       } else {
-        echo "Theme could not changed";
+        echo $pia_lang['BackDevices_Theme_notset'];
         echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
       }    
-    } else {echo "No Theme selected";}
+    } else {echo $pia_lang['BackDevices_Theme_invalid'];}
   } 
 
 }
@@ -895,13 +899,13 @@ function setPiAlertLanguage() {
       }
       if ($pia_lang_error == False) {
         $testlang = fopen($pia_lang_set_dir.'setting_language_'.$pia_lang_selector, 'w');
-        echo "Language applied";
+        echo $pia_lang['BackDevices_Language_set'].': '.$_REQUEST['PiaLangSelection'];
         echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
       } else {
-        echo "Language could not changed";
+        echo $pia_lang['BackDevices_Language_notset'];
         echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
       }    
-    } else {echo "No Lanugage selected";}
+    } else {echo $pia_lang['BackDevices_Language_invalid'];}
   }
 
 }
@@ -935,6 +939,26 @@ if (isset($_REQUEST['PiaArpTimer'])) {
       echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
      }
 }
+
+}
+
+//------------------------------------------------------------------------------
+//  Save Config File
+//------------------------------------------------------------------------------
+function RestoreConfigFile() {
+  global $pia_lang;
+
+  echo "Restore Success";
+
+}
+
+//------------------------------------------------------------------------------
+//  Save Config File
+//------------------------------------------------------------------------------
+function BackupConfigFile() {
+  global $pia_lang;
+
+  echo "Backup Success";
 
 }
 

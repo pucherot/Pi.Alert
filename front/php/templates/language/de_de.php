@@ -43,7 +43,7 @@ $pia_lang['Login_Toggle_Alert_headline'] = 'Passwort Warnung!';
 $pia_lang['Navigation_Devices'] = 'Geräte';
 $pia_lang['Navigation_Presence'] = 'Anwesenheit';
 $pia_lang['Navigation_Events'] = 'Ereignisse';
-$pia_lang['Navigation_Maintenance'] = 'Wartung';
+$pia_lang['Navigation_Maintenance'] = 'Einstellungen';
 $pia_lang['Navigation_Network'] = 'Netzwerk';
 $pia_lang['Navigation_HelpFAQ'] = 'Hilfe / FAQ';
 
@@ -206,7 +206,7 @@ $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailierter Scan: Standardscan
 // Maintenance Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Maintenance_Title'] = 'Wartungswerkzeuge';
+$pia_lang['Maintenance_Title'] = 'Einstellungen und Wartung';
 $pia_lang['Maintenance_database_path'] = 'Datenbank-Pfad';
 $pia_lang['Maintenance_database_size'] = 'Datenbank-Größe';
 $pia_lang['Maintenance_database_lastmod'] = 'Letzte Änderung';
@@ -239,7 +239,7 @@ $pia_lang['Maintenance_lang_es_es'] = 'Spanisch (ES)';
 $pia_lang['Maintenance_lang_selector_text'] = 'Die Änderung findet ser&shy;verseitig statt, betrifft also alle verwendeten Ge&shy;räte.';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Übernehmen';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Einstellungen';
-$pia_lang['Maintenance_Tools_Tab_Tools'] = 'Werkzeuge';
+$pia_lang['Maintenance_Tools_Tab_Tools'] = 'Wartung';
 $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Sicherg. / Wiederherstellg.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Darstellungswechsel (Dunkel/Hell)';
 $pia_lang['Maintenance_Tool_darkmode_text'] = 'Wechselt zwischen der hellen und der dunklen Darstellung. Wenn der Wechsel nicht richtig funk&shy;tionieren sollte, ver&shy;suchen Sie den Browser&shy;cache zu löschen. Die Änderung findet ser&shy;ver&shy;seitig statt und betrifft alle verwendeten Ge&shy;räte.';

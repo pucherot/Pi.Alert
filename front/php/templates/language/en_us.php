@@ -43,7 +43,7 @@ $pia_lang['Login_Toggle_Alert_headline'] = 'Password Alert!';
 $pia_lang['Navigation_Devices'] = 'Devices';
 $pia_lang['Navigation_Presence'] = 'Presence';
 $pia_lang['Navigation_Events'] = 'Events';
-$pia_lang['Navigation_Maintenance'] = 'Maintenance';
+$pia_lang['Navigation_Maintenance'] = 'Settings';
 $pia_lang['Navigation_Network'] = 'Network';
 $pia_lang['Navigation_HelpFAQ'] = 'Help / FAQ';
 
@@ -209,7 +209,7 @@ $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailed Scan: Default scan wit
 // Maintenance Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Maintenance_Title'] = 'Maintenance tools';
+$pia_lang['Maintenance_Title'] = 'Settings and Maintenance';
 $pia_lang['Maintenance_database_path'] = 'Database-Path';
 $pia_lang['Maintenance_database_size'] = 'Database-Size';
 $pia_lang['Maintenance_database_lastmod'] = 'last Modification';
@@ -241,8 +241,8 @@ $pia_lang['Maintenance_lang_de_de'] = 'German (DE)';
 $pia_lang['Maintenance_lang_es_es'] = 'Spanish (ES)';
 $pia_lang['Maintenance_lang_selector_text'] = 'The change takes place on the server side, so it affects all devices in use.';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Apply';
-$pia_lang['Maintenance_Tools_Tab_Settings'] = 'UI Settings';
-$pia_lang['Maintenance_Tools_Tab_Tools'] = 'DB Tools';
+$pia_lang['Maintenance_Tools_Tab_Settings'] = 'Settings';
+$pia_lang['Maintenance_Tools_Tab_Tools'] = 'Maintenance';
 $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Backup &sol; Restore';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Toggle Modes (Dark&sol;Light)';
 $pia_lang['Maintenance_Tool_darkmode_text'] = 'Toggle between dark mode and light mode. If the switch does not work properly, try to clear the browser cache. The change takes place on the server side, so it affects all devices in use.';

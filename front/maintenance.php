@@ -332,7 +332,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: last nmap scan (Memory)</h4>
+                    <h4 class="modal-title">Viewer: last Nmap Scan (Memory)</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
@@ -344,50 +344,6 @@ if ($_REQUEST['tab'] == '1') {
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                   </div>
-            </div>
-        </div>
-    </div>
-
-<!-- Config Editor ----------------------------------------------------------------- -->
-
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Config Editor</h3>
-        </div>
-        <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
-            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-config-editor" style="margin: 5px;">Bearbeitung starten</button>
-      </div>
-    </div>
-
-<!-- Config Editor - Modals ----------------------------------------------------------------- -->
-
-    <div class="modal fade" id="modal-config-editor">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <form role="form">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Config Editor</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-<textarea class="form-control" rows="30" spellcheck="false" data-gramm="false" wrap="off" style="resize: none;">
-<?php
-$file = file_get_contents('../config/pialert.conf');
-if ($file == "") {echo "Ein Problem";} 
-   else {
-echo $file;
-    }
-?>
-</textarea>              
-                </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger">Restore</button>
-                    <button type="button" class="btn btn-success">Backup</button>
-                    <button type="button" class="btn btn-danger" type="submit">Save</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                  </div>
-              </form>
             </div>
         </div>
     </div>
@@ -488,6 +444,12 @@ echo $file;
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></div>
                     </div>
                     <div class="db_info_table_row">
+                        <div class="db_tools_table_cell_a" style="">
+                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-yellow dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button>
+                        </div>
+                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text'];?></div>
+                    </div>
+                    <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="text-align: center;">
                             <div style="display: inline-block; text-align: center;">
                               <div class="form-group" style="width:160px; margin-bottom:5px;">
@@ -546,12 +508,6 @@ else {
                 <div class="db_info_table">
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-yellow dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
                             <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs'];?></button>
                         </div>
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs_text'];?></div>
@@ -606,6 +562,39 @@ else {
         </div>
     </div>
 </div>
+
+<!-- Config Editor ----------------------------------------------------------------- -->
+
+    <div class="box">
+        <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+            <button type="button" id="oisjmofeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor" style="margin: 5px;">Pi.Alert Config bearbeiten</button>
+      </div>
+    </div>
+
+<!-- Config Editor - Modals ----------------------------------------------------------------- -->
+
+    <div class="modal fade" id="modal-config-editor">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form role="form" method="post" action="./index.php">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Config Editor</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <textarea class="form-control" name="txtConfigFileEditor" rows="30" spellcheck="false" wrap="off" style="resize: none; font-family: monospace;"><?php echo file_get_contents('../config/pialert.conf');?></textarea>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" onclick="askRestoreConfigFile()">Restore</button>
+                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" data-dismiss="modal" onclick="BackupConfigFile()">Backup</button>
+                    <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig">Save</button>
+                    <button type="button" class="btn btn-primary" id="btnPiaEditorClose" data-dismiss="modal">Close</button>
+                  </div>
+              </form>
+            </div>
+        </div>
+    </div>
 
 <div style="width: 100%; height: 20px;"></div>
     <!-- ----------------------------------------------------------------------- -->
@@ -820,10 +809,8 @@ function PiaLoginDisable()
   });
 }
 
-
 function setTextValue (textElement, textValue) {
   $('#'+textElement).val (textValue);
-
 }
 
 // Set Theme 
@@ -835,7 +822,7 @@ function setPiAlertTheme () {
 }
 
 // Set Language 
-function setPiAlertLanguage () {
+function setPiAlertLanguage() {
   // update data to server
   $.get('php/server/devices.php?action=setPiAlertLanguage&PiaLangSelection='+ $('#txtLangSelection').val(), function(msg) {
     showMessage (msg);
@@ -843,7 +830,7 @@ function setPiAlertLanguage () {
 }
 
 // Set ArpScanTimer 
-function setPiAlertArpTimer () {
+function setPiAlertArpTimer() {
   $.ajax({
         method: "GET",
         url: "./php/server/devices.php?action=setPiAlertArpTimer&PiaArpTimer=" + $('#txtPiaArpTimer').val(),
@@ -854,6 +841,27 @@ function setPiAlertArpTimer () {
             showMessage (data);
         }
     })
+}
+
+// Backup Configfile 
+function BackupConfigFile()  {
+  // Execute
+  $.get('php/server/devices.php?action=BackupConfigFile', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Restore Configfile
+function askRestoreConfigFile() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_loginenable_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_loginenable_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'RestoreConfigFile');
+}
+function RestoreConfigFile() {
+  // Execute
+  $.get('php/server/devices.php?action=RestoreConfigFile', function(msg) {
+    showMessage (msg);
+  });
 }
 </script>
 
