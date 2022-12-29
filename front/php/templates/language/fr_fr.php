@@ -18,26 +18,28 @@ $pia_lang['Gen_Backup'] = 'Ejecutar copia de seguridad';
 $pia_lang['Gen_Restore'] = 'Ejecutar restauración';
 $pia_lang['Gen_Switch'] = 'Switch'; //
 $pia_lang['Gen_Run'] = 'Exécuter'; //
+$pia_lang['Gen_Save'] = 'Sauvez';
+$pia_lang['Gen_Close'] = 'Close';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - 03ago2022
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Login_Box'] = 'Ingrese su contraseña';
-$pia_lang['Login_Remember'] = 'Recordar';
-$pia_lang['Login_Remember_small'] = '(válido por 7 días)';
-$pia_lang['Login_Submit'] = 'Ingresar';
-$pia_lang['Login_Psw_run'] = 'Para cambiar contraseña ejecute:';
-$pia_lang['Login_Psw_new'] = 'nueva_contraseña';
-$pia_lang['Login_Psw_folder'] = 'en la carpeta back.';
-$pia_lang['Login_Psw_alert'] = '¡Alerta de Contraseña!';
-$pia_lang['Login_Psw-box'] = 'Contraseña';
-$pia_lang['Login_Toggle_Info'] = 'Información sobre la contraseña';
-$pia_lang['Login_Toggle_Info_headline'] = 'Información sobre la contraseña';
-$pia_lang['Login_Toggle_Alert_headline'] = 'Alerta de Contraseña!';
+$pia_lang['Login_Box'] = 'Entrez votre mot de passe';
+$pia_lang['Login_Remember'] = 'Mémoriser';
+$pia_lang['Login_Remember_small'] = '(valable pour 7 jours)';
+$pia_lang['Login_Submit'] = "S'inscrire";
+$pia_lang['Login_Psw_run'] = 'Pour changer le mot de passe, exécutez:';
+$pia_lang['Login_Psw_new'] = 'nouveau_mot_de_passe';
+$pia_lang['Login_Psw_folder'] = 'dans le dossier "~/pialert/back".';
+$pia_lang['Login_Psw_alert'] = 'Consigne de sécurité !';
+$pia_lang['Login_Psw-box'] = 'Mot de passe';
+$pia_lang['Login_Toggle_Info'] = 'Informations sur le mot de passe';
+$pia_lang['Login_Toggle_Info_headline'] = 'Informations sur le mot de passe';
+$pia_lang['Login_Toggle_Alert_headline'] = 'Avertissement sur le mot de passe !';
 
 //////////////////////////////////////////////////////////////////
-// Device Page - 03ago2022
+// Sidebar
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Dispositivos';
@@ -46,6 +48,11 @@ $pia_lang['Navigation_Events'] = 'Eventos';
 $pia_lang['Navigation_Maintenance'] = 'Mantenimiento';
 $pia_lang['Navigation_Network'] = 'Red';
 $pia_lang['Navigation_HelpFAQ'] = 'Ayuda / FAQ';
+
+//////////////////////////////////////////////////////////////////
+// Device Page - 03ago2022
+//////////////////////////////////////////////////////////////////
+
 $pia_lang['Device_Title'] = 'Dispositivos';
 $pia_lang['Device_Shortcut_AllDevices'] = 'Todos';
 $pia_lang['Device_Shortcut_Connected'] = 'Conectado(s)';
@@ -54,7 +61,8 @@ $pia_lang['Device_Shortcut_NewDevices'] = 'Nuevo(s)';
 $pia_lang['Device_Shortcut_DownAlerts'] = 'Alerta(s) de caída(s)';
 $pia_lang['Device_Shortcut_Archived'] = 'Archivado(s)';
 $pia_lang['Device_Shortcut_Devices'] = 'Dispositivos';
-$pia_lang['Device_Shortcut_OnlineChart'] = 'Presencia del dispositivo a lo largo del tiempo';
+$pia_lang['Device_Shortcut_OnlineChart_a'] = 'Presencia del dispositivo a lo largo del tiempo';
+$pia_lang['Device_Shortcut_OnlineChart_b'] = '';
 $pia_lang['Device_TableHead_Name'] = 'Nombre';
 $pia_lang['Device_TableHead_Owner'] = 'Propietario';
 $pia_lang['Device_TableHead_Type'] = 'Tipo';
@@ -89,7 +97,7 @@ $pia_lang['Presence_Shortcut_Devices'] = 'Dispositivos';
 
 // Localizationfiles under pialert/front/lib/AdminLTE/bower_components/fullcalendar/dist/locale
 $pia_lang['Presence_CallHead_Devices'] = 'Dispositivos';
-$pia_lang['Presence_CalHead_lang'] = 'es-es';
+$pia_lang['Presence_CalHead_lang'] = 'fr';
 $pia_lang['Presence_CalHead_year'] = 'año';
 $pia_lang['Presence_CalHead_quarter'] = 'trimestre';
 $pia_lang['Presence_CalHead_month'] = 'mes';

@@ -18,6 +18,8 @@ $pia_lang['Gen_Backup'] = 'Run Backup';
 $pia_lang['Gen_Restore'] = 'Run Restore';
 $pia_lang['Gen_Switch'] = 'Switch';
 $pia_lang['Gen_Run'] = 'Run';
+$pia_lang['Gen_Save'] = 'Save';
+$pia_lang['Gen_Close'] = 'Close';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - Update by @TeroRERO 03ago2022
@@ -29,7 +31,7 @@ $pia_lang['Login_Remember_small'] = '(valid for 7 days)';
 $pia_lang['Login_Submit'] = 'Log in';
 $pia_lang['Login_Psw_run'] = 'To change password run:';
 $pia_lang['Login_Psw_new'] = 'new_password';
-$pia_lang['Login_Psw_folder'] = 'in the back folder.';
+$pia_lang['Login_Psw_folder'] = 'in the "~/pialert/back" folder.';
 $pia_lang['Login_Psw_alert'] = 'Password Alert!';
 $pia_lang['Login_Psw-box'] = 'Password';
 $pia_lang['Login_Toggle_Info'] = 'Password Information';
