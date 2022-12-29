@@ -225,7 +225,7 @@ if ($_REQUEST['tab'] == '1') {
                     <br></div>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
                   </div>
             </div>
         </div>
@@ -251,7 +251,7 @@ if ($_REQUEST['tab'] == '1') {
                     <br></div>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
                   </div>
             </div>
         </div>
@@ -292,7 +292,7 @@ if ($_REQUEST['tab'] == '1') {
                     <br></div>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
                   </div>
             </div>
         </div>
@@ -318,7 +318,7 @@ if ($_REQUEST['tab'] == '1') {
                     <br></div>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
                   </div>
             </div>
         </div>
@@ -342,7 +342,7 @@ if ($_REQUEST['tab'] == '1') {
                     <br></div>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
                   </div>
             </div>
         </div>
@@ -372,6 +372,7 @@ if ($_REQUEST['tab'] == '1') {
                                       <ul id="dropdownLangSelection" class="dropdown-menu dropdown-menu-right">
                                         <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','en_us');"><?php echo $pia_lang['Maintenance_lang_en_us'];?></a></li>
                                         <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','de_de');"><?php echo $pia_lang['Maintenance_lang_de_de'];?></a></li>
+                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','fr_fr');"><?php echo $pia_lang['Maintenance_lang_fr_fr'];?></a></li>
                                         <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','es_es');"><?php echo $pia_lang['Maintenance_lang_es_es'];?></a></li>
                                       </ul>
                                     </div>
@@ -583,13 +584,13 @@ else {
                     <h4 class="modal-title">Config Editor</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
-                    <textarea class="form-control" name="txtConfigFileEditor" rows="30" spellcheck="false" wrap="off" style="resize: none; font-family: monospace;"><?php echo file_get_contents('../config/pialert.conf');?></textarea>
+                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?php echo file_get_contents('../config/pialert.conf');?></textarea>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" onclick="askRestoreConfigFile()">Restore</button>
-                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" data-dismiss="modal" onclick="BackupConfigFile()">Backup</button>
-                    <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig">Save</button>
-                    <button type="button" class="btn btn-primary" id="btnPiaEditorClose" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?php echo $pia_lang['Gen_Restore'];?></button>
+                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" data-dismiss="modal" style="margin: 5px" onclick="BackupConfigFile()"><?php echo $pia_lang['Gen_Backup'];?></button>
+                    <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig" style="margin: 5px"><?php echo $pia_lang['Gen_Save'];?></button>
+                    <button type="button" class="btn btn-default" id="btnPiaEditorClose" data-dismiss="modal" style="margin: 5px"><?php echo $pia_lang['Gen_Close'];?></button>
                   </div>
               </form>
             </div>

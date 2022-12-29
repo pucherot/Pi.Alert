@@ -880,7 +880,8 @@ function setPiAlertLanguage() {
 
   $pia_installed_langs = array('en_us', 
                                'de_de',
-                               'es_es');
+                               'es_es',
+                               'fr_fr');
 
   if (isset($_REQUEST['PiaLangSelection'])) {
     $pia_lang_set_dir = '../../../db/';

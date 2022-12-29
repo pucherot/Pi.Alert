@@ -18,6 +18,8 @@ $pia_lang['Gen_Backup'] = 'Sichern';
 $pia_lang['Gen_Restore'] = 'Wiederherstellen';
 $pia_lang['Gen_Switch'] = 'Umschalten';
 $pia_lang['Gen_Run'] = 'Ausführen';
+$pia_lang['Gen_Save'] = 'Speichern';
+$pia_lang['Gen_Close'] = 'Schließen';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - Update by @TeroRERO 03ago2022
@@ -236,6 +238,7 @@ $pia_lang['Maintenance_lang_selector_empty'] = 'Sprache wählen';
 $pia_lang['Maintenance_lang_en_us'] = 'Englisch (US)';
 $pia_lang['Maintenance_lang_de_de'] = 'Deutsch (DE)';
 $pia_lang['Maintenance_lang_es_es'] = 'Spanisch (ES)';
+$pia_lang['Maintenance_lang_fr_fr'] = 'Französisch (FR) unvollständig';
 $pia_lang['Maintenance_lang_selector_text'] = 'Die Änderung findet ser&shy;verseitig statt, betrifft also alle verwendeten Ge&shy;räte.';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Übernehmen';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Einstellungen';

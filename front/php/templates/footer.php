@@ -15,7 +15,7 @@
     <?php
       $conf_file = '../config/version.conf';
       $conf_data = parse_ini_file($conf_file);
-      echo '<span style="display:inline-block; transform: rotate(180deg)">&copy;</span> '. $conf_data['VERSION_YEAR'] .' Puche and leiweibau';
+      echo '<span style="display:inline-block; transform: rotate(180deg)">&copy;</span> '. $conf_data['VERSION_YEAR'] .' Puche & leiweibau';
     ?>
     <!-- To the right -->
     <div class="pull-right no-hidden-xs">
@@ -24,7 +24,7 @@
     <?php
       $conf_file = '../config/version.conf';
       $conf_data = parse_ini_file($conf_file);
-      echo 'Pi.Alert&nbsp;&nbsp;'. $conf_data['VERSION'] .'&nbsp;&nbsp;<small>('. $conf_data['VERSION_DATE'] .')</small>';
+      echo ''. $conf_data['VERSION'] .'&nbsp;&nbsp;<small>('. $conf_data['VERSION_DATE'] .')</small>';
     ?>
     </div>
   </footer>

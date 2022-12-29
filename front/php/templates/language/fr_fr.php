@@ -1,29 +1,28 @@
 <?php
 unset($pia_lang);
 //////////////////////////////////////////////////////////////////
-// About - Update by @TeroRERO 07ago2022
+// About
 //////////////////////////////////////////////////////////////////
 $pia_lang['About_Title'] = 'Guadián de Red <br>(Código Abierto)';
 $pia_lang['About_Design'] = 'Diseñado para:';
-$pia_lang['About_Exit'] = 'Salir';
+$pia_lang['About_Exit'] = 'Logout'; //
 
 //////////////////////////////////////////////////////////////////
-// General - Update by @TeroRERO 01ago2022
+// General - 01ago2022
 //////////////////////////////////////////////////////////////////
-$pia_lang['Gen_Delete'] = 'Eliminar';
-$pia_lang['Gen_Cancel'] = 'Cancelar';
-$pia_lang['Gen_Okay'] = 'Ok';
-$pia_lang['Gen_Purge'] = 'Purgar';
-$pia_lang['Gen_Backup'] = 'Ejecutar copia de seguridad';
+$pia_lang['Gen_Delete'] = 'Supprimer'; //
+$pia_lang['Gen_Cancel'] = 'Annuler'; //
+$pia_lang['Gen_Okay'] = 'Ok'; //
+$pia_lang['Gen_Purge'] = 'Purge'; //
+$pia_lang['Gen_Backup'] = 'Ejecutar copia de seguridad'; 
 $pia_lang['Gen_Restore'] = 'Ejecutar restauración';
-$pia_lang['Gen_Switch'] = 'Cambiar';
-$pia_lang['Gen_Run'] = 'Run';
+$pia_lang['Gen_Switch'] = 'Switch'; //
+$pia_lang['Gen_Run'] = 'Exécuter'; //
 
 //////////////////////////////////////////////////////////////////
-// Login Page - Update by @TeroRERO 03ago2022
+// Login Page - 03ago2022
 //////////////////////////////////////////////////////////////////
 
-// TeroRERO Off $pia_lang['Login_Box'] = 'Inicie su sesión';
 $pia_lang['Login_Box'] = 'Ingrese su contraseña';
 $pia_lang['Login_Remember'] = 'Recordar';
 $pia_lang['Login_Remember_small'] = '(válido por 7 días)';
@@ -38,7 +37,7 @@ $pia_lang['Login_Toggle_Info_headline'] = 'Información sobre la contraseña';
 $pia_lang['Login_Toggle_Alert_headline'] = 'Alerta de Contraseña!';
 
 //////////////////////////////////////////////////////////////////
-// Device Page - Update by @TeroRERO 03ago2022
+// Device Page - 03ago2022
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Dispositivos';
@@ -76,7 +75,7 @@ $pia_lang['Device_Table_nav_next'] = 'Siguiente';
 $pia_lang['Device_Table_nav_prev'] = 'Anterior';
 
 //////////////////////////////////////////////////////////////////
-// Presence Page - Update by @TeroRERO 25jul2022
+// Presence Page - 25jul2022
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Presence_Title'] = 'Historial por dispositivo';
@@ -97,7 +96,7 @@ $pia_lang['Presence_CalHead_month'] = 'mes';
 $pia_lang['Presence_CalHead_week'] = 'semana';
 
 //////////////////////////////////////////////////////////////////
-// Events Page - Update by @TeroRERO 25jul2022
+// Events Page - 25jul2022
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Events_Title'] = 'Eventos';
@@ -133,7 +132,7 @@ $pia_lang['Events_Table_nav_next'] = 'Siguiente';
 $pia_lang['Events_Table_nav_prev'] = 'Anterior';
 
 //////////////////////////////////////////////////////////////////
-// Device Details Page - Update by @TeroRERO 01ago2022
+// Device Details Page - 01ago2022
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['DevDetail_Periodselect_today'] = 'Hoy';
@@ -196,7 +195,7 @@ $pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Escaneo predeterminado: NMAP e
 $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Escaneo detallado: escaneo predeterminado con detección de sistema operativo habilitado, detección de versiones, escaneo de script y traceroute (hasta 30 segundos o más)';
 
 /////////////////////////////////////////////////////////////////////////////
-// Maintenance Page - Update by @TeroRERO 07ago2022 and leiweibau 29ago2022
+// Maintenance Page and leiweibau 29ago2022
 /////////////////////////////////////////////////////////////////////////////
 
 $pia_lang['Maintenance_Title'] = 'Herramientas de mantenimiento';
@@ -226,10 +225,10 @@ $pia_lang['Maintenance_themeselector_text'] = 'El cambio tiene lugar en el lado 
 $pia_lang['Maintenance_themeselector_apply'] = 'Aplicar';
 $pia_lang['Maintenance_lang_selector_lable'] = 'Seleccione su idioma';
 $pia_lang['Maintenance_lang_selector_empty'] = 'Elija un idioma';
-$pia_lang['Maintenance_lang_en_us'] = 'Inglés (US)';
-$pia_lang['Maintenance_lang_de_de'] = 'Alemán (DE)';
-$pia_lang['Maintenance_lang_es_es'] = 'Español (ES)';
-$pia_lang['Maintenance_lang_fr_fr'] = 'Francés (FR) incompleto';
+$pia_lang['Maintenance_lang_en_us'] = 'Anglais (US)'; //
+$pia_lang['Maintenance_lang_de_de'] = 'Allemand (DE)'; //
+$pia_lang['Maintenance_lang_es_es'] = 'Espagnol (ES)'; //
+$pia_lang['Maintenance_lang_fr_fr'] = 'Français (FR) incomplet'; //
 $pia_lang['Maintenance_lang_selector_text'] = 'El cambio tiene lugar en el lado del servidor, por lo que afecta todos los dispositivos en uso.';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Aplicar';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Ajustes';
@@ -313,7 +312,7 @@ $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
 
 /////////////////////////////////////////////////////////////////////////////
-// Maintenance Page - Update by @TeroRERO 25jul2022 and leiweibau 29ago2022
+// Maintenance Page - 25jul2022 and leiweibau 29ago2022
 /////////////////////////////////////////////////////////////////////////////
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Desactivado';
@@ -352,7 +351,7 @@ $pia_lang['BackDevices_Language_notset'] = 'Theme not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
 
 //////////////////////////////////////////////////////////////////
-// Network Page - Update by @TeroRERO 01ago2022
+// Network Page - 01ago2022
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Network_Title'] = 'Descripción general de la red';
@@ -385,7 +384,7 @@ $pia_lang['Network_Table_IP'] = 'Dirección IP';
 $pia_lang['Network_UnassignedDevices'] = 'Unassigned devices';
 
 //////////////////////////////////////////////////////////////////
-// Help Page - Update by @TeroRERO 07ago2022
+// Help Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['HelpFAQ_Title'] = 'Ayuda / FAQ';
