@@ -3,12 +3,12 @@ unset($pia_lang);
 //////////////////////////////////////////////////////////////////
 // About
 //////////////////////////////////////////////////////////////////
-$pia_lang['About_Title'] = 'Guadián de Red <br>(Código Abierto)';
-$pia_lang['About_Design'] = 'Diseñado para:';
-$pia_lang['About_Exit'] = 'Logout'; //
+$pia_lang['About_Title'] = 'Garde réseau open source'; //
+$pia_lang['About_Design'] = 'Conçu pour:'; //
+$pia_lang['About_Exit'] = 'Logout'; // //
 
 //////////////////////////////////////////////////////////////////
-// General - 01ago2022
+// General
 //////////////////////////////////////////////////////////////////
 $pia_lang['Gen_Delete'] = 'Supprimer'; //
 $pia_lang['Gen_Cancel'] = 'Annuler'; //
@@ -18,60 +18,60 @@ $pia_lang['Gen_Backup'] = 'Ejecutar copia de seguridad';
 $pia_lang['Gen_Restore'] = 'Ejecutar restauración';
 $pia_lang['Gen_Switch'] = 'Switch'; //
 $pia_lang['Gen_Run'] = 'Exécuter'; //
-$pia_lang['Gen_Save'] = 'Sauvez';
-$pia_lang['Gen_Close'] = 'Close';
+$pia_lang['Gen_Save'] = 'Sauvez'; //
+$pia_lang['Gen_Close'] = 'Close'; //
 
 //////////////////////////////////////////////////////////////////
-// Login Page - 03ago2022
+// Login Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Login_Box'] = 'Entrez votre mot de passe';
-$pia_lang['Login_Remember'] = 'Mémoriser';
-$pia_lang['Login_Remember_small'] = '(valable pour 7 jours)';
-$pia_lang['Login_Submit'] = "S'inscrire";
-$pia_lang['Login_Psw_run'] = 'Pour changer le mot de passe, exécutez:';
-$pia_lang['Login_Psw_new'] = 'nouveau_mot_de_passe';
-$pia_lang['Login_Psw_folder'] = 'dans le dossier "~/pialert/back".';
-$pia_lang['Login_Psw_alert'] = 'Consigne de sécurité !';
-$pia_lang['Login_Psw-box'] = 'Mot de passe';
-$pia_lang['Login_Toggle_Info'] = 'Informations sur le mot de passe';
-$pia_lang['Login_Toggle_Info_headline'] = 'Informations sur le mot de passe';
-$pia_lang['Login_Toggle_Alert_headline'] = 'Avertissement sur le mot de passe !';
+$pia_lang['Login_Box'] = 'Entrez votre mot de passe'; //
+$pia_lang['Login_Remember'] = 'Mémoriser'; //
+$pia_lang['Login_Remember_small'] = '(valable pour 7 jours)'; //
+$pia_lang['Login_Submit'] = "S'inscrire"; //
+$pia_lang['Login_Psw_run'] = 'Pour changer le mot de passe, exécutez:'; //
+$pia_lang['Login_Psw_new'] = 'nouveau_mot_de_passe'; //
+$pia_lang['Login_Psw_folder'] = 'dans le dossier "~/pialert/back".'; //
+$pia_lang['Login_Psw_alert'] = 'Consigne de sécurité !'; //
+$pia_lang['Login_Psw-box'] = 'Mot de passe'; //
+$pia_lang['Login_Toggle_Info'] = 'Informations sur le mot de passe'; //
+$pia_lang['Login_Toggle_Info_headline'] = 'Informations sur le mot de passe'; //
+$pia_lang['Login_Toggle_Alert_headline'] = 'Avertissement sur le mot de passe !'; //
 
 //////////////////////////////////////////////////////////////////
 // Sidebar
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Navigation_Devices'] = 'Dispositivos';
-$pia_lang['Navigation_Presence'] = 'Historial';
-$pia_lang['Navigation_Events'] = 'Eventos';
-$pia_lang['Navigation_Maintenance'] = 'Mantenimiento';
-$pia_lang['Navigation_Network'] = 'Red';
-$pia_lang['Navigation_HelpFAQ'] = 'Ayuda / FAQ';
+$pia_lang['Navigation_Devices'] = 'Dispositifs'; //
+$pia_lang['Navigation_Presence'] = 'Présence'; //
+$pia_lang['Navigation_Events'] = 'Événements'; //
+$pia_lang['Navigation_Maintenance'] = 'Paramètres'; //
+$pia_lang['Navigation_Network'] = 'Réseau'; //
+$pia_lang['Navigation_HelpFAQ'] = 'Aide / FAQ'; //
 
 //////////////////////////////////////////////////////////////////
-// Device Page - 03ago2022
+// Device Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Device_Title'] = 'Dispositivos';
-$pia_lang['Device_Shortcut_AllDevices'] = 'Todos';
-$pia_lang['Device_Shortcut_Connected'] = 'Conectado(s)';
-$pia_lang['Device_Shortcut_Favorites'] = 'Favorito(s)';
-$pia_lang['Device_Shortcut_NewDevices'] = 'Nuevo(s)';
-$pia_lang['Device_Shortcut_DownAlerts'] = 'Alerta(s) de caída(s)';
-$pia_lang['Device_Shortcut_Archived'] = 'Archivado(s)';
-$pia_lang['Device_Shortcut_Devices'] = 'Dispositivos';
-$pia_lang['Device_Shortcut_OnlineChart_a'] = 'Presencia del dispositivo a lo largo del tiempo';
-$pia_lang['Device_Shortcut_OnlineChart_b'] = '';
-$pia_lang['Device_TableHead_Name'] = 'Nombre';
-$pia_lang['Device_TableHead_Owner'] = 'Propietario';
-$pia_lang['Device_TableHead_Type'] = 'Tipo';
-$pia_lang['Device_TableHead_Favorite'] = 'Favorito';
-$pia_lang['Device_TableHead_Group'] = 'Grupo';
-$pia_lang['Device_TableHead_FirstSession'] = '1ra. sesión';
-$pia_lang['Device_TableHead_LastSession'] = 'Última sesión';
-$pia_lang['Device_TableHead_LastIP'] = 'Última IP';
-$pia_lang['Device_TableHead_MAC'] = 'MAC';
+$pia_lang['Device_Title'] = 'Dispositifs'; //
+$pia_lang['Device_Shortcut_AllDevices'] = 'Tous les appareils'; //
+$pia_lang['Device_Shortcut_Connected'] = 'Connecté'; //
+$pia_lang['Device_Shortcut_Favorites'] = 'Favoris'; //
+$pia_lang['Device_Shortcut_NewDevices'] = 'Nouveau';
+$pia_lang['Device_Shortcut_DownAlerts'] = 'Alertes descendantes'; //
+$pia_lang['Device_Shortcut_Archived'] = 'Archivé'; //
+$pia_lang['Device_Shortcut_Devices'] = 'Dispositifs'; //
+$pia_lang['Device_Shortcut_OnlineChart_a'] = 'Présence du dispositif dans le temps ('; //
+$pia_lang['Device_Shortcut_OnlineChart_b'] = 'h)'; //
+$pia_lang['Device_TableHead_Name'] = 'Nom'; //
+$pia_lang['Device_TableHead_Owner'] = 'Propriétaire'; //
+$pia_lang['Device_TableHead_Type'] = 'Type'; //
+$pia_lang['Device_TableHead_Favorite'] = 'Favori'; //
+$pia_lang['Device_TableHead_Group'] = 'Groupe'; //
+$pia_lang['Device_TableHead_FirstSession'] = 'Première session'; //
+$pia_lang['Device_TableHead_LastSession'] = 'Dernière session'; //
+$pia_lang['Device_TableHead_LastIP'] = 'Dernière IP'; //
+$pia_lang['Device_TableHead_MAC'] = 'MAC'; //
 $pia_lang['Device_TableHead_LastIPOrder'] = 'Última orden de IP';
 $pia_lang['Device_TableHead_Rowid'] = 'Rowid';
 $pia_lang['Device_TableHead_Status'] = 'Estado';
@@ -83,31 +83,31 @@ $pia_lang['Device_Table_nav_next'] = 'Siguiente';
 $pia_lang['Device_Table_nav_prev'] = 'Anterior';
 
 //////////////////////////////////////////////////////////////////
-// Presence Page - 25jul2022
+// Presence Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Presence_Title'] = 'Historial por dispositivo';
-$pia_lang['Presence_Shortcut_AllDevices'] = 'Todos';
-$pia_lang['Presence_Shortcut_Connected'] = 'Conectado(s)';
-$pia_lang['Presence_Shortcut_Favorites'] = 'Favorito(s)';
-$pia_lang['Presence_Shortcut_NewDevices'] = 'Nuevo(s)';
-$pia_lang['Presence_Shortcut_DownAlerts'] = 'Alerta(s) de caída(s)';
-$pia_lang['Presence_Shortcut_Archived'] = 'Archivado(s)';
-$pia_lang['Presence_Shortcut_Devices'] = 'Dispositivos';
+$pia_lang['Presence_Shortcut_AllDevices'] = 'Tous les appareils'; //
+$pia_lang['Presence_Shortcut_Connected'] = 'Connecté'; //
+$pia_lang['Presence_Shortcut_Favorites'] = 'Favoris'; //
+$pia_lang['Presence_Shortcut_NewDevices'] = 'Nouveau'; //
+$pia_lang['Presence_Shortcut_DownAlerts'] = 'Alertes descendantes'; //
+$pia_lang['Presence_Shortcut_Archived'] = 'Archivé'; //
+$pia_lang['Presence_Shortcut_Devices'] = 'Dispositifs'; //
 
 // Localizationfiles under pialert/front/lib/AdminLTE/bower_components/fullcalendar/dist/locale
-$pia_lang['Presence_CallHead_Devices'] = 'Dispositivos';
-$pia_lang['Presence_CalHead_lang'] = 'fr';
+$pia_lang['Presence_CallHead_Devices'] = 'Dispositifs'; //
+$pia_lang['Presence_CalHead_lang'] = 'fr'; //
 $pia_lang['Presence_CalHead_year'] = 'año';
 $pia_lang['Presence_CalHead_quarter'] = 'trimestre';
 $pia_lang['Presence_CalHead_month'] = 'mes';
 $pia_lang['Presence_CalHead_week'] = 'semana';
 
 //////////////////////////////////////////////////////////////////
-// Events Page - 25jul2022
+// Events Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Events_Title'] = 'Eventos';
+$pia_lang['Events_Title'] = 'Événements'; //
 $pia_lang['Events_Periodselect_today'] = 'Hoy';
 $pia_lang['Events_Periodselect_LastWeek'] = 'La semana pasada';
 $pia_lang['Events_Periodselect_LastMonth'] = 'El mes pasado';
@@ -140,7 +140,7 @@ $pia_lang['Events_Table_nav_next'] = 'Siguiente';
 $pia_lang['Events_Table_nav_prev'] = 'Anterior';
 
 //////////////////////////////////////////////////////////////////
-// Device Details Page - 01ago2022
+// Device Details Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['DevDetail_Periodselect_today'] = 'Hoy';
@@ -186,6 +186,8 @@ $pia_lang['DevDetail_EveandAl_RandomMAC'] = 'MAC al azar';
 $pia_lang['DevDetail_EveandAl_ScanCycle_a'] = 'Escanear Dispositivo (1 min)';
 $pia_lang['DevDetail_EveandAl_ScanCycle_z'] = 'No Escanear Dispositivo (0 min)';
 $pia_lang['DevDetail_button_Delete'] = 'Eliminar dispositivo';
+$pia_lang['DevDetail_button_DeleteEvents'] = 'Delete Events';
+$pia_lang['DevDetail_button_DeleteEvents_Warning'] = 'Are you sure you want to delete all Events of this device?<br><br>(this will clear the <b>Events history</b> and the <b>Sessions</b> and might help with constant (persistent) notifications)';
 $pia_lang['DevDetail_button_Reset'] = 'Restablecer cambios';
 $pia_lang['DevDetail_button_Save'] = 'Guardar';
 $pia_lang['DevDetail_SessionTable_Order'] = 'Ordenar';
@@ -203,7 +205,7 @@ $pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Escaneo predeterminado: NMAP e
 $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Escaneo detallado: escaneo predeterminado con detección de sistema operativo habilitado, detección de versiones, escaneo de script y traceroute (hasta 30 segundos o más)';
 
 /////////////////////////////////////////////////////////////////////////////
-// Maintenance Page and leiweibau 29ago2022
+// Maintenance Page
 /////////////////////////////////////////////////////////////////////////////
 
 $pia_lang['Maintenance_Title'] = 'Herramientas de mantenimiento';
@@ -280,10 +282,6 @@ $pia_lang['Maintenance_Tool_del_allevents'] = 'Eliminar todo (Restablecer histor
 $pia_lang['Maintenance_Tool_del_allevents_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Se eliminarán todos los eventos en la base de datos. En ese momento se restablecerá la presencia de todos los dispositivos. Esto puede conducir a sesiones no válidas. Esto significa que los dispositivos se muestran como "presentes", aunque están fuera de línea. Un escaneo mientras el dispositivo en cuestión está en línea resuelve el problema.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Eliminar eventos';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = '¿Estás seguro de que quieres eliminar todos los eventos? Esto restablece la presencia de todos los dispositivos.';
-$pia_lang['Maintenance_Tool_del_allevents30'] = 'Eliminar eventos antiguos (30 días)';
-$pia_lang['Maintenance_Tool_del_allevents30_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Se eliminarán todos los eventos mayores a 30 días en la base de datos. En ese momento se restablecerá la presencia de todos los dispositivos. Esto puede conducir a sesiones no válidas. Esto significa que los dispositivos se muestran como "presentes", aunque están fuera de línea. Un escaneo mientras el dispositivo en cuestión está en línea resuelve el problema.';
-$pia_lang['Maintenance_Tool_del_allevents30_noti'] = 'Eliminar eventos';
-$pia_lang['Maintenance_Tool_del_allevents30_noti_text'] = '¿Está seguro de eliminar todos los eventos mayores a 30 días? Esto restablece la presencia de todos los dispositivos.';
 $pia_lang['Maintenance_Tool_backup'] = 'Respaldar DB';
 $pia_lang['Maintenance_Tool_backup_text'] = 'Las copias de seguridad de la base de datos se encuentran en el directorio de la base de datos como una Zip-Archive, nombrada con la fecha de creación. No hay un número máximo de copias de seguridad.';
 $pia_lang['Maintenance_Tool_backup_noti'] = 'Respaldar DB';
@@ -300,14 +298,6 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Eliminar la actividad de la red'
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'El gráfico de actividad de la red se resetea. Esto no afecta a los eventos.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Borrar la actividad de la red';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = '¿Está seguro de restablecer la actividad de la red?';
-$pia_lang['Maintenance_Tool_ExportCSV'] = 'Exportación CSV';
-$pia_lang['Maintenance_Tool_ExportCSV_text'] = 'Generar un archivo CSV (valores separados por comas) que contenga la lista de dispositivos incluyendo las relaciones de red entre los nodos de red y los dispositivos conectados.';
-$pia_lang['Maintenance_Tool_ExportCSV_noti'] = 'Exportación CSV';
-$pia_lang['Maintenance_Tool_ExportCSV_noti_text'] = '¿Está seguro de que quiere generar un archivo CSV?';
-$pia_lang['Maintenance_Tool_ImportCSV'] = 'Importación CSV';
-$pia_lang['Maintenance_Tool_ImportCSV_text'] = 'Antes de usar esta función, haga una copia de seguridad. Importe un archivo CSV (valor separado por comas) que contiene la lista de dispositivos, incluidas las relaciones de red entre nodos de red y dispositivos conectados. Para hacer eso, coloque el archivo CSV llamado <b> devices.csv </b> en su carpeta <b>/config </b>.';
-$pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'Importación CSV';
-$pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = '¿Está seguro de que quiere importar el archivo CSV? Esto sobrescribirá completamente los dispositivos de su base de datos.';
 $pia_lang['Maintenance_Github_package_a'] ='La última versión de Pi.Alert (Fork leiweibau) se publicó en ';
 $pia_lang['Maintenance_Github_package_b'] ='';
 $pia_lang['Maintenance_Tool_loginenable'] ='Login activado.';
@@ -319,8 +309,11 @@ $pia_lang['Maintenance_Tool_logindisable_text'] ='El inicio de sesión se desact
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
 
+$pia_lang['Maintenance_ConfEditor_Backup'] ='Créer une sauvegarde'; //
+$pia_lang['Maintenance_ConfEditor_Restore'] ='Vers la dernière version'; //
+
 /////////////////////////////////////////////////////////////////////////////
-// Maintenance Page - 25jul2022 and leiweibau 29ago2022
+// Maintenance Page
 /////////////////////////////////////////////////////////////////////////////
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Arp-Scan Desactivado';
@@ -350,7 +343,6 @@ $pia_lang['BackDevices_DBTools_DelActHistory'] = 'Network aktivity reset success
 $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Network aktivity reset not successful';
 $pia_lang['BackDevices_Login_disabled'] = 'Login desactivado.';
 $pia_lang['BackDevices_Login_enabled'] = 'Login activado.';
-
 $pia_lang['BackDevices_Theme_set'] = 'Theme applied';
 $pia_lang['BackDevices_Theme_notset'] = 'Theme not applied';
 $pia_lang['BackDevices_Theme_invalid'] = 'Selection invalid';
@@ -358,8 +350,11 @@ $pia_lang['BackDevices_Language_set'] = 'Theme applied';
 $pia_lang['BackDevices_Language_notset'] = 'Theme not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
 
+$pia_lang['BackDevices_ConfEditor_CopError'] = "La sauvegarde de la configuration n'est pas possible."; //
+$pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La sauvegarde de la configuration est terminée.'; //
+
 //////////////////////////////////////////////////////////////////
-// Network Page - 01ago2022
+// Network Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Network_Title'] = 'Descripción general de la red';

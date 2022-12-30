@@ -22,7 +22,7 @@ $pia_lang['Gen_Save'] = 'Save';
 $pia_lang['Gen_Close'] = 'Close';
 
 //////////////////////////////////////////////////////////////////
-// Login Page - Update by @TeroRERO 03ago2022
+// Login Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Login_Box'] = 'Enter your password';
@@ -167,7 +167,6 @@ $pia_lang['DevDetail_MainInfo_Favorite'] = 'Favorite';
 $pia_lang['DevDetail_MainInfo_Group'] = 'Group';
 $pia_lang['DevDetail_MainInfo_Location'] = 'Location';
 $pia_lang['DevDetail_MainInfo_Comments'] = 'Comments';
-$pia_lang['DevDetail_MainInfo_Network_Title'] = 'Network';
 $pia_lang['DevDetail_MainInfo_Network'] = 'Network Node (MAC)';
 $pia_lang['DevDetail_MainInfo_Network_Port'] = 'Connected to Port';
 $pia_lang['DevDetail_SessionInfo_Title'] = 'Session Info';
@@ -191,8 +190,6 @@ $pia_lang['DevDetail_button_DeleteEvents'] = 'Delete Events';
 $pia_lang['DevDetail_button_DeleteEvents_Warning'] = 'Are you sure you want to delete all Events of this device?<br><br>(this will clear the <b>Events history</b> and the <b>Sessions</b> and might help with constant (persistent) notifications)';
 $pia_lang['DevDetail_button_Reset'] = 'Reset Changes';
 $pia_lang['DevDetail_button_Save'] = 'Save';
-$pia_lang['DevDetail_button_DeleteEvents'] = 'Delete Events';
-$pia_lang['DevDetail_button_DeleteEvents_Warning'] = 'Are you sure you want to delete all Events of this device?<br><br>(this will clear the <b>Events history</b> and the <b>Sessions</b> and might help with constant (persistent) notifications)';
 $pia_lang['DevDetail_SessionTable_Order'] = 'Order';
 $pia_lang['DevDetail_SessionTable_Connection'] = 'Connection';
 $pia_lang['DevDetail_SessionTable_Disconnection'] = 'Disconnection';
@@ -265,17 +262,14 @@ $pia_lang['Maintenance_Tool_arpscansw'] = 'Toggle arp-Scan (on/off)';
 $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Switches the arp scan on or off. If no time period has been defined for timer activation, Pi.Alert switches on again after a pause of 10 min with the next pending scan. Scans that are already running will not be terminated.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'Toggle arp-Scan on or off';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'When the scan has been switched off it remains off until it is activated again.';
-$pia_lang['Maintenance_Tool_del_empty_macs'] = 'Delete Devices with empty MACs';
-$pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All devices without MAC will be deleted from the database.';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Delete Devices';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Are you sure you want to delete all devices with empty MAC addresses?<br>(maybe you prefer to archive it)';
-$pia_lang['Maintenance_Tool_upgrade_database_noti'] = 'Upgrade database';
-$pia_lang['Maintenance_Tool_upgrade_database_text'] = 'This button will upgrade the database to enable the Network activity over last 12 hours chart. Please backup your database in case of issues.';
-$pia_lang['Maintenance_Tool_upgrade_database_noti_text'] = 'Are you sure you want to upgrade the database?<br>(maybe you prefer to archive it)';
 $pia_lang['Maintenance_Tool_test_notification'] = 'Test Notifications';
 $pia_lang['Maintenance_Tool_test_notification_text'] = 'Test reporting for all activated services.';
 $pia_lang['Maintenance_Tool_test_notification_noti'] = '';
 $pia_lang['Maintenance_Tool_test_notification_noti_text'] = '';
+$pia_lang['Maintenance_Tool_del_empty_macs'] = 'Delete Devices with empty MACs';
+$pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All devices without MAC will be deleted from the database.';
+$pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Delete Devices';
+$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Are you sure you want to delete all devices with empty MAC addresses?<br>(maybe you prefer to archive it)';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Delete all Devices';
 $pia_lang['Maintenance_Tool_del_alldev_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All devices will be deleted from the database.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Delete Devices';
@@ -288,10 +282,6 @@ $pia_lang['Maintenance_Tool_del_allevents'] = 'Delete Events (Reset Presence)';
 $pia_lang['Maintenance_Tool_del_allevents_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All events in the database will be deleted. At that moment the presence of all devices will be reset. This can lead to invalid sessions. This means that devices are displayed as "present" although they are offline. A scan while the device in question is online solves the problem.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Delete Events';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = 'Are you sure you want to delete all Events? This resets Presence of all Devices.';
-$pia_lang['Maintenance_Tool_del_allevents30'] = 'Delete all Events older than 30 days';
-$pia_lang['Maintenance_Tool_del_allevents30_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All events older than 30 days in the database will be deleted. At that moment the presence of all devices will be reset. This can lead to invalid sessions. This means that devices are displayed as "present" although they are offline. A scan while the device in question is online solves the problem.';
-$pia_lang['Maintenance_Tool_del_allevents30_noti'] = 'Delete Events';
-$pia_lang['Maintenance_Tool_del_allevents30_noti_text'] = 'Are you sure you want to delete all Events older than 30 days? This resets Presence of all Devices.';
 $pia_lang['Maintenance_Tool_backup'] = 'DB Backup';
 $pia_lang['Maintenance_Tool_backup_text'] = 'The database backups are located in the database directory as a zip-archive, named with the creation date. There is no maximum number of backups.';
 $pia_lang['Maintenance_Tool_backup_noti'] = 'DB Backup';
@@ -308,15 +298,8 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Deleting the network activity';
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'The network activity graph is reset. This does not affect the events.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Delete network activity';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = 'Are you sure you want to reset the network activity?';
-$pia_lang['Maintenance_Tool_ExportCSV'] = 'CSV Export';
-$pia_lang['Maintenance_Tool_ExportCSV_text'] = 'Generate a CSV (comma separated value) file containing the list of Devices including the Network relationships between Network Nodes and connected devices.';
-$pia_lang['Maintenance_Tool_ExportCSV_noti'] = 'CSV Export';
-$pia_lang['Maintenance_Tool_ExportCSV_noti_text'] = 'Are you sure you want to generate a CSV file?';
-$pia_lang['Maintenance_Tool_ImportCSV'] = 'CSV Import';
-$pia_lang['Maintenance_Tool_ImportCSV_text'] = 'Before using this function, please make a backup. Import a CSV (comma separated value) file containing the list of Devices including the Network relationships between Network Nodes and connected devices. To do that place the CSV file named <b>devices.csv</b> into your <b>/config</b> folder.';
-$pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'CSV Import';
-$pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = 'Are you sure you want to import the CSV file? This will completely overwrite the devices in your database.';
 $pia_lang['Maintenance_Github_package_a'] ='The latest version was released on ';
+$pia_lang['Maintenance_Github_package_b'] = '';
 $pia_lang['Maintenance_Tool_loginenable'] ='Enable Login';
 $pia_lang['Maintenance_Tool_loginenable_text'] ='After activation, you will automatically be taken to the login page. If you have not set a password before, "123456" is the default password.';
 $pia_lang['Maintenance_Tool_loginenable_noti'] ='Enable Login';
@@ -325,6 +308,9 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Disable Login';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='The login will be deactivated. Every user now has the possibility to access the Pi.Alert page again.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Disable Login';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Are you sure you want to deactivate the login?';
+
+$pia_lang['Maintenance_ConfEditor_Backup'] ='Backup anlegen';
+$pia_lang['Maintenance_ConfEditor_Restore'] ='Zur letzten Version';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)
@@ -353,9 +339,6 @@ $pia_lang['BackDevices_DBTools_DelDevError_b'] = 'Error deleting Devices';
 $pia_lang['BackDevices_DBTools_UpdDev'] = 'Device updated successfully';
 $pia_lang['BackDevices_DBTools_UpdDevError'] = 'Error updating device';
 $pia_lang['BackDevices_DBTools_Purge'] = 'The oldest backups were deleted';
-$pia_lang['BackDevices_DBTools_ImportCSV'] = 'The devices from the CSV file were imported successfully.';
-$pia_lang['BackDevices_DBTools_ImportCSVError'] = 'The CSV file couldn\'t be imported. Make sure the format is correct.';
-$pia_lang['BackDevices_DBTools_ImportCSVMissing'] = 'The CSV file couldn\'t be found under <b>/config/devices.csv.</b>';
 $pia_lang['BackDevices_DBTools_DelActHistory'] = 'Network aktivity reset successful';
 $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Network aktivity reset not successful';
 $pia_lang['BackDevices_Login_disabled'] = 'Login disabled.';
@@ -366,6 +349,9 @@ $pia_lang['BackDevices_Theme_invalid'] = 'No theme selected';
 $pia_lang['BackDevices_Language_set'] = 'Language applied';
 $pia_lang['BackDevices_Language_notset'] = 'Language not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'No language selected';
+
+$pia_lang['BackDevices_ConfEditor_CopError'] = 'Die Sicherung der Konfiguration ist nicht möglich.';
+$pia_lang['BackDevices_ConfEditor_CopOkay'] = 'Die Sicherung der Konfiguration ist abgeschlossen.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

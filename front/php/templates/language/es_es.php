@@ -18,12 +18,13 @@ $pia_lang['Gen_Backup'] = 'Ejecutar copia de seguridad';
 $pia_lang['Gen_Restore'] = 'Ejecutar restauración';
 $pia_lang['Gen_Switch'] = 'Cambiar';
 $pia_lang['Gen_Run'] = 'Run';
+$pia_lang['Gen_Save'] = 'Save';
+$pia_lang['Gen_Close'] = 'Close';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - Update by @TeroRERO 03ago2022
 //////////////////////////////////////////////////////////////////
 
-// TeroRERO Off $pia_lang['Login_Box'] = 'Inicie su sesión';
 $pia_lang['Login_Box'] = 'Ingrese su contraseña';
 $pia_lang['Login_Remember'] = 'Recordar';
 $pia_lang['Login_Remember_small'] = '(válido por 7 días)';
@@ -38,7 +39,7 @@ $pia_lang['Login_Toggle_Info_headline'] = 'Información sobre la contraseña';
 $pia_lang['Login_Toggle_Alert_headline'] = 'Alerta de Contraseña!';
 
 //////////////////////////////////////////////////////////////////
-// Device Page - Update by @TeroRERO 03ago2022
+// Sidebar
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Dispositivos';
@@ -47,6 +48,11 @@ $pia_lang['Navigation_Events'] = 'Eventos';
 $pia_lang['Navigation_Maintenance'] = 'Mantenimiento';
 $pia_lang['Navigation_Network'] = 'Red';
 $pia_lang['Navigation_HelpFAQ'] = 'Ayuda / FAQ';
+
+//////////////////////////////////////////////////////////////////
+// Device Page - Update by @TeroRERO 03ago2022
+//////////////////////////////////////////////////////////////////
+
 $pia_lang['Device_Title'] = 'Dispositivos';
 $pia_lang['Device_Shortcut_AllDevices'] = 'Todos';
 $pia_lang['Device_Shortcut_Connected'] = 'Conectado(s)';
@@ -55,7 +61,8 @@ $pia_lang['Device_Shortcut_NewDevices'] = 'Nuevo(s)';
 $pia_lang['Device_Shortcut_DownAlerts'] = 'Alerta(s) de caída(s)';
 $pia_lang['Device_Shortcut_Archived'] = 'Archivado(s)';
 $pia_lang['Device_Shortcut_Devices'] = 'Dispositivos';
-$pia_lang['Device_Shortcut_OnlineChart'] = 'Presencia del dispositivo a lo largo del tiempo';
+$pia_lang['Device_Shortcut_OnlineChart_a'] = 'Presencia del dispositivo a lo largo del tiempo';
+$pia_lang['Device_Shortcut_OnlineChart_b'] = 'h)'; //
 $pia_lang['Device_TableHead_Name'] = 'Nombre';
 $pia_lang['Device_TableHead_Owner'] = 'Propietario';
 $pia_lang['Device_TableHead_Type'] = 'Tipo';
@@ -179,6 +186,8 @@ $pia_lang['DevDetail_EveandAl_RandomMAC'] = 'MAC al azar';
 $pia_lang['DevDetail_EveandAl_ScanCycle_a'] = 'Escanear Dispositivo (1 min)';
 $pia_lang['DevDetail_EveandAl_ScanCycle_z'] = 'No Escanear Dispositivo (0 min)';
 $pia_lang['DevDetail_button_Delete'] = 'Eliminar dispositivo';
+$pia_lang['DevDetail_button_DeleteEvents'] = 'Delete Events';
+$pia_lang['DevDetail_button_DeleteEvents_Warning'] = 'Are you sure you want to delete all Events of this device?<br><br>(this will clear the <b>Events history</b> and the <b>Sessions</b> and might help with constant (persistent) notifications)';
 $pia_lang['DevDetail_button_Reset'] = 'Restablecer cambios';
 $pia_lang['DevDetail_button_Save'] = 'Guardar';
 $pia_lang['DevDetail_SessionTable_Order'] = 'Ordenar';
@@ -273,10 +282,6 @@ $pia_lang['Maintenance_Tool_del_allevents'] = 'Eliminar todo (Restablecer histor
 $pia_lang['Maintenance_Tool_del_allevents_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Se eliminarán todos los eventos en la base de datos. En ese momento se restablecerá la presencia de todos los dispositivos. Esto puede conducir a sesiones no válidas. Esto significa que los dispositivos se muestran como "presentes", aunque están fuera de línea. Un escaneo mientras el dispositivo en cuestión está en línea resuelve el problema.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Eliminar eventos';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = '¿Estás seguro de que quieres eliminar todos los eventos? Esto restablece la presencia de todos los dispositivos.';
-$pia_lang['Maintenance_Tool_del_allevents30'] = 'Eliminar eventos antiguos (30 días)';
-$pia_lang['Maintenance_Tool_del_allevents30_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Se eliminarán todos los eventos mayores a 30 días en la base de datos. En ese momento se restablecerá la presencia de todos los dispositivos. Esto puede conducir a sesiones no válidas. Esto significa que los dispositivos se muestran como "presentes", aunque están fuera de línea. Un escaneo mientras el dispositivo en cuestión está en línea resuelve el problema.';
-$pia_lang['Maintenance_Tool_del_allevents30_noti'] = 'Eliminar eventos';
-$pia_lang['Maintenance_Tool_del_allevents30_noti_text'] = '¿Está seguro de eliminar todos los eventos mayores a 30 días? Esto restablece la presencia de todos los dispositivos.';
 $pia_lang['Maintenance_Tool_backup'] = 'Respaldar DB';
 $pia_lang['Maintenance_Tool_backup_text'] = 'Las copias de seguridad de la base de datos se encuentran en el directorio de la base de datos como una Zip-Archive, nombrada con la fecha de creación. No hay un número máximo de copias de seguridad.';
 $pia_lang['Maintenance_Tool_backup_noti'] = 'Respaldar DB';
@@ -293,14 +298,6 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Eliminar la actividad de la red'
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'El gráfico de actividad de la red se resetea. Esto no afecta a los eventos.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Borrar la actividad de la red';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = '¿Está seguro de restablecer la actividad de la red?';
-$pia_lang['Maintenance_Tool_ExportCSV'] = 'Exportación CSV';
-$pia_lang['Maintenance_Tool_ExportCSV_text'] = 'Generar un archivo CSV (valores separados por comas) que contenga la lista de dispositivos incluyendo las relaciones de red entre los nodos de red y los dispositivos conectados.';
-$pia_lang['Maintenance_Tool_ExportCSV_noti'] = 'Exportación CSV';
-$pia_lang['Maintenance_Tool_ExportCSV_noti_text'] = '¿Está seguro de que quiere generar un archivo CSV?';
-$pia_lang['Maintenance_Tool_ImportCSV'] = 'Importación CSV';
-$pia_lang['Maintenance_Tool_ImportCSV_text'] = 'Antes de usar esta función, haga una copia de seguridad. Importe un archivo CSV (valor separado por comas) que contiene la lista de dispositivos, incluidas las relaciones de red entre nodos de red y dispositivos conectados. Para hacer eso, coloque el archivo CSV llamado <b> devices.csv </b> en su carpeta <b>/config </b>.';
-$pia_lang['Maintenance_Tool_ImportCSV_noti'] = 'Importación CSV';
-$pia_lang['Maintenance_Tool_ImportCSV_noti_text'] = '¿Está seguro de que quiere importar el archivo CSV? Esto sobrescribirá completamente los dispositivos de su base de datos.';
 $pia_lang['Maintenance_Github_package_a'] ='La última versión de Pi.Alert (Fork leiweibau) se publicó en ';
 $pia_lang['Maintenance_Github_package_b'] ='';
 $pia_lang['Maintenance_Tool_loginenable'] ='Login activado.';
@@ -311,6 +308,9 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='El inicio de sesión se desactivará. Ahora, todos los usuarios tienen la posibilidad de acceder de nuevo a la página Pi.Alert.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
+
+$pia_lang['Maintenance_ConfEditor_Backup'] ='Crear copia de seguridad';
+$pia_lang['Maintenance_ConfEditor_Restore'] ='A la última versión';
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page - Update by @TeroRERO 25jul2022 and leiweibau 29ago2022
@@ -343,13 +343,15 @@ $pia_lang['BackDevices_DBTools_DelActHistory'] = 'Network aktivity reset success
 $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Network aktivity reset not successful';
 $pia_lang['BackDevices_Login_disabled'] = 'Login desactivado.';
 $pia_lang['BackDevices_Login_enabled'] = 'Login activado.';
-
 $pia_lang['BackDevices_Theme_set'] = 'Theme applied';
 $pia_lang['BackDevices_Theme_notset'] = 'Theme not applied';
 $pia_lang['BackDevices_Theme_invalid'] = 'Selection invalid';
 $pia_lang['BackDevices_Language_set'] = 'Theme applied';
 $pia_lang['BackDevices_Language_notset'] = 'Theme not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
+
+$pia_lang['BackDevices_ConfEditor_CopError'] = 'No es posible guardar la configuración.';
+$pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La copia de seguridad de la configuración ha finalizado.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page - Update by @TeroRERO 01ago2022

@@ -22,7 +22,7 @@ $pia_lang['Gen_Save'] = 'Speichern';
 $pia_lang['Gen_Close'] = 'Schließen';
 
 //////////////////////////////////////////////////////////////////
-// Login Page - Update by @TeroRERO 03ago2022
+// Login Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Login_Box'] = 'Passwort eingeben';
@@ -262,17 +262,14 @@ $pia_lang['Maintenance_Tool_arpscansw'] = 'Scan stoppen/starten';
 $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet den arp-Scan an oder aus. Wenn bei der Aktivierung des Timers kein Zeitraum festgelegt wurde, schal&shy;tet sich Pi.Alert nach einer Pause von 10min mit dem nächsten an&shy;ste&shy;henden Scan wieder ein. Bereits laufende Scans werden dabei nicht beendet.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'arp-Scan stoppen/starten';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'Wenn der Scan aus ist, bleibt er so lange aus bis er wieder aktiviert wird.';
-$pia_lang['Maintenance_Tool_del_empty_macs'] = 'Alle Geräte ohne MAC löschen';
-$pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht wer&shy;den. Alle Geäte ohne MAC-Adresse werden aus der Datenbank ge&shy;löscht.';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Geräte löschen';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Sind Sie sicher, dass Sie alle Geräte ohne MAC-Adresse löschen wollen?<br>(Vielleicht bevorzugenn Sie eine Archivierung.)';
-$pia_lang['Maintenance_Tool_upgrade_database_noti'] = 'Aktualisiere Datenbank';
-$pia_lang['Maintenance_Tool_upgrade_database_text'] = 'Mit dieser Schaltfläche wird die Datenbank aktualisiert, um das Diagramm der Netzwerkaktivitäten der letzten 12 Stunden zu aktivieren. Bitte sichern Sie Ihre Datenbank, falls Probleme auftreten.';
-$pia_lang['Maintenance_Tool_upgrade_database_noti_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen.';
 $pia_lang['Maintenance_Tool_test_notification'] = 'Benachrichtigung testen';
 $pia_lang['Maintenance_Tool_test_notification_text'] = 'Führt eine Probe&shy;be&shy;nach&shy;rich&shy;tigung aus, um die korrekte Kon&shy;figu&shy;ration der Dienste zu testen.';
 $pia_lang['Maintenance_Tool_test_notification_noti'] = 'Testbenachrichtigung';
 $pia_lang['Maintenance_Tool_test_notification_noti_text'] = 'Soll eine Testbenachrichtigung über alle konfigurierten und aktivierten Benachrichtigungsdienste durchgeführt werden?';
+$pia_lang['Maintenance_Tool_del_empty_macs'] = 'Alle Geräte ohne MAC löschen';
+$pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht wer&shy;den. Alle Geäte ohne MAC-Adresse werden aus der Datenbank ge&shy;löscht.';
+$pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Geräte löschen';
+$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Sind Sie sicher, dass Sie alle Geräte ohne MAC-Adresse löschen wollen?<br>(Vielleicht bevorzugenn Sie eine Archivierung.)';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Alle Geräte löschen';
 $pia_lang['Maintenance_Tool_del_alldev_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht wer&shy;den. Alle Geräte wer&shy;den in der Datenbank ge&shy;löscht.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Geräte löschen';
@@ -312,6 +309,9 @@ $pia_lang['Maintenance_Tool_logindisable_text'] ='Der Login wird de&shy;akti&shy
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login deaktivieren';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Bist du dir sicher, dass du den Login deaktivieren möchtest?';
 
+$pia_lang['Maintenance_ConfEditor_Backup'] ='Backup anlegen';
+$pia_lang['Maintenance_ConfEditor_Restore'] ='Zur letzten Version';
+
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)
 //////////////////////////////////////////////////////////////////
@@ -349,6 +349,9 @@ $pia_lang['BackDevices_Theme_invalid'] = 'Es wurde kein Theme ausgewählt';
 $pia_lang['BackDevices_Language_set'] = 'Sprache wird angewendet';
 $pia_lang['BackDevices_Language_notset'] = 'Sprache wird nicht angewendet';
 $pia_lang['BackDevices_Language_invalid'] = 'Es wurde kein Sprache ausgewählt';
+
+$pia_lang['BackDevices_ConfEditor_CopError'] = 'Die Sicherung der Konfiguration ist nicht möglich.';
+$pia_lang['BackDevices_ConfEditor_CopOkay'] = 'Die Sicherung der Konfiguration ist abgeschlossen.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

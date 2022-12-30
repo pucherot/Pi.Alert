@@ -959,7 +959,17 @@ function RestoreConfigFile() {
 function BackupConfigFile() {
   global $pia_lang;
 
-  echo "Backup Success";
+  // prepare fast Backup
+  $file = '../../../config/pialert.conf';
+  $newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
+  global $pia_lang;
+
+  // copy files as a fast Backup
+  if (!copy($file, $newfile)) {
+      echo $pia_lang['BackDevices_ConfEditor_CopError'];
+  } else {
+    echo $pia_lang['BackDevices_ConfEditor_CopOkay'];
+  }
 
 }
 

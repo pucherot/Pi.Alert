@@ -587,8 +587,8 @@ else {
                     <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?php echo file_get_contents('../config/pialert.conf');?></textarea>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?php echo $pia_lang['Gen_Restore'];?></button>
-                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" data-dismiss="modal" style="margin: 5px" onclick="BackupConfigFile()"><?php echo $pia_lang['Gen_Backup'];?></button>
+                    <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?php echo $pia_lang['Maintenance_ConfEditor_Restore'];?></button>
+                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" data-dismiss="modal" style="margin: 5px" onclick="BackupConfigFile()"><?php echo $pia_lang['Maintenance_ConfEditor_Backup'];?></button>
                     <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig" style="margin: 5px"><?php echo $pia_lang['Gen_Save'];?></button>
                     <button type="button" class="btn btn-default" id="btnPiaEditorClose" data-dismiss="modal" style="margin: 5px"><?php echo $pia_lang['Gen_Close'];?></button>
                   </div>
