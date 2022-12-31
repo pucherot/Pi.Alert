@@ -944,13 +944,26 @@ if (isset($_REQUEST['PiaArpTimer'])) {
 }
 
 //------------------------------------------------------------------------------
-//  Save Config File
+//  Restore Config File
 //------------------------------------------------------------------------------
 function RestoreConfigFile() {
   global $pia_lang;
+  // prepare fast Backup
+  //$file = '../../../config/pialert.conf';
+  // start temp var
+  $file = '../../../config/pialert2.conf';
+  // end temp var
+  //$newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
+  $laststate = '../../../config/pialert-prev.bak';
 
-  echo "Restore Success";
-
+  // Restore fast Backup
+  if (!copy($laststate, $file)) {
+      echo $pia_lang['BackDevices_ConfEditor_RestoreError'];
+  } else {
+    echo $pia_lang['BackDevices_ConfEditor_RestoreOkay'];
+  }
+  copy($file, $laststate);
+  echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 }
 
 //------------------------------------------------------------------------------
@@ -960,16 +973,17 @@ function BackupConfigFile() {
   global $pia_lang;
 
   // prepare fast Backup
-  $file = '../../../config/pialert.conf';
+  $file = '../../../config/pialert2.conf';
   $newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
-  global $pia_lang;
+  $laststate = '../../../config/pialert-prev.bak';
 
-  // copy files as a fast Backup
   if (!copy($file, $newfile)) {
       echo $pia_lang['BackDevices_ConfEditor_CopError'];
   } else {
     echo $pia_lang['BackDevices_ConfEditor_CopOkay'];
   }
+  // copy files as a fast Backup
+  copy($file, $laststate);
 
 }
 

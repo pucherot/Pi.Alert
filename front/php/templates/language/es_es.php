@@ -308,9 +308,13 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='El inicio de sesión se desactivará. Ahora, todos los usuarios tienen la posibilidad de acceder de nuevo a la página Pi.Alert.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
-
 $pia_lang['Maintenance_ConfEditor_Backup'] ='Crear copia de seguridad';
 $pia_lang['Maintenance_ConfEditor_Restore'] ='A la última versión';
+$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='A la versión anterior';
+$pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='Se restaura la última versión del fichero de configuración. La "versión anterior" es la de la última copia de seguridad o la versión anterior al último guardado. Dependiendo de cuál sea más actual.';
+$pia_lang['Maintenance_ConfEditor_Backup_info'] ='Además del archivo "pialert-prev.bak", se crea otra copia de seguridad con la fecha y hora actuales. Esta copia de seguridad debe restaurarse manualmente si es necesario (cambiar el nombre a "pialert.conf"). Un archivo "pialert-prev.bak" existente siempre se sobrescribe.';
+$pia_lang['Maintenance_ConfEditor_Restore_info'] ='Esta función restaura el archivo de configuración desde el archivo "pialert-prev.bak". El archivo "pialert-prev.bak" se crea al guardar y crear una copia de seguridad.';
+$pia_lang['Maintenance_ConfEditor_Save_info'] ='El contenido del campo de texto con cualquier cambio se guarda en el archivo "pialert.conf". La configuración anterior se guarda como "pialert-prev.bak". Con cada guardado, el archivo "pialert-prev.bak" se sobrescribe una y otra vez con el archivo de configuración anterior.';
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page - Update by @TeroRERO 25jul2022 and leiweibau 29ago2022

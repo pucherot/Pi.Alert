@@ -6,8 +6,10 @@ session_start();
 // ###################################
 
 if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {
-  $pia_config_set_dir = '../config/';
-  $newconfig = fopen($pia_config_set_dir.'temp.conf','w');
+  $laststate = '../config/pialert-prev.bak';
+  $configfile = '../config/pialert2.conf';
+  copy($configfile, $laststate);
+  $newconfig = fopen($configfile,'w');
   fwrite($newconfig, $_REQUEST['txtConfigFileEditor']);
   fclose($newconfig);
 }

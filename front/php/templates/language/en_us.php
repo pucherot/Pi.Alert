@@ -349,9 +349,13 @@ $pia_lang['BackDevices_Theme_invalid'] = 'No theme selected';
 $pia_lang['BackDevices_Language_set'] = 'Language applied';
 $pia_lang['BackDevices_Language_notset'] = 'Language not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'No language selected';
-
-$pia_lang['BackDevices_ConfEditor_CopError'] = 'Die Sicherung der Konfiguration ist nicht möglich.';
-$pia_lang['BackDevices_ConfEditor_CopOkay'] = 'Die Sicherung der Konfiguration ist abgeschlossen.';
+$pia_lang['BackDevices_ConfEditor_CopError'] = 'It is not possible to save the configuration.';
+$pia_lang['BackDevices_ConfEditor_CopOkay'] = 'The configuration backup is completed.';
+$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='To previous version';
+$pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='The last version of the configuration file is restored. The "previous version" is either that of the last backup, or the version before the last save. Depending on which is more current.';
+$pia_lang['Maintenance_ConfEditor_Backup_info'] ='In addition to the "pialert-prev.bak" file, another backup is created with the current date incl. time. This backup must be restored manually if necessary (rename to "pialert.conf"). An existing "pialert-prev.bak" file is always overwritten.';
+$pia_lang['Maintenance_ConfEditor_Restore_info'] ='This function restores the configuration file from the "pialert-prev.bak" file. The file "pialert-prev.bak" is created when saving and creating a backup.';
+$pia_lang['Maintenance_ConfEditor_Save_info'] ='The content of the text field with any changes is saved to the "pialert.conf" file. The previous configuration is saved as "pialert-prev.bak". With each save the file "pialert-prev.bak" is overwritten again and again with the previous configuration file.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

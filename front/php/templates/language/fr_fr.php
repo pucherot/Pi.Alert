@@ -86,7 +86,7 @@ $pia_lang['Device_Table_nav_prev'] = 'Anterior';
 // Presence Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Presence_Title'] = 'Historial por dispositivo';
+$pia_lang['Presence_Title'] = 'Présence par appareil'; //
 $pia_lang['Presence_Shortcut_AllDevices'] = 'Tous les appareils'; //
 $pia_lang['Presence_Shortcut_Connected'] = 'Connecté'; //
 $pia_lang['Presence_Shortcut_Favorites'] = 'Favoris'; //
@@ -98,23 +98,23 @@ $pia_lang['Presence_Shortcut_Devices'] = 'Dispositifs'; //
 // Localizationfiles under pialert/front/lib/AdminLTE/bower_components/fullcalendar/dist/locale
 $pia_lang['Presence_CallHead_Devices'] = 'Dispositifs'; //
 $pia_lang['Presence_CalHead_lang'] = 'fr'; //
-$pia_lang['Presence_CalHead_year'] = 'año';
-$pia_lang['Presence_CalHead_quarter'] = 'trimestre';
-$pia_lang['Presence_CalHead_month'] = 'mes';
-$pia_lang['Presence_CalHead_week'] = 'semana';
+$pia_lang['Presence_CalHead_year'] = 'Année'; //
+$pia_lang['Presence_CalHead_quarter'] = 'trimestre'; //
+$pia_lang['Presence_CalHead_month'] = 'Mois'; //
+$pia_lang['Presence_CalHead_week'] = 'Semaine'; //
 
 //////////////////////////////////////////////////////////////////
 // Events Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Events_Title'] = 'Événements'; //
-$pia_lang['Events_Periodselect_today'] = 'Hoy';
-$pia_lang['Events_Periodselect_LastWeek'] = 'La semana pasada';
-$pia_lang['Events_Periodselect_LastMonth'] = 'El mes pasado';
-$pia_lang['Events_Periodselect_LastYear'] = 'El año pasado';
-$pia_lang['Events_Periodselect_All'] = 'Toda la información';
-$pia_lang['Events_Shortcut_AllEvents'] = 'Todos los eventos';
-$pia_lang['Events_Shortcut_Sessions'] = 'Sesiones';
+$pia_lang['Events_Periodselect_today'] = 'Aujourd&apos;hui'; //
+$pia_lang['Events_Periodselect_LastWeek'] = 'Semaine dernière'; //
+$pia_lang['Events_Periodselect_LastMonth'] = 'Dernier mois'; //
+$pia_lang['Events_Periodselect_LastYear'] = 'Dernière année'; //
+$pia_lang['Events_Periodselect_All'] = 'Tous les événements'; //
+$pia_lang['Events_Shortcut_AllEvents'] = 'Tous les événements'; //
+$pia_lang['Events_Shortcut_Sessions'] = 'Sessions'; //
 $pia_lang['Events_Shortcut_MissSessions'] = 'Sesiones faltantes';
 $pia_lang['Events_Shortcut_VoidSessions'] = 'Sesiones anuladas';
 $pia_lang['Events_Shortcut_NewDevices'] = 'Nuevo(s)';
@@ -308,9 +308,13 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='El inicio de sesión se desactivará. Ahora, todos los usuarios tienen la posibilidad de acceder de nuevo a la página Pi.Alert.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
-
 $pia_lang['Maintenance_ConfEditor_Backup'] ='Créer une sauvegarde'; //
 $pia_lang['Maintenance_ConfEditor_Restore'] ='Vers la dernière version'; //
+$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='Vers la version précédente'; //
+$pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='C&apos;est la dernière version du fichier de configuration qui est restaurée. La "version précédente" est soit celle de la dernière sauvegarde, soit la version antérieure à la dernière sauvegarde. Selon la plus récente.'; //
+$pia_lang['Maintenance_ConfEditor_Backup_info'] ='Outre le fichier "pialert-prev.bak", une autre sauvegarde est créée avec la date et l&apos;heure actuelles. Cette sauvegarde doit être restaurée manuellement en cas de besoin (renommer "pialert.conf"). Un fichier "pialert-prev.bak" existant est toujours écrasé.'; //
+$pia_lang['Maintenance_ConfEditor_Restore_info'] ='Cette fonction restaure le fichier de configuration à partir du fichier "pialert-prev.bak". Le fichier "pialert-prev.bak" est créé lors de l&apos;enregistrement et de la création d&apos;une sauvegarde.'; //
+$pia_lang['Maintenance_ConfEditor_Save_info'] ='Le contenu du champ de texte avec les éventuelles modifications est enregistré dans le fichier "pialert.conf". La configuration précédente est sauvegardée en tant que "pialert-prev.bak". A chaque sauvegarde, le fichier "pialert-prev.bak" est toujours écrasé par le fichier de configuration précédent.'; //
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page
@@ -346,8 +350,8 @@ $pia_lang['BackDevices_Login_enabled'] = 'Login activado.';
 $pia_lang['BackDevices_Theme_set'] = 'Theme applied';
 $pia_lang['BackDevices_Theme_notset'] = 'Theme not applied';
 $pia_lang['BackDevices_Theme_invalid'] = 'Selection invalid';
-$pia_lang['BackDevices_Language_set'] = 'Theme applied';
-$pia_lang['BackDevices_Language_notset'] = 'Theme not applied';
+$pia_lang['BackDevices_Language_set'] = 'Language applied';
+$pia_lang['BackDevices_Language_notset'] = 'Language not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
 
 $pia_lang['BackDevices_ConfEditor_CopError'] = "La sauvegarde de la configuration n'est pas possible."; //

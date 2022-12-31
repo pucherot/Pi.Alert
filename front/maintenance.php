@@ -569,7 +569,24 @@ else {
     <div class="box">
         <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
             <button type="button" id="oisjmofeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor" style="margin: 5px;">Pi.Alert Config bearbeiten</button>
-      </div>
+            <table class="table" style="font-size: 16px; text-align: left; margin-top: 10px;">
+              <tbody>
+                <tr>
+                  <th scope="row" class="text-nowrap">"<?php echo $pia_lang['Maintenance_ConfEditor_Restore'];?>"</th>
+                  <td><?php echo $pia_lang['Maintenance_ConfEditor_Restore_info'];?></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-nowrap">"<?php echo $pia_lang['Maintenance_ConfEditor_Backup'];?>"</th>
+                  <td><?php echo $pia_lang['Maintenance_ConfEditor_Backup_info'];?></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-nowrap">"<?php echo $pia_lang['Gen_Save'];?>"</th>
+                  <td><?php echo $pia_lang['Maintenance_ConfEditor_Save_info'];?></td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
     </div>
 
 <!-- Config Editor - Modals ----------------------------------------------------------------- -->
@@ -584,7 +601,7 @@ else {
                     <h4 class="modal-title">Config Editor</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
-                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?php echo file_get_contents('../config/pialert.conf');?></textarea>
+                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?php echo file_get_contents('../config/pialert2.conf');?></textarea>
                 </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?php echo $pia_lang['Maintenance_ConfEditor_Restore'];?></button>
@@ -855,7 +872,7 @@ function BackupConfigFile()  {
 // Restore Configfile
 function askRestoreConfigFile() {
   // Ask 
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_loginenable_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_loginenable_noti_text'];?>',
+  showModalWarning('<?php echo $pia_lang['Maintenance_ConfEditor_Restore_noti'];?>', '<?php echo $pia_lang['Maintenance_ConfEditor_Restore_noti_text'];?>',
     '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'RestoreConfigFile');
 }
 function RestoreConfigFile() {
