@@ -104,7 +104,7 @@ $pia_lang['Presence_CalHead_month'] = 'Mois';
 $pia_lang['Presence_CalHead_week'] = 'Semaine';
 
 //////////////////////////////////////////////////////////////////
-// Events Page
+// Events Page - ready
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Events_Title'] = 'Événements';
@@ -125,29 +125,29 @@ $pia_lang['Events_TableHead_Device'] = 'Dispositifs';
 $pia_lang['Events_TableHead_Owner'] = 'Propriétaire';
 $pia_lang['Events_TableHead_Date'] = 'Date';
 $pia_lang['Events_TableHead_EventType'] = 'Évènement Type';
-$pia_lang['Events_TableHead_Connection'] = '';
-$pia_lang['Events_TableHead_Disconnection'] = '';
-$pia_lang['Events_TableHead_Duration'] = '';
-$pia_lang['Events_TableHead_DurationOrder'] = '';
-$pia_lang['Events_TableHead_IP'] = '';
-$pia_lang['Events_TableHead_IPOrder'] = '';
-$pia_lang['Events_TableHead_AdditionalInfo'] = '';
-$pia_lang['Events_Searchbox'] = '';
-$pia_lang['Events_Tablelenght'] = '';
-$pia_lang['Events_Tablelenght_all'] = '';
-$pia_lang['Events_Table_info'] = '';
-$pia_lang['Events_Table_nav_next'] = '';
-$pia_lang['Events_Table_nav_prev'] = '';
+$pia_lang['Events_TableHead_Connection'] = 'Connexion';
+$pia_lang['Events_TableHead_Disconnection'] = 'Déconnection';
+$pia_lang['Events_TableHead_Duration'] = 'Durée';
+$pia_lang['Events_TableHead_DurationOrder'] = 'Duration Order';
+$pia_lang['Events_TableHead_IP'] = 'IP';
+$pia_lang['Events_TableHead_IPOrder'] = 'IP Order';
+$pia_lang['Events_TableHead_AdditionalInfo'] = 'Infos complémentaires';
+$pia_lang['Events_Searchbox'] = 'Recherche';
+$pia_lang['Events_Tablelenght'] = 'Afficher _MENU_ entrées';
+$pia_lang['Events_Tablelenght_all'] = 'Tous les';
+$pia_lang['Events_Table_info'] = 'Afficher _START_ à _END_ de _TOTAL_ entrées';
+$pia_lang['Events_Table_nav_next'] = 'Prochain';
+$pia_lang['Events_Table_nav_prev'] = 'Retour';
 
 //////////////////////////////////////////////////////////////////
 // Device Details Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['DevDetail_Periodselect_today'] = 'Hoy';
-$pia_lang['DevDetail_Periodselect_LastWeek'] = 'La semana pasada';
-$pia_lang['DevDetail_Periodselect_LastMonth'] = 'El mes pasado';
-$pia_lang['DevDetail_Periodselect_LastYear'] = 'El año pasado';
-$pia_lang['DevDetail_Periodselect_All'] = 'Toda la información';
+$pia_lang['DevDetail_Periodselect_today'] = 'Aujourd&apos;hui'; //
+$pia_lang['DevDetail_Periodselect_LastWeek'] = 'Semaine dernière'; //
+$pia_lang['DevDetail_Periodselect_LastMonth'] = 'Dernier mois'; //
+$pia_lang['DevDetail_Periodselect_LastYear'] = 'Dernière année'; //
+$pia_lang['DevDetail_Periodselect_All'] = 'Tous les événements'; //
 $pia_lang['DevDetail_Shortcut_CurrentStatus'] = 'Estado actual';
 $pia_lang['DevDetail_Shortcut_Sessions'] = 'Sesiones';
 $pia_lang['DevDetail_Shortcut_Presence'] = 'Historial';
