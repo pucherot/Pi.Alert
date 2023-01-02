@@ -566,10 +566,21 @@ else {
 
 <!-- Config Editor ----------------------------------------------------------------- -->
 
-    <div class="box">
-        <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
-            <button type="button" id="oisjmofeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor" style="margin: 5px;">Pi.Alert Config bearbeiten</button>
-            <table class="table" style="font-size: 16px; text-align: left; margin-top: 10px;">
+ <div class="box">
+        <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
+           <button type="button" id="oisggfjmofeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor"><?php echo $pia_lang['Maintenance_ConfEditor_Start'];?></button>
+      </div>
+    </div>
+
+    <div class="box box-solid box-danger collapsed-box" style="margin-top: -15px;">
+    <div class="box-header with-border" data-widget="collapse">
+           <h3 class="box-title"><?php echo $pia_lang['Maintenance_ConfEditor_Hint'];?></h3>  
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+          </div>        
+    </div>
+    <div class="box-body">
+           <table class="table" style="font-size: 16px; text-align: left; margin-top: 10px;">
               <tbody>
                 <tr>
                   <th scope="row" class="text-nowrap">"<?php echo $pia_lang['Maintenance_ConfEditor_Restore'];?>"</th>
@@ -585,9 +596,9 @@ else {
                 </tr>
               </tbody>
             </table>
-
-        </div>
     </div>
+    <!-- /.box-body -->
+</div>
 
 <!-- Config Editor - Modals ----------------------------------------------------------------- -->
 

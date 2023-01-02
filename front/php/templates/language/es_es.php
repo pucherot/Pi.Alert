@@ -135,7 +135,7 @@ $pia_lang['Events_TableHead_AdditionalInfo'] = 'Información adicional';
 $pia_lang['Events_Searchbox'] = 'Búsqueda';
 $pia_lang['Events_Tablelenght'] = 'Mostrando entradas del MENÚ';
 $pia_lang['Events_Tablelenght_all'] = 'Todos';
-$pia_lang['Events_Table_info'] = 'Mostrando el INICIO y el FINAL de TODAS las entradas';
+$pia_lang['Events_Table_info'] = 'Mostrar de _START_ a _END_ de _TOTAL_ entradas';
 $pia_lang['Events_Table_nav_next'] = 'Siguiente';
 $pia_lang['Events_Table_nav_prev'] = 'Anterior';
 
@@ -308,6 +308,8 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='El inicio de sesión se desactivará. Ahora, todos los usuarios tienen la posibilidad de acceder de nuevo a la página Pi.Alert.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
+$pia_lang['Maintenance_ConfEditor_Start'] = 'Editar Pi.Alert Config';
+$pia_lang['Maintenance_ConfEditor_Hint'] = 'Notas sobre el editor';
 $pia_lang['Maintenance_ConfEditor_Backup'] ='Crear copia de seguridad';
 $pia_lang['Maintenance_ConfEditor_Restore'] ='A la última versión';
 $pia_lang['Maintenance_ConfEditor_Restore_noti'] ='A la versión anterior';

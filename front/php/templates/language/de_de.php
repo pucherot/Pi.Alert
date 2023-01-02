@@ -308,13 +308,15 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Login deaktivieren';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='Der Login wird de&shy;akti&shy;viert. Jeder Nutzer hat nun wieder die Mög&shy;lich&shy;keit auf die Pi.Alert-Seite zuzugreifen.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login deaktivieren';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Bist du dir sicher, dass du den Login deaktivieren möchtest?';
+$pia_lang['Maintenance_ConfEditor_Start'] = 'Pi.Alert Config bearbeiten';
+$pia_lang['Maintenance_ConfEditor_Hint'] = 'Hinweise zum Editor';
 $pia_lang['Maintenance_ConfEditor_Backup'] ='Backup anlegen';
 $pia_lang['Maintenance_ConfEditor_Restore'] ='Zur vorherige Version';
 $pia_lang['Maintenance_ConfEditor_Restore_noti'] ='Zur vorherige Version';
 $pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='Es wird die letzte Version der Konfigurationsdatei zurückgespielt. Die "vorherige Version" ist entweder, die des letzten Backups, oder die Version vor der letzten Speicherung. Je nachdem welche aktueller ist.';
 $pia_lang['Maintenance_ConfEditor_Backup_info'] ='Neben der Datei "pialert-prev.bak" wird eine weitere Sicherung mit dem aktuellen Datum inkl. Uhrzeit angelegt. Diese Sicherung muss im Bedarfsfall manuell wiederhergestellt werden (umbenennen in "pialert.conf"). Eine vorhandene "pialert-prev.bak"-Datei wird immer wieder überschrieben.';
-$pia_lang['Maintenance_ConfEditor_Restore_info'] ='Diese Funktion stellt die Konfigurationsdatei aus der Datei "pialert-prev.bak" wieder her. Die Datei "pialert-prev.bak" wird Beim Speichern und bei der Erstellung einer Sicherung erzeugt.';
-$pia_lang['Maintenance_ConfEditor_Save_info'] ='Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" gespeichert. Die vorherige Konfiguration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" immer wieder mit der vorherigen Konfigurationsdatei überschrieben.';
+$pia_lang['Maintenance_ConfEditor_Restore_info'] ='Diese Funktion stellt die Konfigurationsdatei aus der Datei "pialert-prev.bak" wieder her. Die Datei "pialert-prev.bak" wird beim Speichern und bei der Erstellung einer Sicherung erzeugt.';
+$pia_lang['Maintenance_ConfEditor_Save_info'] ='Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" gespeichert. Die vorherige Konfiguration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" wieder mit der vorherigen vorherigen Version der Konfigurationsdatei überschrieben.';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)

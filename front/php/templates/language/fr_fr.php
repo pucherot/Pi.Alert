@@ -1,143 +1,143 @@
 <?php
 unset($pia_lang);
 //////////////////////////////////////////////////////////////////
-// About
+// About - ready
 //////////////////////////////////////////////////////////////////
-$pia_lang['About_Title'] = 'Garde réseau open source'; //
-$pia_lang['About_Design'] = 'Conçu pour:'; //
-$pia_lang['About_Exit'] = 'Logout'; // //
+$pia_lang['About_Title'] = 'Garde réseau open source';
+$pia_lang['About_Design'] = 'Conçu pour:';
+$pia_lang['About_Exit'] = 'Logout';
 
 //////////////////////////////////////////////////////////////////
-// General
+// General - ready
 //////////////////////////////////////////////////////////////////
-$pia_lang['Gen_Delete'] = 'Supprimer'; //
-$pia_lang['Gen_Cancel'] = 'Annuler'; //
-$pia_lang['Gen_Okay'] = 'Ok'; //
-$pia_lang['Gen_Purge'] = 'Purge'; //
-$pia_lang['Gen_Backup'] = 'Ejecutar copia de seguridad'; 
-$pia_lang['Gen_Restore'] = 'Ejecutar restauración';
-$pia_lang['Gen_Switch'] = 'Switch'; //
-$pia_lang['Gen_Run'] = 'Exécuter'; //
-$pia_lang['Gen_Save'] = 'Sauvez'; //
-$pia_lang['Gen_Close'] = 'Close'; //
+$pia_lang['Gen_Delete'] = 'Supprimer';
+$pia_lang['Gen_Cancel'] = 'Annuler';
+$pia_lang['Gen_Okay'] = 'Ok';
+$pia_lang['Gen_Purge'] = 'Purge';
+$pia_lang['Gen_Backup'] = 'Sauvegarder'; 
+$pia_lang['Gen_Restore'] = 'Restaurer';
+$pia_lang['Gen_Switch'] = 'Switch';
+$pia_lang['Gen_Run'] = 'Exécuter';
+$pia_lang['Gen_Save'] = 'Sauvez';
+$pia_lang['Gen_Close'] = 'Close';
 
 //////////////////////////////////////////////////////////////////
-// Login Page
+// Login Page - ready
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Login_Box'] = 'Entrez votre mot de passe'; //
-$pia_lang['Login_Remember'] = 'Mémoriser'; //
-$pia_lang['Login_Remember_small'] = '(valable pour 7 jours)'; //
-$pia_lang['Login_Submit'] = "S'inscrire"; //
-$pia_lang['Login_Psw_run'] = 'Pour changer le mot de passe, exécutez:'; //
-$pia_lang['Login_Psw_new'] = 'nouveau_mot_de_passe'; //
-$pia_lang['Login_Psw_folder'] = 'dans le dossier "~/pialert/back".'; //
-$pia_lang['Login_Psw_alert'] = 'Consigne de sécurité !'; //
-$pia_lang['Login_Psw-box'] = 'Mot de passe'; //
-$pia_lang['Login_Toggle_Info'] = 'Informations sur le mot de passe'; //
-$pia_lang['Login_Toggle_Info_headline'] = 'Informations sur le mot de passe'; //
-$pia_lang['Login_Toggle_Alert_headline'] = 'Avertissement sur le mot de passe !'; //
+$pia_lang['Login_Box'] = 'Entrez votre mot de passe';
+$pia_lang['Login_Remember'] = 'Mémoriser';
+$pia_lang['Login_Remember_small'] = '(valable pour 7 jours)';
+$pia_lang['Login_Submit'] = "S'inscrire";
+$pia_lang['Login_Psw_run'] = 'Pour changer le mot de passe, exécutez:';
+$pia_lang['Login_Psw_new'] = 'nouveau_mot_de_passe';
+$pia_lang['Login_Psw_folder'] = 'dans le dossier "~/pialert/back".';
+$pia_lang['Login_Psw_alert'] = 'Consigne de sécurité !';
+$pia_lang['Login_Psw-box'] = 'Mot de passe';
+$pia_lang['Login_Toggle_Info'] = 'Informations sur le mot de passe';
+$pia_lang['Login_Toggle_Info_headline'] = 'Informations sur le mot de passe';
+$pia_lang['Login_Toggle_Alert_headline'] = 'Avertissement sur le mot de passe !';
 
 //////////////////////////////////////////////////////////////////
-// Sidebar
+// Sidebar - ready
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Navigation_Devices'] = 'Dispositifs'; //
-$pia_lang['Navigation_Presence'] = 'Présence'; //
-$pia_lang['Navigation_Events'] = 'Événements'; //
-$pia_lang['Navigation_Maintenance'] = 'Paramètres'; //
-$pia_lang['Navigation_Network'] = 'Réseau'; //
-$pia_lang['Navigation_HelpFAQ'] = 'Aide / FAQ'; //
+$pia_lang['Navigation_Devices'] = 'Dispositifs';
+$pia_lang['Navigation_Presence'] = 'Présence';
+$pia_lang['Navigation_Events'] = 'Événements';
+$pia_lang['Navigation_Maintenance'] = 'Paramètres';
+$pia_lang['Navigation_Network'] = 'Réseau';
+$pia_lang['Navigation_HelpFAQ'] = 'Aide / FAQ';
 
 //////////////////////////////////////////////////////////////////
-// Device Page
+// Device Page - ready
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Device_Title'] = 'Dispositifs'; //
-$pia_lang['Device_Shortcut_AllDevices'] = 'Tous les appareils'; //
-$pia_lang['Device_Shortcut_Connected'] = 'Connecté'; //
-$pia_lang['Device_Shortcut_Favorites'] = 'Favoris'; //
+$pia_lang['Device_Title'] = 'Dispositifs';
+$pia_lang['Device_Shortcut_AllDevices'] = 'Tous les appareils';
+$pia_lang['Device_Shortcut_Connected'] = 'Connecté';
+$pia_lang['Device_Shortcut_Favorites'] = 'Favoris';
 $pia_lang['Device_Shortcut_NewDevices'] = 'Nouveau';
-$pia_lang['Device_Shortcut_DownAlerts'] = 'Alertes descendantes'; //
-$pia_lang['Device_Shortcut_Archived'] = 'Archivé'; //
-$pia_lang['Device_Shortcut_Devices'] = 'Dispositifs'; //
-$pia_lang['Device_Shortcut_OnlineChart_a'] = 'Présence du dispositif dans le temps ('; //
-$pia_lang['Device_Shortcut_OnlineChart_b'] = 'h)'; //
-$pia_lang['Device_TableHead_Name'] = 'Nom'; //
-$pia_lang['Device_TableHead_Owner'] = 'Propriétaire'; //
-$pia_lang['Device_TableHead_Type'] = 'Type'; //
-$pia_lang['Device_TableHead_Favorite'] = 'Favori'; //
-$pia_lang['Device_TableHead_Group'] = 'Groupe'; //
-$pia_lang['Device_TableHead_FirstSession'] = 'Première session'; //
-$pia_lang['Device_TableHead_LastSession'] = 'Dernière session'; //
-$pia_lang['Device_TableHead_LastIP'] = 'Dernière IP'; //
-$pia_lang['Device_TableHead_MAC'] = 'MAC'; //
-$pia_lang['Device_TableHead_LastIPOrder'] = 'Última orden de IP';
-$pia_lang['Device_TableHead_Rowid'] = 'Rowid';
-$pia_lang['Device_TableHead_Status'] = 'Estado';
-$pia_lang['Device_Searchbox'] = 'Búsqueda';
-$pia_lang['Device_Tablelenght'] = 'Mostrar _MENU_ entradas';
-$pia_lang['Device_Tablelenght_all'] = 'Todos';
-$pia_lang['Device_Table_info'] = 'Mostrando el INICIO y el FINAL de TODAS las entradas';
-$pia_lang['Device_Table_nav_next'] = 'Siguiente';
-$pia_lang['Device_Table_nav_prev'] = 'Anterior';
+$pia_lang['Device_Shortcut_DownAlerts'] = 'Alertes descendantes';
+$pia_lang['Device_Shortcut_Archived'] = 'Archivé';
+$pia_lang['Device_Shortcut_Devices'] = 'Dispositifs';
+$pia_lang['Device_Shortcut_OnlineChart_a'] = 'Présence du dispositif dans le temps (';
+$pia_lang['Device_Shortcut_OnlineChart_b'] = 'h)';
+$pia_lang['Device_TableHead_Name'] = 'Nom';
+$pia_lang['Device_TableHead_Owner'] = 'Propriétaire';
+$pia_lang['Device_TableHead_Type'] = 'Type';
+$pia_lang['Device_TableHead_Favorite'] = 'Favori';
+$pia_lang['Device_TableHead_Group'] = 'Groupe';
+$pia_lang['Device_TableHead_FirstSession'] = 'Première session';
+$pia_lang['Device_TableHead_LastSession'] = 'Dernière session';
+$pia_lang['Device_TableHead_LastIP'] = 'Dernière IP';
+$pia_lang['Device_TableHead_MAC'] = 'MAC';
+$pia_lang['Device_TableHead_LastIPOrder'] = 'Last IP Order';
+$pia_lang['Device_TableHead_Rowid'] = 'Numéro de ligne';
+$pia_lang['Device_TableHead_Status'] = 'Statut';
+$pia_lang['Device_Searchbox'] = 'Recherche';
+$pia_lang['Device_Tablelenght'] = 'Afficher _MENU_ entrées';
+$pia_lang['Device_Tablelenght_all'] = 'Tous les';
+$pia_lang['Device_Table_info'] = 'Afficher _START_ à _END_ de _TOTAL_ entrées';
+$pia_lang['Device_Table_nav_next'] = 'Prochain';
+$pia_lang['Device_Table_nav_prev'] = 'Retour';
 
 //////////////////////////////////////////////////////////////////
-// Presence Page
+// Presence Page - ready
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Presence_Title'] = 'Présence par appareil'; //
-$pia_lang['Presence_Shortcut_AllDevices'] = 'Tous les appareils'; //
-$pia_lang['Presence_Shortcut_Connected'] = 'Connecté'; //
-$pia_lang['Presence_Shortcut_Favorites'] = 'Favoris'; //
-$pia_lang['Presence_Shortcut_NewDevices'] = 'Nouveau'; //
-$pia_lang['Presence_Shortcut_DownAlerts'] = 'Alertes descendantes'; //
-$pia_lang['Presence_Shortcut_Archived'] = 'Archivé'; //
-$pia_lang['Presence_Shortcut_Devices'] = 'Dispositifs'; //
+$pia_lang['Presence_Title'] = 'Présence par appareil';
+$pia_lang['Presence_Shortcut_AllDevices'] = 'Tous les appareils';
+$pia_lang['Presence_Shortcut_Connected'] = 'Connecté';
+$pia_lang['Presence_Shortcut_Favorites'] = 'Favoris';
+$pia_lang['Presence_Shortcut_NewDevices'] = 'Nouveau';
+$pia_lang['Presence_Shortcut_DownAlerts'] = 'Alertes descendantes';
+$pia_lang['Presence_Shortcut_Archived'] = 'Archivé';
+$pia_lang['Presence_Shortcut_Devices'] = 'Dispositifs';
 
 // Localizationfiles under pialert/front/lib/AdminLTE/bower_components/fullcalendar/dist/locale
-$pia_lang['Presence_CallHead_Devices'] = 'Dispositifs'; //
-$pia_lang['Presence_CalHead_lang'] = 'fr'; //
-$pia_lang['Presence_CalHead_year'] = 'Année'; //
-$pia_lang['Presence_CalHead_quarter'] = 'trimestre'; //
-$pia_lang['Presence_CalHead_month'] = 'Mois'; //
-$pia_lang['Presence_CalHead_week'] = 'Semaine'; //
+$pia_lang['Presence_CallHead_Devices'] = 'Dispositifs';
+$pia_lang['Presence_CalHead_lang'] = 'fr';
+$pia_lang['Presence_CalHead_year'] = 'Année';
+$pia_lang['Presence_CalHead_quarter'] = 'trimestre';
+$pia_lang['Presence_CalHead_month'] = 'Mois';
+$pia_lang['Presence_CalHead_week'] = 'Semaine';
 
 //////////////////////////////////////////////////////////////////
 // Events Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Events_Title'] = 'Événements'; //
-$pia_lang['Events_Periodselect_today'] = 'Aujourd&apos;hui'; //
-$pia_lang['Events_Periodselect_LastWeek'] = 'Semaine dernière'; //
-$pia_lang['Events_Periodselect_LastMonth'] = 'Dernier mois'; //
-$pia_lang['Events_Periodselect_LastYear'] = 'Dernière année'; //
-$pia_lang['Events_Periodselect_All'] = 'Tous les événements'; //
-$pia_lang['Events_Shortcut_AllEvents'] = 'Tous les événements'; //
-$pia_lang['Events_Shortcut_Sessions'] = 'Sessions'; //
-$pia_lang['Events_Shortcut_MissSessions'] = 'Sesiones faltantes';
-$pia_lang['Events_Shortcut_VoidSessions'] = 'Sesiones anuladas';
-$pia_lang['Events_Shortcut_NewDevices'] = 'Nuevo(s)';
-$pia_lang['Events_Shortcut_DownAlerts'] = 'Alerta(s) de caída(s)';
-$pia_lang['Events_Shortcut_Events'] = 'Eventos';
+$pia_lang['Events_Title'] = 'Événements';
+$pia_lang['Events_Periodselect_today'] = 'Aujourd&apos;hui';
+$pia_lang['Events_Periodselect_LastWeek'] = 'Semaine dernière';
+$pia_lang['Events_Periodselect_LastMonth'] = 'Dernier mois';
+$pia_lang['Events_Periodselect_LastYear'] = 'Dernière année';
+$pia_lang['Events_Periodselect_All'] = 'Tous les événements';
+$pia_lang['Events_Shortcut_AllEvents'] = 'Tous les événements';
+$pia_lang['Events_Shortcut_Sessions'] = 'Sessions';
+$pia_lang['Events_Shortcut_MissSessions'] = 'Sessions manquantes';
+$pia_lang['Events_Shortcut_VoidSessions'] = 'Sessions terminées';
+$pia_lang['Events_Shortcut_NewDevices'] = 'Nouveau';
+$pia_lang['Events_Shortcut_DownAlerts'] = 'Alertes descendantes';
+$pia_lang['Events_Shortcut_Events'] = 'Événements';
 $pia_lang['Events_TableHead_Order'] = 'Ordenar';
-$pia_lang['Events_TableHead_Device'] = 'Dispositivo';
-$pia_lang['Events_TableHead_Owner'] = 'Propietario';
-$pia_lang['Events_TableHead_Date'] = 'Fecha';
-$pia_lang['Events_TableHead_EventType'] = 'Tipo de evento';
-$pia_lang['Events_TableHead_Connection'] = 'Conexión';
-$pia_lang['Events_TableHead_Disconnection'] = 'Desconexión';
-$pia_lang['Events_TableHead_Duration'] = 'Duración';
-$pia_lang['Events_TableHead_DurationOrder'] = 'Orden de duración';
-$pia_lang['Events_TableHead_IP'] = 'Dirección IP';
-$pia_lang['Events_TableHead_IPOrder'] = 'Orden de IP';
-$pia_lang['Events_TableHead_AdditionalInfo'] = 'Información adicional';
-$pia_lang['Events_Searchbox'] = 'Búsqueda';
-$pia_lang['Events_Tablelenght'] = 'Mostrando entradas del MENÚ';
-$pia_lang['Events_Tablelenght_all'] = 'Todos';
-$pia_lang['Events_Table_info'] = 'Mostrando el INICIO y el FINAL de TODAS las entradas';
-$pia_lang['Events_Table_nav_next'] = 'Siguiente';
-$pia_lang['Events_Table_nav_prev'] = 'Anterior';
+$pia_lang['Events_TableHead_Device'] = 'Dispositifs';
+$pia_lang['Events_TableHead_Owner'] = 'Propriétaire';
+$pia_lang['Events_TableHead_Date'] = 'Date';
+$pia_lang['Events_TableHead_EventType'] = 'Évènement Type';
+$pia_lang['Events_TableHead_Connection'] = '';
+$pia_lang['Events_TableHead_Disconnection'] = '';
+$pia_lang['Events_TableHead_Duration'] = '';
+$pia_lang['Events_TableHead_DurationOrder'] = '';
+$pia_lang['Events_TableHead_IP'] = '';
+$pia_lang['Events_TableHead_IPOrder'] = '';
+$pia_lang['Events_TableHead_AdditionalInfo'] = '';
+$pia_lang['Events_Searchbox'] = '';
+$pia_lang['Events_Tablelenght'] = '';
+$pia_lang['Events_Tablelenght_all'] = '';
+$pia_lang['Events_Table_info'] = '';
+$pia_lang['Events_Table_nav_next'] = '';
+$pia_lang['Events_Table_nav_prev'] = '';
 
 //////////////////////////////////////////////////////////////////
 // Device Details Page
@@ -308,6 +308,8 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='El inicio de sesión se desactivará. Ahora, todos los usuarios tienen la posibilidad de acceder de nuevo a la página Pi.Alert.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Login desactivado.';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='¿Estás seguro de que quieres desactivar el inicio de sesión?';
+$pia_lang['Maintenance_ConfEditor_Start'] = 'Modifier la config Pi.Alert'; //
+$pia_lang['Maintenance_ConfEditor_Hint'] = 'Remarques sur l&apos;éditeur'; //
 $pia_lang['Maintenance_ConfEditor_Backup'] ='Créer une sauvegarde'; //
 $pia_lang['Maintenance_ConfEditor_Restore'] ='Vers la dernière version'; //
 $pia_lang['Maintenance_ConfEditor_Restore_noti'] ='Vers la version précédente'; //
