@@ -31,6 +31,7 @@ main() {
   check_pialert_home
   check_python_version
 
+  reset_permissions
   create_backup
   move_files
   clean_files
@@ -47,6 +48,17 @@ main() {
   print_msg ""
 
   move_logfile
+}
+
+# ------------------------------------------------------------------------------
+# Reset Permissions
+# ------------------------------------------------------------------------------
+reset_permissions() {
+  print_msg "- Reset permissions..."
+  sudo chgrp -R www-data $PIALERT_HOME/db                             2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/db                                  2>&1 >> "$LOG"
+  sudo chgrp -R www-data $PIALERT_HOME/config                         2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/config                              2>&1 >> "$LOG"
 }
 
 # ------------------------------------------------------------------------------
@@ -133,7 +145,7 @@ download_pialert() {
 # ------------------------------------------------------------------------------
 update_config() {
   print_msg "- Config backup..."
-  sudo chmod 666 "$PIALERT_HOME/config/pialert.conf"
+#  sudo chmod 666 "$PIALERT_HOME/config/pialert.conf"
   cp "$PIALERT_HOME/config/pialert.conf" "$PIALERT_HOME/config/pialert.conf.back"  2>&1 >> "$LOG"
 
   print_msg "- Updating config file..."
@@ -187,7 +199,7 @@ fi
 update_db() {
   print_msg "- Updating DB permissions..."
   sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
-  sudo chmod -R 770 $PIALERT_HOME/db                              2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/db                              2>&1 >> "$LOG"
 
   print_msg "- Installing sqlite3..."
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
@@ -239,7 +251,7 @@ update_permissions() {
   chmod +x "$PIALERT_HOME/back/pialert-cli"                         2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/pialert.py"                          2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/update_vendors.sh"                   2>&1 >> "$LOG"
-  sudo chmod -R 770 "$PIALERT_HOME/config/"                         2>&1 >> "$LOG"
+  sudo chmod -R 775 "$PIALERT_HOME/config/"                         2>&1 >> "$LOG"
   sudo chgrp -R www-data "$PIALERT_HOME/config/pialert.conf"
   print_msg "- Create Logfile Symlinks..."
   touch "$PIALERT_HOME/log/pialert.vendors.log"
