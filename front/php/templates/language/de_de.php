@@ -227,7 +227,7 @@ $pia_lang['Maintenance_Tools_Logviewer_Vendor'] = 'Vendor Update';
 $pia_lang['Maintenance_Tools_Logviewer_Vendor_empty'] = 'Kein Log verfügbar';
 $pia_lang['Maintenance_Tools_Logviewer_Cleanup'] = 'Cleanup';
 $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty'] = 'Kein Log verfügbar';
-$pia_lang['Maintenance_Tools_Logviewer_Nmap'] = 'Nmap (Speicher)';
+$pia_lang['Maintenance_Tools_Logviewer_Nmap'] = 'Nmap (Session)';
 $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'] = 'Kein Log verfügbar';
 $pia_lang['Maintenance_themeselector_lable'] = 'Skin Auswahl';
 $pia_lang['Maintenance_themeselector_empty'] = 'Skin wählen';
@@ -263,7 +263,7 @@ $pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet den arp-Scan an oder au
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'arp-Scan stoppen/starten';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'Wenn der Scan aus ist, bleibt er so lange aus bis er wieder aktiviert wird.';
 $pia_lang['Maintenance_Tool_test_notification'] = 'Benachrichtigung testen';
-$pia_lang['Maintenance_Tool_test_notification_text'] = 'Führt eine Probe&shy;be&shy;nach&shy;rich&shy;tigung aus, um die korrekte Kon&shy;figu&shy;ration der Dienste zu testen.';
+$pia_lang['Maintenance_Tool_test_notification_text'] = 'Sendet eine Probe&shy;be&shy;nach&shy;rich&shy;tigung, um die korrekte Kon&shy;figu&shy;ra&shy;tion der Dienste zu testen.';
 $pia_lang['Maintenance_Tool_test_notification_noti'] = 'Testbenachrichtigung';
 $pia_lang['Maintenance_Tool_test_notification_noti_text'] = 'Soll eine Testbenachrichtigung über alle konfigurierten und aktivierten Benachrichtigungsdienste durchgeführt werden?';
 $pia_lang['Maintenance_Tool_del_empty_macs'] = 'Alle Geräte ohne MAC löschen';
@@ -311,12 +311,12 @@ $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Bist du dir sicher, dass 
 $pia_lang['Maintenance_ConfEditor_Start'] = 'Pi.Alert Config bearbeiten';
 $pia_lang['Maintenance_ConfEditor_Hint'] = 'Hinweise zum Editor';
 $pia_lang['Maintenance_ConfEditor_Backup'] ='Backup anlegen';
-$pia_lang['Maintenance_ConfEditor_Restore'] ='Zur vorherige Version';
-$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='Zur vorherige Version';
+$pia_lang['Maintenance_ConfEditor_Restore'] ='Vorherige Version';
+$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='Vorherige Version';
 $pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='Es wird die letzte Version der Konfigurationsdatei zurückgespielt. Die "vorherige Version" ist entweder, die des letzten Backups, oder die Version vor der letzten Speicherung. Je nachdem welche aktueller ist.';
-$pia_lang['Maintenance_ConfEditor_Backup_info'] ='Neben der Datei "pialert-prev.bak" wird eine weitere Sicherung mit dem aktuellen Datum inkl. Uhrzeit angelegt. Diese Sicherung muss im Bedarfsfall manuell wiederhergestellt werden (umbenennen in "pialert.conf"). Eine vorhandene "pialert-prev.bak"-Datei wird immer wieder überschrieben.';
-$pia_lang['Maintenance_ConfEditor_Restore_info'] ='Diese Funktion stellt die Konfigurationsdatei aus der Datei "pialert-prev.bak" wieder her. Die Datei "pialert-prev.bak" wird beim Speichern und bei der Erstellung einer Sicherung erzeugt.';
-$pia_lang['Maintenance_ConfEditor_Save_info'] ='Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" gespeichert. Die vorherige Konfiguration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" wieder mit der vorherigen vorherigen Version der Konfigurationsdatei überschrieben.';
+$pia_lang['Maintenance_ConfEditor_Backup_info'] ='Neben der Datei "pialert-prev.bak" wird eine weitere Sich&shy;erung mit dem aktuellen Datum inkl. Uhrzeit angelegt. Diese Sicherung muss im Bedarfsfall manuell wieder&shy;her&shy;gestellt werden (umbenennen in "pialert.conf"). Eine vorhandene "pialert-prev.bak"-Datei wird im&shy;mer wieder überschrieben.';
+$pia_lang['Maintenance_ConfEditor_Restore_info'] ='Diese Funktion stellt die Kon&shy;fi&shy;gura&shy;tionsdatei aus der Datei "pialert-prev.bak" wieder her. Die Datei "pialert-prev.bak" wird beim Speichern und bei der Erstellung einer Sicherung er&shy;zeugt.';
+$pia_lang['Maintenance_ConfEditor_Save_info'] ='Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" ge&shy;spei&shy;chert. Die vorherige Kon&shy;figu&shy;ration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" wieder mit der vorherigen Version der Kon&shy;figu&shy;rationsdatei überschrieben.';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)

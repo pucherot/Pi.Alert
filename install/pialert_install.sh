@@ -574,12 +574,12 @@ publish_pialert() {
   fi
 
   print_msg "- Setting permissions..."
+  chmod go+x $INSTALL_DIR
   sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
   chmod -R g+rwx $PIALERT_HOME/db                                 2>&1 >> "$LOG"
-  chmod go+x $INSTALL_DIR
+  chmod 770 $PIALERT_HOME/db                                      2>&1 >> "$LOG"
   sudo chgrp www-data $PIALERT_HOME/config                        2>&1 >> "$LOG"
   sudo chgrp www-data $PIALERT_HOME/config/pialert.conf           2>&1 >> "$LOG"
-  chmod 770 $PIALERT_HOME/db                                      2>&1 >> "$LOG"
   chmod 770 $PIALERT_HOME/config                                  2>&1 >> "$LOG"
   chmod g+rw $PIALERT_HOME/config/pialert.conf                    2>&1 >> "$LOG"
   chmod +x $PIALERT_HOME/back/shoutrrr/arm64/shoutrrr             2>&1 >> "$LOG"

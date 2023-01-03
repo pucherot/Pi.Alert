@@ -580,19 +580,19 @@ else {
           </div>        
     </div>
     <div class="box-body">
-           <table class="table" style="font-size: 16px; text-align: left; margin-top: 10px;">
+           <table class="table" style="text-align: left; margin-top: 10px;">
               <tbody>
                 <tr>
-                  <th scope="row" class="text-nowrap">"<?php echo $pia_lang['Maintenance_ConfEditor_Restore'];?>"</th>
-                  <td><?php echo $pia_lang['Maintenance_ConfEditor_Restore_info'];?></td>
+                  <th scope="row" class="text-nowrap text-danger"><?php echo $pia_lang['Maintenance_ConfEditor_Restore'];?></th>
+                  <td class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_ConfEditor_Restore_info'];?></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="text-nowrap">"<?php echo $pia_lang['Maintenance_ConfEditor_Backup'];?>"</th>
-                  <td><?php echo $pia_lang['Maintenance_ConfEditor_Backup_info'];?></td>
+                  <th scope="row" class="text-nowrap text-danger"><?php echo $pia_lang['Maintenance_ConfEditor_Backup'];?></th>
+                  <td class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_ConfEditor_Backup_info'];?></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="text-nowrap">"<?php echo $pia_lang['Gen_Save'];?>"</th>
-                  <td><?php echo $pia_lang['Maintenance_ConfEditor_Save_info'];?></td>
+                  <th scope="row" class="text-nowrap text-danger"><?php echo $pia_lang['Gen_Save'];?></th>
+                  <td class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_ConfEditor_Save_info'];?></td>
                 </tr>
               </tbody>
             </table>
@@ -605,14 +605,14 @@ else {
     <div class="modal fade" id="modal-config-editor">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-              <form role="form" method="post" action="./index.php">
+              <form role="form" accept-charset="utf-8" method="post" action="./index.php">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
                     <h4 class="modal-title">Config Editor</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
-                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?php echo file_get_contents('../config/pialert2.conf');?></textarea>
+                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?php echo file_get_contents('../config/pialert.conf');?></textarea>
                 </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?php echo $pia_lang['Maintenance_ConfEditor_Restore'];?></button>

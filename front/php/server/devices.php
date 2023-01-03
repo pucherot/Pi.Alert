@@ -951,7 +951,7 @@ function RestoreConfigFile() {
   // prepare fast Backup
   //$file = '../../../config/pialert.conf';
   // start temp var
-  $file = '../../../config/pialert2.conf';
+  $file = '../../../config/pialert.conf';
   // end temp var
   //$newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
   $laststate = '../../../config/pialert-prev.bak';
@@ -973,7 +973,7 @@ function BackupConfigFile() {
   global $pia_lang;
 
   // prepare fast Backup
-  $file = '../../../config/pialert2.conf';
+  $file = '../../../config/pialert.conf';
   $newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
   $laststate = '../../../config/pialert-prev.bak';
 

@@ -7,7 +7,7 @@ session_start();
 
 if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {
   $laststate = '../config/pialert-prev.bak';
-  $configfile = '../config/pialert2.conf';
+  $configfile = '../config/pialert.conf';
   copy($configfile, $laststate);
   $newconfig = fopen($configfile,'w');
   fwrite($newconfig, $_REQUEST['txtConfigFileEditor']);
