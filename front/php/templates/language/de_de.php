@@ -287,6 +287,7 @@ $pia_lang['Maintenance_Tool_backup_text'] = 'Die Datenbank-Sicher&shy;ungen befi
 $pia_lang['Maintenance_Tool_backup_noti'] = 'DB Sicherung';
 $pia_lang['Maintenance_Tool_backup_noti_text'] = 'Sind Sie sicher, dass Sie die Datenbank jetzt sichern möchten. Prüfen Sie, dass gerade keine Scans stattfinden.';
 $pia_lang['Maintenance_Tool_restore'] = 'DB Wiederherstellung';
+$pia_lang['Maintenance_Tool_restore_blocked'] = 'nicht verfügbar';
 $pia_lang['Maintenance_Tool_restore_text'] = 'Das neuste Backup kann über diese Funk&shy;tion wie&shy;derhergestellt wer&shy;den. Ältere Sicher&shy;ungen müssen manuell wie&shy;der&shy;hergestellt wer&shy;den. Es empfiehlt sich eine Integritäts&shy;prüfung nach der Wieder&shy;her&shy;stellung zu machen, falls die Datenbank bei der Sicherung geöffnet war.';
 $pia_lang['Maintenance_Tool_restore_noti'] = 'DB Wiederherstellung';
 $pia_lang['Maintenance_Tool_restore_noti_text'] = 'Sind Sie sicher, dass Sie die Datenbank aus der neusten Sicherung wiederherstellen möchten? Prüfen Sie, dass gerade keine Scans stattfinden.';

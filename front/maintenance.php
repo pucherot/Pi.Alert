@@ -74,10 +74,15 @@ $Pia_Archive_diskusage = number_format(($Pia_Archive_diskusage / 1000000),2,",",
 // Find latest Backup for restore -----------------------------------------------
 
 $latestfiles = glob($Pia_Archive_Path."pialertdb_*.zip");
-natsort($latestfiles);
-$latestfiles = array_reverse($latestfiles,False);
-$latestbackup = $latestfiles[0];
-$latestbackup_date = date ("Y-m-d H:i:s", filemtime($latestbackup));
+if (sizeof($latestfiles) == 0) {
+    $latestbackup_date = $pia_lang['Maintenance_Tool_restore_blocked'];
+    $block_restore_button = true;
+} else {
+        natsort($latestfiles);
+        $latestfiles = array_reverse($latestfiles,False);
+        $latestbackup = $latestfiles[0];
+        $latestbackup_date = date ("Y-m-d H:i:s", filemtime($latestbackup));
+    }
 
 // Aprscan read Timer -----------------------------------------------------------------
 
@@ -549,7 +554,15 @@ else {
                     </div>
                     <div class="db_info_table_row">
                         <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()"><?php echo $pia_lang['Maintenance_Tool_restore'];?><br><?php echo $latestbackup_date;?></button>
+<?php
+if (!$block_restore_button) {
+    echo '<button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
+} else {
+    echo '<button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button disabled" id="btnPiaRestoreDBfromArchive">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
+}
+
+?>
+                            
                         </div>
                         <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_restore_text'];?></div>
                     </div>

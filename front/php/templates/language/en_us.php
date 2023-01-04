@@ -287,6 +287,7 @@ $pia_lang['Maintenance_Tool_backup_text'] = 'The database backups are located in
 $pia_lang['Maintenance_Tool_backup_noti'] = 'DB Backup';
 $pia_lang['Maintenance_Tool_backup_noti_text'] = 'Are you sure you want to execute the the DB Backup? Be sure that no scan is currently running.';
 $pia_lang['Maintenance_Tool_restore'] = 'DB Restore';
+$pia_lang['Maintenance_Tool_restore_blocked'] = 'not available';
 $pia_lang['Maintenance_Tool_restore_text'] = 'The latest backup can be restored via the button, but older backups can only be restored manually. After the restore, make an integrity check on the database for safety, in case the db was currently in write access when the backup was created.';
 $pia_lang['Maintenance_Tool_restore_noti'] = 'DB Restore';
 $pia_lang['Maintenance_Tool_restore_noti_text'] = 'Are you sure you want to execute the the DB Restore? Be sure that no scan is currently running.';

@@ -287,6 +287,7 @@ $pia_lang['Maintenance_Tool_backup_text'] = 'Las copias de seguridad de la base 
 $pia_lang['Maintenance_Tool_backup_noti'] = 'Respaldar DB';
 $pia_lang['Maintenance_Tool_backup_noti_text'] = '¿Estás seguro de que quieres exactos la copia de seguridad de DB? Asegúrese de que ningún escaneo se esté ejecutando actualmente.';
 $pia_lang['Maintenance_Tool_restore'] = 'Restaurar DB';
+$pia_lang['Maintenance_Tool_restore_blocked'] = 'non disponible';
 $pia_lang['Maintenance_Tool_restore_text'] = 'La última copia de seguridad se puede restaurar a través del botón, pero las copias de seguridad anteriores solo se pueden restaurar manualmente. Después de la restauración, realice una verificación de integridad en la base de datos por seguridad, en caso de que el DB estuviera actualmente en acceso de escritura cuando se creó la copia de seguridad.';
 $pia_lang['Maintenance_Tool_restore_noti'] = 'Restaurar DB';
 $pia_lang['Maintenance_Tool_restore_noti_text'] = '¿Estás seguro de que quieres hacer exactos la restauración de DB? Asegúrese de que ningún escaneo se esté ejecutando actualmente.';
