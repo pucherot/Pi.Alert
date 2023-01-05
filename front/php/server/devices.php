@@ -490,7 +490,7 @@ function PiaLoginEnable() {
   session_destroy();
   exec('../../../back/pialert-cli set_login', $output);
   echo $pia_lang['BackDevices_Login_enabled'];
-  echo("<meta http-equiv='refresh' content='1; /pialert/index.php?action=logout'>");
+  echo("<meta http-equiv='refresh' content='1; ./index.php?action=logout'>");
   }
 
 //------------------------------------------------------------------------------
@@ -503,7 +503,7 @@ function PiaLoginDisable() {
   setcookie("PiAlert_SaveLogin", "", time() - 3600);
   exec('../../../back/pialert-cli unset_login', $output);
   echo $pia_lang['BackDevices_Login_disabled'];
-  echo("<meta http-equiv='refresh' content='1; /pialert/index.php?action=logout'>");
+  echo("<meta http-equiv='refresh' content='1; ./index.php?action=logout'>");
   }
 
 //------------------------------------------------------------------------------
