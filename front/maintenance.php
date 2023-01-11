@@ -363,101 +363,86 @@ if ($_REQUEST['tab'] == '1') {
     </ul>
     <div class="tab-content">
         <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
-                <div class="db_info_table">
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="text-align:center;">
-                            <div style="display: inline-block; text-align: center;">
-                              <div class="form-group" style="width:160px; margin-bottom:5px;">
-                                <!-- <div class="col-sm-7"> -->
-                                  <div class="input-group">
-                                    <input class="form-control" id="txtLangSelection" type="text" value="<?php echo $pia_lang['Maintenance_lang_selector_empty'];?>" readonly >
-                                    <div class="input-group-btn">
-                                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonLangSelection">
-                                        <span class="fa fa-caret-down"></span></button>
-                                      <ul id="dropdownLangSelection" class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','en_us');"><?php echo $pia_lang['Maintenance_lang_en_us'];?></a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','de_de');"><?php echo $pia_lang['Maintenance_lang_de_de'];?></a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','fr_fr');"><?php echo $pia_lang['Maintenance_lang_fr_fr'];?></a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','es_es');"><?php echo $pia_lang['Maintenance_lang_es_es'];?></a></li>
-                                      </ul>
+            <table class="table_settings">
+                <tr class="table_settings">
+                    <td class="db_info_table_cell" colspan="2" style="text-align: center;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
+                </tr>
+                <tr class="table_settings_row">
+                    <td class="db_info_table_cell" colspan="2">
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                    <div class="form-group" style="width:160px; margin-bottom:5px;">
+                                      <div class="input-group">
+                                        <input class="form-control" id="txtLangSelection" type="text" value="<?php echo $pia_lang['Maintenance_lang_selector_empty'];?>" readonly >
+                                        <div class="input-group-btn">
+                                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonLangSelection">
+                                            <span class="fa fa-caret-down"></span></button>
+                                          <ul id="dropdownLangSelection" class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','en_us');"><?php echo $pia_lang['Maintenance_lang_en_us'];?></a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','de_de');"><?php echo $pia_lang['Maintenance_lang_de_de'];?></a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','fr_fr');"><?php echo $pia_lang['Maintenance_lang_fr_fr'];?></a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','es_es');"><?php echo $pia_lang['Maintenance_lang_es_es'];?></a></li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>                             
+                                    <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
+                                </div>
+                            </div>
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                    <div class="form-group" style="width:160px; margin-bottom:5px;">
+                                      <div class="input-group">
+                                        <input class="form-control" id="txtSkinSelection" type="text" value="<?php echo $pia_lang['Maintenance_themeselector_empty'];?>" readonly >
+                                        <div class="input-group-btn">
+                                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonSkinSelection">
+                                            <span class="fa fa-caret-down"></span></button>
+                                          <ul id="dropdownSkinSelection" class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black-light');">Black-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black');">Black</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue-light');">Blue-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue');">Blue</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green-light');">Green-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green');">Green</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple-light');">Purple-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple');">Purple</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red-light');">Red-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red');">Red</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow-light');">Yellow-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow');">Yellow</a></li>
+                                          </ul>
+                                        </div>
+                                      </div>
                                     </div>
-                                  </div>
-                              </div>
+                                    <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
+                                </div>
                             </div>
-                            <div style="display: block;">
-                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" >
-                                <?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
+                                </div>
                             </div>
-                        </div>
-                        <div class="db_tools_table_cell_b" style="padding: 10px; height:40px; vertical-align: middle;">
-                            <?php echo $pia_lang['Maintenance_lang_selector_text'];?>
-                        </div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="text-align: center;">
-                            
-                            <div style="display: inline-block; text-align: center;">
-                              <div class="form-group" style="width:160px; margin-bottom:5px;">
-                                <!-- <div class="col-sm-7"> -->
-                                  <div class="input-group">
-                                    <input class="form-control" id="txtSkinSelection" type="text" value="<?php echo $pia_lang['Maintenance_themeselector_empty'];?>" readonly >
-                                    <div class="input-group-btn">
-                                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonSkinSelection">
-                                        <span class="fa fa-caret-down"></span></button>
-                                      <ul id="dropdownSkinSelection" class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black-light');">Black-light</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black');">Black</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue-light');">Blue-light</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue');">Blue</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green-light');">Green-light</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green');">Green</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple-light');">Purple-light</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple');">Purple</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red-light');">Red-light</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red');">Red</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow-light');">Yellow-light</a></li>
-                                        <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow');">Yellow</a></li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                              </div>
-                            </div>
-                            <div style="display: block;">
-                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" >
-                                <?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
+                                </div>
                             </div>
                         </div>
-                        <div class="db_tools_table_cell_b" style="padding: 10px; height:40px; vertical-align: middle;">
-                            <?php echo $pia_lang['Maintenance_themeselector_text']; ?>
-                        </div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a">
-                            <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a">
-                            <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_darkmode_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a">
-                            <button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-yellow dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="text-align: center;">
-                            <div style="display: inline-block; text-align: center;">
+                    </td>
+                </tr>
+                <tr class="table_settings_row">
+                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></td>
+                </tr>
+                <tr class="table_settings_row">
+                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default pa-btn pa-btn-delete bg-yellow dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text'];?></td>
+                </tr>
+                <tr class="table_settings_row">
+                    <td class="db_info_table_cell db_tools_table_cell_a">
+
+                        <div style="display: inline-block; text-align: center;">
                               <div class="form-group" style="width:160px; margin-bottom:5px;">
                                 <!-- <div class="col-sm-7"> -->
                                   <div class="input-group">
@@ -483,32 +468,26 @@ if ($_REQUEST['tab'] == '1') {
                                 <div id="TimeralertText" class=""><?php echo $pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
                             </div>
                         </div>
-                        <div class="db_tools_table_cell_b" style="padding: 10px; height:40px; vertical-align: middle;">
-                            <?php echo $pia_lang['Maintenance_Tool_arpscansw_text']; ?>
-                        </div>    
-                    </div>
+
+                    </td>
+                    <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_arpscansw_text'];?></td>
+                </tr>
+                <tr class="table_settings_row">
 
 <?php
 
 if (strtolower($_SESSION['WebProtection']) != 'true') {
-    echo '          <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a">
-                            <button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">'.$pia_lang['Maintenance_Tool_loginenable'].'</button>
-                        </div>
-                        <div class="db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_loginenable_text'].'</div> 
-                    </div>';}
+    echo '          <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">'.$pia_lang['Maintenance_Tool_loginenable'].'</button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_loginenable_text'].'</td>';}
 else {
-        echo '          <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a">
-                            <button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">'.$pia_lang['Maintenance_Tool_logindisable'].'</button>
-                        </div>
-                        <div class="db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_logindisable_text'].'</div>
-                    </div>'; 
-}
+        echo '      <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">'.$pia_lang['Maintenance_Tool_logindisable'].'</button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_logindisable_text'].'</td>';}
 
 ?>
 
-                </div>
+                </tr>
+            </table>
+
         </div>
         <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
                 <div class="db_info_table">

@@ -456,79 +456,34 @@
     display: none;
 }
 
-.dbtools-button {
-    display: inline-block;
-    width: 160px;
-    height: 60px;
-    white-space: normal;
-    word-wrap: break-word;
-    font-size: 16px;
-    padding: 4px;
-}
+.dbtools-button { display: inline-block; width: 160px; height: 73px; white-space: normal; word-wrap: break-word; font-size: 16px; padding: 4px;}
 
-.db_info_table_cell:nth-child(1) {
-    background: white
-}
+.db_info_table_cell:nth-child(1) { background: white }
+.db_info_table_cell:nth-child(2) { background: white }
+.db_tools_table_cell_a:nth-child(1) { background: white }
+.db_tools_table_cell_a:nth-child(2) { background: white }
+.db_tools_table_cell_b:nth-child(1) { background: white }
+.db_tools_table_cell_b:nth-child(2) { background: white }
+.db_info_table { display: table; border-spacing: 0em; font-weight: 400; font-size: 15px; width: 100%; margin: auto;}
+.db_info_table_row { display: table-row; padding: 3px; }
+.db_info_table_cell { display: table-cell; padding: 3px; padding-left: 10px;}
+.db_tools_table_cell_a { display: table-cell; text-align: center; padding: 10px; min-width: 180px; width: 20%; vertical-align: middle;}
+.db_tools_table_cell_b { display: table-cell; text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px;}
 
-.db_info_table_cell:nth-child(2) {
-    background: white
-}
+.table_settings { border-spacing: 0em; font-weight: 400; font-size: 15px; width: 100%; margin: auto; }
+.table_settings_row { padding: 3px;}
+.table_settings_cell { padding: 3px; padding-left: 10px;}
+.table_settings_cell_a {text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px; }
+.table_settings_cell_b { text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px; }
 
-.db_tools_table_cell_a:nth-child(1) {
-    background: white
-}
-
-.db_tools_table_cell_a:nth-child(2) {
-    background: white
-}
-.db_tools_table_cell_b:nth-child(1) {
-    background: white
-}
-
-.db_tools_table_cell_b:nth-child(2) {
-    background: white
-}
-.db_info_table {
-    display: table;
-    border-spacing: 0em;
-    font-weight: 400;
-    font-size: 15px;
-    width: 100%;
-    margin: auto;
-}
-
-.db_info_table_row {
-    display: table-row;
-    padding: 3px;
-}
-
-.db_info_table_cell {
-    display: table-cell;
-    padding: 3px;
-    padding-left: 10px;
-}
-
-.db_tools_table_cell_a {
-    display: table-cell;
-    text-align: center; 
-    padding: 10px; 
-    min-width: 180px; 
-    width: 20%; 
-    vertical-align: middle;
-}
-.db_tools_table_cell_b {
-    display: table-cell;
-    text-align: justify; 
-    font-size: 16px; 
-    vertical-align: middle;
-    padding: 10px;
-}
+.settings_button_wrapper { display: inline-flex; margin: 15px auto;}
+.settings_button_box { display: inline-block; margin-left: 10px; margin-right: 10px;}
 
 .ajax_scripts_loading {
-background-image: url('../img/Loading_Animation.gif');
-background-repeat: no-repeat;
-background-position: center;
-height: 50px;
+    background-image: url('../img/Loading_Animation.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50px;
 }
 
 .nav-tabs-custom .tab-content {
