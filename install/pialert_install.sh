@@ -386,19 +386,20 @@ install_python() {
   if [ $USE_PYTHON_VERSION -eq 2 ] ; then
     if $PYTHON2 ; then
       print_msg "- Using Python 2"
+      sudo apt-get install python-pip python-requests -y
     else
       print_msg "- Installing Python 2..."
-      sudo apt-get install python python-pip -y                              2>&1 >> "$LOG"
+      sudo apt-get install python python-pip python-requests -y                              2>&1 >> "$LOG"
       pip install requests
     fi
     PYTHON_BIN="python"
   elif [ $USE_PYTHON_VERSION -eq 3 ] ; then
     if $PYTHON3 ; then
       print_msg "- Using Python 3"
+      sudo apt-get install python3-pip python3-requests python-is-python3 -y
     else
       print_msg "- Installing Python 3..."
-      sudo apt-get install python3 python3-pip python-is-python3 -y          2>&1 >> "$LOG"
-      python3 -m pip install requests
+      sudo apt-get install python3 python3-pip python3-requests python-is-python3 -y          2>&1 >> "$LOG"
     fi
     PYTHON_BIN="python3"
   else
