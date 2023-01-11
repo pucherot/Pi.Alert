@@ -365,10 +365,10 @@ if ($_REQUEST['tab'] == '1') {
         <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
             <table class="table_settings">
                 <tr class="table_settings">
-                    <td class="db_info_table_cell" colspan="2" style="text-align: center;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
+                    <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
                 </tr>
                 <tr class="table_settings_row">
-                    <td class="db_info_table_cell" colspan="2">
+                    <td class="db_info_table_cell" colspan="2" style="padding-bottom: 20px;">
                         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">

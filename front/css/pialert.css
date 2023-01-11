@@ -467,13 +467,13 @@
 .db_info_table { display: table; border-spacing: 0em; font-weight: 400; font-size: 15px; width: 100%; margin: auto;}
 .db_info_table_row { display: table-row; padding: 3px; }
 .db_info_table_cell { display: table-cell; padding: 3px; padding-left: 10px;}
-.db_tools_table_cell_a { display: table-cell; text-align: center; padding: 10px; min-width: 180px; width: 20%; vertical-align: middle;}
+.db_tools_table_cell_a { display: table-cell; text-align: center; padding: 10px; min-width: 180px; width: 20%; vertical-align: top;}
 .db_tools_table_cell_b { display: table-cell; text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px;}
 
 .table_settings { border-spacing: 0em; font-weight: 400; font-size: 15px; width: 100%; margin: auto; }
 .table_settings_row { padding: 3px;}
 .table_settings_cell { padding: 3px; padding-left: 10px;}
-.table_settings_cell_a {text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px; }
+.table_settings_cell_a { text-align: justify; font-size: 16px; vertical-align: top; padding: 10px; }
 .table_settings_cell_b { text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px; }
 
 .settings_button_wrapper { display: inline-flex; margin: 15px auto;}
