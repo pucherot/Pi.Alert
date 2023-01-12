@@ -431,6 +431,40 @@ if ($_REQUEST['tab'] == '1') {
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+
+  <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+  <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+
+                    <div class="form-group">
+                    
+                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                          <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" style="position: relative; margin-top:-3px;">
+                          <label class="control-label">Favoriten</label>
+                        </div>
+                        
+                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                          <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" style="position: relative; margin-top:-3px;">
+                          <label class="control-label">Gruppe</label>
+                        </div>
+
+                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                          <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" style="position: relative; margin-top:-3px;">
+                          <label class="control-label">Eigentümer</label>
+                        </div>
+
+                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                          <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" style="position: relative; margin-top:-3px;">
+                          <label class="control-label">Typ</label>
+                        </div>
+
+                      <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" >Save</button>
+
+                    </div>
+
+                    </td>
+                </tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></td>
@@ -884,6 +918,25 @@ function RestoreConfigFile() {
     showMessage (msg);
   });
 }
+
+// Set Device List Column
+function askDeviceListCol() {
+  // Ask 
+  showModalWarning('Überschrift', 'Funktionstext',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'setDeviceListCol');
+}
+function setDeviceListCol() {
+  // Execute
+    $.get('php/server/devices.php?action=setDeviceListCol&'
+    + '&favorite='       + ($('#chkFavorite')[0].checked * 1)
+    + '&group='          + ($('#chkGroup')[0].checked * 1)
+    + '&type='           + ($('#chkType')[0].checked * 1)
+    + '&owner='          + ($('#chkOwner')[0].checked * 1)
+    , function(msg) {
+    showMessage (msg);
+  });
+}
+
 </script>
 
 

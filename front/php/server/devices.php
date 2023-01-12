@@ -60,6 +60,8 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'setPiAlertLanguage':           setPiAlertLanguage();                    break;
       case 'setPiAlertArpTimer':           setPiAlertArpTimer();                    break;
 
+      case 'setDeviceListCol':             setDeviceListCol();                      break;
+
       case 'getDevicesTotals':             getDevicesTotals();                      break;
       case 'getDevicesList':               getDevicesList();                        break;
       case 'getDevicesListCalendar':       getDevicesListCalendar();                break;
@@ -984,6 +986,20 @@ function BackupConfigFile() {
   }
   // copy files as a fast Backup
   copy($file, $laststate);
+}
+
+//------------------------------------------------------------------------------
+//  Set Device List Columns
+//------------------------------------------------------------------------------
+function setDeviceListCol() {
+  global $pia_lang;
+
+  if (($_REQUEST['favorite'] == 0) || ($_REQUEST['favorite'] == 1)) {$Set_Favorites = $_REQUEST['favorite'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['group'] == 0) || ($_REQUEST['group'] == 1)) {$Set_Group = $_REQUEST['group'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['owner'] == 0) || ($_REQUEST['owner'] == 1)) {$Set_Owner = $_REQUEST['owner'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['type'] == 0) || ($_REQUEST['type'] == 1)) {$Set_Type = $_REQUEST['type'];} else {echo "Fehler"; exit;}
+
+  echo 'Favorite ('.$Set_Favorites.'), Group ('.$Set_Group.'), Owner ('.$Set_Owner.'), Type ('.$Set_Type.')';
 
 }
 
