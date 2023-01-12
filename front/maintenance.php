@@ -364,12 +364,14 @@ if ($_REQUEST['tab'] == '1') {
     <div class="tab-content">
         <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
             <table class="table_settings">
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;">Allgemein</h4></td></tr>
                 <tr class="table_settings">
                     <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
                 </tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell" colspan="2" style="padding-bottom: 20px;">
                         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+<!-- Language Selection ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
@@ -390,6 +392,7 @@ if ($_REQUEST['tab'] == '1') {
                                     <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
                                 </div>
                             </div>
+<!-- Theme Selection ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
@@ -418,11 +421,13 @@ if ($_REQUEST['tab'] == '1') {
                                     <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
                                 </div>
                             </div>
+<!-- Set History Graph ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
                                 </div>
                             </div>
+<!-- Set DarkMode ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
@@ -431,6 +436,7 @@ if ($_REQUEST['tab'] == '1') {
                         </div>
                     </td>
                 </tr>
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;">Geräteübersicht konfigurieren</h4></td></tr>
                 <tr>
                     <td colspan="2">
 
@@ -465,6 +471,7 @@ if ($_REQUEST['tab'] == '1') {
 
                     </td>
                 </tr>
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;">Sicherheit</h4></td></tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></td>
