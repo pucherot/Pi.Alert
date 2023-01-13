@@ -87,7 +87,7 @@ if (sizeof($latestfiles) == 0) {
 // Aprscan read Timer -----------------------------------------------------------------
 
 function read_arpscan_timer() {
-    $pia_lang_set_dir = '../db/';
+    //$pia_lang_set_dir = '../db/';
     $file = '../db/setting_stoparpscan';
     if (file_exists($file)) {
         $timer_arpscan = file_get_contents($file, true);
@@ -104,6 +104,20 @@ function read_arpscan_timer() {
     }
     $timer_output = '<span style="color:red;">'.$timer_output.'</span>';
     echo $timer_output;
+}
+
+// Get Device List Columns -----------------------------------------------------------------
+
+function read_DevListCol() {
+    //$pia_lang_set_dir = '../db/';
+    $file = '../db/setting_devicelist';
+    if (file_exists($file)) {
+        $get = file_get_contents($file, true);
+        $output_array = json_decode($get, true);
+    } else {
+        $output_array = array('Favorites' => 'checked', 'Group' => 'checked', 'Owner' => 'checked', 'Type' => 'checked');
+    }
+    return $output_array;
 }
 
 // Set Tab ----------------------------------------------------------------------------
@@ -440,34 +454,40 @@ if ($_REQUEST['tab'] == '1') {
                 <tr>
                     <td colspan="2">
 
-  <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-  <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+                        <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+                        <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 
-                    <div class="form-group">
-                    
-                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                          <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" style="position: relative; margin-top:-3px;">
-                          <label class="control-label">Favoriten</label>
+<?php
+    $table_config = read_DevListCol();
+    if ($table_config['Favorites'] == 1) {$checkbox_fav = "checked";}
+    if ($table_config['Group'] == 1) {$checkbox_grp = "checked";}
+    if ($table_config['Owner'] == 1) {$checkbox_own = "checked";}
+    if ($table_config['Type'] == 1) {$checkbox_typ = "checked";}
+?>
+
+                        <div class="form-group">
+                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                              <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" <?php echo $checkbox_fav; ?> style="position: relative; margin-top:-3px;">
+                              <label class="control-label">Favoriten</label>
+                            </div>
+                            
+                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                              <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $checkbox_grp; ?> style="position: relative; margin-top:-3px;">
+                              <label class="control-label">Gruppe</label>
+                            </div>
+
+                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                              <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $checkbox_own; ?> style="position: relative; margin-top:-3px;">
+                              <label class="control-label">Eigentümer</label>
+                            </div>
+
+                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
+                              <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" <?php echo $checkbox_typ; ?> style="position: relative; margin-top:-3px;">
+                              <label class="control-label">Typ</label>
+                            </div>
+                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" >Save</button>
                         </div>
-                        
-                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                          <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" style="position: relative; margin-top:-3px;">
-                          <label class="control-label">Gruppe</label>
-                        </div>
 
-                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                          <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" style="position: relative; margin-top:-3px;">
-                          <label class="control-label">Eigentümer</label>
-                        </div>
-
-                        <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                          <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" style="position: relative; margin-top:-3px;">
-                          <label class="control-label">Typ</label>
-                        </div>
-
-                      <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" >Save</button>
-
-                    </div>
 
                     </td>
                 </tr>

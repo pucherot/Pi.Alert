@@ -999,7 +999,16 @@ function setDeviceListCol() {
   if (($_REQUEST['owner'] == 0) || ($_REQUEST['owner'] == 1)) {$Set_Owner = $_REQUEST['owner'];} else {echo "Fehler"; exit;}
   if (($_REQUEST['type'] == 0) || ($_REQUEST['type'] == 1)) {$Set_Type = $_REQUEST['type'];} else {echo "Fehler"; exit;}
 
-  echo 'Favorite ('.$Set_Favorites.'), Group ('.$Set_Group.'), Owner ('.$Set_Owner.'), Type ('.$Set_Type.')';
+  echo 'Tabelleneinstellung wird gespeichert';
+
+  $config_array = array('Favorites' => $Set_Favorites, 'Group' => $Set_Group, 'Owner' => $Set_Owner, 'Type' => $Set_Type);
+
+  $DevListCol_file = '../../../db/setting_devicelist';
+  $DevListCol_new = fopen($DevListCol_file,'w');
+  fwrite($DevListCol_new, json_encode($config_array));
+  fclose($DevListCol_new);
+
+  echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 
 }
 
