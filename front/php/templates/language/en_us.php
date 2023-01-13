@@ -242,6 +242,9 @@ $pia_lang['Maintenance_lang_selector_apply'] = 'Apply';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Settings';
 $pia_lang['Maintenance_Tools_Tab_Tools'] = 'Maintenance';
 $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Backup &sol; Restore';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'General';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configure device overview';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Security';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'The options listed here cause server-side configuration changes. These changes affect all devices that access this page.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Toggle Modes (Dark&sol;Light)';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Toggle Modes';
@@ -249,6 +252,8 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'After the theme switch, the 
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Toggle History Graph';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Graph display';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h.';
+$pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configure device overview';
+$pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Do you want to save the changes you have made? This change will affect all devices you use to access this page.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'No API-Key set';
 $pia_lang['Maintenance_Tool_setapikey'] = 'Set API-Key';
 $pia_lang['Maintenance_Tool_setapikey_text'] = 'With the API key it is possible to make queries to the database without using the web page. This can be the case if another service should access the data of this database. If an API key already exists, it will be replaced.';
@@ -306,9 +311,15 @@ $pia_lang['Maintenance_Tool_logindisable'] ='Disable Login';
 $pia_lang['Maintenance_Tool_logindisable_text'] ='The login will be deactivated. Every user now has the possibility to access the Pi.Alert page again.';
 $pia_lang['Maintenance_Tool_logindisable_noti'] ='Disable Login';
 $pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Are you sure you want to deactivate the login?';
-
-$pia_lang['Maintenance_ConfEditor_Backup'] ='Backup anlegen';
-$pia_lang['Maintenance_ConfEditor_Restore'] ='Zur letzten Version';
+$pia_lang['Maintenance_ConfEditor_Start'] = 'Edit Pi.Alert Config';
+$pia_lang['Maintenance_ConfEditor_Hint'] = 'Notes to the editor';
+$pia_lang['Maintenance_ConfEditor_Backup'] ='Create Backup';
+$pia_lang['Maintenance_ConfEditor_Restore'] ='Prev. Version';
+$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='To previous version';
+$pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='The last version of the configuration file is restored. The "previous version" is either that of the last backup, or the version before the last save. Depending on which is more current.';
+$pia_lang['Maintenance_ConfEditor_Backup_info'] ='In addition to the "pialert-prev.bak" file, another backup is created with the current date incl. time. This backup must be restored manually if necessary (rename to "pialert.conf"). An existing "pialert-prev.bak" file is always overwritten.';
+$pia_lang['Maintenance_ConfEditor_Restore_info'] ='This function restores the configuration file from the "pialert-prev.bak" file. The file "pialert-prev.bak" is created when saving and creating a backup.';
+$pia_lang['Maintenance_ConfEditor_Save_info'] ='The content of the text field with any changes is saved to the "pialert.conf" file. The previous configuration is saved as "pialert-prev.bak". With each save the file "pialert-prev.bak" is overwritten again and again with the previous configuration file.';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)
@@ -347,15 +358,11 @@ $pia_lang['BackDevices_Theme_invalid'] = 'No theme selected';
 $pia_lang['BackDevices_Language_set'] = 'Language applied';
 $pia_lang['BackDevices_Language_notset'] = 'Language not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'No language selected';
-$pia_lang['Maintenance_ConfEditor_Start'] = 'Edit Pi.Alert Config';
-$pia_lang['Maintenance_ConfEditor_Hint'] = 'Notes to the editor';
+$pia_lang['BackDevices_DevListCol_noti_text'] = 'Table setting is saved.';
 $pia_lang['BackDevices_ConfEditor_CopError'] = 'It is not possible to save the configuration.';
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'The configuration backup is completed.';
-$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='To previous version';
-$pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='The last version of the configuration file is restored. The "previous version" is either that of the last backup, or the version before the last save. Depending on which is more current.';
-$pia_lang['Maintenance_ConfEditor_Backup_info'] ='In addition to the "pialert-prev.bak" file, another backup is created with the current date incl. time. This backup must be restored manually if necessary (rename to "pialert.conf"). An existing "pialert-prev.bak" file is always overwritten.';
-$pia_lang['Maintenance_ConfEditor_Restore_info'] ='This function restores the configuration file from the "pialert-prev.bak" file. The file "pialert-prev.bak" is created when saving and creating a backup.';
-$pia_lang['Maintenance_ConfEditor_Save_info'] ='The content of the text field with any changes is saved to the "pialert.conf" file. The previous configuration is saved as "pialert-prev.bak". With each save the file "pialert-prev.bak" is overwritten again and again with the previous configuration file.';
+$pia_lang['BackDevices_ConfEditor_RestoreError'] = 'The last version of the configuration could not be restored.';
+$pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'The last version of the configuration has been restored.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

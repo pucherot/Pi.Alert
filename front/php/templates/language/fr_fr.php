@@ -174,8 +174,8 @@ $pia_lang['DevDetail_SessionInfo_Status'] = 'Statut';
 $pia_lang['DevDetail_SessionInfo_FirstSession'] = 'Première session';
 $pia_lang['DevDetail_SessionInfo_LastSession'] = 'Dernière session';
 $pia_lang['DevDetail_SessionInfo_LastIP'] = 'Dernière IP';
-$pia_lang['DevDetail_SessionInfo_StaticIP'] = 'IP statique'
-$pia_lang['DevDetail_EveandAl_Title'] = 'Configuration des événements et alertes'
+$pia_lang['DevDetail_SessionInfo_StaticIP'] = 'IP statique';
+$pia_lang['DevDetail_EveandAl_Title'] = 'Configuration des événements et alertes';
 $pia_lang['DevDetail_EveandAl_ScanCycle'] = 'Cycle d&apos;analyse';
 $pia_lang['DevDetail_EveandAl_AlertAllEvents'] = 'Alerter tous les événements';
 $pia_lang['DevDetail_EveandAl_AlertDown'] = 'Signaler Down';
@@ -242,6 +242,9 @@ $pia_lang['Maintenance_lang_selector_apply'] = 'Appliquer'; //
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Paramètres'; //
 $pia_lang['Maintenance_Tools_Tab_Tools'] = 'Maintenance'; //
 $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Sauvegarde / Restauration'; //
+$pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'Généralités'; //
+$pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configurer l&apos;aperçu des appareils'; //
+$pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Sécurité'; //
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Les options mentionnées ici entraînent des modifications de configuration côté serveur. Ces modifications concernent donc tous les appareils qui accèdent à cette page.'; //
 $pia_lang['Maintenance_Tool_darkmode'] = 'Changement d&apos;affichage (sombre/clair)'; //
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Changement d&apos;affichage'; //
@@ -249,6 +252,8 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Después del cambio de tema,
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Alternar el gráfico de actividad';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Visualización de gráficos';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Activa/desactiva el gráfico para mostrar la actividad online/offline de las últimas 12h.';
+$pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurer l&apos;aperçu des appareils'; //
+$pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Souhaitez-vous enregistrer les modifications que vous avez apportées ? Cette modification s&apos;applique à tous les appareils avec lesquels vous accédez à cette page.'; //
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'No hay conjunto de claves API';
 $pia_lang['Maintenance_Tool_setapikey'] = 'Establecer la clave API';
 $pia_lang['Maintenance_Tool_setapikey_text'] = 'Con la clave API es posible realizar consultas a la base de datos sin utilizar la página web. Este puede ser el caso si otro servicio debe acceder a los datos de esta base de datos. Si ya existe una clave API, ésta será sustituida.';
@@ -353,9 +358,11 @@ $pia_lang['BackDevices_Theme_invalid'] = 'Selection invalid';
 $pia_lang['BackDevices_Language_set'] = 'Language applied';
 $pia_lang['BackDevices_Language_notset'] = 'Language not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
-
+$pia_lang['BackDevices_DevListCol_noti_text'] = 'Tabelleneinstellung wird gespeichert.';
 $pia_lang['BackDevices_ConfEditor_CopError'] = "La sauvegarde de la configuration n'est pas possible."; //
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La sauvegarde de la configuration est terminée.'; //
+$pia_lang['BackDevices_ConfEditor_RestoreError'] = 'The last version of the configuration could not be restored.';
+$pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'The last version of the configuration has been restored.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

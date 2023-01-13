@@ -87,7 +87,7 @@ if (sizeof($latestfiles) == 0) {
 // Aprscan read Timer -----------------------------------------------------------------
 
 function read_arpscan_timer() {
-    $pia_lang_set_dir = '../db/';
+    //$pia_lang_set_dir = '../db/';
     $file = '../db/setting_stoparpscan';
     if (file_exists($file)) {
         $timer_arpscan = file_get_contents($file, true);
@@ -104,6 +104,20 @@ function read_arpscan_timer() {
     }
     $timer_output = '<span style="color:red;">'.$timer_output.'</span>';
     echo $timer_output;
+}
+
+// Get Device List Columns -----------------------------------------------------------------
+
+function read_DevListCol() {
+    //$pia_lang_set_dir = '../db/';
+    $file = '../db/setting_devicelist';
+    if (file_exists($file)) {
+        $get = file_get_contents($file, true);
+        $output_array = json_decode($get, true);
+    } else {
+        $output_array = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1);
+    }
+    return $output_array;
 }
 
 // Set Tab ----------------------------------------------------------------------------
@@ -364,12 +378,14 @@ if ($_REQUEST['tab'] == '1') {
     <div class="tab-content">
         <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
             <table class="table_settings">
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_a'];?></h4></td></tr>
                 <tr class="table_settings">
                     <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
                 </tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell" colspan="2" style="padding-bottom: 20px;">
                         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+<!-- Language Selection ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
@@ -390,6 +406,7 @@ if ($_REQUEST['tab'] == '1') {
                                     <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
                                 </div>
                             </div>
+<!-- Theme Selection ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
@@ -418,11 +435,13 @@ if ($_REQUEST['tab'] == '1') {
                                     <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
                                 </div>
                             </div>
+<!-- Set History Graph ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
                                 </div>
                             </div>
+<!-- Set DarkMode ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
@@ -431,6 +450,73 @@ if ($_REQUEST['tab'] == '1') {
                         </div>
                     </td>
                 </tr>
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_b'];?></h4></td></tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+
+                        <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+                        <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+
+<?php
+    $table_config = read_DevListCol();
+    if ($table_config['Favorites'] == 1) {$checkbox_fav = "checked";}
+    if ($table_config['Group'] == 1) {$checkbox_grp = "checked";}
+    if ($table_config['Owner'] == 1) {$checkbox_own = "checked";}
+    if ($table_config['Type'] == 1) {$checkbox_typ = "checked";}
+    if ($table_config['FirstSession'] == 1) {$checkbox_first_sess = "checked";}
+    if ($table_config['LastSession'] == 1) {$checkbox_last_sess = "checked";}
+    if ($table_config['LastIP'] == 1) {$checkbox_lastip = "checked";}
+    if ($table_config['MACType'] == 1) {$checkbox_mactype = "checked";}
+?>
+
+                        <div class="form-group">
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $checkbox_own; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Owner'];?></label>
+                            </div>
+
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" <?php echo $checkbox_typ; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Type'];?></label>
+                            </div>
+
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" <?php echo $checkbox_fav; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Favorite'];?></label>
+                            </div>
+                            
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $checkbox_grp; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Group'];?></label>
+                            </div>
+
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkfirstSess" type="checkbox" <?php echo $checkbox_first_sess; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_FirstSession'];?></label>
+                            </div>
+                            
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chklastSess" type="checkbox" <?php echo $checkbox_last_sess; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastSession'];?></label>
+                            </div>
+
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chklastIP" type="checkbox" <?php echo $checkbox_lastip; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastIP'];?></label>
+                            </div>
+                            
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkMACtype" type="checkbox" <?php echo $checkbox_mactype; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_MAC'];?></label>
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-primary bg-green" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?php echo $pia_lang['Gen_Save'];?></button>
+                        </div>
+
+
+                    </td>
+                </tr>
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></td>
@@ -884,6 +970,29 @@ function RestoreConfigFile() {
     showMessage (msg);
   });
 }
+
+// Set Device List Column
+function askDeviceListCol() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Save'];?>', 'setDeviceListCol');
+}
+function setDeviceListCol() {
+  // Execute
+    $.get('php/server/devices.php?action=setDeviceListCol&'
+    + '&favorite='       + ($('#chkFavorite')[0].checked * 1)
+    + '&group='          + ($('#chkGroup')[0].checked * 1)
+    + '&type='           + ($('#chkType')[0].checked * 1)
+    + '&owner='          + ($('#chkOwner')[0].checked * 1)
+    + '&firstsess='      + ($('#chkfirstSess')[0].checked * 1)
+    + '&lastsess='       + ($('#chklastSess')[0].checked * 1)
+    + '&lastip='         + ($('#chklastIP')[0].checked * 1)
+    + '&mactype='        + ($('#chkMACtype')[0].checked * 1)
+    , function(msg) {
+    showMessage (msg);
+  });
+}
+
 </script>
 
 

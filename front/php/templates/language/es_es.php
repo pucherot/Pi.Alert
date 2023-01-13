@@ -242,6 +242,9 @@ $pia_lang['Maintenance_lang_selector_apply'] = 'Aplicar';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Ajustes';
 $pia_lang['Maintenance_Tools_Tab_Tools'] = 'Tools';
 $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Respaldo / Restaurar';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'General';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configurar la vista general del dispositivo';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Seguridad';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Las opciones enumeradas aquí efectúan cambios en la configuración del servidor. Por lo tanto, estos cambios afectan a todos los dispositivos que accedan a esta página.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Cambiar Modo (Dark/Light)';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Cambiar Modo';
@@ -249,6 +252,8 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Después del cambio de tema,
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Alternar el gráfico de actividad';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Visualización de gráficos';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Activa/desactiva el gráfico para mostrar la actividad online/offline de las últimas 12h.';
+$pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurar la vista general del dispositivo';
+$pia_lang['Maintenance_Tool_DevListCol_noti_text'] = '¿Desea guardar los cambios realizados? Este cambio afectará a todos los dispositivos que utilices para acceder a esta página.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'No hay conjunto de claves API';
 $pia_lang['Maintenance_Tool_setapikey'] = 'Establecer la clave API';
 $pia_lang['Maintenance_Tool_setapikey_text'] = 'Con la clave API es posible realizar consultas a la base de datos sin utilizar la página web. Este puede ser el caso si otro servicio debe acceder a los datos de esta base de datos. Si ya existe una clave API, ésta será sustituida.';
@@ -353,9 +358,11 @@ $pia_lang['BackDevices_Theme_invalid'] = 'Selection invalid';
 $pia_lang['BackDevices_Language_set'] = 'Theme applied';
 $pia_lang['BackDevices_Language_notset'] = 'Theme not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
-
+$pia_lang['BackDevices_DevListCol_noti_text'] = 'Tabelleneinstellung wird gespeichert.';
 $pia_lang['BackDevices_ConfEditor_CopError'] = 'No es posible guardar la configuración.';
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La copia de seguridad de la configuración ha finalizado.';
+$pia_lang['BackDevices_ConfEditor_RestoreError'] = 'The last version of the configuration could not be restored.';
+$pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'The last version of the configuration has been restored.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page - Update by @TeroRERO 01ago2022

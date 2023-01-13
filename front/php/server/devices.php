@@ -60,6 +60,8 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'setPiAlertLanguage':           setPiAlertLanguage();                    break;
       case 'setPiAlertArpTimer':           setPiAlertArpTimer();                    break;
 
+      case 'setDeviceListCol':             setDeviceListCol();                      break;
+
       case 'getDevicesTotals':             getDevicesTotals();                      break;
       case 'getDevicesList':               getDevicesList();                        break;
       case 'getDevicesListCalendar':       getDevicesListCalendar();                break;
@@ -984,6 +986,33 @@ function BackupConfigFile() {
   }
   // copy files as a fast Backup
   copy($file, $laststate);
+}
+
+//------------------------------------------------------------------------------
+//  Set Device List Columns
+//------------------------------------------------------------------------------
+function setDeviceListCol() {
+  global $pia_lang;
+
+  if (($_REQUEST['favorite'] == 0) || ($_REQUEST['favorite'] == 1)) {$Set_Favorites = $_REQUEST['favorite'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['group'] == 0) || ($_REQUEST['group'] == 1)) {$Set_Group = $_REQUEST['group'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['owner'] == 0) || ($_REQUEST['owner'] == 1)) {$Set_Owner = $_REQUEST['owner'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['type'] == 0) || ($_REQUEST['type'] == 1)) {$Set_Type = $_REQUEST['type'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['firstsess'] == 0) || ($_REQUEST['firstsess'] == 1)) {$Set_First_Session = $_REQUEST['firstsess'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['lastsess'] == 0) || ($_REQUEST['lastsess'] == 1)) {$Set_Last_Session = $_REQUEST['lastsess'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['lastip'] == 0) || ($_REQUEST['lastip'] == 1)) {$Set_LastIP = $_REQUEST['lastip'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['mactype'] == 0) || ($_REQUEST['mactype'] == 1)) {$Set_MACType = $_REQUEST['mactype'];} else {echo "Fehler"; exit;}
+
+  echo $pia_lang['BackDevices_DevListCol_noti_text'];
+
+  $config_array = array('Favorites' => $Set_Favorites, 'Group' => $Set_Group, 'Owner' => $Set_Owner, 'Type' => $Set_Type, 'FirstSession' => $Set_First_Session, 'LastSession' => $Set_Last_Session, 'LastIP' => $Set_LastIP, 'MACType' => $Set_MACType);
+
+  $DevListCol_file = '../../../db/setting_devicelist';
+  $DevListCol_new = fopen($DevListCol_file,'w');
+  fwrite($DevListCol_new, json_encode($config_array));
+  fclose($DevListCol_new);
+
+  echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 
 }
 

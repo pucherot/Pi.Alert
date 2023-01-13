@@ -573,3 +573,11 @@ body.modal-open {
 .spinnerOverlay {
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+.table_settings_col_box {
+    padding-top:6px; display: inline-block; margin: 5px 10px; padding-left: 10px; padding-right: 10px; border: 1px solid #aaa;
+}
+
+.table_settings_col_box_check {
+    position: relative; margin-top:-3px; margin-right: 5px;
+}
