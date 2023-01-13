@@ -249,6 +249,8 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Después del cambio de tema,
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Alternar el gráfico de actividad';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Visualización de gráficos';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Activa/desactiva el gráfico para mostrar la actividad online/offline de las últimas 12h.';
+$pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Device Übersicht konfigurieren';
+$pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Möchten Sie die von Ihnen gemachten Änderungen speichern? Diese Änderung wirkt sich auf alle Geräte, mit denen Sie auf diese Seote zugreifen.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'No hay conjunto de claves API';
 $pia_lang['Maintenance_Tool_setapikey'] = 'Establecer la clave API';
 $pia_lang['Maintenance_Tool_setapikey_text'] = 'Con la clave API es posible realizar consultas a la base de datos sin utilizar la página web. Este puede ser el caso si otro servicio debe acceder a los datos de esta base de datos. Si ya existe una clave API, ésta será sustituida.';
@@ -353,9 +355,11 @@ $pia_lang['BackDevices_Theme_invalid'] = 'Selection invalid';
 $pia_lang['BackDevices_Language_set'] = 'Language applied';
 $pia_lang['BackDevices_Language_notset'] = 'Language not applied';
 $pia_lang['BackDevices_Language_invalid'] = 'Selection invalid';
-
+$pia_lang['BackDevices_DevListCol_noti_text'] = 'Tabelleneinstellung wird gespeichert.';
 $pia_lang['BackDevices_ConfEditor_CopError'] = "La sauvegarde de la configuration n'est pas possible."; //
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La sauvegarde de la configuration est terminée.'; //
+$pia_lang['BackDevices_ConfEditor_RestoreError'] = 'The last version of the configuration could not be restored.';
+$pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'The last version of the configuration has been restored.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page

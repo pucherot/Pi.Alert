@@ -115,7 +115,7 @@ function read_DevListCol() {
         $get = file_get_contents($file, true);
         $output_array = json_decode($get, true);
     } else {
-        $output_array = array('Favorites' => 'checked', 'Group' => 'checked', 'Owner' => 'checked', 'Type' => 'checked');
+        $output_array = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1);
     }
     return $output_array;
 }
@@ -378,7 +378,7 @@ if ($_REQUEST['tab'] == '1') {
     <div class="tab-content">
         <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
             <table class="table_settings">
-                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;">Allgemein</h4></td></tr>
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_a'];?></h4></td></tr>
                 <tr class="table_settings">
                     <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
                 </tr>
@@ -450,9 +450,9 @@ if ($_REQUEST['tab'] == '1') {
                         </div>
                     </td>
                 </tr>
-                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;">Geräteübersicht konfigurieren</h4></td></tr>
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_b'];?></h4></td></tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="2" style="text-align: center;">
 
                         <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
                         <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
@@ -463,35 +463,60 @@ if ($_REQUEST['tab'] == '1') {
     if ($table_config['Group'] == 1) {$checkbox_grp = "checked";}
     if ($table_config['Owner'] == 1) {$checkbox_own = "checked";}
     if ($table_config['Type'] == 1) {$checkbox_typ = "checked";}
+    if ($table_config['FirstSession'] == 1) {$checkbox_first_sess = "checked";}
+    if ($table_config['LastSession'] == 1) {$checkbox_last_sess = "checked";}
+    if ($table_config['LastIP'] == 1) {$checkbox_lastip = "checked";}
+    if ($table_config['MACType'] == 1) {$checkbox_mactype = "checked";}
 ?>
 
                         <div class="form-group">
-                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                              <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" <?php echo $checkbox_fav; ?> style="position: relative; margin-top:-3px;">
-                              <label class="control-label">Favoriten</label>
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $checkbox_own; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Owner'];?></label>
+                            </div>
+
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" <?php echo $checkbox_typ; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Type'];?></label>
+                            </div>
+
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" <?php echo $checkbox_fav; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Favorite'];?></label>
                             </div>
                             
-                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                              <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $checkbox_grp; ?> style="position: relative; margin-top:-3px;">
-                              <label class="control-label">Gruppe</label>
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $checkbox_grp; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Group'];?></label>
                             </div>
 
-                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                              <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $checkbox_own; ?> style="position: relative; margin-top:-3px;">
-                              <label class="control-label">Eigentümer</label>
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkfirstSess" type="checkbox" <?php echo $checkbox_first_sess; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_FirstSession'];?></label>
+                            </div>
+                            
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chklastSess" type="checkbox" <?php echo $checkbox_last_sess; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastSession'];?></label>
                             </div>
 
-                            <div class="" style="padding-top:6px; display: inline-block; margin: 5px 15px;">
-                              <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" <?php echo $checkbox_typ; ?> style="position: relative; margin-top:-3px;">
-                              <label class="control-label">Typ</label>
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chklastIP" type="checkbox" <?php echo $checkbox_lastip; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastIP'];?></label>
                             </div>
-                            <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" >Save</button>
+                            
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkMACtype" type="checkbox" <?php echo $checkbox_mactype; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_MAC'];?></label>
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-primary bg-green" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?php echo $pia_lang['Gen_Save'];?></button>
                         </div>
 
 
                     </td>
                 </tr>
-                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;">Sicherheit</h4></td></tr>
+                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></td>
@@ -949,8 +974,8 @@ function RestoreConfigFile() {
 // Set Device List Column
 function askDeviceListCol() {
   // Ask 
-  showModalWarning('Überschrift', 'Funktionstext',
-    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'setDeviceListCol');
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Save'];?>', 'setDeviceListCol');
 }
 function setDeviceListCol() {
   // Execute
@@ -959,6 +984,10 @@ function setDeviceListCol() {
     + '&group='          + ($('#chkGroup')[0].checked * 1)
     + '&type='           + ($('#chkType')[0].checked * 1)
     + '&owner='          + ($('#chkOwner')[0].checked * 1)
+    + '&firstsess='      + ($('#chkfirstSess')[0].checked * 1)
+    + '&lastsess='       + ($('#chklastSess')[0].checked * 1)
+    + '&lastip='         + ($('#chklastIP')[0].checked * 1)
+    + '&mactype='        + ($('#chkMACtype')[0].checked * 1)
     , function(msg) {
     showMessage (msg);
   });
