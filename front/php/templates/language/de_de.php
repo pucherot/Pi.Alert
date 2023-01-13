@@ -68,6 +68,7 @@ $pia_lang['Device_TableHead_Owner'] = 'Eigentümer';
 $pia_lang['Device_TableHead_Type'] = 'Typ';
 $pia_lang['Device_TableHead_Favorite'] = 'Favorit';
 $pia_lang['Device_TableHead_Group'] = 'Gruppe';
+$pia_lang['Device_TableHead_Location'] = 'Standort';
 $pia_lang['Device_TableHead_FirstSession'] = 'Erste Sitzg.';
 $pia_lang['Device_TableHead_LastSession'] = 'Letzte Sitzg.';
 $pia_lang['Device_TableHead_LastIP'] = 'Letzte IP';

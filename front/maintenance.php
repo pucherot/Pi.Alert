@@ -115,7 +115,7 @@ function read_DevListCol() {
         $get = file_get_contents($file, true);
         $output_array = json_decode($get, true);
     } else {
-        $output_array = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1);
+        $output_array = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'Location' => 0);
     }
     return $output_array;
 }
@@ -435,16 +435,16 @@ if ($_REQUEST['tab'] == '1') {
                                     <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
                                 </div>
                             </div>
-<!-- Set History Graph ----------------------------------------------------------------- -->
-                            <div class="settings_button_wrapper">
-                                <div class="settings_button_box">
-                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
-                                </div>
-                            </div>
 <!-- Set DarkMode ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
+                                </div>
+                            </div>
+<!-- Set History Graph ----------------------------------------------------------------- -->
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
                                 </div>
                             </div>
                         </div>
@@ -467,6 +467,7 @@ if ($_REQUEST['tab'] == '1') {
     if ($table_config['LastSession'] == 1) {$checkbox_last_sess = "checked";}
     if ($table_config['LastIP'] == 1) {$checkbox_lastip = "checked";}
     if ($table_config['MACType'] == 1) {$checkbox_mactype = "checked";}
+    if ($table_config['Location'] == 1) {$checkbox_loc = "checked";}
 ?>
 
                         <div class="form-group">
@@ -488,6 +489,11 @@ if ($_REQUEST['tab'] == '1') {
                             <div class="table_settings_col_box" style="">
                               <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $checkbox_grp; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_Group'];?></label>
+                            </div>
+
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkLocation" type="checkbox" <?php echo $checkbox_loc; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Location'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
@@ -988,6 +994,7 @@ function setDeviceListCol() {
     + '&lastsess='       + ($('#chklastSess')[0].checked * 1)
     + '&lastip='         + ($('#chklastIP')[0].checked * 1)
     + '&mactype='        + ($('#chkMACtype')[0].checked * 1)
+    + '&location='       + ($('#chkLocation')[0].checked * 1)
     , function(msg) {
     showMessage (msg);
   });

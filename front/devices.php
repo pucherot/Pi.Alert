@@ -152,16 +152,37 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
               <h3 id="tableDevicesTitle" class="box-title text-gray">Devices</h3>
             </div>
 
-            <!-- table -->
             <div class="box-body table-responsive">
               <table id="tableDevices" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
+          <?php
+
+          $file = '../db/setting_devicelist';
+          if (file_exists($file)) {
+            $get = file_get_contents($file, true);
+            $table_config = json_decode($get, true);
+          } else {
+            $table_config = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'Location' => 0);
+          }
+
+          $devlistcol_hide = '';
+          if ($table_config['Owner'] == 0) {$devlistcol_hide = $devlistcol_hide.'1, ';} 
+          if ($table_config['Type'] == 0) {$devlistcol_hide = $devlistcol_hide.'2, ';} 
+          if ($table_config['Favorites'] == 0) {$devlistcol_hide = $devlistcol_hide.'3, ';} 
+          if ($table_config['Group'] == 0) {$devlistcol_hide = $devlistcol_hide.'4, ';} 
+          if ($table_config['Location'] == 0) {$devlistcol_hide = $devlistcol_hide.'5, ';} 
+          if ($table_config['FirstSession'] == 0) {$devlistcol_hide = $devlistcol_hide.'6, ';}
+          if ($table_config['LastSession'] == 0) {$devlistcol_hide = $devlistcol_hide.'7, ';} 
+          if ($table_config['LastIP'] == 0) {$devlistcol_hide = $devlistcol_hide.'8, ';}
+          if ($table_config['MACType'] == 0) {$devlistcol_hide = $devlistcol_hide.'9, ';} 
+          ?>
                   <th><?php echo $pia_lang['Device_TableHead_Name'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Owner'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Type'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Favorite'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Group'];?></th>
+                  <th><?php echo $pia_lang['Device_TableHead_Location'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_FirstSession'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_LastSession'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_LastIP'];?></th>
@@ -261,11 +282,17 @@ function initializeDatatable () {
     // 'order'       : [[3,'desc'], [0,'asc']],
 
     'columnDefs'   : [
-      {visible:   false,         targets: [10, 11, 12] },
-      {className: 'text-center', targets: [3, 8, 9] },
-      {width:     '80px',        targets: [5, 6] },
-      {width:     '0px',         targets: 9 },
-      {orderData: [11],          targets: 7 },
+      {visible:   false,         targets: [<?php echo $devlistcol_hide;?>11, 12, 13] },
+      {className: 'text-center', targets: [3, 8, 10] },
+      {width:     '80px',        targets: [6, 7] },
+      {width:     '0px',         targets: 10 },
+      {orderData: [11],          targets: 8 },
+
+      // {visible:   false,         targets: [10, 11, 12] },
+      // {className: 'text-center', targets: [3, 8, 9] },
+      // {width:     '80px',        targets: [5, 6] },
+      // {width:     '0px',         targets: 9 },
+      // {orderData: [11],          targets: 7 },
 
       // Device Name
       {targets: [0],
@@ -284,13 +311,13 @@ function initializeDatatable () {
       } },
         
       // Dates
-      {targets: [5, 6],
+      {targets: [6, 7],
         'createdCell': function (td, cellData, rowData, row, col) {
           $(td).html (translateHTMLcodes (cellData));
       } },
 
       // Random MAC
-      {targets: [8],
+      {targets: [9],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
             $(td).html ('<i data-toggle="tooltip" data-placement="right" title="Random MAC" style="font-size: 16px;" class="text-yellow glyphicon glyphicon-random"></i>');
@@ -300,7 +327,7 @@ function initializeDatatable () {
       } },
 
       // Status color
-      {targets: [9],
+      {targets: [10],
         'createdCell': function (td, cellData, rowData, row, col) {
           switch (cellData) {
             case 'Down':      color='red';              break;

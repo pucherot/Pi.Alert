@@ -557,6 +557,7 @@ function getDevicesList() {
                                   $row['dev_DeviceType'],
                                   $row['dev_Favorite'],
                                   $row['dev_Group'],
+                                  $row['dev_Location'],
                                   formatDate ($row['dev_FirstConnection']),
                                   formatDate ($row['dev_LastConnection']),
                                   $row['dev_LastIP'],
@@ -1002,10 +1003,11 @@ function setDeviceListCol() {
   if (($_REQUEST['lastsess'] == 0) || ($_REQUEST['lastsess'] == 1)) {$Set_Last_Session = $_REQUEST['lastsess'];} else {echo "Fehler"; exit;}
   if (($_REQUEST['lastip'] == 0) || ($_REQUEST['lastip'] == 1)) {$Set_LastIP = $_REQUEST['lastip'];} else {echo "Fehler"; exit;}
   if (($_REQUEST['mactype'] == 0) || ($_REQUEST['mactype'] == 1)) {$Set_MACType = $_REQUEST['mactype'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['location'] == 0) || ($_REQUEST['location'] == 1)) {$Set_Location = $_REQUEST['location'];} else {echo "Fehler"; exit;}
 
   echo $pia_lang['BackDevices_DevListCol_noti_text'];
 
-  $config_array = array('Favorites' => $Set_Favorites, 'Group' => $Set_Group, 'Owner' => $Set_Owner, 'Type' => $Set_Type, 'FirstSession' => $Set_First_Session, 'LastSession' => $Set_Last_Session, 'LastIP' => $Set_LastIP, 'MACType' => $Set_MACType);
+  $config_array = array('Favorites' => $Set_Favorites, 'Group' => $Set_Group, 'Owner' => $Set_Owner, 'Type' => $Set_Type, 'FirstSession' => $Set_First_Session, 'LastSession' => $Set_Last_Session, 'LastIP' => $Set_LastIP, 'MACType' => $Set_MACType, 'Location' => $Set_Location);
 
   $DevListCol_file = '../../../db/setting_devicelist';
   $DevListCol_new = fopen($DevListCol_file,'w');
