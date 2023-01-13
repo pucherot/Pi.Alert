@@ -6,11 +6,12 @@ require 'db.php';
 // Open DB
 OpenDB();
 
-function getStatusofMAC($query_ip) {
+function crosscheckIP($query_ip) {
 	global $db;
     $sql = 'SELECT * FROM Devices WHERE dev_LastIP="'. $query_ip .'"';
 	$result = $db->query($sql);
 	$row = $result -> fetchArray (SQLITE3_ASSOC);
+	return $row['dev_LastIP'];
 }
 
 $DBFILE = '../../../db/pialert.db';
@@ -22,7 +23,7 @@ $PIA_SCAN_MODE = $_REQUEST['mode'];
 if (filter_var($PIA_HOST_IP, FILTER_VALIDATE_IP)) {
 
 	// Check if IP is already known and in DB
-   	$db_crosscheck = getStatusofMAC($PIA_HOST_IP);
+   	$db_crosscheck = crosscheckIP($PIA_HOST_IP);
 	if (isset($db_crosscheck)) {
 		if ($PIA_SCAN_MODE == 'fast') {
 	    		exec('nmap -F '.$PIA_HOST_IP, $output);
