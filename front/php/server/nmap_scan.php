@@ -1,18 +1,38 @@
 <?php
 session_start();
 
+require 'db.php';
+
+// Open DB
+OpenDB();
+
+function getStatusofMAC($query_ip) {
+	global $db;
+    $sql = 'SELECT * FROM Devices WHERE dev_LastIP="'. $query_ip .'"';
+	$result = $db->query($sql);
+	$row = $result -> fetchArray (SQLITE3_ASSOC);
+}
+
+$DBFILE = '../../../db/pialert.db';
+
 $PIA_HOST_IP = $_REQUEST['scan'];
 $PIA_SCAN_MODE = $_REQUEST['mode'];
 
+// Check if IP is valid
 if (filter_var($PIA_HOST_IP, FILTER_VALIDATE_IP)) {
-	if ($PIA_SCAN_MODE == 'fast') {
-    		exec('nmap -F '.$PIA_HOST_IP, $output);
-	} elseif ($PIA_SCAN_MODE == 'normal') {
-	    exec('nmap '.$PIA_HOST_IP, $output);
-	} elseif ($PIA_SCAN_MODE == 'detail') {
-	    exec('nmap -A '.$PIA_HOST_IP, $output);
-	}
-} else {exit;}
+
+	// Check if IP is already known and in DB
+   	$db_crosscheck = getStatusofMAC($PIA_HOST_IP);
+	if (isset($db_crosscheck)) {
+		if ($PIA_SCAN_MODE == 'fast') {
+	    		exec('nmap -F '.$PIA_HOST_IP, $output);
+		} elseif ($PIA_SCAN_MODE == 'normal') {
+		    exec('nmap '.$PIA_HOST_IP, $output);
+		} elseif ($PIA_SCAN_MODE == 'detail') {
+		    exec('nmap -A '.$PIA_HOST_IP, $output);
+		}
+	} else {echo "Unknown IP"; exit;}
+} else {echo "Wrong parameter"; exit;}
 echo '<h4>Scan ('.$PIA_SCAN_MODE.') Results of: '.$PIA_HOST_IP.'</h4>';
 echo '<pre style="border: none;">';
 
