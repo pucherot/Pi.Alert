@@ -25,6 +25,17 @@ $sql = 'CREATE TABLE IF NOT EXISTS "network_infrastructure" (
   "net_device_port"  INTEGER,
 	PRIMARY KEY("device_id" AUTOINCREMENT)
 )';
+
+// $sql = 'CREATE TABLE IF NOT EXISTS "network_infrastructure" (
+//   "device_id" INTEGER,
+//   "net_device_name" TEXT NOT NULL,
+//   "net_device_typ"  TEXT NOT NULL,
+//   "net_device_port"  INTEGER,
+//   "net_uplink_target"  TEXT,
+//   "net_uplink_port"  INTEGER,
+//   PRIMARY KEY("device_id" AUTOINCREMENT)
+// )';
+
 $result = $db->query($sql);
 // #####################################
 // ## Expand Devices Table
@@ -33,6 +44,11 @@ $sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure" INTEGER';
 $result = $db->query($sql);
 $sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure_port" INTEGER';
 $result = $db->query($sql);
+// $sql = 'ALTER TABLE "network_infrastructure" ADD "net_uplink_target" TEXT';
+// $result = $db->query($sql);
+// $sql = 'ALTER TABLE "network_infrastructure" ADD "net_uplink_port" INTEGER';
+// $result = $db->query($sql);
+
 // #####################################
 // Add New Network Devices
 // #####################################
@@ -111,6 +127,14 @@ if ($_REQUEST['Networkdelete'] == "yes") {
                 <label for="NetworkDevicePort"><?php echo $pia_lang['Network_ManageAdd_Port'];?>:</label>
                 <input type="text" class="form-control" id="NetworkDevicePort" name="NetworkDevicePort" placeholder="<?php echo $pia_lang['Network_ManageAdd_Port_text'];?>">
               </div>
+<!--               <div class="form-group">
+                <label for="NetworkDeviceUplinkPort">Uplink Port:</label>
+                <input type="text" class="form-control" id="NetworkDeviceUplinkPort" name="NetworkDeviceUplinkPort" placeholder="Work in Progress">
+              </div>
+              <div class="form-group">
+                <label for="NetworkDeviceUplinkTarget">Uplink Node:</label>
+                <input type="text" class="form-control" id="NetworkDeviceUplinkTarget" name="NetworkDeviceUplinkTarget" placeholder="Work in Progress">
+              </div> -->
               <div class="form-group">
               <button type="submit" class="btn btn-success" name="Networkinsert" value="yes"><?php echo $pia_lang['Network_ManageAdd_Submit'];?></button>
           	  </div>
@@ -153,6 +177,14 @@ if ($_REQUEST['Networkdelete'] == "yes") {
                 <label for="NetworkDevicePort"><?php echo $pia_lang['Network_ManageEdit_Port'];?>:</label>
                 <input type="text" class="form-control" id="NewNetworkDevicePort" name="NewNetworkDevicePort" placeholder="<?php echo $pia_lang['Network_ManageEdit_Port_text'];?>">
               </div>
+<!--               <div class="form-group">
+                <label for="NetworkDeviceUplinkPort">Uplink Port:</label>
+                <input type="text" class="form-control" id="NetworkDeviceUplinkPort" name="NetworkDeviceUplinkPort" placeholder="Work in Progress">
+              </div>
+              <div class="form-group">
+                <label for="NetworkDeviceUplinkTarget">Uplink Node:</label>
+                <input type="text" class="form-control" id="NetworkDeviceUplinkTarget" name="NetworkDeviceUplinkTarget" placeholder="Work in Progress">
+              </div> -->
               <!-- /.form-group -->
               <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="Networkedit" value="yes"><?php echo $pia_lang['Network_ManageEdit_Submit'];?></button>
@@ -267,8 +299,18 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
   // Create table with Port
   if ($pia_func_netdevport > 1)
     {
+
+// Test new Variables
+// Uplink is conf. for ID 3 (The Devices own ID) on Port 2
+//if ($pia_func_netdevid == "3") {$Uplink_Dev = "Demo Router";}   // Uplink_Dev is a value that can be configured, it is a table value
+//if ($pia_func_netdevid == "3") {$UplinkPort = "2";}             // UplinkPort is a value that can be configured, it is a table value
+// Uplink is conf. for ID 9 (The Devices own ID) on Port 1
+//if ($pia_func_netdevid == "9") {$Uplink_Dev = "Demo Router";}   // Uplink_Dev is a value that can be configured, it is a table value
+//if ($pia_func_netdevid == "9") {$UplinkPort = "1";}             // UplinkPort is a value that can be configured, it is a table value
+
       for ($x=1; $x<=$pia_func_netdevport; $x++) 
         {
+          if ($x == $UplinkPort) {$network_device_portname[$x] = $Uplink_Dev;}
           // Prepare online/offline badge for later functions
           $online_badge = '<div class="badge bg-green text-white" style="width: 60px;">Online</div>';
           $offline_badge = '<div class="badge bg-gray text-white" style="width: 60px;">Offline</div>';
