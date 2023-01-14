@@ -101,10 +101,10 @@ if ($_REQUEST['Networkdelete'] == "yes") {
                <label><?php echo $pia_lang['Network_ManageAdd_Type'];?>:</label>
                   <select class="form-control" name="NetworkDeviceTyp">
                     <option value=""><?php echo $pia_lang['Network_ManageAdd_Type_text'];?></option>
-                    <option value="Router">Router</option>
-                    <option value="Switch">Switch</option>
-                    <option value="WLAN">WLAN</option>
-                    <option value="Powerline">Powerline</option>
+                    <option value="1_Router">Router</option>
+                    <option value="2_Switch">Switch</option>
+                    <option value="3_WLAN">WLAN</option>
+                    <option value="4_Powerline">Powerline</option>
                   </select>
               </div>
               <div class="form-group">
@@ -126,11 +126,11 @@ if ($_REQUEST['Networkdelete'] == "yes") {
                   <select class="form-control" name="NetworkDeviceID">
                     <option value=""><?php echo $pia_lang['Network_ManageEdit_ID_text'];?></option>
 					<?php
-					$sql = 'SELECT "device_id", "net_device_name", "net_device_typ" FROM "network_infrastructure"'; 
+					$sql = 'SELECT "device_id", "net_device_name", "net_device_typ" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC'; 
 					$result = $db->query($sql);//->fetchArray(SQLITE3_ASSOC); 
 					while($res = $result->fetchArray(SQLITE3_ASSOC)){
 						if(!isset($res['device_id'])) continue; 
-					    echo '<option value="'.$res['device_id'].'">'.$res['net_device_name'].' / '.$res['net_device_typ'].'</option>';
+					    echo '<option value="'.$res['device_id'].'">'.$res['net_device_name'].' / '.substr($res['net_device_typ'], 2).'</option>';
 					} 
 					?>
                   </select>
@@ -143,10 +143,10 @@ if ($_REQUEST['Networkdelete'] == "yes") {
                <label><?php echo $pia_lang['Network_ManageEdit_Type'];?>:</label>
                   <select class="form-control" name="NewNetworkDeviceTyp">
                     <option value=""><?php echo $pia_lang['Network_ManageEdit_Type_text'];?></option>
-                    <option value="Router">Router</option>
-                    <option value="Switch">Switch</option>
-                    <option value="WLAN">WLAN</option>
-                    <option value="Powerline">Powerline</option>
+                    <option value="1_Router">Router</option>
+                    <option value="2_Switch">Switch</option>
+                    <option value="3_WLAN">WLAN</option>
+                    <option value="4_Powerline">Powerline</option>
                   </select>
               </div>
               <div class="form-group">
@@ -169,11 +169,11 @@ if ($_REQUEST['Networkdelete'] == "yes") {
                   <select class="form-control" name="NetworkDeviceID">
                     <option value=""><?php echo $pia_lang['Network_ManageDel_Name_text'];?></option>
           <?php
-          $sql = 'SELECT "device_id", "net_device_name", "net_device_typ" FROM "network_infrastructure"'; 
+          $sql = 'SELECT "device_id", "net_device_name", "net_device_typ" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC'; 
           $result = $db->query($sql);//->fetchArray(SQLITE3_ASSOC); 
           while($res = $result->fetchArray(SQLITE3_ASSOC)){
             if(!isset($res['device_id'])) continue; 
-              echo '<option value="'.$res['device_id'].'">'.$res['net_device_name'].' / '.$res['net_device_typ'].'</option>';
+              echo '<option value="'.$res['device_id'].'">'.$res['net_device_name'].' / '.substr($res['net_device_typ'], 2).'</option>';
           } 
           ?>
                   </select>
@@ -206,7 +206,7 @@ function unassigned_devices() {
 }
 
 function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
-	echo '<li class="'.$activetab.'"><a href="#'.$pia_func_netdevid.'" data-toggle="tab">'.$pia_func_netdevname.' / '.$pia_func_netdevtyp;
+	echo '<li class="'.$activetab.'"><a href="#'.$pia_func_netdevid.'" data-toggle="tab">'.$pia_func_netdevname.' / '.substr($pia_func_netdevtyp, 2);
   if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
   echo '</a></li>';
 }
@@ -215,7 +215,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
   echo '<div class="tab-pane '.$activetab.'" id="'.$pia_func_netdevid.'">
 	      <h4>'.$pia_func_netdevname.' (ID: '.$pia_func_netdevid.')</h4><br>';
   echo '<div class="box-body no-padding">
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
       <tbody><tr>
         <th style="width: 40px">Port</th>
         <th style="width: 75px">'.$pia_lang['Network_Table_State'].'</th>
@@ -339,7 +339,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 // #####################################
 // ## Create Tabs
 // #####################################
-$sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port" FROM "network_infrastructure"'; 
+$sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC'; 
 $result = $db->query($sql);//->fetchArray(SQLITE3_ASSOC); 
 ?>
       <div class="nav-tabs-custom" style="">
