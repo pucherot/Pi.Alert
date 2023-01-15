@@ -798,7 +798,7 @@ function getNetworkNodes() {
   while ($row = $result -> fetchArray (SQLITE3_ASSOC)) {   
     // Push row data
     $tableData[] = array('id'    => $row['device_id'], 
-                         'name'  => $row['net_device_name'].'/'.$row['net_device_typ'] );                        
+                         'name'  => $row['net_device_name'].'/'.substr($row['net_device_typ'], 2) );                        
   }
   
   // Control no rows
