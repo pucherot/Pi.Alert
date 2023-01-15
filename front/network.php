@@ -68,6 +68,9 @@ if ($_REQUEST['Networkdelete'] == "yes") {
 }
 
 ?>
+
+<link href="lib/AdminLTE/bower_components/bootstrap-icons/font/bootstrap-icons.css" media="all" rel="stylesheet" type="text/css" />
+
 <!-- Page ------------------------------------------------------------------ -->
 <div class="content-wrapper">
 
@@ -220,12 +223,16 @@ function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_ne
   echo getNodeOnlineState($pia_func_netdevname);
   echo $pia_func_netdevname.' / ';
   if (substr($pia_func_netdevtyp, 2) == 'WLAN') {
-    echo '<i class="fa fa-wifi"></i>';}
+    echo '<i class="bi bi-wifi" style="font-size: 16px; position: relative; top: 1px;"></i>';}
     elseif (substr($pia_func_netdevtyp, 2) == 'Powerline') {
-      echo '<i class="fa fa-flash"></i>';}
-      else {echo substr($pia_func_netdevtyp, 2);}
+      echo '<i class="bi bi-plug-fill" style="font-size: 16px; position: relative; top: 2px;"></i>';}
+    elseif (substr($pia_func_netdevtyp, 2) == 'Router') {
+      echo '<i class="bi bi-router-fill" style="font-size: 16px; position: relative; top: 2px;"></i>';}
+    elseif (substr($pia_func_netdevtyp, 2) == 'Switch') {
+      echo '<i class="bi bi-ethernet" style="font-size: 16px; position: relative; top: 2px;"></i>';}
+    else {echo substr($pia_func_netdevtyp, 2);}
   // Enable the display of the complete Portcount
-  if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
+  //if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
   echo '</a></li>';
 }
 
