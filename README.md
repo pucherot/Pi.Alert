@@ -141,6 +141,9 @@ This update script is only recommended for an already existing installation of t
   
   Source of the selfhosted Fonts
   https://github.com/adobe-fonts/source-sans
+  
+  Source of the Bootstrap Icons
+  https://github.com/twbs/icons
 
 ### Special thanks 🥇
 
