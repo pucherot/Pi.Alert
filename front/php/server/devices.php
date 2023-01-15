@@ -995,15 +995,15 @@ function BackupConfigFile() {
 function setDeviceListCol() {
   global $pia_lang;
 
-  if (($_REQUEST['favorite'] == 0) || ($_REQUEST['favorite'] == 1)) {$Set_Favorites = $_REQUEST['favorite'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['group'] == 0) || ($_REQUEST['group'] == 1)) {$Set_Group = $_REQUEST['group'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['owner'] == 0) || ($_REQUEST['owner'] == 1)) {$Set_Owner = $_REQUEST['owner'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['type'] == 0) || ($_REQUEST['type'] == 1)) {$Set_Type = $_REQUEST['type'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['firstsess'] == 0) || ($_REQUEST['firstsess'] == 1)) {$Set_First_Session = $_REQUEST['firstsess'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['lastsess'] == 0) || ($_REQUEST['lastsess'] == 1)) {$Set_Last_Session = $_REQUEST['lastsess'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['lastip'] == 0) || ($_REQUEST['lastip'] == 1)) {$Set_LastIP = $_REQUEST['lastip'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['mactype'] == 0) || ($_REQUEST['mactype'] == 1)) {$Set_MACType = $_REQUEST['mactype'];} else {echo "Fehler"; exit;}
-  if (($_REQUEST['location'] == 0) || ($_REQUEST['location'] == 1)) {$Set_Location = $_REQUEST['location'];} else {echo "Fehler"; exit;}
+  if (($_REQUEST['favorite'] == 0) || ($_REQUEST['favorite'] == 1)) {$Set_Favorites = $_REQUEST['favorite'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['group'] == 0) || ($_REQUEST['group'] == 1)) {$Set_Group = $_REQUEST['group'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['owner'] == 0) || ($_REQUEST['owner'] == 1)) {$Set_Owner = $_REQUEST['owner'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['type'] == 0) || ($_REQUEST['type'] == 1)) {$Set_Type = $_REQUEST['type'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['firstsess'] == 0) || ($_REQUEST['firstsess'] == 1)) {$Set_First_Session = $_REQUEST['firstsess'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['lastsess'] == 0) || ($_REQUEST['lastsess'] == 1)) {$Set_Last_Session = $_REQUEST['lastsess'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['lastip'] == 0) || ($_REQUEST['lastip'] == 1)) {$Set_LastIP = $_REQUEST['lastip'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['mactype'] == 0) || ($_REQUEST['mactype'] == 1)) {$Set_MACType = $_REQUEST['mactype'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['location'] == 0) || ($_REQUEST['location'] == 1)) {$Set_Location = $_REQUEST['location'];} else {echo "Error. Wrong variable value!"; exit;}
 
   echo $pia_lang['BackDevices_DevListCol_noti_text'];
 

@@ -298,7 +298,7 @@ function initializeDatatable () {
       // Device Name
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[10] +'" class="">'+ cellData +'</a></b>');
+            $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[11] +'" class="">'+ cellData +'</a></b>');
       } },
 
       // Favorite
@@ -339,7 +339,7 @@ function initializeDatatable () {
             default:          color='aqua';             break;
           };
       
-          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[10] +'" class="badge bg-'+ color +'">'+ cellData.replace('-', '') +'</a>');
+          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[11] +'" class="badge bg-'+ color +'">'+ cellData.replace('-', '') +'</a>');
       } },
     ],
     
