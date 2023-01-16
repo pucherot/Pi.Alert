@@ -365,11 +365,11 @@ function initializeDatatable () {
     
   $('#tableDevices').on( 'order.dt', function () {
     setParameter (parTableOrder, JSON.stringify (table.order()) );
-    setCookie ('devicesList',JSON.stringify (table.column(12, { 'search': 'applied' }).data().toArray()) );
+    setCookie ('devicesList',JSON.stringify (table.column(13, { 'search': 'applied' }).data().toArray()) );
   } );
 
   $('#tableDevices').on( 'search.dt', function () {
-    setCookie ('devicesList', JSON.stringify (table.column(12, { 'search': 'applied' }).data().toArray()) );
+    setCookie ('devicesList', JSON.stringify (table.column(13, { 'search': 'applied' }).data().toArray()) );
   } );
 
 };
