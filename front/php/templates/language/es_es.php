@@ -176,6 +176,7 @@ $pia_lang['DevDetail_SessionInfo_FirstSession'] = '1ra. sesión';
 $pia_lang['DevDetail_SessionInfo_LastSession'] = 'Última sesión';
 $pia_lang['DevDetail_SessionInfo_LastIP'] = 'Última IP';
 $pia_lang['DevDetail_SessionInfo_StaticIP'] = 'IP estática';
+$pia_lang['DevDetail_Network_Titel'] = 'Red';
 $pia_lang['DevDetail_EveandAl_Title'] = 'Configuración de eventos y alertas';
 $pia_lang['DevDetail_EveandAl_ScanCycle'] = 'Ciclo de escaneo';
 $pia_lang['DevDetail_EveandAl_AlertAllEvents'] = 'Alerta a todos los eventos';
