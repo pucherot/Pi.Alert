@@ -287,7 +287,7 @@ function initializeDatatable () {
       {width:     '80px',        targets: [6, 7] },
       {width:     '30px',        targets: 9 },
       {width:     '0px',         targets: 10 },
-      {orderData: [11],          targets: 8 },
+      {orderData: [12],          targets: 8 },
 
       // {visible:   false,         targets: [10, 11, 12] },
       // {className: 'text-center', targets: [3, 8, 9] },
