@@ -38,8 +38,8 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'deleteDevice':                 deleteDevice();                          break;
       case 'getNetworkNodes':              getNetworkNodes();                       break;
       case 'deleteAllWithEmptyMACs':       deleteAllWithEmptyMACs();                break;
-      case 'createBackupDB':               createBackupDB();                        break;
-      case 'restoreBackupDB':              restoreBackupDB();                       break;
+//      case 'createBackupDB':               createBackupDB();                        break;
+//      case 'restoreBackupDB':              restoreBackupDB();                       break;
       case 'deleteAllDevices':             deleteAllDevices();                      break;
       case 'runScan15min':                 runScan15min();                          break;
       case 'runScan1min':                  runScan1min();                           break;
@@ -56,10 +56,11 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'PiaSetAPIKey':                 PiaSetAPIKey();                          break;
       case 'PiaLoginEnable':               PiaLoginEnable();                        break;
       case 'PiaLoginDisable':              PiaLoginDisable();                       break;
+      case 'DeleteInactiveHosts':          DeleteInactiveHosts();                   break;
+
       case 'setPiAlertTheme':              setPiAlertTheme();                       break;
       case 'setPiAlertLanguage':           setPiAlertLanguage();                    break;
       case 'setPiAlertArpTimer':           setPiAlertArpTimer();                    break;
-
       case 'setDeviceListCol':             setDeviceListCol();                      break;
 
       case 'getDevicesTotals':             getDevicesTotals();                      break;
@@ -1016,6 +1017,15 @@ function setDeviceListCol() {
 
   echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 
+}
+
+//------------------------------------------------------------------------------
+//  Delete Inactive Hosts
+//------------------------------------------------------------------------------
+function DeleteInactiveHosts() {
+  global $pia_lang;
+
+  echo 'Function entered';
 }
 
 ?>

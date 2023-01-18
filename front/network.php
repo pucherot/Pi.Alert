@@ -269,7 +269,6 @@ function network_infrastructurelist() {
   $func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
   $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
   while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
-    //echo '<a href="./deviceDetails.php?mac='.$func_res['dev_MAC'].'"><div style="display: inline-block; padding: 5px 15px; font-weight: bold;">'.$func_res['dev_Name'].'</div></a>';
     echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkNodeMac\',\''.$func_res['dev_Name'].'\')">'.$func_res['dev_Name'].'/'.$func_res['dev_DeviceType'].'</a></li>';
   }
 }
@@ -279,7 +278,6 @@ function network_device_downlink_mac() {
   $func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
   $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
   while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
-    //echo '<a href="./deviceDetails.php?mac='.$func_res['dev_MAC'].'"><div style="display: inline-block; padding: 5px 15px; font-weight: bold;">'.$func_res['dev_Name'].'</div></a>';
     echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkDeviceDownlinkMac\',\''.$func_res['dev_MAC'].',\')">'.$func_res['dev_Name'].'</a></li>';
   }
 }
