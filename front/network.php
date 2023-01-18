@@ -23,6 +23,7 @@ $sql = 'CREATE TABLE IF NOT EXISTS "network_infrastructure" (
 	"net_device_name"	TEXT NOT NULL,
 	"net_device_typ"	TEXT NOT NULL,
   "net_device_port"  INTEGER,
+  "net_downstream_devices" TEXT,
 	PRIMARY KEY("device_id" AUTOINCREMENT)
 )';
 
@@ -33,6 +34,8 @@ $result = $db->query($sql);
 $sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure" INTEGER';
 $result = $db->query($sql);
 $sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure_port" INTEGER';
+$result = $db->query($sql);
+$sql = 'ALTER TABLE "network_infrastructure" ADD "net_downstream_devices" TEXT';
 $result = $db->query($sql);
 
 // #####################################
@@ -49,12 +52,20 @@ if ($_REQUEST['Networkinsert'] == "yes") {
 // Add New Network Devices
 // #####################################
 if ($_REQUEST['Networkedit'] == "yes") {
-  if (isset($_REQUEST['NewNetworkDeviceName']) && isset($_REQUEST['NewNetworkDeviceTyp']))
+  if (($_REQUEST['NewNetworkDeviceName'] != "") && isset($_REQUEST['NewNetworkDeviceTyp']))
   {
-    $sql = 'UPDATE "network_infrastructure" SET "net_device_name" = "'.$_REQUEST['NewNetworkDeviceName'].'", "net_device_typ" = "'.$_REQUEST['NewNetworkDeviceTyp'].'", "net_device_port" = "'.$_REQUEST['NewNetworkDevicePort'].'" WHERE "device_id"="'.$_REQUEST['NetworkDeviceID'].'"';
+    $sql = 'UPDATE "network_infrastructure" SET "net_device_name" = "'.$_REQUEST['NewNetworkDeviceName'].'", "net_device_typ" = "'.$_REQUEST['NewNetworkDeviceTyp'].'", "net_device_port" = "'.$_REQUEST['NewNetworkDevicePort'].'", "net_downstream_devices" = "'.$_REQUEST['NetworkDeviceDownlink'].'" WHERE "device_id"="'.$_REQUEST['NetworkDeviceID'].'"';
     //$sql = 'INSERT INTO "network_infrastructure" ("net_device_name", "net_device_typ", "net_device_port") VALUES("'.$_REQUEST['NetworkDeviceName'].'", "'.$_REQUEST['NetworkDeviceTyp'].'", "'.$_REQUEST['NetworkDevicePort'].'")'; 
     $result = $db->query($sql);
   }
+
+  if (($_REQUEST['NewNetworkDeviceName'] == "") && isset($_REQUEST['NewNetworkDeviceTyp']))
+  {
+    $sql = 'UPDATE "network_infrastructure" SET "net_device_typ" = "'.$_REQUEST['NewNetworkDeviceTyp'].'", "net_device_port" = "'.$_REQUEST['NewNetworkDevicePort'].'", "net_downstream_devices" = "'.$_REQUEST['NetworkDeviceDownlink'].'" WHERE "device_id"="'.$_REQUEST['NetworkDeviceID'].'"';
+    //$sql = 'INSERT INTO "network_infrastructure" ("net_device_name", "net_device_typ", "net_device_port") VALUES("'.$_REQUEST['NetworkDeviceName'].'", "'.$_REQUEST['NetworkDeviceTyp'].'", "'.$_REQUEST['NetworkDevicePort'].'")'; 
+    $result = $db->query($sql);
+  }
+
 }
 // #####################################
 // remove Network Devices
@@ -97,22 +108,41 @@ if ($_REQUEST['Networkdelete'] == "yes") {
             <div class="col-md-4">
             <h4 class="box-title"><?php echo $pia_lang['Network_ManageAdd'];?></h4>
             <form role="form" method="post" action="./network.php">
-              <div class="form-group">
-                <label for="NetworkDeviceName"><?php echo $pia_lang['Network_ManageAdd_Name'];?>:</label>
-                <input type="text" class="form-control" id="NetworkDeviceName" name="NetworkDeviceName" placeholder="<?php echo $pia_lang['Network_ManageAdd_Name_text'];?>">
+              <div class="form-group has-success">
+
+                  <label for="NetworkDeviceName"><?php echo $pia_lang['Network_ManageAdd_Name'];?>:</label>
+                  <div class="input-group">
+                      <input class="form-control" id="txtNetworkNodeMac" name="NetworkDeviceName" type="text" placeholder="<?php echo $pia_lang['Network_ManageAdd_Name_text'];?>">
+                          <div class="input-group-btn">
+
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="buttonNetworkNodeMac">
+                                <span class="fa fa-caret-down"></span>
+                            </button>
+                            <ul id="dropdownNetworkNodeMac" class="dropdown-menu dropdown-menu-right">
+                              <li class="divider"></li>
+
+                              <?php
+                              network_infrastructurelist();
+                              ?>
+
+                            </ul>
+                          </div>
+                  </div>
+
               </div>
               <!-- /.form-group -->
-              <div class="form-group">
+              <div class="form-group has-success">
                <label><?php echo $pia_lang['Network_ManageAdd_Type'];?>:</label>
                   <select class="form-control" name="NetworkDeviceTyp">
                     <option value=""><?php echo $pia_lang['Network_ManageAdd_Type_text'];?></option>
+                    <option value="0_Internet">Internet</option>
                     <option value="1_Router">Router</option>
                     <option value="2_Switch">Switch</option>
                     <option value="3_WLAN">WLAN</option>
                     <option value="4_Powerline">Powerline</option>
                   </select>
               </div>
-              <div class="form-group">
+              <div class="form-group has-success">
                 <label for="NetworkDevicePort"><?php echo $pia_lang['Network_ManageAdd_Port'];?>:</label>
                 <input type="text" class="form-control" id="NetworkDevicePort" name="NetworkDevicePort" placeholder="<?php echo $pia_lang['Network_ManageAdd_Port_text'];?>">
               </div>
@@ -126,7 +156,7 @@ if ($_REQUEST['Networkdelete'] == "yes") {
             <div class="col-md-4">
               <h4 class="box-title"><?php echo $pia_lang['Network_ManageEdit'];?></h4>
               <form role="form" method="post" action="./network.php">
-              <div class="form-group">
+              <div class="form-group has-warning">
               	<label><?php echo $pia_lang['Network_ManageEdit_ID'];?>:</label>
                   <select class="form-control" name="NetworkDeviceID">
                     <option value=""><?php echo $pia_lang['Network_ManageEdit_ID_text'];?></option>
@@ -140,26 +170,55 @@ if ($_REQUEST['Networkdelete'] == "yes") {
 					?>
                   </select>
               </div>
-              <div class="form-group">
+              <div class="form-group has-warning">
                 <label for="NetworkDeviceName"><?php echo $pia_lang['Network_ManageEdit_Name'];?>:</label>
                 <input type="text" class="form-control" id="NewNetworkDeviceName" name="NewNetworkDeviceName" placeholder="<?php echo $pia_lang['Network_ManageEdit_Name_text'];?>">
               </div>
-              <div class="form-group">
+              <div class="form-group has-warning">
                <label><?php echo $pia_lang['Network_ManageEdit_Type'];?>:</label>
                   <select class="form-control" name="NewNetworkDeviceTyp">
                     <option value=""><?php echo $pia_lang['Network_ManageEdit_Type_text'];?></option>
+                    <option value="0_Internet">Internet</option>
                     <option value="1_Router">Router</option>
                     <option value="2_Switch">Switch</option>
                     <option value="3_WLAN">WLAN</option>
                     <option value="4_Powerline">Powerline</option>
                   </select>
               </div>
-              <div class="form-group">
+              <div class="form-group has-warning">
                 <label for="NetworkDevicePort"><?php echo $pia_lang['Network_ManageEdit_Port'];?>:</label>
                 <input type="text" class="form-control" id="NewNetworkDevicePort" name="NewNetworkDevicePort" placeholder="<?php echo $pia_lang['Network_ManageEdit_Port_text'];?>">
               </div>
+              <div class="form-group has-warning">
+<!--                 <label for="NetworkDeviceDownlink"><?php echo $pia_lang['Network_ManageEdit_Downlink'];?>:</label>
+                <input type="text" class="form-control" id="NetworkDeviceDownlink" name="NetworkDeviceDownlink" placeholder="<?php echo $pia_lang['Network_ManageEdit_Downlink_text'];?>"> -->
+
+                  <label for="NetworkDeviceDownlink"><?php echo $pia_lang['Network_ManageEdit_Downlink'];?>:</label>
+                  <div class="input-group">
+                      <input class="form-control" id="txtNetworkDeviceDownlinkMac" name="NetworkDeviceDownlink" type="text" placeholder="<?php echo $pia_lang['Network_ManageEdit_Downlink_text'];?>">
+                          <div class="input-group-btn">
+
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="buttonNetworkDeviceDownlinkMac">
+                                <span class="fa fa-caret-down"></span>
+                            </button>
+                            <ul id="dropdownNetworkDeviceDownlinkMac" class="dropdown-menu dropdown-menu-right">
+                              <li class="divider"></li>
+
+                              <?php
+                              //network_infrastructurelist();
+                              network_device_downlink_mac();
+                              ?>
+
+                            </ul>
+                          </div>
+                  </div>
+
+
+
+
+              </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-primary" name="Networkedit" value="yes"><?php echo $pia_lang['Network_ManageEdit_Submit'];?></button>
+                <button type="submit" class="btn btn-warning" name="Networkedit" value="yes"><?php echo $pia_lang['Network_ManageEdit_Submit'];?></button>
               </div>
          	 </form>
               <!-- /.form-group -->
@@ -168,7 +227,7 @@ if ($_REQUEST['Networkdelete'] == "yes") {
            <div class="col-md-4">
             <h4 class="box-title"><?php echo $pia_lang['Network_ManageDel'];?></h4>
               <form role="form" method="post" action="./network.php">
-              <div class="form-group">
+              <div class="form-group has-error">
                 <label><?php echo $pia_lang['Network_ManageDel_Name'];?>:</label>
                   <select class="form-control" name="NetworkDeviceID">
                     <option value=""><?php echo $pia_lang['Network_ManageDel_Name_text'];?></option>
@@ -195,16 +254,70 @@ if ($_REQUEST['Networkdelete'] == "yes") {
         <!-- /.box-body -->
       </div>
 
+<script>
+function setTextValue (textElement, textValue) {
+  $('#'+textElement).val (textValue);
+}
+</script>
+
 <?php
 // #####################################
 // ## Start Function Setup
 // #####################################
+function network_infrastructurelist() {
+  global $db;
+  $func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
+  $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
+  while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
+    //echo '<a href="./deviceDetails.php?mac='.$func_res['dev_MAC'].'"><div style="display: inline-block; padding: 5px 15px; font-weight: bold;">'.$func_res['dev_Name'].'</div></a>';
+    echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkNodeMac\',\''.$func_res['dev_Name'].'\')">'.$func_res['dev_Name'].'/'.$func_res['dev_DeviceType'].'</a></li>';
+  }
+}
+
+function network_device_downlink_mac() {
+  global $db;
+  $func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
+  $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
+  while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
+    //echo '<a href="./deviceDetails.php?mac='.$func_res['dev_MAC'].'"><div style="display: inline-block; padding: 5px 15px; font-weight: bold;">'.$func_res['dev_Name'].'</div></a>';
+    echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkDeviceDownlinkMac\',\''.$func_res['dev_MAC'].',\')">'.$func_res['dev_Name'].'</a></li>';
+  }
+}
+
 function unassigned_devices() {
   global $db;
   $func_sql = 'SELECT * FROM "Devices" WHERE "dev_Infrastructure" = "" OR "dev_Infrastructure" IS NULL';
   $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
   while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
     echo '<a href="./deviceDetails.php?mac='.$func_res['dev_MAC'].'"><div style="display: inline-block; padding: 5px 15px; font-weight: bold;">'.$func_res['dev_Name'].'</div></a>';
+  }
+}
+
+function get_downstream_devices($pia_func_down_devid) {
+  global $db;
+
+  $manual_downstream_ports = array();
+  $func_sql = 'SELECT * FROM "network_infrastructure" WHERE "device_id" = "'.$pia_func_down_devid.'"';
+  $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
+  while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
+    $temp_group_array = explode(';',$func_res['net_downstream_devices']);
+  }
+  $clean_group_array = array_filter($temp_group_array);
+  unset($temp_group_array);
+  for($x=0;$x<sizeof($clean_group_array);$x++) {
+    $temp_port_array = explode(',',trim($clean_group_array[$x]));
+    $downstream_devices[trim($temp_port_array[1])] = trim(strtolower($temp_port_array[0]));
+  }
+  return $downstream_devices;
+}
+
+function get_downstream_from_mac($pia_func_down_mac) {
+  global $db;
+
+  $func_sql = 'SELECT * FROM "Devices" WHERE "dev_MAC" = "'.$pia_func_down_mac.'"';
+  $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
+  while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
+    return $func_res;
   }
 }
 
@@ -230,6 +343,8 @@ function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_ne
       echo '<i class="bi bi-router-fill" style="font-size: 16px; position: relative; top: 2px;"></i>';}
     elseif (substr($pia_func_netdevtyp, 2) == 'Switch') {
       echo '<i class="bi bi-ethernet" style="font-size: 16px; position: relative; top: 2px;"></i>';}
+    elseif (substr($pia_func_netdevtyp, 2) == 'Internet') {
+      echo '<i class="bi bi-globe" style="font-size: 16px; position: relative; top: 2px;"></i>';}
     else {echo substr($pia_func_netdevtyp, 2);}
   // Enable the display of the complete Portcount
   //if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
@@ -239,7 +354,10 @@ function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_ne
 function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
 	global $pia_lang;
   echo '<div class="tab-pane '.$activetab.'" id="'.$pia_func_netdevid.'">
-	      <h4>'.$pia_func_netdevname.' (ID: '.$pia_func_netdevid.')</h4><br>';
+	      <h4>'.$pia_func_netdevname.'</h4><br>';
+  
+  $downstream_devices = get_downstream_devices($pia_func_netdevid);
+  
   echo '<div class="box-body no-padding">
     <table class="table table-striped table-hover">
       <tbody><tr>
@@ -285,8 +403,8 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
       } else {
         // Table without Port > echo values
         // Specific icon for devicetype
-        if ($pia_func_netdevtyp == "WLAN") {$dev_port_icon = 'fa-wifi';}
-        if ($pia_func_netdevtyp == "Powerline") {$dev_port_icon = 'fa-flash';}
+        if (substr($pia_func_netdevtyp, 2) == "WLAN") {$dev_port_icon = 'fa-wifi';}
+        if (substr($pia_func_netdevtyp, 2) == "Powerline") {$dev_port_icon = 'fa-flash';}
         echo '<tr><td style="text-align: center;"><i class="fa '.$dev_port_icon.'"></i></td><td>'.$port_state.'</td><td style="padding-left: 10px;"><a href="./deviceDetails.php?mac='.$func_res['dev_MAC'].'"><b>'.$func_res['dev_Name'].'</b></a></td><td>'.$func_res['dev_LastIP'].'</td></tr>';
       }
 	}
@@ -295,7 +413,14 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
     {
       for ($x=1; $x<=$pia_func_netdevport; $x++) 
         {
-          if ($x == $UplinkPort) {$network_device_portname[$x] = $Uplink_Dev;}
+          // Manual Entry Processing
+          if (isset($downstream_devices[$x])) {
+            $downstream_device_resolved = get_downstream_from_mac($downstream_devices[$x]);
+            $network_device_portmac[$x] = $downstream_devices[$x];
+            $network_device_portname[$x] = $downstream_device_resolved['dev_Name'];
+            $network_device_portstate[$x] = $downstream_device_resolved['dev_PresentLastScan'];
+            $network_device_portip[$x] =  $downstream_device_resolved['dev_LastIP'];
+          }
           // Prepare online/offline badge for later functions
           $online_badge = '<div class="badge bg-green text-white" style="width: 60px;">Online</div>';
           $offline_badge = '<div class="badge bg-gray text-white" style="width: 60px;">Offline</div>';
