@@ -6,7 +6,9 @@ session_start();
 //
 //  devices.php - Front module. Server side. Manage Devices
 //------------------------------------------------------------------------------
-//  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+//  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
+//  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
+//  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
 
 foreach (glob("../../../db/setting_language*") as $filename) {
@@ -66,7 +68,6 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'getDevicesTotals':             getDevicesTotals();                      break;
       case 'getDevicesList':               getDevicesList();                        break;
       case 'getDevicesListCalendar':       getDevicesListCalendar();                break;
-
       case 'getOwners':                    getOwners();                             break;
       case 'getDeviceTypes':               getDeviceTypes();                        break;
       case 'getGroups':                    getGroups();                             break;
@@ -1024,8 +1025,35 @@ function setDeviceListCol() {
 //------------------------------------------------------------------------------
 function DeleteInactiveHosts() {
   global $pia_lang;
+  global $db;
 
-  echo 'Function entered';
+  //SELECT id FROM tab WHERE col <= date('now', '-30 day')
+
+  // sql
+  $sql = 'SELECT * FROM Devices WHERE dev_PresentLastScan = 0 AND dev_LastConnection <= date("now", "-30 day")';
+  // execute sql
+  $result = $db->query($sql);
+  while($res = $result->fetchArray(SQLITE3_ASSOC)){
+      // sql
+      $sql_dev = 'DELETE FROM Devices WHERE dev_MAC="' . $res['dev_MAC'] .'"';
+      // execute sql
+      $result_dev = $db->query($sql_dev);
+
+      // sql
+      $sql_evt = 'DELETE FROM Events WHERE eve_MAC="' . $res['dev_MAC'] .'"';
+      // execute sql
+      $result_evt = $db->query($sql_evt);
+
+
+  } 
+
+  //check result
+  if ($result_dev == TRUE && $result_evt == TRUE) {
+    echo $pia_lang['BackDevices_DBTools_DelInactHosts'];
+  } else {
+    echo $pia_lang['BackDevices_DBTools_DelInactHostsError'].'<br>'."\n\n$sql_loop \n\n". $db->lastErrorMsg();
+  }
+
 }
 
 ?>

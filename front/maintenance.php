@@ -14,11 +14,11 @@ if ($_SESSION["login"] != 1)
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector 
 //
-//  devices.php - Front module. Server side. Manage Devices
+//  maintenance.php - Front module. Server side. Manage Devices
 //------------------------------------------------------------------------------
 //  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
 //  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
-//  leiweibau  2022        https://github.com/leiweibau     GNU GPLv3
+//  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
   
 ?>
@@ -137,11 +137,11 @@ if ($_REQUEST['tab'] == '1') {
 
 <!-- Status Box ----------------------------------------------------------------- -->
 
-      <div class="box" id="Maintain-Status">
-          <div class="box-header with-border">
+    <div class="box" id="Maintain-Status">
+        <div class="box-header with-border">
             <h3 class="box-title">Status</h3>
-          </div>
-          <div class="box-body" style="padding-bottom: 5px;">
+        </div>
+        <div class="box-body" style="padding-bottom: 5px;">
             <div class="db_info_table">
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_database_path'];?></div>
@@ -179,9 +179,10 @@ if ($_REQUEST['tab'] == '1') {
                     </div>
                 </div>
             </div>                
-          </div>
-          <!-- /.box-body -->
         </div>
+          <!-- /.box-body -->
+    </div>
+
       </div>
     </div>
 
@@ -243,9 +244,9 @@ if ($_REQUEST['tab'] == '1') {
                     ?>
                     <br></div>
                 </div>
-                  <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -269,9 +270,9 @@ if ($_REQUEST['tab'] == '1') {
                     ?>
                     <br></div>
                 </div>
-                  <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -310,9 +311,9 @@ if ($_REQUEST['tab'] == '1') {
                     ?>
                     <br></div>
                 </div>
-                  <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -336,9 +337,9 @@ if ($_REQUEST['tab'] == '1') {
                     ?>
                     <br></div>
                 </div>
-                  <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -360,9 +361,9 @@ if ($_REQUEST['tab'] == '1') {
                     ?>
                     <br></div>
                 </div>
-                  <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -582,49 +583,55 @@ else {
 
         </div>
         <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
-                <div class="db_info_table">
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs_text'];?></div>
+            <div class="db_info_table">
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs'];?></button>
                     </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?php echo $pia_lang['Maintenance_Tool_del_alldev'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_alldev_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteUnknown" onclick="askDeleteUnknown()"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteEvents" onclick="askDeleteEvents()"><?php echo $pia_lang['Maintenance_Tool_del_allevents'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_allevents_text'];?></div>
-                    </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteActHistory" onclick="askDeleteActHistory()"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory_text'];?></div>
-                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs_text'];?></div>
                 </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?php echo $pia_lang['Maintenance_Tool_del_alldev'];?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_alldev_text'];?></div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteUnknown" onclick="askDeleteUnknown()"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev'];?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev_text'];?></div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteEvents" onclick="askDeleteEvents()"><?php echo $pia_lang['Maintenance_Tool_del_allevents'];?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_allevents_text'];?></div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteActHistory" onclick="askDeleteActHistory()"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory'];?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory_text'];?></div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteInactiveHosts" onclick="askDeleteInactiveHosts()"><?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts'];?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'];?></div>
+                </div>
+            </div>
         </div>
         <div class="tab-pane <?php echo $pia_tab_backup; ?>" id="tab_BackupRestore">
-                <div class="db_info_table">
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?php echo $pia_lang['Maintenance_Tool_backup'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_backup_text'];?></div>
+            <div class="db_info_table">
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?php echo $pia_lang['Maintenance_Tool_backup'];?></button>
                     </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_backup_text'];?></div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
 <?php
 if (!$block_restore_button) {
     echo '<button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
@@ -632,18 +639,17 @@ if (!$block_restore_button) {
     echo '<button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button disabled" id="btnPiaRestoreDBfromArchive">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
 }
 
-?>
-                            
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_restore_text'];?></div>
+?>                            
                     </div>
-                    <div class="db_info_table_row">
-                        <div class="db_tools_table_cell_a" style="">
-                            <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaPurgeDBBackups" onclick="askPiaPurgeDBBackups()"><?php echo $pia_lang['Maintenance_Tool_purgebackup'];?></button>
-                        </div>
-                        <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_purgebackup_text'];?></div>
-                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_restore_text'];?></div>
                 </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaPurgeDBBackups" onclick="askPiaPurgeDBBackups()"><?php echo $pia_lang['Maintenance_Tool_purgebackup'];?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_purgebackup_text'];?></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -996,6 +1002,19 @@ function setDeviceListCol() {
     + '&mactype='        + ($('#chkMACtype')[0].checked * 1)
     + '&location='       + ($('#chkLocation')[0].checked * 1)
     , function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Delete Inactive Hosts
+function askDeleteInactiveHosts() {
+  // Ask 
+  showModalWarning('Delete Inactive Hosts Title', 'Delete Inactive Hosts Text',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'DeleteInactiveHosts');
+}
+function DeleteInactiveHosts() {
+  // Execute
+  $.get('php/server/devices.php?action=DeleteInactiveHosts', function(msg) {
     showMessage (msg);
   });
 }

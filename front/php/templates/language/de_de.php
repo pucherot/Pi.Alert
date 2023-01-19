@@ -239,7 +239,7 @@ $pia_lang['Maintenance_lang_selector_empty'] = 'Sprache wählen';
 $pia_lang['Maintenance_lang_en_us'] = 'Englisch (US)';
 $pia_lang['Maintenance_lang_de_de'] = 'Deutsch (DE)';
 $pia_lang['Maintenance_lang_es_es'] = 'Spanisch (ES)';
-$pia_lang['Maintenance_lang_fr_fr'] = 'Französisch (FR) unvollständig';
+$pia_lang['Maintenance_lang_fr_fr'] = 'Französisch (FR)';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Übernehmen';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Einstellungen';
 $pia_lang['Maintenance_Tools_Tab_Tools'] = 'Wartung';
@@ -286,6 +286,8 @@ $pia_lang['Maintenance_Tool_del_allevents'] = 'Alle Ereignisse löschen';
 $pia_lang['Maintenance_Tool_del_allevents_text'] = 'Machen Sie ein Backup, bevor Sie diese Funk&shy;tion nutzen. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht wer&shy;den. Alle Ereignisse werden aus der Daten&shy;bank ge&shy;löscht. Dies setzt auch die An&shy;wesen&shy;heit zu&shy;rück. Es kann ab dem Moment zu un&shy;gül&shy;tigen Sitzungen kom&shy;men. Ein Scan, während das be&shy;treffen&shy;de Gerät "online" ist, sollte das Problem lösen.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Alle Ereignisse löschen';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = 'Sind Sie sicher, dass Sie alle Ereignisse aus der Datenbank löschen wollen. Dies setzt die Anwesenheit aller Geräte zurück.';
+$pia_lang['Maintenance_Tool_del_Inactive_Hosts'] = 'Lösche inaktive Geräte';
+$pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'] = 'Es werden alle, seit 30 Tagen inaktiven, Geräte gelöscht. Ebenfalls werden auch die Events dieser Geräte aus der Datenbank entfernt.';
 $pia_lang['Maintenance_Tool_backup'] = 'DB Sicherung';
 $pia_lang['Maintenance_Tool_backup_text'] = 'Die Datenbank-Sicher&shy;ungen befinden sich im Datenbank-Ver&shy;zeich&shy;nis, gepackt als zip-Archive, benannt mit dem Er&shy;stell&shy;ungs&shy;datum. Es gibt keine maximale Anzahl von Backups.';
 $pia_lang['Maintenance_Tool_backup_noti'] = 'DB Sicherung';
@@ -352,6 +354,8 @@ $pia_lang['BackDevices_DBTools_UpdDevError'] = 'Fehler beim Aktualisieren des Ge
 $pia_lang['BackDevices_DBTools_Purge'] = 'Die ältesten Backups wurden gelöscht.';
 $pia_lang['BackDevices_DBTools_DelActHistory'] = 'Die Anzeige der Netzwerkaktivität wurde zurückgesetzt.';
 $pia_lang['BackDevices_DBTools_DelActHistoryError'] = 'Fehler beim Zurücksetzen der Netzwerkaktivitätsanzeige.';
+$pia_lang['BackDevices_DBTools_DelInactHosts'] = 'Inaktive Hosts wurden gelöscht.';
+$pia_lang['BackDevices_DBTools_DelInactHostsError'] = 'Es trat, bei dem Versuch inaktive Hosts zu löschen, ein Fehler auf.';
 $pia_lang['BackDevices_Login_disabled'] = 'Login deaktiviert.';
 $pia_lang['BackDevices_Login_enabled'] = 'Login aktiviert.';
 $pia_lang['BackDevices_Theme_set'] = 'Theme wird angewendet.';
@@ -389,7 +393,7 @@ $pia_lang['Network_ManageEdit_Name_text'] = 'Leer lassen wenn keine Änderung er
 $pia_lang['Network_ManageEdit_Type'] = 'Neuer Typ';
 $pia_lang['Network_ManageEdit_Type_text'] = '-- Typ wählen --';
 $pia_lang['Network_ManageEdit_Port'] = 'Neue Portanzahl';
-$pia_lang['Network_ManageEdit_Port_text'] = 'bei WLAN oder Powerline leer lassen';
+$pia_lang['Network_ManageEdit_Port_text'] = 'Bei WLAN oder Powerline leer lassen';
 $pia_lang['Network_ManageEdit_Downlink'] = 'manuelle Port-Konfiguration (Ziel-MAC,lokaler Port)';
 $pia_lang['Network_ManageEdit_Downlink_text'] = '0a:1b:3c:4d:5e:6f,16;Ziel-MAC 2,Port 2;';
 $pia_lang['Network_ManageEdit_Submit'] = 'Speichern';
@@ -413,9 +417,7 @@ $pia_lang['HelpFAQ_Cat_General_100_text_a'] = 'Aktuell konfigurierte Zeitzone:';
 $pia_lang['HelpFAQ_Cat_General_100_text_b'] = '<br>Sollte dies nicht die Zeitzone sein, in der du dich aufhältst, solltest du die Zeitzone in der PHP Konfigurationsdatei anpassen. Diese findest du in dem Verzeichnis:';
 $pia_lang['HelpFAQ_Cat_General_100_text_c'] = 'Suche in dieser Datei nach dem Eintrag "<span class="text-maroon help_faq_code">date.timezone</span>", entferne ggf. das führende "<span class="text-maroon help_faq_code">;</span>" und trage die gewünschte Zeitzone ein. Eine Liste mit den unterstützten Zeitzonen findest du hier (<a href="https://www.php.net/manual/de/timezones.php" target="blank">Link</a>).';
 $pia_lang['HelpFAQ_Cat_General_101_head'] = 'Mein Netzwerk scheint langsamer zu werden, Streaming "ruckelt".';
-$pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es kann durchaus sein, dass leistungsschwache Geräte mit der Art und Weise, wie Pi.Alert neue Geräte im Netzwerk erkennt, an ihre Leistungsgrenzen stoßen. Dies verstärkt sich noch einmal, 
-											 wenn diese Geräte per WLAN mit dem Netzwerk kommunizieren. Lösungen wären hier, wenn möglich ein Wechsel auf eine Kabelverbindung oder, falls das Geräte nur einen begrenzten Zeitraum genutzt 
-											 werden soll, den arp-Scan auf der Wartungsseite zu pausieren.';
+$pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es kann durchaus sein, dass leistungsschwache Geräte mit der Art und Weise, wie Pi.Alert neue Geräte im Netzwerk erkennt, an ihre Leistungsgrenzen stoßen. Dies verstärkt sich noch einmal, wenn diese Geräte per WLAN mit dem Netzwerk kommunizieren. Lösungen wären hier, wenn möglich ein Wechsel auf eine Kabelverbindung oder, falls das Geräte nur einen begrenzten Zeitraum genutzt werden soll, den arp-Scan auf der Wartungsseite zu pausieren.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Ich bekomme die Meldung, dass die Datenbank schreibgeschützt (read only) ist.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
               								 <span class="text-maroon help_faq_code">drwxrwx---  2 (dein Username) www-data</span><br>
@@ -425,7 +427,7 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob d
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
-              								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zuückspielen eines Datenbank-Backups über die Wartungsseite.';
+              								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span> 
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
