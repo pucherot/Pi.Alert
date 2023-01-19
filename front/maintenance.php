@@ -1009,8 +1009,8 @@ function setDeviceListCol() {
 // Delete Inactive Hosts
 function askDeleteInactiveHosts() {
   // Ask 
-  showModalWarning('Delete Inactive Hosts Title', 'Delete Inactive Hosts Text',
-    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'DeleteInactiveHosts');
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts'];?>', '<?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Delete'];?>', 'DeleteInactiveHosts');
 }
 function DeleteInactiveHosts() {
   // Execute
