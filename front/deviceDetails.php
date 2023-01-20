@@ -263,33 +263,7 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                           <textarea class="form-control" rows="3" id="txtComments"></textarea>
                         </div>
                       </div>
-
-                      <div class="form-group">
-                        <label class="col-sm-6 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Network'];?></label>
-                        <div class="col-sm-6">  
-                          <div class="input-group"> 
-
-                            <input class="form-control" id="txtNetworkNodeMac" type="text" value="--">
-                            <div class="input-group-btn">
-
-                              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="buttonNetworkNodeMac">
-                                    <span class="fa fa-caret-down"></span></button>
-                              <ul id="dropdownNetworkNodeMac" class="dropdown-menu dropdown-menu-right">
-                              </ul>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="col-sm-6 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Network_Port'];?></label>
-                        <div class="col-sm-6">
-                          <input class="form-control" id="txtNetworkPort" type="text" value="--">
-                        </div>
-                      </div>
-
-
-                    </div>          
+                    </div>         
                   </div>          
 
     <!-- column 2 -->
@@ -336,8 +310,38 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                           <input class="checkbox blue hidden" id="chkStaticIP" type="checkbox">
                         </div>
                       </div>
-      
                     </div>
+
+                    <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_Network_Titel'];?></h4>
+                    <div class="box-body form-horizontal">
+                      <div class="form-group">
+                        <label class="col-sm-6 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Network'];?></label>
+                        <div class="col-sm-6">  
+                          <div class="input-group"> 
+
+                            <input class="form-control" id="txtNetworkNodeMac" type="text" value="--">
+                            <div class="input-group-btn">
+
+                              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="buttonNetworkNodeMac">
+                                    <span class="fa fa-caret-down"></span></button>
+                              <ul id="dropdownNetworkNodeMac" class="dropdown-menu dropdown-menu-right">
+                              </ul>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-6 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Network_Port'];?></label>
+                        <div class="col-sm-6">
+                          <input class="form-control" id="txtNetworkPort" type="text" value="--">
+                        </div>
+                      </div>
+
+
+                    </div> 
+
+
                   </div>
 
     <!-- column 3 -->
