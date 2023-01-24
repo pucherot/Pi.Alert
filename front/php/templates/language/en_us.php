@@ -6,6 +6,7 @@ unset($pia_lang);
 $pia_lang['About_Title'] = 'Open Source Network Guard';
 $pia_lang['About_Design'] = 'Designed for:';
 $pia_lang['About_Exit'] = 'Sign out';
+$pia_lang['About_Reports'] = 'Show notifications';
 
 //////////////////////////////////////////////////////////////////
 // General
@@ -511,5 +512,11 @@ $pia_lang['HelpFAQ_Cat_Network_600_head'] = 'What is this page for?';
 $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'This page should offer you the possibility to map the assignment of your network devices. For this purpose, you can create one or more switches, WLANs, routers, etc., provide them with a port number if necessary and assign already detected 
 											 devices to them. This assignment is done in the detailed view of the device to be assigned. So it is possible for you to quickly determine to which port a host is connected and if it is online. It is possible to assign a device to multiple 
 											 ports (port bundling), as well as multiple devices to one port (virtual machines).';
+
+//////////////////////////////////////////////////////////////////
+// Reports Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['Reports_Title'] = 'Notifications';
 
 ?>

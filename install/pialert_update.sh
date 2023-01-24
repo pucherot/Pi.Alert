@@ -191,6 +191,16 @@ SCAN_SUBNETS    = '--localnet'
 EOF
 fi
 
+
+if ! grep -Fq "# WebGUI Reporting" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# WebGUI Reporting
+# ----------------------
+REPORT_WEBGUI = True
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------
@@ -253,6 +263,8 @@ update_permissions() {
   chmod +x "$PIALERT_HOME/back/update_vendors.sh"                   2>&1 >> "$LOG"
   sudo chmod -R 775 "$PIALERT_HOME/config/"                         2>&1 >> "$LOG"
   sudo chgrp -R www-data "$PIALERT_HOME/config/pialert.conf"
+  sudo chmod -R 775 "$PIALERT_HOME/front/reports"
+  sudo chgrp -R www-data "$PIALERT_HOME/front/reports"
   print_msg "- Create Logfile Symlinks..."
   touch "$PIALERT_HOME/log/pialert.vendors.log"
   touch "$PIALERT_HOME/log/pialert.1.log"

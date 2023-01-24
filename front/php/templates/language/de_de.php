@@ -6,6 +6,7 @@ unset($pia_lang);
 $pia_lang['About_Title'] = 'Open Source Network Guard';
 $pia_lang['About_Design'] = 'Designed for:';
 $pia_lang['About_Exit'] = 'Abmelden';
+$pia_lang['About_Reports'] = 'Meldungen zeigen';
 
 //////////////////////////////////////////////////////////////////
 // General
@@ -510,5 +511,12 @@ $pia_lang['HelpFAQ_Cat_Network_600_head'] = 'Was bringt mir diese Seite?';
 $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Diese Seite soll dir die Möglichkeit bieten, die Belegung deiner Netzwerkgeräte abzubilden. Dazu kannst du einen oder mehrere Switches, WLANs, Router, etc. erstellen,
         									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen 
         									 an welchem Port ein Host angeschlossen und ob er online ist. Es ist möglich ein Gerät mehreren Ports (bei Portbündelung), als auch mehrere Geräte einem Port (virtuelle Maschinen), zuzuordnen.';
+
+//////////////////////////////////////////////////////////////////
+// Reports Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['Reports_Title'] = 'Benachrichtigungen';
+
 
 ?>

@@ -38,6 +38,7 @@ PIALERT_BACK_PATH = os.path.dirname(os.path.abspath(__file__))
 PIALERT_PATH = PIALERT_BACK_PATH + "/.."
 STOPARPSCAN = PIALERT_PATH + "/db/setting_stoparpscan"
 PIALERT_DB_FILE = PIALERT_PATH + "/db/pialert.db"
+REPORTPATH_WEBGUI = PIALERT_PATH + "/front/reports/"
 
 if (sys.version_info > (3,0)):
     exec(open(PIALERT_PATH + "/config/version.conf").read())
@@ -133,6 +134,13 @@ def get_username():
 def set_pia_file_permissions():
 
     os.system("sudo chown " + get_username() + ":www-data " + PIALERT_DB_FILE)
+
+# ------------------------------------------------------------------------------
+
+def set_pia_reports_permissions():
+
+    os.system("chown -R " + get_username() + ":www-data " + REPORTPATH_WEBGUI)
+    os.system("chmod -R 775 " + REPORTPATH_WEBGUI)
 
 #===============================================================================
 # Countdown
@@ -1431,7 +1439,7 @@ def email_reporting ():
     # DEBUG - Write output emails for testing
     if True :
         write_file (LOG_PATH + '/report_output.txt', mail_text) 
-        write_file (LOG_PATH + '/report_output.html', mail_html) 
+        write_file (LOG_PATH + '/report_output.html', mail_html)
 
     # Send Mail
     if mail_section_Internet == True or mail_section_new_devices == True \
@@ -1454,6 +1462,9 @@ def email_reporting ():
         if REPORT_NTFY :
             print ('    Sending report by NTFY...')
             send_ntfy (mail_text)
+        if REPORT_WEBGUI :
+            print ('    Save report to file...')
+            send_webgui (mail_text)
         else :
             print ('    Skip NTFY...')
     else :
@@ -1527,12 +1538,26 @@ def send_telegram (_Text):
     runningpath = os.path.abspath(os.path.dirname(__file__))
     stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_telegram_Text+'" --title "Pi.Alert - '+subheadline+'"')
 
+
+#-------------------------------------------------------------------------------
+
+def send_webgui (_Text):
+    # Remove one linebrake between "Server" and the headline of the event type
+    _webgui_Text = _Text.replace('\n\n\n', '\n\n')
+    # extract event type headline to use it in the notification headline
+    findsubheadline = _webgui_Text.split('\n')
+    subheadline = findsubheadline[3]
+    _webgui_filename = time.strftime("%Y%m%d-%H%M%S") + "_" + subheadline + ".txt"
+    if (os.path.exists(REPORTPATH_WEBGUI + _webgui_filename) == False):
+        f = open(REPORTPATH_WEBGUI + _webgui_filename, "w")
+        f.write(_webgui_Text)
+        f.close()
+    set_pia_reports_permissions()
+
 #===============================================================================
 # Test REPORTING
 #===============================================================================
 def email_reporting_test (_Mode):
-    #global mail_text
-    #global mail_html
 
     if _Mode == 'Test' :
         notiMessage = "Test-Notification"
@@ -1551,22 +1576,22 @@ def email_reporting_test (_Mode):
         send_email (notiMessage, notiMessage)
     else :
         print ('    Skip mail...')
-
     if REPORT_PUSHSAFER :
         print ('    Sending report by PUSHSAFER...')
         send_pushsafer_test (notiMessage)
     else :
         print ('    Skip PUSHSAFER...')
-
     if REPORT_NTFY :
         print ('    Sending report by NTFY...')
         send_ntfy_test (notiMessage)
     else :
         print ('    Skip NTFY...')
-
     if REPORT_TELEGRAM :
         print ('    Sending report by Telegram...')
         send_telegram_test (notiMessage)
+    if REPORT_WEBGUI :
+        print ('    Save report to file...')
+        send_webgui_test (notiMessage)
     else :
         print ('    Skip Telegram...')
         
@@ -1611,6 +1636,17 @@ def send_pushsafer_test (_notiMessage):
 def send_telegram_test (_notiMessage):
     runningpath = os.path.abspath(os.path.dirname(__file__))
     stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_notiMessage+'" --title "Pi.Alert"')
+
+#-------------------------------------------------------------------------------
+def send_webgui_test (_notiMessage):
+    # Remove one linebrake between "Server" and the headline of the event type
+    # extract event type headline to use it in the notification headline
+    _webgui_filename = time.strftime("%Y%m%d-%H%M%S") + "_Test.txt"
+    if (os.path.exists(REPORTPATH_WEBGUI + _webgui_filename) == False):
+        f = open(REPORTPATH_WEBGUI + _webgui_filename, "w")
+        f.write(_notiMessage)
+        f.close()
+    set_pia_reports_permissions()
 
 #-------------------------------------------------------------------------------
 def format_report_section (pActive, pSection, pTable, pText, pHTML):

@@ -6,6 +6,7 @@ unset($pia_lang);
 $pia_lang['About_Title'] = 'Guadián de Red <br>(Código Abierto)';
 $pia_lang['About_Design'] = 'Diseñado para:';
 $pia_lang['About_Exit'] = 'Salir';
+$pia_lang['About_Reports'] = 'Notificaciones';
 
 //////////////////////////////////////////////////////////////////
 // General - Update by @TeroRERO 01ago2022
@@ -511,4 +512,9 @@ $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Esta sección debería ofrecerle la
 											ya detectados. Esta asignación se realiza en la vista detallada del dispositivo a asignar.  Por lo tanto, es posible determinar rápidamente a qué puerto está conectado un host y si está en línea. Es posible asignar un dispositivo a múltiples 
 											 puertos (agrupación de puertos), así como múltiples dispositivos a un puerto (máquinas virtuales).';
 
+//////////////////////////////////////////////////////////////////
+// Reports Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['Reports_Title'] = 'Notificaciones';
 ?>

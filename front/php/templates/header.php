@@ -30,6 +30,18 @@ foreach (glob("../db/setting_language*") as $filename) {
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 require 'php/templates/language/'.$pia_lang_selected.'.php';
 
+function count_webgui_reports() {
+    $prep_remove_report = './reports/'.str_replace(array('\'', '"', ',' , ';', '<', '>' , '.' , '/' , '&'), "", $_REQUEST['remove_report']).'.txt';
+    if (file_exists($prep_remove_report)) {
+      unlink($prep_remove_report);
+    }
+
+    $files = scandir('./reports');
+    $report_counter = count($files)-2;
+    if ($report_counter == 0) {unset($report_counter);}
+    return $report_counter;
+}
+
 // ###################################
 // ## GUI settings processing end
 // ###################################
@@ -57,6 +69,7 @@ require 'php/templates/language/'.$pia_lang_selected.'.php';
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
+
 
   <!-- Ionicons -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
@@ -110,7 +123,6 @@ function show_pia_servertime() {
     if (pia_second <= 9) { pia_second = "0" + pia_second; } realtime_pia_servertime = "(" + pia_hour + ":" + pia_minute + ":" + pia_second + ")";
     if (document.getElementById) { document.getElementById("PIA_Servertime_place").innerHTML = realtime_pia_servertime; } setTimeout("show_pia_servertime()", 1000);
 }
-
 
 document.addEventListener("visibilitychange",()=>{
    if(document.visibilityState==="visible"){
@@ -166,7 +178,8 @@ document.addEventListener("visibilitychange",()=>{
               <!-- The user image in the navbar-->
               <img src="img/pialertLogoWhite.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Pi.Alert</span>
+              <!-- <span class="hidden-xs">Pi.Alert</span> -->
+              <span class="label label-danger"><?php echo count_webgui_reports();?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -181,8 +194,11 @@ document.addEventListener("visibilitychange",()=>{
               <!-- Menu Body -->
 
               <li class="user-footer">
+                <div class="pull-left">
+                  <a href="./reports.php" class="btn btn-warning"><?php echo $pia_lang['About_Reports'];?></a>
+                </div>
                 <div class="pull-right">
-                  <a href="/pialert/index.php?action=logout" class="btn btn-danger"><?php echo $pia_lang['About_Exit'];?></a>
+                  <a href="./index.php?action=logout" class="btn btn-danger"><?php echo $pia_lang['About_Exit'];?></a>
                 </div>
               </li>
             </ul>
@@ -202,152 +218,137 @@ document.addEventListener("visibilitychange",()=>{
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
 
-<!--         <a href="." class="logo">
-          <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
-        </a> -->
+        <div class="logo" style="width:50%; margin:auto;">
+           <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
+        </div>
+        <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
+<?php
 
-                <div class="logo" style="width:50%; margin:auto;">
-                   <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
-                </div>
-                <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
-                    <?php
+// Pause Arp Scan Section ---------------------------------------------------------------
 
-                    // Pause Arp Scan Section ---------------------------------------------------------------
+if (!file_exists('../db/setting_stoparpscan')) {
+  $execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
+  $pia_arpscans = "";
+  exec($execstring, $pia_arpscans);
+  $pia_arpscans_result = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
+  $pia_arpscans_sidebarstate = 'Active';
+  $pia_arpscans_sidebarstate_light = 'green-light';
+} else {
+  $pia_arpscan_timerstart = date ("H:i:s", filectime('../db/setting_stoparpscan'));
+  $pia_arpscans_result = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
+  $pia_arpscans_sidebarstate = 'Disabled&nbsp;&nbsp;&nbsp;('.$pia_arpscan_timerstart.')';
+  $pia_arpscans_sidebarstate_light = 'red';
+}
 
-                    if (!file_exists('../db/setting_stoparpscan')) {
-                      $execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
-                      $pia_arpscans = "";
-                      exec($execstring, $pia_arpscans);
-                      $pia_arpscans_result = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
-                      $pia_arpscans_sidebarstate = 'Active';
-                      $pia_arpscans_sidebarstate_light = 'green-light';
-                    } else {
-                      $pia_arpscan_timerstart = date ("H:i:s", filectime('../db/setting_stoparpscan'));
-                      $pia_arpscans_result = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
-                      $pia_arpscans_sidebarstate = 'Disabled&nbsp;&nbsp;&nbsp;('.$pia_arpscan_timerstart.')';
-                      $pia_arpscans_sidebarstate_light = 'red';
-                    }
+// Pause Arp Scan Section ---------------------------------------------------------------
 
-                    // Pause Arp Scan Section ---------------------------------------------------------------
+echo '<span id="status">
+        <i class="fa fa-w fa-circle text-'.$pia_arpscans_sidebarstate_light.'"></i> '.$pia_arpscans_sidebarstate.'&nbsp;&nbsp;
+      </span><br>';
 
-                    echo '<span id="status">
-                            <i class="fa fa-w fa-circle text-'.$pia_arpscans_sidebarstate_light.'"></i> '.$pia_arpscans_sidebarstate.'&nbsp;&nbsp;
-                          </span><br>';
-
-
-                    // (may be less than the number of online processors)
-                    $nproc = shell_exec('nproc');
-                    if (!is_numeric($nproc)) {
-                        $cpuinfo = file_get_contents('/proc/cpuinfo');
-                        preg_match_all('/^processor/m', $cpuinfo, $matches);
-                        $nproc = count($matches[0]);
-                    }
-
-                    $loaddata = sys_getloadavg();
-                    echo '<span title="Detected '.$nproc.' cores"><i class="fa fa-w fa-circle ';
-                    if ($loaddata[0] > $nproc) {
-                        echo 'text-red';
-                    } else {
-                        echo 'text-green-light';
-                    }
-                    echo '"></i> Load:&nbsp;&nbsp;'.$loaddata[0].'&nbsp;&nbsp;'.$loaddata[1].'&nbsp;&nbsp;'.$loaddata[2].'</span>';
-                    ?>
+// (may be less than the number of online processors)
+$nproc = shell_exec('nproc');
+if (!is_numeric($nproc)) {
+    $cpuinfo = file_get_contents('/proc/cpuinfo');
+    preg_match_all('/^processor/m', $cpuinfo, $matches);
+    $nproc = count($matches[0]);
+}
+$loaddata = sys_getloadavg();
+echo '<span title="Detected '.$nproc.' cores"><i class="fa fa-w fa-circle ';
+if ($loaddata[0] > $nproc) {
+    echo 'text-red';
+} else {
+    echo 'text-green-light';
+}
+echo '"></i> Load:&nbsp;&nbsp;'.$loaddata[0].'&nbsp;&nbsp;'.$loaddata[1].'&nbsp;&nbsp;'.$loaddata[2].'</span>';
+?>
                     <br/>
-                    <?php
+<?php
+function getMemUsage()
+{
+    $data = explode("\n", file_get_contents('/proc/meminfo'));
+    $meminfo = array();
+    if (count($data) > 0) {
+        foreach ($data as $line) {
+            $expl = explode(':', $line);
+            if (count($expl) == 2) {
+                // remove " kB" from the end of the string and make it an integer
+                $meminfo[$expl[0]] = intval(trim(substr($expl[1], 0, -3)));
+            }
+        }
+        $memused = $meminfo['MemTotal'] - $meminfo['MemFree'] - $meminfo['Buffers'] - $meminfo['Cached'];
+        $memusage = $memused / $meminfo['MemTotal'];
+    } else {
+        $memusage = -1;
+    }
 
-                    function getMemUsage()
-                    {
-                        $data = explode("\n", file_get_contents('/proc/meminfo'));
-                        $meminfo = array();
-                        if (count($data) > 0) {
-                            foreach ($data as $line) {
-                                $expl = explode(':', $line);
-                                if (count($expl) == 2) {
-                                    // remove " kB" from the end of the string and make it an integer
-                                    $meminfo[$expl[0]] = intval(trim(substr($expl[1], 0, -3)));
-                                }
-                            }
-                            $memused = $meminfo['MemTotal'] - $meminfo['MemFree'] - $meminfo['Buffers'] - $meminfo['Cached'];
-                            $memusage = $memused / $meminfo['MemTotal'];
-                        } else {
-                            $memusage = -1;
-                        }
+    return $memusage;
+}
 
-                        return $memusage;
-                    }
-
-                    $memory_usage = getMemUsage();
-                    echo '<span><i class="fa fa-w fa-circle ';
-                    if ($memory_usage > 0.75 || $memory_usage < 0.0) {
-                        echo 'text-red';
-                    } else {
-                        echo 'text-green-light';
-                    }
-                    if ($memory_usage > 0.0) {
-                        echo '"></i> Memory usage:&nbsp;&nbsp;'.sprintf('%.1f', 100.0 * $memory_usage).'&thinsp;%</span>';
-                    } else {
-                        echo '"></i> Memory usage:&nbsp;&nbsp; N/A</span>';
-                    }
-                    ?>
+$memory_usage = getMemUsage();
+echo '<span><i class="fa fa-w fa-circle ';
+if ($memory_usage > 0.75 || $memory_usage < 0.0) {
+    echo 'text-red';
+} else {
+    echo 'text-green-light';
+}
+if ($memory_usage > 0.0) {
+    echo '"></i> Memory usage:&nbsp;&nbsp;'.sprintf('%.1f', 100.0 * $memory_usage).'&thinsp;%</span>';
+} else {
+    echo '"></i> Memory usage:&nbsp;&nbsp; N/A</span>';
+}
+?>
                     <br/>
-                    <?php
 
+<?php
+function getTemperature()
+{
+    if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
+        $output = rtrim(file_get_contents('/sys/class/thermal/thermal_zone0/temp'));
+    } elseif (file_exists('/sys/class/hwmon/hwmon0/temp1_input')) {
+        $output = rtrim(file_get_contents('/sys/class/hwmon/hwmon0/temp1_input'));
+    } else {
+        $output = '';
+    }
 
-                    function getTemperature()
-                    {
-                        if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
-                            $output = rtrim(file_get_contents('/sys/class/thermal/thermal_zone0/temp'));
-                        } elseif (file_exists('/sys/class/hwmon/hwmon0/temp1_input')) {
-                            $output = rtrim(file_get_contents('/sys/class/hwmon/hwmon0/temp1_input'));
-                        } else {
-                            $output = '';
-                        }
+    // Test if we succeeded in getting the temperature
+    if (is_numeric($output)) {
+        // $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5
+        // ex. 39007 vs 39
+        $celsius = intval($output);
+        // If celsius is greater than 1 degree and is in the 4-5 digit format
+        if ($celsius > 1000) {
+            // Use multiplication to get around the division-by-zero error
+            $celsius *= 1e-3;
+        }
+        $limit = 60;
+        
+    } else {
+        // Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin)
+        // This is the minimum temperature possible (AKA absolute zero)
+        $celsius = -273.16;
+        // Set templimit to null if no tempsensor was found
+        $limit = null;
+    }
+    return array($celsius, $limit);
+}
 
-                        // Test if we succeeded in getting the temperature
-                        if (is_numeric($output)) {
-                            // $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5
-                            // ex. 39007 vs 39
-                            $celsius = intval($output);
-                            // If celsius is greater than 1 degree and is in the 4-5 digit format
-                            if ($celsius > 1000) {
-                                // Use multiplication to get around the division-by-zero error
-                                $celsius *= 1e-3;
-                            }
-                            $limit = 60;
-                            
-                        } else {
-                            // Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin)
-                            // This is the minimum temperature possible (AKA absolute zero)
-                            $celsius = -273.16;
-                            // Set templimit to null if no tempsensor was found
-                            $limit = null;
-                        }
-                        return array($celsius, $limit);
-                    }
+list($celsius, $temperaturelimit) = getTemperature();
 
-                    list($celsius, $temperaturelimit) = getTemperature();
-
-                    if ($celsius >= -273.15) {
-                        // Only show temp info if any data is available -->
-                        $tempcolor = 'text-vivid-blue';
-                        if (isset($temperaturelimit) && $celsius > $temperaturelimit) {
-                            $tempcolor = 'text-red';
-                        }
-                        echo '<span id="temperature"><i class="fa fa-w fa-fire '.$tempcolor.'" style="width: 1em !important"></i> ';
-                        echo 'Temp:&nbsp;<span id="rawtemp" hidden>'.$celsius.'</span>';
-                        echo '<span id="tempdisplay"></span></span>';
-                    }
-                    ?>
-                </div>
-
-
-
-
+if ($celsius >= -273.15) {
+    // Only show temp info if any data is available -->
+    $tempcolor = 'text-vivid-blue';
+    if (isset($temperaturelimit) && $celsius > $temperaturelimit) {
+        $tempcolor = 'text-red';
+    }
+    echo '<span id="temperature"><i class="fa fa-w fa-fire '.$tempcolor.'" style="width: 1em !important"></i> ';
+    echo 'Temp:&nbsp;<span id="rawtemp" hidden>'.$celsius.'</span>';
+    echo '<span id="tempdisplay"></span></span>';
+}
+?>
+            </div>
 
       </div>
-
-      <!-- search form (Optional) -->
-        <!-- DELETED -->
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
