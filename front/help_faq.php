@@ -104,6 +104,19 @@ if ($_SESSION["login"] != 1)
             </div>
           </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading faqhelp_head_color">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse106">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_106_head'];?></a>
+            </h4>
+          </div>
+          <div id="collapse106" class="panel-collapse collapse" style="font-size: 16px;">
+            <div class="panel-body">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_106_text'];?>
+            </div>
+          </div>
+        </div>
       </div> 
 
 <h4><?php echo $pia_lang['Navigation_Devices'];?></h4>
@@ -226,7 +239,24 @@ if ($_SESSION["login"] != 1)
       </div>
     </div>
   </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse601">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_601_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse601" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_601_text'];?>
+      </div>
+    </div>
+  </div>
+
 </div> 
+
 
 
   <div style="width: 100%; height: 20px;"></div>
