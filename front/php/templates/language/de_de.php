@@ -481,6 +481,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											        <td style="padding-left:5px;">- Testet alle aktiven Benachrichtigungsdienste<br>&nbsp;</td>
 											    </tr>
 											</table>';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan benötigt sudo-Berechtigungen</span>';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Wenn ein Nicht-Standard-Benutzer verwendet wird, z. B. piadmin, schlägt der arp-scan im Cronjob fehl.<br>
+											 Dazu wird die folgende Datei erstellt: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-arpscan</span><br>
+											 Diese Datei wird geöffnet und mit folgendem Inhalt abgespeichert ("piadmin" ist durch den entsprechenden Usernamen zu ersetzen):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan</span>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und 
          									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen. 
@@ -511,6 +515,13 @@ $pia_lang['HelpFAQ_Cat_Network_600_head'] = 'Was bringt mir diese Seite?';
 $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Diese Seite soll dir die Möglichkeit bieten, die Belegung deiner Netzwerkgeräte abzubilden. Dazu kannst du einen oder mehrere Switches, WLANs, Router, etc. erstellen,
         									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen 
         									 an welchem Port ein Host angeschlossen und ob er online ist. Es ist möglich ein Gerät mehreren Ports (bei Portbündelung), als auch mehrere Geräte einem Port (virtuelle Maschinen), zuzuordnen.';
+
+$pia_lang['HelpFAQ_Cat_Network_601_head'] = 'Wie funktioniert die Netzwerk Seite?';
+$pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ein Switch erstellt. Dazu biete ich bereits entsprechende Geräte in der Auswahlliste an. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
+											 Auf der Detailansicht hast du nun, bei jedem erkannten Gerät, die Möglichkeit diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
+											 Jetzt zeigt dir die Netzwerk Seite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit, mehrere Ports, die du mit einem Komma trennst, an einem Switch zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server mit mehreren virtuellen Maschinen).<br><br>
+											 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Netzwerk Seite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu klappst du die "Verwaltung" auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast, hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
+
 
 //////////////////////////////////////////////////////////////////
 // Reports Page
