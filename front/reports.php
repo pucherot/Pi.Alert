@@ -31,9 +31,10 @@ require 'php/server/db.php';
     <section class="content">
 
 <?php
+
 $directory = './reports/';
 $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-natsort($scanned_directory);
+rsort($scanned_directory);
 
 foreach ($scanned_directory as $file) {
   if (substr($file, -4) == '.txt') {

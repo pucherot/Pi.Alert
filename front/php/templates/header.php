@@ -38,10 +38,13 @@ function useRegex($input) {
 }
 
 function count_webgui_reports() {
-    $prep_remove_report = './reports/'.str_replace(array('\'', '"', ',' , ';', '<', '>' , '.' , '/' , '&'), "", $_REQUEST['remove_report']).'.txt';
-
-    if (file_exists($prep_remove_report) && useRegex($prep_remove_report)) {
-      unlink($prep_remove_report);
+    if (isset($_REQUEST['remove_report'])) {
+        $prep_remove_report = str_replace(array('\'', '"', ',' , ';', '<', '>' , '.' , '/' , '&'), "", $_REQUEST['remove_report']).'.txt';
+        if (useRegex($prep_remove_report) == TRUE) {
+            if (file_exists('./reports/'.$prep_remove_report)) {
+              unlink('./reports/'.$prep_remove_report);
+            }
+        }
     }
 
     $files = scandir('./reports');
@@ -94,7 +97,7 @@ function arpscanstatus() {
   <!-- Bootstrap 3.4.1 -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
   
-  <!-- Bootstrap Icons 1.10.3 -->
+  <!-- Bootstrap Icons v1.10.3 -->
   <link href="lib/AdminLTE/bower_components/bootstrap-icons/font/bootstrap-icons.css" media="all" rel="stylesheet" type="text/css" />
 
   <!-- Font Awesome -->
