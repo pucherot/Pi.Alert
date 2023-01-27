@@ -1,4 +1,15 @@
 <?php
+//------------------------------------------------------------------------------
+//  Pi.Alert
+//  Open Source Network Guard / WIFI & LAN intrusion detector 
+//
+//  maintenance.php - Front module. Server side. Manage Devices
+//------------------------------------------------------------------------------
+//  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
+//  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
+//  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
+//------------------------------------------------------------------------------
+
 session_start();
 
 // Turn off php errors
@@ -10,21 +21,7 @@ if ($_SESSION["login"] != 1)
       exit;
   }
 
-//------------------------------------------------------------------------------
-//  Pi.Alert
-//  Open Source Network Guard / WIFI & LAN intrusion detector 
-//
-//  maintenance.php - Front module. Server side. Manage Devices
-//------------------------------------------------------------------------------
-//  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
-//  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
-//  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
-//------------------------------------------------------------------------------
-  
-?>
-
-<?php
-  require 'php/templates/header.php';
+require 'php/templates/header.php';
 ?>
 <!-- Page ------------------------------------------------------------------ -->
 <div class="content-wrapper">
@@ -40,7 +37,7 @@ if ($_SESSION["login"] != 1)
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
-  <?php
+<?php
 // Get API-Key ------------------------------------------------------------------
 
 $config_file = "../config/pialert.conf";
@@ -170,7 +167,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_arp_status'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $pia_arpscans_result; read_arpscan_timer();?></div>
+                        <?php echo $_SESSION['arpscan_result']; read_arpscan_timer();?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px">Api-Key</div>

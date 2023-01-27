@@ -30,9 +30,17 @@ foreach (glob("../db/setting_language*") as $filename) {
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 require 'php/templates/language/'.$pia_lang_selected.'.php';
 
+// Remove WebGUI Reports ---------------------------------------------------------------
+
+function useRegex($input) {
+    $regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
+    return preg_match($regex, $input);
+}
+
 function count_webgui_reports() {
     $prep_remove_report = './reports/'.str_replace(array('\'', '"', ',' , ';', '<', '>' , '.' , '/' , '&'), "", $_REQUEST['remove_report']).'.txt';
-    if (file_exists($prep_remove_report)) {
+
+    if (file_exists($prep_remove_report) && useRegex($prep_remove_report)) {
       unlink($prep_remove_report);
     }
 
@@ -40,6 +48,26 @@ function count_webgui_reports() {
     $report_counter = count($files)-2;
     if ($report_counter == 0) {unset($report_counter);}
     return $report_counter;
+}
+
+// Pause Arp Scan Section ---------------------------------------------------------------
+
+function arpscanstatus() {
+    global $pia_lang;
+    if (!file_exists('../db/setting_stoparpscan')) {
+      $execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
+      $pia_arpscans = "";
+      exec($execstring, $pia_arpscans);
+      unset($_SESSION['arpscan_timerstart']);
+      $_SESSION['arpscan_result'] = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
+      $_SESSION['arpscan_sidebarstate'] = 'Active';
+      $_SESSION['arpscan_sidebarstate_light'] = 'green-light';
+    } else {
+      $_SESSION['arpscan_timerstart'] = date ("H:i:s", filectime('../db/setting_stoparpscan'));
+      $_SESSION['arpscan_result'] = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
+      $_SESSION['arpscan_sidebarstate'] = 'Disabled&nbsp;&nbsp;&nbsp;('.$_SESSION['arpscan_timerstart'].')';
+      $_SESSION['arpscan_sidebarstate_light'] = 'red';
+    }
 }
 
 // ###################################
@@ -63,13 +91,14 @@ function count_webgui_reports() {
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <!-- Bootstrap 3.3.7 -->
+  <!-- Bootstrap 3.4.1 -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
   
+  <!-- Bootstrap Icons 1.10.3 -->
+  <link href="lib/AdminLTE/bower_components/bootstrap-icons/font/bootstrap-icons.css" media="all" rel="stylesheet" type="text/css" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
-
 
   <!-- Ionicons -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
@@ -77,20 +106,11 @@ function count_webgui_reports() {
   <!-- Theme style -->
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/AdminLTE.min.css">
 
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
+  <!-- AdminLTE Skins. -->
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?php echo $pia_skin_selected;?>.min.css">
 
   <!-- Pi.Alert CSS -->
   <link rel="stylesheet" href="css/pialert.css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
@@ -224,26 +244,11 @@ document.addEventListener("visibilitychange",()=>{
         <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
 <?php
 
-// Pause Arp Scan Section ---------------------------------------------------------------
+arpscanstatus();
 
-if (!file_exists('../db/setting_stoparpscan')) {
-  $execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
-  $pia_arpscans = "";
-  exec($execstring, $pia_arpscans);
-  $pia_arpscans_result = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
-  $pia_arpscans_sidebarstate = 'Active';
-  $pia_arpscans_sidebarstate_light = 'green-light';
-} else {
-  $pia_arpscan_timerstart = date ("H:i:s", filectime('../db/setting_stoparpscan'));
-  $pia_arpscans_result = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
-  $pia_arpscans_sidebarstate = 'Disabled&nbsp;&nbsp;&nbsp;('.$pia_arpscan_timerstart.')';
-  $pia_arpscans_sidebarstate_light = 'red';
-}
-
-// Pause Arp Scan Section ---------------------------------------------------------------
 
 echo '<span id="status">
-        <i class="fa fa-w fa-circle text-'.$pia_arpscans_sidebarstate_light.'"></i> '.$pia_arpscans_sidebarstate.'&nbsp;&nbsp;
+        <i class="fa fa-w fa-circle text-'.$_SESSION['arpscan_sidebarstate_light'].'"></i> '.$_SESSION['arpscan_sidebarstate'].'&nbsp;&nbsp;
       </span><br>';
 
 // (may be less than the number of online processors)

@@ -80,8 +80,6 @@ if ($_REQUEST['Networkdelete'] == "yes") {
 
 ?>
 
-<link href="lib/AdminLTE/bower_components/bootstrap-icons/font/bootstrap-icons.css" media="all" rel="stylesheet" type="text/css" />
-
 <!-- Page ------------------------------------------------------------------ -->
 <div class="content-wrapper">
 
@@ -489,7 +487,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 // #####################################
 // ## Create Tabs
 // #####################################
-$sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC'; 
+$sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC, "net_device_name" ASC'; 
 $result = $db->query($sql);//->fetchArray(SQLITE3_ASSOC); 
 ?>
       <div class="nav-tabs-custom" style="">
