@@ -2,6 +2,10 @@
 
 # Update History
 
+### Version 2.3.1. December 19, 2019
+* Website update
+* Minor bugfixes
+
 ### Version 2.3.0. December 11, 2018
 * Website update
 * Big skins update

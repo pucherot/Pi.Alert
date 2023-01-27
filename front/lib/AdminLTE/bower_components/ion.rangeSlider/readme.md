@@ -1,14 +1,12 @@
 ![ion.rangeSlider](_tmp/logo-ion-range-slider.png)
 
-> English description | <a href="readme.ru.md">Описание на русском</a>
-
 Ion.RangeSlider. Is an easy, flexible and responsive range slider with tons of options.
 
 ***
 
-* Version: 2.3.0 | *Version 3.x is under development now*
-* <a href="http://ionden.com/a/plugins/ion.rangeSlider/en.html">Project page and demos</a>
-* <a href="http://ionden.com/a/plugins/ion.rangeSlider/ion.rangeSlider-2.3.0.zip">Download ZIP</a>
+* Version: 2.3.1 | *Version 3.x is under development now*
+* <a href="http://ionden.com/a/plugins/ion.rangeSlider/">Project page and demos</a>
+* <a href="https://github.com/IonDen/ion.rangeSlider/archive/2.3.1.zip">Download ZIP</a>
 
 ## Description
 * Ion.RangeSlider — cool, comfortable, responsive and easily customizable range slider
@@ -61,14 +59,45 @@ Add the following libraries to the page:
 Add the following stylesheets to the page:
 * ion.rangeSlider.min.css
 
-## Install with bower
-
-* bower install ionrangeslider
 
 
-## Install with npm
+## CDN
+
+Use [CDNjs](https://cdnjs.com/libraries/ion-rangeslider) or [JSdelivr](https://www.jsdelivr.com/package/npm/ion-rangeslider) to get latest version of plugin and jQuery.
+```html
+<!--Plugin CSS file with desired skin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+
+<!--jQuery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
+``` 
+
+
+
+## Install with NPM
+
+Use [NPM](https://www.npmjs.com/package/ion-rangeslider) to download latest version of a plugin and install it directly in to your project. 
 
 * npm install ion-rangeslider
+
+
+
+## Install with Bower
+
+Use [Bower](https://bower.io/) to download latest version of a plugin and install it directly in to your project. 
+
+* bower install ion-rangeslider
+
+
+
+## Install with Yarn
+
+Use [Yarn](https://yarnpkg.com/en/package/ion-rangeslider) to download latest version of a plugin and install it directly in to your project. 
+
+* yarn add ion-rangeslider
 
 
 ## Initialisation
@@ -84,35 +113,26 @@ $("#example_id").ionRangeSlider();
 ```
 
 
-## Demo for juniors
+## <a href="https://jsfiddle.net/IonDen/uqs7njp9/" target="_blank">Experiments playground</a>
 
-If your are new in web development and you are not sure how to correctly install the plugin to your web-page, please download
-<a href="http://ionden.com/a/plugins/ion.rangeSlider/ionRangeSliderDemo.zip" class="button">this demo example</a>
-
-
-## <a href="http://jsfiddle.net/IonDen/qv6yrjrv/" target="_blank">Experiments playground</a>
-
-Here you can find bunch of advanced JSFIDDLE demos with different, non-standart use cases:
-* [Reverse or RTL](http://jsfiddle.net/IonDen/gbmszmp4/)
-* [1 handle bind to 1 input](http://jsfiddle.net/IonDen/mvrfg2vc/)
-* [2 handles bind to 2 inputs](http://jsfiddle.net/IonDen/r5aox84v/)
-* [2 sliders connected to each other](http://jsfiddle.net/IonDen/4k3d4y3s/)
-* [1st slider disables/enables 2nd slider](http://jsfiddle.net/IonDen/ctkouh69/)
-* [Non-linear slider](http://jsfiddle.net/IonDen/pzjaoxe7/)
-* [Plus and Minus buttons](http://jsfiddle.net/IonDen/wsk7y08a/)
-* [Calculating sum](http://codepen.io/anon/pen/QyzwJZ)
-* [Adding one more diapazon on 1 slider](http://jsfiddle.net/IonDen/st9eotpy/)
-* [Live editing of Min and Max values](http://jsfiddle.net/IonDen/wL8gq4py/)
-* [Prettify and transform values at the same time](http://jsfiddle.net/IonDen/j0tLzgq1/)
-* [Custom marks on slider](http://jsfiddle.net/IonDen/spez12kt/)
-* [Rendering money value n.nn](http://jsfiddle.net/IonDen/vrqqL2Lw/)
-* [Rendering Dates with Moment.js](http://jsfiddle.net/tvn2ckj2/)
-* [Changing step live](http://jsfiddle.net/IonDen/ca6ykae6/)
-* [Toggle slider](http://jsfiddle.net/IonDen/t936wtjv/)
-* [Using different skin color at the same time](http://jsfiddle.net/IonDen/2sruxk4e/)
-* [2 dependant sliders](http://jsfiddle.net/IonDen/n2sxswv2/)
-* [Skip some values](http://jsfiddle.net/IonDen/4qgq9bto/)
-* [Good Prettify example](http://jsfiddle.net/IonDen/bvbvr0xs/)
+Here you can find bunch of advanced JSFIDDLE demos with different, non-standard use cases:
+* [Custom marks on slider](https://jsfiddle.net/IonDen/tdvxs3zL/)
+* [1 handle bind to 1 input](https://jsfiddle.net/IonDen/khngpw3m/)
+* [2 handles bind to 2 inputs](https://jsfiddle.net/IonDen/avcm6wpj/)
+* [2 sliders connected to each other](https://jsfiddle.net/IonDen/1hnvxsg5/)
+* [2 dependant sliders](https://jsfiddle.net/IonDen/f1t6qpx0/)
+* [1st slider disables/enables 2nd slider](https://jsfiddle.net/IonDen/kqwm1294/)
+* [Non-linear slider](https://jsfiddle.net/IonDen/5f2730ds/)
+* [Plus and Minus buttons](https://jsfiddle.net/IonDen/e9as5k2m/)
+* [Calculating sum](https://jsfiddle.net/IonDen/dfcmryn2/)
+* [Adding one more diapazon on 1 slider](https://jsfiddle.net/IonDen/ckwrqv75/)
+* [Live editing of Min and Max values](https://jsfiddle.net/IonDen/wgfv76je/)
+* [Prettify and transform values at the same time](https://jsfiddle.net/IonDen/kc0tzreu/)
+* [Rendering money value n.nn](https://jsfiddle.net/IonDen/a0rghmd7/)
+* [Changing step live](https://jsfiddle.net/IonDen/5ptjgm6h/)
+* [Toggle slider](https://jsfiddle.net/IonDen/7m4otxwp/)
+* [Skip some values](https://jsfiddle.net/IonDen/bqyw1e7k/)
+* [Values array + prettify](https://jsfiddle.net/IonDen/p9gu71sL/)
 
 
 ## Settings
@@ -120,7 +140,7 @@ Here you can find bunch of advanced JSFIDDLE demos with different, non-standart 
 
 | Option | Data-Attr | Defaults | Type | Description |
 | --- | --- | --- | --- | --- |
-| `skin` | `data-skin` | `flat` | string | Choose UI skin to use |
+| `skin` | `data-skin` | `flat` | string | Choose UI skin to use (flat, big, modern, round, sharp, square) |
 | `type` | `data-type` | `single` | string | Choose slider type, could be `single` - for one handle, or `double` for two handles |
 | `min` | `data-min` | `10` | number | Set slider minimum value |
 | `max` | `data-max` | `100` | number | Set slider maximum value |
