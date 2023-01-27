@@ -40,8 +40,6 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'deleteDevice':                 deleteDevice();                          break;
       case 'getNetworkNodes':              getNetworkNodes();                       break;
       case 'deleteAllWithEmptyMACs':       deleteAllWithEmptyMACs();                break;
-//      case 'createBackupDB':               createBackupDB();                        break;
-//      case 'restoreBackupDB':              restoreBackupDB();                       break;
       case 'deleteAllDevices':             deleteAllDevices();                      break;
       case 'runScan15min':                 runScan15min();                          break;
       case 'runScan1min':                  runScan1min();                           break;
@@ -398,6 +396,7 @@ function PiaRestoreDBfromArchive() {
 function PiaPurgeDBBackups() {
   global $pia_lang;
 
+  // Clean DB Backups
   $Pia_Archive_Path = '../../../db';
   $Pia_Backupfiles = array();
   $files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip'));
@@ -417,7 +416,31 @@ function PiaPurgeDBBackups() {
         {
           unlink($Pia_Backupfiles_Purge[$i]);
         }
-  }
+    }
+
+  // Clean Config Backups
+  unset($Pia_Backupfiles);
+  $Pia_Archive_Path = '../../../config';
+  $Pia_Backupfiles = array();
+  $files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.conf', 'version.conf', 'pialert-prev.bak'));
+
+  foreach ($files as &$item) 
+    {
+      $item = $Pia_Archive_Path.'/'.$item;
+      array_push($Pia_Backupfiles, $item);
+    }
+
+  if (sizeof($Pia_Backupfiles) > 3) 
+    {
+      rsort($Pia_Backupfiles);
+      unset($Pia_Backupfiles[0], $Pia_Backupfiles[1], $Pia_Backupfiles[2]);
+      $Pia_Backupfiles_Purge = array_values($Pia_Backupfiles);
+      for ($i = 0; $i < sizeof($Pia_Backupfiles_Purge); $i++) 
+        {
+          unlink($Pia_Backupfiles_Purge[$i]);
+        }
+    }
+
   echo $pia_lang['BackDevices_DBTools_Purge'];
   echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
     
