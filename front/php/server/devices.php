@@ -482,7 +482,7 @@ function TestNotificationSystem() {
 
     exec('../../../back/pialert-cli reporting_test', $output);
     echo $pia_lang['BackDevices_test_notification'];
-    //echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+    echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
   }
 
 //------------------------------------------------------------------------------
