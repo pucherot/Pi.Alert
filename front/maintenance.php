@@ -54,7 +54,15 @@ $pia_db = str_replace('front', 'db', getcwd()).'/pialert.db';
 $pia_db_size = number_format((filesize($pia_db) / 1000000),2,",",".") . ' MB';
 $pia_db_mod = date ("d.m.Y, H:i:s", filemtime($pia_db)).' Uhr';
 
-// Count and Calc Backups -------------------------------------------------------
+// Count Config Backups -------------------------------------------------------
+
+$pia_config_Path = str_replace('front', 'config', getcwd()).'/';
+$files = glob($pia_config_Path."pialert-20*.bak");
+if ($files){
+ $pia_config_count = count($files);
+}
+
+// Count and Calc DB Backups -------------------------------------------------------
 
 $Pia_Archive_Path = str_replace('front', 'db', getcwd()).'/';
 $Pia_Archive_count = 0;
@@ -150,6 +158,12 @@ if ($_REQUEST['tab'] == '1') {
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_size'];?></div>
                     <div class="db_info_table_cell">
                         <?php echo $pia_db_size;?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_config_backup'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo $pia_config_count.' '.$pia_lang['Maintenance_database_backup_found'];?>
                     </div>
                 </div>
                 <div class="db_info_table_row">

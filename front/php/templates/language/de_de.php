@@ -216,6 +216,7 @@ $pia_lang['Maintenance_database_path'] = 'Datenbank-Pfad';
 $pia_lang['Maintenance_database_size'] = 'Datenbank-Größe';
 $pia_lang['Maintenance_database_lastmod'] = 'Letzte Änderung';
 $pia_lang['Maintenance_database_backup'] = 'DB Sicherungen';
+$pia_lang['Maintenance_config_backup'] = 'Config Sicherungen';
 $pia_lang['Maintenance_database_backup_found'] = 'Sicherungen vorhanden';
 $pia_lang['Maintenance_database_backup_total'] = 'Größe insgesamt';
 $pia_lang['Maintenance_arp_status'] = 'Scan Status';

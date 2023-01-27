@@ -216,6 +216,7 @@ $pia_lang['Maintenance_database_path'] = 'Répertoire des bases de données';
 $pia_lang['Maintenance_database_size'] = 'Taille de la base de données';
 $pia_lang['Maintenance_database_lastmod'] = 'Dernière modification';
 $pia_lang['Maintenance_database_backup'] = 'Sauvegarde des bases de données';
+$pia_lang['Maintenance_config_backup'] = 'Config Backups';
 $pia_lang['Maintenance_database_backup_found'] = 'sauvegardes ont été trouvées';
 $pia_lang['Maintenance_database_backup_total'] = 'utilisation totale du disque';
 $pia_lang['Maintenance_arp_status'] = 'Statut du scan';

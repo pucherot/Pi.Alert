@@ -216,6 +216,7 @@ $pia_lang['Maintenance_database_path'] = 'Database-Path';
 $pia_lang['Maintenance_database_size'] = 'Database-Size';
 $pia_lang['Maintenance_database_lastmod'] = 'last Modification';
 $pia_lang['Maintenance_database_backup'] = 'DB Backups';
+$pia_lang['Maintenance_config_backup'] = 'Config Backups';
 $pia_lang['Maintenance_database_backup_found'] = 'backups were found';
 $pia_lang['Maintenance_database_backup_total'] = 'total disk usage';
 $pia_lang['Maintenance_arp_status'] = 'Scan Status';
