@@ -51,7 +51,7 @@ foreach ($scanned_directory as $file) {
                   <a href="./reports.php?remove_report='.substr($file, 0, -4).'" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
-            <div class="box-body"><pre>';
+            <div class="box-body"><pre style="background-color: transparent; border: solid 1px #777">';
 
     echo $webgui_report;
             
