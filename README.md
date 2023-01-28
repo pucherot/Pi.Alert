@@ -41,7 +41,7 @@ In charge of:
   - Scan the network searching connected devices using the scanning methods
     described
   - Store the information in the DB
-  - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/))
+  - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
   - DB cleanup tasks via cron
   - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
 
@@ -64,14 +64,15 @@ A web frontend that allows:
   - Maintenance tasks and settings like:
     - Status information *(active scans, database size, backup counter)*
     - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
-    - Language selection *(english, german, spanish)*
+    - Language selection *(english, german, spanish, french)*
     - Enable/Disable network activity graph 
     - Pause arp-scan
     - Set API-key
     - Enable/Disable login
-    - DB maintenance tools and a possibility for backup, restore and cleanup the database
+    - DB maintenance tools and a possibility for backup, restore and cleanup the database and the config file
     - Send test notifications
-  - Help/FAQ section 
+    - Config file editor
+  - Help/FAQ section
 
   | ![Screen 1][screen1]                   | ![Screen 2][screen2]                   | ![Screen 3][screen3]                   | 
   | -------------------------------------- | -------------------------------------- | -------------------------------------- |
@@ -100,7 +101,8 @@ With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Ho
 # Installation
 <!--- --------------------------------------------------------------------- --->
 Initially designed to run on a Raspberry Pi, probably it can run on many other
-Linux distributions. A Docker version of Pi.Alert can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
+Linux distributions. With minor adjustments (FAQ page) I tested Pi.Alert on Dietpi and Ubuntu Server. 
+An also active developed Docker version of Pi.Alert can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
 
 - One-step Automated Install:
   #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh | bash`
@@ -109,7 +111,8 @@ Linux distributions. A Docker version of Pi.Alert can be found here: [jokob-sk/P
 
 # Update
 <!--- --------------------------------------------------------------------- --->
-This update script is only recommended for an already existing installation of this fork. The script is still being tested.
+This update script is only recommended for an already existing installation of this fork. If you are using another fork, 
+I recommend uninstalling it first. If you backup the database, it may be possible to continue using it with my fork after a patch.
 
 - One-step Automated Update:
   #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh | bash`
