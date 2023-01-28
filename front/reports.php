@@ -35,7 +35,6 @@ require 'php/server/db.php';
 $directory = './reports/';
 $scanned_directory = array_diff(scandir($directory), array('..', '.'));
 rsort($scanned_directory);
-
 foreach ($scanned_directory as $file) {
   if (substr($file, -4) == '.txt') {
     //echo $file.'<br>';

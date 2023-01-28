@@ -161,12 +161,6 @@ if ($_REQUEST['tab'] == '1') {
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_config_backup'];?></div>
-                    <div class="db_info_table_cell">
-                        <?php echo $pia_config_count.' '.$pia_lang['Maintenance_database_backup_found'];?>
-                    </div>
-                </div>
-                <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_lastmod'];?></div>
                     <div class="db_info_table_cell">
                         <?php echo $pia_db_mod;?>
@@ -176,6 +170,12 @@ if ($_REQUEST['tab'] == '1') {
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_backup'];?></div>
                     <div class="db_info_table_cell">
                         <?php echo $Pia_Archive_count.' '.$pia_lang['Maintenance_database_backup_found'].' / '.$pia_lang['Maintenance_database_backup_total'].': '.$Pia_Archive_diskusage;?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_config_backup'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo $pia_config_count.' '.$pia_lang['Maintenance_database_backup_found'];?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
@@ -746,7 +746,7 @@ if (!$block_restore_button) {
 function askDeleteDevicesWithEmptyMACs () {
   // Ask 
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_empty_macs_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_del_empty_macs_noti_text'];?>',
-    'Cancel', 'Delete', 'deleteDevicesWithEmptyMACs');
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Delete'];?>', 'deleteDevicesWithEmptyMACs');
 }
 function deleteDevicesWithEmptyMACs()
 { 
@@ -755,7 +755,6 @@ function deleteDevicesWithEmptyMACs()
     showMessage (msg);
   });
 }
-
 
 // Test Notifications
 function askTestNotificationSystem () {

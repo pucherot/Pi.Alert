@@ -118,7 +118,7 @@ function arpscanstatus() {
   <!-- Google Font -->
   <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
   <link rel="stylesheet" href="css/offline-font.css">
-  <link rel="icon" type="image/x-icon" href="img/pialertLogoOrange.png">
+  <link rel="icon" type="image/x-icon" href="img/favicons/flat_blue_white.png">
 
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
