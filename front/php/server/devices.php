@@ -57,7 +57,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'PiaLoginEnable':               PiaLoginEnable();                        break;
       case 'PiaLoginDisable':              PiaLoginDisable();                       break;
       case 'DeleteInactiveHosts':          DeleteInactiveHosts();                   break;
-
+      case 'deleteAllNotifications':       deleteAllNotifications();                break;
       case 'setPiAlertTheme':              setPiAlertTheme();                       break;
       case 'setPiAlertLanguage':           setPiAlertLanguage();                    break;
       case 'setPiAlertArpTimer':           setPiAlertArpTimer();                    break;
@@ -89,7 +89,6 @@ function getDeviceData() {
   // Request Parameters
   $periodDate = getDateFromPeriod();
   $mac = $_REQUEST['mac'];
-
   // Device Data
   $sql = 'SELECT rowid, *,
             CASE WHEN dev_AlertDeviceDown=1 AND dev_PresentLastScan=0 THEN "Down"
@@ -101,17 +100,13 @@ function getDeviceData() {
   $row = $result -> fetchArray (SQLITE3_ASSOC);
   $deviceData = $row;
   $mac = $deviceData['dev_MAC'];
-
   $deviceData['dev_Network_Node_MAC'] = $row['dev_Infrastructure'];
   $deviceData['dev_Network_Node_port'] = $row['dev_Infrastructure_port'];
   $deviceData['dev_FirstConnection'] = formatDate ($row['dev_FirstConnection']); // Date formated
   $deviceData['dev_LastConnection'] =  formatDate ($row['dev_LastConnection']);  // Date formated
-
   $deviceData['dev_RandomMAC'] = ( in_array($mac[1], array("2","6","A","E","a","e")) ? 1 : 0);
-
   // Count Totals
   $condition = ' WHERE eve_MAC="'. $mac .'" AND eve_DateTime >= '. $periodDate;
-
   // Connections
   $sql = 'SELECT COUNT(*) FROM Sessions
           WHERE ses_MAC="'. $mac .'"
@@ -121,19 +116,16 @@ function getDeviceData() {
   $result = $db->query($sql);
   $row = $result -> fetchArray (SQLITE3_NUM);
   $deviceData['dev_Sessions'] = $row[0];
-  
   // Events
   $sql = 'SELECT COUNT(*) FROM Events '. $condition .' AND eve_EventType <> "Connected" AND eve_EventType <> "Disconnected" ';
   $result = $db->query($sql);
   $row = $result -> fetchArray (SQLITE3_NUM);
   $deviceData['dev_Events'] = $row[0];
-
   // Down Alerts
   $sql = 'SELECT COUNT(*) FROM Events '. $condition .' AND eve_EventType = "Device Down"';
   $result = $db->query($sql);
   $row = $result -> fetchArray (SQLITE3_NUM);
   $deviceData['dev_DownAlerts'] = $row[0];
-
   // Presence hours
   $sql = 'SELECT CAST(( MAX (0, SUM (julianday (IFNULL (ses_DateTimeDisconnection, DATETIME("now","localtime")))
                                      - julianday (CASE WHEN ses_DateTimeConnection < '. $periodDate .' THEN '. $periodDate .'
@@ -148,7 +140,6 @@ function getDeviceData() {
   $result = $db->query($sql);
   $row = $result -> fetchArray (SQLITE3_NUM);
   $deviceData['dev_PresenceHours'] = round ($row[0]);
-
   // Return json
   echo (json_encode ($deviceData));
 }
@@ -183,7 +174,6 @@ function setDeviceData() {
           WHERE dev_MAC="' . $_REQUEST['mac'] .'"';
   // update Data
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_UpdDev'];
@@ -204,7 +194,6 @@ function deleteDevice() {
   $sql = 'DELETE FROM Devices WHERE dev_MAC="' . $_REQUEST['mac'] .'"';
   // execute sql
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelDev_a'];
@@ -224,7 +213,6 @@ function deleteAllWithEmptyMACs() {
   $sql = 'DELETE FROM Devices WHERE dev_MAC=""';
   // execute sql
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelDev_b'];
@@ -244,7 +232,6 @@ function deleteUnknownDevices() {
   $sql = 'DELETE FROM Devices WHERE dev_Name="(unknown)"';
   // execute sql
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelDev_b'];
@@ -264,7 +251,6 @@ function deleteDeviceEvents() {
   $sql = 'DELETE FROM Events WHERE eve_MAC="' . $_REQUEST['mac'] .'"';
   // execute sql
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelEvents'];
@@ -284,7 +270,6 @@ function deleteAllDevices() {
   $sql = 'DELETE FROM Devices';
   // execute sql
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelDev_b'];
@@ -304,7 +289,6 @@ function deleteEvents() {
   $sql = 'DELETE FROM Events';
   // execute sql
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelEvents'];
@@ -324,7 +308,6 @@ function deleteActHistory() {
   $sql = 'DELETE FROM Online_History';
   // execute sql
   $result = $db->query($sql);
-
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelActHistory'];
@@ -359,7 +342,6 @@ function PiaBackupDBtoArchive() {
       echo $pia_lang['BackDevices_Backup_Failed'].' (pialert.db.latestbackup)';
     }
   }
-
 }
 
 //------------------------------------------------------------------------------
@@ -387,7 +369,6 @@ function PiaRestoreDBfromArchive() {
        echo $pia_lang['BackDevices_Restore_Failed'];
      }
   }
-
 }
 
 //------------------------------------------------------------------------------
@@ -400,13 +381,11 @@ function PiaPurgeDBBackups() {
   $Pia_Archive_Path = '../../../db';
   $Pia_Backupfiles = array();
   $files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip'));
-
   foreach ($files as &$item) 
     {
       $item = $Pia_Archive_Path.'/'.$item;
       if (stristr($item, 'setting_') == '') {array_push($Pia_Backupfiles, $item);}
     }
-
   if (sizeof($Pia_Backupfiles) > 3) 
     {
       rsort($Pia_Backupfiles);
@@ -417,19 +396,16 @@ function PiaPurgeDBBackups() {
           unlink($Pia_Backupfiles_Purge[$i]);
         }
     }
-
   // Clean Config Backups
   unset($Pia_Backupfiles);
   $Pia_Archive_Path = '../../../config';
   $Pia_Backupfiles = array();
   $files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.conf', 'version.conf', 'pialert-prev.bak'));
-
   foreach ($files as &$item) 
     {
       $item = $Pia_Archive_Path.'/'.$item;
       array_push($Pia_Backupfiles, $item);
     }
-
   if (sizeof($Pia_Backupfiles) > 3) 
     {
       rsort($Pia_Backupfiles);
@@ -440,10 +416,8 @@ function PiaPurgeDBBackups() {
           unlink($Pia_Backupfiles_Purge[$i]);
         }
     }
-
   echo $pia_lang['BackDevices_DBTools_Purge'];
   echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
-    
 }
 
 //------------------------------------------------------------------------------
@@ -549,9 +523,7 @@ function getDevicesTotals() {
         (SELECT COUNT(*) FROM Devices '. getDeviceCondition ('down').') as down, 
         (SELECT COUNT(*) FROM Devices '. getDeviceCondition ('archived').') as archived
    ');
-
   $row = $result -> fetchArray (SQLITE3_NUM);   
-
   echo (json_encode (array ($row[0], $row[1], $row[2], $row[3], $row[4], $row[5])));
 }
 
@@ -564,7 +536,6 @@ function getDevicesList() {
 
   // SQL
   $condition = getDeviceCondition ($_REQUEST['status']);
-
   $sql = 'SELECT rowid, *, CASE
             WHEN dev_AlertDeviceDown=1 AND dev_PresentLastScan=0 THEN "Down"
             WHEN dev_NewDevice=1 THEN "New"
@@ -573,7 +544,6 @@ function getDevicesList() {
           END AS dev_Status
           FROM Devices '. $condition;
   $result = $db->query($sql);
-
   // arrays of rows
   $tableData = array();
   while ($row = $result -> fetchArray (SQLITE3_ASSOC)) {
@@ -593,12 +563,10 @@ function getDevicesList() {
                                   $row['rowid'] // Rowid (hidden)
                                  );
   }
-
   // Control no rows
   if (empty($tableData['data'])) {
     $tableData['data'] = '';
   }
-
   // Return json
   echo (json_encode ($tableData));
 }
@@ -625,7 +593,6 @@ function getDevicesListCalendar() {
                           'title'    => $row['dev_Name'],
                           'favorite' => $row['dev_Favorite']);
   }
-
   // Return json
   echo (json_encode ($tableData));
 }
@@ -658,7 +625,6 @@ function getOwners() {
     $tableData[] = array ('order' => $row['dev_Order'],
                           'name'  => $row['dev_Owner']);
   }
-
   // Return json
   echo (json_encode ($tableData));
 }
@@ -719,7 +685,6 @@ function getDeviceTypes() {
     $tableData[] = array ('order' => $row['dev_Order'],
                           'name'  => $row['dev_DeviceType']);
   }
-
   // Return json
   echo (json_encode ($tableData));
 }
@@ -791,17 +756,13 @@ function getLocations() {
           UNION SELECT 10 as dev_Order, "Other"
           ORDER BY 1,2 ';
 
-
- 
   $result = $db->query($sql);
-
   // arrays of rows
   $tableData = array();
   while ($row = $result -> fetchArray (SQLITE3_ASSOC)) {
     $tableData[] = array ('order' => $row['dev_Order'],
                           'name'  => $row['dev_Location']);
   }
-
   // Return json
   echo (json_encode ($tableData));
 }
@@ -815,9 +776,7 @@ function getNetworkNodes() {
 
   // Device Data
   $sql = 'SELECT * FROM network_infrastructure';
-
   $result = $db->query($sql);
-
   // arrays of rows
   $tableData = array();
   while ($row = $result -> fetchArray (SQLITE3_ASSOC)) {   
@@ -825,12 +784,10 @@ function getNetworkNodes() {
     $tableData[] = array('id'    => $row['device_id'], 
                          'name'  => $row['net_device_name'].'/'.substr($row['net_device_typ'], 2) );                        
   }
-  
   // Control no rows
   if (empty($tableData)) {
     $tableData = [];
   }
-  
     // Return json
   echo (json_encode ($tableData));
 }
@@ -896,8 +853,7 @@ function setPiAlertTheme() {
         echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
       }    
     } else {echo $pia_lang['BackDevices_Theme_invalid'];}
-  } 
-
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -945,30 +901,23 @@ function setPiAlertLanguage() {
 function setPiAlertArpTimer() {
   global $pia_lang;
 
-if (isset($_REQUEST['PiaArpTimer'])) {
-  $pia_lang_set_dir = '../../../db/';
-
-  $file = '../../../db/setting_stoparpscan';
-
-  if (file_exists($file)) {
-      echo $pia_lang['BackDevices_Arpscan_enabled'];
-      // old method
-      //unlink($file);
-      exec('../../../back/pialert-cli enable_scan', $output);
-      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
-     } else {
-        if (is_numeric($_REQUEST['PiaArpTimer'])) {
-          //echo 'Timer Enabled ('.$_REQUEST['PiaArpTimer'].')';
-          exec('../../../back/pialert-cli disable_scan '.$_REQUEST['PiaArpTimer'], $output);
-        } else { 
-          //echo 'Timer Enabled (10min)';
-          exec('../../../back/pialert-cli disable_scan', $output);
-        }
-      echo $pia_lang['BackDevices_Arpscan_disabled'];
-      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
-     }
-}
-
+  if (isset($_REQUEST['PiaArpTimer'])) {
+    $pia_lang_set_dir = '../../../db/';
+    $file = '../../../db/setting_stoparpscan';
+    if (file_exists($file)) {
+        echo $pia_lang['BackDevices_Arpscan_enabled'];
+        exec('../../../back/pialert-cli enable_scan', $output);
+        echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+       } else {
+          if (is_numeric($_REQUEST['PiaArpTimer'])) {
+            exec('../../../back/pialert-cli disable_scan '.$_REQUEST['PiaArpTimer'], $output);
+          } else { 
+            exec('../../../back/pialert-cli disable_scan', $output);
+          }
+        echo $pia_lang['BackDevices_Arpscan_disabled'];
+        echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+       }
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -983,7 +932,6 @@ function RestoreConfigFile() {
   // end temp var
   //$newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
   $laststate = '../../../config/pialert-prev.bak';
-
   // Restore fast Backup
   if (!copy($laststate, $file)) {
       echo $pia_lang['BackDevices_ConfEditor_RestoreError'];
@@ -1004,7 +952,6 @@ function BackupConfigFile() {
   $file = '../../../config/pialert.conf';
   $newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
   $laststate = '../../../config/pialert-prev.bak';
-
   if (!copy($file, $newfile)) {
       echo $pia_lang['BackDevices_ConfEditor_CopError'];
   } else {
@@ -1029,18 +976,13 @@ function setDeviceListCol() {
   if (($_REQUEST['lastip'] == 0) || ($_REQUEST['lastip'] == 1)) {$Set_LastIP = $_REQUEST['lastip'];} else {echo "Error. Wrong variable value!"; exit;}
   if (($_REQUEST['mactype'] == 0) || ($_REQUEST['mactype'] == 1)) {$Set_MACType = $_REQUEST['mactype'];} else {echo "Error. Wrong variable value!"; exit;}
   if (($_REQUEST['location'] == 0) || ($_REQUEST['location'] == 1)) {$Set_Location = $_REQUEST['location'];} else {echo "Error. Wrong variable value!"; exit;}
-
   echo $pia_lang['BackDevices_DevListCol_noti_text'];
-
   $config_array = array('Favorites' => $Set_Favorites, 'Group' => $Set_Group, 'Owner' => $Set_Owner, 'Type' => $Set_Type, 'FirstSession' => $Set_First_Session, 'LastSession' => $Set_Last_Session, 'LastIP' => $Set_LastIP, 'MACType' => $Set_MACType, 'Location' => $Set_Location);
-
   $DevListCol_file = '../../../db/setting_devicelist';
   $DevListCol_new = fopen($DevListCol_file,'w');
   fwrite($DevListCol_new, json_encode($config_array));
   fclose($DevListCol_new);
-
   echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
-
 }
 
 //------------------------------------------------------------------------------
@@ -1049,8 +991,6 @@ function setDeviceListCol() {
 function DeleteInactiveHosts() {
   global $pia_lang;
   global $db;
-
-  //SELECT id FROM tab WHERE col <= date('now', '-30 day')
 
   // sql
   $sql = 'SELECT * FROM Devices WHERE dev_PresentLastScan = 0 AND dev_LastConnection <= date("now", "-30 day")';
@@ -1061,22 +1001,37 @@ function DeleteInactiveHosts() {
       $sql_dev = 'DELETE FROM Devices WHERE dev_MAC="' . $res['dev_MAC'] .'"';
       // execute sql
       $result_dev = $db->query($sql_dev);
-
       // sql
       $sql_evt = 'DELETE FROM Events WHERE eve_MAC="' . $res['dev_MAC'] .'"';
       // execute sql
       $result_evt = $db->query($sql_evt);
-
-
   } 
-
   //check result
   if ($result_dev == TRUE && $result_evt == TRUE) {
     echo $pia_lang['BackDevices_DBTools_DelInactHosts'];
   } else {
     echo $pia_lang['BackDevices_DBTools_DelInactHostsError'].'<br>'."\n\n$sql_loop \n\n". $db->lastErrorMsg();
   }
+}
 
+//------------------------------------------------------------------------------
+//  Delete All Notification in WebGUI
+//------------------------------------------------------------------------------
+function deleteAllNotifications() {
+  global $pia_lang;
+
+  $regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
+  $reports_path = '../../reports/';
+  $files = array_diff(scandir($reports_path, SCANDIR_SORT_DESCENDING), array('.', '..'));
+  $count_all_reports =  sizeof($files);
+  foreach ($files as &$item) 
+    {
+      if (preg_match($regex, $item) == True) {
+        unlink($reports_path.$item);
+      }
+    }
+  echo $count_all_reports.' '.$pia_lang['BackDevices_Report_Delete'] ;
+  echo("<meta http-equiv='refresh' content='2; URL=./reports.php'>");
 }
 
 ?>

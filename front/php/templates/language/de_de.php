@@ -215,8 +215,8 @@ $pia_lang['Maintenance_Title'] = 'Einstellungen und Wartung';
 $pia_lang['Maintenance_database_path'] = 'Datenbank-Pfad';
 $pia_lang['Maintenance_database_size'] = 'Datenbank-Größe';
 $pia_lang['Maintenance_database_lastmod'] = 'Letzte Änderung';
-$pia_lang['Maintenance_database_backup'] = 'DB Sicherungen';
-$pia_lang['Maintenance_config_backup'] = 'Config Sicherungen';
+$pia_lang['Maintenance_database_backup'] = 'Sicherung: DB';
+$pia_lang['Maintenance_config_backup'] = 'Sicherung: Config';
 $pia_lang['Maintenance_database_backup_found'] = 'Sicherungen vorhanden';
 $pia_lang['Maintenance_database_backup_total'] = 'Größe insgesamt';
 $pia_lang['Maintenance_arp_status'] = 'Scan Status';
@@ -300,7 +300,7 @@ $pia_lang['Maintenance_Tool_restore_text'] = 'Das neuste Backup kann über diese
 $pia_lang['Maintenance_Tool_restore_noti'] = 'DB Wiederherstellung';
 $pia_lang['Maintenance_Tool_restore_noti_text'] = 'Sind Sie sicher, dass Sie die Datenbank aus der neusten Sicherung wiederherstellen möchten? Prüfen Sie, dass gerade keine Scans stattfinden.';
 $pia_lang['Maintenance_Tool_purgebackup'] = 'Sicherungen aufräumen';
-$pia_lang['Maintenance_Tool_purgebackup_text'] = 'Es werden, bis auf die letzten 3 Backups, alle übrigen Backups ge&shy;löscht.';
+$pia_lang['Maintenance_Tool_purgebackup_text'] = 'Es werden, bis auf die letzten 3 Backups, alle übrigen Backups ge&shy;löscht. Dies betrifft die Sicherungen der Datenbank und die der Konfigurationsdatei';
 $pia_lang['Maintenance_Tool_purgebackup_noti'] = 'Sicherungen aufräumen';
 $pia_lang['Maintenance_Tool_purgebackup_noti_text'] = 'Sind Sie sicher, alle Backups, bis auf die letzten 3 löschen möchten?';
 $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Löschen der Netzwerkaktivität';
@@ -371,6 +371,8 @@ $pia_lang['BackDevices_ConfEditor_CopError'] = 'Die Sicherung der Konfiguration 
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'Die Sicherung der Konfiguration ist abgeschlossen.';
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'Die letzte Version der Konfiguration konnte nicht wieder hergestellt werden.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'Die letzte Version der Konfiguration wurde wieder hergestellt.';
+
+$pia_lang['BackDevices_Report_Delete'] = ' Benachrichtigung(en) wurde(n) gelöscht.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page
@@ -529,6 +531,7 @@ $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ei
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Reports_Title'] = 'Benachrichtigungen';
-
-
+$pia_lang['Reports_delete_all'] = 'Alle Benachrichtigungen löschen';
+$pia_lang['Reports_delete_all_noti'] = 'Alle Benachrichtigungen löschen';
+$pia_lang['Reports_delete_all_noti_text'] = 'Es werden alle Benachrichtigungen gelöscht. Der Zähler wird damit zurückgesetzt.';
 ?>

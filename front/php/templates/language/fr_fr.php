@@ -372,6 +372,8 @@ $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La sauvegarde de la configuration
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'La dernière version de la configuration n&apos;a pas pu être restaurée.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'La dernière version de la configuration a été restaurée.';
 
+$pia_lang['BackDevices_Report_Delete'] = ' La/les notification(s) a/ont été supprimées.';
+
 //////////////////////////////////////////////////////////////////
 // Network Page
 //////////////////////////////////////////////////////////////////
@@ -516,4 +518,7 @@ $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'This page should offer you the poss
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Reports_Title'] = 'Notifications';
+$pia_lang['Reports_delete_all'] = 'Supprimer toutes les notifications';
+$pia_lang['Reports_delete_all_noti'] = 'Supprimer toutes les notifications';
+$pia_lang['Reports_delete_all_noti_text'] = 'Toutes les notifications sont supprimées. Le compteur est ainsi remis à zéro.';
 ?>

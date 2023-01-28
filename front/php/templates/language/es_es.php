@@ -372,6 +372,8 @@ $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La copia de seguridad de la confi
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'The last version of the configuration could not be restored.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'The last version of the configuration has been restored.';
 
+$pia_lang['BackDevices_Report_Delete'] = ' Notificación(es) eliminada(s).';
+
 //////////////////////////////////////////////////////////////////
 // Network Page - Update by @TeroRERO 01ago2022
 //////////////////////////////////////////////////////////////////
@@ -518,4 +520,7 @@ $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Esta sección debería ofrecerle la
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Reports_Title'] = 'Notificaciones';
+$pia_lang['Reports_delete_all'] = 'Borrar todas las notificaciones';
+$pia_lang['Reports_delete_all_noti'] = 'Borrar todas las notificaciones';
+$pia_lang['Reports_delete_all_noti_text'] = 'Se borran todas las notificaciones. El contador se pone a cero.';
 ?>

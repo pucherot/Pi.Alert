@@ -372,6 +372,8 @@ $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'The configuration backup is compl
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'The last version of the configuration could not be restored.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'The last version of the configuration has been restored.';
 
+$pia_lang['BackDevices_Report_Delete'] = ' Notification(s) has been deleted.';
+
 //////////////////////////////////////////////////////////////////
 // Network Page
 //////////////////////////////////////////////////////////////////
@@ -530,5 +532,7 @@ $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'On the network side, for example, a
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Reports_Title'] = 'Notifications';
-
+$pia_lang['Reports_delete_all'] = 'Delete all notifications';
+$pia_lang['Reports_delete_all_noti'] = 'Delete all notifications';
+$pia_lang['Reports_delete_all_noti_text'] = 'All notifications are deleted. The counter is being reset with this.';
 ?>
