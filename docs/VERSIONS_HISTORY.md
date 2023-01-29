@@ -1,21 +1,185 @@
 # Pi.Alert Version History
 <!--- --------------------------------------------------------------------- --->
 
-  | Version | Description                                                     |
-  | ------- | --------------------------------------------------------------- |
-  |  v3.7.x | Bug fixing, minor improvements and features                     |
-  |  v3.7   | New features & Usability improvements                           |
-  |  v3.5   | Update AdminLTE, Major set of New features & Enhancements       |
-  |  v3.00  | Major set of New features & Enhancements                        |
-  |  v2.70  | New features & Usability improvements in the web prontal        |
-  |  v2.61  | Bug fixing                                                      |
-  |  v2.60  | Improved the compability of installation process (Ubuntu)       |
-  |  v2.56  | Bug fixing                                                      |
-  |  v2.55  | Bug fixing                                                      |
-  |  v2.52  | Bug fixing                                                      |
-  |  v2.51  | Bug fixing                                                      |
-  |  v2.50  | First public release                                            |
+  | Version | Description                                                              |
+  | ------- | ------------------------------------------------------------------------ |
+  |  v3.8   | Update AdminLTE components, minor improvements and features, cleanup     |
+  |  v3.7.x | Bug fixing, minor improvements and features                              |
+  |  v3.7   | New features & Usability improvements                                    |
+  |  v3.5   | Update AdminLTE, Major set of New features & Enhancements                |
+  |  v3.00  | Major set of New features & Enhancements                                 |
+  |  v2.70  | New features & Usability improvements in the web prontal                 |
+  |  v2.61  | Bug fixing                                                               |
+  |  v2.60  | Improved the compability of installation process (Ubuntu)                |
+  |  v2.56  | Bug fixing                                                               |
+  |  v2.55  | Bug fixing                                                               |
+  |  v2.52  | Bug fixing                                                               |
+  |  v2.51  | Bug fixing                                                               |
+  |  v2.50  | First public release                                                     |
 
+## Pi.Alert v3.8.0
+<!--- --------------------------------------------------------------------- --->
+New:
+ - Config backup counter in the status box on the maintenance ppage
+ - Delete all notifications at once on the notification page
+
+Updated:
+ - AdminLTE/Bootstrap 3.3.7 to 3.4.1
+ - AdminLTE/eve.js 0.5.0 to 0.5.4
+ - AdminLTE/Ion.RangeSlider 2.3.0 to 2.3.1
+ - AdminLTE/Select2 4.0.8 to 4.0.13
+ - Reverse sorting of the notification list. The newest entry is now on top
+ - The deletion function of the reports hardened to make manipulations via the frontend more difficult
+
+Changed:
+ - Autoreload after sending the test notification
+ - Some Code Cleanup
+ - Little UI tweaks on the notification page
+ - The cleanup of the database backups, except for the latest 3, now also deletes the config file backups, except for the last 3
+
+Removed:
+ - Unnecessary files from AdminLTE components
+
+## Pi.Alert v3.7.19
+<!--- --------------------------------------------------------------------- --->
+New:
+ - WebGUI Notification: Displays the notifications now also on the web page. The indication is a small red badge above the Pi.Alert icon, in the upper right corner. Clicking on the icon opens a menu with a button that leads to a page with all notifications. These can now be viewed and deleted individually. The deletion of all notifications will be implemented later. The badge is displayed as long as notifications are present.
+This can be disabled in the pialert.conf (REPORT_WEBGUI = False)
+ - Page to view all notifications
+
+Updated:
+ - Language files
+ - FAQ / Help - Network page (en/de)
+ - FAQ / Help - General (en/de)
+
+## Pi.Alert v3.7.18
+<!--- --------------------------------------------------------------------- --->
+New:
+ - Possibility to purge Devices not connected since 30 Days
+
+Fixed:
+ - Sorting error in the IP column
+
+Updated:
+ - Documentation
+ - Language files
+
+## Pi.Alert v3.7.17
+<!--- --------------------------------------------------------------------- --->
+New:
+ - Add bootstrap-icons v1.10.3
+
+Fixed:
+ - Addressing the issue #67. While it was possible to assign a port to a switch on a router, which was displayed in the router tab, it was not possible to assign multiple switches to a router, so that the router was displayed on all switch tabs. Now it is possible to manually configure ports when configuring a switch on the network page.
+ - Issue #68
+
+Updated:
+ - Language files
+ - Minor visual improvements on the network page
+ - Documentation
+
+Note:
+ - French Translation is still incomplete
+
+## Pi.Alert v3.7.16
+<!--- --------------------------------------------------------------------- --->
+New:
+ - Configurable columns for device list
+ - Optional column "Location"
+ - Network page: Indicates the online status by a red or green "light" next to the name. This only works if the node has the same name as in the device list.
+
+Fixed:
+ - Install script then existing python version is selected
+
+Updated:
+ - Language files
+ - nmap_scan hardened
+ - Documentation
+
+Changed:
+ - header(Location) for login and logout processing, if you use http://pi.alert instead of http://ip/pialert
+ - Layout on maintenance page
+ - Network page. The mode of operation has not changed. However, with the new update, the first two characters are missing in the display of the "Device Type". This can be corrected by editing the device and selecting the same type (router, switch, ...) again. The background is that I insert numbers at the beginning to be able in the representation of the tabs the devices by type. Previously, the devices were "sorted" according to the order of creation. Now by Router, Switch, WLAN and Powerline
+
+Note:
+ - Network page: But you can't map one client or router to multiple nodes. An example to explain. You can assign a router to several switches. However, you can assign only one switch to the router. In the Router tab you can see the connected switches. But you can only see the router on one switch tab.
+ - French Translation is still incomplete
+
+## Pi.Alert v3.7.15
+<!--- --------------------------------------------------------------------- --->
+Fixed:
+ - Rollback minifying of the CSS files, due to a page rendering error
+
+Updated:
+ - Language files
+
+Changed:
+ - The button "Github History" is now called "Version History (leiweibau.net)" and leads to "https://leiweibau.net/archive/pialert/" instead of Github, which allows me to document the versions in a more structured way. It is only a link. No data is transmitted. (60aceff)
+ - Disable the DB Restore button if no db backups are available
+
+Note:
+ - French Translation is still incomplete
+
+## Pi.Alert v3.7.14
+<!--- --------------------------------------------------------------------- --->
+New:
+ - Add latest Nmap Scan to Log Viewer. This is only save inside the current session. There is no saved log file.
+ - Backup and restore of the configuration via the website possible
+ - Edit Pi.Alert-Config inside the web interface
+ - French language file (incomplete)
+
+Fixed:
+ - Missing translation in the notification when language was changed
+ - pialert_update.sh (again)
+ - Spanish language file on devices page
+
+Updated:
+ - All language files
+ - Documentation
+
+## Pi.Alert v3.7.13
+<!--- --------------------------------------------------------------------- --->
+Fixed:
+ - Security Fix.
+There was the possibility of an RCE (Remote Code Execution) via the nmap scan page. A passing variable was not checked.
+
+Removed:
+ - Unnecessary files within the AdminLTE dashboard
+ - shoutrrr x86_64 binary (32bit should also work on 64bit systems)
+
+## Pi.Alert v3.7.12
+<!--- --------------------------------------------------------------------- --->
+New:
+ - Add "Cleanup" log to maintenance page
+
+Fixed:
+ - Crontab fixed (Installation aborted)
+ - pialert_update.sh (Permission issues)
+
+Updated:
+ - pialert_install.sh and pialert_update.sh updated to support the new feature
+ - Documentation
+ - Minor UI improvments (Sidebar behavior)
+
+## Pi.Alert v3.7.11
+<!--- --------------------------------------------------------------------- --->
+New:
+ - API enhancement (new value in "system_status")
+ - View logs on frontend (Maintenance page)
+
+Fixed:
+ - in some cases speedtest-cli could not be started. The bug has been fixed for new installations. For existing installations, installing an additional package with the command "sudo apt install python-is-python3" helps.
+
+Updated:
+ - Documentation
+ - Help/FAQ: Handle read only db error.
+
+Changed:
+ - UI improvements (Help/FAQ and Maintenance)
+
+Note:
+ - Some old code and old comments removed
+ - Older versions can be found at "https://leiweibau.net/archive" now
 
 ## Pi.Alert v3.7.10
 <!--- --------------------------------------------------------------------- --->
