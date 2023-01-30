@@ -50,7 +50,7 @@ In charge of:
   | -------------------- | -------------------- |
 
 ### Front
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it on the settings page, or in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md). The pialert-cli is provided for changing the password. More information about this can be found on the Help FAQ page.
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it on the settings page, or in the configuration file ~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md). The pialert-cli is provided for changing the password. More information about this can be found on the Help FAQ page.
 
 The original web frontend that allows:
   - Manage the devices inventory and the characteristics
@@ -62,7 +62,7 @@ This was extended with:
   - Simple network relationship display
   - Help/FAQ page that deals with general questions about the use of Pi.Alert and also explains specific questions concerning this fork.
 
-The settings page allows the following things
+The settings page allows the following things:
   - Status information *(active scans, database size, backup counter)*
   - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
   - Language selection *(english, german, spanish, french)*
@@ -73,6 +73,8 @@ The settings page allows the following things
   - DB maintenance tools and a possibility for backup, restore and cleanup the database and the config file
   - Send test notifications
   - Config file editor
+
+When WebGUI notifications are enabled (they are by default), they are indicated by a counter in the upper right corner. The menu there takes you to a notification page where each notification can be viewed and deleted.
 
 
 
