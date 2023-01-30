@@ -66,7 +66,8 @@ The settings page allows the following things:
   - Status information *(active scans, database size, backup counter)*
   - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
   - Language selection *(english, german, spanish, french)*
-  - Enable/Disable network activity graph 
+  - Enable/Disable network activity graph
+  - Columns configuration for the devices list
   - Pause arp-scan
   - Set API-key
   - Enable/Disable login
