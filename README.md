@@ -8,15 +8,13 @@ unknown devices. It also warns if a "always connected" device disconnects.
 
 ![Main screen][main]
 
-## "Under the hood" Modifications within this Fork
+## Modifications within this Fork
   - Only one scan cycle
   - The Backend has the additional option "cleanup"
   - "[pialert-cli](docs/PIALERTCLI.md)" that helps to configure login, password and DB migration
   - API for basic queries
-
-## Obvious modifications within this Fork
   - Maintenance tasks
-  - Settings page (optional Login, Darkmode and Theme selection, Multilanguage, Config-Editor)
+  - Settings page (optional Login, Darkmode and Theme selection, Multi language, Configfile-Editor)
   - FAQ page
   - Additional notifications
 
@@ -38,8 +36,7 @@ The system consists of three parts:
 
 ### Back
 In charge of:
-  - Scan the network searching connected devices using the scanning methods
-    described
+  - Scan the network searching connected devices using the scanning methods described
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
   - DB cleanup tasks via cron
@@ -53,26 +50,31 @@ In charge of:
   | -------------------- | -------------------- |
 
 ### Front
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file ~/pialert/config/pialert.conf or via [pialert-cli](docs/PIALERTCLI.md).
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it on the settings page, or in the configuration file ~/pialert/config/pialert.conf or via [pialert-cli](docs/PIALERTCLI.md). The pialert-cli is provided for changing the password. More information about this can be found on the Help FAQ page.
 
-A web frontend that allows:
+The original web frontend that allows:
   - Manage the devices inventory and the characteristics
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
-  - Manual Nmap scans
+
+This was extended with:
+  - Manual Nmap scans in the details view
   - Speedtest for device "Internet" in the details view
   - Simple network relationship display
-  - Maintenance tasks and settings like:
-    - Status information *(active scans, database size, backup counter)*
-    - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
-    - Language selection *(english, german, spanish, french)*
-    - Enable/Disable network activity graph 
-    - Pause arp-scan
-    - Set API-key
-    - Enable/Disable login
-    - DB maintenance tools and a possibility for backup, restore and cleanup the database and the config file
-    - Send test notifications
-    - Config file editor
-  - Help/FAQ section
+  - Help/FAQ page that deals with general questions about the use of Pi.Alert and also explains specific questions concerning this fork.
+
+The settings page allows the following things
+  - Status information *(active scans, database size, backup counter)*
+  - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
+  - Language selection *(english, german, spanish, french)*
+  - Enable/Disable network activity graph 
+  - Pause arp-scan
+  - Set API-key
+  - Enable/Disable login
+  - DB maintenance tools and a possibility for backup, restore and cleanup the database and the config file
+  - Send test notifications
+  - Config file editor
+
+
 
   | ![Screen 1][screen1]                   | ![Screen 2][screen2]                   | ![Screen 3][screen3]                   | 
   | -------------------------------------- | -------------------------------------- | -------------------------------------- |
