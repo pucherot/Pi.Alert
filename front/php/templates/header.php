@@ -73,6 +73,14 @@ function arpscanstatus() {
     }
 }
 
+// Enable SubMenu for Web Services Events ---------------------------------------------------------------
+
+$config_file = "../config/pialert.conf";
+$config_file_lines = file($config_file);
+$config_file_lines_bypass = array_values(preg_grep('/^SCAN_WEBSERVICES\s.*/', $config_file_lines));
+$scan_services_line = explode("=", $config_file_lines_bypass[0]);
+$_SESSION['Scan_WebServices'] = strtolower(trim($scan_services_line[1]));
+
 // ###################################
 // ## GUI settings processing end
 // ###################################
@@ -377,9 +385,35 @@ if ($celsius >= -273.15) {
           <a href="presence.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Presence'];?></span></a>
         </li>
 
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('events.php') ) ){ echo 'active'; } ?>">
-          <a href="events.php"><i class="fa fa-bolt"></i> <span><?php echo $pia_lang['Navigation_Events'];?></span></a>
-        </li>
+<?php
+
+if ($_SESSION['Scan_WebServices'] == "true") {
+    echo '<li class=" treeview menu-close" style="height: auto;">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>'.$pia_lang['Navigation_Events'].'</span>
+          </a>
+          <ul class="treeview-menu" style="display: block;">';
+    echo '<li class="';
+    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php') ) ){ echo 'active'; }
+    echo '"><a href="devicesEvents.php"><i class="fa fa-circle-o"></i> '.$pia_lang['Navigation_Events_Dev'].'</a></li>'; 
+    echo '<li class="';
+    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php') ) ){ echo 'active'; }
+    echo '"><a href="servicesEvents.php"><i class="fa fa-circle-o"></i> '.$pia_lang['Navigation_Events_Serv'].'</a></li>'; 
+    echo '</ul>
+        </li>';
+} else {
+   echo '<li class="';
+   
+   if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php') ) ){ echo 'active'; }
+
+   echo '">
+          <a href="devicesEvents.php"><i class="fa fa-bolt"></i> <span>'.$pia_lang['Navigation_Events'].'</span></a>
+        </li>'; 
+}
+
+
+?>
+
 
         <li class="header text-uppercase" style="font-size: 0; padding: 1px;">Maintain and Settings</li>
 

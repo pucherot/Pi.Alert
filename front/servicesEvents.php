@@ -50,7 +50,7 @@ if ($_SESSION["login"] != 1)
           <a href="#" onclick="javascript: getEvents('all');">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Events_Shortcut_AllEvents'];?></p>
+                <p class="infobox_label"><?php echo 'Alle';?></p>
               </div>
               <div class="icon"> <i class="fa fa-bolt text-aqua-40"></i> </div>
             </div>
@@ -59,60 +59,60 @@ if ($_SESSION["login"] != 1)
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEvents('sessions');">
+          <a href="#" onclick="javascript: getEvents('2');">
             <div class="small-box bg-green">
-              <div class="inner"> <h3 id="eventsSessions"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Events_Shortcut_Sessions'];?></p>
+              <div class="inner"> <h3 id="events2xx"> -- </h3>
+                <p class="infobox_label"><?php echo 'HTTP 2xx';?></p>
               </div>
-              <div class="icon"> <i class="fa fa-plug text-green-40"></i> </div>
+              <div class="icon"> <i class="bi bi-check2-square text-green-40"></i> </div>
             </div>
           </a>
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEvents('missing');">
+          <a href="#" onclick="javascript: getEvents('3');">
             <div  class="small-box bg-yellow">
-              <div class="inner"> <h3 id="eventsMissing"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Events_Shortcut_MissSessions'];?></p>
+              <div class="inner"> <h3 id="events3xx"> -- </h3>
+                <p class="infobox_label"><?php echo 'HTTP 3xx';?></p>
               </div>
-              <div class="icon"> <i class="fa fa-exchange text-yellow-40"></i> </div>
+              <div class="icon"> <i class="bi bi-sign-turn-right text-yellow-40"></i> </div>
             </div>
           </a>
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEvents('voided');">
+          <a href="#" onclick="javascript: getEvents('4');">
             <div  class="small-box bg-yellow">
-              <div class="inner"> <h3 id="eventsVoided"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Events_Shortcut_VoidSessions'];?></p>
+              <div class="inner"> <h3 id="events4xx"> -- </h3>
+                <p class="infobox_label"><?php echo 'HTTP 4xx';?></p>
               </div>
-              <div class="icon"> <i class="fa fa-exclamation-circle text-yellow-40"></i> </div>
+              <div class="icon"> <i class="bi bi-exclamation-square text-yellow-40"></i> </div>
             </div>
           </a>
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEvents('new');">
+          <a href="#" onclick="javascript: getEvents('5');">
             <div  class="small-box bg-yellow">
-              <div class="inner"> <h3 id="eventsNewDevices"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Events_Shortcut_NewDevices'];?></p>
+              <div class="inner"> <h3 id="events5xx"> -- </h3>
+                <p class="infobox_label"><?php echo 'HTTP 5xx';?></p>
               </div>
-              <div class="icon"> <i class="ion ion-plus-round text-yellow-40"></i> </div>
+              <div class="icon"> <i class="bi bi-database-x text-yellow-40"></i> </div>
             </div>
           </a>
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEvents('down');">
+          <a href="#" onclick="javascript: getEvents('99999999');">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsDown"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Events_Shortcut_DownAlerts'];?></p>
+                <p class="infobox_label"><?php echo 'Down';?></p>
               </div>
-              <div class="icon"> <i class="fa fa-warning text-red-40"></i> </div>
+              <div class="icon"> <i class="bi bi-exclamation-diamond-fill text-red-40"></i> </div>
             </div>
           </a>
         </div>
@@ -135,18 +135,11 @@ if ($_SESSION["login"] != 1)
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
                 <tr>
-                  <th><?php echo $pia_lang['Events_TableHead_Order'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_Device'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_Owner'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_Date'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_EventType'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_Connection'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_Disconnection'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_Duration'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_DurationOrder'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_IP'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_IPOrder'];?></th>
-                  <th><?php echo $pia_lang['Events_TableHead_AdditionalInfo'];?></th>
+                  <th><?php echo 'URL';?></th>
+                  <th><?php echo 'Target IP';?></th>
+                  <th><?php echo 'ScanTime';?></th>
+                  <th><?php echo 'StatusCode';?></th>
+                  <th><?php echo 'ResponsTime';?></th>
                 </tr>
                 </thead>
               </table>
@@ -182,12 +175,12 @@ if ($_SESSION["login"] != 1)
 
 <!-- page script ----------------------------------------------------------- -->
 <script>
-  var parPeriod       = 'Front_Events_Period';
-  var parTableRows    = 'Front_Events_Rows';
+  var parPeriod       = 'Front_ServicesEvents_Period';
+  var parTableRows    = 'Front_ServicesEvents_Rows';
 
   var eventsType      = 'all';
   var period          = '';
-  var tableRows       = 10;
+  var tableRows       = 50;
   
   // Read parameters & Initialize components
   main();
@@ -215,7 +208,7 @@ function main () {
 
       // query data
       getEventsTotals();
-      getEvents (eventsType);
+      getEvents(eventsType);
     });
   });
 }
@@ -231,28 +224,34 @@ function initializeDatatable () {
     'ordering'     : true,
     'info'         : true,
     'autoWidth'    : false,
-    'order'       : [[0,"desc"], [3,"desc"], [5,"desc"]],
+    'columns': [
+        { "data": 0 },
+        { "data": 4 },
+        { "data": 1 },
+        { "data": 2 },
+        { "data": 3 }
+      ],
 
     // Parameters
     'pageLength'   : tableRows,
 
     'columnDefs'  : [
-      {visible:   false,         targets: [0,5,6,7,8,10] },
+      {visible:   false,         targets: [] },
       {className: 'text-center', targets: [] },
-      {orderData: [8],           targets: 7 },
-      {orderData: [10],          targets: 9 },
+//      {orderData: [8],           targets: 7 },
+//      {orderData: [10],          targets: 9 },
 
-      // Device Name
-      {targets: [1],
-        "createdCell": function (td, cellData, rowData, row, col) {
-          $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[13] +'" class="">'+ cellData +'</a></b>');
+      //Device Name
+      {targets: [0],
+       "createdCell": function (td, cellData, rowData, row, col) {
+         $(td).html ('<b><a href="'+ rowData[0] +'" class="" target="_blank">'+ cellData +'</a></b>');
       } },
 
       // Replace HTML codes
-      {targets: [3,4,5,6,7],
-        "createdCell": function (td, cellData, rowData, row, col) {
-          $(td).html (translateHTMLcodes (cellData));
-      } }
+      // {targets: [0,1,2,3,4],
+      //  "createdCell": function (td, cellData, rowData, row, col) {
+      //    $(td).html (translateHTMLcodes (cellData));
+      // } }
     ],
 
     // Processing
@@ -267,7 +266,7 @@ function initializeDatatable () {
           "previous":   "<?php echo $pia_lang['Events_Table_nav_prev'];?>"
       },
       "info":           "<?php echo $pia_lang['Events_Table_info'];?>",
-    }
+    },
   });
 
   // Save Parameter rows when changed
@@ -295,15 +294,15 @@ function getEventsTotals () {
   stopTimerRefreshData();
 
   // get totals and put in boxes
-  $.get('php/server/events.php?action=getEventsTotals&period='+ period, function(data) {
+  $.get('php/server/services.php?action=getEventsTotals&period='+ period, function(data) {
     var totalsEvents = JSON.parse(data);
 
-    $('#eventsAll').html        (totalsEvents[0].toLocaleString());
-    $('#eventsSessions').html   (totalsEvents[1].toLocaleString());
-    $('#eventsMissing').html    (totalsEvents[2].toLocaleString());
-    $('#eventsVoided').html     (totalsEvents[3].toLocaleString());
-    $('#eventsNewDevices').html (totalsEvents[4].toLocaleString());
-    $('#eventsDown').html       (totalsEvents[5].toLocaleString());
+    $('#eventsAll').html      (totalsEvents[0].toLocaleString());
+    $('#events2xx').html      (totalsEvents[1].toLocaleString());
+    $('#events3xx').html      (totalsEvents[2].toLocaleString());
+    $('#events4xx').html      (totalsEvents[3].toLocaleString());
+    $('#events5xx').html      (totalsEvents[4].toLocaleString());
+    $('#eventsDown').html     (totalsEvents[5].toLocaleString());
 
     // Timer for refresh data
     newTimerRefreshData (getEventsTotals);
@@ -318,13 +317,13 @@ function getEvents (p_eventsType) {
 
   // Define color & title for the status selected
   switch (eventsType) {
-    case 'all':       tableTitle = '<?php echo $pia_lang['Events_Shortcut_AllEvents'];?>';      color = 'aqua';    sesionCols = false;  break;
-    case 'sessions':  tableTitle = '<?php echo $pia_lang['Events_Shortcut_Sessions'];?>';       color = 'green';   sesionCols = true;   break;
-    case 'missing':   tableTitle = '<?php echo $pia_lang['Events_Shortcut_MissSessions'];?>';   color = 'yellow';  sesionCols = true;   break;
-    case 'voided':    tableTitle = '<?php echo $pia_lang['Events_Shortcut_VoidSessions'];?>';   color = 'yellow';  sesionCols = false;  break;
-    case 'new':       tableTitle = '<?php echo $pia_lang['Events_Shortcut_NewDevices'];?>';     color = 'yellow';  sesionCols = false;  break;
-    case 'down':      tableTitle = '<?php echo $pia_lang['Events_Shortcut_DownAlerts'];?>';     color = 'red';     sesionCols = false;  break;
-    default:          tableTitle = '<?php echo $pia_lang['Events_Shortcut_Events'];?>';         boxClass = '';     sesionCols = false;  break;
+    case 'all':       tableTitle = '<?php echo $pia_lang['Events_Shortcut_AllEvents'];?>';      color = 'aqua';    break;
+    case '2':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_Sessions'];?>';       color = 'green';   break;
+    case '3':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_MissSessions'];?>';   color = 'yellow';  break;
+    case '4':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_VoidSessions'];?>';   color = 'yellow';  break;
+    case '5':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_NewDevices'];?>';     color = 'yellow';  break;
+    case '99999999':  tableTitle = '<?php echo $pia_lang['Events_Shortcut_DownAlerts'];?>';     color = 'red';     break;
+    default:          tableTitle = '<?php echo $pia_lang['Events_Shortcut_Events'];?>';         boxClass = '';     break;
   } 
 
   // Set title and color
@@ -333,17 +332,17 @@ function getEvents (p_eventsType) {
   $('#tableEventsTitle').html (tableTitle);
 
   // Coluumns Visibility
-  $('#tableEvents').DataTable().column(3).visible (!sesionCols);
-  $('#tableEvents').DataTable().column(4).visible (!sesionCols);
-  $('#tableEvents').DataTable().column(5).visible (sesionCols);
-  $('#tableEvents').DataTable().column(6).visible (sesionCols);
-  $('#tableEvents').DataTable().column(7).visible (sesionCols);
+  // $('#tableEvents').DataTable().column(5).visible();
+  // $('#tableEvents').DataTable().column(4).visible();
+  // $('#tableEvents').DataTable().column(1).visible();
+  // $('#tableEvents').DataTable().column(2).visible();
+  // $('#tableEvents').DataTable().column(3).visible();
 
   // Define new datasource URL and reload
   $('#tableEvents').DataTable().clear();
   $('#tableEvents').DataTable().draw();
-  $('#tableEvents').DataTable().order ([0,"desc"], [3,"desc"], [5,"desc"]);
-  $('#tableEvents').DataTable().ajax.url('php/server/events.php?action=getEvents&type=' + eventsType +'&period='+ period ).load();
+  $('#tableEvents').DataTable().order ([2,"desc"]);
+  $('#tableEvents').DataTable().ajax.url('php/server/services.php?action=getEvents&type=' + eventsType +'&period='+ period ).load();
 };
 
 </script>
