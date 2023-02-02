@@ -150,8 +150,8 @@ if ($ENABLED_DARKMODE === True) {
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
-            <label>
-              <input type="checkbox" name="PWRemember">
+            <label for="PWRememberBox">
+              <input type="checkbox" name="PWRemember" id="PWRememberBox">
                 <div style="margin-left: 10px; display: inline-block; vertical-align: top;"> 
                   <?php echo $pia_lang['Login_Remember'];?><br><span style="font-size: smaller"><?php echo $pia_lang['Login_Remember_small'];?></span>
                 </div>

@@ -785,3 +785,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .faqhelp_head_color {
    background-color: #272c30 !important;
 }
+
+.skin-blue .sidebar-menu > li > .treeview-menu {
+  background-color: #22272a;
+}
