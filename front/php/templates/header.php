@@ -79,7 +79,10 @@ $config_file = "../config/pialert.conf";
 $config_file_lines = file($config_file);
 $config_file_lines_bypass = array_values(preg_grep('/^SCAN_WEBSERVICES\s.*/', $config_file_lines));
 $scan_services_line = explode("=", $config_file_lines_bypass[0]);
-$_SESSION['Scan_WebServices'] = strtolower(trim($scan_services_line[1]));
+if (strtolower(trim($scan_services_line[1])) == "true") {
+  $_SESSION['Scan_WebServices'] = True;  
+} else {$_SESSION['Scan_WebServices'] = False;}
+
 
 // ###################################
 // ## GUI settings processing end
@@ -387,7 +390,14 @@ if ($celsius >= -273.15) {
 
 <?php
 
-if ($_SESSION['Scan_WebServices'] == "true") {
+if ($_SESSION['Scan_WebServices'] == True) {
+    echo '<li class="'; 
+    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('services.php') ) ){ echo 'active'; }
+    echo '">
+            <a href="services.php"><i class="fa fa-globe"></i> <span> Web Services</span></a>
+          </li>';
+
+
     echo '<li class=" treeview menu-close" style="height: auto;">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>'.$pia_lang['Navigation_Events'].'</span>

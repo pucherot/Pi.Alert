@@ -25,7 +25,7 @@ if ($_SESSION["login"] != 1)
 <!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
       <h1 id="pageTitle">
-         <?php echo $pia_lang['Events_Title'];?>
+         <?php echo $pia_lang['WebServices_Events_Title'];?>
       </h1>
 
       <!-- period selector -->
@@ -50,7 +50,7 @@ if ($_SESSION["login"] != 1)
           <a href="#" onclick="javascript: getEvents('all');">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
-                <p class="infobox_label"><?php echo 'Alle';?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_All'];?></p>
               </div>
               <div class="icon"> <i class="fa fa-bolt text-aqua-40"></i> </div>
             </div>
@@ -62,7 +62,7 @@ if ($_SESSION["login"] != 1)
           <a href="#" onclick="javascript: getEvents('2');">
             <div class="small-box bg-green">
               <div class="inner"> <h3 id="events2xx"> -- </h3>
-                <p class="infobox_label"><?php echo 'HTTP 2xx';?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP2xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-check2-square text-green-40"></i> </div>
             </div>
@@ -74,7 +74,7 @@ if ($_SESSION["login"] != 1)
           <a href="#" onclick="javascript: getEvents('3');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events3xx"> -- </h3>
-                <p class="infobox_label"><?php echo 'HTTP 3xx';?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP3xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-sign-turn-right text-yellow-40"></i> </div>
             </div>
@@ -86,7 +86,7 @@ if ($_SESSION["login"] != 1)
           <a href="#" onclick="javascript: getEvents('4');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events4xx"> -- </h3>
-                <p class="infobox_label"><?php echo 'HTTP 4xx';?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP4xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-exclamation-square text-yellow-40"></i> </div>
             </div>
@@ -98,7 +98,7 @@ if ($_SESSION["login"] != 1)
           <a href="#" onclick="javascript: getEvents('5');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events5xx"> -- </h3>
-                <p class="infobox_label"><?php echo 'HTTP 5xx';?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP5xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-database-x text-yellow-40"></i> </div>
             </div>
@@ -110,7 +110,7 @@ if ($_SESSION["login"] != 1)
           <a href="#" onclick="javascript: getEvents('99999999');">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsDown"> -- </h3>
-                <p class="infobox_label"><?php echo 'Down';?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_Down'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-exclamation-diamond-fill text-red-40"></i> </div>
             </div>
@@ -135,11 +135,11 @@ if ($_SESSION["login"] != 1)
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
                 <tr>
-                  <th><?php echo 'URL';?></th>
-                  <th><?php echo 'Target IP';?></th>
-                  <th><?php echo 'ScanTime';?></th>
-                  <th><?php echo 'StatusCode';?></th>
-                  <th><?php echo 'ResponsTime';?></th>
+                  <th><?php echo $pia_lang['WebServices_Events_TableHead_URL'];?></th>
+                  <th><?php echo $pia_lang['WebServices_Events_TableHead_TargetIP'];?></th>
+                  <th><?php echo $pia_lang['WebServices_Events_TableHead_ScanTime'];?></th>
+                  <th><?php echo $pia_lang['WebServices_Events_TableHead_StatusCode'];?></th>
+                  <th><?php echo $pia_lang['WebServices_Events_TableHead_ResponsTime'];?></th>
                 </tr>
                 </thead>
               </table>
@@ -236,8 +236,11 @@ function initializeDatatable () {
     'pageLength'   : tableRows,
 
     'columnDefs'  : [
-      {visible:   false,         targets: [] },
-      {className: 'text-center', targets: [] },
+      {className: 'text-center', targets: [2,3] },
+      {className: 'text-right',  targets: [1] },
+      {width:     '220px',       targets: [0] },
+      {width:     '120px',       targets: [1] },
+      {width:     '80px',        targets: [3] },
 //      {orderData: [8],           targets: 7 },
 //      {orderData: [10],          targets: 9 },
 
@@ -284,14 +287,26 @@ function periodChanged () {
 
   // Requery totals and events
   getEventsTotals();
-  getEvents (eventsType);
+  getEvents(eventsType);
+
+  // $.get('php/server/services.php?action=getEventsTotals&period='+ period, function(data) {
+  //   var totalsEvents = JSON.parse(data);
+
+  //   $('#eventsAll').html      (totalsEvents[0].toLocaleString());
+  //   $('#events2xx').html      (totalsEvents[1].toLocaleString());
+  //   $('#events3xx').html      (totalsEvents[2].toLocaleString());
+  //   $('#events4xx').html      (totalsEvents[3].toLocaleString());
+  //   $('#events5xx').html      (totalsEvents[4].toLocaleString());
+  //   $('#eventsDown').html     (totalsEvents[5].toLocaleString());
+  // });    
+
 }
 
 
 // -----------------------------------------------------------------------------
-function getEventsTotals () {
+function getEventsTotals() {
   // stop timer
-  stopTimerRefreshData();
+  // stopTimerRefreshData();
 
   // get totals and put in boxes
   $.get('php/server/services.php?action=getEventsTotals&period='+ period, function(data) {
@@ -303,10 +318,9 @@ function getEventsTotals () {
     $('#events4xx').html      (totalsEvents[3].toLocaleString());
     $('#events5xx').html      (totalsEvents[4].toLocaleString());
     $('#eventsDown').html     (totalsEvents[5].toLocaleString());
-
-    // Timer for refresh data
-    newTimerRefreshData (getEventsTotals);
   });
+    // Timer for refresh data
+    //newTimerRefreshData(getEventsTotals);
 }
 
 
@@ -317,13 +331,13 @@ function getEvents (p_eventsType) {
 
   // Define color & title for the status selected
   switch (eventsType) {
-    case 'all':       tableTitle = '<?php echo $pia_lang['Events_Shortcut_AllEvents'];?>';      color = 'aqua';    break;
-    case '2':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_Sessions'];?>';       color = 'green';   break;
-    case '3':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_MissSessions'];?>';   color = 'yellow';  break;
-    case '4':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_VoidSessions'];?>';   color = 'yellow';  break;
-    case '5':         tableTitle = '<?php echo $pia_lang['Events_Shortcut_NewDevices'];?>';     color = 'yellow';  break;
-    case '99999999':  tableTitle = '<?php echo $pia_lang['Events_Shortcut_DownAlerts'];?>';     color = 'red';     break;
-    default:          tableTitle = '<?php echo $pia_lang['Events_Shortcut_Events'];?>';         boxClass = '';     break;
+    case 'all':       tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_All'];?>';      color = 'aqua';    break;
+    case '2':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP2xx'];?>';       color = 'green';   break;
+    case '3':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP3xx'];?>';   color = 'yellow';  break;
+    case '4':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP4xx'];?>';   color = 'yellow';  break;
+    case '5':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP5xx'];?>';     color = 'yellow';  break;
+    case '99999999':  tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_Down'];?>';     color = 'red';     break;
+    default:          tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_All'];?>';         boxClass = '';     break;
   } 
 
   // Set title and color

@@ -74,7 +74,7 @@ function getEventsTotals() {
   $events5xx = $row[0];
 
   // Down
-  $result = $db->query($SQL1. ' AND moneve_StatusCode LIKE "99999%" ');
+  $result = $db->query($SQL1. ' AND moneve_Latency LIKE "99999%" ');
   $row = $result -> fetchArray (SQLITE3_NUM);
   $eventsDown = $row[0];
 
@@ -105,7 +105,7 @@ function getEvents() {
     case '3':         $SQL = $SQL1 .' AND moneve_StatusCode LIKE "3%" ';      break;
     case '4':         $SQL = $SQL1 .' AND moneve_StatusCode LIKE "4%" ';      break;
     case '5':         $SQL = $SQL1 .' AND moneve_StatusCode LIKE "5%" ';      break;
-    case '99999999':  $SQL = $SQL1 .' AND moneve_StatusCode LIKE "999999%" '; break;
+    case '99999999':  $SQL = $SQL1 .' AND moneve_Latency LIKE "999999%" ';    break;
     default:          $SQL = $SQL1 .' AND 1==0 ';                             break;
   }
 
@@ -116,8 +116,7 @@ function getEvents() {
   while ($row = $result -> fetchArray (SQLITE3_NUM)) {
 
     $row[1] = formatDate ($row[1]);
-    $row[3] = $row[3].' s';
-    if ($row[3] == "99999999") {$raw[3] = "No Response";}
+    if ($row[3] == "99999999") {$row[3] = "No Response";}
 
     // IP Order
     // $row[10] = formatIPlong ($row[9]);

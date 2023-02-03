@@ -232,7 +232,12 @@ if ($_REQUEST['tab'] == '1') {
             <button type="button" id="wefwfwefewdf" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-iplog" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog'];?></button>
             <button type="button" id="tzhrsreawefw" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-vendor" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
             <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-cleanup" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup'];?></button>
-            <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-nmap" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
+            <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-webservices" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
+<?php
+if ($_SESSION['Scan_WebServices'] == True) {
+    echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-webservices" style="margin: 5px;">WebServices</button>';
+}
+?>
       </div>
     </div>
 
@@ -379,6 +384,34 @@ if ($_REQUEST['tab'] == '1') {
         </div>
     </div>
 
+<!-- Log Viewer - Modals WebServices ----------------------------------------------------------------- -->
+<?php
+if ($_SESSION['Scan_WebServices'] == True) {
+    echo '<div class="modal fade" id="modal-logviewer-webservices">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: pialert.webservices.log (File)</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">';
+
+                    $file = file_get_contents('./php/server/pialert.webservices.log', true);
+                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty'];}
+                    echo str_replace("\n",'<br>',$file);
+
+    echo '                <br></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">'.$pia_lang['Gen_Close'].'</button>
+                </div>
+            </div>
+        </div>
+    </div>';
+}
+?>
 <!-- Tabs ----------------------------------------------------------------- -->
 
     <div class="nav-tabs-custom">

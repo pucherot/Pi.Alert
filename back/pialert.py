@@ -18,6 +18,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from time import sleep, time, strftime
+from urllib.parse import urlparse
 
 import sys
 import subprocess
@@ -347,6 +348,9 @@ def cleanup_database ():
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(730) # 2 years
 
+    # Cleanup WebServices Events
+    print ('\nCleanup Services_Events, up to the lastest '+strdaystokeepOH+' days...')
+    sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
     # Cleanup Online History
     print ('\nCleanup Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
@@ -540,7 +544,8 @@ def scan_network ():
         enable_services_monitoring = False
 
     if enable_services_monitoring == True:
-        service_monitoring()
+        if str(startTime)[15] == "0":
+            service_monitoring()
 
     # Commit changes
     sql_connection.commit()
@@ -1301,7 +1306,8 @@ def prepare_service_monitoring_env ():
                                 moneve_URL TEXT NOT NULL,
                                 moneve_DateTime TEXT NOT NULL,
                                 moneve_StatusCode NUMERIC NOT NULL,
-                                moneve_Latency TEXT NOT NULL
+                                moneve_Latency TEXT NOT NULL,
+                                moneve_TargetIP TEXT NOT NULL
                             ); """
     sql.execute(sql_create_table)
 
@@ -1313,7 +1319,8 @@ def prepare_service_monitoring_env ():
                                 cur_AlertEvents INTEGER DEFAULT 0,
                                 cur_AlertDown INTEGER DEFAULT 0,
                                 cur_StatusChanged INTEGER DEFAULT 0,
-                                cur_LatencyChanged INTEGER DEFAULT 0
+                                cur_LatencyChanged INTEGER DEFAULT 0,
+                                cur_TargetIP TEXT NOT NULL
                             ); """
     sql.execute(sql_create_table)
 
@@ -1326,35 +1333,36 @@ def prepare_service_monitoring_env ():
                                 mon_Tags TEXT,
                                 mon_AlertEvents INTEGER DEFAULT 0,
                                 mon_AlertDown INTEGER DEFAULT 0,
+                                mon_TargetIP TEXT NOT NULL,
                                 PRIMARY KEY(mon_URL)
                             ); """
     sql.execute(sql_create_table)
 
 
 # -----------------------------------------------------------------------------
-def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence,):
+def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP):
 
-    sqlite_insert = """UPDATE Services SET mon_LastScan=?, mon_LastStatus=?, mon_LastLatency=? WHERE mon_URL=?;"""
+    sqlite_insert = """UPDATE Services SET mon_LastScan=?, mon_LastStatus=?, mon_LastLatency=?, mon_TargetIP=? WHERE mon_URL=?;"""
 
-    table_data = (_mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_URL)
+    table_data = (_mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_URL)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
 
 # -----------------------------------------------------------------------------
-def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency):
+def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency, _moneve_TargetIP):
 
     sqlite_insert = """INSERT INTO Services_Events
-                     (moneve_URL, moneve_DateTime, moneve_StatusCode, moneve_Latency) 
-                     VALUES (?, ?, ?, ?);"""
+                     (moneve_URL, moneve_DateTime, moneve_StatusCode, moneve_Latency, moneve_TargetIP) 
+                     VALUES (?, ?, ?, ?, ?);"""
 
-    table_data = (_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency)
+    table_data = (_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency, _moneve_TargetIP)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
 
 # -----------------------------------------------------------------------------
-def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency):
+def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP):
 
     sql.execute("SELECT * FROM Services WHERE mon_URL = ?", [_cur_URL])
     rows = sql.fetchall()
@@ -1363,6 +1371,12 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _mon_AlertDown = row[7]
         _mon_StatusCode = row[2]
         _mon_Latency = row[3]
+        _mon_TargetIP = row[8]
+
+    if _mon_TargetIP != _cur_TargetIP:
+        _cur_StatusChanged = 1
+    else:
+        _cur_StatusChanged = 0
 
     if _mon_StatusCode != _cur_StatusCode:
         _cur_StatusChanged = 1
@@ -1377,10 +1391,10 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _cur_LatencyChanged = 0
 
     sqlite_insert = """INSERT INTO Services_CurrentScan
-                     (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged) 
-                     VALUES (?, ?, ?, ?, ?, ?, ?, ?);"""
+                     (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"""
 
-    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged)
+    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
@@ -1527,17 +1541,27 @@ def service_monitoring():
             #                     latency)
             #      )
 
+            #Get IP from Domain
+            if latency != "99999999":
+                domain = urlparse(site).netloc
+                domain = domain.split(":")[0]
+                #print(domain)
+                domain_ip = socket.gethostbyname(domain)
+            else:
+                domain_ip = ""
             # Write Logfile
             service_monitoring_log(site, status, latency)
             # Insert Services_Events with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
-            set_services_events(site, scantime, status, latency)
+            set_services_events(site, scantime, status, latency, domain_ip)
             # Insert Services_CurrentScan with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
-            set_services_current_scan(site, scantime, status, latency)
+            set_services_current_scan(site, scantime, status, latency, domain_ip)
+
+            # Notification here
 
             sys.stdout.flush()
 
             # Update Service with lastLatence, lastScan and lastStatus after compare with services_current_scan
-            set_service_update(site, scantime, status, latency)
+            set_service_update(site, scantime, status, latency, domain_ip)
 
         break
 

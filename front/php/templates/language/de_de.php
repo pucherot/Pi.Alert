@@ -111,7 +111,7 @@ $pia_lang['Presence_CalHead_week'] = 'Woche';
 // Events Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Events_Title'] = 'Ereignisse';
+$pia_lang['Events_Title'] = 'Geräte - Ereignisse';
 $pia_lang['Events_Periodselect_today'] = 'Heute';
 $pia_lang['Events_Periodselect_LastWeek'] = 'Letzte Woche';
 $pia_lang['Events_Periodselect_LastMonth'] = 'Letzter Monat';
@@ -142,6 +142,25 @@ $pia_lang['Events_Tablelenght_all'] = 'Alle';
 $pia_lang['Events_Table_info'] = 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen';
 $pia_lang['Events_Table_nav_next'] = 'Nächste';
 $pia_lang['Events_Table_nav_prev'] = 'Zurück';
+
+
+//////////////////////////////////////////////////////////////////
+// WebServices Events Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['WebServices_Events_Title'] = 'WebServices - Ereignisse';
+$pia_lang['WebServices_Events_Shortcut_All'] = 'Alle Ereignisse';
+$pia_lang['WebServices_Events_Shortcut_HTTP2xx'] = 'HTTP Code 2xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP3xx'] = 'HTTP Code 3xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP4xx'] = 'HTTP Code 4xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP5xx'] = 'HTTP Code 5xx';
+$pia_lang['WebServices_Events_Shortcut_Down'] = 'Down';
+$pia_lang['WebServices_Events_TableHead_URL'] = 'URL';
+$pia_lang['WebServices_Events_TableHead_TargetIP'] = 'TargetIP';
+$pia_lang['WebServices_Events_TableHead_ScanTime'] = 'ScanTime';
+$pia_lang['WebServices_Events_TableHead_StatusCode'] = 'StatusCode';
+$pia_lang['WebServices_Events_TableHead_ResponsTime'] = 'ResponsTime';
+
 
 //////////////////////////////////////////////////////////////////
 // Device Details Page
@@ -208,6 +227,13 @@ $pia_lang['DevDetail_Nmap_buttonDetail'] = 'Detailierter Scan';
 $pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Schneller Scan: Überprüft nur die wichtigsten 100 Ports (wenige Sekunden)';
 $pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Standard Scan: Nmap scannt die ersten 1.000 Ports für jedes angeforderte Scan-Protokoll. Damit werden etwa 93% der TCP-Ports und 49% der UDP-Ports erfasst. (ca. 5-10 Sekunden)';
 $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailierter Scan: Standardscan mit aktivierter Betriebssystemerkennung, Versionserkennung, Skript-Scan und Traceroute (bis zu 30 oder mehr Sekunden)';
+
+//////////////////////////////////////////////////////////////////
+// WebServices Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['WebServices_Title'] = 'WebServices';
+
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page
