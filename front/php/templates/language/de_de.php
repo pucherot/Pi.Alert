@@ -233,6 +233,7 @@ $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailierter Scan: Standardscan
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['WebServices_Title'] = 'WebServices';
+$pia_lang['WebServices_unknown_Device'] = 'Unbekanntes Gerät';
 
 
 //////////////////////////////////////////////////////////////////
