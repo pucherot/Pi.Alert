@@ -204,46 +204,54 @@ while ($row = $dev_res->fetchArray()) {
 
 
     <!-- column 2 -->
-                  <div class="col-sm-6 col-xs-12">
+                  <div class="col-sm-6 col-xs-12" style="margin-bottom: 50px;">
                     <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_EveandAl_Title'];?></h4>
                     <div class="box-body form-horizontal">
 
+                      <!-- Last HTTP Status -->
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label"><?php echo 'Last HTTP Code';?></label>
+                        <div class="col-sm-8">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?php echo $servicedetails['mon_LastStatus']?>">
+                        </div>
+                      </div>
+
                       <!-- Last IP -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'Last IP';?></label>
-                        <div class="col-sm-9">
-                          <input class="form-control" id="txtLast" type="text" readonly value="<?php echo $servicedetails['mon_TargetIP']?>">
+                        <label class="col-sm-4 control-label"><?php echo 'Last IP';?></label>
+                        <div class="col-sm-8">
+                          <input class="form-control" id="txtLastIP" type="text" readonly value="<?php echo $servicedetails['mon_TargetIP']?>">
                         </div>
                       </div>
 
                       <!-- Last Scan -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'Last Scan';?></label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-4 control-label"><?php echo 'Last Scan';?></label>
+                        <div class="col-sm-8">
                           <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $servicedetails['mon_LastScan']?>">
                         </div>
                       </div>
 
                       <!-- Last Latency -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'Last Response Time';?></label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-4 control-label"><?php echo 'Last Response Time';?></label>
+                        <div class="col-sm-8">
                           <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $servicedetails['mon_LastLatency']?>">
                         </div>
                       </div>
 
                       <!-- Alert events -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'All Events';?></label>
-                        <div class="col-sm-9" style="padding-top:6px;">
+                        <label class="col-xs-4 control-label"><?php echo 'All Events';?></label>
+                        <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox blue" id="chkAlertEvents" <?php if($servicedetails['mon_AlertEvents'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
                       </div>
       
                       <!-- Alert Down -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'Down';?></label>
-                        <div class="col-sm-9" style="padding-top:6px;">
+                        <label class="col-xs-4 control-label"><?php echo 'Down';?></label>
+                        <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox red" id="chkAlertDown" <?php if($servicedetails['mon_AlertDown'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
                       </div>
@@ -261,7 +269,7 @@ while ($row = $dev_res->fetchArray()) {
                         <button type="button" class="btn btn-default" style="margin-left:6px; margin-top:6px;" 
                           id="btnRestore"  onclick="getDeviceData(true)"> <?php echo $pia_lang['DevDetail_button_Reset'];?> </button>
                         <!-- <button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px;"  -->
-                        <button type="button" disabled class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
+                        <button type="button" class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
                           id="btnSave"     onclick="setDeviceData()" >     <?php echo $pia_lang['DevDetail_button_Save'];?> </button>
                     </div>
                   </div>
