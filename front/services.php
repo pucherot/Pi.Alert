@@ -59,7 +59,7 @@ require 'php/templates/header.php';
     left: 0px;
     top: 0px;
     padding: 5px;
-    background-color: #222;
+    background-color: #913225;
     font-size: 16px;
     color: white;
     width: 100%;
@@ -250,7 +250,8 @@ function list_standalone_services() {
                     </div>
                     <div style="display: inline-block; width: 100%;">
                         <div style="margin: 0px 15px;">
-                           <table height="20px" width="100%"><tr><td><span class="">'.$url_array[1].'</span></td><td align="right"><span style="font-weight: bolder; font-size:16px;">'.$row['mon_Tags'].'</span></td></tr></table>';
+                           <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">'.$row['mon_Tags'].'</span></td></tr></table>';
+            // Render Progressbar
             echo'          <div class="progress-segment">';
 
             // Get Tooltip values
@@ -339,7 +340,7 @@ function get_service_from_unique_device($func_unique_device) {
                     </div>
                     <div style="display: inline-block; width: 100%;">
                         <div style="margin: 0px 15px;">
-                                <table height="20px" width="100%"><tr><td><span class="">'.$url_array[1].'</span></td><td align="right"><span style="font-weight: bolder; font-size:16px;">'.$row['mon_Tags'].'</span></td></tr></table>';
+                                <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">'.$row['mon_Tags'].'</span></td></tr></table>';
             // Render Progressbar
                     echo'         <div class="progress-segment">';
 
@@ -382,11 +383,6 @@ function get_service_from_unique_device($func_unique_device) {
 
 // Get a array of device with monitored URLs
 $unique_devices = get_devices_from_services();
-
-
-// ###### Debugging
-// ##########################################
-//print_r($unique_devices);
 
 // #######################################################
 // ###### Main Function (Unique Devices)

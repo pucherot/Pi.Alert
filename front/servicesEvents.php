@@ -247,7 +247,7 @@ function initializeDatatable () {
       //Device Name
       {targets: [0],
        "createdCell": function (td, cellData, rowData, row, col) {
-         $(td).html ('<b><a href="'+ rowData[0] +'" class="" target="_blank">'+ cellData +'</a></b>');
+         $(td).html ('<b><a href="serviceDetails.php?url='+ rowData[0] +'" class="">'+ cellData +'</a></b>');
       } },
 
       // Replace HTML codes

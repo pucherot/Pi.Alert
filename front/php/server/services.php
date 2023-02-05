@@ -30,8 +30,57 @@
     switch ($action) {
       case 'getEventsTotals':    getEventsTotals();                       break;
       case 'getEvents':          getEvents();                             break;
+      case 'getEventsTotalsforService': getEventsTotalsforService();      break;
     }
   }
+
+//------------------------------------------------------------------------------
+//  Query total numbers of Events from Device
+//------------------------------------------------------------------------------
+function getEventsTotalsforService() {
+  global $db;
+
+  // Request Parameters
+  $serviceURL = $_REQUEST['url'];
+
+  // SQL 
+  $SQL1 = 'SELECT Count(*)
+           FROM Services_Events 
+           WHERE moneve_URL = "'. $serviceURL.'"';
+
+  // All
+  $result = $db->query($SQL1);
+  $row = $result -> fetchArray (SQLITE3_NUM);
+  $eventsAll = $row[0];
+
+  // 2xx
+  $result = $db->query($SQL1. ' AND moneve_StatusCode LIKE "2%" ');
+  $row = $result -> fetchArray (SQLITE3_NUM);
+  $events2xx = $row[0];
+
+  // Missing
+  $result = $db->query($SQL1. ' AND moneve_StatusCode LIKE "3%" ');
+  $row = $result -> fetchArray (SQLITE3_NUM);
+  $events3xx = $row[0];
+
+  // Voided
+  $result = $db->query($SQL1. ' AND moneve_StatusCode LIKE "4%" ');
+  $row = $result -> fetchArray (SQLITE3_NUM);
+  $events4xx = $row[0];
+
+  // New
+  $result = $db->query($SQL1. ' AND moneve_StatusCode LIKE "5%" ');
+  $row = $result -> fetchArray (SQLITE3_NUM);
+  $events5xx = $row[0];
+
+  // Down
+  $result = $db->query($SQL1. ' AND moneve_Latency LIKE "99999%" ');
+  $row = $result -> fetchArray (SQLITE3_NUM);
+  $eventsDown = $row[0];
+
+  // Return json
+  echo (json_encode (array ($eventsAll, $events2xx, $events3xx, $events4xx, $events5xx, $eventsDown)));
+}
 
 
 //------------------------------------------------------------------------------
@@ -132,7 +181,5 @@ function getEvents() {
   // Return json
   echo (json_encode ($tableData));
 }
-
-
 
 ?>
