@@ -28,7 +28,7 @@ require 'php/templates/header.php';
 .progress-segment {
   display: flex;
   margin-bottom: 5px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .item {
@@ -64,6 +64,10 @@ require 'php/templates/header.php';
     color: white;
     width: 100%;
     height: 38px;
+}
+
+.item:hover {
+    background-color: #aaa !important;
 }
 
 </style>
@@ -250,7 +254,7 @@ function list_standalone_services() {
                     </div>
                     <div style="display: inline-block; width: 100%;">
                         <div style="margin: 0px 15px;">
-                           <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">'.$row['mon_Tags'].'</span></td></tr></table>';
+                           <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;'.$row['mon_Tags'].'</span></td></tr></table>';
             // Render Progressbar
             echo'          <div class="progress-segment">';
 
@@ -340,7 +344,7 @@ function get_service_from_unique_device($func_unique_device) {
                     </div>
                     <div style="display: inline-block; width: 100%;">
                         <div style="margin: 0px 15px;">
-                                <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">'.$row['mon_Tags'].'</span></td></tr></table>';
+                                <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;'.$row['mon_Tags'].'</span></td></tr></table>';
             // Render Progressbar
                     echo'         <div class="progress-segment">';
 

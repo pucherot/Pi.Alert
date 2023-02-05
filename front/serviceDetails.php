@@ -19,7 +19,8 @@ if ($_SESSION["login"] != 1)
 require 'php/templates/header.php';
 require 'php/server/db.php';
 
-  $service_details_title = $_REQUEST['url'];
+$service_details_title = $_REQUEST['url'];
+$service_details_title_array = explode('://', $_REQUEST['url']);
 
 $db_file = '../db/pialert.db';
 
@@ -30,6 +31,15 @@ function get_service_details($service_URL) {
     $row = $mon_res->fetchArray();
     $db->close();
     return $row;
+}
+
+function get_service_events_table($service_URL) {
+    global $db_file;
+    $db = new SQLite3($db_file);
+    $moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="'.$service_URL.'"');
+    while ($row = $moneve_res->fetchArray()) {
+        echo  '<tr><td>'.$row['moneve_URL'].'</td><td>'.$row['moneve_TargetIP'].'</td><td>'.$row['moneve_DateTime'].'</td><td>'.$row['moneve_StatusCode'].'</td><td>'.$row['moneve_Latency'].'</td></tr>';
+    }
 }
 
 $servicedetails = get_service_details($service_details_title);
@@ -44,7 +54,7 @@ $servicedetails = get_service_details($service_details_title);
       <?php require 'php/templates/notification.php'; ?>
 
       <h1 id="pageTitle">
-        <?php echo $service_details_title;?>
+        <?php echo '['.strtoupper($service_details_title_array[0]).'] '.$service_details_title_array[1];?>
       </h1>
     </section>
     
@@ -267,7 +277,7 @@ while ($row = $dev_res->fetchArray()) {
                           id="btnDelete"   onclick="askDeleteDevice()">   <?php echo 'WebService löschen';?> </button>
                         <!-- <button type="button" class="btn btn-default pa-btn" style="margin-left:6px;"  -->
                         <button type="button" class="btn btn-default" style="margin-left:6px; margin-top:6px;" 
-                          id="btnRestore"  onclick="getDeviceData(true)"> <?php echo $pia_lang['DevDetail_button_Reset'];?> </button>
+                          id="btnRestore"  onclick="location.reload()"> <?php echo $pia_lang['DevDetail_button_Reset'];?> </button>
                         <!-- <button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px;"  -->
                         <button type="button" class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
                           id="btnSave"     onclick="setDeviceData()" >     <?php echo $pia_lang['DevDetail_button_Save'];?> </button>
@@ -285,17 +295,19 @@ while ($row = $dev_res->fetchArray()) {
                 <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                   <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>Event type</th>
-                    <th>IP</th>
-                    <th>Additional info</th>
-                    <th>Additional info</th>
+                    <th>Service URL</th>
+                    <th>Target IP</th>
+                    <th>ScanTime</th>
+                    <th>Status Code</th>
+                    <th>Response Time</th>
                   </tr>
                   </thead>
                   <tbody>
+
+
 <?php
 
-// Insert Table date here
+get_service_events_table($service_details_title);
 
 ?>
                 </tbody>
@@ -361,7 +373,7 @@ if ($ENABLED_DARKMODE === True) {
   var parEventsRows       = 'Front_ServiceDetails_Events_Rows';
   var period              = '1 month';
   var tab                 = 'tabDetails'
-  var eventsRows          = 10;
+  //var eventsRows          = 25;
 
   // Read parameters & Initialize components
   main();
@@ -428,21 +440,21 @@ function initializeDatatable () {
   $('#tableEvents').DataTable({
     'paging'       : true,
     'lengthChange' : true,
-    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
+    //'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
+    'bLengthChange': false,
     'searching'    : true,
     'ordering'     : true,
     'info'         : true,
     'autoWidth'    : false,
+    'pageLength'   : 25,
+    'order'        : [[2, 'desc']],
     'columns': [
         { "data": 0 },
-        { "data": 4 },
         { "data": 1 },
         { "data": 2 },
-        { "data": 3 }
+        { "data": 3 },
+        { "data": 4 }
       ],
-
-    // Parameters
-    'pageLength'   : 25,
 
     'columnDefs'  : [
       {className: 'text-center', targets: [2,3] },
@@ -450,8 +462,6 @@ function initializeDatatable () {
       {width:     '220px',       targets: [0] },
       {width:     '120px',       targets: [1] },
       {width:     '80px',        targets: [3] },
-//      {orderData: [8],           targets: 7 },
-//      {orderData: [10],          targets: 9 },
 
       //Device Name
       {targets: [0],
@@ -459,11 +469,6 @@ function initializeDatatable () {
          $(td).html ('<b><a href="'+ rowData[0] +'" class="" target="_blank">'+ cellData +'</a></b>');
       } },
 
-      // Replace HTML codes
-      // {targets: [0,1,2,3,4],
-      //  "createdCell": function (td, cellData, rowData, row, col) {
-      //    $(td).html (translateHTMLcodes (cellData));
-      // } }
     ],
 
     // Processing
@@ -480,11 +485,6 @@ function initializeDatatable () {
       "info":           "<?php echo $pia_lang['Events_Table_info'];?>",
     },
   });
-
-  //Save Parameter rows when changed
-  $('#tableEvents').on( 'length.dt', function ( e, settings, len ) {
-    setParameter (parTableRows, len);
-  } );
 };
 
 </script>
