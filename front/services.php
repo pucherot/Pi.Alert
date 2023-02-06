@@ -320,7 +320,7 @@ function get_devices_from_services() {
 function get_service_from_unique_device($func_unique_device) {
     global $db_file;
     $db = new SQLite3($db_file);
-    $mon_res = $db->query('SELECT * FROM Services');
+    $mon_res = $db->query('SELECT * FROM Services ORDER BY mon_Tags ASC');
     // Print Services Loop
     while ($row = $mon_res->fetchArray()) {
         if ($row['mon_MAC'] == $func_unique_device) {

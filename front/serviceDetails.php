@@ -38,7 +38,12 @@ function get_service_events_table($service_URL) {
     $db = new SQLite3($db_file);
     $moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="'.$service_URL.'"');
     while ($row = $moneve_res->fetchArray()) {
-        echo  '<tr><td>'.$row['moneve_URL'].'</td><td>'.$row['moneve_TargetIP'].'</td><td>'.$row['moneve_DateTime'].'</td><td>'.$row['moneve_StatusCode'].'</td><td>'.$row['moneve_Latency'].'</td></tr>';
+        echo  '<tr>
+                  <td>'.$row['moneve_TargetIP'].'</td>
+                  <td>'.$row['moneve_DateTime'].'</td>
+                  <td>'.$row['moneve_StatusCode'].'</td>
+                  <td>'.$row['moneve_Latency'].'</td>
+              </tr>';
     }
 }
 
@@ -172,7 +177,7 @@ $servicedetails = get_service_details($service_details_title);
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo 'URL';?></label>
                         <div class="col-sm-9">
-                          <input class="form-control" id="txtURL" type="text" value="<?php echo $servicedetails['mon_URL']?>">
+                          <input class="form-control" id="txtURL" type="text" readonly value="<?php echo $servicedetails['mon_URL']?>">
                         </div>
                       </div>
       
@@ -188,7 +193,7 @@ $servicedetails = get_service_details($service_details_title);
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo 'Gerät';?></label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="txtMAC">
+                            <select class="form-control" id="txtMAC" name="txtMAC">
 
 <?php
 if ($servicedetails['mon_MAC'] != "") {
@@ -274,13 +279,13 @@ while ($row = $dev_res->fetchArray()) {
                     <div class="pull-right">
                         <!-- <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;" -->
                         <button type="button" class="btn btn-danger"  style="margin-left:6px; margin-top:6px;"
-                          id="btnDelete"   onclick="askDeleteDevice()">   <?php echo 'WebService löschen';?> </button>
+                          id="btnDelete"   onclick="askDeleteDevice()"> <?php echo $pia_lang['Gen_Delete'];?> </button>
                         <!-- <button type="button" class="btn btn-default pa-btn" style="margin-left:6px;"  -->
                         <button type="button" class="btn btn-default" style="margin-left:6px; margin-top:6px;" 
-                          id="btnRestore"  onclick="location.reload()"> <?php echo $pia_lang['DevDetail_button_Reset'];?> </button>
+                          id="btnRestore"  onclick="location.reload()"> <?php echo $pia_lang['Gen_Cancel'];?> </button>
                         <!-- <button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px;"  -->
                         <button type="button" class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
-                          id="btnSave"     onclick="setDeviceData()" >     <?php echo $pia_lang['DevDetail_button_Save'];?> </button>
+                          id="btnSave"     onclick="setServiceData()" > <?php echo $pia_lang['Gen_Save'];?> </button>
                     </div>
                   </div>
 
@@ -295,15 +300,14 @@ while ($row = $dev_res->fetchArray()) {
                 <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                   <thead>
                   <tr>
-                    <th>Service URL</th>
-                    <th>Target IP</th>
-                    <th>ScanTime</th>
-                    <th>Status Code</th>
-                    <th>Response Time</th>
+                    <!-- <th>Service URL</th> -->
+                    <th><?php echo $pia_lang['WebServices_tablehead_TargetIP'];?></th>
+                    <th><?php echo $pia_lang['WebServices_tablehead_ScanTime'];?></th>
+                    <th><?php echo $pia_lang['WebServices_tablehead_Status_Code'];?></th>
+                    <th><?php echo $pia_lang['WebServices_tablehead_Response_Time'];?></th>
                   </tr>
                   </thead>
                   <tbody>
-
 
 <?php
 
@@ -365,7 +369,7 @@ if ($ENABLED_DARKMODE === True) {
 <!-- page script ----------------------------------------------------------- -->
 <script>
 
-  var mac                 = '';
+  var url                 = '';
   var devicesList         = [];
   var pos                 = -1;
   var parPeriod           = 'Front_ServiceDetails_Period';
@@ -382,6 +386,7 @@ if ($ENABLED_DARKMODE === True) {
 // -----------------------------------------------------------------------------
 
 function main () {
+  url = '<?php echo $service_details_title;?>'
   initializeTabs();
   initializeiCheck();
   getEventsTotalsforService();
@@ -447,26 +452,25 @@ function initializeDatatable () {
     'info'         : true,
     'autoWidth'    : false,
     'pageLength'   : 25,
-    'order'        : [[2, 'desc']],
+    'order'        : [[1, 'desc']],
     'columns': [
         { "data": 0 },
         { "data": 1 },
         { "data": 2 },
-        { "data": 3 },
-        { "data": 4 }
+        { "data": 3 }
       ],
 
     'columnDefs'  : [
-      {className: 'text-center', targets: [2,3] },
-      {className: 'text-right',  targets: [1] },
-      {width:     '220px',       targets: [0] },
-      {width:     '120px',       targets: [1] },
-      {width:     '80px',        targets: [3] },
+      {className: 'text-center', targets: [1,2,3] },
+      //{className: 'text-right',  targets: [1] },
+      //{width:     '220px',       targets: [0] },
+      //{width:     '120px',       targets: [1] },
+      //{width:     '80px',        targets: [3] },
 
       //Device Name
       {targets: [0],
        "createdCell": function (td, cellData, rowData, row, col) {
-         $(td).html ('<b><a href="'+ rowData[0] +'" class="" target="_blank">'+ cellData +'</a></b>');
+         $(td).html ('<b>'+ cellData +'</a></b>');
       } },
 
     ],
@@ -486,5 +490,60 @@ function initializeDatatable () {
     },
   });
 };
+
+// -----------------------------------------------------------------------------
+function setServiceData(refreshCallback='') {
+  // Check MAC
+  if (url == '') {
+    return;
+  }
+
+  // update data to server
+  $.get('php/server/services.php?action=setServiceData'
+    + '&url='             + $('#txtURL').val()
+    + '&tags='            + $('#txtTags').val()
+    + '&mac='             + $('#txtMAC').val()
+    + '&alertdown='       + ($('#chkAlertDown')[0].checked * 1)
+    + '&alertevents='     + ($('#chkAlertEvents')[0].checked * 1)
+    , function(msg) {
+
+    // deactivate button 
+    // deactivateSaveRestoreData ();
+    showMessage (msg);
+    // Callback fuction
+    if (typeof refreshCallback == 'function') {
+      refreshCallback();
+    }
+  });
+}
+
+// -----------------------------------------------------------------------------
+function askDeleteService () {
+  // Check MAC
+  if (mac == '') {
+    return;
+  }
+
+  // Ask delete device
+  showModalWarning ('Delete Device', 'Are you sure you want to delete this device?<br>(maybe you prefer to archive it)',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Delete'];?>', 'deleteService');
+}
+
+
+// -----------------------------------------------------------------------------
+function deleteService () {
+  // Check MAC
+  if (mac == '') {
+    return;
+  }
+
+  // Delete device
+  $.get('php/server/devices.php?action=deleteService&mac='+ mac, function(msg) {
+    showMessage (msg);
+  });
+
+  // Deactivate controls
+  $('#panDetails :input').attr('disabled', true);
+}
 
 </script>

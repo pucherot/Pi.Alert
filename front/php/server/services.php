@@ -1,19 +1,26 @@
 <?php
+session_start();
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector 
 //
-//  events.php - Front module. Server side. Manage Events
+//  devices.php - Front module. Server side. Manage Devices
 //------------------------------------------------------------------------------
-//  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+//  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
+//  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
+//  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
 
+foreach (glob("../../../db/setting_language*") as $filename) {
+    $pia_lang_selected = str_replace('setting_language_','',basename($filename));
+}
+if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 
 //------------------------------------------------------------------------------
   // External files
   require 'db.php';
   require 'util.php';
-
+  require '../templates/language/'.$pia_lang_selected.'.php';
 
 //------------------------------------------------------------------------------
 //  Action selector
@@ -28,9 +35,11 @@
   if (isset ($_REQUEST['action']) && !empty ($_REQUEST['action'])) {
     $action = $_REQUEST['action'];
     switch ($action) {
-      case 'getEventsTotals':    getEventsTotals();                       break;
-      case 'getEvents':          getEvents();                             break;
-      case 'getEventsTotalsforService': getEventsTotalsforService();      break;
+      case 'getEventsTotals':             getEventsTotals();                  break;
+      case 'getEvents':                   getEvents();                        break;
+      case 'getEventsTotalsforService':   getEventsTotalsforService();        break;
+      case 'setServiceData':              setServiceData();                   break;
+      case 'deleteService':               deleteService();                    break;
     }
   }
 
@@ -180,6 +189,51 @@ function getEvents() {
 
   // Return json
   echo (json_encode ($tableData));
+}
+
+//------------------------------------------------------------------------------
+//  Set Services Data
+//------------------------------------------------------------------------------
+
+function setServiceData() {
+  global $db;
+  global $pia_lang;
+  // sql
+  $sql = 'UPDATE Services SET
+                 mon_Tags           = "'. quotes($_REQUEST['tags'])         .'",
+                 mon_MAC            = "'. quotes($_REQUEST['mac'])          .'",
+                 mon_AlertDown      = "'. quotes($_REQUEST['alertdown'])    .'",
+                 mon_AlertEvents    = "'. quotes($_REQUEST['alertevents'])  .'"
+          WHERE mon_URL="' . $_REQUEST['url'] .'"';
+  // update Data
+  $result = $db->query($sql);
+  // check result
+  if ($result == TRUE) {
+    echo $pia_lang['BackWebServices_DBTools_UpdServ'];
+  } else {
+    echo $pia_lang['BackWebServices_DBTools_UpdServError']."\n\n$sql \n\n". $db->lastErrorMsg();
+    //echo $_REQUEST['tags'];
+  }
+
+}
+
+//------------------------------------------------------------------------------
+//  Delete Service
+//------------------------------------------------------------------------------
+function deleteService() {
+  global $db;
+  global $pia_lang;
+
+  // sql
+  $sql = 'DELETE FROM Services WHERE dev_MAC="' . $_REQUEST['mac'] .'"';
+  // execute sql
+  $result = $db->query($sql);
+  // check result
+  if ($result == TRUE) {
+    echo $pia_lang['BackDevices_DBTools_DelDev_a'];
+  } else {
+    echo $pia_lang['BackDevices_DBTools_DelDevError_a']."\n\n$sql \n\n". $db->lastErrorMsg();
+  }
 }
 
 ?>

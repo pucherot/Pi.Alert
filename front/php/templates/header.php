@@ -374,7 +374,7 @@ if ($celsius >= -273.15) {
 <!--
         <li class="header">MAIN MENU</li>
 -->
-        <li class="header text-uppercase" style="font-size: 0; padding: 1px;">MAIN MENU</li>
+        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_A'];?></li>
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devices.php', 'deviceDetails.php') ) ){ echo 'active'; } ?>">
           <a href="devices.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Devices'];?></span></a>
@@ -384,8 +384,8 @@ if ($celsius >= -273.15) {
          <li><a href="devices.php?status=favorites"><i class="fa fa-star"></i> <span>Favorites Devices</span></a></li>
 -->
 
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('presence.php') ) ){ echo 'active'; } ?>">
-          <a href="presence.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Presence'];?></span></a>
+        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('network.php') ) ){ echo 'active'; } ?>">
+          <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network'];?></span></a>
         </li>
 
 <?php
@@ -397,46 +397,37 @@ if ($_SESSION['Scan_WebServices'] == True) {
             <a href="services.php"><i class="fa fa-globe"></i> <span> Web Services</span></a>
           </li>';
 
+    echo '<li class="header text-uppercase" style="font-size: 0; padding: 1px;">EVENTS</li>';
 
-    echo '<li class=" treeview menu-close" style="height: auto;">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>'.$pia_lang['Navigation_Events'].'</span>
-          </a>
-          <ul class="treeview-menu" style="display: block;">';
-    echo '<li class="';
-    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php') ) ){ echo 'active'; }
-    echo '"><a href="devicesEvents.php"><i class="fa fa-circle-o"></i> '.$pia_lang['Navigation_Events_Dev'].'</a></li>'; 
-    echo '<li class="';
-    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php') ) ){ echo 'active'; }
-    echo '"><a href="servicesEvents.php"><i class="fa fa-circle-o"></i> '.$pia_lang['Navigation_Events_Serv'].'</a></li>'; 
-    echo '</ul>
-        </li>';
-} else {
-   echo '<li class="';
-   
-   if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php') ) ){ echo 'active'; }
-
-   echo '">
-          <a href="devicesEvents.php"><i class="fa fa-bolt"></i> <span>'.$pia_lang['Navigation_Events'].'</span></a>
-        </li>'; 
 }
 
 
 ?>
 
+        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_B'];?></li>
 
-        <li class="header text-uppercase" style="font-size: 0; padding: 1px;">Maintain and Settings</li>
-
-
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('network.php') ) ){ echo 'active'; } ?>">
-          <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network'];?></span></a>
+        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php') ) ){ echo 'active'; } ?>">
+          <a href="devicesEvents.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Events_Dev'];?></span></a>
         </li>
+
+        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('presence.php') ) ){ echo 'active'; } ?>">
+          <a href="presence.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Presence'];?></span></a>
+        </li>
+
+<?php
+if ($_SESSION['Scan_WebServices'] == True) {
+    echo '<li class="';
+    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php') ) ){ echo 'active'; }
+    echo '">
+          <a href="servicesEvents.php"><i class="fa fa-globe"></i> <span>'.$pia_lang['Navigation_Events_Serv'].'</span></a>
+        </li>';
+}
+?>
+        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_C'];?></li>
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('maintenance.php') ) ){ echo 'active'; } ?>">
           <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Maintenance'];?></span></a>
         </li>
-
-        <li class="header text-uppercase" style="font-size: 0; padding: 1px;">Help</li>
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('help_faq.php') ) ){ echo 'active'; } ?>">
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ'];?></span></a>

@@ -51,6 +51,9 @@ $pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Einstellungen';
 $pia_lang['Navigation_Network'] = 'Netzwerk';
 $pia_lang['Navigation_HelpFAQ'] = 'Hilfe / FAQ';
+$pia_lang['Navigation_Section_A'] = 'HAUPTMENÜ';
+$pia_lang['Navigation_Section_B'] = 'EVENTS & JOURNAL';
+$pia_lang['Navigation_Section_C'] = 'EINSTELLUNG & HILFE';
 
 //////////////////////////////////////////////////////////////////
 // Device Page
@@ -229,12 +232,23 @@ $pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Standard Scan: Nmap scannt die
 $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailierter Scan: Standardscan mit aktivierter Betriebssystemerkennung, Versionserkennung, Skript-Scan und Traceroute (bis zu 30 oder mehr Sekunden)';
 
 //////////////////////////////////////////////////////////////////
-// WebServices Page
+// WebServices Details Page
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['WebServices_Title'] = 'WebServices';
 $pia_lang['WebServices_unknown_Device'] = 'Unbekanntes Gerät';
 
+$pia_lang['WebServices_tablehead_TargetIP'] = 'Ziel IP';
+$pia_lang['WebServices_tablehead_ScanTime'] = 'Aktualisierungszeit';
+$pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status Code';
+$pia_lang['WebServices_tablehead_Response_Time'] = 'Antwortzeit';
+
+//////////////////////////////////////////////////////////////////
+// WebServices Details Page - Backend
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['BackWebServices_DBTools_UpdServ'] = 'Der WebService wurde aktualisiert';
+$pia_lang['BackWebServices_DBTools_UpdServError'] = 'Der WebService wurde nicht aktualisiert';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page
@@ -361,22 +375,22 @@ $pia_lang['Maintenance_ConfEditor_Save_info'] ='Der Inhalt des Textfeldes mit ev
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['BackDevices_Arpscan_disabled'] = 'Automatischer Arp-Scan deaktiviert.';
-$pia_lang['BackDevices_Arpscan_enabled'] = 'Automatischer Arp-Scan aktiviert.';
-$pia_lang['BackDevices_setapikey'] = 'API-Key wurde gesetzt.';
+$pia_lang['BackDevices_Arpscan_enabled'] = 'Automatischer Arp-Scan aktiviert';
+$pia_lang['BackDevices_setapikey'] = 'API-Key wurde gesetzt';
 $pia_lang['BackDevices_test_notification'] = 'Testnachricht wurde gesendet';
-$pia_lang['BackDevices_darkmode_disabled'] = 'Heller Modus aktiviert.';
-$pia_lang['BackDevices_darkmode_enabled'] = 'Dunkler Modus aktiviert.';
-$pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Aktivitätsverlauf deaktiviert.';
-$pia_lang['BackDevices_onlinehistorygraph_enabled'] = 'Aktivitätsverlauf aktiviert.';
-$pia_lang['BackDevices_Restore_CopError'] = 'Die originale Datenbank konnte nicht kopiert werden.';
-$pia_lang['BackDevices_Restore_okay'] = 'Die Wiederherstellung wurde erfolgreich ausgeführt.';
-$pia_lang['BackDevices_Restore_Failed'] = 'Die Wiederherstellung ist fehlgeschlagen. Stellen Sie das Backup manuell her.';
-$pia_lang['BackDevices_Backup_CopError'] = 'Die originale Datenbank konnte nicht gesichert werden.';
-$pia_lang['BackDevices_Backup_okay'] = 'Das Backup wurde erfolgreich beendet.';
-$pia_lang['BackDevices_Backup_Failed'] = 'Das Backup wurde teilweise ausgeführt. Das Archiv ist entweder leer oder nicht vorhanden.';
-$pia_lang['BackDevices_DBTools_DelDev_a'] = 'Gerät erfolgreich gelöscht.';
-$pia_lang['BackDevices_DBTools_DelDev_b'] = 'Geräte erfolgreich gelöscht.';
-$pia_lang['BackDevices_DBTools_DelEvents'] = 'Events erfolgreich gelöscht.';
+$pia_lang['BackDevices_darkmode_disabled'] = 'Heller Modus aktiviert';
+$pia_lang['BackDevices_darkmode_enabled'] = 'Dunkler Modus aktiviert';
+$pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Aktivitätsverlauf deaktiviert';
+$pia_lang['BackDevices_onlinehistorygraph_enabled'] = 'Aktivitätsverlauf aktiviert';
+$pia_lang['BackDevices_Restore_CopError'] = 'Die originale Datenbank konnte nicht kopiert werden';
+$pia_lang['BackDevices_Restore_okay'] = 'Die Wiederherstellung wurde erfolgreich ausgeführt';
+$pia_lang['BackDevices_Restore_Failed'] = 'Die Wiederherstellung ist fehlgeschlagen. Stellen Sie das Backup manuell her';
+$pia_lang['BackDevices_Backup_CopError'] = 'Die originale Datenbank konnte nicht gesichert werden';
+$pia_lang['BackDevices_Backup_okay'] = 'Das Backup wurde erfolgreich beendet';
+$pia_lang['BackDevices_Backup_Failed'] = 'Das Backup wurde teilweise ausgeführt. Das Archiv ist entweder leer oder nicht vorhanden';
+$pia_lang['BackDevices_DBTools_DelDev_a'] = 'Gerät erfolgreich gelöscht';
+$pia_lang['BackDevices_DBTools_DelDev_b'] = 'Geräte erfolgreich gelöscht';
+$pia_lang['BackDevices_DBTools_DelEvents'] = 'Events erfolgreich gelöscht';
 $pia_lang['BackDevices_DBTools_DelEventsError'] = 'Fehler beim Löschen der Ereignisse.';
 $pia_lang['BackDevices_DBTools_DelDevError_a'] = 'Fehler beim Löschen des Gerätes.';
 $pia_lang['BackDevices_DBTools_DelDevError_b'] = 'Fehler beim Löschen der Geräte.';

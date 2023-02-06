@@ -46,9 +46,14 @@ $pia_lang['Login_Toggle_Alert_headline'] = 'Password Alert!';
 $pia_lang['Navigation_Devices'] = 'Devices';
 $pia_lang['Navigation_Presence'] = 'Presence';
 $pia_lang['Navigation_Events'] = 'Events';
+$pia_lang['Navigation_Events_Dev'] = 'Devices';
+$pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Settings';
 $pia_lang['Navigation_Network'] = 'Network';
 $pia_lang['Navigation_HelpFAQ'] = 'Help / FAQ';
+$pia_lang['Navigation_Section_A'] = 'MAIN MENU';
+$pia_lang['Navigation_Section_B'] = 'EVENTS & JOURNAL';
+$pia_lang['Navigation_Section_C'] = 'SETTINGS & HELP';
 
 //////////////////////////////////////////////////////////////////
 // Device Page
@@ -206,6 +211,25 @@ $pia_lang['DevDetail_Nmap_buttonDetail'] = 'Detailed Scan';
 $pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Fast Scan: Scan fewer ports (100) than the default scan (a few seconds)';
 $pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Default Scan: Nmap scans the top 1,000 ports for each scan protocol requested. This catches roughly 93% of the TCP ports and 49% of the UDP ports. (about 5 seconds)';
 $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailed Scan: Default scan with enabled OS detection, version detection, script scanning and traceroute (up to 30 seconds or more)';
+
+//////////////////////////////////////////////////////////////////
+// WebServices Details Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['WebServices_Title'] = 'WebServices';
+$pia_lang['WebServices_unknown_Device'] = 'Unknown Device';
+
+$pia_lang['WebServices_tablehead_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_tablehead_ScanTime'] = 'Scan Time';
+$pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status';
+$pia_lang['WebServices_tablehead_Response_Time'] = 'Response Time';
+
+//////////////////////////////////////////////////////////////////
+// WebServices Details Page - Backend
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['BackWebServices_DBTools_UpdServ'] = 'WebService successfully updated.';
+$pia_lang['BackWebServices_DBTools_UpdServError'] = 'WebService was not updated, because of an error.';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page
