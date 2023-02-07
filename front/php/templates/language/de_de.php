@@ -146,24 +146,22 @@ $pia_lang['Events_Table_info'] = 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen
 $pia_lang['Events_Table_nav_next'] = 'Nächste';
 $pia_lang['Events_Table_nav_prev'] = 'Zurück';
 
-
 //////////////////////////////////////////////////////////////////
 // WebServices Events Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['WebServices_Events_Title'] = 'WebServices - Ereignisse';
+$pia_lang['WebServices_Events_Title'] = 'Web Services - Ereignisse';
 $pia_lang['WebServices_Events_Shortcut_All'] = 'Alle Ereignisse';
 $pia_lang['WebServices_Events_Shortcut_HTTP2xx'] = 'HTTP Code 2xx';
 $pia_lang['WebServices_Events_Shortcut_HTTP3xx'] = 'HTTP Code 3xx';
 $pia_lang['WebServices_Events_Shortcut_HTTP4xx'] = 'HTTP Code 4xx';
 $pia_lang['WebServices_Events_Shortcut_HTTP5xx'] = 'HTTP Code 5xx';
 $pia_lang['WebServices_Events_Shortcut_Down'] = 'Down';
-$pia_lang['WebServices_Events_TableHead_URL'] = 'URL';
-$pia_lang['WebServices_Events_TableHead_TargetIP'] = 'TargetIP';
-$pia_lang['WebServices_Events_TableHead_ScanTime'] = 'ScanTime';
-$pia_lang['WebServices_Events_TableHead_StatusCode'] = 'StatusCode';
-$pia_lang['WebServices_Events_TableHead_ResponsTime'] = 'ResponsTime';
-
+$pia_lang['WebServices_Events_TableHead_URL'] = 'Web Service URL';
+$pia_lang['WebServices_Events_TableHead_TargetIP'] = 'Ziel IP';
+$pia_lang['WebServices_Events_TableHead_ScanTime'] = 'Aktualisierungszeit';
+$pia_lang['WebServices_Events_TableHead_StatusCode'] = 'HTTP Status';
+$pia_lang['WebServices_Events_TableHead_ResponsTime'] = 'Antwortzeit';
 
 //////////////////////////////////////////////////////////////////
 // Device Details Page
@@ -235,13 +233,23 @@ $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailierter Scan: Standardscan
 // WebServices Details Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['WebServices_Title'] = 'WebServices';
+$pia_lang['WebServices_Title'] = 'Web Services';
 $pia_lang['WebServices_unknown_Device'] = 'Unbekanntes Gerät';
-
 $pia_lang['WebServices_tablehead_TargetIP'] = 'Ziel IP';
 $pia_lang['WebServices_tablehead_ScanTime'] = 'Aktualisierungszeit';
 $pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status Code';
 $pia_lang['WebServices_tablehead_Response_Time'] = 'Antwortzeit';
+$pia_lang['WebServices_lable_URL'] = 'Service URL';
+$pia_lang['WebServices_lable_Tags'] = 'Tag';
+$pia_lang['WebServices_lable_MAC'] = 'Gerät';
+$pia_lang['WebServices_lable_MAC_Select'] = 'Auswahl';
+$pia_lang['WebServices_lable_TargetIP'] = 'Ziel IP';
+$pia_lang['WebServices_lable_StatusCode'] = 'HTTP Status';
+$pia_lang['WebServices_lable_ScanTime'] = 'Aktualisierungszeit';
+$pia_lang['WebServices_lable_Response_Time'] = 'Antwortzeit';
+$pia_lang['WebServices_lable_AlertEvents'] = 'Alle Events';
+$pia_lang['WebServices_lable_AlertDown'] = 'Down';
+
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend

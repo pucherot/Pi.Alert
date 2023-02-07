@@ -175,7 +175,7 @@ $servicedetails = get_service_details($service_details_title);
 
                       <!-- URL -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'URL';?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_lable_URL'];?></label>
                         <div class="col-sm-9">
                           <input class="form-control" id="txtURL" type="text" readonly value="<?php echo $servicedetails['mon_URL']?>">
                         </div>
@@ -183,36 +183,49 @@ $servicedetails = get_service_details($service_details_title);
       
                       <!-- Tags -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'Tag';?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_lable_Tags'];?></label>
                         <div class="col-sm-9">
                           <input class="form-control" id="txtTags" type="text" value="<?php echo $servicedetails['mon_Tags']?>">
                         </div>
                       </div>
 
-                      <!-- MAC -->
-                      <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'Gerät';?></label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="txtMAC" name="txtMAC">
 
+
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_lable_MAC'];?></label>
+                        <div class="col-sm-9">
+                          <div class="input-group">
+                            <div class="input-group-btn">
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_lable_MAC_Select'];?>
+                                <span class="fa fa-caret-down"></span></button>
+                              <ul class="dropdown-menu">
 <?php
+
 if ($servicedetails['mon_MAC'] != "") {
-    echo '<option value="'.$servicedetails['mon_MAC'].'">'.$servicedetails['mon_MAC'].'</option>';
+    echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\''.$servicedetails['mon_MAC'].'\')">'.$servicedetails['mon_MAC'].'</a></li>';
 }
 
-echo '<option value=""> -----  </option>';
+echo '<li> -----  </li>';
 
 global $db_file;
 $db = new SQLite3($db_file);
 $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices');
 $code_array = array();
 while ($row = $dev_res->fetchArray()) {
-    echo  '<option value="'.$row['dev_MAC'].'">'.$row['dev_Name'].'</option>';
+    echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\''.$row['dev_MAC'].'\')">'.$row['dev_Name'].'</a></li>';
 }
+
 ?>
-                            </select>
+                              </ul>
+                            </div>
+                            <!-- /btn-group -->
+                            <input type="text" id="txtMAC" class="form-control" data-enpassusermodified="yes">
+                          </div>
                         </div>
                       </div>
+
+
+
 
                     </div>         
                   </div>
@@ -225,7 +238,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last HTTP Status -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo 'Last HTTP Code';?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_StatusCode'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastStatus" type="text" readonly value="<?php echo $servicedetails['mon_LastStatus']?>">
                         </div>
@@ -233,7 +246,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last IP -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo 'Last IP';?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_TargetIP'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastIP" type="text" readonly value="<?php echo $servicedetails['mon_TargetIP']?>">
                         </div>
@@ -241,7 +254,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last Scan -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo 'Last Scan';?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_ScanTime'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $servicedetails['mon_LastScan']?>">
                         </div>
@@ -249,15 +262,15 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last Latency -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo 'Last Response Time';?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_Response_Time'];?></label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $servicedetails['mon_LastLatency']?>">
+                          <input class="form-control" id="txtLastLatency" type="text" readonly value="<?php echo $servicedetails['mon_LastLatency']?>">
                         </div>
                       </div>
 
                       <!-- Alert events -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo 'All Events';?></label>
+                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_lable_AlertEvents'];?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox blue" id="chkAlertEvents" <?php if($servicedetails['mon_AlertEvents'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
@@ -265,7 +278,7 @@ while ($row = $dev_res->fetchArray()) {
       
                       <!-- Alert Down -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo 'Down';?></label>
+                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_lable_AlertDown'];?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox red" id="chkAlertDown" <?php if($servicedetails['mon_AlertDown'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
@@ -546,4 +559,7 @@ function deleteService () {
   $('#panDetails :input').attr('disabled', true);
 }
 
+function setTextValue (textElement, textValue) {
+  $('#'+textElement).val (textValue);
+}
 </script>

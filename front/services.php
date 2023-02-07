@@ -20,85 +20,27 @@ if ($_SESSION["login"] != 1)
   }
 
 require 'php/templates/header.php';
-?>
-<!-- Page ------------------------------------------------------------------ -->
-
-<style type="text/css">
-
-.progress-segment {
-  display: flex;
-  margin-bottom: 5px;
-  margin-top: 10px;
-}
-
-.item {
-  width: 100%;
-  background-color: lightgray;
-  margin-right: 2px;
-  height: 12px;
-
-  &:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  &:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-  }
-}
-
-.orange-common {
-    background-color: #f04500 !important;
-  }
-
-.item:hover:after {
-    position: absolute;
-    display: flex;
-    content: attr(title);
-    left: 0px;
-    top: 0px;
-    padding: 5px;
-    background-color: #913225;
-    font-size: 16px;
-    color: white;
-    width: 100%;
-    height: 38px;
-}
-
-.item:hover {
-    background-color: #aaa !important;
-}
-
-</style>
-
-<div class="content-wrapper">
-
-<!-- Content header--------------------------------------------------------- -->
-    <section class="content-header">
-    <?php require 'php/templates/notification.php'; ?>
-      <h1 id="pageTitle">
-         <?php echo $pia_lang['WebServices_Title'];?>
-      </h1>
-    </section>
-
-    <!-- Main content ---------------------------------------------------------- -->
-    <section class="content">
-<?php
+require 'php/server/db.php';
 
 // ===============================================================================
 // Start prepare data
 // ===============================================================================
 
 $db_file = '../db/pialert.db';
-// $db = new SQLite3($db_file);
-// $mon_res = $db->query('SELECT * FROM Services');
-// $dev_res = $db->query('SELECT * FROM Devices');
-// $moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
 
 // ===============================================================================
 // End prepare data
 // ===============================================================================
+
+function getDeviceMacs () {
+    global $db_file;
+    $db = new SQLite3($db_file);
+    $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices');
+    $code_array = array();
+    while ($row = $dev_res->fetchArray()) {
+        echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'serviceMAC\',\''.$row['dev_MAC'].'\')">'.$row['dev_Name'].'</a></li>';
+    }
+}
 
 // -----------------------------------------------------------------------------------------------
 
@@ -381,6 +323,141 @@ function get_service_from_unique_device($func_unique_device) {
     $db->close();
 }
 
+
+?>
+<!-- Page ------------------------------------------------------------------ -->
+
+<link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+
+<style type="text/css">
+
+.progress-segment {
+  display: flex;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.item {
+  width: 100%;
+  background-color: lightgray;
+  margin-right: 2px;
+  height: 12px;
+
+  &:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+}
+
+.orange-common {
+    background-color: #f04500 !important;
+  }
+
+.item:hover:after {
+    position: absolute;
+    display: flex;
+    content: attr(title);
+    left: 0px;
+    top: 0px;
+    padding: 5px;
+    background-color: #913225;
+    font-size: 16px;
+    color: white;
+    width: 100%;
+    height: 38px;
+}
+
+.item:hover {
+    background-color: #aaa !important;
+}
+
+</style>
+
+<div class="content-wrapper">
+
+<!-- Content header--------------------------------------------------------- -->
+    <section class="content-header">
+    <?php require 'php/templates/notification.php'; ?>
+      <h1 id="pageTitle">
+         <?php echo $pia_lang['WebServices_Title'];?> 
+      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-add-monitoringURL" style="display: inline-block; margin-top: -5px; margin-left: 15px;"><i class="bi bi-plus-lg"></i></button>
+      </h1>
+
+<!-- Modals New URL ----------------------------------------------------------------- -->
+
+        <form role="form">
+            <div class="modal fade" id="modal-add-monitoringURL">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">New Web Service</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div style="height: 230px;">
+                            <div class="form-group col-xs-12">
+                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_URL'];?></label>
+                              <div class="col-xs-9">
+                                <input type="text" class="form-control" id="serviceURL" placeholder="Service URL">
+                              </div>
+                            </div>
+                            <div class="form-group col-xs-12">
+                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_Tags'];?></label>
+                              <div class="col-xs-9">
+                                <input type="text" class="form-control" id="serviceTag" placeholder="Tag">
+                              </div>
+                            </div>
+                              <div class="form-group col-xs-12">
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_MAC'];?></label>
+                                <div class="col-xs-9">
+                                  <div class="input-group">
+                                    <div class="input-group-btn">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_lable_MAC_Select'];?>
+                                        <span class="fa fa-caret-down"></span></button>
+                                      <ul class="dropdown-menu">
+                                        <?php getDeviceMacs (); ?>
+                                      </ul>
+                                    </div>
+                                    <!-- /btn-group -->
+                                    <input type="text" id="serviceMAC" class="form-control" data-enpassusermodified="yes">
+                                  </div>
+                                </div>
+                              </div>
+                            <div class="form-group col-xs-12">
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_AlertEvents'];?></label>
+                                <div class="col-xs-9" style="margin-top: 0px;">
+                                  <input class="checkbox blue" id="insAlertEvents" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_AlertDown'];?></label>
+                                <div class="col-xs-9" style="margin-top: px;">
+                                  <input class="checkbox red" id="insAlertDown" type="checkbox">
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
+                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewService()" ><?php echo $pia_lang['Gen_Save'];?></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </section>
+
+    <!-- Main content ---------------------------------------------------------- -->
+    <section class="content">
+<?php
+
 // ===============================================================================
 // Start rendering page data
 // ===============================================================================
@@ -447,8 +524,65 @@ if ($count_standalone > 0) {
   require 'php/templates/footer.php';
 ?>
 
+<script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+
 <script>
 
+initializeiCheck();
+
+function initializeiCheck () {
+   // Blue
+   $('input[type="checkbox"].blue').iCheck({
+     checkboxClass: 'icheckbox_flat-blue',
+     radioClass:    'iradio_flat-blue',
+     increaseArea:  '20%'
+   });
+
+  // Orange
+  $('input[type="checkbox"].orange').iCheck({
+    checkboxClass: 'icheckbox_flat-orange',
+    radioClass:    'iradio_flat-orange',
+    increaseArea:  '20%'
+  });
+
+  // Red
+  $('input[type="checkbox"].red').iCheck({
+    checkboxClass: 'icheckbox_flat-red',
+    radioClass:    'iradio_flat-red',
+    increaseArea:  '20%'
+  });
+
+}
+
+// -----------------------------------------------------------------------------
+function insertNewService(refreshCallback='') {
+  // Check URL
+  if ($('#serviceURL').val() == '') {
+    return;
+  }
+
+  // update data to server
+  $.get('php/server/services.php?action=insertNewService'
+    + '&url='             + $('#serviceURL').val()
+    + '&tags='            + $('#serviceTag').val()
+    + '&mac='             + $('#serviceMAC').val()
+    + '&alertdown='       + ($('#insAlertEvents')[0].checked * 1)
+    + '&alertevents='     + ($('#insAlertDown')[0].checked * 1)
+    , function(msg) {
+
+    // deactivate button 
+    // deactivateSaveRestoreData ();
+    showMessage (msg);
+    // Callback fuction
+    if (typeof refreshCallback == 'function') {
+      refreshCallback();
+    }
+  });
+}
+
+function setTextValue (textElement, textValue) {
+  $('#'+textElement).val (textValue);
+}
+
 </script>
-
-

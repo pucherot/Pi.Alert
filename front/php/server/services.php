@@ -40,6 +40,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'getEventsTotalsforService':   getEventsTotalsforService();        break;
       case 'setServiceData':              setServiceData();                   break;
       case 'deleteService':               deleteService();                    break;
+      case 'insertNewService':            insertNewService();                 break;
     }
   }
 
@@ -235,5 +236,26 @@ function deleteService() {
     echo $pia_lang['BackDevices_DBTools_DelDevError_a']."\n\n$sql \n\n". $db->lastErrorMsg();
   }
 }
+
+function insertNewService() {
+  global $db;
+  global $pia_lang;
+
+  echo 'Enter Function';
+
+  // sql
+  //$sql = 'DELETE FROM Services WHERE dev_MAC="' . $_REQUEST['mac'] .'"';
+  // execute sql
+  //$result = $db->query($sql);
+  // check result
+  // if ($result == TRUE) {
+  //   echo $pia_lang['BackDevices_DBTools_DelDev_a'];
+  //   echo("<meta http-equiv='refresh' content='2; URL=./services.php'>");
+  // } else {
+    //echo $pia_lang['BackDevices_DBTools_DelDevError_a']."\n\n$sql \n\n". $db->lastErrorMsg();
+  // }
+
+}
+
 
 ?>

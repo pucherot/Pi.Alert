@@ -147,6 +147,23 @@ $pia_lang['Events_Table_nav_next'] = 'Next';
 $pia_lang['Events_Table_nav_prev'] = 'Previous';
 
 //////////////////////////////////////////////////////////////////
+// WebServices Events Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['WebServices_Events_Title'] = 'Web Services - Events';
+$pia_lang['WebServices_Events_Shortcut_All'] = 'All Events';
+$pia_lang['WebServices_Events_Shortcut_HTTP2xx'] = 'HTTP Code 2xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP3xx'] = 'HTTP Code 3xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP4xx'] = 'HTTP Code 4xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP5xx'] = 'HTTP Code 5xx';
+$pia_lang['WebServices_Events_Shortcut_Down'] = 'Down';
+$pia_lang['WebServices_Events_TableHead_URL'] = 'URL';
+$pia_lang['WebServices_Events_TableHead_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_Events_TableHead_ScanTime'] = 'Scan Time';
+$pia_lang['WebServices_Events_TableHead_StatusCode'] = 'Status Code';
+$pia_lang['WebServices_Events_TableHead_ResponsTime'] = 'Response Time';
+
+//////////////////////////////////////////////////////////////////
 // Device Details Page
 //////////////////////////////////////////////////////////////////
 
@@ -216,13 +233,22 @@ $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailed Scan: Default scan wit
 // WebServices Details Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['WebServices_Title'] = 'WebServices';
+$pia_lang['WebServices_Title'] = 'Web Services';
 $pia_lang['WebServices_unknown_Device'] = 'Unknown Device';
-
 $pia_lang['WebServices_tablehead_TargetIP'] = 'Target IP';
 $pia_lang['WebServices_tablehead_ScanTime'] = 'Scan Time';
 $pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status';
 $pia_lang['WebServices_tablehead_Response_Time'] = 'Response Time';
+$pia_lang['WebServices_lable_URL'] = 'URL';
+$pia_lang['WebServices_lable_Tags'] = 'Tag';
+$pia_lang['WebServices_lable_MAC'] = 'Device';
+$pia_lang['WebServices_lable_MAC_Select'] = 'Select';
+$pia_lang['WebServices_lable_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_lable_StatusCode'] = 'HTTP Status';
+$pia_lang['WebServices_lable_ScanTime'] = 'Scan Time';
+$pia_lang['WebServices_lable_Response_Time'] = 'Response Time';
+$pia_lang['WebServices_lable_AlertEvents'] = 'All Events';
+$pia_lang['WebServices_lable_AlertDown'] = 'Down Events';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend
