@@ -209,7 +209,7 @@ echo '<li> -----  </li>';
 
 global $db_file;
 $db = new SQLite3($db_file);
-$dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices');
+$dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
 $code_array = array();
 while ($row = $dev_res->fetchArray()) {
     echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\''.$row['dev_MAC'].'\')">'.$row['dev_Name'].'</a></li>';
@@ -219,7 +219,7 @@ while ($row = $dev_res->fetchArray()) {
                               </ul>
                             </div>
                             <!-- /btn-group -->
-                            <input type="text" id="txtMAC" class="form-control" data-enpassusermodified="yes">
+                            <input type="text" id="txtMAC" class="form-control" data-enpassusermodified="yes" value="<?php echo $servicedetails['mon_MAC'];?>">
                           </div>
                         </div>
                       </div>
@@ -292,7 +292,7 @@ while ($row = $dev_res->fetchArray()) {
                     <div class="pull-right">
                         <!-- <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;" -->
                         <button type="button" class="btn btn-danger"  style="margin-left:6px; margin-top:6px;"
-                          id="btnDelete"   onclick="askDeleteDevice()"> <?php echo $pia_lang['Gen_Delete'];?> </button>
+                          id="btnDelete"   onclick="askDeleteService()"> <?php echo $pia_lang['Gen_Delete'];?> </button>
                         <!-- <button type="button" class="btn btn-default pa-btn" style="margin-left:6px;"  -->
                         <button type="button" class="btn btn-default" style="margin-left:6px; margin-top:6px;" 
                           id="btnRestore"  onclick="location.reload()"> <?php echo $pia_lang['Gen_Cancel'];?> </button>
@@ -533,12 +533,12 @@ function setServiceData(refreshCallback='') {
 // -----------------------------------------------------------------------------
 function askDeleteService () {
   // Check MAC
-  if (mac == '') {
+  if (url == '') {
     return;
   }
 
   // Ask delete device
-  showModalWarning ('Delete Device', 'Are you sure you want to delete this device?<br>(maybe you prefer to archive it)',
+  showModalWarning ('Delete Service', 'Are you sure you want to delete this device?<br>(maybe you prefer to archive it)',
     '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Delete'];?>', 'deleteService');
 }
 
@@ -546,12 +546,12 @@ function askDeleteService () {
 // -----------------------------------------------------------------------------
 function deleteService () {
   // Check MAC
-  if (mac == '') {
+  if (url == '') {
     return;
   }
 
   // Delete device
-  $.get('php/server/devices.php?action=deleteService&mac='+ mac, function(msg) {
+  $.get('php/server/services.php?action=deleteService&url='+ url, function(msg) {
     showMessage (msg);
   });
 
@@ -559,6 +559,7 @@ function deleteService () {
   $('#panDetails :input').attr('disabled', true);
 }
 
+// -----------------------------------------------------------------------------
 function setTextValue (textElement, textValue) {
   $('#'+textElement).val (textValue);
 }

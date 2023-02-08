@@ -254,8 +254,12 @@ $pia_lang['WebServices_lable_AlertDown'] = 'Down Events';
 // WebServices Details Page - Backend
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['BackWebServices_DBTools_UpdServ'] = 'WebService successfully updated.';
-$pia_lang['BackWebServices_DBTools_UpdServError'] = 'WebService was not updated, because of an error.';
+$pia_lang['BackWebServices_UpdServ'] = 'The web service was updated';
+$pia_lang['BackWebServices_UpdServError'] = 'The web service was not updated';
+$pia_lang['BackWebServices_InsServ'] = 'The web service was saved';
+$pia_lang['BackWebServices_InsServError'] = 'The web service was not saved';
+$pia_lang['BackWebServices_DelServ'] = 'The web service was deleted from the database';
+$pia_lang['BackWebServices_DelServError'] = 'The web service could not be deleted, or could not be deleted completely';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page
@@ -421,7 +425,6 @@ $pia_lang['BackDevices_ConfEditor_CopError'] = 'It is not possible to save the c
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'The configuration backup is completed.';
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'The last version of the configuration could not be restored.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'The last version of the configuration has been restored.';
-
 $pia_lang['BackDevices_Report_Delete'] = ' Notification(s) has been deleted.';
 
 //////////////////////////////////////////////////////////////////

@@ -250,13 +250,16 @@ $pia_lang['WebServices_lable_Response_Time'] = 'Antwortzeit';
 $pia_lang['WebServices_lable_AlertEvents'] = 'Alle Events';
 $pia_lang['WebServices_lable_AlertDown'] = 'Down';
 
-
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['BackWebServices_DBTools_UpdServ'] = 'Der WebService wurde aktualisiert';
-$pia_lang['BackWebServices_DBTools_UpdServError'] = 'Der WebService wurde nicht aktualisiert';
+$pia_lang['BackWebServices_UpdServ'] = 'Der Web Service wurde aktualisiert';
+$pia_lang['BackWebServices_UpdServError'] = 'Der Web Service wurde nicht aktualisiert';
+$pia_lang['BackWebServices_InsServ'] = 'Der Web Service wurde gespeichert';
+$pia_lang['BackWebServices_InsServError'] = 'Der Web Service wurde nicht gespeichert';
+$pia_lang['BackWebServices_DelServ'] = 'Der Web Service wurde aus der Datenbank gelöscht';
+$pia_lang['BackWebServices_DelServError'] = 'Der Web Service konnte nicht, oder nicht vollständig gelöscht werden';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page
@@ -422,7 +425,6 @@ $pia_lang['BackDevices_ConfEditor_CopError'] = 'Die Sicherung der Konfiguration 
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'Die Sicherung der Konfiguration ist abgeschlossen.';
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'Die letzte Version der Konfiguration konnte nicht wieder hergestellt werden.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'Die letzte Version der Konfiguration wurde wieder hergestellt.';
-
 $pia_lang['BackDevices_Report_Delete'] = ' Benachrichtigung(en) wurde(n) gelöscht.';
 
 //////////////////////////////////////////////////////////////////

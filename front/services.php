@@ -35,7 +35,7 @@ $db_file = '../db/pialert.db';
 function getDeviceMacs () {
     global $db_file;
     $db = new SQLite3($db_file);
-    $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices');
+    $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
     $code_array = array();
     while ($row = $dev_res->fetchArray()) {
         echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'serviceMAC\',\''.$row['dev_MAC'].'\')">'.$row['dev_Name'].'</a></li>';

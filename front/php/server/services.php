@@ -210,9 +210,9 @@ function setServiceData() {
   $result = $db->query($sql);
   // check result
   if ($result == TRUE) {
-    echo $pia_lang['BackWebServices_DBTools_UpdServ'];
+    echo $pia_lang['BackWebServices_UpdServ'];
   } else {
-    echo $pia_lang['BackWebServices_DBTools_UpdServError']."\n\n$sql \n\n". $db->lastErrorMsg();
+    echo $pia_lang['BackWebServices_UpdServError']."\n\n$sql \n\n". $db->lastErrorMsg();
     //echo $_REQUEST['tags'];
   }
 
@@ -226,34 +226,62 @@ function deleteService() {
   global $pia_lang;
 
   // sql
-  $sql = 'DELETE FROM Services WHERE dev_MAC="' . $_REQUEST['mac'] .'"';
+  $sql = 'DELETE FROM Services WHERE mon_URL="' . $_REQUEST['url'] .'"';
+  // execute sql
+  $result = $db->query($sql);
+  $sql = 'DELETE FROM Services_Events WHERE moneve_URL="' . $_REQUEST['url'] .'"';
   // execute sql
   $result = $db->query($sql);
   // check result
   if ($result == TRUE) {
-    echo $pia_lang['BackDevices_DBTools_DelDev_a'];
+    echo $pia_lang['BackWebServices_DelServ'];
+    echo("<meta http-equiv='refresh' content='2; URL=./services.php'>");
   } else {
-    echo $pia_lang['BackDevices_DBTools_DelDevError_a']."\n\n$sql \n\n". $db->lastErrorMsg();
+    echo $pia_lang['BackWebServices_DelServError']."\n\n$sql \n\n". $db->lastErrorMsg();
   }
 }
 
+//------------------------------------------------------------------------------
+//  Delete Service
+//------------------------------------------------------------------------------
 function insertNewService() {
   global $db;
   global $pia_lang;
 
-  echo 'Enter Function';
+  //echo 'Enter Function';
+
+  $url = $_REQUEST['url'];
+
+  if(!$url || !is_string($url) || ! preg_match('/^http(s)?:\/\/[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $url)){
+    return false;
+  }
+
+  $check_timestamp = date("Y-m-d H:i:s");
+
+  $checkURL = curl_init($url);
+  curl_setopt($checkURL, CURLOPT_HEADER,         1);
+  curl_setopt($checkURL, CURLOPT_NOBODY,         1);
+  curl_setopt($checkURL, CURLOPT_FOLLOWLOCATION, 1);
+  curl_setopt($checkURL, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($checkURL, CURLOPT_TIMEOUT,       10);
+  $output = curl_exec($checkURL);
+  $httpstats = curl_getinfo($checkURL);
+  $http_code = curl_getinfo($checkURL, CURLINFO_HTTP_CODE);
+  curl_close($checkURL);
 
   // sql
-  //$sql = 'DELETE FROM Services WHERE dev_MAC="' . $_REQUEST['mac'] .'"';
+  $sql = 'INSERT INTO Services ("mon_URL", "mon_MAC", "mon_LastStatus", "mon_LastLatency", "mon_LastScan", "mon_Tags", "mon_AlertEvents", "mon_AlertDown", "mon_TargetIP") 
+                         VALUES("'.$url.'", "'.$_REQUEST['mac'].'", "'.$http_code.'", "'.$httpstats['total_time'].'", "'.$check_timestamp.'", "'.$_REQUEST['tags'].'", "'.$_REQUEST['alertevents'].'", "'.$_REQUEST['alertdown'].'", "'.$httpstats['primary_ip'].'")'; 
+  
   // execute sql
-  //$result = $db->query($sql);
+  $result = $db->query($sql);
   // check result
-  // if ($result == TRUE) {
-  //   echo $pia_lang['BackDevices_DBTools_DelDev_a'];
-  //   echo("<meta http-equiv='refresh' content='2; URL=./services.php'>");
-  // } else {
-    //echo $pia_lang['BackDevices_DBTools_DelDevError_a']."\n\n$sql \n\n". $db->lastErrorMsg();
-  // }
+  if ($result == TRUE) {
+    echo $pia_lang['BackWebServices_InsServ'];
+    echo("<meta http-equiv='refresh' content='2; URL=./services.php'>");
+  } else {
+    echo $pia_lang['BackWebServices_InsServError']."\n\n$sql \n\n". $db->lastErrorMsg();
+  }
 
 }
 
