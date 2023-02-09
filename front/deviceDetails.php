@@ -455,10 +455,25 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                         <button type="button" disabled class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
                           id="btnSave"     onclick="setDeviceData()" >     <?php echo $pia_lang['DevDetail_button_Save'];?> </button>
                     </div>
+                    <div style="width: 100%; position: absolute; top: 52px; right: 5px;">
+
+                      <div class="btn-group pull-right" style="position: relative; right: 0px;">
+                        <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px;"
+                          id="btnPrevious_down" onclick="previousRecord()"> <i class="fa fa-chevron-left"></i> </button>
+
+                        <div class="btn pa-btn-records"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
+                          id="txtRecord_down"     > 0 / 0 </div>
+
+                        <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
+                          id="btnNext_down"     onclick="nextRecord()"> <i class="fa fa-chevron-right"></i> </button>
+                      </div>
+
+                    </div>
                   </div>
 
                 </div>
-              </div>                                                                         
+              </div>
+
 
 <!-- tab page 2 ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panSessions">
@@ -608,7 +623,7 @@ if ($_REQUEST['mac'] == 'Internet') {
         <!-- /.col -->
       </div>
       <!-- /.row -->
-
+      <div style="width: 100%; height:50px;"></div>
     </section>
     <!-- /.content -->
   </div>
@@ -1116,8 +1131,12 @@ function getDeviceData (readAllData=false) {
   if (readAllData) {
     $('#btnPrevious').attr        ('disabled','');
     $('#btnPrevious').addClass    ('text-gray50');
+    $('#btnPrevious_down').attr        ('disabled','');
+    $('#btnPrevious_down').addClass    ('text-gray50');
     $('#btnNext').attr            ('disabled','');
     $('#btnNext').addClass        ('text-gray50');
+    $('#btnNext_down').attr            ('disabled','');
+    $('#btnNext_down').addClass        ('text-gray50');
     $("body").css                 ("cursor", "progress");
   }
 
@@ -1269,23 +1288,32 @@ function getDeviceData (readAllData=false) {
 
     // Record number
     $('#txtRecord').html (pos+1 +' / '+ devicesList.length);
+    $('#txtRecord_down').html (pos+1 +' / '+ devicesList.length);
 
     // Deactivate previous button
     if (pos <= 0) {
       $('#btnPrevious').attr        ('disabled','');
       $('#btnPrevious').addClass    ('text-gray50');
+      $('#btnPrevious_down').attr        ('disabled','');
+      $('#btnPrevious_down').addClass    ('text-gray50');
     } else {
       $('#btnPrevious').removeAttr  ('disabled');
       $('#btnPrevious').removeClass ('text-gray50');
+      $('#btnPrevious_down').removeAttr  ('disabled');
+      $('#btnPrevious_down').removeClass ('text-gray50');
     }
   
     // Deactivate next button
     if (pos >= (devicesList.length-1)) {
       $('#btnNext').attr        ('disabled','');
       $('#btnNext').addClass    ('text-gray50');
+      $('#btnNext_down').attr        ('disabled','');
+      $('#btnNext_down').addClass    ('text-gray50');
     } else {
       $('#btnNext').removeAttr  ('disabled');
       $('#btnNext').removeClass ('text-gray50');
+      $('#btnNext_down').removeAttr  ('disabled');
+      $('#btnNext_down').removeClass ('text-gray50');
     }
     
     // Timer for refresh data
