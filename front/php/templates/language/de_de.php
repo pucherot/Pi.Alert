@@ -211,6 +211,7 @@ $pia_lang['DevDetail_EveandAl_RandomMAC'] = 'Zufällige MAC';
 $pia_lang['DevDetail_EveandAl_ScanCycle_a'] = 'Gerät scannen (1 min)';
 $pia_lang['DevDetail_EveandAl_ScanCycle_z'] = 'Gerät nicht scannen (0 min)';
 $pia_lang['DevDetail_button_Delete'] = 'Gerät löschen';
+$pia_lang['DevDetail_button_Delete_Warning'] = 'Sind Sie sicher, dass Sie dieses Gerät löschen wollen?';
 $pia_lang['DevDetail_button_Reset'] = 'Abbruch';
 $pia_lang['DevDetail_button_Save'] = 'Speichern';
 $pia_lang['DevDetail_button_DeleteEvents'] = 'Events löschen';
@@ -249,6 +250,8 @@ $pia_lang['WebServices_lable_ScanTime'] = 'Aktualisierungszeit';
 $pia_lang['WebServices_lable_Response_Time'] = 'Antwortzeit';
 $pia_lang['WebServices_lable_AlertEvents'] = 'Alle Events';
 $pia_lang['WebServices_lable_AlertDown'] = 'Down';
+$pia_lang['WebServices_button_Delete_label'] = 'Service löschen';
+$pia_lang['WebServices_button_Delete_Warning'] = 'Sind Sie sicher, dass Sie diesen Web Service löschen wollen?';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend

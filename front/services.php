@@ -185,7 +185,7 @@ function list_standalone_services() {
             if (substr($row['mon_LastStatus'],0,1) == "3") {$code_icon_color = "bg-yellow";}
             if (substr($row['mon_LastStatus'],0,1) == "4") {$code_icon_color = "bg-yellow";}
             if (substr($row['mon_LastStatus'],0,1) == "5") {$code_icon_color = "orange-common";}
-            if ($row['mon_LastLanency'] == "99999999") {$code_icon_color = "bg-red";}
+            if ($row['mon_LastLatency'] == "99999999") {$code_icon_color = "bg-red";}
             $url_array = explode('://', $row['mon_URL']);
             echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
                     <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;">
@@ -208,11 +208,10 @@ function list_standalone_services() {
                     for($x = 0; $x < 18; $x++) {
                         unset($codecolor);
                         $for_httpcode = $func_httpcodes[$x];
-                        if ($for_httpcode >= 200 && $for_httpcode < 300) {$codecolor = "bg-green";}
-                        if ($for_httpcode >= 300 && $for_httpcode < 400) {$codecolor = "bg-yellow";}
+                        if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
                         if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                        if ($for_httpcode >= 500 && $for_httpcode < 500) {$codecolor = "orange-common";}
-                        if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-red";}
+                        if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
+                        if ($for_httpcode == "0") {$codecolor = "bg-red";}
                         echo '<div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
 
                     }
@@ -275,7 +274,7 @@ function get_service_from_unique_device($func_unique_device) {
             if (substr($row['mon_LastStatus'],0,1) == "3") {$code_icon_color = "bg-yellow";}
             if (substr($row['mon_LastStatus'],0,1) == "4") {$code_icon_color = "bg-yellow";}
             if (substr($row['mon_LastStatus'],0,1) == "5") {$code_icon_color = "orange-common";}
-            if ($row['mon_LastLanency'] == "99999999") {$code_icon_color = "bg-red";}
+            if ($row['mon_LastLatency'] == "99999999") {$code_icon_color = "bg-red";}
             $url_array = explode('://', $row['mon_URL']);
             echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
                     <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;">
@@ -298,11 +297,10 @@ function get_service_from_unique_device($func_unique_device) {
                     for($x = 0; $x < 18; $x++) {
                         unset($codecolor);
                         $for_httpcode = $func_httpcodes[$x];
-                        if ($for_httpcode >= 200 && $for_httpcode < 300) {$codecolor = "bg-green";}
-                        if ($for_httpcode >= 300 && $for_httpcode < 400) {$codecolor = "bg-yellow";}
+                        if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
                         if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                        if ($for_httpcode >= 500 && $for_httpcode < 500) {$codecolor = "orange-common";}
-                        if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-red";}
+                        if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
+                        if ($for_httpcode == "0") {$codecolor = "bg-red";}
                         echo '<div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
 
                     }

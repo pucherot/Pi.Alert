@@ -211,6 +211,7 @@ $pia_lang['DevDetail_EveandAl_RandomMAC'] = 'Random MAC';
 $pia_lang['DevDetail_EveandAl_ScanCycle_a'] = 'Scan Device (1 min)';
 $pia_lang['DevDetail_EveandAl_ScanCycle_z'] = 'Don&#39;t Scan Device (0 min)';
 $pia_lang['DevDetail_button_Delete'] = 'Delete Device';
+$pia_lang['DevDetail_button_Delete_Warning'] = 'Are you sure you want to delete this device?<br>(maybe you prefer to archive it)';
 $pia_lang['DevDetail_button_DeleteEvents'] = 'Delete Events';
 $pia_lang['DevDetail_button_DeleteEvents_Warning'] = 'Are you sure you want to delete all Events of this device?<br><br>(this will clear the <b>Events history</b> and the <b>Sessions</b> and might help with constant (persistent) notifications)';
 $pia_lang['DevDetail_button_Reset'] = 'Reset Changes';
@@ -249,6 +250,8 @@ $pia_lang['WebServices_lable_ScanTime'] = 'Scan Time';
 $pia_lang['WebServices_lable_Response_Time'] = 'Response Time';
 $pia_lang['WebServices_lable_AlertEvents'] = 'All Events';
 $pia_lang['WebServices_lable_AlertDown'] = 'Down Events';
+$pia_lang['WebServices_button_Delete_label'] = 'Delete Service';
+$pia_lang['WebServices_button_Delete_Warning'] = 'Are you sure you want to delete this web service?';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend
@@ -451,6 +454,8 @@ $pia_lang['Network_ManageEdit_Type'] = 'New Device Type';
 $pia_lang['Network_ManageEdit_Type_text'] = '-- Select Type --';
 $pia_lang['Network_ManageEdit_Port'] = ' New Port Count';
 $pia_lang['Network_ManageEdit_Port_text'] = 'leave blank for wifi and powerline';
+$pia_lang['Network_ManageEdit_Downlink'] = 'manual Port-Configuration (Target-MAC,locale Port)';
+$pia_lang['Network_ManageEdit_Downlink_text'] = '0a:1b:3c:4d:5e:6f,16;Target-MAC 2,Port 2;';
 $pia_lang['Network_ManageEdit_Submit'] = 'Save Changes';
 $pia_lang['Network_ManageDel_Name'] = 'Device to delete';
 $pia_lang['Network_ManageDel_Name_text'] = '-- Select Device --';
@@ -588,4 +593,5 @@ $pia_lang['Reports_Title'] = 'Notifications';
 $pia_lang['Reports_delete_all'] = 'Delete all notifications';
 $pia_lang['Reports_delete_all_noti'] = 'Delete all notifications';
 $pia_lang['Reports_delete_all_noti_text'] = 'All notifications are deleted. The counter is being reset with this.';
+
 ?>

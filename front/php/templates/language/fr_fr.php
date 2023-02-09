@@ -40,15 +40,20 @@ $pia_lang['Login_Toggle_Info_headline'] = 'Informations sur le mot de passe';
 $pia_lang['Login_Toggle_Alert_headline'] = 'Avertissement sur le mot de passe !';
 
 //////////////////////////////////////////////////////////////////
-// Sidebar - ready
+// Sidebar
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Dispositifs';
 $pia_lang['Navigation_Presence'] = 'Présence';
 $pia_lang['Navigation_Events'] = 'Événements';
+$pia_lang['Navigation_Events_Dev'] = 'Devices';
+$pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Paramètres';
 $pia_lang['Navigation_Network'] = 'Réseau';
 $pia_lang['Navigation_HelpFAQ'] = 'Aide / FAQ';
+$pia_lang['Navigation_Section_A'] = 'MAIN MENU';
+$pia_lang['Navigation_Section_B'] = 'EVENTS & JOURNAL';
+$pia_lang['Navigation_Section_C'] = 'SETTINGS & HELP';
 
 //////////////////////////////////////////////////////////////////
 // Device Page - ready
@@ -142,6 +147,23 @@ $pia_lang['Events_Table_nav_next'] = 'Prochain';
 $pia_lang['Events_Table_nav_prev'] = 'Retour';
 
 //////////////////////////////////////////////////////////////////
+// WebServices Events Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['WebServices_Events_Title'] = 'Web Services - Events';
+$pia_lang['WebServices_Events_Shortcut_All'] = 'All Events';
+$pia_lang['WebServices_Events_Shortcut_HTTP2xx'] = 'HTTP Code 2xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP3xx'] = 'HTTP Code 3xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP4xx'] = 'HTTP Code 4xx';
+$pia_lang['WebServices_Events_Shortcut_HTTP5xx'] = 'HTTP Code 5xx';
+$pia_lang['WebServices_Events_Shortcut_Down'] = 'Down';
+$pia_lang['WebServices_Events_TableHead_URL'] = 'URL';
+$pia_lang['WebServices_Events_TableHead_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_Events_TableHead_ScanTime'] = 'Scan Time';
+$pia_lang['WebServices_Events_TableHead_StatusCode'] = 'Status Code';
+$pia_lang['WebServices_Events_TableHead_ResponsTime'] = 'Response Time';
+
+//////////////////////////////////////////////////////////////////
 // Device Details Page - ready
 //////////////////////////////////////////////////////////////////
 
@@ -189,6 +211,7 @@ $pia_lang['DevDetail_EveandAl_RandomMAC'] = 'MAC aléatoire';
 $pia_lang['DevDetail_EveandAl_ScanCycle_a'] = 'Dispositif d&apos;analyse (1 min)';
 $pia_lang['DevDetail_EveandAl_ScanCycle_z'] = 'Ne scannez pas le dispositif (0 min)';
 $pia_lang['DevDetail_button_Delete'] = 'Supprimer le dispositif';
+$pia_lang['DevDetail_button_Delete_Warning'] = 'Are you sure you want to delete this device?<br>(maybe you prefer to archive it)';
 $pia_lang['DevDetail_button_DeleteEvents'] = 'Supprimer les événements';
 $pia_lang['DevDetail_button_DeleteEvents_Warning'] = 'Êtes-vous sûr de vouloir supprimer tous les événements de cet appareil <br><br>(cela effacera l&apos;historique des événements et des sessions et pourrait aider à la mise en place de notifications constantes (persistantes))';
 $pia_lang['DevDetail_button_Reset'] = 'Rejeter les modifications';
@@ -206,6 +229,40 @@ $pia_lang['DevDetail_Nmap_buttonDetail'] = 'Scan détaillé';
 $pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Scan rapide: Scanner moins de ports (100) que le scan par défaut (quelques secondes)';
 $pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Scan par défaut: Nmap scanne les 1000 premiers ports pour chaque protocole de scan demandé. Cela permet de capturer environ 93% des ports TCP et 49% des ports UDP. (environ 5 secondes)';
 $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Scan rapide: Analyse par défaut avec détection du système d&apos;exploitation, détection de la version, analyse des scripts et traceroute activés (jusqu&apos;à 30 secondes ou plus)';
+
+//////////////////////////////////////////////////////////////////
+// WebServices Details Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['WebServices_Title'] = 'Web Services';
+$pia_lang['WebServices_unknown_Device'] = 'Unknown Device';
+$pia_lang['WebServices_tablehead_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_tablehead_ScanTime'] = 'Scan Time';
+$pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status';
+$pia_lang['WebServices_tablehead_Response_Time'] = 'Response Time';
+$pia_lang['WebServices_lable_URL'] = 'URL';
+$pia_lang['WebServices_lable_Tags'] = 'Tag';
+$pia_lang['WebServices_lable_MAC'] = 'Device';
+$pia_lang['WebServices_lable_MAC_Select'] = 'Select';
+$pia_lang['WebServices_lable_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_lable_StatusCode'] = 'HTTP Status';
+$pia_lang['WebServices_lable_ScanTime'] = 'Scan Time';
+$pia_lang['WebServices_lable_Response_Time'] = 'Response Time';
+$pia_lang['WebServices_lable_AlertEvents'] = 'All Events';
+$pia_lang['WebServices_lable_AlertDown'] = 'Down Events';
+$pia_lang['WebServices_button_Delete_label'] = 'Delete Service';
+$pia_lang['WebServices_button_Delete_Warning'] = 'Are you sure you want to delete this web service?';
+
+//////////////////////////////////////////////////////////////////
+// WebServices Details Page - Backend
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['BackWebServices_UpdServ'] = 'The web service was updated';
+$pia_lang['BackWebServices_UpdServError'] = 'The web service was not updated';
+$pia_lang['BackWebServices_InsServ'] = 'The web service was saved';
+$pia_lang['BackWebServices_InsServError'] = 'The web service was not saved';
+$pia_lang['BackWebServices_DelServ'] = 'The web service was deleted from the database';
+$pia_lang['BackWebServices_DelServError'] = 'The web service could not be deleted, or could not be deleted completely';
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page - ready

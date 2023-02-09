@@ -1432,7 +1432,7 @@ function askDeleteDevice () {
   }
 
   // Ask delete device
-  showModalWarning ('Delete Device', 'Are you sure you want to delete this device?<br>(maybe you prefer to archive it)',
+  showModalWarning ('<?php echo $pia_lang['DevDetail_button_Delete'];?>', '<?php echo $pia_lang['DevDetail_button_Delete_Warning'];?>',
     '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Delete'];?>', 'deleteDevice');
 }
 

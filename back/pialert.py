@@ -1320,7 +1320,9 @@ def prepare_service_monitoring_env ():
                                 cur_AlertDown INTEGER DEFAULT 0,
                                 cur_StatusChanged INTEGER DEFAULT 0,
                                 cur_LatencyChanged INTEGER DEFAULT 0,
-                                cur_TargetIP TEXT NOT NULL
+                                cur_TargetIP TEXT NOT NULL,
+                                cur_StatusCode_prev NUMERIC,
+                                cur_TargetIP_prev TEXT
                             ); """
     sql.execute(sql_create_table)
 
@@ -1391,10 +1393,10 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _cur_LatencyChanged = 0
 
     sqlite_insert = """INSERT INTO Services_CurrentScan
-                     (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP) 
-                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"""
+                     (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
 
-    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP)
+    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP, _mon_StatusCode, _mon_TargetIP)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
@@ -1410,27 +1412,6 @@ def service_monitoring_log(site, status, latency):
                                                 site
                                                 )
                              )
-
-# -----------------------------------------------------------------------------
-# def send_service_monitoring_alert(site, status):
-#     """If more than EMAIL_INTERVAL seconds since last email, resend email"""
-#     if (time() - last_email_time[site]) > EMAIL_INTERVAL:
-#         try:
-#             smtpObj = smtplib.SMTP(host, port)  # Set up SMTP object
-#             smtpObj.starttls()
-#             smtpObj.login(sender, password)
-#             smtpObj.sendmail(sender,
-#                              receivers,
-#                              MESSAGE.format(sender=sender,
-#                                             receivers=", ".join(receivers),
-#                                             site=site,
-#                                             status=status
-#                                             )
-#                              )
-#             last_email_time[site] = time()  # Update time of last email
-#             print("Successfully sent email")
-#         except smtplib.SMTPException:
-#             print("Error sending email ({}:{})".format(host, port))
 
 # -----------------------------------------------------------------------------
 def check_services_health(site):
@@ -1449,8 +1430,10 @@ def check_services_health(site):
     except requests.exceptions.SSLError:
         pass
     except:
+        # Latency for offline services
         latency = "99999999"
-        return 503, latency
+        # HTTP Status Code for offline services
+        return 0, latency
 
 
 # -----------------------------------------------------------------------------
@@ -1495,13 +1478,138 @@ def print_service_monitoring_changes():
         monitor_logfile.close()
 
 # -----------------------------------------------------------------------------
-# def prepare_service_monitoring_notification():
-#     global cur
-#     global con
+def service_monitoring_notification():
+
+    global mail_text_webservice
+    global mail_html_webservice
+    
+    # Reporting section
+    print ('\nReporting (Web Services) ...')
+    openDB()
+
+    # Open text Template
+    template_file = open(PIALERT_BACK_PATH + '/report_template_webservice.txt', 'r') 
+    mail_text_webservice = template_file.read() 
+    template_file.close() 
+
+    # Open html Template
+    template_file = open(PIALERT_BACK_PATH + '/report_template_webservice.html', 'r') 
+    mail_html_webservice = template_file.read() 
+    template_file.close() 
+
+    # Report Header & footer
+    timeFormated = startTime.strftime ('%Y-%m-%d %H:%M')
+    mail_text_webservice = mail_text_webservice.replace ('<REPORT_DATE>', timeFormated)
+    mail_text_webservice = mail_text_webservice.replace ('<REPORT_DATE>', timeFormated)
+
+    mail_text_webservice = mail_text_webservice.replace ('<SERVER_NAME>', socket.gethostname() )
+    mail_text_webservice = mail_text_webservice.replace ('<SERVER_NAME>', socket.gethostname() )
+
+    # Compose Devices Down Section
+    mail_section_devices_down = False
+    mail_text_devices_down = ''
+    mail_html_devices_down = ''
+    text_line_template = '{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    html_line_template     = '<tr>\n'+ \
+        '  <td> <a href="{}{}"> {} </a>  </td>\n  <td> {} </td>\n'+ \
+        '  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
+
+    # sql.execute ("""SELECT * FROM Events_Devices
+    #                 WHERE eve_PendingAlertEmail = 1
+    #                   AND eve_EventType = 'Service Down'
+    #                 ORDER BY eve_DateTime""")
+
+    # for eventAlert in sql :
+    #     mail_section_devices_down = True
+    #     mail_text_devices_down += text_line_template.format (
+    #         'Name: ', eventAlert['dev_Name'], 'MAC: ', eventAlert['eve_MAC'],
+    #         'Time: ', eventAlert['eve_DateTime'],'IP: ', eventAlert['eve_IP'])
+    #     mail_html_devices_down += html_line_template.format (
+    #         REPORT_DEVICE_URL, eventAlert['eve_MAC'], eventAlert['eve_MAC'],
+    #         eventAlert['eve_DateTime'], eventAlert['eve_IP'],
+    #         eventAlert['dev_Name'])
+
+    # format_report_section (mail_section_devices_down, 'SECTION_DEVICES_DOWN',
+    #     'TABLE_DEVICES_DOWN', mail_text_devices_down, mail_html_devices_down)
+
+    # Compose Events Section
+    mail_section_events = False
+    mail_text_events   = ''
+    mail_html_events   = ''
+    text_line_template = '{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    html_line_template = '<tr>\n  <td>'+ \
+            ' <a href="{}{}"> {} </a> </td>\n  <td> {} </td>\n'+ \
+            '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
+            '  <td> {} </td>\n</tr>\n'
+
+    # sql.execute ("""SELECT * FROM Events_Devices
+    #                 WHERE eve_PendingAlertEmail = 1
+    #                   AND eve_EventType IN ('Connected','Disconnected',
+    #                       'IP Changed')
+    #                 ORDER BY eve_DateTime""")
+
+    # for eventAlert in sql :
+    #     mail_section_events = True
+    #     mail_text_events += text_line_template.format (
+    #         'Name: ', eventAlert['dev_Name'], 'MAC: ', eventAlert['eve_MAC'], 
+    #         'IP: ', eventAlert['eve_IP'],'Time: ', eventAlert['eve_DateTime'],
+    #         'Event: ', eventAlert['eve_EventType'],'More Info: ', eventAlert['eve_AdditionalInfo'])
+    #     mail_html_events += html_line_template.format (
+    #         REPORT_DEVICE_URL, eventAlert['eve_MAC'], eventAlert['eve_MAC'],
+    #         eventAlert['eve_DateTime'], eventAlert['eve_IP'],
+    #         eventAlert['eve_EventType'], eventAlert['dev_Name'],
+    #         eventAlert['eve_AdditionalInfo'])
+
+    # format_report_section (mail_section_events, 'SECTION_EVENTS',
+    #     'TABLE_EVENTS', mail_text_events, mail_html_events)
+
+    # # DEBUG - Write output emails for testing
+    # if True :
+    #     write_file (LOG_PATH + '/report_output.txt', mail_text) 
+    #     write_file (LOG_PATH + '/report_output.html', mail_html)
+
+    # # Send Mail
+    # if mail_section_Internet == True or mail_section_new_devices == True \
+    # or mail_section_devices_down == True or mail_section_events == True :
+    #     if REPORT_MAIL :
+    #         print ('    Sending report by email...')
+    #         send_email (mail_text, mail_html)
+    #     else :
+    #         print ('    Skip mail...')
+    #     if REPORT_PUSHSAFER :
+    #         print ('    Sending report by PUSHSAFER...')
+    #         send_pushsafer (mail_text)
+    #     else :
+    #         print ('    Skip PUSHSAFER...')
+    #     if REPORT_TELEGRAM :
+    #         print ('    Sending report by Telegram...')
+    #         send_telegram (mail_text)
+    #     else :
+    #         print ('    Skip Telegram...')
+    #     if REPORT_NTFY :
+    #         print ('    Sending report by NTFY...')
+    #         send_ntfy (mail_text)
+    #     if REPORT_WEBGUI :
+    #         print ('    Save report to file...')
+    #         send_webgui (mail_text)
+    #     else :
+    #         print ('    Skip NTFY...')
+    # else :
+    #     print ('    No changes to report...')
+
+
+    # # DEBUG - print number of rows updated
+    # print ('    Notifications:', sql.rowcount)
+
+    # # Commit changes
+    # sql_connection.commit()
+    # closeDB()
 
 
 # -----------------------------------------------------------------------------
 def service_monitoring():
+    global VERSION
+    global VERSION_DATE
 
     prepare_service_monitoring_env()
 
@@ -1509,7 +1617,7 @@ def service_monitoring():
     print("\nPrepare Services Monitoring...")
     print("    Prepare Logfile...")
     with open(PIALERT_WEBSERVICES_LOG, 'w') as monitor_logfile:
-        monitor_logfile.write("Pi.Alert [Prototype]:\n---------------------------------------------------------\n")
+        monitor_logfile.write("\nPi.Alert " + VERSION + " (" + VERSION_DATE + "):\n---------------------------------------------------------\n")
         monitor_logfile.write("Current User: %s \n\n" % get_username())
         monitor_logfile.write("Monitor Web-Services\n")
         monitor_logfile.write("- Timestamp: " + strftime("%Y-%m-%d %H:%M:%S") + "\n")
@@ -1523,7 +1631,7 @@ def service_monitoring():
 
     print("\nStart Services Monitoring...")
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
-        monitor_logfile.write("\nStart Services Monitoring\n\n Timestamp          | StatusCode | ResponseTime | URL \n-------------------------------------------------------\n") 
+        monitor_logfile.write("\nStart Services Monitoring\n\n Timestamp          | StatusCode | ResponseTime | URL \n-----------------------------------------------------------------\n") 
         monitor_logfile.close()
 
     # for site in sites:
@@ -1556,8 +1664,6 @@ def service_monitoring():
             # Insert Services_CurrentScan with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
             set_services_current_scan(site, scantime, status, latency, domain_ip)
 
-            # Notification here
-
             sys.stdout.flush()
 
             # Update Service with lastLatence, lastScan and lastStatus after compare with services_current_scan
@@ -1571,7 +1677,11 @@ def service_monitoring():
             monitor_logfile.write("\n**************** No site(s) to monitor!! ****************\n")
             monitor_logfile.close()
 
+    # Print to log file
     print_service_monitoring_changes()
+
+    # Send notifications
+    service_monitoring_notification()
 
 #===============================================================================
 # REPORTING

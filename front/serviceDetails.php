@@ -538,7 +538,7 @@ function askDeleteService () {
   }
 
   // Ask delete device
-  showModalWarning ('Delete Service', 'Are you sure you want to delete this device?<br>(maybe you prefer to archive it)',
+  showModalWarning ('<?php echo $pia_lang['WebServices_button_Delete_label'];?>', '<?php echo $pia_lang['WebServices_button_Delete_Warning'];?>',
     '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Delete'];?>', 'deleteService');
 }
 
