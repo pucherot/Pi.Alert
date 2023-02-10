@@ -22,6 +22,8 @@ a notification can be sent.
   - Settings page (optional Login, Darkmode and Theme selection, Multilanguage, Config-Editor)
   - FAQ page
   - Additional notifications
+  - Simple network relationship display
+  - Web service monitoring
 
 ## Scan Methods
 Up to three scanning methods are used:
