@@ -1,7 +1,7 @@
 # Pi.Alert
 <!--- --------------------------------------------------------------------- --->
 
-WIFI / LAN intruder detector.
+WIFI / LAN intruder detector with web service monitoring.
 
 Scan the devices connected to your WIFI / LAN and alert you the connection of
 unknown devices. It also warns if a "always connected" device disconnects. In addition, it is 
