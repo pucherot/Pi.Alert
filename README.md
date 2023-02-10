@@ -36,7 +36,7 @@ Up to three scanning methods are used:
         examines the DHCP leases (addresses assigned) to find active devices
         that were not discovered by the other methods.
   - **Web service monitoring**. This method is optional. An HTTP request is 
-        sent and the web server's response is evaluated. If Seft Signed 
+        sent and the web server's response is evaluated. If seft signed 
         certificates are used, no validation of the certificate is performed.
 
 ## Components
