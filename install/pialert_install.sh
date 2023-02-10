@@ -590,6 +590,7 @@ publish_pialert() {
   touch "$PIALERT_HOME/log/pialert.vendors.log"
   touch "$PIALERT_HOME/log/pialert.1.log"
   touch "$PIALERT_HOME/log/pialert.cleanup.log"
+  touch "$PIALERT_HOME/log/pialert.webservices.log"
   ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"
   ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"
   ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"

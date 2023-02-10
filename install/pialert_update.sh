@@ -114,7 +114,7 @@ check_packages() {
   sudo apt-get install dnsutils net-tools -y                      2>&1 >> "$LOG"
 
   print_msg "- Checking packages php-curl..."
-  sudo apt-get install php-curl -y                      2>&1 >> "$LOG"
+  sudo apt-get install php-curl -y                                2>&1 >> "$LOG"
 }
 
 
@@ -279,6 +279,7 @@ update_permissions() {
   touch "$PIALERT_HOME/log/pialert.vendors.log"
   touch "$PIALERT_HOME/log/pialert.1.log"
   touch "$PIALERT_HOME/log/pialert.cleanup.log"
+  touch "$PIALERT_HOME/log/pialert.webservices.log"
   ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"
   ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"
   ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"
