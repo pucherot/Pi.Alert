@@ -175,7 +175,7 @@ $servicedetails = get_service_details($service_details_title);
 
                       <!-- URL -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_lable_URL'];?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_URL'];?></label>
                         <div class="col-sm-9">
                           <input class="form-control" id="txtURL" type="text" readonly value="<?php echo $servicedetails['mon_URL']?>">
                         </div>
@@ -183,7 +183,7 @@ $servicedetails = get_service_details($service_details_title);
       
                       <!-- Tags -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_lable_Tags'];?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_Tags'];?></label>
                         <div class="col-sm-9">
                           <input class="form-control" id="txtTags" type="text" value="<?php echo $servicedetails['mon_Tags']?>">
                         </div>
@@ -192,11 +192,11 @@ $servicedetails = get_service_details($service_details_title);
 
 
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_lable_MAC'];?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_MAC'];?></label>
                         <div class="col-sm-9">
                           <div class="input-group">
                             <div class="input-group-btn">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_lable_MAC_Select'];?>
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select'];?>
                                 <span class="fa fa-caret-down"></span></button>
                               <ul class="dropdown-menu">
 <?php
@@ -238,7 +238,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last HTTP Status -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_StatusCode'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_StatusCode'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastStatus" type="text" readonly value="<?php echo $servicedetails['mon_LastStatus']?>">
                         </div>
@@ -246,7 +246,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last IP -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_TargetIP'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_TargetIP'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastIP" type="text" readonly value="<?php echo $servicedetails['mon_TargetIP']?>">
                         </div>
@@ -254,7 +254,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last Scan -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_ScanTime'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_ScanTime'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $servicedetails['mon_LastScan']?>">
                         </div>
@@ -262,7 +262,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last Latency -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_lable_Response_Time'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_Response_Time'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastLatency" type="text" readonly value="<?php echo $servicedetails['mon_LastLatency']?>">
                         </div>
@@ -270,7 +270,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Alert events -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_lable_AlertEvents'];?></label>
+                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents'];?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox blue" id="chkAlertEvents" <?php if($servicedetails['mon_AlertEvents'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
@@ -278,7 +278,7 @@ while ($row = $dev_res->fetchArray()) {
       
                       <!-- Alert Down -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_lable_AlertDown'];?></label>
+                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertDown'];?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox red" id="chkAlertDown" <?php if($servicedetails['mon_AlertDown'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>

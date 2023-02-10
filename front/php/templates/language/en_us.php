@@ -240,18 +240,24 @@ $pia_lang['WebServices_tablehead_TargetIP'] = 'Target IP';
 $pia_lang['WebServices_tablehead_ScanTime'] = 'Scan Time';
 $pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status';
 $pia_lang['WebServices_tablehead_Response_Time'] = 'Response Time';
-$pia_lang['WebServices_lable_URL'] = 'URL';
-$pia_lang['WebServices_lable_Tags'] = 'Tag';
-$pia_lang['WebServices_lable_MAC'] = 'Device';
-$pia_lang['WebServices_lable_MAC_Select'] = 'Select';
-$pia_lang['WebServices_lable_TargetIP'] = 'Target IP';
-$pia_lang['WebServices_lable_StatusCode'] = 'HTTP Status';
-$pia_lang['WebServices_lable_ScanTime'] = 'Scan Time';
-$pia_lang['WebServices_lable_Response_Time'] = 'Response Time';
-$pia_lang['WebServices_lable_AlertEvents'] = 'All Events';
-$pia_lang['WebServices_lable_AlertDown'] = 'Down Events';
+$pia_lang['WebServices_label_URL'] = 'URL';
+$pia_lang['WebServices_label_Tags'] = 'Tag';
+$pia_lang['WebServices_label_MAC'] = 'Device';
+$pia_lang['WebServices_label_MAC_Select'] = 'Select';
+$pia_lang['WebServices_label_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_label_StatusCode'] = 'HTTP Status';
+$pia_lang['WebServices_label_ScanTime'] = 'Scan Time';
+$pia_lang['WebServices_label_Response_Time'] = 'Response Time';
+$pia_lang['WebServices_label_AlertEvents'] = 'All Events';
+$pia_lang['WebServices_label_AlertDown'] = 'Down Events';
+$pia_lang['WebServices_label_Notification'] = 'Notify';
 $pia_lang['WebServices_button_Delete_label'] = 'Delete Service';
 $pia_lang['WebServices_button_Delete_Warning'] = 'Are you sure you want to delete this web service?';
+$pia_lang['WebServices_headline_NewService'] = 'New Web Service';
+$pia_lang['WebServices_Events_all'] = 'All Events';
+$pia_lang['WebServices_Events_down'] = 'Down';
+$pia_lang['WebServices_Events_none'] = 'none';
+$pia_lang['WebServices_BoxTitle_General'] = 'General';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend

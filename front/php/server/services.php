@@ -229,9 +229,10 @@ function deleteService() {
   $sql = 'DELETE FROM Services WHERE mon_URL="' . $_REQUEST['url'] .'"';
   // execute sql
   $result = $db->query($sql);
-  $sql = 'DELETE FROM Services_Events WHERE moneve_URL="' . $_REQUEST['url'] .'"';
+  // Remove Events too
+  //$sql = 'DELETE FROM Services_Events WHERE moneve_URL="' . $_REQUEST['url'] .'"';
   // execute sql
-  $result = $db->query($sql);
+  //$result = $db->query($sql);
   // check result
   if ($result == TRUE) {
     echo $pia_lang['BackWebServices_DelServ'];

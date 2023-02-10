@@ -162,12 +162,13 @@ function get_count_standalone_services() {
 // Print a list of all monitored URLs without a MAC Adresse
 function list_standalone_services() {
     global $db_file;
+    global $pia_lang;
     $db = new SQLite3($db_file);
     $mon_res = $db->query('SELECT * FROM Services');
     // General Box for all Services without MAC
     echo '<div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">General</h3>
+              <h3 class="box-title">'.$pia_lang['WebServices_BoxTitle_General'].'</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">';
@@ -177,9 +178,10 @@ function list_standalone_services() {
         if ($row['mon_MAC'] == "") {
             if (substr($row['mon_LastStatus'],0,1) == "2") {$code_icon_color = "bg-green";}
 
-            if ($row['mon_AlertEvents'] == "1") {$notification_type = "Alle Events";}
-            elseif ($row['mon_AlertDown'] == "1") {$notification_type = "Down";}
-            else {$notification_type = "keine";}
+            if ($row['mon_AlertEvents'] == "1" && $row['mon_AlertDown'] == "1") {$notification_type = $pia_lang['WebServices_Events_all'].", ".$pia_lang['WebServices_Events_down'];}
+            elseif ($row['mon_AlertDown'] == "1") {$notification_type = $pia_lang['WebServices_Events_down'];}
+            elseif ($row['mon_AlertEvents'] == "1") {$notification_type = $pia_lang['WebServices_Events_all'];}
+            else {$notification_type = $pia_lang['WebServices_Events_none'];}
 
             if (substr($row['mon_LastStatus'],0,1) == "2") {$code_icon_color = "bg-green";}
             if (substr($row['mon_LastStatus'],0,1) == "3") {$code_icon_color = "bg-yellow";}
@@ -217,7 +219,7 @@ function list_standalone_services() {
                     }
 
             echo '         </div>';
-            echo '         <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">Meldung bei: '.$notification_type.'</td></tr></table>
+            echo '         <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
                         </div>
                     </div>
                   </div>';
@@ -260,6 +262,8 @@ function get_devices_from_services() {
 // Print a list of all monitored URLs of an unique device
 function get_service_from_unique_device($func_unique_device) {
     global $db_file;
+    global $pia_lang;
+
     $db = new SQLite3($db_file);
     $mon_res = $db->query('SELECT * FROM Services ORDER BY mon_Tags ASC');
     // Print Services Loop
@@ -312,7 +316,7 @@ function get_service_from_unique_device($func_unique_device) {
                     // echo '<br>';
                     // print_r($func_scans);
                                         
-            echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">Meldung bei: '.$notification_type.'</td></tr></table>
+            echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
                         </div>
                     </div>
                   </div>';
@@ -395,28 +399,28 @@ function get_service_from_unique_device($func_unique_device) {
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title">New Web Service</h4>
+                            <h4 class="modal-title"><?php echo $pia_lang['WebServices_headline_NewService'];?></h4>
                         </div>
                         <div class="modal-body">
                             <div style="height: 230px;">
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_URL'];?></label>
+                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_URL'];?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="serviceURL" placeholder="Service URL">
                               </div>
                             </div>
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_Tags'];?></label>
+                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_Tags'];?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="serviceTag" placeholder="Tag">
                               </div>
                             </div>
                               <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_MAC'];?></label>
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_MAC'];?></label>
                                 <div class="col-xs-9">
                                   <div class="input-group">
                                     <div class="input-group-btn">
-                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_lable_MAC_Select'];?>
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select'];?>
                                         <span class="fa fa-caret-down"></span></button>
                                       <ul class="dropdown-menu">
                                         <?php getDeviceMacs (); ?>
@@ -428,13 +432,13 @@ function get_service_from_unique_device($func_unique_device) {
                                 </div>
                               </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_AlertEvents'];?></label>
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents'];?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox blue" id="insAlertEvents" type="checkbox">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_lable_AlertDown'];?></label>
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertDown'];?></label>
                                 <div class="col-xs-9" style="margin-top: px;">
                                   <input class="checkbox red" id="insAlertDown" type="checkbox">
                                 </div>

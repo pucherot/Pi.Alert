@@ -201,6 +201,13 @@ REPORT_WEBGUI = True
 EOF
 fi
 
+if ! grep -Fq "SCAN_WEBSERVICES" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+SCAN_WEBSERVICES = False
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------

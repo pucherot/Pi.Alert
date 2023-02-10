@@ -453,7 +453,7 @@ def query_MAC_vendor (pMAC):
 def scan_network ():
     # Header
     print ('Scan Devices')
-    print ('    ScanCycle:', cycle)
+    # print ('    ScanCycle:', cycle)
     print ('    Timestamp:', startTime )
 
     # Query ScanCycle properties
@@ -1365,6 +1365,9 @@ def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _mone
 
 # -----------------------------------------------------------------------------
 def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP):
+    
+    #_cur_LatencyChanged = 0
+    #_cur_StatusChanged = 0
 
     sql.execute("SELECT * FROM Services WHERE mon_URL = ?", [_cur_URL])
     rows = sql.fetchall()
@@ -1377,20 +1380,20 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
 
     if _mon_TargetIP != _cur_TargetIP:
         _cur_StatusChanged = 1
-    else:
-        _cur_StatusChanged = 0
-
-    if _mon_StatusCode != _cur_StatusCode:
+    elif _mon_StatusCode != _cur_StatusCode:
         _cur_StatusChanged = 1
     else:
         _cur_StatusChanged = 0
 
     if _mon_Latency == "99999999" and _mon_Latency != _cur_Latency:
-        _cur_LatencyChanged = 1
+        _cur_LatencyChanged = 0
+        _cur_StatusChanged = 1
     elif _cur_Latency == "99999999" and _mon_Latency != _cur_Latency:
         _cur_LatencyChanged = 1
+        #_cur_StatusChanged = 1
     else:
-        _cur_LatencyChanged = 0
+        _cur_LatencyChanged = 0 
+
 
     sqlite_insert = """INSERT INTO Services_CurrentScan
                      (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev) 
@@ -1500,102 +1503,98 @@ def service_monitoring_notification():
     # Report Header & footer
     timeFormated = startTime.strftime ('%Y-%m-%d %H:%M')
     mail_text_webservice = mail_text_webservice.replace ('<REPORT_DATE>', timeFormated)
-    mail_text_webservice = mail_text_webservice.replace ('<REPORT_DATE>', timeFormated)
+    mail_html_webservice = mail_html_webservice.replace ('<REPORT_DATE>', timeFormated)
 
     mail_text_webservice = mail_text_webservice.replace ('<SERVER_NAME>', socket.gethostname() )
-    mail_text_webservice = mail_text_webservice.replace ('<SERVER_NAME>', socket.gethostname() )
+    mail_html_webservice = mail_html_webservice.replace ('<SERVER_NAME>', socket.gethostname() )
 
     # Compose Devices Down Section
-    mail_section_devices_down = False
-    mail_text_devices_down = ''
-    mail_html_devices_down = ''
-    text_line_template = '{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    mail_section_services_down = False
+    mail_text_services_down = ''
+    mail_html_services_down = ''
+    text_line_template = '{}\t{}\n{}\t\t{}\n{}\t{}\n\n'
     html_line_template     = '<tr>\n'+ \
-        '  <td> <a href="{}{}"> {} </a>  </td>\n  <td> {} </td>\n'+ \
-        '  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
+        '  <td> {} </td>\n  <td> {} </td>\n'+ \
+        '  <td> {} </td>\n</tr>\n'
 
-    # sql.execute ("""SELECT * FROM Events_Devices
-    #                 WHERE eve_PendingAlertEmail = 1
-    #                   AND eve_EventType = 'Service Down'
-    #                 ORDER BY eve_DateTime""")
+    sql.execute ("""SELECT * FROM Services_CurrentScan
+                    WHERE cur_AlertDown = 1 AND cur_LatencyChanged = 1
+                    ORDER BY cur_DateTime""")
 
-    # for eventAlert in sql :
-    #     mail_section_devices_down = True
-    #     mail_text_devices_down += text_line_template.format (
-    #         'Name: ', eventAlert['dev_Name'], 'MAC: ', eventAlert['eve_MAC'],
-    #         'Time: ', eventAlert['eve_DateTime'],'IP: ', eventAlert['eve_IP'])
-    #     mail_html_devices_down += html_line_template.format (
-    #         REPORT_DEVICE_URL, eventAlert['eve_MAC'], eventAlert['eve_MAC'],
-    #         eventAlert['eve_DateTime'], eventAlert['eve_IP'],
-    #         eventAlert['dev_Name'])
+    for eventAlert in sql :
+        mail_section_services_down = True
+        mail_text_services_down += text_line_template.format (
+            'Service: ', eventAlert['cur_URL'], 
+            'Time: ', eventAlert['cur_DateTime'], 
+            'Target IP: ', eventAlert['cur_TargetIP'])
+        mail_html_services_down += html_line_template.format (
+            eventAlert['cur_URL'], eventAlert['cur_DateTime'], eventAlert['cur_TargetIP'])
 
-    # format_report_section (mail_section_devices_down, 'SECTION_DEVICES_DOWN',
-    #     'TABLE_DEVICES_DOWN', mail_text_devices_down, mail_html_devices_down)
+    format_report_section_services (mail_section_services_down, 'SECTION_DEVICES_DOWN',
+        'TABLE_DEVICES_DOWN', mail_text_services_down, mail_html_services_down)
 
-    # Compose Events Section
+    # Compose Events Section (includes Down as an Event)
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    text_line_template = '{}\t\t\t{}\n{}\t\t\t\t{}\n{}\t\t\t{}\n{}\t\t{}\n{}\t{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
-            ' <a href="{}{}"> {} </a> </td>\n  <td> {} </td>\n'+ \
+            '  {} </td>\n  <td> {} </td>\n'+ \
             '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
             '  <td> {} </td>\n</tr>\n'
 
-    # sql.execute ("""SELECT * FROM Events_Devices
-    #                 WHERE eve_PendingAlertEmail = 1
-    #                   AND eve_EventType IN ('Connected','Disconnected',
-    #                       'IP Changed')
-    #                 ORDER BY eve_DateTime""")
+    sql.execute ("""SELECT * FROM Services_CurrentScan
+                    WHERE cur_AlertEvents = 1 AND cur_StatusChanged = 1
+                    ORDER BY cur_DateTime""")
 
-    # for eventAlert in sql :
-    #     mail_section_events = True
-    #     mail_text_events += text_line_template.format (
-    #         'Name: ', eventAlert['dev_Name'], 'MAC: ', eventAlert['eve_MAC'], 
-    #         'IP: ', eventAlert['eve_IP'],'Time: ', eventAlert['eve_DateTime'],
-    #         'Event: ', eventAlert['eve_EventType'],'More Info: ', eventAlert['eve_AdditionalInfo'])
-    #     mail_html_events += html_line_template.format (
-    #         REPORT_DEVICE_URL, eventAlert['eve_MAC'], eventAlert['eve_MAC'],
-    #         eventAlert['eve_DateTime'], eventAlert['eve_IP'],
-    #         eventAlert['eve_EventType'], eventAlert['dev_Name'],
-    #         eventAlert['eve_AdditionalInfo'])
+    for eventAlert in sql :
+        mail_section_events = True
+        mail_text_events += text_line_template.format (
+            'Service: ', eventAlert['cur_URL'], 
+            'Time: ', eventAlert['cur_DateTime'], 
+            'Target IP: ', eventAlert['cur_TargetIP'], 
+            'HTTP Status Code: ', eventAlert['cur_StatusCode'], 
+            'Prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
+        mail_html_events += html_line_template.format (
+            eventAlert['cur_URL'], eventAlert['cur_Latency'], eventAlert['cur_TargetIP'],
+            eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
+            eventAlert['cur_StatusCode_prev'])
 
-    # format_report_section (mail_section_events, 'SECTION_EVENTS',
-    #     'TABLE_EVENTS', mail_text_events, mail_html_events)
+    format_report_section_services (mail_section_events, 'SECTION_EVENTS',
+        'TABLE_EVENTS', mail_text_events, mail_html_events)
 
-    # # DEBUG - Write output emails for testing
+    # DEBUG - Write output emails for testing
     # if True :
-    #     write_file (LOG_PATH + '/report_output.txt', mail_text) 
-    #     write_file (LOG_PATH + '/report_output.html', mail_html)
+    #     write_file (LOG_PATH + '/report_output.txt', mail_text_webservice) 
+    #     write_file (LOG_PATH + '/report_output.html', mail_html_webservice)
 
     # # Send Mail
-    # if mail_section_Internet == True or mail_section_new_devices == True \
-    # or mail_section_devices_down == True or mail_section_events == True :
-    #     if REPORT_MAIL :
-    #         print ('    Sending report by email...')
-    #         send_email (mail_text, mail_html)
-    #     else :
-    #         print ('    Skip mail...')
-    #     if REPORT_PUSHSAFER :
-    #         print ('    Sending report by PUSHSAFER...')
-    #         send_pushsafer (mail_text)
-    #     else :
-    #         print ('    Skip PUSHSAFER...')
-    #     if REPORT_TELEGRAM :
-    #         print ('    Sending report by Telegram...')
-    #         send_telegram (mail_text)
-    #     else :
-    #         print ('    Skip Telegram...')
-    #     if REPORT_NTFY :
-    #         print ('    Sending report by NTFY...')
-    #         send_ntfy (mail_text)
-    #     if REPORT_WEBGUI :
-    #         print ('    Save report to file...')
-    #         send_webgui (mail_text)
-    #     else :
-    #         print ('    Skip NTFY...')
-    # else :
-    #     print ('    No changes to report...')
+    if mail_section_services_down == True or mail_section_events == True :
+        if REPORT_MAIL :
+            print ('    Sending report by email...')
+            send_email (mail_text_webservice, mail_html_webservice)
+        else :
+            print ('    Skip mail...')
+        if REPORT_PUSHSAFER :
+            print ('    Sending report by PUSHSAFER...')
+            send_pushsafer (mail_text_webservice)
+        else :
+            print ('    Skip PUSHSAFER...')
+        if REPORT_TELEGRAM :
+            print ('    Sending report by Telegram...')
+            send_telegram (mail_text_webservice)
+        else :
+            print ('    Skip Telegram...')
+        if REPORT_NTFY :
+            print ('    Sending report by NTFY...')
+            send_ntfy (mail_text_webservice)
+        if REPORT_WEBGUI :
+            print ('    Save report to file...')
+            send_webgui (mail_text_webservice)
+        else :
+            print ('    Skip WebUI...')
+    else :
+        print ('    No changes to report...')
 
 
     # # DEBUG - print number of rows updated
@@ -1681,7 +1680,6 @@ def service_monitoring():
     print_service_monitoring_changes()
 
     # Send notifications
-    service_monitoring_notification()
 
 #===============================================================================
 # REPORTING
@@ -1839,9 +1837,9 @@ def email_reporting ():
         'TABLE_EVENTS', mail_text_events, mail_html_events)
 
     # DEBUG - Write output emails for testing
-    if True :
-        write_file (LOG_PATH + '/report_output.txt', mail_text) 
-        write_file (LOG_PATH + '/report_output.html', mail_html)
+    # if True :
+    #     write_file (LOG_PATH + '/report_output.txt', mail_text) 
+    #     write_file (LOG_PATH + '/report_output.html', mail_html)
 
     # Send Mail
     if mail_section_Internet == True or mail_section_new_devices == True \
@@ -1868,7 +1866,7 @@ def email_reporting ():
             print ('    Save report to file...')
             send_webgui (mail_text)
         else :
-            print ('    Skip NTFY...')
+            print ('    Skip WebGUI...')
     else :
         print ('    No changes to report...')
 
@@ -1882,6 +1880,15 @@ def email_reporting ():
 
     # DEBUG - print number of rows updated
     print ('    Notifications:', sql.rowcount)
+
+    try:
+        enable_services_monitoring = SCAN_WEBSERVICES
+    except NameError:
+        enable_services_monitoring = False
+
+    if enable_services_monitoring == True:
+        if str(startTime)[15] == "0":
+            service_monitoring_notification()
 
     # Commit changes
     sql_connection.commit()
@@ -1945,6 +1952,7 @@ def send_telegram (_Text):
 
 def send_webgui (_Text):
     # Remove one linebrake between "Server" and the headline of the event type
+    #_webgui_Text = _Text
     _webgui_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
     findsubheadline = _webgui_Text.split('\n')
@@ -2065,6 +2073,22 @@ def format_report_section (pActive, pSection, pTable, pText, pHTML):
     else:
         mail_text = remove_section (mail_text, pSection)
         mail_html = remove_section (mail_html, pSection)
+
+#-------------------------------------------------------------------------------
+def format_report_section_services (pActive, pSection, pTable, pText, pHTML):
+    global mail_text_webservice
+    global mail_html_webservice
+
+    # Replace section text
+    if pActive :
+        mail_text_webservice = mail_text_webservice.replace ('<'+ pTable +'>', pText)
+        mail_html_webservice = mail_html_webservice.replace ('<'+ pTable +'>', pHTML)       
+
+        mail_text_webservice = remove_tag (mail_text_webservice, pSection)       
+        mail_html_webservice = remove_tag (mail_html_webservice, pSection)
+    else:
+        mail_text_webservice = remove_section (mail_text_webservice, pSection)
+        mail_html_webservice = remove_section (mail_html_webservice, pSection)
 
 #-------------------------------------------------------------------------------
 def remove_section (pText, pSection):
