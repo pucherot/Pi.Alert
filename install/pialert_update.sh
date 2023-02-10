@@ -113,7 +113,7 @@ check_packages() {
   print_msg "- Checking packages dnsutils & net-tools..."
   sudo apt-get install dnsutils net-tools -y                      2>&1 >> "$LOG"
 
-  print_msg "- Checking packages dnsutils & net-tools..."
+  print_msg "- Checking packages php-curl..."
   sudo apt-get install php-curl -y                      2>&1 >> "$LOG"
 }
 
