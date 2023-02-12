@@ -9,8 +9,7 @@ possible to check web services for availability. For this purpose HTTP status co
 response time of the service are evaluated. If a service fails or the HTTP status code changes, 
 a notification can be sent.
 
-  | ![Main screen][main] | ![Compare][compare] |
-  | -------------------- | -------------------- |
+![Main screen][main]
 
 ## Scan Methods
 Up to three scanning methods are used:
@@ -158,7 +157,6 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 [screen4]: ./docs/img/3_presence.jpg          "Screen 4"
 [report1]: ./docs/img/4_report_1.jpg          "Report sample 1"
 [report2]: ./docs/img/4_report_2.jpg          "Report sample 2"
-[compare]: /docs/img/compare.jpg     "Compare"
 [webservices_dark]: /docs/img/7_webservices.jpg                   "Webservices screen dark"
 [webservices_details_dark]: /docs/img/8_webservices_details.jpg   "Webservices Details screen dark"
 [glass_black_white]: /favicons/glass_black_white.png       "glass_black_white.png"
