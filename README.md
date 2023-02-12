@@ -10,6 +10,7 @@ response time of the service are evaluated. If a service fails or the HTTP statu
 a notification can be sent.
 
 ![Main screen][main]
+[Compare this fork with the main project](docs/VERSIONCOMPARE.md)
 
 ## Scan Methods
 Up to three scanning methods are used:
