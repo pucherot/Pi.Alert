@@ -151,7 +151,7 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 [Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert) and many more
 
 <!--- --------------------------------------------------------------------- --->
-[main]:    ./docs/img/1_devices.jpg           "Main screen"
+[main]:    ./docs/img/1_devices_new.jpg           "Main screen"
 [screen1]: ./docs/img/2_1_device_details.jpg  "Screen 1"
 [screen2]: ./docs/img/2_2_device_sessions.jpg "Screen 2"
 [screen3]: ./docs/img/2_3_device_presence.jpg "Screen 3"
