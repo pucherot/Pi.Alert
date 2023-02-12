@@ -9,21 +9,8 @@ possible to check web services for availability. For this purpose HTTP status co
 response time of the service are evaluated. If a service fails or the HTTP status code changes, 
 a notification can be sent.
 
-![Main screen][main]
-
-## "Under the hood" modifications within this fork
-  - Only one scan cycle
-  - The Backend has the additional option "cleanup"
-  - "[pialert-cli](docs/PIALERTCLI.md)" that helps to configure login, password and DB migration
-  - API for basic queries
-
-## Obvious modifications within this fork
-  - Maintenance tasks
-  - Settings page (optional Login, Darkmode and Theme selection, Multilanguage, Config-Editor)
-  - FAQ page
-  - Additional notifications
-  - Simple network relationship display
-  - Web service monitoring
+  | ![Main screen][main] | ![Compare][compare] |
+  | -------------------- | -------------------- |
 
 ## Scan Methods
 Up to three scanning methods are used:
@@ -85,8 +72,7 @@ A web frontend that allows:
 
   | ![Screen 1][screen1]                            | ![Screen 2][screen2]                         | ![Screen 3][screen3]                                           | 
   | ----------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------- |
-  | ![Screen 4][screen4]                            | ![Maintain screen dark][maintain_dark]       | ![HelpFAQ screen dark][helpfaq_dark]                           |
-  | ![Notification screen dark][notification_dark]  | ![Webservices screen dark][webservices_dark] | ![Webservices Details screen dark][webservices_details_dark]   |
+  | ![Screen 4][screen4]                            | ![Webservices screen dark][webservices_dark] | ![Webservices Details screen dark][webservices_details_dark]   |
 
 Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
@@ -172,9 +158,7 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 [screen4]: ./docs/img/3_presence.jpg          "Screen 4"
 [report1]: ./docs/img/4_report_1.jpg          "Report sample 1"
 [report2]: ./docs/img/4_report_2.jpg          "Report sample 2"
-[maintain_dark]: /docs/img/5_maintain.jpg     "Maintain screen dark"
-[helpfaq_dark]: /docs/img/6_helpfaq.jpg       "HelpFAQ screen dark"
-[notification_dark]: /docs/img/9_notifications.jpg                "Notification screen dark"
+[compare]: /docs/img/compare.jpg     "Compare"
 [webservices_dark]: /docs/img/7_webservices.jpg                   "Webservices screen dark"
 [webservices_details_dark]: /docs/img/8_webservices_details.jpg   "Webservices Details screen dark"
 [glass_black_white]: /favicons/glass_black_white.png       "glass_black_white.png"
