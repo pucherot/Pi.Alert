@@ -44,6 +44,7 @@ $pia_lang['Login_Toggle_Alert_headline'] = 'Avertissement sur le mot de passe !'
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Dispositifs';
+$pia_lang['Navigation_Services'] = 'Web Services';
 $pia_lang['Navigation_Presence'] = 'Présence';
 $pia_lang['Navigation_Events'] = 'Événements';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';

@@ -44,6 +44,7 @@ $pia_lang['Login_Toggle_Alert_headline'] = 'Alerta de Contraseña!';
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Dispositivos';
+$pia_lang['Navigation_Services'] = 'Web Services';
 $pia_lang['Navigation_Presence'] = 'Historial';
 $pia_lang['Navigation_Events'] = 'Eventos';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';

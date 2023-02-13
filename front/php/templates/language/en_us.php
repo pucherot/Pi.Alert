@@ -44,6 +44,7 @@ $pia_lang['Login_Toggle_Alert_headline'] = 'Password Alert!';
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Navigation_Devices'] = 'Devices';
+$pia_lang['Navigation_Services'] = 'Web Services';
 $pia_lang['Navigation_Presence'] = 'Presence';
 $pia_lang['Navigation_Events'] = 'Events';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';

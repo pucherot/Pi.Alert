@@ -394,7 +394,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
     echo '<li class="'; 
     if (in_array (basename($_SERVER['SCRIPT_NAME']), array('services.php') ) ){ echo 'active'; }
     echo '">
-            <a href="services.php"><i class="fa fa-globe"></i> <span> Web Services</span></a>
+            <a href="services.php"><i class="fa fa-globe"></i> <span>'.$pia_lang['Navigation_Services'].'</span></a>
           </li>';
 
     echo '<li class="header text-uppercase" style="font-size: 0; padding: 1px;">EVENTS</li>';
