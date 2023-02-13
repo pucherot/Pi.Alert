@@ -1512,10 +1512,10 @@ def service_monitoring_notification():
     mail_section_services_down = False
     mail_text_services_down = ''
     mail_html_services_down = ''
-    text_line_template = '{}\t{}\n{}\t\t{}\n{}\t{}\n\n'
+    text_line_template = '{}\t{}\n{}\t\t{}\n{}\t{}\n{}\t{}\n\n'
     html_line_template     = '<tr>\n'+ \
         '  <td> {} </td>\n  <td> {} </td>\n'+ \
-        '  <td> {} </td>\n</tr>\n'
+        '  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
 
     sql.execute ("""SELECT * FROM Services_CurrentScan
                     WHERE cur_AlertDown = 1 AND cur_LatencyChanged = 1
@@ -1526,9 +1526,10 @@ def service_monitoring_notification():
         mail_text_services_down += text_line_template.format (
             'Service: ', eventAlert['cur_URL'], 
             'Time: ', eventAlert['cur_DateTime'], 
-            'Target IP: ', eventAlert['cur_TargetIP'])
+            'Target IP: ', eventAlert['cur_TargetIP'],
+            'prev. Target IP: ', eventAlert['cur_TargetIP_prev'])
         mail_html_services_down += html_line_template.format (
-            eventAlert['cur_URL'], eventAlert['cur_DateTime'], eventAlert['cur_TargetIP'])
+            eventAlert['cur_URL'], eventAlert['cur_DateTime'], eventAlert['cur_TargetIP'], eventAlert['cur_TargetIP_prev'])
 
     format_report_section_services (mail_section_services_down, 'SECTION_DEVICES_DOWN',
         'TABLE_DEVICES_DOWN', mail_text_services_down, mail_html_services_down)
@@ -1537,10 +1538,10 @@ def service_monitoring_notification():
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}\t\t\t{}\n{}\t\t\t\t{}\n{}\t\t\t{}\n{}\t\t{}\n{}\t{}\n\n'
+    text_line_template = '{}\t\t\t{}\n{}\t\t\t\t{}\n{}\t\t\t{}\n{}\t\t{}\n{}\t\t{}\n{}\t{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
             '  {} </td>\n  <td> {} </td>\n'+ \
-            '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
+            '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
             '  <td> {} </td>\n</tr>\n'
 
     sql.execute ("""SELECT * FROM Services_CurrentScan
@@ -1552,12 +1553,13 @@ def service_monitoring_notification():
         mail_text_events += text_line_template.format (
             'Service: ', eventAlert['cur_URL'], 
             'Time: ', eventAlert['cur_DateTime'], 
-            'Target IP: ', eventAlert['cur_TargetIP'], 
+            'Target IP: ', eventAlert['cur_TargetIP'],
+            'prev. Target IP: ', eventAlert['cur_TargetIP_prev'], 
             'HTTP Status Code: ', eventAlert['cur_StatusCode'], 
-            'Prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
+            'prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
         mail_html_events += html_line_template.format (
             eventAlert['cur_URL'], eventAlert['cur_Latency'], eventAlert['cur_TargetIP'],
-            eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
+            eventAlert['cur_TargetIP'], eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
             eventAlert['cur_StatusCode_prev'])
 
     format_report_section_services (mail_section_events, 'SECTION_EVENTS',
