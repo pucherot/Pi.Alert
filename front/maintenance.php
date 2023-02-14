@@ -423,7 +423,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
     <div class="tab-content">
         <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
             <table class="table_settings">
-                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_a'];?></h4></td></tr>
+                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_a'];?></h4></td></tr>
                 <tr class="table_settings">
                     <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
                 </tr>
@@ -495,7 +495,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                         </div>
                     </td>
                 </tr>
-                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_b'];?></h4></td></tr>
+                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_b'];?></h4></td></tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
 
@@ -567,7 +567,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
 
                     </td>
                 </tr>
-                <tr><td colspan="2"><h4 style="text-decoration: underline; font-size: medium;"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
+                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></td>
