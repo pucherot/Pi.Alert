@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 #
 #-------------------------------------------------------------------------------
-#  Pi.Alert  v2.70  /  2021-02-01
+#  Pi.Alert
 #  Open Source Network Guard / WIFI & LAN intrusion detector 
 #
 #  pialert.py - Back module. Network scanner
 #-------------------------------------------------------------------------------
 #  Puche 2021                                              GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 #-------------------------------------------------------------------------------
-
 
 #===============================================================================
 # IMPORTS
@@ -18,7 +18,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from time import sleep, time, strftime
-from urllib.parse import urlparse
+# from urllib.parse import urlparse
+try:
+  from urlparse import urlparse
+except ImportError:
+  from urllib.parse import urlparse
 
 import sys
 import subprocess
