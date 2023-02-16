@@ -196,7 +196,7 @@ function list_standalone_services() {
             if ($http_status_code[$row['mon_LastStatus']] != "") {
                 $status_description = $http_status_code[$row['mon_LastStatus']]['description'];
             } else {
-                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem..';
+                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem.';
             }
 
             echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
@@ -295,7 +295,7 @@ function get_service_from_unique_device($func_unique_device) {
             if ($http_status_code[$row['mon_LastStatus']] != "") {
                 $status_description = $http_status_code[$row['mon_LastStatus']]['description'];
             } else {
-                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem..';
+                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem.';
             }
 
             echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
