@@ -31,6 +31,13 @@ $db_file = '../db/pialert.db';
 // ===============================================================================
 // End prepare data
 // ===============================================================================
+function open_http_status_code_json () {
+    $jsonfile = file_get_contents("./lib/http-status-code/index.json");
+    $array = json_decode($jsonfile, true);
+    return $array;
+}
+
+// -----------------------------------------------------------------------------------------------
 
 function getDeviceMacs () {
     global $db_file;
@@ -54,9 +61,7 @@ function get_latest_latency_from_url($service_URL) {
     $code_array = array();
     while ($row = $moneve_res->fetchArray()) {
         if ($row['moneve_URL'] == $service_URL) {
-            //echo $row['moneve_StatusCode'];
             $code_array[17-$i] = $row['moneve_Latency'];
-            //echo $i;
             $i++;
         }
         if ($i == 18) {break;}
@@ -78,9 +83,7 @@ function get_latest_statuscodes_from_url($service_URL) {
     $code_array = array();
     while ($row = $moneve_res->fetchArray()) {
         if ($row['moneve_URL'] == $service_URL) {
-            //echo $row['moneve_StatusCode'];
             $code_array[17-$i] = $row['moneve_StatusCode'];
-            //echo $i;
             $i++;
         }
         if ($i == 18) {break;}
@@ -102,9 +105,7 @@ function get_latest_scans_from_url($service_URL) {
     $code_array = array();
     while ($row = $moneve_res->fetchArray()) {
         if ($row['moneve_URL'] == $service_URL) {
-            //echo $row['moneve_StatusCode'];
             $code_array[17-$i] = $row['moneve_DateTime'];
-            //echo $i;
             $i++;
         }
         if ($i == 18) {break;}
@@ -163,6 +164,8 @@ function get_count_standalone_services() {
 function list_standalone_services() {
     global $db_file;
     global $pia_lang;
+    global $http_status_code;
+
     $db = new SQLite3($db_file);
     $mon_res = $db->query('SELECT * FROM Services');
     // General Box for all Services without MAC
@@ -189,8 +192,15 @@ function list_standalone_services() {
             if (substr($row['mon_LastStatus'],0,1) == "5") {$code_icon_color = "orange-common";}
             if ($row['mon_LastLatency'] == "99999999") {$code_icon_color = "bg-red";}
             $url_array = explode('://', $row['mon_URL']);
+
+            if ($http_status_code[$row['mon_LastStatus']] != "") {
+                $status_description = $http_status_code[$row['mon_LastStatus']]['description'];
+            } else {
+                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem..';
+            }
+
             echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
-                    <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;">
+                    <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="'.$status_description.'">
                         <div style="width: 70px; height: 70px; text-align: center; padding-top: 5px;">
                             <span style="font-size:18px;">'.strtoupper($url_array[0]).'</span><br>
                             <span style="font-size:24px;">'.$row['mon_LastStatus'].'</span>
@@ -263,6 +273,7 @@ function get_devices_from_services() {
 function get_service_from_unique_device($func_unique_device) {
     global $db_file;
     global $pia_lang;
+    global $http_status_code;
 
     $db = new SQLite3($db_file);
     $mon_res = $db->query('SELECT * FROM Services ORDER BY mon_Tags ASC');
@@ -280,8 +291,15 @@ function get_service_from_unique_device($func_unique_device) {
             if (substr($row['mon_LastStatus'],0,1) == "5") {$code_icon_color = "orange-common";}
             if ($row['mon_LastLatency'] == "99999999") {$code_icon_color = "bg-red";}
             $url_array = explode('://', $row['mon_URL']);
+
+            if ($http_status_code[$row['mon_LastStatus']] != "") {
+                $status_description = $http_status_code[$row['mon_LastStatus']]['description'];
+            } else {
+                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem..';
+            }
+
             echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
-                    <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;">
+                    <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="'.$status_description.'">
                         <div style="width: 70px; height: 70px; text-align: center; padding-top: 5px;">
                             <span style="font-size:18px;">'.strtoupper($url_array[0]).'</span><br>
                             <span style="font-size:24px;">'.$row['mon_LastStatus'].'</span>
@@ -333,50 +351,14 @@ function get_service_from_unique_device($func_unique_device) {
 
 <style type="text/css">
 
-.progress-segment {
-  display: flex;
-  margin-bottom: 5px;
-  margin-top: 10px;
+.progress-segment {display: flex; margin-bottom: 5px; margin-top: 10px;}
+.item {width: 100%; background-color: lightgray; margin-right: 2px; height: 12px;
+  &:first-child {border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
+  &:last-child {border-top-right-radius: 3px; border-bottom-right-radius: 3px;}
 }
-
-.item {
-  width: 100%;
-  background-color: lightgray;
-  margin-right: 2px;
-  height: 12px;
-
-  &:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-  }
-
-  &:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-  }
-}
-
-.orange-common {
-    background-color: #f04500 !important;
-  }
-
-.item:hover:after {
-    position: absolute;
-    display: flex;
-    content: attr(title);
-    left: 0px;
-    top: 0px;
-    padding: 5px;
-    background-color: #913225;
-    font-size: 16px;
-    color: white;
-    width: 100%;
-    height: 38px;
-}
-
-.item:hover {
-    background-color: #aaa !important;
-}
+.orange-common {background-color: #f04500 !important;}
+.item:hover:after {position: absolute; display: flex; content: attr(title); left: 0px; top: 0px; padding: 5px; background-color: #913225; font-size: 16px; color: white; width: 100%; height: 38px;}
+.item:hover {background-color: #aaa !important;}
 
 </style>
 
@@ -464,6 +446,9 @@ function get_service_from_unique_device($func_unique_device) {
 // Start rendering page data
 // ===============================================================================
 
+// Load http status code in array
+$http_status_code = open_http_status_code_json();
+
 // Get a array of device with monitored URLs
 $unique_devices = get_devices_from_services();
 
@@ -530,6 +515,10 @@ if ($count_standalone > 0) {
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
 
 <script>
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
 initializeiCheck();
 
