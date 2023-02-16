@@ -160,7 +160,7 @@ $pia_lang['WebServices_Events_Shortcut_HTTP5xx'] = 'HTTP Code 5xx';
 $pia_lang['WebServices_Events_Shortcut_Down'] = 'Down';
 $pia_lang['WebServices_Events_TableHead_URL'] = 'Web Service URL';
 $pia_lang['WebServices_Events_TableHead_TargetIP'] = 'Ziel IP';
-$pia_lang['WebServices_Events_TableHead_ScanTime'] = 'Aktualisierungszeit';
+$pia_lang['WebServices_Events_TableHead_ScanTime'] = 'Datum';
 $pia_lang['WebServices_Events_TableHead_StatusCode'] = 'HTTP Status';
 $pia_lang['WebServices_Events_TableHead_ResponsTime'] = 'Antwortzeit';
 
@@ -313,7 +313,7 @@ $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Sicherg. / Wiederherstellg.'
 $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'Allgemein';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Geräteübersicht konfigurieren';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Sicherheit';
-$pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Die hier aufgeführten Optionen bewirken serverseitige Konfigurationsänderungen. Diese Änderunegn betreffen also alle Geräte die auf diese Seite zugreifen.';
+$pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Die hier aufgeführten Optionen bewirken serverseitige Konfigurationsänderungen. Diese Änderungen betreffen also alle Geräte die auf diese Seite zugreifen.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Darstellungswechsel (Dunkel/Hell)';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Darstellungswechsel';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Wechselt zwischen der hellen und der dunklen Darstellung. Wenn die Umschaltung nicht ordentlich funktionieren sollte, versuchen Sie den Browsercache zu löschen.';
