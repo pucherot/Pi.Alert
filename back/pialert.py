@@ -1492,7 +1492,6 @@ def service_monitoring_notification():
     
     # Reporting section
     print ('\nReporting (Web Services) ...')
-    openDB()
 
     # Open text Template
     template_file = open(PIALERT_BACK_PATH + '/report_template_webservice.txt', 'r') 
@@ -1516,7 +1515,7 @@ def service_monitoring_notification():
     mail_section_services_down = False
     mail_text_services_down = ''
     mail_html_services_down = ''
-    text_line_template = '{}\t{}\n{}\t\t{}\n{}\t{}\n{}\t{}\n\n'
+    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t\t{}\n\t{}\t{}\n\n'
     html_line_template     = '<tr>\n'+ \
         '  <td> {} </td>\n  <td> {} </td>\n'+ \
         '  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
@@ -1542,7 +1541,7 @@ def service_monitoring_notification():
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}\t\t\t{}\n{}\t\t\t\t{}\n{}\t\t\t{}\n{}\t\t{}\n{}\t\t{}\n{}\t{}\n\n'
+    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
             '  {} </td>\n  <td> {} </td>\n'+ \
             '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
@@ -1568,11 +1567,6 @@ def service_monitoring_notification():
 
     format_report_section_services (mail_section_events, 'SECTION_EVENTS',
         'TABLE_EVENTS', mail_text_events, mail_html_events)
-
-    # DEBUG - Write output emails for testing
-    # if True :
-    #     write_file (LOG_PATH + '/report_output.txt', mail_text_webservice) 
-    #     write_file (LOG_PATH + '/report_output.html', mail_html_webservice)
 
     # # Send Mail
     if mail_section_services_down == True or mail_section_events == True :
@@ -1602,13 +1596,8 @@ def service_monitoring_notification():
     else :
         print ('    No changes to report...')
 
-
-    # # DEBUG - print number of rows updated
-    # print ('    Notifications:', sql.rowcount)
-
     # # Commit changes
-    # sql_connection.commit()
-    # closeDB()
+    sql_connection.commit()
 
 
 # -----------------------------------------------------------------------------
@@ -1639,15 +1628,12 @@ def service_monitoring():
         monitor_logfile.write("\nStart Services Monitoring\n\n Timestamp          | StatusCode | ResponseTime | URL \n-----------------------------------------------------------------\n") 
         monitor_logfile.close()
 
-    # for site in sites:
-    #     last_email_time[site] = 0  # Initialize timestamp as 0
-
     while sites:
         for site in sites:
             status,latency = check_services_health(site)
             scantime = strftime("%Y-%m-%d %H:%M:%S")
 
-            # Debugging 
+            # DEBUG 
             # print("{} - {} STATUS: {} ResponseTime: {}".format(strftime("%Y-%m-%d %H:%M:%S"),
             #                     site,
             #                     status,
@@ -1887,6 +1873,9 @@ def email_reporting ():
     # DEBUG - print number of rows updated
     print ('    Notifications:', sql.rowcount)
 
+    # Commit changes
+    sql_connection.commit()
+
     try:
         enable_services_monitoring = SCAN_WEBSERVICES
     except NameError:
@@ -1896,8 +1885,6 @@ def email_reporting ():
         if str(startTime)[15] == "0":
             service_monitoring_notification()
 
-    # Commit changes
-    sql_connection.commit()
     closeDB()
 
 #-------------------------------------------------------------------------------
