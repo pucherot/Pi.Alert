@@ -1525,14 +1525,23 @@ def service_monitoring_notification():
                     ORDER BY cur_DateTime""")
 
     for eventAlert in sql :
+        if eventAlert['cur_TargetIP'] == '':
+            _func_cur_TargetIP = 'n.a.'
+        else:
+            _func_cur_TargetIP = eventAlert['cur_TargetIP']
+        if eventAlert['cur_TargetIP_prev'] == '':
+            _func_cur_TargetIP_prev = 'n.a.'
+        else:
+            _func_cur_TargetIP_prev = eventAlert['cur_TargetIP_prev']
+
         mail_section_services_down = True
         mail_text_services_down += text_line_template.format (
             'Service: ', eventAlert['cur_URL'], 
             'Time: ', eventAlert['cur_DateTime'], 
-            'Target IP: ', eventAlert['cur_TargetIP'],
-            'prev. Target IP: ', eventAlert['cur_TargetIP_prev'])
+            'Target IP: ', _func_cur_TargetIP,
+            'prev. Target IP: ', _func_cur_TargetIP_prev)
         mail_html_services_down += html_line_template.format (
-            eventAlert['cur_URL'], eventAlert['cur_DateTime'], eventAlert['cur_TargetIP'], eventAlert['cur_TargetIP_prev'])
+            eventAlert['cur_URL'], eventAlert['cur_DateTime'], _func_cur_TargetIP, _func_cur_TargetIP_prev)
 
     format_report_section_services (mail_section_services_down, 'SECTION_DEVICES_DOWN',
         'TABLE_DEVICES_DOWN', mail_text_services_down, mail_html_services_down)
@@ -1552,17 +1561,26 @@ def service_monitoring_notification():
                     ORDER BY cur_DateTime""")
 
     for eventAlert in sql :
+        if eventAlert['cur_TargetIP'] == '':
+            _func_cur_TargetIP = 'n.a.'
+        else:
+            _func_cur_TargetIP = eventAlert['cur_TargetIP']
+        if eventAlert['cur_TargetIP_prev'] == '':
+            _func_cur_TargetIP_prev = 'n.a.'
+        else:
+            _func_cur_TargetIP_prev = eventAlert['cur_TargetIP_prev']
+
         mail_section_events = True
         mail_text_events += text_line_template.format (
             'Service: ', eventAlert['cur_URL'], 
             'Time: ', eventAlert['cur_DateTime'], 
-            'Target IP: ', eventAlert['cur_TargetIP'],
-            'prev. Target IP: ', eventAlert['cur_TargetIP_prev'], 
+            'Target IP: ', _func_cur_TargetIP,
+            'prev. Target IP: ', _func_cur_TargetIP_prev, 
             'HTTP Status Code: ', eventAlert['cur_StatusCode'], 
             'prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
         mail_html_events += html_line_template.format (
-            eventAlert['cur_URL'], eventAlert['cur_Latency'], eventAlert['cur_TargetIP'],
-            eventAlert['cur_TargetIP'], eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
+            eventAlert['cur_URL'], eventAlert['cur_Latency'], _func_cur_TargetIP,
+            _func_cur_TargetIP_prev, eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
             eventAlert['cur_StatusCode_prev'])
 
     format_report_section_services (mail_section_events, 'SECTION_EVENTS',
