@@ -2,10 +2,11 @@
 #  Pi.Alert
 #  Open Source Network Guard / WIFI & LAN intrusion detector 
 #
-#  events.php - Front module. Events page
+#  serviceEvents.php - Front module. Service events page
 #-------------------------------------------------------------------------------
-#  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
+
 
 <?php
 session_start();

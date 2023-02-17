@@ -160,6 +160,31 @@ function get_count_standalone_services() {
 
 // -----------------------------------------------------------------------------------------------
 
+// get String with the selected notifications
+function get_notifications($alertDown, $alertEvent) {
+    global $pia_lang;
+
+    if ($alertEvent == "1" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_all'].", ".$pia_lang['WebServices_Events_down'];}
+    elseif ($alertEvent == "0" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_down'];}
+    elseif ($alertEvent == "1" && $alertDown == "0") {$notification_type = $pia_lang['WebServices_Events_all'];}
+    else {$notification_type = $pia_lang['WebServices_Events_none'];}
+    return $notification_type;
+}
+
+// -----------------------------------------------------------------------------------------------
+
+// get color from status code
+function get_icon_color($statuscode) {
+    if (substr($statuscode,0,1) == "2") {$code_icon_color = "bg-green";}
+    if (substr($statuscode,0,1) == "3") {$code_icon_color = "bg-yellow";}
+    if (substr($statuscode,0,1) == "4") {$code_icon_color = "bg-yellow";}
+    if (substr($statuscode,0,1) == "5") {$code_icon_color = "orange-common";}
+    if ($statuscode == "0") {$code_icon_color = "bg-red";}
+    return $code_icon_color;
+}
+
+// -----------------------------------------------------------------------------------------------
+
 // Print a list of all monitored URLs without a MAC Adresse
 function list_standalone_services() {
     global $db_file;
@@ -181,16 +206,10 @@ function list_standalone_services() {
         if ($row['mon_MAC'] == "") {
             if (substr($row['mon_LastStatus'],0,1) == "2") {$code_icon_color = "bg-green";}
 
-            if ($row['mon_AlertEvents'] == "1" && $row['mon_AlertDown'] == "1") {$notification_type = $pia_lang['WebServices_Events_all'].", ".$pia_lang['WebServices_Events_down'];}
-            elseif ($row['mon_AlertDown'] == "1") {$notification_type = $pia_lang['WebServices_Events_down'];}
-            elseif ($row['mon_AlertEvents'] == "1") {$notification_type = $pia_lang['WebServices_Events_all'];}
-            else {$notification_type = $pia_lang['WebServices_Events_none'];}
+            $notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
 
-            if (substr($row['mon_LastStatus'],0,1) == "2") {$code_icon_color = "bg-green";}
-            if (substr($row['mon_LastStatus'],0,1) == "3") {$code_icon_color = "bg-yellow";}
-            if (substr($row['mon_LastStatus'],0,1) == "4") {$code_icon_color = "bg-yellow";}
-            if (substr($row['mon_LastStatus'],0,1) == "5") {$code_icon_color = "orange-common";}
-            if ($row['mon_LastLatency'] == "99999999") {$code_icon_color = "bg-red";}
+            $code_icon_color = get_icon_color($row['mon_LastStatus']);
+
             $url_array = explode('://', $row['mon_URL']);
 
             if ($http_status_code[$row['mon_LastStatus']] != "") {
@@ -238,7 +257,6 @@ function list_standalone_services() {
             // print_r($func_httpcodes);
             // echo '<br>';
             // print_r($func_scans);
-
         }
     }
 
@@ -281,15 +299,11 @@ function get_service_from_unique_device($func_unique_device) {
     while ($row = $mon_res->fetchArray()) {
         if ($row['mon_MAC'] == $func_unique_device) {
             unset($func_httpcodes);
-            if ($row['mon_AlertEvents'] == "1") {$notification_type = "Alle Events";}
-            elseif ($row['mon_AlertDown'] == "1") {$notification_type = "Down";}
-            else {$notification_type = "keine";}
 
-            if (substr($row['mon_LastStatus'],0,1) == "2") {$code_icon_color = "bg-green";}
-            if (substr($row['mon_LastStatus'],0,1) == "3") {$code_icon_color = "bg-yellow";}
-            if (substr($row['mon_LastStatus'],0,1) == "4") {$code_icon_color = "bg-yellow";}
-            if (substr($row['mon_LastStatus'],0,1) == "5") {$code_icon_color = "orange-common";}
-            if ($row['mon_LastLatency'] == "99999999") {$code_icon_color = "bg-red";}
+            $notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
+
+            $code_icon_color = get_icon_color($row['mon_LastStatus']);
+
             $url_array = explode('://', $row['mon_URL']);
 
             if ($http_status_code[$row['mon_LastStatus']] != "") {
@@ -333,7 +347,7 @@ function get_service_from_unique_device($func_unique_device) {
                     // print_r($func_httpcodes);
                     // echo '<br>';
                     // print_r($func_scans);
-                                        
+                        
             echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
                         </div>
                     </div>
@@ -399,7 +413,7 @@ function get_service_from_unique_device($func_unique_device) {
                                 <div class="col-xs-9">
                                   <div class="input-group">
                                     <div class="input-group-btn">
-                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select'];?>
+                                      <button type="button" class="btn btn-default dropdown-toggle black-tooltip" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select'];?>
                                         <span class="fa fa-caret-down"></span></button>
                                       <ul class="dropdown-menu">
                                         <?php getDeviceMacs (); ?>

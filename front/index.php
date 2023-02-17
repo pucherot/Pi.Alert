@@ -1,3 +1,12 @@
+<!-- ---------------------------------------------------------------------------
+#  Pi.Alert
+#  Open Source Network Guard / WIFI & LAN intrusion detector 
+#
+#  index.php - Front module. Login and logout, redirect
+#-------------------------------------------------------------------------------
+#  leiweibau 2023                                          GNU GPLv3
+#--------------------------------------------------------------------------- -->
+
 <?php
 session_start();
 

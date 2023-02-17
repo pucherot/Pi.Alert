@@ -2,10 +2,11 @@
 #  Pi.Alert
 #  Open Source Network Guard / WIFI & LAN intrusion detector 
 #
-#  deviceDetails.php - Front module. Device management page
+#  serviceDetails.php - Front module. Service management page
 #-------------------------------------------------------------------------------
-#  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
+
 
 <?php
 session_start();
@@ -17,29 +18,30 @@ if ($_SESSION["login"] != 1)
   }
 
 require 'php/templates/header.php';
-require 'php/server/db.php';
 
 $service_details_title = $_REQUEST['url'];
 $service_details_title_array = explode('://', $_REQUEST['url']);
 
 $db_file = '../db/pialert.db';
+$db = new SQLite3($db_file);
+$db->exec('PRAGMA journal_mode = wal;');
 
 function get_service_details($service_URL) {
-    global $db_file;
-    $db = new SQLite3($db_file);
+    global $db;
+
     $mon_res = $db->query('SELECT * FROM Services WHERE mon_URL="'.$service_URL.'"');
     $row = $mon_res->fetchArray();
-    $db->close();
     return $row;
 }
 
 function get_service_events_table($service_URL) {
-    global $db_file;
-    $db = new SQLite3($db_file);
+    global $db;
+
     $moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="'.$service_URL.'"');
     while ($row = $moneve_res->fetchArray()) {
+        if ($row['moneve_TargetIP'] == '') {$func_TargetIP = 'n.a.';} else {$func_TargetIP = $row['moneve_TargetIP'];}
         echo  '<tr>
-                  <td>'.$row['moneve_TargetIP'].'</td>
+                  <td>'.$func_TargetIP.'</td>
                   <td>'.$row['moneve_DateTime'].'</td>
                   <td>'.$row['moneve_StatusCode'].'</td>
                   <td>'.$row['moneve_Latency'].'</td>

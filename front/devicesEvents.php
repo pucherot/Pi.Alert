@@ -2,9 +2,10 @@
 #  Pi.Alert
 #  Open Source Network Guard / WIFI & LAN intrusion detector 
 #
-#  events.php - Front module. Events page
+#  devicesEvents.php - Front module. Events page
 #-------------------------------------------------------------------------------
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
 
 <?php
@@ -15,8 +16,7 @@ if ($_SESSION["login"] != 1)
       header('Location: /pialert/index.php');
       exit;
   }
-
-  require 'php/templates/header.php';
+require 'php/templates/header.php';
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->

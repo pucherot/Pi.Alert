@@ -5,6 +5,7 @@
 #  presence.php - Front module. Device Presence calendar page
 #-------------------------------------------------------------------------------
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
 
 <?php
@@ -15,9 +16,9 @@ if ($_SESSION["login"] != 1)
       header('Location: /pialert/index.php');
       exit;
   }
-
-  require 'php/templates/header.php';
-  require 'php/templates/graph.php';
+require 'php/server/db.php';
+require 'php/templates/header.php';
+require 'php/templates/graph.php';
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
