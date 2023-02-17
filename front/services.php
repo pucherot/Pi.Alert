@@ -26,7 +26,8 @@ require 'php/server/db.php';
 // Start prepare data
 // ===============================================================================
 
-$db_file = '../db/pialert.db';
+$DBFILE = '../db/pialert.db';
+OpenDB();
 
 // ===============================================================================
 // End prepare data
@@ -40,8 +41,7 @@ function open_http_status_code_json () {
 // -----------------------------------------------------------------------------------------------
 
 function getDeviceMacs () {
-    global $db_file;
-    $db = new SQLite3($db_file);
+    global $db;
     $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
     $code_array = array();
     while ($row = $dev_res->fetchArray()) {
@@ -53,9 +53,8 @@ function getDeviceMacs () {
 
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_latency_from_url($service_URL) {
-    global $db_file;
+    global $db;
     unset($code_array, $i, $moneve_res);
-    $db = new SQLite3($db_file);
     $moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
     $i = 0;
     $code_array = array();
@@ -65,9 +64,7 @@ function get_latest_latency_from_url($service_URL) {
             $i++;
         }
         if ($i == 18) {break;}
-
     }
-    $db->close();
     return $code_array;
 }
 
@@ -75,9 +72,8 @@ function get_latest_latency_from_url($service_URL) {
 
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_statuscodes_from_url($service_URL) {
-    global $db_file;
+    global $db;
     unset($code_array, $i, $moneve_res);
-    $db = new SQLite3($db_file);
     $moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
     $i = 0;
     $code_array = array();
@@ -87,9 +83,7 @@ function get_latest_statuscodes_from_url($service_URL) {
             $i++;
         }
         if ($i == 18) {break;}
-
     }
-    $db->close();
     return $code_array;
 }
 
@@ -97,9 +91,8 @@ function get_latest_statuscodes_from_url($service_URL) {
 
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_scans_from_url($service_URL) {
-    global $db_file;
+    global $db;
     unset($code_array, $i, $moneve_res);
-    $db = new SQLite3($db_file);
     $moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
     $i = 0;
     $code_array = array();
@@ -110,7 +103,6 @@ function get_latest_scans_from_url($service_URL) {
         }
         if ($i == 18) {break;}
     }
-    $db->close();
     return $code_array;
 }
 
@@ -119,42 +111,36 @@ function get_latest_scans_from_url($service_URL) {
 
 // Get Name from Devices
 function get_device_name($service_MAC) {
-    global $db_file;
-    $db = new SQLite3($db_file);
+    global $db;
     $dev_res = $db->query('SELECT * FROM Devices');
     while ($row = $dev_res->fetchArray()) {
         if ($row['dev_MAC'] == $service_MAC) {
             return $row['dev_Name'];
         }
     }
-    $db->close();
 }
 
 // -----------------------------------------------------------------------------------------------
 
 // Print a list of all monitored URLs
 function list_all_services() {
-    global $db_file;
-    $db = new SQLite3($db_file);
+    global $db;
     $mon_res = $db->query('SELECT * FROM Services');
     while ($row = $mon_res->fetchArray()) {
         echo $row['mon_URL'].' - '.$row['mon_MAC'].' - '.$row['mon_TargetIP'].'<br>';
     }
-    $db->close();
 }
 
 // -----------------------------------------------------------------------------------------------
 
 // get Count of all standalone services
 function get_count_standalone_services() {
-    global $db_file;
-    $db = new SQLite3($db_file);
+    global $db;
     $mon_res = $db->query('SELECT * FROM Services');
     $func_count = 0;
     while ($row = $mon_res->fetchArray()) {
         if ($row['mon_MAC'] == "") {$func_count++;}
     }
-    $db->close();
     return $func_count;
 }
 
@@ -187,11 +173,10 @@ function get_icon_color($statuscode) {
 
 // Print a list of all monitored URLs without a MAC Adresse
 function list_standalone_services() {
-    global $db_file;
     global $pia_lang;
     global $http_status_code;
+    global $db;
 
-    $db = new SQLite3($db_file);
     $mon_res = $db->query('SELECT * FROM Services');
     // General Box for all Services without MAC
     echo '<div class="box">
@@ -236,16 +221,16 @@ function list_standalone_services() {
             $func_httpcodes = get_latest_statuscodes_from_url($row['mon_URL']);
             $func_latency = get_latest_latency_from_url($row['mon_URL']);
 
-                    for($x = 0; $x < 18; $x++) {
-                        unset($codecolor);
-                        $for_httpcode = $func_httpcodes[$x];
-                        if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
-                        if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                        if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
-                        if ($for_httpcode == "0") {$codecolor = "bg-red";}
-                        echo '<div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
+            for($x = 0; $x < 18; $x++) {
+                unset($codecolor);
+                $for_httpcode = $func_httpcodes[$x];
+                if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
+                if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
+                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
+                if ($for_httpcode == "0") {$codecolor = "bg-red";}
+                echo '       <div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
 
-                    }
+            }
 
             echo '         </div>';
             echo '         <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
@@ -263,22 +248,19 @@ function list_standalone_services() {
     echo '  <!-- /.box-body -->
             </div>
           </div>';
-    $db->close();
 }
 
 // -----------------------------------------------------------------------------------------------
 
 // Get a array of unique devices with monitored URLs
 function get_devices_from_services() {
-    global $db_file;
-    $db = new SQLite3($db_file);
+    global $db;
     $mon_res = $db->query('SELECT * FROM Services');
     $func_unique_devices = array();
     while ($row = $mon_res->fetchArray()) {
         array_push($func_unique_devices, $row['mon_MAC']);
     }
     $func_unique_devices = array_values(array_unique(array_filter($func_unique_devices)));
-    $db->close();
     return $func_unique_devices;
 }
 // ###### Debugging
@@ -289,11 +271,10 @@ function get_devices_from_services() {
 
 // Print a list of all monitored URLs of an unique device
 function get_service_from_unique_device($func_unique_device) {
-    global $db_file;
     global $pia_lang;
     global $http_status_code;
+    global $db;
 
-    $db = new SQLite3($db_file);
     $mon_res = $db->query('SELECT * FROM Services ORDER BY mon_Tags ASC');
     // Print Services Loop
     while ($row = $mon_res->fetchArray()) {
@@ -321,32 +302,32 @@ function get_service_from_unique_device($func_unique_device) {
                     </div>
                     <div style="display: inline-block; width: 100%;">
                         <div style="margin: 0px 15px;">
-                                <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;'.$row['mon_Tags'].'</span></td></tr></table>';
+                             <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;'.$row['mon_Tags'].'</span></td></tr></table>';
             // Render Progressbar
-                    echo'         <div class="progress-segment">';
+            echo'                <div class="progress-segment">';
 
             // Get Tooltip values
             $func_scans = get_latest_scans_from_url($row['mon_URL']);
             $func_httpcodes = get_latest_statuscodes_from_url($row['mon_URL']);
             $func_latency = get_latest_latency_from_url($row['mon_URL']);
 
-                    for($x = 0; $x < 18; $x++) {
-                        unset($codecolor);
-                        $for_httpcode = $func_httpcodes[$x];
-                        if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
-                        if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                        if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
-                        if ($for_httpcode == "0") {$codecolor = "bg-red";}
-                        echo '<div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
+            for($x = 0; $x < 18; $x++) {
+                unset($codecolor);
+                $for_httpcode = $func_httpcodes[$x];
+                if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
+                if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
+                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
+                if ($for_httpcode == "0") {$codecolor = "bg-red";}
+                echo '              <div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
 
-                    }
+            }
 
-                    echo '        </div>';
-                    // ###### Debugging
-                    // ##########################################
-                    // print_r($func_httpcodes);
-                    // echo '<br>';
-                    // print_r($func_scans);
+            echo '        </div>';
+            // ###### Debugging
+            // ##########################################
+            // print_r($func_httpcodes);
+            // echo '<br>';
+            // print_r($func_scans);
                         
             echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
                         </div>
@@ -354,7 +335,6 @@ function get_service_from_unique_device($func_unique_device) {
                   </div>';
         }
     }
-    $db->close();
 }
 
 
