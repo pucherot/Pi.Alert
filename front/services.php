@@ -348,18 +348,15 @@ function get_service_from_unique_device($func_unique_device) {
 <!-- Page ------------------------------------------------------------------ -->
 
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-
 <style type="text/css">
-
-.progress-segment {display: flex; margin-bottom: 5px; margin-top: 10px;}
-.item {width: 100%; background-color: lightgray; margin-right: 2px; height: 12px;
-  &:first-child {border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
-  &:last-child {border-top-right-radius: 3px; border-bottom-right-radius: 3px;}
-}
-.orange-common {background-color: #f04500 !important;}
-.item:hover:after {position: absolute; display: flex; content: attr(title); left: 0px; top: 0px; padding: 5px; background-color: #913225; font-size: 16px; color: white; width: 100%; height: 38px;}
-.item:hover {background-color: #aaa !important;}
-
+    .progress-segment {display: flex; margin-bottom: 5px; margin-top: 10px;}
+    .item {width: 100%; background-color: lightgray; margin-right: 2px; height: 12px;
+      &:first-child {border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
+      &:last-child {border-top-right-radius: 3px; border-bottom-right-radius: 3px;}
+    }
+    .orange-common {background-color: #f04500 !important;}
+    .item:hover:after {position: absolute; display: flex; content: attr(title); left: 0px; top: 0px; padding: 5px; background-color: #913225; font-size: 16px; color: white; width: 100%; height: 38px;}
+    .item:hover {background-color: #aaa !important;}
 </style>
 
 <div class="content-wrapper">

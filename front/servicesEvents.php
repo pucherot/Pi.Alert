@@ -236,8 +236,8 @@ function initializeDatatable () {
     'pageLength'   : tableRows,
 
     'columnDefs'  : [
-      {className: 'text-center', targets: [2,3] },
-      {className: 'text-right',  targets: [1] },
+      {className: 'text-center', targets: [1,3] },
+      {className: 'text-right',  targets: [] },
       {width:     '220px',       targets: [0] },
       {width:     '120px',       targets: [1] },
       {width:     '80px',        targets: [3] },

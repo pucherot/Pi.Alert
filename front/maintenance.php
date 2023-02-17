@@ -235,7 +235,7 @@ if ($_REQUEST['tab'] == '1') {
             <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-nmap" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
 <?php
 if ($_SESSION['Scan_WebServices'] == True) {
-    echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-webservices" style="margin: 5px;">WebServices</button>';
+    echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-webservices" style="margin: 5px;">'.$pia_lang['Maintenance_Tools_Logviewer_WebServices'].'</button>';
 }
 ?>
       </div>
@@ -399,7 +399,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                     <div style="border: none; overflow-y: scroll;">';
 
                     $file = file_get_contents('./php/server/pialert.webservices.log', true);
-                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty'];}
+                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty'];}
                     echo str_replace("\n",'<br>',$file);
 
     echo '                <br></div>
