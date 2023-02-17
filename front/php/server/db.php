@@ -55,6 +55,10 @@ function OpenDB () {
   {
     die ('Error connecting to database');
   }
+  
+  $db->busyTimeout(2000);
+  $db->exec('PRAGMA journal_mode = wal;');
+
 }
    
 ?>
