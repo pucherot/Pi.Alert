@@ -587,3 +587,14 @@ body.modal-open {
   box-shadow: 0px 0px 4px black;
   opacity: 0.85 !important;
 }
+
+.fa-gradient-green {
+    background: -webkit-gradient(linear, left top, left bottom, from(#AEFF01), to(#01A000));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.fa-gradient-red {
+    background: -webkit-gradient(linear, left top, left bottom, from(#FF8800), to(#bd2c19));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

@@ -331,7 +331,7 @@ function getNodeOnlineState($pia_node_name) {
   $func_sql = 'SELECT * FROM "Devices" WHERE "dev_Name" = "'.$pia_node_name.'"';
   $func_result = $db->query($func_sql);//->fetchArray(SQLITE3_ASSOC); 
   while($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
-     if ($func_res['dev_PresentLastScan'] == 1) {return '<i class="fa fa-w fa-circle text-green-light"></i>&nbsp;';} else {return '<i class="fa fa-w fa-circle text-red"></i>&nbsp;';}
+     if ($func_res['dev_PresentLastScan'] == 1) {return '<i class="fa fa-w fa-circle text-green-light fa-gradient-green"></i>&nbsp;';} else {return '<i class="fa fa-w fa-circle text-red fa-gradient-red"></i>&nbsp;';}
   }
 }
 
