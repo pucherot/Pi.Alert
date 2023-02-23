@@ -592,7 +592,38 @@ $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'On the network side, for example, a
 											 On the detail view you have now, with each recognized device, the possibility to save this just created switch and the occupied port.<br><br>
 											 Now the network page shows you the switch with its ports and the devices connected to it. For each device in the detail view, you have the option of assigning multiple ports to a switch, which you separate with a comma (e.g. for link aggregation). It is also possible to assign several devices to one port (e.g. a server with several virtual machines).<br><br>
 											 You can also assign a switch to a router if you have created it on the network side. Normally, this switch will now be displayed on the router tab. What does not happen is that the router is displayed on the switch port. For this it is necessary and possible to save a manual port configuration. To do this, open the "Administration" and select the switch in the editing. After you have entered the type and the number of ports again, you have a selection list of possible devices in the lowest field. After the selection, only the MAC address is visible, followed by a ",". Now simply add the port of the router on the switch and save. It is also possible to enter multiple MAC addresses and ports. It is important to follow the syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC".';
-
+$pia_lang['HelpFAQ_Cat_Network_602_head'] = 'A switch or router is shown to me without ports.';
+$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'It is possible that the number of ports was not entered when the device was created on the network page. When editing the device on the network page, it is also necessary to enter an already entered number of ports again.<br>
+											 If the number of ports is missing for a device that has already been created, the problem should be solved by editing the device and specifying the ports, the type and, if necessary, the manual port configuration.';
+$pia_lang['HelpFAQ_Cat_Service_700_head'] = 'What do the different colors in the colored bar mean?';
+$pia_lang['HelpFAQ_Cat_Service_700_text'] = 'There are 5 different color codes in total: <br>
+											 <span style="background-color:lightgray;">&nbsp;&nbsp;&nbsp;</span> - no scan available yet<br>
+											 <span class="bg-green">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 2xx<br>
+											 <span class="bg-yellow">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 3xx-4xx<br>
+											 <span class="bg-orange-custom">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 5xx<br>
+											 <span class="bg-red">&nbsp;&nbsp;&nbsp;</span> - offline';
+$pia_lang['HelpFAQ_Cat_Service_701_head'] = 'What are the HTTP status codes?';
+											// from json
+$pia_lang['HelpFAQ_Cat_Service_702_head'] = 'What changes are reported?';
+$pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Detectable events are:<br>
+												<ul>
+													<li>Changing the HTTP status code</li>
+													<li>Change IP</li>
+													<li>Response time of the server or the missing of the response.</li>
+												</ul>
+											 Depending on the choice of notification, either everything is reported, or only the absence of a server response.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'] = 'I cannot edit all the fields.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Not every field that is displayed on this page can be edited. Editable fields are:
+													<ul>
+														<li>'.$pia_lang['WebServices_label_Tags'].'</li>
+														<li>'.$pia_lang['WebServices_label_MAC'].' (possibly a device to which this web service is assigned)<br>
+															A MAC address is expected here. If something else (e.g. "laptop") is entered here, "'.$pia_lang['WebServices_unknown_Device'].' (laptop)" appears in the overview.. 
+															Services without this entry are listed under "'.$pia_lang['WebServices_BoxTitle_General'].'".</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_all'].'</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_down'].'</li>
+													</ul>';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Filtering the events via the colored tiles does not work.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Yes, that\'s right.';
 
 //////////////////////////////////////////////////////////////////
 // Reports Page

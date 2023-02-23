@@ -52,9 +52,9 @@ $pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Einstellungen';
 $pia_lang['Navigation_Network'] = 'Netzwerk';
 $pia_lang['Navigation_HelpFAQ'] = 'Hilfe / FAQ';
-$pia_lang['Navigation_Section_A'] = 'HAUPTMENÜ';
+$pia_lang['Navigation_Section_A'] = 'HAUPTFUNKTIONEN';
 $pia_lang['Navigation_Section_B'] = 'EVENTS & JOURNAL';
-$pia_lang['Navigation_Section_C'] = 'EINSTELLUNG & HILFE';
+$pia_lang['Navigation_Section_C'] = 'EINSTELLUNGEN & HILFE';
 
 //////////////////////////////////////////////////////////////////
 // Device Page
@@ -251,13 +251,13 @@ $pia_lang['WebServices_label_ScanTime'] = 'Aktualisierungszeit';
 $pia_lang['WebServices_label_Response_Time'] = 'Antwortzeit';
 $pia_lang['WebServices_label_AlertEvents'] = 'Alle Events';
 $pia_lang['WebServices_label_AlertDown'] = 'Down';
-$pia_lang['WebServices_label_Notification'] = 'Meldung bei';
+$pia_lang['WebServices_label_Notification'] = 'Melde';
 $pia_lang['WebServices_button_Delete_label'] = 'Service löschen';
 $pia_lang['WebServices_button_Delete_Warning'] = 'Sind Sie sicher, dass Sie diesen Web Service löschen wollen?';
 $pia_lang['WebServices_headline_NewService'] = 'Neuen Service hinzufügen';
 $pia_lang['WebServices_Events_all'] = 'Alle Events';
 $pia_lang['WebServices_Events_down'] = 'Down';
-$pia_lang['WebServices_Events_none'] = 'keine';
+$pia_lang['WebServices_Events_none'] = 'nichts';
 $pia_lang['WebServices_BoxTitle_General'] = 'Allgemein';
 
 //////////////////////////////////////////////////////////////////
@@ -583,12 +583,43 @@ $pia_lang['HelpFAQ_Cat_Network_600_head'] = 'Was bringt mir diese Seite?';
 $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Diese Seite soll dir die Möglichkeit bieten, die Belegung deiner Netzwerkgeräte abzubilden. Dazu kannst du einen oder mehrere Switches, WLANs, Router, etc. erstellen,
         									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen 
         									 an welchem Port ein Host angeschlossen und ob er online ist. Es ist möglich ein Gerät mehreren Ports (bei Portbündelung), als auch mehrere Geräte einem Port (virtuelle Maschinen), zuzuordnen.';
-
 $pia_lang['HelpFAQ_Cat_Network_601_head'] = 'Wie funktioniert die Netzwerk Seite?';
 $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ein Switch erstellt. Dazu biete ich bereits entsprechende Geräte in der Auswahlliste an. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
 											 Auf der Detailansicht hast du nun, bei jedem erkannten Gerät, die Möglichkeit diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
 											 Jetzt zeigt dir die Netzwerk Seite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit, mehrere Ports, die du mit einem Komma trennst, an einem Switch zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server mit mehreren virtuellen Maschinen).<br><br>
 											 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Netzwerk Seite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu klappst du die "Verwaltung" auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast, hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
+$pia_lang['HelpFAQ_Cat_Network_602_head'] = 'Ein Switch oder Router wird mir ohne Ports angezeigt.';
+$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'Möglicherweise wurde beim Anlegen des Gerätes auf der Netzwerkseite versäumt die Portanzahl einzugeben. Auch bei der Bearbeitung des Gerätes auf der Netzwerkseite ist es notwendig auch eine bereits eingegebene Portanzahl erneut einzugeben.<br>
+											 Solle also bei einem bereits angelegten Gerät die Portanzzahl fehlen, sollte eine Bearbeitung des Gerätes unter Angabe der <span class="text-maroon help_faq_code">Ports</span>, des <span class="text-maroon help_faq_code">Types</span> und ggf. der <span class="text-maroon help_faq_code">manuelle Port-Konfiguration</span> das Problem beseitigen.';
+$pia_lang['HelpFAQ_Cat_Service_700_head'] = 'Was bedeuten die unterschiedlichen Farben in dem farbigen Balken?';
+$pia_lang['HelpFAQ_Cat_Service_700_text'] = 'Es gibt insgesamt 5 verschiedene Farbcodes: <br>
+											 <span style="background-color:lightgray;">&nbsp;&nbsp;&nbsp;</span> - noch kein Scan verfügbar<br>
+											 <span class="bg-green">&nbsp;&nbsp;&nbsp;</span> - HTTP Status Code 2xx<br>
+											 <span class="bg-yellow">&nbsp;&nbsp;&nbsp;</span> - HTTP Status Code 3xx-4xx<br>
+											 <span class="bg-orange-custom">&nbsp;&nbsp;&nbsp;</span> - HTTP Status Code 5xx<br>
+											 <span class="bg-red">&nbsp;&nbsp;&nbsp;</span> - Offline';
+$pia_lang['HelpFAQ_Cat_Service_701_head'] = 'Welche HTTP Status Codes gibt es?';
+											// von json
+$pia_lang['HelpFAQ_Cat_Service_702_head'] = 'Welche Änderungen werden gemeldet?';
+$pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Feststellbare Events sind:<br>
+												<ul>
+													<li>Änderung des HTTP Status Codes</li>
+													<li>Änderung der IP</li>
+													<li>Antwortzeit des Servers bzw. das Ausbleiben der Antwort</li>
+												</ul>
+											 Je nach Wahl der Benachrichtigung, wird entweder alles gemeldet, oder nur das Ausbleiben einer Serverantwort.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'] = 'Ich kann nicht alle Felder bearbeiten.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Nicht jedes Feld, was auf dieser Seite angezeigt wird, kann auch bearbeitet werden. Bearbeitbare Felder sind:
+													<ul>
+														<li>'.$pia_lang['WebServices_label_Tags'].'</li>
+														<li>'.$pia_lang['WebServices_label_MAC'].' (eventuell ein Gerät, welchem dieser Web Service zugeordnet ist)<br>
+															Hier wird eine MAC-Adresse erwartet. Wenn hier etwas anderes (z.B. "Laptop") eingetragen wird, erscheint in der Übersicht "'.$pia_lang['WebServices_unknown_Device'].' (Laptop)". 
+															Services ohne diesen Eintrag werden unter "'.$pia_lang['WebServices_BoxTitle_General'].'" aufgelistet.</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_all'].'</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_down'].'</li>
+													</ul>';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Das Filtern der Ereignisse über die bunten Kacheln funktioniert nicht.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Ja, das stimmt.';
 
 
 //////////////////////////////////////////////////////////////////
@@ -599,4 +630,5 @@ $pia_lang['Reports_Title'] = 'Benachrichtigungen';
 $pia_lang['Reports_delete_all'] = 'Alle Benachrichtigungen löschen';
 $pia_lang['Reports_delete_all_noti'] = 'Alle Benachrichtigungen löschen';
 $pia_lang['Reports_delete_all_noti_text'] = 'Es werden alle Benachrichtigungen gelöscht. Der Zähler wird damit zurückgesetzt.';
+
 ?>

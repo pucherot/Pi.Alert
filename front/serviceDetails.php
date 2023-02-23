@@ -18,6 +18,7 @@ if ($_SESSION["login"] != 1)
   }
 
 require 'php/templates/header.php';
+# require 'php/server/db.php';
 
 $service_details_title = $_REQUEST['url'];
 $service_details_title_array = explode('://', $_REQUEST['url']);
@@ -209,8 +210,8 @@ if ($servicedetails['mon_MAC'] != "") {
 
 echo '<li> -----  </li>';
 
-global $db_file;
-$db = new SQLite3($db_file);
+//global $db_file;
+//$db = new SQLite3($db_file);
 $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
 $code_array = array();
 while ($row = $dev_res->fetchArray()) {
@@ -225,9 +226,6 @@ while ($row = $dev_res->fetchArray()) {
                           </div>
                         </div>
                       </div>
-
-
-
 
                     </div>         
                   </div>

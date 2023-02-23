@@ -1,3 +1,12 @@
+<!-- ---------------------------------------------------------------------------
+#  Pi.Alert
+#  Open Source Network Guard / WIFI & LAN intrusion detector 
+#
+#  help_faq.php - Front module. Help and FAQ
+#-------------------------------------------------------------------------------
+#  leiweibau 2023                                          GNU GPLv3
+#--------------------------------------------------------------------------- -->
+
 <?php
 session_start();
 
@@ -119,6 +128,8 @@ if ($_SESSION["login"] != 1)
         </div>
       </div> 
 
+<!-- Devices -->
+
 <h4><?php echo $pia_lang['Navigation_Devices'];?></h4>
  <div class="panel-group" id="accordion_dev">
   <div class="panel panel-default">
@@ -134,10 +145,11 @@ if ($_SESSION["login"] != 1)
       </div>
     </div>
   </div>
-</div> 
+</div>
 
+<!-- Devices Details -->
 
-<h4><?php echo $pia_lang['HelpFAQ_Cat_Detail'];?></h4>
+<h4><?php echo $pia_lang['Navigation_Devices'];?> - <?php echo $pia_lang['HelpFAQ_Cat_Detail'];?></h4>
  <div class="panel-group" id="accordion_det">
   <div class="panel panel-default">
     <div class="panel-heading faqhelp_head_color">
@@ -194,6 +206,141 @@ if ($_SESSION["login"] != 1)
   </div>
 </div> 
 
+<!-- Network -->
+
+<h4><?php echo $pia_lang['Navigation_Network'];?></h4>
+ <div class="panel-group" id="accordion_net">
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse600">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_600_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse600" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_600_text'];?>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse601">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_601_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse601" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_601_text'];?>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse602">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_602_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse602" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_Network_602_text'];?>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- Web Services -->
+
+<h4><?php echo $pia_lang['Navigation_Services'];?></h4>
+ <div class="panel-group" id="accordion_pre">
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse700">
+        <?php echo $pia_lang['HelpFAQ_Cat_Service_700_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse700" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_Service_700_text'];?>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse701">
+        <?php echo $pia_lang['HelpFAQ_Cat_Service_701_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse701" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <table class="table table-bordered table-hover table-striped"><tr><th class="col-xs-1" style="text-align: center">Code</th><th class="col-xs-11">Description</th></tr>
+        <?php 
+
+          $jsonfile = file_get_contents("./lib/http-status-code/index.json");
+          $code_array = json_decode($jsonfile, true);
+          asort($code_array);
+          foreach ($code_array as $key => $jsons) {
+            echo '<tr><td class="text-danger" style="font-weight: 600; text-align: center; vertical-align: top">'.$jsons['code'].'</td><td style="padding-left: 15px;">'.$jsons['description'].'</td></tr>';
+          }
+
+        ;?>
+      </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse702">
+        <?php echo $pia_lang['HelpFAQ_Cat_Service_702_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse702" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_Service_702_text'];?>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- Web Services Details -->
+
+<h4><?php echo $pia_lang['Navigation_Services'];?> - <?php echo $pia_lang['HelpFAQ_Cat_Detail'];?></h4>
+ <div class="panel-group" id="accordion_pre">
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse750">
+        <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse750" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'];?>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading faqhelp_head_color">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse751">
+        <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'];?></a>
+      </h4>
+    </div>
+    <div id="collapse751" class="panel-collapse collapse" style="font-size: 16px;">
+      <div class="panel-body">
+        <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'];?>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- Presence -->
+
 <h4><?php echo $pia_lang['Navigation_Presence'];?></h4>
  <div class="panel-group" id="accordion_pre">
   <div class="panel panel-default">
@@ -223,41 +370,6 @@ if ($_SESSION["login"] != 1)
     </div>
   </div>
 </div> 
-
-<h4><?php echo $pia_lang['Navigation_Network'];?></h4>
- <div class="panel-group" id="accordion_net">
-  <div class="panel panel-default">
-    <div class="panel-heading faqhelp_head_color">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse600">
-        <?php echo $pia_lang['HelpFAQ_Cat_Network_600_head'];?></a>
-      </h4>
-    </div>
-    <div id="collapse600" class="panel-collapse collapse" style="font-size: 16px;">
-      <div class="panel-body">
-        <?php echo $pia_lang['HelpFAQ_Cat_Network_600_text'];?>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="panel panel-default">
-    <div class="panel-heading faqhelp_head_color">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse601">
-        <?php echo $pia_lang['HelpFAQ_Cat_Network_601_head'];?></a>
-      </h4>
-    </div>
-    <div id="collapse601" class="panel-collapse collapse" style="font-size: 16px;">
-      <div class="panel-body">
-        <?php echo $pia_lang['HelpFAQ_Cat_Network_601_text'];?>
-      </div>
-    </div>
-  </div>
-
-</div> 
-
-
 
   <div style="width: 100%; height: 20px;"></div>
     </section>

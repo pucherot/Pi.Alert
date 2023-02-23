@@ -456,23 +456,23 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                         <button type="button" disabled class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
                           id="btnSave"     onclick="setDeviceData()" >     <?php echo $pia_lang['DevDetail_button_Save'];?> </button>
                     </div>
-                    <div style="width: 100%; position: absolute; top: 52px; right: 5px;">
-
-                      <div class="btn-group pull-right" style="position: relative; right: 0px;">
-                        <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px;"
-                          id="btnPrevious_down" onclick="previousRecord()"> <i class="fa fa-chevron-left"></i> </button>
-
-                        <div class="btn pa-btn-records"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
-                          id="txtRecord_down"     > 0 / 0 </div>
-
-                        <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
-                          id="btnNext_down"     onclick="nextRecord()"> <i class="fa fa-chevron-right"></i> </button>
-                      </div>
-
-                    </div>
                   </div>
 
                 </div>
+                    <div style="width: 100%; position: relative; top: 12px; right: -10px;">
+
+                      <div class="btn-group pull-right" style="position: relative; right: 0px;">
+                        <button type="button" class="btn btn-default" style="padding: 10px; min-width: 30px;"
+                          id="btnPrevious_down" onclick="previousRecord()"> <i class="fa fa-chevron-left"></i> </button>
+
+                        <div class="btn pa-btn-records"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
+                          id="txtRecord_down"> 0 / 0 </div>
+
+                        <button type="button" class="btn btn-default" style="padding: 10px; min-width: 30px; margin-left: 1px;"
+                          id="btnNext_down" onclick="nextRecord()"> <i class="fa fa-chevron-right"></i> </button>
+                      </div>
+
+                    </div>
               </div>
 
 
