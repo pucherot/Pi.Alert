@@ -39,7 +39,6 @@ function open_http_status_code_json () {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 function getDeviceMacs () {
     global $db;
     $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
@@ -50,7 +49,6 @@ function getDeviceMacs () {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_latency_from_url($service_URL) {
     global $db;
@@ -69,7 +67,6 @@ function get_latest_latency_from_url($service_URL) {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_statuscodes_from_url($service_URL) {
     global $db;
@@ -88,7 +85,6 @@ function get_latest_statuscodes_from_url($service_URL) {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_scans_from_url($service_URL) {
     global $db;
@@ -106,9 +102,7 @@ function get_latest_scans_from_url($service_URL) {
     return $code_array;
 }
 
-
 // -----------------------------------------------------------------------------------------------
-
 // Get Name from Devices
 function get_device_name($service_MAC) {
     global $db;
@@ -121,7 +115,6 @@ function get_device_name($service_MAC) {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // Print a list of all monitored URLs
 function list_all_services() {
     global $db;
@@ -132,7 +125,6 @@ function list_all_services() {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // get Count of all standalone services
 function get_count_standalone_services() {
     global $db;
@@ -145,7 +137,6 @@ function get_count_standalone_services() {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // get String with the selected notifications
 function get_notifications($alertDown, $alertEvent) {
     global $pia_lang;
@@ -158,19 +149,17 @@ function get_notifications($alertDown, $alertEvent) {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // get color from status code
 function get_icon_color($statuscode) {
     if (substr($statuscode,0,1) == "2") {$code_icon_color = "bg-green";}
     if (substr($statuscode,0,1) == "3") {$code_icon_color = "bg-yellow";}
     if (substr($statuscode,0,1) == "4") {$code_icon_color = "bg-yellow";}
-    if (substr($statuscode,0,1) == "5") {$code_icon_color = "orange-common";}
+    if (substr($statuscode,0,1) == "5") {$code_icon_color = "bg-orange-custom";}
     if ($statuscode == "0") {$code_icon_color = "bg-red";}
     return $code_icon_color;
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // Print a list of all monitored URLs without a MAC Adresse
 function list_standalone_services() {
     global $pia_lang;
@@ -194,13 +183,13 @@ function list_standalone_services() {
             $notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
 
             $code_icon_color = get_icon_color($row['mon_LastStatus']);
-
+            
             $url_array = explode('://', $row['mon_URL']);
 
             if ($http_status_code[$row['mon_LastStatus']] != "") {
                 $status_description = $http_status_code[$row['mon_LastStatus']]['description'];
             } else {
-                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem.';
+                $status_description = 'No status code was received from the server. The server may be offline or the network may have a problem.';
             }
 
             echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
@@ -226,7 +215,7 @@ function list_standalone_services() {
                 $for_httpcode = $func_httpcodes[$x];
                 if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
                 if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
+                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
                 if ($for_httpcode == "0") {$codecolor = "bg-red";}
                 echo '       <div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
 
@@ -237,11 +226,6 @@ function list_standalone_services() {
                         </div>
                     </div>
                   </div>';
-            // ###### Debugging
-            // ##########################################
-            // print_r($func_httpcodes);
-            // echo '<br>';
-            // print_r($func_scans);
         }
     }
 
@@ -251,7 +235,6 @@ function list_standalone_services() {
 }
 
 // -----------------------------------------------------------------------------------------------
-
 // Get a array of unique devices with monitored URLs
 function get_devices_from_services() {
     global $db;
@@ -263,12 +246,8 @@ function get_devices_from_services() {
     $func_unique_devices = array_values(array_unique(array_filter($func_unique_devices)));
     return $func_unique_devices;
 }
-// ###### Debugging
-// ##########################################
-//print_r(get_devices_from_services($mon_res));
 
 // -----------------------------------------------------------------------------------------------
-
 // Print a list of all monitored URLs of an unique device
 function get_service_from_unique_device($func_unique_device) {
     global $pia_lang;
@@ -316,19 +295,13 @@ function get_service_from_unique_device($func_unique_device) {
                 $for_httpcode = $func_httpcodes[$x];
                 if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
                 if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "orange-common";}
+                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
                 if ($for_httpcode == "0") {$codecolor = "bg-red";}
                 echo '              <div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
 
             }
 
-            echo '        </div>';
-            // ###### Debugging
-            // ##########################################
-            // print_r($func_httpcodes);
-            // echo '<br>';
-            // print_r($func_scans);
-                        
+            echo '        </div>';                        
             echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
                         </div>
                     </div>
@@ -360,7 +333,7 @@ function get_service_from_unique_device($func_unique_device) {
     <?php require 'php/templates/notification.php'; ?>
       <h1 id="pageTitle">
          <?php echo $pia_lang['WebServices_Title'];?> 
-      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-add-monitoringURL" style="display: inline-block; margin-top: -5px; margin-left: 15px;"><i class="bi bi-plus-lg"></i></button>
+      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-add-monitoringURL" style="display: inline-block; margin-top: -5px; margin-left: 15px;"><i class="bi bi-plus-lg" style="font-size:1.5rem"></i></button>
       </h1>
 
 <!-- Modals New URL ----------------------------------------------------------------- -->
@@ -412,7 +385,7 @@ function get_service_from_unique_device($func_unique_device) {
                             </div>
                             <div class="form-group col-xs-12">
                                 <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertDown'];?></label>
-                                <div class="col-xs-9" style="margin-top: px;">
+                                <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox red" id="insAlertDown" type="checkbox">
                                 </div>
                             </div>
@@ -484,9 +457,7 @@ if ($count_standalone > 0) {
 // ===============================================================================
 // End rendering page data
 // ===============================================================================
-
 ?>
-
 
     <div style="width: 100%; height: 20px;"></div>
     <!-- ----------------------------------------------------------------------- -->
@@ -534,7 +505,6 @@ function initializeiCheck () {
     radioClass:    'iradio_flat-red',
     increaseArea:  '20%'
   });
-
 }
 
 // -----------------------------------------------------------------------------
