@@ -545,6 +545,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td style="padding-left:5px;">- Allows the start of new scans again.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">enable_service_mon</td>
+											        <td style="padding-left:5px;">- Enable Web Service Monitoring<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">disable_service_mon</td>
+											        <td style="padding-left:5px;">- Disable Web Service Monitoring<br>&nbsp;</td>
+											    </tr>
+											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
 											        <td style="padding-left:5px;">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
 											    </tr>

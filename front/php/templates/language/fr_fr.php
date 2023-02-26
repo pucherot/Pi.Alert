@@ -322,6 +322,9 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Permet de passer de l&apos;a
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'dés-/activer l&apos;historique des activités';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Historique des activités';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Désactive/active l&apos;historique des activités sur la page de l&apos;appareil et sur la page de présence.';
+$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (on/off)';
+$pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Monitoring';
+$pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the web service monitoring for Pi.Alert. With activation, additional elements are displayed in the interface. With deactivation, they disappear again.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurer l&apos;aperçu des appareils';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Souhaitez-vous enregistrer les modifications que vous avez apportées ? Cette modification s&apos;applique à tous les appareils avec lesquels vous accédez à cette page.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'Pas de clé API définie';
@@ -403,6 +406,8 @@ $pia_lang['BackDevices_setapikey'] = 'La clé API a été définie';
 $pia_lang['BackDevices_test_notification'] = 'Le message de test a été envoyé';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Mode clair activé.';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Mode sombre activé.';
+$pia_lang['BackDevices_webservicemon_disabled'] = 'Web Service Monitoring Disabled';
+$pia_lang['BackDevices_webservicemon_enabled'] = 'Web Service Monitoring Enabled';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Historique d&apos;activité désactivé.';
 $pia_lang['BackDevices_onlinehistorygraph_enabled'] = 'Historique d&apos;activité activé.';
 $pia_lang['BackDevices_Restore_CopError'] = 'La base de données originale n&apos;a pas pu être copiée.';
@@ -437,7 +442,6 @@ $pia_lang['BackDevices_ConfEditor_CopError'] = "La sauvegarde de la configuratio
 $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'La sauvegarde de la configuration est terminée.';
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'La dernière version de la configuration n&apos;a pas pu être restaurée.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'La dernière version de la configuration a été restaurée.';
-
 $pia_lang['BackDevices_Report_Delete'] = ' La/les notification(s) a/ont été supprimées.';
 
 //////////////////////////////////////////////////////////////////
@@ -536,6 +540,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td style="padding-left:5px;">- Allows the start of new scans again.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">enable_service_mon</td>
+											        <td style="padding-left:5px;">- Enable Web Service Monitoring<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">disable_service_mon</td>
+											        <td style="padding-left:5px;">- Disable Web Service Monitoring<br>&nbsp;</td>
+											    </tr>
+											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
 											        <td style="padding-left:5px;">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
 											    </tr>
@@ -578,6 +590,43 @@ $pia_lang['HelpFAQ_Cat_Network_600_head'] = 'What is this page for?';
 $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'This page should offer you the possibility to map the assignment of your network devices. For this purpose, you can create one or more switches, WLANs, routers, etc., provide them with a port number if necessary and assign already detected 
 											 devices to them. This assignment is done in the detailed view of the device to be assigned. So it is possible for you to quickly determine to which port a host is connected and if it is online. It is possible to assign a device to multiple 
 											 ports (port bundling), as well as multiple devices to one port (virtual machines).';
+$pia_lang['HelpFAQ_Cat_Network_601_head'] = 'How does the network page work?';
+$pia_lang['HelpFAQ_Cat_Network_601_text'] = 'On the network side, for example, a switch is created. For this purpose, I already offer corresponding devices in the selection list. You continue to specify the type and the number of ports.<br><br>
+											 On the detail view you have now, with each recognized device, the possibility to save this just created switch and the occupied port.<br><br>
+											 Now the network page shows you the switch with its ports and the devices connected to it. For each device in the detail view, you have the option of assigning multiple ports to a switch, which you separate with a comma (e.g. for link aggregation). It is also possible to assign several devices to one port (e.g. a server with several virtual machines).<br><br>
+											 You can also assign a switch to a router if you have created it on the network side. Normally, this switch will now be displayed on the router tab. What does not happen is that the router is displayed on the switch port. For this it is necessary and possible to save a manual port configuration. To do this, open the "Administration" and select the switch in the editing. After you have entered the type and the number of ports again, you have a selection list of possible devices in the lowest field. After the selection, only the MAC address is visible, followed by a ",". Now simply add the port of the router on the switch and save. It is also possible to enter multiple MAC addresses and ports. It is important to follow the syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC".';
+$pia_lang['HelpFAQ_Cat_Network_602_head'] = 'A switch or router is shown to me without ports.';
+$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'It is possible that the number of ports was not entered when the device was created on the network page. When editing the device on the network page, it is also necessary to enter an already entered number of ports again.<br>
+											 If the number of ports is missing for a device that has already been created, the problem should be solved by editing the device and specifying the ports, the type and, if necessary, the manual port configuration.';
+$pia_lang['HelpFAQ_Cat_Service_700_head'] = 'What do the different colors in the colored bar mean?';
+$pia_lang['HelpFAQ_Cat_Service_700_text'] = 'There are 5 different color codes in total: <br>
+											 <span style="background-color:lightgray;">&nbsp;&nbsp;&nbsp;</span> - no scan available yet<br>
+											 <span class="bg-green">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 2xx<br>
+											 <span class="bg-yellow">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 3xx-4xx<br>
+											 <span class="bg-orange-custom">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 5xx<br>
+											 <span class="bg-red">&nbsp;&nbsp;&nbsp;</span> - offline';
+$pia_lang['HelpFAQ_Cat_Service_701_head'] = 'What are the HTTP status codes?';
+											// from json
+$pia_lang['HelpFAQ_Cat_Service_702_head'] = 'What changes are reported?';
+$pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Detectable events are:<br>
+												<ul>
+													<li>Changing the HTTP status code</li>
+													<li>Change IP</li>
+													<li>Response time of the server or the missing of the response.</li>
+												</ul>
+											 Depending on the choice of notification, either everything is reported, or only the absence of a server response.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'] = 'I cannot edit all the fields.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Not every field that is displayed on this page can be edited. Editable fields are:
+													<ul>
+														<li>'.$pia_lang['WebServices_label_Tags'].'</li>
+														<li>'.$pia_lang['WebServices_label_MAC'].' (possibly a device to which this web service is assigned)<br>
+															A MAC address is expected here. If something else (e.g. "laptop") is entered here, "'.$pia_lang['WebServices_unknown_Device'].' (laptop)" appears in the overview.. 
+															Services without this entry are listed under "'.$pia_lang['WebServices_BoxTitle_General'].'".</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_all'].'</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_down'].'</li>
+													</ul>';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Filtering the events via the colored tiles does not work.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Yes, that\'s right.';
 
 //////////////////////////////////////////////////////////////////
 // Reports Page
@@ -587,4 +636,5 @@ $pia_lang['Reports_Title'] = 'Notifications';
 $pia_lang['Reports_delete_all'] = 'Supprimer toutes les notifications';
 $pia_lang['Reports_delete_all_noti'] = 'Supprimer toutes les notifications';
 $pia_lang['Reports_delete_all_noti_text'] = 'Toutes les notifications sont supprimées. Le compteur est ainsi remis à zéro.';
+
 ?>

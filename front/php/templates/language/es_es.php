@@ -322,6 +322,9 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Después del cambio de tema,
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Alternar el gráfico de actividad';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Visualización de gráficos';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Activa/desactiva el gráfico para mostrar la actividad online/offline de las últimas 12h.';
+$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (on/off)';
+$pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Monitoring';
+$pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the web service monitoring for Pi.Alert. With activation, additional elements are displayed in the interface. With deactivation, they disappear again.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurar la vista general del dispositivo';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = '¿Desea guardar los cambios realizados? Este cambio afectará a todos los dispositivos que utilices para acceder a esta página.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'No hay conjunto de claves API';
@@ -403,6 +406,8 @@ $pia_lang['BackDevices_setapikey'] = 'API-Key set';
 $pia_lang['BackDevices_test_notification'] = 'Notification sent';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Darkmode Desactivado';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Darkmode Activado';
+$pia_lang['BackDevices_webservicemon_disabled'] = 'Web Service Monitoring Disabled';
+$pia_lang['BackDevices_webservicemon_enabled'] = 'Web Service Monitoring Enabled';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Graph disabled.';
 $pia_lang['BackDevices_onlinehistorygraph_enabled'] = 'Graph enabled.';
 $pia_lang['BackDevices_Restore_CopError'] = 'La base de datos original no se pudo guardar.';
@@ -539,6 +544,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td style="padding-left:5px;">- Allows the start of new scans again.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">enable_service_mon</td>
+											        <td style="padding-left:5px;">- Enable Web Service Monitoring<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">disable_service_mon</td>
+											        <td style="padding-left:5px;">- Disable Web Service Monitoring<br>&nbsp;</td>
+											    </tr>
+											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
 											        <td style="padding-left:5px;">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
 											    </tr>
@@ -581,6 +594,43 @@ $pia_lang['HelpFAQ_Cat_Network_600_head'] = '¿Para qué sirve esta sección?';
 $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Esta sección debería ofrecerle la posibilidad de mapear la asignación de sus dispositivos de red.  Para ello, puede crear uno o más conmutadores, WLAN, enrutadores, etc., proporcionarles un número de puerto si es necesario y asignarles dispositivos 
 											ya detectados. Esta asignación se realiza en la vista detallada del dispositivo a asignar.  Por lo tanto, es posible determinar rápidamente a qué puerto está conectado un host y si está en línea. Es posible asignar un dispositivo a múltiples 
 											 puertos (agrupación de puertos), así como múltiples dispositivos a un puerto (máquinas virtuales).';
+$pia_lang['HelpFAQ_Cat_Network_601_head'] = 'How does the network page work?';
+$pia_lang['HelpFAQ_Cat_Network_601_text'] = 'On the network side, for example, a switch is created. For this purpose, I already offer corresponding devices in the selection list. You continue to specify the type and the number of ports.<br><br>
+											 On the detail view you have now, with each recognized device, the possibility to save this just created switch and the occupied port.<br><br>
+											 Now the network page shows you the switch with its ports and the devices connected to it. For each device in the detail view, you have the option of assigning multiple ports to a switch, which you separate with a comma (e.g. for link aggregation). It is also possible to assign several devices to one port (e.g. a server with several virtual machines).<br><br>
+											 You can also assign a switch to a router if you have created it on the network side. Normally, this switch will now be displayed on the router tab. What does not happen is that the router is displayed on the switch port. For this it is necessary and possible to save a manual port configuration. To do this, open the "Administration" and select the switch in the editing. After you have entered the type and the number of ports again, you have a selection list of possible devices in the lowest field. After the selection, only the MAC address is visible, followed by a ",". Now simply add the port of the router on the switch and save. It is also possible to enter multiple MAC addresses and ports. It is important to follow the syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC".';
+$pia_lang['HelpFAQ_Cat_Network_602_head'] = 'A switch or router is shown to me without ports.';
+$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'It is possible that the number of ports was not entered when the device was created on the network page. When editing the device on the network page, it is also necessary to enter an already entered number of ports again.<br>
+											 If the number of ports is missing for a device that has already been created, the problem should be solved by editing the device and specifying the ports, the type and, if necessary, the manual port configuration.';
+$pia_lang['HelpFAQ_Cat_Service_700_head'] = 'What do the different colors in the colored bar mean?';
+$pia_lang['HelpFAQ_Cat_Service_700_text'] = 'There are 5 different color codes in total: <br>
+											 <span style="background-color:lightgray;">&nbsp;&nbsp;&nbsp;</span> - no scan available yet<br>
+											 <span class="bg-green">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 2xx<br>
+											 <span class="bg-yellow">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 3xx-4xx<br>
+											 <span class="bg-orange-custom">&nbsp;&nbsp;&nbsp;</span> - HTTP status code 5xx<br>
+											 <span class="bg-red">&nbsp;&nbsp;&nbsp;</span> - offline';
+$pia_lang['HelpFAQ_Cat_Service_701_head'] = 'What are the HTTP status codes?';
+											// from json
+$pia_lang['HelpFAQ_Cat_Service_702_head'] = 'What changes are reported?';
+$pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Detectable events are:<br>
+												<ul>
+													<li>Changing the HTTP status code</li>
+													<li>Change IP</li>
+													<li>Response time of the server or the missing of the response.</li>
+												</ul>
+											 Depending on the choice of notification, either everything is reported, or only the absence of a server response.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'] = 'I cannot edit all the fields.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Not every field that is displayed on this page can be edited. Editable fields are:
+													<ul>
+														<li>'.$pia_lang['WebServices_label_Tags'].'</li>
+														<li>'.$pia_lang['WebServices_label_MAC'].' (possibly a device to which this web service is assigned)<br>
+															A MAC address is expected here. If something else (e.g. "laptop") is entered here, "'.$pia_lang['WebServices_unknown_Device'].' (laptop)" appears in the overview.. 
+															Services without this entry are listed under "'.$pia_lang['WebServices_BoxTitle_General'].'".</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_all'].'</li>
+														<li>CheckBox: '.$pia_lang['WebServices_Events_down'].'</li>
+													</ul>';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Filtering the events via the colored tiles does not work.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Yes, that\'s right.';
 
 //////////////////////////////////////////////////////////////////
 // Reports Page

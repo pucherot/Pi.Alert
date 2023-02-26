@@ -542,6 +542,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											        <td style="padding-left:5px;">- Erlaubt wieder den Start neuer Scans.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">enable_service_mon</td>
+											        <td style="padding-left:5px;">- Aktiviert die Web Service Überwachung.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">disable_service_mon</td>
+											        <td style="padding-left:5px;">- Deaktiviert die Web Service Überwachung.<br>&nbsp;</td>
+											    </tr>
+											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
 											        <td style="padding-left:5px;">- Erstellt die benötigten Datenbankfelder, welche für diesen Fork benötigt werden.<br>&nbsp;</td>
 											    </tr>
@@ -594,8 +602,8 @@ $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ei
 											 Jetzt zeigt dir die Netzwerk Seite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit, mehrere Ports, die du mit einem Komma trennst, an einem Switch zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server mit mehreren virtuellen Maschinen).<br><br>
 											 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Netzwerk Seite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu klappst du die "Verwaltung" auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast, hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
 $pia_lang['HelpFAQ_Cat_Network_602_head'] = 'Ein Switch oder Router wird mir ohne Ports angezeigt.';
-$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'Möglicherweise wurde beim Anlegen des Gerätes auf der Netzwerkseite versäumt die Portanzahl einzugeben. Auch bei der Bearbeitung des Gerätes auf der Netzwerkseite ist es notwendig auch eine bereits eingegebene Portanzahl erneut einzugeben.<br>
-											 Solle also bei einem bereits angelegten Gerät die Portanzzahl fehlen, sollte eine Bearbeitung des Gerätes unter Angabe der <span class="text-maroon help_faq_code">Ports</span>, des <span class="text-maroon help_faq_code">Types</span> und ggf. der <span class="text-maroon help_faq_code">manuelle Port-Konfiguration</span> das Problem beseitigen.';
+$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'Möglicherweise wurde beim Anlegen des Gerätes auf der Netzwerkseite versäumt, die Portanzahl einzugeben. Auch bei der Bearbeitung des Gerätes auf der Netzwerkseite, ist es notwendig, eine bereits eingegebene Portanzahl, erneut einzugeben.<br>
+											 Sollte also bei einem bereits angelegten Gerät die Portanzzahl fehlen, wird eine Bearbeitung des Gerätes unter Angabe der <span class="text-maroon help_faq_code">Ports</span>, des <span class="text-maroon help_faq_code">Types</span> und ggf. der <span class="text-maroon help_faq_code">manuelle Port-Konfiguration</span> das Problem beseitigen.';
 $pia_lang['HelpFAQ_Cat_Service_700_head'] = 'Was bedeuten die unterschiedlichen Farben in dem farbigen Balken?';
 $pia_lang['HelpFAQ_Cat_Service_700_text'] = 'Es gibt insgesamt 5 verschiedene Farbcodes: <br>
 											 <span style="background-color:lightgray;">&nbsp;&nbsp;&nbsp;</span> - noch kein Scan verfügbar<br>
@@ -625,7 +633,6 @@ $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Nicht jedes Feld, was auf di
 													</ul>';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Das Filtern der Ereignisse über die bunten Kacheln funktioniert nicht.';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Ja, das stimmt.';
-
 
 //////////////////////////////////////////////////////////////////
 // Reports Page
