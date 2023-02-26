@@ -480,16 +480,22 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                     <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
                                 </div>
                             </div>
-<!-- Set DarkMode ----------------------------------------------------------------- -->
+<!-- Toggle DarkMode ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
                                 </div>
                             </div>
-<!-- Set History Graph ----------------------------------------------------------------- -->
+<!-- Toggle History Graph ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
+                                </div>
+                            </div>
+<!-- Toggle Web Service Monitoring ----------------------------------------------------------------- -->
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?php echo $pia_lang['Maintenance_Tool_webservicemon'];?></button>
                                 </div>
                             </div>
                         </div>
@@ -911,6 +917,20 @@ function PiaEnableDarkmode()
 { 
   // Execute
   $.get('php/server/devices.php?action=PiaEnableDarkmode', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Switch Web Service Monitor 
+function askPiaEnableWebServiceMon() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_webservicemon_noti'];?>', '<?php echo $pia_lang['Maintenance_Tool_webservicemon_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Switch'];?>', 'PiaEnableWebServiceMon');
+}
+function PiaEnableWebServiceMon()
+{ 
+  // Execute
+  $.get('php/server/devices.php?action=EnableWebServiceMon', function(msg) {
     showMessage (msg);
   });
 }

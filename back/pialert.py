@@ -2,9 +2,9 @@
 #
 #-------------------------------------------------------------------------------
 #  Pi.Alert
-#  Open Source Network Guard / WIFI & LAN intrusion detector 
+#  Open Source Network Guard / WIFI & LAN intrusion detector and Web service monitor
 #
-#  pialert.py - Back module. Network scanner
+#  pialert.py - Back module. Network scanner, Web service monitor
 #-------------------------------------------------------------------------------
 #  Puche 2021                                              GNU GPLv3
 #  leiweibau 2023                                          GNU GPLv3
@@ -54,7 +54,6 @@ if (sys.version_info > (3,0)):
 else:
     execfile (PIALERT_PATH + "/config/version.conf")
     execfile (PIALERT_PATH + "/config/pialert.conf")
-
 
 #===============================================================================
 # MAIN
@@ -329,7 +328,6 @@ def check_IP_format (pIP):
     # Return IP
     return IP.group(0)
 
-
 #===============================================================================
 # Cleanup Tasks
 #===============================================================================
@@ -346,11 +344,11 @@ def cleanup_database ():
     except NameError: # variable not defined, use a default
         strdaystokeepOH = str(60) # 2 months
 
-    # keep 2 years if not specified how many days to keep
+    # keep 200 days if not specified how many days to keep
     try:
         strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     except NameError: # variable not defined, use a default
-        strdaystokeepEV = str(730) # 2 years
+        strdaystokeepEV = str(200) # 200 days
 
     # Cleanup WebServices Events
     print ('\nCleanup Services_Events, up to the lastest '+strdaystokeepOH+' days...')
@@ -369,7 +367,6 @@ def cleanup_database ():
     
     # OK
     return 0
-
 
 #===============================================================================
 # UPDATE DEVICE MAC VENDORS
@@ -423,7 +420,6 @@ def update_devices_MAC_vendors (pArg = ''):
     # DEBUG - print number of rows updated
         # print (sql.rowcount)
 
-    # Close DB
     closeDB()
 
 #-------------------------------------------------------------------------------
@@ -593,7 +589,6 @@ def execute_arpscan ():
         print("    arp-scan: One interface")
         arpscan_output += execute_arpscan_on_interface (SCAN_SUBNETS)
 
-    
     # Search IP + MAC + Vendor as regular expresion
     re_ip = r'(?P<ip>((2[0-5]|1[0-9]|[0-9])?[0-9]\.){3}((2[0-5]|1[0-9]|[0-9])?[0-9]))'
     re_mac = r'(?P<mac>([0-9a-fA-F]{2}[:-]){5}([0-9a-fA-F]{2}))'
@@ -604,7 +599,6 @@ def execute_arpscan ():
     devices_list = [device.groupdict()
         for device in re.finditer (re_pattern, arpscan_output)]
 
-    
     # Delete duplicate MAC
     unique_mac = [] 
     unique_devices = [] 
@@ -838,9 +832,7 @@ def print_scan_stats ():
                     (cycle,))
     print ('        IP Changes.........: ' + str ( sql.fetchone()[0]) )
 
-
 #------------------------------------------------------------------------------
-
 def calculate_activity_history ():
     # Add to History
     sql.execute("SELECT * FROM Devices WHERE dev_Archived = 0 AND dev_PresentLastScan = 1")
@@ -1303,7 +1295,6 @@ def skip_repeated_notifications ():
 #===============================================================================
 # Services Monitoring
 #===============================================================================
-
 def prepare_service_monitoring_env ():
 
     sql_create_table = """ CREATE TABLE IF NOT EXISTS Services_Events(
@@ -1344,7 +1335,6 @@ def prepare_service_monitoring_env ():
                             ); """
     sql.execute(sql_create_table)
 
-
 # -----------------------------------------------------------------------------
 def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP):
 
@@ -1353,7 +1343,6 @@ def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatenc
     table_data = (_mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_URL)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
-
 
 # -----------------------------------------------------------------------------
 def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency, _moneve_TargetIP):
@@ -1366,12 +1355,8 @@ def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _mone
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
-
 # -----------------------------------------------------------------------------
 def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP):
-    
-    #_cur_LatencyChanged = 0
-    #_cur_StatusChanged = 0
 
     sql.execute("SELECT * FROM Services WHERE mon_URL = ?", [_cur_URL])
     rows = sql.fetchall()
@@ -1394,10 +1379,8 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _cur_StatusChanged = 1
     elif _cur_Latency == "99999999" and _mon_Latency != _cur_Latency:
         _cur_LatencyChanged = 1
-        #_cur_StatusChanged = 1
     else:
         _cur_LatencyChanged = 0 
-
 
     sqlite_insert = """INSERT INTO Services_CurrentScan
                      (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev) 
@@ -1409,7 +1392,6 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
 
 # -----------------------------------------------------------------------------
 def service_monitoring_log(site, status, latency):
-    # global monitor_logfile
 
     # Log status message to log file
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
@@ -1441,7 +1423,6 @@ def check_services_health(site):
         latency = "99999999"
         # HTTP Status Code for offline services
         return 0, latency
-
 
 # -----------------------------------------------------------------------------
 def get_services_list():
@@ -1515,7 +1496,7 @@ def service_monitoring_notification():
     mail_section_services_down = False
     mail_text_services_down = ''
     mail_html_services_down = ''
-    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t\t{}\n\t{}\t{}\n\n'
+    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
     html_line_template     = '<tr>\n'+ \
         '  <td> {} </td>\n  <td> {} </td>\n'+ \
         '  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
@@ -1538,8 +1519,8 @@ def service_monitoring_notification():
         mail_text_services_down += text_line_template.format (
             'Service: ', eventAlert['cur_URL'], 
             'Time: ', eventAlert['cur_DateTime'], 
-            'Target IP: ', _func_cur_TargetIP,
-            'prev. Target IP: ', _func_cur_TargetIP_prev)
+            'Destination IP: ', _func_cur_TargetIP,
+            'prev. Destination IP: ', _func_cur_TargetIP_prev)
         mail_html_services_down += html_line_template.format (
             eventAlert['cur_URL'], eventAlert['cur_DateTime'], _func_cur_TargetIP, _func_cur_TargetIP_prev)
 
@@ -1550,7 +1531,7 @@ def service_monitoring_notification():
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}{}\n\n'
+    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
             '  {} </td>\n  <td> {} </td>\n'+ \
             '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
@@ -1574,8 +1555,8 @@ def service_monitoring_notification():
         mail_text_events += text_line_template.format (
             'Service: ', eventAlert['cur_URL'], 
             'Time: ', eventAlert['cur_DateTime'], 
-            'Target IP: ', _func_cur_TargetIP,
-            'prev. Target IP: ', _func_cur_TargetIP_prev, 
+            'Destination IP: ', _func_cur_TargetIP,
+            'prev. Destination IP: ', _func_cur_TargetIP_prev, 
             'HTTP Status Code: ', eventAlert['cur_StatusCode'], 
             'prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
         mail_html_events += html_line_template.format (
@@ -1616,7 +1597,6 @@ def service_monitoring_notification():
 
     # # Commit changes
     sql_connection.commit()
-
 
 # -----------------------------------------------------------------------------
 def service_monitoring():
@@ -1689,8 +1669,6 @@ def service_monitoring():
     # Print to log file
     print_service_monitoring_changes()
 
-    # Send notifications
-
 #===============================================================================
 # REPORTING
 #===============================================================================
@@ -1713,7 +1691,6 @@ def email_reporting ():
                         (
                             SELECT dev_MAC FROM Devices WHERE dev_AlertDeviceDown = 0 
                         )""")
-
 
     # Open text Template
     template_file = open(PIALERT_BACK_PATH + '/report_template.txt', 'r') 
@@ -1765,7 +1742,7 @@ def email_reporting ():
     mail_section_new_devices = False
     mail_text_new_devices = ''
     mail_html_new_devices = ''
-    text_line_template = '{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    text_line_template = '{}\t{}\n\t{}\t\t{}\n\t{}\t\t{}\n\t{}\t\t{}\n\t{}\t{}\n\n'
     html_line_template    = '<tr>\n'+ \
         '  <td> <a href="{}{}"> {} </a> </td>\n  <td> {} </td>\n'+\
         '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
@@ -1819,7 +1796,7 @@ def email_reporting ():
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    text_line_template = '{}\t{}\n\t{}\t\t{}\n\t{}\t\t{}\n\t{}\t\t{}\n\t{}\t\t{}\n\t{}\t{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
             ' <a href="{}{}"> {} </a> </td>\n  <td> {} </td>\n'+ \
             '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
@@ -1906,7 +1883,6 @@ def email_reporting ():
     closeDB()
 
 #-------------------------------------------------------------------------------
-
 def send_pushsafer (_Text):
     
     try:
@@ -1936,7 +1912,6 @@ def send_pushsafer (_Text):
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
-
 def send_ntfy (_Text):
     requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
     data=_Text,
@@ -1948,7 +1923,6 @@ def send_ntfy (_Text):
     })
 
 #-------------------------------------------------------------------------------
-
 def send_telegram (_Text):
     # Remove one linebrake between "Server" and the headline of the event type
     _telegram_Text = _Text.replace('\n\n\n', '\n\n')
@@ -1958,9 +1932,7 @@ def send_telegram (_Text):
     runningpath = os.path.abspath(os.path.dirname(__file__))
     stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_telegram_Text+'" --title "Pi.Alert - '+subheadline+'"')
 
-
 #-------------------------------------------------------------------------------
-
 def send_webgui (_Text):
     # Remove one linebrake between "Server" and the headline of the event type
     #_webgui_Text = _Text
@@ -2210,7 +2182,6 @@ def closeDB ():
     sql_connection.close()
     sql_connection = None    
 
-
 #===============================================================================
 # UTIL
 #===============================================================================
@@ -2232,7 +2203,6 @@ def print_log (pText):
 
     # Save current time to calculate elapsed time until next log
     log_timestamp = log_timestamp2
-
 
 #===============================================================================
 # BEGIN

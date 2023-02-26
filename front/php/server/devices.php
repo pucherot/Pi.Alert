@@ -52,6 +52,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'PiaRestoreDBfromArchive':      PiaRestoreDBfromArchive();               break;
       case 'PiaPurgeDBBackups':            PiaPurgeDBBackups();                     break;
       case 'PiaEnableDarkmode':            PiaEnableDarkmode();                     break;
+      case 'EnableWebServiceMon':          EnableWebServiceMon();                   break;
       case 'PiaEnableOnlineHistoryGraph':  PiaEnableOnlineHistoryGraph();           break;
       case 'PiaSetAPIKey':                 PiaSetAPIKey();                          break;
       case 'PiaLoginEnable':               PiaLoginEnable();                        break;
@@ -437,6 +438,23 @@ function PiaEnableDarkmode() {
       echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
      }
   }
+
+//------------------------------------------------------------------------------
+//  Toggle Web Service Monitoring
+//------------------------------------------------------------------------------
+function EnableWebServiceMon() {
+  global $pia_lang;
+
+  if ($_SESSION['Scan_WebServices'] == True) {
+      exec('../../../back/pialert-cli disable_service_mon', $output);
+      echo $pia_lang['BackDevices_webservicemon_disabled'];
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+  } else {
+      exec('../../../back/pialert-cli enable_service_mon', $output);
+      echo $pia_lang['BackDevices_webservicemon_enabled'];
+      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+  }
+}
 
 //------------------------------------------------------------------------------
 //  Toggle History Graph Themes

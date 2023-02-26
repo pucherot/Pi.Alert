@@ -159,7 +159,7 @@ $pia_lang['WebServices_Events_Shortcut_HTTP4xx'] = 'HTTP Code 4xx';
 $pia_lang['WebServices_Events_Shortcut_HTTP5xx'] = 'HTTP Code 5xx';
 $pia_lang['WebServices_Events_Shortcut_Down'] = 'Down';
 $pia_lang['WebServices_Events_TableHead_URL'] = 'URL';
-$pia_lang['WebServices_Events_TableHead_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_Events_TableHead_TargetIP'] = 'Dest. IP';
 $pia_lang['WebServices_Events_TableHead_ScanTime'] = 'Scan Time';
 $pia_lang['WebServices_Events_TableHead_StatusCode'] = 'Status Code';
 $pia_lang['WebServices_Events_TableHead_ResponsTime'] = 'Response Time';
@@ -237,7 +237,7 @@ $pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailed Scan: Default scan wit
 
 $pia_lang['WebServices_Title'] = 'Web Services';
 $pia_lang['WebServices_unknown_Device'] = 'Unknown Device';
-$pia_lang['WebServices_tablehead_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_tablehead_TargetIP'] = 'Dest. IP';
 $pia_lang['WebServices_tablehead_ScanTime'] = 'Scan Time';
 $pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status';
 $pia_lang['WebServices_tablehead_Response_Time'] = 'Response Time';
@@ -245,7 +245,7 @@ $pia_lang['WebServices_label_URL'] = 'URL';
 $pia_lang['WebServices_label_Tags'] = 'Tag';
 $pia_lang['WebServices_label_MAC'] = 'Device';
 $pia_lang['WebServices_label_MAC_Select'] = 'Select';
-$pia_lang['WebServices_label_TargetIP'] = 'Target IP';
+$pia_lang['WebServices_label_TargetIP'] = 'Dest. IP';
 $pia_lang['WebServices_label_StatusCode'] = 'HTTP Status';
 $pia_lang['WebServices_label_ScanTime'] = 'Scan Time';
 $pia_lang['WebServices_label_Response_Time'] = 'Response Time';
@@ -322,6 +322,9 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'After the theme switch, the 
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Toggle History Graph';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Graph display';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h.';
+$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (on/off)';
+$pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Monitoring';
+$pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the web service monitoring for Pi.Alert. With activation, additional elements are displayed in the interface. With deactivation, they disappear again.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configure device overview';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Do you want to save the changes you have made? This change will affect all devices you use to access this page.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'No API-Key set';
@@ -403,6 +406,8 @@ $pia_lang['BackDevices_setapikey'] = 'API-Key set';
 $pia_lang['BackDevices_test_notification'] = 'Notification sent';
 $pia_lang['BackDevices_darkmode_disabled'] = 'Darkmode Disabled';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Darkmode Enabled';
+$pia_lang['BackDevices_webservicemon_disabled'] = 'Web Service Monitoring Disabled';
+$pia_lang['BackDevices_webservicemon_enabled'] = 'Web Service Monitoring Enabled';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Graph disabled.';
 $pia_lang['BackDevices_onlinehistorygraph_enabled'] = 'Graph enabled.';
 $pia_lang['BackDevices_Restore_CopError'] = 'The original database could not be saved.';
@@ -556,7 +561,6 @@ $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_c
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'When a non-standard user is used, e.g. piadmin then the arp-scan fails in the cronjob.<br>
 											 A file needs to be created: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-arpscan</span><br>
 											 This file is opened and saved with the following content ("piadmin" is to be replaced by the corresponding user name):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan</span>';
-
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and 
          									delete the DHCP lease if necessary. Then, also in Pi-hole, look under Tools -> Network to see if you can find the recurring hosts there. 

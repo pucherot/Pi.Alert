@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.7'
+SCRIPTVERSION='v0.8'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -24,12 +24,12 @@ case $1 in
     echo ""
     echo " set_password <password>  - Sets the new password as a hashed value."
     echo "                          - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be"
-    echo "                            created and set to 'True' (login enabled)."
+    echo "                            created and set to TRUE (login enabled)."
     echo ""
     echo " set_autopassword         - Sets a new random password as a hashed value and show it plaintext in"
     echo "                            the console."
     echo "                          - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be"
-    echo "                            created and set to 'True' (login enabled)."
+    echo "                            created and set to TRUE (login enabled)."
     echo ""
     echo " disable_scan <MIN>       - Stops all active scans"
     echo "                          - Prevents new scans from starting."
@@ -37,6 +37,14 @@ case $1 in
     echo "                            restarts itself with the next scan after 10min."
     echo ""
     echo " enable_scan              - Allows the start of new scans again."
+    echo ""
+    echo " enable_service_mon       - Enable Web Service Monitoring."
+    echo "                          - If the SCAN_WEBSERVICES parameter does not exist yet, it will be"
+    echo "                            created and set to TRUE."
+    echo ""
+    echo " disable_service_mon      - Allows the start of new scans again."
+    echo "                          - If the SCAN_WEBSERVICES parameter does not exist yet, it will be"
+    echo "                            created and set to FALSE."
     echo ""
     echo " update_db                - The script tries to make the database compatible for this fork."
     echo ""
@@ -151,6 +159,34 @@ case $1 in
     rm ${SCRIPTPATH}/../db/setting_stoparpscan
     /bin/python3 ${SCRIPTPATH}/pialert.py reporting_stoptimer
     echo "The arp-scan is enabled"
+    ;;
+
+  enable_service_mon)
+    ## Check if SCAN_WEBSERVICES exists
+    CHECK_PROT=$(grep "SCAN_WEBSERVICES" $PIA_CONF_FILE | wc -l)
+    if [ $CHECK_PROT -eq 0 ]
+    then
+        ## Create SCAN_WEBSERVICES and enable it
+        sed -i "/^VENDORS_DB.*/a SCAN_WEBSERVICES = True" $PIA_CONF_FILE
+    else
+        ## Switch SCAN_WEBSERVICES to enable
+        sed -i "/SCAN_WEBSERVICES/c\SCAN_WEBSERVICES = True" $PIA_CONF_FILE
+    fi
+    echo "Web Service Monitoring is now enabled"
+    ;;
+
+  disable_service_mon)
+    ## Check if SCAN_WEBSERVICES exists
+    CHECK_PROT=$(grep "SCAN_WEBSERVICES" $PIA_CONF_FILE | wc -l)
+    if [ $CHECK_PROT -eq 0 ]
+    then
+        ## Create SCAN_WEBSERVICES and disable it
+        sed -i "/^VENDORS_DB.*/a SCAN_WEBSERVICES = False" $PIA_CONF_FILE
+    else
+        ## Switch SCAN_WEBSERVICES to disable
+        sed -i "/SCAN_WEBSERVICES/c\SCAN_WEBSERVICES = False" $PIA_CONF_FILE
+    fi
+    echo "Web Service Monitoring is now disabled"
     ;;
 
   update_db)
