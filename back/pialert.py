@@ -1294,6 +1294,49 @@ def skip_repeated_notifications ():
     print_log ('Skip Repeated end')
 
 #===============================================================================
+# nmap Scan
+#===============================================================================
+def prepare_nmap_env ():
+    # create table in db
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_results(
+                                mac TEXT NOT NULL,
+                                port_protocol TEXT NOT NULL,
+                                port_status TEXT NOT NULL,
+                                port_description TEXT NOT NULL,
+                            ); """
+    sql.execute(sql_create_table)
+
+#-------------------------------------------------------------------------------
+def use_nmap_regex(_nmap_raw_result):
+    # Filter for relevant lines from output
+    pattern = re.compile(r"^.*\d\d/.*$", re.IGNORECASE)
+    return pattern.match(_nmap_raw_result)
+
+#-------------------------------------------------------------------------------
+def execute_nmap_scan(_IP):
+    # nmap scan
+    stream = os.popen('nmap -n ' + _IP)
+    output = stream.read()
+    nmap_scan = output.split("\n")
+    process_nmap_scan(nmap_scan)
+
+#-------------------------------------------------------------------------------
+def process_nmap_scan(_nmap_result):
+    # use filter with output
+    for x in range(len(_nmap_result)):
+        if use_nmap_regex(_nmap_result[x]):
+            # split filtered lines and remove empty elements from list
+            # not tested with python 2
+            temp = _nmap_result[x].split(" ")
+            temp = list(filter(None, temp))
+
+            # processing results (write to db)
+            #print(temp[0] + " - " + temp[2])
+
+# DEBUG
+#execute_nmap_scan(IP)
+
+#===============================================================================
 # Services Monitoring
 #===============================================================================
 def prepare_service_monitoring_env ():
