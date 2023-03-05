@@ -1294,17 +1294,29 @@ def skip_repeated_notifications ():
     print_log ('Skip Repeated end')
 
 #===============================================================================
-# nmap Scan
+# nmap Scan 
+#
+# Maybe outsource to an extra script because of longer runtime
 #===============================================================================
 def prepare_nmap_env ():
     # create table in db
-    sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_results(
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_cur(
                                 mac TEXT NOT NULL,
+                                scan_time TEXT NOT NULL,
                                 port_protocol TEXT NOT NULL,
                                 port_status TEXT NOT NULL,
                                 port_description TEXT NOT NULL,
                             ); """
     sql.execute(sql_create_table)
+
+    # sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_prev(
+    #                             mac TEXT NOT NULL,
+    #                             scan_time TEXT NOT NULL,
+    #                             port_protocol TEXT NOT NULL,
+    #                             port_status TEXT NOT NULL,
+    #                             port_description TEXT NOT NULL,
+    #                         ); """
+    # sql.execute(sql_create_table)
 
 #-------------------------------------------------------------------------------
 def use_nmap_regex(_nmap_raw_result):
@@ -1315,14 +1327,14 @@ def use_nmap_regex(_nmap_raw_result):
 #-------------------------------------------------------------------------------
 def execute_nmap_scan(_IP):
     # nmap scan
-    stream = os.popen('nmap -n ' + _IP)
+    stream = os.popen('nmap -n -p -10000 ' + _IP)
     output = stream.read()
     nmap_scan = output.split("\n")
     process_nmap_scan(nmap_scan)
 
 #-------------------------------------------------------------------------------
 def process_nmap_scan(_nmap_result):
-    # use filter with output
+    # apply filter on output
     for x in range(len(_nmap_result)):
         if use_nmap_regex(_nmap_result[x]):
             # split filtered lines and remove empty elements from list
@@ -1330,7 +1342,10 @@ def process_nmap_scan(_nmap_result):
             temp = _nmap_result[x].split(" ")
             temp = list(filter(None, temp))
 
-            # processing results (write to db)
+            # processing results (maybe write to db or to temp file)
+            # compare to prev scan or not?
+            # maybe INSERT INTO old_scan SELECT * FROM current_scan;
+            # Do not write intermediate results to the DB immediately, but to a temporary variable/list first, to have only one big DB operation at the end and not many small ones during runtime.
             #print(temp[0] + " - " + temp[2])
 
 # DEBUG
