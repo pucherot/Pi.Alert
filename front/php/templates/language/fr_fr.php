@@ -178,7 +178,7 @@ $pia_lang['DevDetail_Shortcut_Sessions'] = 'Sessions';
 $pia_lang['DevDetail_Shortcut_Presence'] = 'Présence';
 $pia_lang['DevDetail_Shortcut_DownAlerts'] = 'Alertes descendantes';
 $pia_lang['DevDetail_Tab_Details'] = 'Détails';
-$pia_lang['DevDetail_Tab_Nmap'] = 'Nmap';
+$pia_lang['DevDetail_Tab_Nmap'] = 'Tools';
 $pia_lang['DevDetail_Tab_Sessions'] = 'Sessions';
 $pia_lang['DevDetail_Tab_Presence'] = 'Présence';
 $pia_lang['DevDetail_Tab_Events'] = 'Événements';
@@ -224,12 +224,17 @@ $pia_lang['DevDetail_SessionTable_Duration'] = 'Durée';
 $pia_lang['DevDetail_SessionTable_IP'] = 'IP';
 $pia_lang['DevDetail_SessionTable_Additionalinfo'] = 'Infos complémentaires';
 $pia_lang['DevDetail_Events_CheckBox'] = 'Masquer les événements de connexion';
-$pia_lang['DevDetail_Nmap_buttonFast'] = 'Scan rapide';
-$pia_lang['DevDetail_Nmap_buttonDefault'] = 'Scan par défaut';
-$pia_lang['DevDetail_Nmap_buttonDetail'] = 'Scan détaillé';
-$pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Scan rapide: Scanner moins de ports (100) que le scan par défaut (quelques secondes)';
-$pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Scan par défaut: Nmap scanne les 1000 premiers ports pour chaque protocole de scan demandé. Cela permet de capturer environ 93% des ports TCP et 49% des ports UDP. (environ 5 secondes)';
-$pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Scan rapide: Analyse par défaut avec détection du système d&apos;exploitation, détection de la version, analyse des scripts et traceroute activés (jusqu&apos;à 30 secondes ou plus)';
+$pia_lang['DevDetail_Tools_nmap_buttonFast'] = 'Scan rapide';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault'] = 'Scan par défaut';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail'] = 'Scan détaillé';
+$pia_lang['DevDetail_Tools_nmap_buttonFast_text'] = 'Scan rapide: Scanner moins de ports (100) que le scan par défaut (quelques secondes)';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault_text'] = 'Scan par défaut: Nmap scanne les 1000 premiers ports pour chaque protocole de scan demandé. Cela permet de capturer environ 93% des ports TCP et 49% des ports UDP. (environ 5 secondes)';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail_text'] = 'Scan rapide: Analyse par défaut avec détection du système d&apos;exploitation, détection de la version, analyse des scripts et traceroute activés (jusqu&apos;à 30 secondes ou plus)';
+$pia_lang['DevDetail_Tools_WOL'] = 'Send Wol command to ';
+$pia_lang['DevDetail_Tools_WOL_noti'] = 'Wake-on-LAN';
+$pia_lang['DevDetail_Tools_WOL_noti_text'] = 'The Wake-on-LAN command is sent to the broadcast address. If the target is not in the subnet/vlan of Pi.Alert, the target device will not respond.';
+$pia_lang['BackDevDetail_Tools_WOL_okay'] = 'The command was executed';
+$pia_lang['BackDevDetail_Tools_WOL_error'] = 'The command was not executed';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page

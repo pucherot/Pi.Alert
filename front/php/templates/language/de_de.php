@@ -178,7 +178,7 @@ $pia_lang['DevDetail_Shortcut_Sessions'] = 'Sitzungen';
 $pia_lang['DevDetail_Shortcut_Presence'] = 'Anwesenheit';
 $pia_lang['DevDetail_Shortcut_DownAlerts'] = 'Down Meldungen';
 $pia_lang['DevDetail_Tab_Details'] = 'Details';
-$pia_lang['DevDetail_Tab_Nmap'] = 'Nmap';
+$pia_lang['DevDetail_Tab_Nmap'] = 'Tools';
 $pia_lang['DevDetail_Tab_Sessions'] = 'Sitzungen';
 $pia_lang['DevDetail_Tab_Presence'] = 'Anwesenheit';
 $pia_lang['DevDetail_Tab_Events'] = 'Ereignisse';
@@ -224,12 +224,17 @@ $pia_lang['DevDetail_SessionTable_Duration'] = 'Dauer';
 $pia_lang['DevDetail_SessionTable_IP'] = 'IP';
 $pia_lang['DevDetail_SessionTable_Additionalinfo'] = 'Zusätzliche Info';
 $pia_lang['DevDetail_Events_CheckBox'] = 'Blende Verbindungs-Ereignisse aus';
-$pia_lang['DevDetail_Nmap_buttonFast'] = 'Schneller Scan';
-$pia_lang['DevDetail_Nmap_buttonDefault'] = 'Standard Scan';
-$pia_lang['DevDetail_Nmap_buttonDetail'] = 'Detailierter Scan';
-$pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Schneller Scan: Überprüft nur die wichtigsten 100 Ports (wenige Sekunden)';
-$pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Standard Scan: Nmap scannt die ersten 1.000 Ports für jedes angeforderte Scan-Protokoll. Damit werden etwa 93% der TCP-Ports und 49% der UDP-Ports erfasst. (ca. 5-10 Sekunden)';
-$pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailierter Scan: Standardscan mit aktivierter Betriebssystemerkennung, Versionserkennung, Skript-Scan und Traceroute (bis zu 30 oder mehr Sekunden)';
+$pia_lang['DevDetail_Tools_nmap_buttonFast'] = 'Schneller Scan';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault'] = 'Standard Scan';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail'] = 'Detailierter Scan';
+$pia_lang['DevDetail_Tools_nmap_buttonFast_text'] = 'Schneller Scan: Überprüft nur die wichtigsten 100 Ports (wenige Sekunden)';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault_text'] = 'Standard Scan: Nmap scannt die ersten 1.000 Ports für jedes angeforderte Scan-Protokoll. Damit werden etwa 93% der TCP-Ports und 49% der UDP-Ports erfasst. (ca. 5-10 Sekunden)';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail_text'] = 'Detailierter Scan: Standardscan mit aktivierter Betriebssystemerkennung, Versionserkennung, Skript-Scan und Traceroute (bis zu 30 oder mehr Sekunden)';
+$pia_lang['DevDetail_Tools_WOL'] = 'Sende Wol Befehl an ';
+$pia_lang['DevDetail_Tools_WOL_noti'] = 'Wake-on-LAN';
+$pia_lang['DevDetail_Tools_WOL_noti_text'] = 'Das Wake-on-LAN Kommando wird an die Broadcast Adresse gesendet. Wenn das Ziel nicht in dem Subnet/vlan von Pi.Alert ist, wird das Ziel-Gerät nicht reagieren.';
+$pia_lang['BackDevDetail_Tools_WOL_okay'] = 'Das Kommando wurde ausgeführt';
+$pia_lang['BackDevDetail_Tools_WOL_error'] = 'Das Kommando wurde nicht ausgeführt';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page

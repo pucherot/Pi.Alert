@@ -178,7 +178,7 @@ $pia_lang['DevDetail_Shortcut_Sessions'] = 'Sesiones';
 $pia_lang['DevDetail_Shortcut_Presence'] = 'Historial';
 $pia_lang['DevDetail_Shortcut_DownAlerts'] = 'Alerta(s) de caída(s)';
 $pia_lang['DevDetail_Tab_Details'] = 'Detalles';
-$pia_lang['DevDetail_Tab_Nmap'] = 'Nmap';
+$pia_lang['DevDetail_Tab_Nmap'] = 'Tools';
 $pia_lang['DevDetail_Tab_Sessions'] = 'Sesiones';
 $pia_lang['DevDetail_Tab_Presence'] = 'Historial';
 $pia_lang['DevDetail_Tab_Events'] = 'Eventos';
@@ -224,12 +224,17 @@ $pia_lang['DevDetail_SessionTable_Duration'] = 'Duración';
 $pia_lang['DevDetail_SessionTable_IP'] = 'Dirección IP';
 $pia_lang['DevDetail_SessionTable_Additionalinfo'] = 'Información adicional';
 $pia_lang['DevDetail_Events_CheckBox'] = 'Ocultar eventos de conexión';
-$pia_lang['DevDetail_Nmap_buttonFast'] = 'Exploración rápida';
-$pia_lang['DevDetail_Nmap_buttonDefault'] = 'Escaneado predeterminado';
-$pia_lang['DevDetail_Nmap_buttonDetail'] = 'Escaneo detallado';
-$pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Escaneo rápido: escanee menos puertos (100) que el escaneo predeterminado (unos pocos segundos)';
-$pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Escaneo predeterminado: NMAP escanea los 1,000 puertos principales para cada protocolo de escaneo solicitado. Esto atrapa aproximadamente el 93% de los puertos TCP y el 49% de los puertos UDP. (aproximadamente 5 segundos)';
-$pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Escaneo detallado: escaneo predeterminado con detección de sistema operativo habilitado, detección de versiones, escaneo de script y traceroute (hasta 30 segundos o más)';
+$pia_lang['DevDetail_Tools_nmap_buttonFast'] = 'Exploración rápida';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault'] = 'Escaneado predeterminado';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail'] = 'Escaneo detallado';
+$pia_lang['DevDetail_Tools_nmap_buttonFast_text'] = 'Escaneo rápido: escanee menos puertos (100) que el escaneo predeterminado (unos pocos segundos)';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault_text'] = 'Escaneo predeterminado: NMAP escanea los 1,000 puertos principales para cada protocolo de escaneo solicitado. Esto atrapa aproximadamente el 93% de los puertos TCP y el 49% de los puertos UDP. (aproximadamente 5 segundos)';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail_text'] = 'Escaneo detallado: escaneo predeterminado con detección de sistema operativo habilitado, detección de versiones, escaneo de script y traceroute (hasta 30 segundos o más)';
+$pia_lang['DevDetail_Tools_WOL'] = 'Send Wol command to ';
+$pia_lang['DevDetail_Tools_WOL_noti'] = 'Wake-on-LAN';
+$pia_lang['DevDetail_Tools_WOL_noti_text'] = 'The Wake-on-LAN command is sent to the broadcast address. If the target is not in the subnet/vlan of Pi.Alert, the target device will not respond.';
+$pia_lang['BackDevDetail_Tools_WOL_okay'] = 'The command was executed';
+$pia_lang['BackDevDetail_Tools_WOL_error'] = 'The command was not executed';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page

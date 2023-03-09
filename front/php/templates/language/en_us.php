@@ -178,7 +178,7 @@ $pia_lang['DevDetail_Shortcut_Sessions'] = 'Sessions';
 $pia_lang['DevDetail_Shortcut_Presence'] = 'Presence';
 $pia_lang['DevDetail_Shortcut_DownAlerts'] = 'Down Alerts';
 $pia_lang['DevDetail_Tab_Details'] = 'Details';
-$pia_lang['DevDetail_Tab_Nmap'] = 'Nmap';
+$pia_lang['DevDetail_Tab_Nmap'] = 'Tools';
 $pia_lang['DevDetail_Tab_Sessions'] = 'Sessions';
 $pia_lang['DevDetail_Tab_Presence'] = 'Presence';
 $pia_lang['DevDetail_Tab_Events'] = 'Events';
@@ -224,12 +224,17 @@ $pia_lang['DevDetail_SessionTable_Duration'] = 'Duration';
 $pia_lang['DevDetail_SessionTable_IP'] = 'IP';
 $pia_lang['DevDetail_SessionTable_Additionalinfo'] = 'Additional info';
 $pia_lang['DevDetail_Events_CheckBox'] = 'Hide Connection Events';
-$pia_lang['DevDetail_Nmap_buttonFast'] = 'Fast Scan';
-$pia_lang['DevDetail_Nmap_buttonDefault'] = 'Default Scan';
-$pia_lang['DevDetail_Nmap_buttonDetail'] = 'Detailed Scan';
-$pia_lang['DevDetail_Nmap_buttonFast_text'] = 'Fast Scan: Scan fewer ports (100) than the default scan (a few seconds)';
-$pia_lang['DevDetail_Nmap_buttonDefault_text'] = 'Default Scan: Nmap scans the top 1,000 ports for each scan protocol requested. This catches roughly 93% of the TCP ports and 49% of the UDP ports. (about 5 seconds)';
-$pia_lang['DevDetail_Nmap_buttonDetail_text'] = 'Detailed Scan: Default scan with enabled OS detection, version detection, script scanning and traceroute (up to 30 seconds or more)';
+$pia_lang['DevDetail_Tools_nmap_buttonFast'] = 'Fast Scan';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault'] = 'Default Scan';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail'] = 'Detailed Scan';
+$pia_lang['DevDetail_Tools_nmap_buttonFast_text'] = 'Fast Scan: Scan fewer ports (100) than the default scan (a few seconds)';
+$pia_lang['DevDetail_Tools_nmap_buttonDefault_text'] = 'Default Scan: Nmap scans the top 1,000 ports for each scan protocol requested. This catches roughly 93% of the TCP ports and 49% of the UDP ports. (about 5 seconds)';
+$pia_lang['DevDetail_Tools_nmap_buttonDetail_text'] = 'Detailed Scan: Default scan with enabled OS detection, version detection, script scanning and traceroute (up to 30 seconds or more)';
+$pia_lang['DevDetail_Tools_WOL'] = 'Send Wol command to ';
+$pia_lang['DevDetail_Tools_WOL_noti'] = 'Wake-on-LAN';
+$pia_lang['DevDetail_Tools_WOL_noti_text'] = 'The Wake-on-LAN command is sent to the broadcast address. If the target is not in the subnet/vlan of Pi.Alert, the target device will not respond.';
+$pia_lang['BackDevDetail_Tools_WOL_okay'] = 'The command was executed';
+$pia_lang['BackDevDetail_Tools_WOL_error'] = 'The command was not executed';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page

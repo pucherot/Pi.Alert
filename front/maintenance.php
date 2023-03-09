@@ -448,7 +448,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                         </div>
                                       </div>
                                     </div>                             
-                                    <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
+                                    <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?php echo $pia_lang['Maintenance_lang_selector_apply'];?> </button>
                                 </div>
                             </div>
 <!-- Theme Selection ----------------------------------------------------------------- -->
@@ -477,25 +477,25 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                         </div>
                                       </div>
                                     </div>
-                                    <button type="button" class="btn btn-primary bg-green" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
+                                    <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply'];?> </button>
                                 </div>
                             </div>
 <!-- Toggle DarkMode ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode'];?></button>
                                 </div>
                             </div>
 <!-- Toggle History Graph ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>      
                                 </div>
                             </div>
 <!-- Toggle Web Service Monitoring ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn bg-green dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?php echo $pia_lang['Maintenance_Tool_webservicemon'];?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?php echo $pia_lang['Maintenance_Tool_webservicemon'];?></button>
                                 </div>
                             </div>
                         </div>
@@ -567,7 +567,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_MAC'];?></label>
                             </div>
                             <br>
-                            <button type="button" class="btn btn-primary bg-green" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?php echo $pia_lang['Gen_Save'];?></button>
+                            <button type="button" class="btn btn-default" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?php echo $pia_lang['Gen_Save'];?></button>
                         </div>
 
 
@@ -575,11 +575,11 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 </tr>
                 <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
                 <tr class="table_settings_row">
-                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-yellow dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text'];?></td>
                 </tr>
                 <tr class="table_settings_row">
-                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default pa-btn pa-btn-delete bg-yellow dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text'];?></td>
                 </tr>
                 <tr class="table_settings_row">
@@ -607,7 +607,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                               </div>
                             </div>
                             <div style="display: block;">
-                            <button type="button" class="btn btn-primary bg-yellow" style="margin-top:0px; width:160px; height:36px" id="btnSavePiaArpTimer" onclick="setPiAlertArpTimer()" ><div id="Timeralertspinner" class="loader disablespinner"></div> 
+                            <button type="button" class="btn btn-warning" style="margin-top:0px; width:160px; height:36px" id="btnSavePiaArpTimer" onclick="setPiAlertArpTimer()" ><div id="Timeralertspinner" class="loader disablespinner"></div> 
                                 <div id="TimeralertText" class=""><?php echo $pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
                             </div>
                         </div>
@@ -620,10 +620,10 @@ if ($_SESSION['Scan_WebServices'] == True) {
 <?php
 
 if (strtolower($_SESSION['WebProtection']) != 'true') {
-    echo '          <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">'.$pia_lang['Maintenance_Tool_loginenable'].'</button></td>
+    echo '          <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">'.$pia_lang['Maintenance_Tool_loginenable'].'</button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_loginenable_text'].'</td>';}
 else {
-        echo '      <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn bg-red dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">'.$pia_lang['Maintenance_Tool_logindisable'].'</button></td>
+        echo '      <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-danger dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">'.$pia_lang['Maintenance_Tool_logindisable'].'</button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_logindisable_text'].'</td>';}
 
 ?>
@@ -636,37 +636,37 @@ else {
             <div class="db_info_table">
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?php echo $pia_lang['Maintenance_Tool_del_alldev'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?php echo $pia_lang['Maintenance_Tool_del_alldev'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_alldev_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteUnknown" onclick="askDeleteUnknown()"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteUnknown" onclick="askDeleteUnknown()"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteEvents" onclick="askDeleteEvents()"><?php echo $pia_lang['Maintenance_Tool_del_allevents'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteEvents" onclick="askDeleteEvents()"><?php echo $pia_lang['Maintenance_Tool_del_allevents'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_allevents_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteActHistory" onclick="askDeleteActHistory()"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteActHistory" onclick="askDeleteActHistory()"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnDeleteInactiveHosts" onclick="askDeleteInactiveHosts()"><?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteInactiveHosts" onclick="askDeleteInactiveHosts()"><?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'];?></div>
                 </div>
@@ -676,7 +676,7 @@ else {
             <div class="db_info_table">
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?php echo $pia_lang['Maintenance_Tool_backup'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?php echo $pia_lang['Maintenance_Tool_backup'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_backup_text'];?></div>
                 </div>
@@ -684,9 +684,9 @@ else {
                     <div class="db_tools_table_cell_a" style="">
 <?php
 if (!$block_restore_button) {
-    echo '<button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
+    echo '<button type="button" class="btn btn-default dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
 } else {
-    echo '<button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button disabled" id="btnPiaRestoreDBfromArchive">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
+    echo '<button type="button" class="btn btn-default dbtools-button disabled" id="btnPiaRestoreDBfromArchive">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
 }
 
 ?>                            
@@ -695,7 +695,7 @@ if (!$block_restore_button) {
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default pa-btn pa-btn-delete bg-red dbtools-button" id="btnPiaPurgeDBBackups" onclick="askPiaPurgeDBBackups()"><?php echo $pia_lang['Maintenance_Tool_purgebackup'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaPurgeDBBackups" onclick="askPiaPurgeDBBackups()"><?php echo $pia_lang['Maintenance_Tool_purgebackup'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_purgebackup_text'];?></div>
                 </div>

@@ -63,6 +63,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
       case 'setPiAlertLanguage':           setPiAlertLanguage();                    break;
       case 'setPiAlertArpTimer':           setPiAlertArpTimer();                    break;
       case 'setDeviceListCol':             setDeviceListCol();                      break;
+      case 'wakeonlan':                    wakeonlan();                             break;
 
       case 'getDevicesTotals':             getDevicesTotals();                      break;
       case 'getDevicesList':               getDevicesList();                        break;
@@ -1052,4 +1053,41 @@ function deleteAllNotifications() {
   echo("<meta http-equiv='refresh' content='2; URL=./reports.php'>");
 }
 
+//------------------------------------------------------------------------------
+//  Wake-on-LAN
+//------------------------------------------------------------------------------
+function crosscheckMAC($query_mac) {
+  global $db;
+    $sql = 'SELECT * FROM Devices WHERE dev_MAC="'. $query_mac .'"';
+  $result = $db->query($sql);
+  $row = $result -> fetchArray (SQLITE3_ASSOC);
+  return $row['dev_MAC'];
+}
+
+function wakeonlan() {
+  global $pia_lang;
+
+  $WOL_HOST_IP = $_REQUEST['ip'];
+  $WOL_HOST_MAC = $_REQUEST['mac'];
+
+  if (!filter_var($WOL_HOST_IP, FILTER_VALIDATE_IP)) {
+      echo "Invalid IP! ".$pia_lang['BackDevDetail_Tools_WOL_error']; exit;
+  } 
+  elseif (!filter_var($WOL_HOST_MAC, FILTER_VALIDATE_MAC)) {
+      echo "Invalid MAC! ".$pia_lang['BackDevDetail_Tools_WOL_error']; exit;
+  } 
+  elseif (crosscheckMAC($WOL_HOST_MAC) == "") {
+      echo "Unknown MAC! ".$pia_lang['BackDevDetail_Tools_WOL_error']; exit;
+  }
+
+  exec('wakeonlan '.$WOL_HOST_MAC , $output);
+
+  echo $pia_lang['BackDevDetail_Tools_WOL_okay'];
+
+}
+
+
+//------------------------------------------------------------------------------
+//  End
+//------------------------------------------------------------------------------
 ?>

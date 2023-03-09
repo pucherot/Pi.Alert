@@ -522,16 +522,29 @@ if ($_REQUEST['mac'] == 'Internet') {
                     })
                   }
                   </script>
-<?php  
+<?php
 }
 ?>
+                <h4 class="">Wake-on-LAN</h4>
+                <div style="width:100%; text-align: center;">
+                  <script>
+                      setTimeout(function(){
+                        document.getElementById('wakeonlan').innerHTML='<?php echo $pia_lang['DevDetail_Tools_WOL'];?> ' + document.getElementById('txtLastIP').value + '';
+                      }, 2000);
+                  </script>
+
+                  <button type="button" id="wakeonlan" class="btn btn-primary pa-btn" style="margin-bottom: 20px; margin-left: 10px; margin-right: 10px;" onclick="askwakeonlan()">Loading...</button>
+                
+                </div>
+
+
                 <h4 class="">Nmap Scans</h4>
                 <div style="width:100%; text-align: center;">
                   <script>
                       setTimeout(function(){
-                        document.getElementById('piamanualnmap_fast').innerHTML='<?php echo $pia_lang['DevDetail_Nmap_buttonFast'];?> (' + document.getElementById('txtLastIP').value +')';
-                        document.getElementById('piamanualnmap_normal').innerHTML='<?php echo $pia_lang['DevDetail_Nmap_buttonDefault'];?> (' + document.getElementById('txtLastIP').value +')';
-                        document.getElementById('piamanualnmap_detail').innerHTML='<?php echo $pia_lang['DevDetail_Nmap_buttonDetail'];?> (' + document.getElementById('txtLastIP').value +')';
+                        document.getElementById('piamanualnmap_fast').innerHTML='<?php echo $pia_lang['DevDetail_Tools_nmap_buttonFast'];?> (' + document.getElementById('txtLastIP').value +')';
+                        document.getElementById('piamanualnmap_normal').innerHTML='<?php echo $pia_lang['DevDetail_Tools_nmap_buttonDefault'];?> (' + document.getElementById('txtLastIP').value +')';
+                        document.getElementById('piamanualnmap_detail').innerHTML='<?php echo $pia_lang['DevDetail_Tools_nmap_buttonDetail'];?> (' + document.getElementById('txtLastIP').value +')';
                       }, 2000);
                   </script>
 
@@ -541,9 +554,9 @@ if ($_REQUEST['mac'] == 'Internet') {
                 
                   <div style="text-align: left;">
                     <ul style="padding:20px;">
-                      <li><?php echo $pia_lang['DevDetail_Nmap_buttonFast_text'];?></li>
-                      <li><?php echo $pia_lang['DevDetail_Nmap_buttonDefault_text'];?></li>
-                      <li><?php echo $pia_lang['DevDetail_Nmap_buttonDetail_text'];?></li>
+                      <li><?php echo $pia_lang['DevDetail_Tools_nmap_buttonFast_text'];?></li>
+                      <li><?php echo $pia_lang['DevDetail_Tools_nmap_buttonDefault_text'];?></li>
+                      <li><?php echo $pia_lang['DevDetail_Tools_nmap_buttonDetail_text'];?></li>
                     </ul>
                   </div>
                 </div>
@@ -1538,6 +1551,22 @@ function deactivateSaveRestoreData () {
 function setTextValue (textElement, textValue) {
   $('#'+textElement).val (textValue);
   activateSaveRestoreData ();
+}
+
+// Restore Configfile
+function askwakeonlan() {
+  // Ask 
+  showModalWarning('<?php echo $pia_lang['DevDetail_Tools_WOL_noti'];?>', '<?php echo $pia_lang['DevDetail_Tools_WOL_noti_text'];?>',
+    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Run'];?>', 'wakeonlan');
+}
+function wakeonlan() {
+  // Execute
+  $.get('php/server/devices.php?action=wakeonlan&'
+    + '&mac='         + $('#txtMAC').val()
+    + '&ip='          + $('#txtLastIP').val()
+    , function(msg) {
+    showMessage (msg);
+  });
 }
 
 </script>
