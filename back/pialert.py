@@ -608,14 +608,6 @@ def execute_arpscan ():
             unique_mac.append(device['mac'])
             unique_devices.append(device)
 
-    # DEBUG
-        # print (devices_list)
-        # print (unique_mac)
-        # print (unique_devices)
-        # print (len(devices_list))
-        # print (len(unique_mac))
-        # print (len(unique_devices))
-
     # return list
     return unique_devices
 
@@ -625,7 +617,6 @@ def execute_arpscan_on_interface (SCAN_SUBNETS):
     # Prepare command arguments
     subnets = SCAN_SUBNETS.strip().split()
     # Retry is 3 to avoid false offline devices
-    #arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--bandwidth=512k', '--retry=3'] + subnets
     arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--bandwidth=256k', '--retry=6'] + subnets
     # arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--retry=6'] + subnets
 
