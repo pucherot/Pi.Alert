@@ -355,7 +355,7 @@ install_arpscan() {
   sudo apt-get install dnsutils net-tools -y                      2>&1 >> "$LOG"
 
   print_msg "- Installing nmap and zip..."
-  sudo apt-get install nmap zip -y                                2>&1 >> "$LOG"
+  sudo apt-get install nmap zip wakeonlan -y                      2>&1 >> "$LOG"
 }
   
 

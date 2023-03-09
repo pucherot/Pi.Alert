@@ -111,7 +111,7 @@ check_packages() {
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
 
   print_msg "- Checking packages dnsutils & net-tools..."
-  sudo apt-get install dnsutils net-tools -y                      2>&1 >> "$LOG"
+  sudo apt-get install dnsutils net-tools wakeonlan -y            2>&1 >> "$LOG"
 
   print_msg "- Checking packages php-curl..."
   sudo apt-get install php-curl -y                                2>&1 >> "$LOG"
