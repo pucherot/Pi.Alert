@@ -211,6 +211,17 @@ SCAN_WEBSERVICES = False
 EOF
 fi
 
+if ! grep -Fq "REPORT_MAIL_WEBMON" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+REPORT_MAIL_WEBMON       = True
+REPORT_WEBGUI_WEBMON     = True
+REPORT_TELEGRAM_WEBMON   = False
+REPORT_NTFY_WEBMON       = False
+REPORT_PUSHSAFER_WEBMON  = False
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------

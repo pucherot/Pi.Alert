@@ -1619,25 +1619,25 @@ def service_monitoring_notification():
 
     # # Send Mail
     if mail_section_services_down == True or mail_section_events == True :
-        if REPORT_MAIL :
+        if REPORT_MAIL_WEBMON :
             print ('    Sending report by email...')
             send_email (mail_text_webservice, mail_html_webservice)
         else :
             print ('    Skip mail...')
-        if REPORT_PUSHSAFER :
+        if REPORT_PUSHSAFER_WEBMON :
             print ('    Sending report by PUSHSAFER...')
             send_pushsafer (mail_text_webservice)
         else :
             print ('    Skip PUSHSAFER...')
-        if REPORT_TELEGRAM :
+        if REPORT_TELEGRAM_WEBMON :
             print ('    Sending report by Telegram...')
             send_telegram (mail_text_webservice)
         else :
             print ('    Skip Telegram...')
-        if REPORT_NTFY :
+        if REPORT_NTFY_WEBMON :
             print ('    Sending report by NTFY...')
             send_ntfy (mail_text_webservice)
-        if REPORT_WEBGUI :
+        if REPORT_WEBGUI_WEBMON :
             print ('    Save report to file...')
             send_webgui (mail_text_webservice)
         else :
@@ -2014,25 +2014,25 @@ def email_reporting_test (_Mode):
     # Open text Template
 
     # Send Mail
-    if REPORT_MAIL :
+    if REPORT_MAIL or REPORT_MAIL_WEBMON:
         print ('    Sending report by email...')
         send_email (notiMessage, notiMessage)
     else :
         print ('    Skip mail...')
-    if REPORT_PUSHSAFER :
+    if REPORT_PUSHSAFER or REPORT_PUSHSAFER_WEBMON:
         print ('    Sending report by PUSHSAFER...')
         send_pushsafer_test (notiMessage)
     else :
         print ('    Skip PUSHSAFER...')
-    if REPORT_NTFY :
+    if REPORT_NTFY or REPORT_NTFY_WEBMON:
         print ('    Sending report by NTFY...')
         send_ntfy_test (notiMessage)
     else :
         print ('    Skip NTFY...')
-    if REPORT_TELEGRAM :
+    if REPORT_TELEGRAM or REPORT_TELEGRAM_WEBMON:
         print ('    Sending report by Telegram...')
         send_telegram_test (notiMessage)
-    if REPORT_WEBGUI :
+    if REPORT_WEBGUI or REPORT_WEBGUI_WEBMON:
         print ('    Save report to file...')
         send_webgui_test (notiMessage)
     else :

@@ -40,53 +40,84 @@ require 'php/templates/header.php';
 <?php
 // Get API-Key ------------------------------------------------------------------
 
-$config_file = "../config/pialert.conf";
-$config_file_lines = file($config_file);
-$config_file_lines_bypass = array_values(preg_grep('/^PIALERT_APIKEY\s.*/', $config_file_lines));
-if ($config_file_lines_bypass != False) {
-    $apikey_line = explode("'", $config_file_lines_bypass[0]);
-    $pia_apikey = trim($apikey_line[1]);
-} else {$pia_apikey = $pia_lang['Maintenance_Tool_setapikey_false'];}
+$CONFIG_FILE_SOURCE = "../config/pialert.conf";
+$CONFIG_FILE_KEY_LINE = file($CONFIG_FILE_SOURCE);
+$CONFIG_FILE_KEY_VALUE = array_values(preg_grep('/^PIALERT_APIKEY\s.*/', $CONFIG_FILE_KEY_LINE));
+if ($CONFIG_FILE_KEY_VALUE != False) {
+    $APIKEY_LINE = explode("'", $CONFIG_FILE_KEY_VALUE[0]);
+    $APIKEY = trim($APIKEY_LINE[1]);
+} else {$APIKEY = $pia_lang['Maintenance_Tool_setapikey_false'];}
+
+// Get Notification Settings ------------------------------------------------------------------
+
+$CONFIG_FILE_FILTER_VALUE_ARP = array_values(preg_grep("/(REPORT_MAIL |REPORT_NTFY |REPORT_WEBGUI |REPORT_PUSHSAFER |REPORT_TELEGRAM )/i", $CONFIG_FILE_KEY_LINE));
+$CONFIG_FILE_FILTER_VALUE_WEB = array_values(preg_grep("/(REPORT_MAIL_WEBMON|REPORT_NTFY_WEBMON|REPORT_WEBGUI_WEBMON|REPORT_PUSHSAFER_WEBMON|REPORT_TELEGRAM_WEBMON)/i", $CONFIG_FILE_KEY_LINE));
+
+function format_notifications ($source_array) {
+    $format_array_true = array();
+    $format_array_false = array();
+    $text_reference = array('WEBGUI','TELEGRAM','MAIL','PUSHSAFER','NTFY');
+    $text_format = array('WebGUI','Telegram','Mail','Pushsafer','NTFY');
+    for ($x=0; $x<sizeof($source_array); $x++) {
+        $temp = explode("=", $source_array[$x]);
+        $temp[0] = trim($temp[0]);
+        $temp[1] = trim($temp[1]);
+        if (strtolower($temp[1]) == "true") {
+            $temp[0] = str_replace('REPORT_', '', $temp[0]);
+            $temp[0] = str_replace('_WEBMON', '', $temp[0]);
+            $key = array_search($temp[0], $text_reference);
+            array_push($format_array_true, '<span style="color: green;">'.$text_format[$key].'</span>');
+        }
+        if (strtolower($temp[1]) == "false") {
+            $temp[0] = str_replace('REPORT_', '', $temp[0]);
+            $temp[0] = str_replace('_WEBMON', '', $temp[0]);
+            $key = array_search($temp[0], $text_reference);
+            array_push($format_array_false, '<span style="color: red;">'.$text_format[$key].'</span>');
+        }
+    }
+    $output = implode(", ", $format_array_true).', '.implode(", ", $format_array_false);
+    echo $output;
+}
 
 // Size and last mod of DB ------------------------------------------------------
 
-$pia_db = str_replace('front', 'db', getcwd()).'/pialert.db';
-$pia_db_size = number_format((filesize($pia_db) / 1000000),2,",",".") . ' MB';
-$pia_db_mod = date ("d.m.Y, H:i:s", filemtime($pia_db)).' Uhr';
+$DB_SOURCE = str_replace('front', 'db', getcwd()).'/pialert.db';
+$DB_SIZE_DATA = number_format((filesize($DB_SOURCE) / 1000000),2,",",".") . ' MB';
+$DB_MOD_DATA = date ("d.m.Y, H:i:s", filemtime($DB_SOURCE)).' Uhr';
 
-// Count Config Backups -------------------------------------------------------
+// Count Config Backups -------------------------s------------------------------
 
-$pia_config_Path = str_replace('front', 'config', getcwd()).'/';
-$files = glob($pia_config_Path."pialert-20*.bak");
+$CONFIG_FILE_DIR = str_replace('front', 'config', getcwd()).'/';
+$files = glob($CONFIG_FILE_DIR."pialert-20*.bak");
 if ($files){
  $pia_config_count = count($files);
 }
 
 // Count and Calc DB Backups -------------------------------------------------------
 
-$Pia_Archive_Path = str_replace('front', 'db', getcwd()).'/';
-$Pia_Archive_count = 0;
-$Pia_Archive_diskusage = 0;
-$files = glob($Pia_Archive_Path."pialertdb_*.zip");
+$ARCHIVE_PATH = str_replace('front', 'db', getcwd()).'/';
+$ARCHIVE_COUNT = 0;
+$ARCHIVE_DISKUSAGE = 0;
+$files = glob($ARCHIVE_PATH."pialertdb_*.zip");
 if ($files){
- $Pia_Archive_count = count($files);
+ $ARCHIVE_COUNT = count($files);
 }
 foreach ($files as $result) {
-    $Pia_Archive_diskusage = $Pia_Archive_diskusage + filesize($result);
+    $ARCHIVE_DISKUSAGE = $ARCHIVE_DISKUSAGE + filesize($result);
 }
-$Pia_Archive_diskusage = number_format(($Pia_Archive_diskusage / 1000000),2,",",".") . ' MB';
+$ARCHIVE_DISKUSAGE = number_format(($ARCHIVE_DISKUSAGE / 1000000),2,",",".") . ' MB';
 
 // Find latest Backup for restore -----------------------------------------------
 
-$latestfiles = glob($Pia_Archive_Path."pialertdb_*.zip");
-if (sizeof($latestfiles) == 0) {
-    $latestbackup_date = $pia_lang['Maintenance_Tool_restore_blocked'];
+$LATEST_FILES = glob($ARCHIVE_PATH."pialertdb_*.zip");
+if (sizeof($LATEST_FILES) == 0) {
+    $LATEST_BACKUP_DATE = $pia_lang['Maintenance_Tool_restore_blocked'];
     $block_restore_button = true;
 } else {
-        natsort($latestfiles);
-        $latestfiles = array_reverse($latestfiles,False);
-        $latestbackup = $latestfiles[0];
-        $latestbackup_date = date ("Y-m-d H:i:s", filemtime($latestbackup));
+        natsort($LATEST_FILES);
+        $LATEST_FILES = array_reverse($LATEST_FILES,False);
+        $LATEST_BACKUP = $LATEST_FILES[0];
+        $LATEST_BACKUP_DATE = date ("Y-m-d H:i:s", filemtime($LATEST_BACKUP));
     }
 
 // Aprscan read Timer -----------------------------------------------------------------
@@ -151,25 +182,25 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_database_path'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $pia_db;?>
+                        <?php echo $DB_SOURCE;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_size'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $pia_db_size;?>
+                        <?php echo $DB_SIZE_DATA;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_lastmod'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $pia_db_mod;?>
+                        <?php echo $DB_MOD_DATA;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_backup'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $Pia_Archive_count.' '.$pia_lang['Maintenance_database_backup_found'].' / '.$pia_lang['Maintenance_database_backup_total'].': '.$Pia_Archive_diskusage;?>
+                        <?php echo $ARCHIVE_COUNT.' '.$pia_lang['Maintenance_database_backup_found'].' / '.$pia_lang['Maintenance_database_backup_total'].': '.$ARCHIVE_DISKUSAGE;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
@@ -186,10 +217,22 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px">Api-Key</div>
                     <div class="db_info_table_cell" style="overflow-wrap: anywhere;">
-                        <input readonly value="<?php echo $pia_apikey;?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
+                        <input readonly value="<?php echo $APIKEY;?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
                     </div>
                 </div>
-            </div>                
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_notification_config'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo format_notifications($CONFIG_FILE_FILTER_VALUE_ARP);?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_notification_config_webmon'];?></div>
+                    <div class="db_info_table_cell">
+                        <?php echo format_notifications($CONFIG_FILE_FILTER_VALUE_WEB);?>
+                    </div>
+                </div>
+            </div>
         </div>
           <!-- /.box-body -->
     </div>
@@ -684,9 +727,9 @@ else {
                     <div class="db_tools_table_cell_a" style="">
 <?php
 if (!$block_restore_button) {
-    echo '<button type="button" class="btn btn-default dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
+    echo '<button type="button" class="btn btn-default dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$LATEST_BACKUP_DATE.'</button>';
 } else {
-    echo '<button type="button" class="btn btn-default dbtools-button disabled" id="btnPiaRestoreDBfromArchive">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$latestbackup_date.'</button>';
+    echo '<button type="button" class="btn btn-default dbtools-button disabled" id="btnPiaRestoreDBfromArchive">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$LATEST_BACKUP_DATE.'</button>';
 }
 
 ?>                            
