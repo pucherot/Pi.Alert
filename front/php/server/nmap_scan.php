@@ -40,13 +40,13 @@ echo '<pre style="border: none;">';
 // Prepare short term memory
 $PIA_SCAN_TIME = date('Y-m-d H:i:s');
 
-unset($_SESSION['ScanShortMem']);
-$_SESSION['ScanShortMem'] = 'Last Nmap Scan<br><br><span style="display:inline-block; width: 100px;">Scan Target:</span> '.$PIA_HOST_IP.'<br><span style="display:inline-block; width: 100px;">Scan Mode:</span> '.$PIA_SCAN_MODE.'<br><span style="display:inline-block; width: 100px;">Scan Time:</span> '.$PIA_SCAN_TIME.'<br><br>Result:<br>';
+unset($_SESSION['ScanShortMem_NMAP']);
+$_SESSION['ScanShortMem_NMAP'] = 'Last Nmap Scan<br><br><span style="display:inline-block; width: 100px;">Scan Target:</span> '.$PIA_HOST_IP.'<br><span style="display:inline-block; width: 100px;">Scan Mode:</span> '.$PIA_SCAN_MODE.'<br><span style="display:inline-block; width: 100px;">Scan Time:</span> '.$PIA_SCAN_TIME.'<br><br>Result:<br>';
 
 foreach($output as $line){
     echo $line . "\n";
     // Safe last Scan result in Session (Short term memory)
-    $_SESSION['ScanShortMem'] = $_SESSION['ScanShortMem'].$line.'<br>';
+    $_SESSION['ScanShortMem_NMAP'] = $_SESSION['ScanShortMem_NMAP'].$line.'<br>';
 }
 echo '</pre>';
 

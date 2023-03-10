@@ -275,7 +275,8 @@ if ($_REQUEST['tab'] == '1') {
             <button type="button" id="wefwfwefewdf" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-iplog" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog'];?></button>
             <button type="button" id="tzhrsreawefw" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-vendor" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
             <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-cleanup" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup'];?></button>
-            <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-nmap" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
+            <button type="button" id="ufiienfflgze" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-nmap" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
+            <button type="button" id="lgnsisnuhzgd" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-wol" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_WOL'];?></button>
 <?php
 if ($_SESSION['Scan_WebServices'] == True) {
     echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-webservices" style="margin: 5px;">'.$pia_lang['Maintenance_Tools_Logviewer_WebServices'].'</button>';
@@ -416,7 +417,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
                     <?php
-                    if (!isset($_SESSION['ScanShortMem'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem'];}
+                    if (!isset($_SESSION['ScanShortMem_NMAP'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem_NMAP'];}
                     ?>
                     <br></div>
                 </div>
@@ -455,6 +456,31 @@ if ($_SESSION['Scan_WebServices'] == True) {
     </div>';
 }
 ?>
+
+<!-- Log Viewer - Modals Wake-on-LAN ----------------------------------------------------------------- -->
+
+    <div class="modal fade" id="modal-logviewer-wol">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: last Wake-on-LAN (Memory)</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">
+                    <?php
+                    if (!isset($_SESSION['ScanShortMem_WOL'])) {echo $pia_lang['Maintenance_Tools_Logviewer_WOL_empty'];} else {echo $_SESSION['ScanShortMem_WOL'];}
+                    ?>
+                    <br></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- Tabs ----------------------------------------------------------------- -->
 
     <div class="nav-tabs-custom">

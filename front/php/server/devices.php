@@ -1084,6 +1084,18 @@ function wakeonlan() {
 
   echo $pia_lang['BackDevDetail_Tools_WOL_okay'];
 
+  // Prepare short term memory
+  $PIA_TIME = date('Y-m-d H:i:s');
+
+  unset($_SESSION['ScanShortMem_WOL']);
+  $_SESSION['ScanShortMem_WOL'] = 'Last Wake-on-LAN Command<br><br><span style="display:inline-block; width: 100px;">IP:</span> '.$WOL_HOST_IP.'<br><span style="display:inline-block; width: 100px;">MAC:</span> '.$WOL_HOST_MAC.'<br><span style="display:inline-block; width: 100px;">Scan Time:</span> '.$PIA_TIME.'<br><br>Output:<br>';
+
+  foreach($output as $line){
+      //echo $line . "\n";
+      // Safe last Scan result in Session (Short term memory)
+      $_SESSION['ScanShortMem_WOL'] = $_SESSION['ScanShortMem_WOL'].$line.'<br>';
+  }
+
 }
 
 
