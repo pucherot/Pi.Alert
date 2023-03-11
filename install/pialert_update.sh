@@ -214,7 +214,7 @@ fi
 if ! grep -Fq "REPORT_MAIL_WEBMON" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
-REPORT_MAIL_WEBMON       = True
+REPORT_MAIL_WEBMON       = False
 REPORT_WEBGUI_WEBMON     = True
 REPORT_TELEGRAM_WEBMON   = False
 REPORT_NTFY_WEBMON       = False
