@@ -223,6 +223,16 @@ REPORT_PUSHSAFER_WEBMON  = False
 EOF
 fi
 
+if ! grep -Fq "# Special Protocol Scanning" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# Special Protocol Scanning
+# ----------------------
+SCAN_ROGUE_DHCP        = False
+DHCP_SERVER_ADDRESS    = '0.0.0.0'
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------

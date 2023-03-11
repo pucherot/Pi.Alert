@@ -538,6 +538,7 @@ def scan_network ():
     print ('    Calculate Activity History...')
     calculate_activity_history ()
 
+    # Web Service Monitoring
     try:
         enable_services_monitoring = SCAN_WEBSERVICES
     except NameError:
@@ -546,6 +547,16 @@ def scan_network ():
     if enable_services_monitoring == True:
         if str(startTime)[15] == "0":
             service_monitoring()
+
+    # Check Rogue DHCP
+    try:
+        enable_rogue_dhcp_detection = SCAN_ROGUE_DHCP
+    except NameError:
+        enable_rogue_dhcp_detection = False
+
+    if enable_rogue_dhcp_detection == True:
+        print ('\nLooking for Rogue DHCP Servers...')
+        rogue_dhcp_detection ()
 
     # Commit changes
     sql_connection.commit()
@@ -1285,7 +1296,76 @@ def skip_repeated_notifications ():
     print_log ('Skip Repeated end')
 
 #===============================================================================
-# nmap Scan 
+# nmap Scan - DHCP Detection
+#===============================================================================
+
+def rogue_dhcp_detection ():
+
+    print_log ('Looking for Rogue DHCP Servers')
+    # Create Table is not exist
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS Nmap_DHCP_Server(
+                                scan_num INTEGER NOT NULL,
+                                dhcp_server TEXT NOT NULL
+                            ); """
+    sql.execute(sql_create_table)
+    sql_connection.commit()
+
+    # Flush Table
+    sql.execute("DELETE FROM Nmap_DHCP_Server")
+    sql_connection.commit()
+
+    # Execute 10 probes and insert in list
+    dhcp_probes = 15
+    dhcp_server_list = []
+    dhcp_server_list.append(strftime("%Y-%m-%d %H:%M:%S"))
+    for _ in range(dhcp_probes):
+        stream = os.popen('sudo nmap --script broadcast-dhcp-discover 2>/dev/null | grep "Server Identifier" | awk \'{ print $4 }\'')
+        output = stream.read()
+        dhcp_server_list.append(output.replace("\n", ""))
+
+    for i in range(len(dhcp_server_list)):
+        # Insert list in database
+        sqlite_insert = """INSERT INTO Nmap_DHCP_Server
+                         (scan_num, dhcp_server) 
+                         VALUES (?, ?);"""
+
+        table_data = (i, dhcp_server_list[i])
+        sql.execute(sqlite_insert, table_data)
+    
+    sql_connection.commit()
+
+    rogue_dhcp_notification ()
+
+# -----------------------------------------------------------------------------------
+def rogue_dhcp_notification ():
+
+    sql.execute("SELECT DISTINCT dhcp_server FROM Nmap_DHCP_Server")
+    rows = sql.fetchall()
+
+    rogue_dhcp_server_list = []
+
+    if len(rows) == 2:
+        if rows[1][0] == DHCP_SERVER_ADDRESS :
+            print ('    One DHCP Server detected......:' + rows[1][0] + ' (valid)')
+        else:
+            print ('    One DHCP Server detected......:' + rows[1][0] + ' (invalid)')
+            # notification
+
+    if len(rows) > 2:
+        print ('    Multiple DHCP Servers detected:')
+        for i in range(1,len(rows),1):
+            if rows[i][0] == DHCP_SERVER_ADDRESS :
+                print ('        ' + rows[i][0] + ' (valid)' )
+            else:
+                print ('        ' + rows[i][0] + ' (rogue)' )
+                rogue_dhcp_server_list.append(rows[i][0])
+
+    rogue_dhcp_server_string = ', '.join(rogue_dhcp_server_list)
+    # notification
+
+
+#===============================================================================
+# nmap Scan of a single device
 #
 # Maybe outsource to an extra script because of longer runtime
 #===============================================================================
@@ -1300,14 +1380,14 @@ def prepare_nmap_env ():
                             ); """
     sql.execute(sql_create_table)
 
-    # sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_prev(
-    #                             mac TEXT NOT NULL,
-    #                             scan_time TEXT NOT NULL,
-    #                             port_protocol TEXT NOT NULL,
-    #                             port_status TEXT NOT NULL,
-    #                             port_description TEXT NOT NULL,
-    #                         ); """
-    # sql.execute(sql_create_table)
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_prev(
+                                mac TEXT NOT NULL,
+                                scan_time TEXT NOT NULL,
+                                port_protocol TEXT NOT NULL,
+                                port_status TEXT NOT NULL,
+                                port_description TEXT NOT NULL,
+                            ); """
+    sql.execute(sql_create_table)
 
 #-------------------------------------------------------------------------------
 def use_nmap_regex(_nmap_raw_result):
@@ -1338,6 +1418,17 @@ def process_nmap_scan(_nmap_result):
             # maybe INSERT INTO old_scan SELECT * FROM current_scan;
             # Do not write intermediate results to the DB immediately, but to a temporary variable/list first, to have only one big DB operation at the end and not many small ones during runtime.
             #print(temp[0] + " - " + temp[2])
+            
+            # ============================
+            # Actual Output for IP (DEMO)|
+            # ----------------------------
+            # 21/tcp - ftp               |
+            # 53/tcp - domain            |
+            # 80/tcp - http              |
+            # 443/tcp - https            |
+            # 5060/tcp - sip             |
+            # 8181/tcp - intermapper     |
+            # ============================
 
 # DEBUG
 #execute_nmap_scan(IP)
