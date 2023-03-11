@@ -148,7 +148,8 @@ download_pialert() {
 # ------------------------------------------------------------------------------
 update_config() {
   print_msg "- Config backup..."
-#  sudo chmod 666 "$PIALERT_HOME/config/pialert.conf"
+  # to force write permission, will be reverted later
+  sudo chmod 777 "$PIALERT_HOME/config/pialert.conf"
   cp "$PIALERT_HOME/config/pialert.conf" "$PIALERT_HOME/config/pialert.conf.back"  2>&1 >> "$LOG"
 
   print_msg "- Updating config file..."
