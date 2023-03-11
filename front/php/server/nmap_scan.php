@@ -30,7 +30,7 @@ if (filter_var($PIA_HOST_IP, FILTER_VALIDATE_IP)) {
 		} elseif ($PIA_SCAN_MODE == 'normal') {
 		    exec('nmap '.$PIA_HOST_IP, $output);
 		} elseif ($PIA_SCAN_MODE == 'detail') {
-		    exec('nmap -A '.$PIA_HOST_IP, $output);
+		    exec('nmap -A -p -10000 '.$PIA_HOST_IP, $output);
 		}
 	} else {echo "Unknown IP"; exit;}
 } else {echo "Wrong parameter"; exit;}
