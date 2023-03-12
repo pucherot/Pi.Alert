@@ -80,6 +80,7 @@ $pia_lang['Device_TableHead_FirstSession'] = '1ra. sesión';
 $pia_lang['Device_TableHead_LastSession'] = 'Última sesión';
 $pia_lang['Device_TableHead_LastIP'] = 'Última IP';
 $pia_lang['Device_TableHead_MAC'] = 'MAC';
+$pia_lang['Device_TableHead_MACaddress'] = 'MAC-Address';
 $pia_lang['Device_TableHead_LastIPOrder'] = 'Última orden de IP';
 $pia_lang['Device_TableHead_Rowid'] = 'Rowid';
 $pia_lang['Device_TableHead_Status'] = 'Estado';

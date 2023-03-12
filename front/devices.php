@@ -189,7 +189,7 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
                   <th><?php echo $pia_lang['Device_TableHead_LastSession'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_LastIP'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_MAC'];?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_MAC'];?></th>
+                  <th><?php echo $pia_lang['Device_TableHead_MACaddress'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Status'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_LastIPOrder'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Rowid'];?></th>
