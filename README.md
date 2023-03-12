@@ -13,7 +13,7 @@ a notification can be sent.
 [Compare this fork with the main project](docs/VERSIONCOMPARE.md)
 
 ## Scan Methods
-Up to three scanning methods are used:
+Multiple scanning methods are used:
   - **Method 1: arp-scan**. The arp-scan system utility is used to search
         for devices on the network using arp frames.
   - **Method 2: Pi-hole**. This method is optional and complementary to
@@ -27,6 +27,8 @@ Up to three scanning methods are used:
   - **Web service monitoring**. This method is optional. An HTTP request is 
         sent and the web server's response is evaluated. If self signed 
         certificates are used, no validation of the certificate is performed.
+  - **DHCP Server Scan**. This method is optional. Nmap is used to send DHCP 
+        requests into the network to detect unknown (rogue) DHCP servers.
 
 ## Components
 The system consists of three parts:
@@ -69,6 +71,7 @@ A web frontend that allows:
     - Config file editor
   - Web service monitoring
   - Help/FAQ section
+  - Wake-on-LAN if supported
 
   | ![Screen 1][screen1]                            | ![Screen 2][screen2]                         | ![Screen 3][screen3]                                           | 
   | ----------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------- |
