@@ -1368,7 +1368,7 @@ def rogue_dhcp_notification ():
         rogue_dhcp_server_string = "Report Date: " + rows[0][0] + "\nServer: " + socket.gethostname() + "\n\nRogue DHCP Server\nDetected Server: "
         rogue_dhcp_server_string += ', '.join(rogue_dhcp_server_list)
 
-        Send Mail
+        # Send Mail
         if REPORT_MAIL or REPORT_MAIL_WEBMON:
             print ('    Sending report by email...')
             send_email (rogue_dhcp_server_string, rogue_dhcp_server_string)
