@@ -75,6 +75,8 @@ function format_notifications ($source_array) {
             array_push($format_array_false, '<span style="color: red;">'.$text_format[$key].'</span>');
         }
     }
+    natsort($format_array_true);
+    natsort($format_array_false);
     $output = implode(", ", $format_array_true).', '.implode(", ", $format_array_false);
     echo $output;
 }

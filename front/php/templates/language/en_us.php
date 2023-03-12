@@ -654,5 +654,6 @@ $pia_lang['Reports_Title'] = 'Notifications';
 $pia_lang['Reports_delete_all'] = 'Delete all notifications';
 $pia_lang['Reports_delete_all_noti'] = 'Delete all notifications';
 $pia_lang['Reports_delete_all_noti_text'] = 'All notifications are deleted. The counter is being reset with this.';
+$pia_lang['Reports_Rogue_hint'] = 'A new message about an unknown DHCP server will only be displayed after this message has been deleted.';
 
 ?>

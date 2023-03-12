@@ -645,5 +645,6 @@ $pia_lang['Reports_Title'] = 'Notifications';
 $pia_lang['Reports_delete_all'] = 'Supprimer toutes les notifications';
 $pia_lang['Reports_delete_all_noti'] = 'Supprimer toutes les notifications';
 $pia_lang['Reports_delete_all_noti_text'] = 'Toutes les notifications sont supprimées. Le compteur est ainsi remis à zéro.';
+$pia_lang['Reports_Rogue_hint'] = 'Un nouveau message concernant un serveur DHCP inconnu n&apos;est envoyé qu&apos;après la suppression de ce message.';
 
 ?>

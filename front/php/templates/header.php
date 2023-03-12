@@ -30,7 +30,7 @@ foreach (glob("../db/setting_language*") as $filename) {
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 require 'php/templates/language/'.$pia_lang_selected.'.php';
 
-// Remove WebGUI Reports ---------------------------------------------------------------
+// Delete WebGUI Reports ---------------------------------------------------------------
 
 function useRegex($input) {
     $regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
@@ -64,13 +64,68 @@ function arpscanstatus() {
       unset($_SESSION['arpscan_timerstart']);
       $_SESSION['arpscan_result'] = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
       $_SESSION['arpscan_sidebarstate'] = 'Active';
-      $_SESSION['arpscan_sidebarstate_light'] = 'green-light';
+      $_SESSION['arpscan_sidebarstate_light'] = 'green-light fa-gradient-green';
     } else {
       $_SESSION['arpscan_timerstart'] = date ("H:i:s", filectime('../db/setting_stoparpscan'));
       $_SESSION['arpscan_result'] = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
       $_SESSION['arpscan_sidebarstate'] = 'Disabled&nbsp;&nbsp;&nbsp;('.$_SESSION['arpscan_timerstart'].')';
-      $_SESSION['arpscan_sidebarstate_light'] = 'red';
+      $_SESSION['arpscan_sidebarstate_light'] = 'red fa-gradient-red';
     }
+}
+
+// Systeminfo in Sidebar ---------------------------------------------------------------
+
+function getTemperature()
+{
+    if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
+        $output = rtrim(file_get_contents('/sys/class/thermal/thermal_zone0/temp'));
+    } elseif (file_exists('/sys/class/hwmon/hwmon0/temp1_input')) {
+        $output = rtrim(file_get_contents('/sys/class/hwmon/hwmon0/temp1_input'));
+    } else {
+        $output = '';
+    }
+
+    // Test if we succeeded in getting the temperature
+    if (is_numeric($output)) {
+        // $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5
+        // ex. 39007 vs 39
+        $celsius = intval($output);
+        // If celsius is greater than 1 degree and is in the 4-5 digit format
+        if ($celsius > 1000) {
+            // Use multiplication to get around the division-by-zero error
+            $celsius *= 1e-3;
+        }
+        $limit = 60;
+        
+    } else {
+        // Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin)
+        // This is the minimum temperature possible (AKA absolute zero)
+        $celsius = -273.16;
+        // Set templimit to null if no tempsensor was found
+        $limit = null;
+    }
+    return array($celsius, $limit);
+}
+
+function getMemUsage()
+{
+    $data = explode("\n", file_get_contents('/proc/meminfo'));
+    $meminfo = array();
+    if (count($data) > 0) {
+        foreach ($data as $line) {
+            $expl = explode(':', $line);
+            if (count($expl) == 2) {
+                // remove " kB" from the end of the string and make it an integer
+                $meminfo[$expl[0]] = intval(trim(substr($expl[1], 0, -3)));
+            }
+        }
+        $memused = $meminfo['MemTotal'] - $meminfo['MemFree'] - $meminfo['Buffers'] - $meminfo['Cached'];
+        $memusage = $memused / $meminfo['MemTotal'];
+    } else {
+        $memusage = -1;
+    }
+
+    return $memusage;
 }
 
 // Enable SubMenu for Web Services Events ---------------------------------------------------------------
@@ -126,18 +181,20 @@ if (strtolower(trim($scan_services_line[1])) == "true") {
   <!-- Pi.Alert CSS -->
   <link rel="stylesheet" href="css/pialert.css">
 
-  <!-- Google Font -->
-  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+  <!-- Offline Font -->
   <link rel="stylesheet" href="css/offline-font.css">
+
+  <!-- Fav / Homescreen Icon -->
   <link rel="icon" type="image/x-icon" href="img/favicons/flat_blue_white.png">
 
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
+
   <!-- Dark-Mode Patch -->
 <?php
 if ($ENABLED_DARKMODE === True) {
-   echo '<link rel="stylesheet" href="css/dark-patch.css">';
-   $BACKGROUND_IMAGE_PATCH='style="background-image: url(\'img/boxed-bg-dark.png\');"';
+    echo '<link rel="stylesheet" href="css/dark-patch.css">';
+    $BACKGROUND_IMAGE_PATCH='style="background-image: url(\'img/boxed-bg-dark.png\');"';
 } else { $BACKGROUND_IMAGE_PATCH='style="background-image: url(\'img/background.png\');"';}
 ?>
 <!-- Servertime to the right of the hostname -->
@@ -260,7 +317,6 @@ document.addEventListener("visibilitychange",()=>{
 
 arpscanstatus();
 
-
 echo '<span id="status">
         <i class="fa fa-w fa-circle text-'.$_SESSION['arpscan_sidebarstate_light'].'"></i> '.$_SESSION['arpscan_sidebarstate'].'&nbsp;&nbsp;
       </span><br>';
@@ -275,82 +331,28 @@ if (!is_numeric($nproc)) {
 $loaddata = sys_getloadavg();
 echo '<span title="Detected '.$nproc.' cores"><i class="fa fa-w fa-circle ';
 if ($loaddata[0] > $nproc) {
-    echo 'text-red';
+    echo 'text-red fa-gradient-red';
 } else {
-    echo 'text-green-light';
+    echo 'text-green-light fa-gradient-green';
 }
 echo '"></i> Load:&nbsp;&nbsp;'.$loaddata[0].'&nbsp;&nbsp;'.$loaddata[1].'&nbsp;&nbsp;'.$loaddata[2].'</span>';
-?>
-                    <br/>
-<?php
-function getMemUsage()
-{
-    $data = explode("\n", file_get_contents('/proc/meminfo'));
-    $meminfo = array();
-    if (count($data) > 0) {
-        foreach ($data as $line) {
-            $expl = explode(':', $line);
-            if (count($expl) == 2) {
-                // remove " kB" from the end of the string and make it an integer
-                $meminfo[$expl[0]] = intval(trim(substr($expl[1], 0, -3)));
-            }
-        }
-        $memused = $meminfo['MemTotal'] - $meminfo['MemFree'] - $meminfo['Buffers'] - $meminfo['Cached'];
-        $memusage = $memused / $meminfo['MemTotal'];
-    } else {
-        $memusage = -1;
-    }
 
-    return $memusage;
-}
+echo '<br/>';
 
 $memory_usage = getMemUsage();
 echo '<span><i class="fa fa-w fa-circle ';
 if ($memory_usage > 0.75 || $memory_usage < 0.0) {
-    echo 'text-red';
+    echo 'text-red fa-gradient-red';
 } else {
-    echo 'text-green-light';
+    echo 'text-green-light fa-gradient-green';
 }
 if ($memory_usage > 0.0) {
     echo '"></i> Memory usage:&nbsp;&nbsp;'.sprintf('%.1f', 100.0 * $memory_usage).'&thinsp;%</span>';
 } else {
     echo '"></i> Memory usage:&nbsp;&nbsp; N/A</span>';
 }
-?>
-                    <br/>
 
-<?php
-function getTemperature()
-{
-    if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
-        $output = rtrim(file_get_contents('/sys/class/thermal/thermal_zone0/temp'));
-    } elseif (file_exists('/sys/class/hwmon/hwmon0/temp1_input')) {
-        $output = rtrim(file_get_contents('/sys/class/hwmon/hwmon0/temp1_input'));
-    } else {
-        $output = '';
-    }
-
-    // Test if we succeeded in getting the temperature
-    if (is_numeric($output)) {
-        // $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5
-        // ex. 39007 vs 39
-        $celsius = intval($output);
-        // If celsius is greater than 1 degree and is in the 4-5 digit format
-        if ($celsius > 1000) {
-            // Use multiplication to get around the division-by-zero error
-            $celsius *= 1e-3;
-        }
-        $limit = 60;
-        
-    } else {
-        // Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin)
-        // This is the minimum temperature possible (AKA absolute zero)
-        $celsius = -273.16;
-        // Set templimit to null if no tempsensor was found
-        $limit = null;
-    }
-    return array($celsius, $limit);
-}
+echo '<br/>';
 
 list($celsius, $temperaturelimit) = getTemperature();
 
@@ -358,7 +360,7 @@ if ($celsius >= -273.15) {
     // Only show temp info if any data is available -->
     $tempcolor = 'text-vivid-blue';
     if (isset($temperaturelimit) && $celsius > $temperaturelimit) {
-        $tempcolor = 'text-red';
+        $tempcolor = 'text-red fa-gradient-red';
     }
     echo '<span id="temperature"><i class="fa fa-w fa-fire '.$tempcolor.'" style="width: 1em !important"></i> ';
     echo 'Temp:&nbsp;<span id="rawtemp" hidden>'.$celsius.'</span>';
@@ -366,23 +368,16 @@ if ($celsius >= -273.15) {
 }
 ?>
             </div>
-
       </div>
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-<!--
-        <li class="header">MAIN MENU</li>
--->
+
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_A'];?></li>
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devices.php', 'deviceDetails.php') ) ){ echo 'active'; } ?>">
           <a href="devices.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Devices'];?></span></a>
         </li>
-
-<!--
-         <li><a href="devices.php?status=favorites"><i class="fa fa-star"></i> <span>Favorites Devices</span></a></li>
--->
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('network.php') ) ){ echo 'active'; } ?>">
           <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network'];?></span></a>
@@ -400,7 +395,6 @@ if ($_SESSION['Scan_WebServices'] == True) {
     echo '<li class="header text-uppercase" style="font-size: 0; padding: 1px;">EVENTS</li>';
 
 }
-
 
 ?>
 
@@ -423,6 +417,11 @@ if ($_SESSION['Scan_WebServices'] == True) {
         </li>';
 }
 ?>
+
+<!--         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('reports.php') ) ){ echo 'active'; } ?>">
+          <a href="reports.php"><i class="fa fa-warning"></i> <span><?php echo 'Meldungen';?></span> <span class="label label-danger" style="position: relative; top: -3px;"><?php echo count_webgui_reports();?></span></a>
+        </li> -->
+
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_C'];?></li>
 
         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('maintenance.php') ) ){ echo 'active'; } ?>">
@@ -433,23 +432,6 @@ if ($_SESSION['Scan_WebServices'] == True) {
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ'];?></span></a>
         </li>
 
-<!--
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Config</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-
-          <ul class="treeview-menu">
-            <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('scancycles.php', 'scancyclesDetails.php') ) ){ echo 'active'; } ?>">
-              <a href="scancycles.php"><i class="fa fa-link"></i> <span>Scan Cycles</span></a>
-            </li>
-            <li><a href="#">Cron Status</a></li>
-            <li><a href="#">Current IP</a></li>
-          </ul>
-        </li>
--->
       </ul>
 
       <!-- /.sidebar-menu -->

@@ -37,6 +37,7 @@ import csv
 import requests
 import time
 import pwd
+import glob
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -1349,6 +1350,7 @@ def rogue_dhcp_notification ():
             print ('    One DHCP Server detected......:' + rows[1][0] + ' (valid)')
         else:
             print ('    One DHCP Server detected......:' + rows[1][0] + ' (invalid)')
+            rogue_dhcp_server_list.append(rows[1][0])
             # notification
 
     if len(rows) > 2:
@@ -1360,7 +1362,38 @@ def rogue_dhcp_notification ():
                 print ('        ' + rows[i][0] + ' (rogue)' )
                 rogue_dhcp_server_list.append(rows[i][0])
 
-    rogue_dhcp_server_string = ', '.join(rogue_dhcp_server_list)
+    rogue_dhcp_reports = glob.glob(REPORTPATH_WEBGUI + "*Rogue DHCP Server*.txt")    
+
+    if rogue_dhcp_server_list and not rogue_dhcp_reports:
+        rogue_dhcp_server_string = "Report Date: " + rows[0][0] + "\nServer: " + socket.gethostname() + "\n\nRogue DHCP Server\nDetected Server: "
+        rogue_dhcp_server_string += ', '.join(rogue_dhcp_server_list)
+
+        Send Mail
+        if REPORT_MAIL or REPORT_MAIL_WEBMON:
+            print ('    Sending report by email...')
+            send_email (rogue_dhcp_server_string, rogue_dhcp_server_string)
+        else :
+            print ('    Skip mail...')
+        if REPORT_PUSHSAFER or REPORT_PUSHSAFER_WEBMON:
+            print ('    Sending report by PUSHSAFER...')
+            send_pushsafer (rogue_dhcp_server_string)
+        else :
+            print ('    Skip PUSHSAFER...')
+        if REPORT_NTFY or REPORT_NTFY_WEBMON:
+            print ('    Sending report by NTFY...')
+            send_ntfy (rogue_dhcp_server_string)
+        else :
+            print ('    Skip NTFY...')
+        if REPORT_TELEGRAM or REPORT_TELEGRAM_WEBMON:
+            print ('    Sending report by Telegram...')
+            send_telegram (rogue_dhcp_server_string)
+        if REPORT_WEBGUI or REPORT_WEBGUI_WEBMON:
+            print ('    Save report to file...')
+            send_webgui (rogue_dhcp_server_string)
+        else :
+            print ('    Skip Telegram...')
+
+
     # notification
 
 
