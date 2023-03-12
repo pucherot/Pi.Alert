@@ -164,7 +164,7 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
             $get = file_get_contents($file, true);
             $table_config = json_decode($get, true);
           } else {
-            $table_config = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'Location' => 0);
+            $table_config = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'MACAddress' => 0, 'Location' => 0);
           }
 
           $devlistcol_hide = '';
@@ -176,7 +176,8 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
           if ($table_config['FirstSession'] == 0) {$devlistcol_hide = $devlistcol_hide.'6, ';}
           if ($table_config['LastSession'] == 0) {$devlistcol_hide = $devlistcol_hide.'7, ';} 
           if ($table_config['LastIP'] == 0) {$devlistcol_hide = $devlistcol_hide.'8, ';}
-          if ($table_config['MACType'] == 0) {$devlistcol_hide = $devlistcol_hide.'9, ';} 
+          if ($table_config['MACType'] == 0) {$devlistcol_hide = $devlistcol_hide.'9, ';}
+          if ($table_config['MACAddress'] == 0) {$devlistcol_hide = $devlistcol_hide.'10, ';} 
           ?>
                   <th><?php echo $pia_lang['Device_TableHead_Name'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Owner'];?></th>
@@ -188,8 +189,8 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
                   <th><?php echo $pia_lang['Device_TableHead_LastSession'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_LastIP'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_MAC'];?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Status'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_MAC'];?></th>
+                  <th><?php echo $pia_lang['Device_TableHead_Status'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_LastIPOrder'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Rowid'];?></th>
                 </tr>
@@ -283,12 +284,12 @@ function initializeDatatable () {
     // 'order'       : [[3,'desc'], [0,'asc']],
 
     'columnDefs'   : [
-      {visible:   false,         targets: [<?php echo $devlistcol_hide;?>11, 12, 13] },
-      {className: 'text-center', targets: [3, 8, 9, 10] },
-      {width:     '80px',        targets: [6, 7] },
-      {width:     '30px',        targets: 9 },
-      {width:     '0px',         targets: 10 },
-      {orderData: [12],          targets: 8 },
+      {visible:   false,         targets: [<?php echo $devlistcol_hide;?>12, 13] },
+      {className: 'text-center', targets: [3, 8, 9, 11] },
+      {width:     '100px',       targets: [6, 7] },
+      {width:     '30px',        targets: [9] },
+      {width:     '0px',         targets: [11] },
+      {orderData: [12],          targets: [8] },
 
       // {visible:   false,         targets: [10, 11, 12] },
       // {className: 'text-center', targets: [3, 8, 9] },
@@ -328,10 +329,15 @@ function initializeDatatable () {
           }
       } },
 
-      // Status color
       {targets: [10],
         'createdCell': function (td, cellData, rowData, row, col) {
-          switch (cellData) {
+            $(td).html (rowData[11]);
+      } },
+
+      // Status color
+      {targets: [11],
+        'createdCell': function (td, cellData, rowData, row, col) {
+          switch (rowData[10]) {
             case 'Down':      color='red';              break;
             case 'New':       color='yellow';           break;
             case 'On-line':   color='green';            break;
@@ -340,7 +346,7 @@ function initializeDatatable () {
             default:          color='aqua';             break;
           };
       
-          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[11] +'" class="badge bg-'+ color +'">'+ cellData.replace('-', '') +'</a>');
+          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[11] +'" class="badge bg-'+ color +'">'+ rowData[10].replace('-', '') +'</a>');
       } },
     ],
     
