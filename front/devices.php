@@ -290,6 +290,7 @@ function initializeDatatable () {
       {width:     '30px',        targets: [9] },
       {width:     '0px',         targets: [11] },
       {orderData: [12],          targets: [8] },
+      {orderData: [11],          targets: [10] },
 
       // {visible:   false,         targets: [10, 11, 12] },
       // {className: 'text-center', targets: [3, 8, 9] },
