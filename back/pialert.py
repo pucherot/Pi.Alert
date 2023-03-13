@@ -1393,10 +1393,6 @@ def rogue_dhcp_notification ():
         else :
             print ('    Skip Telegram...')
 
-
-    # notification
-
-
 #===============================================================================
 # nmap Scan of a single device
 #
