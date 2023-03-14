@@ -185,11 +185,11 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
                   <th><?php echo $pia_lang['Device_TableHead_Favorite'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Group'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Location'];?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_FirstSession'];?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_LastSession'];?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_LastIP'];?></th>
+                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_FirstSession'];?></th>
+                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_LastSession'];?></th>
+                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_LastIP'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_MAC'];?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_MACaddress'];?></th>
+                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_MACaddress'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Status'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_LastIPOrder'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Rowid'];?></th>
@@ -291,12 +291,9 @@ function initializeDatatable () {
       {width:     '0px',         targets: [11] },
       {orderData: [12],          targets: [8] },
       {orderData: [11],          targets: [10] },
-
-      // {visible:   false,         targets: [10, 11, 12] },
-      // {className: 'text-center', targets: [3, 8, 9] },
-      // {width:     '80px',        targets: [5, 6] },
-      // {width:     '0px',         targets: 9 },
-      // {orderData: [11],          targets: 7 },
+      //switch columns Mac address and status
+      {orderData: [10],          targets: [11] },
+      //switch columns Mac address and status
 
       // Device Name
       {targets: [0],
@@ -330,6 +327,8 @@ function initializeDatatable () {
           }
       } },
 
+      //switch columns Mac address and status
+      //MAC-Address
       {targets: [10],
         'createdCell': function (td, cellData, rowData, row, col) {
             $(td).html (rowData[11]);
