@@ -39,6 +39,7 @@ import requests
 import time
 import pwd
 import glob
+import ipaddress
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -1300,7 +1301,14 @@ def skip_repeated_notifications ():
 #===============================================================================
 # nmap Scan - DHCP Detection
 #===============================================================================
+def validate_dhcp_address(ip_string):
+   try:
+       ip_object = ipaddress.ip_address(ip_string)
+       return True
+   except ValueError:
+       return False
 
+# -----------------------------------------------------------------------------------
 def rogue_dhcp_detection ():
 
     print_log ('Looking for Rogue DHCP Servers')
@@ -1346,21 +1354,31 @@ def rogue_dhcp_notification ():
 
     rogue_dhcp_server_list = []
 
+    if len(rows) == 1:
+        print ('    No DHCP Server detected.')
+
     if len(rows) == 2:
-        if rows[1][0] == DHCP_SERVER_ADDRESS :
-            print ('    One DHCP Server detected......:' + rows[1][0] + ' (valid)')
+        if validate_dhcp_address(rows[1][0]):
+            if rows[1][0] == DHCP_SERVER_ADDRESS :
+                print ('    One DHCP Server detected......:' + rows[1][0] + ' (valid)')
+            else:
+                print ('    One DHCP Server detected......:' + rows[1][0] + ' (invalid)')
+                rogue_dhcp_server_list.append(rows[1][0])
         else:
-            print ('    One DHCP Server detected......:' + rows[1][0] + ' (invalid)')
-            rogue_dhcp_server_list.append(rows[1][0])
+            print ('    Detection Error')
 
     if len(rows) > 2:
         print ('    Multiple DHCP Servers detected:')
         for i in range(1,len(rows),1):
-            if rows[i][0] == DHCP_SERVER_ADDRESS :
-                print ('        ' + rows[i][0] + ' (valid)' )
+            if validate_dhcp_address(rows[i][0]):
+                if rows[i][0] == DHCP_SERVER_ADDRESS :
+                    print ('        ' + rows[i][0] + ' (valid)' )
+                else:
+                    print ('        ' + rows[i][0] + ' (rogue)' )
+                    rogue_dhcp_server_list.append(rows[i][0])
             else:
-                print ('        ' + rows[i][0] + ' (rogue)' )
-                rogue_dhcp_server_list.append(rows[i][0])
+                print ('    Detection Error')
+
 
     rogue_dhcp_reports = glob.glob(REPORTPATH_WEBGUI + "*Rogue DHCP Server*.txt")    
 
