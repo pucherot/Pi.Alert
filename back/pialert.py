@@ -1351,7 +1351,6 @@ def rogue_dhcp_notification ():
         else:
             print ('    One DHCP Server detected......:' + rows[1][0] + ' (invalid)')
             rogue_dhcp_server_list.append(rows[1][0])
-            # notification
 
     if len(rows) > 2:
         print ('    Multiple DHCP Servers detected:')
@@ -1365,7 +1364,7 @@ def rogue_dhcp_notification ():
     rogue_dhcp_reports = glob.glob(REPORTPATH_WEBGUI + "*Rogue DHCP Server*.txt")    
 
     if rogue_dhcp_server_list and not rogue_dhcp_reports:
-        rogue_dhcp_server_string = "Report Date: " + rows[0][0] + "\nServer: " + socket.gethostname() + "\n\nRogue DHCP Server\nDetected Server: "
+        rogue_dhcp_server_string = "Report Date: " + rows[0][0] + "\nServer: " + socket.gethostname() + "\n\nRogue DHCP Server\nDetected Server(s): "
         rogue_dhcp_server_string += ', '.join(rogue_dhcp_server_list)
 
         # Send Mail
@@ -1623,11 +1622,11 @@ def flush_services_current_scan():
 # -----------------------------------------------------------------------------
 def print_service_monitoring_changes():
 
-    print("\nServices Monitoring Changes...")
+    print("    Services Monitoring Changes...")
     changedStatusCode = sql.execute("SELECT COUNT() FROM Services_CurrentScan WHERE cur_StatusChanged = 1").fetchone()[0]
-    print("    Changed StatusCodes: ", str(changedStatusCode))
+    print("        Changed StatusCodes: ", str(changedStatusCode))
     changedLatency = sql.execute("SELECT COUNT() FROM Services_CurrentScan WHERE cur_LatencyChanged = 1").fetchone()[0]
-    print("    Changed Reachability: ", str(changedLatency))
+    print("        Changed Reachability: ", str(changedLatency))
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
         monitor_logfile.write("\nServices Monitoring Changes:\n")
         monitor_logfile.write("- Changed StatusCodes: " + str(changedStatusCode))
@@ -1776,7 +1775,7 @@ def service_monitoring():
     prepare_service_monitoring_env()
 
     # Empty Log and write new header
-    print("\nPrepare Services Monitoring...")
+    print("\nStart Services Monitoring...")
     print("    Prepare Logfile...")
     with open(PIALERT_WEBSERVICES_LOG, 'w') as monitor_logfile:
         monitor_logfile.write("\nPi.Alert " + VERSION + " (" + VERSION_DATE + "):\n---------------------------------------------------------\n")
@@ -1791,7 +1790,7 @@ def service_monitoring():
     print("    Flush previous scan results...")
     flush_services_current_scan()
 
-    print("\nStart Services Monitoring...")
+    print("    Check Services...")
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
         monitor_logfile.write("\nStart Services Monitoring\n\n Timestamp          | StatusCode | ResponseTime | URL \n-----------------------------------------------------------------\n") 
         monitor_logfile.close()
@@ -2082,15 +2081,35 @@ def send_pushsafer (_Text):
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
+# def send_ntfy (_Text):
+#     requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
+#     data=_Text,
+#     headers={
+#         "Title": "Pi.Alert Notification",
+#         "Click": REPORT_DASHBOARD_URL,
+#         "Priority": "urgent",
+#         "Tags": "warning"
+#     })
+
 def send_ntfy (_Text):
-    requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
-    data=_Text,
-    headers={
+    headers = {
         "Title": "Pi.Alert Notification",
         "Click": REPORT_DASHBOARD_URL,
-        "Priority": "urgent",
+        "Priority": NTFY_PRIORITY,
         "Tags": "warning"
-    })
+    }
+    # if username and password are set generate hash and update header
+    if NTFY_USER != "" and NTFY_PASSWORD != "":
+    # Generate hash for basic auth
+        usernamepassword = "{}:{}".format(NTFY_USER,NTFY_PASSWORD)
+        basichash = b64encode(bytes(NTFY_USER + ':' + NTFY_PASSWORD, "utf-8")).decode("ascii")
+
+    # add authorization header with hash
+        headers["Authorization"] = "Basic {}".format(basichash)
+
+    requests.post("{}/{}".format( NTFY_HOST, NTFY_TOPIC),
+    data=_Text,
+    headers=headers)
 
 #-------------------------------------------------------------------------------
 def send_telegram (_Text):
