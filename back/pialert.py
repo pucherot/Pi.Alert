@@ -2181,14 +2181,24 @@ def email_reporting_test (_Mode):
 
 #-------------------------------------------------------------------------------
 def send_ntfy_test (_notiMessage):
-    requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
-    data=_notiMessage,
-    headers={
+    headers = {
         "Title": "Pi.Alert Notification",
         "Click": REPORT_DASHBOARD_URL,
-        "Priority": "urgent",
+        "Priority": NTFY_PRIORITY,
         "Tags": "warning"
-    })
+    }
+    # if username and password are set generate hash and update header
+    if NTFY_USER != "" and NTFY_PASSWORD != "":
+    # Generate hash for basic auth
+        usernamepassword = "{}:{}".format(NTFY_USER,NTFY_PASSWORD)
+        basichash = b64encode(bytes(NTFY_USER + ':' + NTFY_PASSWORD, "utf-8")).decode("ascii")
+
+    # add authorization header with hash
+        headers["Authorization"] = "Basic {}".format(basichash)
+
+    requests.post("{}/{}".format( NTFY_HOST, NTFY_TOPIC),
+    data=_notiMessage,
+    headers=headers)
 
 #-------------------------------------------------------------------------------
 def send_pushsafer_test (_notiMessage):
