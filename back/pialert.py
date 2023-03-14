@@ -18,6 +18,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from time import sleep, time, strftime
+from base64 import b64encode
 # from urllib.parse import urlparse
 try:
   from urlparse import urlparse
