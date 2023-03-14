@@ -89,22 +89,26 @@
    Customized Main Menu
 ----------------------------------------------------------------------------- */
 .main-header .logo {
-    width: 150px;
+    /* width: 150px; */
+    width: 170px;
 }
 
 .main-header>.navbar {
-    margin-left: 150px;
+    /* margin-left: 150px; */
+    margin-left: 170px;
 }
 
 .main-sidebar,
 .left-side {
-    width: 150px;
+    /* width: 150px; */
+    width: 170px;
 }
 
 .content-wrapper,
 .right-side,
 .main-footer {
-    margin-left: 150px;
+    /* margin-left: 150px; */
+    margin-left: 170px;
 }
 
 @media (max-width: 767px) {
@@ -128,10 +132,14 @@
 
 .sidebar-open .content-wrapper,
 .sidebar-open .main-footer {
-    -webkit-transform: translate(150px, 0);
+/*     -webkit-transform: translate(150px, 0);
     -ms-transform: translate(150px, 0);
     -o-transform: translate(150px, 0);
-    transform: translate(150px, 0)
+    transform: translate(150px, 0) */
+    -webkit-transform: translate(170px, 0);
+    -ms-transform: translate(170px, 0);
+    -o-transform: translate(170px, 0);
+    transform: translate(170px, 0)
 }
 
 .skin-yellow-light .sidebar-menu>li>a:hover {
@@ -594,7 +602,11 @@ body.modal-open {
     -webkit-text-fill-color: transparent;
 }
 .fa-gradient-red {
-    background: -webkit-gradient(linear, left top, left bottom, from(#FF8800), to(#bd2c19));
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff6c38), to(#c40000));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.bg-orange-custom {
+    background-color: #FE4C00;
 }
