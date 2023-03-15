@@ -285,20 +285,16 @@ function initializeDatatable () {
 
     'columnDefs'   : [
       {visible:   false,         targets: [<?php echo $devlistcol_hide;?>12, 13] },
-      {className: 'text-center', targets: [3, 8, 9, 11] },
+      {className: 'text-center', targets: [3, 8, 9, 10, 11] },
       {width:     '100px',       targets: [6, 7] },
       {width:     '30px',        targets: [9] },
       {width:     '0px',         targets: [11] },
       {orderData: [12],          targets: [8] },
-      {orderData: [11],          targets: [10] },
-      //switch columns Mac address and status
-      {orderData: [10],          targets: [11] },
-      //switch columns Mac address and status
 
       // Device Name
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[11] +'" class="">'+ cellData +'</a></b>');
+            $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[10] +'" class="">'+ cellData +'</a></b>');
       } },
 
       // Favorite
@@ -327,17 +323,16 @@ function initializeDatatable () {
           }
       } },
 
-      //switch columns Mac address and status
       //MAC-Address
       {targets: [10],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html (rowData[11]);
+            $(td).html (rowData[10]);
       } },
 
       // Status color
       {targets: [11],
         'createdCell': function (td, cellData, rowData, row, col) {
-          switch (rowData[10]) {
+          switch (rowData[11]) {
             case 'Down':      color='red';              break;
             case 'New':       color='yellow';           break;
             case 'On-line':   color='green';            break;
@@ -346,7 +341,7 @@ function initializeDatatable () {
             default:          color='aqua';             break;
           };
       
-          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[11] +'" class="badge bg-'+ color +'">'+ rowData[10].replace('-', '') +'</a>');
+          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[10] +'" class="badge bg-'+ color +'">'+ rowData[11].replace('-', '') +'</a>');
       } },
     ],
     

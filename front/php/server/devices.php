@@ -156,23 +156,26 @@ function setDeviceData() {
 
   // sql
   $sql = 'UPDATE Devices SET
-                 dev_Name            = "'. quotes($_REQUEST['name'])         .'",
-                 dev_Owner           = "'. quotes($_REQUEST['owner'])        .'",
-                 dev_DeviceType      = "'. quotes($_REQUEST['type'])         .'",
-                 dev_Vendor          = "'. quotes($_REQUEST['vendor'])       .'",
-                 dev_Favorite        = "'. quotes($_REQUEST['favorite'])     .'",
-                 dev_Group           = "'. quotes($_REQUEST['group'])        .'",
-                 dev_Location        = "'. quotes($_REQUEST['location'])     .'",
-                 dev_Comments        = "'. quotes($_REQUEST['comments'])     .'",
-                 dev_Infrastructure  = "'. quotes($_REQUEST['networknode']).'",
+                 dev_Name                 = "'. quotes($_REQUEST['name'])           .'",
+                 dev_Owner                = "'. quotes($_REQUEST['owner'])          .'",
+                 dev_DeviceType           = "'. quotes($_REQUEST['type'])           .'",
+                 dev_Vendor               = "'. quotes($_REQUEST['vendor'])         .'",
+                 dev_Model                = "'. quotes($_REQUEST['model'])          .'",
+                 dev_Serialnumber         = "'. quotes($_REQUEST['serialnumber'])   .'",
+                 dev_Favorite             = "'. quotes($_REQUEST['favorite'])       .'",
+                 dev_Group                = "'. quotes($_REQUEST['group'])          .'",
+                 dev_Location             = "'. quotes($_REQUEST['location'])       .'",
+                 dev_Comments             = "'. quotes($_REQUEST['comments'])       .'",
+                 dev_Infrastructure       = "'. quotes($_REQUEST['networknode'])    .'",
                  dev_Infrastructure_port  = "'. quotes($_REQUEST['networknodeport']).'",
-                 dev_StaticIP        = "'. quotes($_REQUEST['staticIP'])     .'",
-                 dev_ScanCycle       = "'. quotes($_REQUEST['scancycle'])    .'",
-                 dev_AlertEvents     = "'. quotes($_REQUEST['alertevents'])  .'",
-                 dev_AlertDeviceDown = "'. quotes($_REQUEST['alertdown'])    .'",
-                 dev_SkipRepeated    = "'. quotes($_REQUEST['skiprepeated']) .'",
-                 dev_NewDevice       = "'. quotes($_REQUEST['newdevice'])    .'",
-                 dev_Archived        = "'. quotes($_REQUEST['archived'])     .'"
+                 dev_ConnectionType       = "'. quotes($_REQUEST['connectiontype']) .'",                 
+                 dev_StaticIP             = "'. quotes($_REQUEST['staticIP'])       .'",
+                 dev_ScanCycle            = "'. quotes($_REQUEST['scancycle'])      .'",
+                 dev_AlertEvents          = "'. quotes($_REQUEST['alertevents'])    .'",
+                 dev_AlertDeviceDown      = "'. quotes($_REQUEST['alertdown'])      .'",
+                 dev_SkipRepeated         = "'. quotes($_REQUEST['skiprepeated'])   .'",
+                 dev_NewDevice            = "'. quotes($_REQUEST['newdevice'])      .'",
+                 dev_Archived             = "'. quotes($_REQUEST['archived'])       .'"
           WHERE dev_MAC="' . $_REQUEST['mac'] .'"';
   // update Data
   $result = $db->query($sql);
@@ -576,8 +579,8 @@ function getDevicesList() {
                                   formatDate ($row['dev_LastConnection']),
                                   $row['dev_LastIP'],
                                   ( in_array($row['dev_MAC'][1], array("2","6","A","E","a","e")) ? 1 : 0),
-                                  $row['dev_Status'],
                                   $row['dev_MAC'], // MAC (hidden)
+                                  $row['dev_Status'],
                                   formatIPlong ($row['dev_LastIP']), // IP orderable
                                   $row['rowid'] // Rowid (hidden)
                                  );

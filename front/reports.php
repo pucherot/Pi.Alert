@@ -57,7 +57,7 @@ function process_arp_notifications ($class_name, $event_time, $filename, $direct
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">'.$webgui_report.'</pre></div>
-          </div>'; 
+            </div>'; 
 }
 
 function process_webmon_notifications ($class_name, $event_time, $filename, $directory) {
@@ -71,7 +71,7 @@ function process_webmon_notifications ($class_name, $event_time, $filename, $dir
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">'.$webgui_report.'</pre></div>
-          </div>'; 
+            </div>'; 
 }
 
 function process_test_notifications ($class_name, $event_time, $filename, $directory) {
@@ -85,7 +85,7 @@ function process_test_notifications ($class_name, $event_time, $filename, $direc
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">'.$webgui_report.'</pre></div>
-          </div>';  
+            </div>';  
 }
 
 function process_rogueDHCP_notifications ($class_name, $event_time, $filename, $directory) {
@@ -102,7 +102,7 @@ function process_rogueDHCP_notifications ($class_name, $event_time, $filename, $
             <div class="box-body"><pre style="background-color: transparent; border: none;">'.$webgui_report.'</pre>
             <p style="font-size: 16px; text-align: center;">'.$pia_lang['Reports_Rogue_hint'].'</p>
             </div>
-          </div>';  
+            </div>';  
 }
 
 $directory = './reports/';

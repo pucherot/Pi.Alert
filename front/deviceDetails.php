@@ -205,6 +205,22 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                         </div>
                       </div>
 
+                      <!-- Model -->
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Model'];?></label>
+                        <div class="col-sm-9">
+                          <input class="form-control" id="txtModel" type="text" value="--">
+                        </div>
+                      </div>
+
+                      <!-- Serialnumber -->
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Serialnumber'];?></label>
+                        <div class="col-sm-9">
+                          <input class="form-control" id="txtSerialnumber" type="text" value="--">
+                        </div>
+                      </div>
+
                       <!-- Favorite -->
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Favorite'];?></label>
@@ -315,6 +331,8 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
 
                     <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_Network_Titel'];?></h4>
                     <div class="box-body form-horizontal">
+
+                      <!-- Network Node -->
                       <div class="form-group">
                         <label class="col-sm-6 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Network'];?></label>
                         <div class="col-sm-6">  
@@ -332,6 +350,8 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                           </div>
                         </div>
                       </div>
+                      
+                      <!-- Network Port -->
                       <div class="form-group">
                         <label class="col-sm-6 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Network_Port'];?></label>
                         <div class="col-sm-6">
@@ -339,7 +359,23 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                         </div>
                       </div>
 
-
+                      <!-- Connection Type -->
+                      <div class="form-group">
+                        <label class="col-sm-6 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Network_ConnectType'];?></label>
+                        <div class="col-sm-6">
+                          <div class="input-group">
+                            <input class="form-control" id="txtConnectionType" type="text" value="--">
+                            <div class="input-group-btn">
+                              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="fa fa-caret-down"></span></button>
+                              <ul id="dropdownLocation" class="dropdown-menu dropdown-menu-right">
+                                <li><a href="javascript:void(0)" onclick="setTextValue('txtConnectionType','Ethernet')">    Ethernet</a></li>
+                                <li><a href="javascript:void(0)" onclick="setTextValue('txtConnectionType','WiFi')">    WiFi</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div> 
 
 
@@ -1175,13 +1211,16 @@ function getDeviceData (readAllData=false) {
       $('#txtOwner').val               ('--');
       $('#txtDeviceType').val          ('--');
       $('#txtVendor').val              ('--');
+      $('#txtModel').val               ('--');
+      $('#txtSerialnumber').val        ('--');
 
       $('#chkFavorite').iCheck         ('uncheck'); 
       $('#txtGroup').val               ('--');
       $('#txtLocation').val            ('--');
       $('#txtComments').val            ('--');
-      $('#txtNetworkNodeMac').val         ('--');
+      $('#txtNetworkNodeMac').val      ('--');
       $('#txtNetworkPort').val         ('--');
+      $('#txtConnectionType').val      ('--');
 
       $('#txtFirstConnection').val     ('--');
       $('#txtLastConnection').val      ('--');
@@ -1264,6 +1303,8 @@ function getDeviceData (readAllData=false) {
         $('#txtOwner').val                           (deviceData['dev_Owner']);
         $('#txtDeviceType').val                      (deviceData['dev_DeviceType']);
         $('#txtVendor').val                          (deviceData['dev_Vendor']);
+        $('#txtModel').val                           (deviceData['dev_Model']);
+        $('#txtSerialnumber').val                    (deviceData['dev_Serialnumber']);
   
         if (deviceData['dev_Favorite'] == 1)         {$('#chkFavorite').iCheck('check');}    else {$('#chkFavorite').iCheck('uncheck');}
         $('#txtGroup').val                           (deviceData['dev_Group']);
@@ -1271,6 +1312,7 @@ function getDeviceData (readAllData=false) {
         $('#txtComments').val                        (deviceData['dev_Comments']);
         $('#txtNetworkNodeMac').val                  (deviceData['dev_Network_Node_MAC']);
         $('#txtNetworkPort').val                     (deviceData['dev_Network_Node_port']);
+        $('#txtConnectionType').val                  (deviceData['dev_ConnectionType']);
   
         $('#txtFirstConnection').val                 (deviceData['dev_FirstConnection']);
         $('#txtLastConnection').val                  (deviceData['dev_LastConnection']);
@@ -1380,23 +1422,26 @@ function setDeviceData (refreshCallback='') {
 
   // update data to server
   $.get('php/server/devices.php?action=setDeviceData&mac='+ mac
-    + '&name='           + $('#txtName').val()
-    + '&owner='          + $('#txtOwner').val()
-    + '&type='           + $('#txtDeviceType').val()
-    + '&vendor='         + $('#txtVendor').val()
-    + '&favorite='       + ($('#chkFavorite')[0].checked * 1)
-    + '&group='          + $('#txtGroup').val()
-    + '&location='       + $('#txtLocation').val()
-    + '&comments='       + $('#txtComments').val()
-    + '&networknode='    + $('#txtNetworkNodeMac').val()
+    + '&name='            + $('#txtName').val()
+    + '&owner='           + $('#txtOwner').val()
+    + '&type='            + $('#txtDeviceType').val()
+    + '&vendor='          + $('#txtVendor').val()
+    + '&model='           + $('#txtModel').val()
+    + '&serialnumber='    + $('#txtSerialnumber').val()
+    + '&favorite='        + ($('#chkFavorite')[0].checked * 1)
+    + '&group='           + $('#txtGroup').val()
+    + '&location='        + $('#txtLocation').val()
+    + '&comments='        + $('#txtComments').val()
+    + '&networknode='     + $('#txtNetworkNodeMac').val()
     + '&networknodeport=' + $('#txtNetworkPort').val()
-    + '&staticIP='       + ($('#chkStaticIP')[0].checked * 1)
-    + '&scancycle='      + $('#txtScanCycle').val().split(' ')[0]
-    + '&alertevents='    + ($('#chkAlertEvents')[0].checked * 1)
-    + '&alertdown='      + ($('#chkAlertDown')[0].checked * 1)
-    + '&skiprepeated='   + $('#txtSkipRepeated').val().split(' ')[0]
-    + '&newdevice='      + ($('#chkNewDevice')[0].checked * 1)
-    + '&archived='       + ($('#chkArchived')[0].checked * 1)
+    + '&connectiontype='  + $('#txtConnectionType').val()
+    + '&staticIP='        + ($('#chkStaticIP')[0].checked * 1)
+    + '&scancycle='       + $('#txtScanCycle').val().split(' ')[0]
+    + '&alertevents='     + ($('#chkAlertEvents')[0].checked * 1)
+    + '&alertdown='       + ($('#chkAlertDown')[0].checked * 1)
+    + '&skiprepeated='    + $('#txtSkipRepeated').val().split(' ')[0]
+    + '&newdevice='       + ($('#chkNewDevice')[0].checked * 1)
+    + '&archived='        + ($('#chkArchived')[0].checked * 1)
     , function(msg) {
 
     // deactivate button 
