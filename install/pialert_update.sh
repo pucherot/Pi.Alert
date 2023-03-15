@@ -266,13 +266,24 @@ update_db() {
 #    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_par_ID ON Parameters (par_ID COLLATE NOCASE);"                                               2>&1 >> "$LOG"
 #  fi
   
-#  print_msg "- Checking Devices new columns..."
-#  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_NewDevice' COLLATE NOCASE";`            2>&1 >> "$LOG"
-#  if [ "$COL" == "0" ] ; then
-#    print_msg "  - Adding column 'NewDevice' to 'Devices'..."
-#    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_NewDevice BOOLEAN NOT NULL DEFAULT (1) CHECK (dev_NewDevice IN (0, 1) );"  2>&1 >> "$LOG"
-#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_dev_NewDevice ON Devices (dev_NewDevice);"
-#  fi
+ print_msg "- Checking Devices new columns..."
+ COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Model' COLLATE NOCASE";`                  2>&1 >> "$LOG"
+ if [ "$COL" == "0" ] ; then
+   print_msg "  - Adding column 'NewDevice' to 'Devices'..."
+   sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Model STRING(250);"  2>&1 >> "$LOG"
+ fi
+
+ COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Serialnumber' COLLATE NOCASE";`           2>&1 >> "$LOG"
+ if [ "$COL" == "0" ] ; then
+   print_msg "  - Adding column 'NewDevice' to 'Devices'..."
+   sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Serialnumber STRING(100);"  2>&1 >> "$LOG"
+ fi
+
+ COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_ConnectionType' COLLATE NOCASE";`         2>&1 >> "$LOG"
+ if [ "$COL" == "0" ] ; then
+   print_msg "  - Adding column 'NewDevice' to 'Devices'..."
+   sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_ConnectionType STRING(30);"  2>&1 >> "$LOG"
+ fi
 
 #  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Location' COLLATE NOCASE";`             2>&1 >> "$LOG"
 #  if [ "$COL" == "0" ] ; then
