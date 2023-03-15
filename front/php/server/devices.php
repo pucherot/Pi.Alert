@@ -570,6 +570,7 @@ function getDevicesList() {
   $tableData = array();
   while ($row = $result -> fetchArray (SQLITE3_ASSOC)) {
     $tableData['data'][] = array ($row['dev_Name'],
+                                  $row['dev_ConnectionType'],
                                   $row['dev_Owner'],
                                   $row['dev_DeviceType'],
                                   $row['dev_Favorite'],
@@ -989,18 +990,19 @@ function BackupConfigFile() {
 function setDeviceListCol() {
   global $pia_lang;
 
-  if (($_REQUEST['favorite'] == 0) || ($_REQUEST['favorite'] == 1)) {$Set_Favorites = $_REQUEST['favorite'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['group'] == 0) || ($_REQUEST['group'] == 1)) {$Set_Group = $_REQUEST['group'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['owner'] == 0) || ($_REQUEST['owner'] == 1)) {$Set_Owner = $_REQUEST['owner'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['type'] == 0) || ($_REQUEST['type'] == 1)) {$Set_Type = $_REQUEST['type'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['firstsess'] == 0) || ($_REQUEST['firstsess'] == 1)) {$Set_First_Session = $_REQUEST['firstsess'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['lastsess'] == 0) || ($_REQUEST['lastsess'] == 1)) {$Set_Last_Session = $_REQUEST['lastsess'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['lastip'] == 0) || ($_REQUEST['lastip'] == 1)) {$Set_LastIP = $_REQUEST['lastip'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['mactype'] == 0) || ($_REQUEST['mactype'] == 1)) {$Set_MACType = $_REQUEST['mactype'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['macaddress'] == 0) || ($_REQUEST['macaddress'] == 1)) {$Set_MACAddress = $_REQUEST['macaddress'];} else {echo "Error. Wrong variable value!"; exit;}
-  if (($_REQUEST['location'] == 0) || ($_REQUEST['location'] == 1)) {$Set_Location = $_REQUEST['location'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['connectiontype'] == 0) || ($_REQUEST['connectiontype'] == 1)) {$Set_ConnectionType = $_REQUEST['connectiontype'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['favorite'] == 0) || ($_REQUEST['favorite'] == 1))             {$Set_Favorites = $_REQUEST['favorite'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['group'] == 0) || ($_REQUEST['group'] == 1))                   {$Set_Group = $_REQUEST['group'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['owner'] == 0) || ($_REQUEST['owner'] == 1))                   {$Set_Owner = $_REQUEST['owner'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['type'] == 0) || ($_REQUEST['type'] == 1))                     {$Set_Type = $_REQUEST['type'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['firstsess'] == 0) || ($_REQUEST['firstsess'] == 1))           {$Set_First_Session = $_REQUEST['firstsess'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['lastsess'] == 0) || ($_REQUEST['lastsess'] == 1))             {$Set_Last_Session = $_REQUEST['lastsess'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['lastip'] == 0) || ($_REQUEST['lastip'] == 1))                 {$Set_LastIP = $_REQUEST['lastip'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['mactype'] == 0) || ($_REQUEST['mactype'] == 1))               {$Set_MACType = $_REQUEST['mactype'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['macaddress'] == 0) || ($_REQUEST['macaddress'] == 1))         {$Set_MACAddress = $_REQUEST['macaddress'];} else {echo "Error. Wrong variable value!"; exit;}
+  if (($_REQUEST['location'] == 0) || ($_REQUEST['location'] == 1))             {$Set_Location = $_REQUEST['location'];} else {echo "Error. Wrong variable value!"; exit;}
   echo $pia_lang['BackDevices_DevListCol_noti_text'];
-  $config_array = array('Favorites' => $Set_Favorites, 'Group' => $Set_Group, 'Owner' => $Set_Owner, 'Type' => $Set_Type, 'FirstSession' => $Set_First_Session, 'LastSession' => $Set_Last_Session, 'LastIP' => $Set_LastIP, 'MACType' => $Set_MACType, 'MACAddress' => $Set_MACAddress, 'Location' => $Set_Location);
+  $config_array = array('ConnectionType' => $Set_ConnectionType, 'Favorites' => $Set_Favorites, 'Group' => $Set_Group, 'Owner' => $Set_Owner, 'Type' => $Set_Type, 'FirstSession' => $Set_First_Session, 'LastSession' => $Set_Last_Session, 'LastIP' => $Set_LastIP, 'MACType' => $Set_MACType, 'MACAddress' => $Set_MACAddress, 'Location' => $Set_Location);
   $DevListCol_file = '../../../db/setting_devicelist';
   $DevListCol_new = fopen($DevListCol_file,'w');
   fwrite($DevListCol_new, json_encode($config_array));

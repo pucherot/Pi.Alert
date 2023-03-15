@@ -164,22 +164,34 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
             $get = file_get_contents($file, true);
             $table_config = json_decode($get, true);
           } else {
-            $table_config = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'MACAddress' => 0, 'Location' => 0);
+            $table_config = array('Favorites' => 1, 
+                                  'Group' => 1, 
+                                  'Owner' => 1, 
+                                  'Type' => 1, 
+                                  'FirstSession' => 1, 
+                                  'LastSession' => 1, 
+                                  'LastIP' => 1, 
+                                  'MACType' => 1, 
+                                  'MACAddress' => 0, 
+                                  'Location' => 0, 
+                                  'ConnectionType' => 0);
           }
 
           $devlistcol_hide = '';
-          if ($table_config['Owner'] == 0) {$devlistcol_hide = $devlistcol_hide.'1, ';} 
-          if ($table_config['Type'] == 0) {$devlistcol_hide = $devlistcol_hide.'2, ';} 
-          if ($table_config['Favorites'] == 0) {$devlistcol_hide = $devlistcol_hide.'3, ';} 
-          if ($table_config['Group'] == 0) {$devlistcol_hide = $devlistcol_hide.'4, ';} 
-          if ($table_config['Location'] == 0) {$devlistcol_hide = $devlistcol_hide.'5, ';} 
-          if ($table_config['FirstSession'] == 0) {$devlistcol_hide = $devlistcol_hide.'6, ';}
-          if ($table_config['LastSession'] == 0) {$devlistcol_hide = $devlistcol_hide.'7, ';} 
-          if ($table_config['LastIP'] == 0) {$devlistcol_hide = $devlistcol_hide.'8, ';}
-          if ($table_config['MACType'] == 0) {$devlistcol_hide = $devlistcol_hide.'9, ';}
-          if ($table_config['MACAddress'] == 0) {$devlistcol_hide = $devlistcol_hide.'10, ';} 
+          if ($table_config['ConnectionType'] == 0) {$devlistcol_hide = $devlistcol_hide.'1, ';} 
+          if ($table_config['Owner'] == 0)          {$devlistcol_hide = $devlistcol_hide.'2, ';} 
+          if ($table_config['Type'] == 0)           {$devlistcol_hide = $devlistcol_hide.'3, ';} 
+          if ($table_config['Favorites'] == 0)      {$devlistcol_hide = $devlistcol_hide.'4, ';} 
+          if ($table_config['Group'] == 0)          {$devlistcol_hide = $devlistcol_hide.'5, ';} 
+          if ($table_config['Location'] == 0)       {$devlistcol_hide = $devlistcol_hide.'6, ';} 
+          if ($table_config['FirstSession'] == 0)   {$devlistcol_hide = $devlistcol_hide.'7, ';}
+          if ($table_config['LastSession'] == 0)    {$devlistcol_hide = $devlistcol_hide.'8, ';} 
+          if ($table_config['LastIP'] == 0)         {$devlistcol_hide = $devlistcol_hide.'9, ';}
+          if ($table_config['MACType'] == 0)        {$devlistcol_hide = $devlistcol_hide.'10, ';}
+          if ($table_config['MACAddress'] == 0)     {$devlistcol_hide = $devlistcol_hide.'11, ';} 
           ?>
                   <th><?php echo $pia_lang['Device_TableHead_Name'];?></th>
+                  <th><?php echo $pia_lang['Device_TableHead_ConnectionType'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Owner'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Type'];?></th>
                   <th><?php echo $pia_lang['Device_TableHead_Favorite'];?></th>
@@ -284,21 +296,21 @@ function initializeDatatable () {
     // 'order'       : [[3,'desc'], [0,'asc']],
 
     'columnDefs'   : [
-      {visible:   false,         targets: [<?php echo $devlistcol_hide;?>12, 13] },
-      {className: 'text-center', targets: [3, 8, 9, 10, 11] },
-      {width:     '100px',       targets: [6, 7] },
-      {width:     '30px',        targets: [9] },
-      {width:     '0px',         targets: [11] },
-      {orderData: [12],          targets: [8] },
+      {visible:   false,         targets: [<?php echo $devlistcol_hide;?>13, 14] },
+      {className: 'text-center', targets: [4, 9, 10, 11, 12] },
+      {width:     '100px',       targets: [7, 8] },
+      {width:     '30px',        targets: [10] },
+      {width:     '0px',         targets: [12] },
+      {orderData: [13],          targets: [9] },
 
       // Device Name
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[10] +'" class="">'+ cellData +'</a></b>');
+            $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[11] +'" class="">'+ cellData +'</a></b>');
       } },
 
       // Favorite
-      {targets: [3],
+      {targets: [4],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
             $(td).html ('<i class="fa fa-star text-yellow" style="font-size:16px"></i>');
@@ -308,13 +320,13 @@ function initializeDatatable () {
       } },
         
       // Dates
-      {targets: [6, 7],
+      {targets: [7, 8],
         'createdCell': function (td, cellData, rowData, row, col) {
           $(td).html (translateHTMLcodes (cellData));
       } },
 
       // Random MAC
-      {targets: [9],
+      {targets: [10],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
             $(td).html ('<i data-toggle="tooltip" data-placement="right" title="Random MAC" style="font-size: 16px;" class="text-yellow glyphicon glyphicon-random"></i>');
@@ -324,15 +336,15 @@ function initializeDatatable () {
       } },
 
       //MAC-Address
-      {targets: [10],
+      {targets: [11],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html (rowData[10]);
+            $(td).html (rowData[11]);
       } },
 
       // Status color
-      {targets: [11],
+      {targets: [12],
         'createdCell': function (td, cellData, rowData, row, col) {
-          switch (rowData[11]) {
+          switch (rowData[12]) {
             case 'Down':      color='red';              break;
             case 'New':       color='yellow';           break;
             case 'On-line':   color='green';            break;
@@ -341,7 +353,7 @@ function initializeDatatable () {
             default:          color='aqua';             break;
           };
       
-          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[10] +'" class="badge bg-'+ color +'">'+ rowData[11].replace('-', '') +'</a>');
+          $(td).html ('<a href="deviceDetails.php?mac='+ rowData[11] +'" class="badge bg-'+ color +'">'+ rowData[12].replace('-', '') +'</a>');
       } },
     ],
     

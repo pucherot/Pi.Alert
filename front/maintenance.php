@@ -153,7 +153,7 @@ function read_DevListCol() {
         $get = file_get_contents($file, true);
         $output_array = json_decode($get, true);
     } else {
-        $output_array = array('Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'MACAddress' => 0, 'Location' => 0);
+        $output_array = array('ConnectionType' => 0, 'Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'MACAddress' => 0, 'Location' => 0);
     }
     return $output_array;
 }
@@ -581,6 +581,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
 
 <?php
     $table_config = read_DevListCol();
+    if ($table_config['ConnectionType'] == 1) {$checkbox_connection = "checked";}
     if ($table_config['Favorites'] == 1) {$checkbox_fav = "checked";}
     if ($table_config['Group'] == 1) {$checkbox_grp = "checked";}
     if ($table_config['Owner'] == 1) {$checkbox_own = "checked";}
@@ -594,6 +595,11 @@ if ($_SESSION['Scan_WebServices'] == True) {
 ?>
 
                         <div class="form-group">
+                            <div class="table_settings_col_box" style="">
+                              <input class="icheckbox_minimal-blue" id="chkConnectionType" type="checkbox" <?php echo $checkbox_connection; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_ConnectionType'];?></label>
+                            </div>
+
                             <div class="table_settings_col_box" style="">
                               <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $checkbox_own; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_Owner'];?></label>
@@ -1133,6 +1139,7 @@ function askDeviceListCol() {
 function setDeviceListCol() {
   // Execute
     $.get('php/server/devices.php?action=setDeviceListCol&'
+    + '&connectiontype=' + ($('#chkConnectionType')[0].checked * 1)    
     + '&favorite='       + ($('#chkFavorite')[0].checked * 1)
     + '&group='          + ($('#chkGroup')[0].checked * 1)
     + '&type='           + ($('#chkType')[0].checked * 1)

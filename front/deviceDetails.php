@@ -371,6 +371,7 @@ if ($_REQUEST['mac'] == 'Internet') { $DevDetail_Tap_temp = "Tools"; } else { $D
                               <ul id="dropdownLocation" class="dropdown-menu dropdown-menu-right">
                                 <li><a href="javascript:void(0)" onclick="setTextValue('txtConnectionType','Ethernet')">    Ethernet</a></li>
                                 <li><a href="javascript:void(0)" onclick="setTextValue('txtConnectionType','WiFi')">    WiFi</a></li>
+                                <li><a href="javascript:void(0)" onclick="setTextValue('txtConnectionType','Bluetooth')">    Bluetooth</a></li>
                               </ul>
                             </div>
                           </div>
