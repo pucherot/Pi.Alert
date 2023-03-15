@@ -310,7 +310,7 @@ document.addEventListener("visibilitychange",()=>{
       <div class="user-panel">
 
         <div class="logo" style="width:50%; margin:auto;">
-           <img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/>
+           <a href="./"><img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/></a>
         </div>
         <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
 <?php
