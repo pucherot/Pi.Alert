@@ -286,10 +286,10 @@ document.addEventListener("visibilitychange",()=>{
 
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="./reports.php" class="btn btn-warning"><?php echo $pia_lang['About_Reports'];?></a>
+                  <a href="./reports.php" id="custom-menu-report-button" class="btn btn-warning"><?php echo $pia_lang['About_Reports'];?></a>
                 </div>
                 <div class="pull-right">
-                  <a href="./index.php?action=logout" class="btn btn-danger"><?php echo $pia_lang['About_Exit'];?></a>
+                  <a href="./index.php?action=logout" id="custom-menu-logout-button" class="btn btn-danger"><?php echo $pia_lang['About_Exit'];?></a>
                 </div>
               </li>
             </ul>

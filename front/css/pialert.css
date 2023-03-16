@@ -610,3 +610,13 @@ body.modal-open {
 .bg-orange-custom {
     background-color: #FE4C00;
 }
+
+#custom-menu-report-button {
+    background-color: #d58512;
+    color: #FFF;
+}
+
+#custom-menu-logout-button {
+    background-color: #d73925;
+    color: #FFF;
+}
