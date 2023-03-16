@@ -84,6 +84,7 @@ $pia_lang['Device_TableHead_MACaddress'] = 'MAC-Address';
 $pia_lang['Device_TableHead_LastIPOrder'] = 'Last IP Order';
 $pia_lang['Device_TableHead_Rowid'] = 'Rowid';
 $pia_lang['Device_TableHead_Status'] = 'Status';
+$pia_lang['Device_TableHead_ConnectionType'] = 'Connection Type';
 $pia_lang['Device_Searchbox'] = 'Search';
 $pia_lang['Device_Tablelenght'] = 'Show _MENU_ entries';
 $pia_lang['Device_Tablelenght_all'] = 'All';
