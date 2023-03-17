@@ -1180,15 +1180,15 @@ function getDeviceData (readAllData=false) {
 
   // Deactivate next previous buttons
   if (readAllData) {
-    $('#btnPrevious').attr        ('disabled','');
-    $('#btnPrevious').addClass    ('text-gray50');
-    $('#btnPrevious_down').attr        ('disabled','');
-    $('#btnPrevious_down').addClass    ('text-gray50');
-    $('#btnNext').attr            ('disabled','');
-    $('#btnNext').addClass        ('text-gray50');
-    $('#btnNext_down').attr            ('disabled','');
-    $('#btnNext_down').addClass        ('text-gray50');
-    $("body").css                 ("cursor", "progress");
+    $('#btnPrevious').attr          ('disabled','');
+    $('#btnPrevious').addClass      ('text-gray50');
+    $('#btnPrevious_down').attr     ('disabled','');
+    $('#btnPrevious_down').addClass ('text-gray50');
+    $('#btnNext').attr              ('disabled','');
+    $('#btnNext').addClass          ('text-gray50');
+    $('#btnNext_down').attr         ('disabled','');
+    $('#btnNext_down').addClass     ('text-gray50');
+    $("body").css                   ("cursor", "progress");
   }
 
   // get data from server
