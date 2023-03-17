@@ -72,6 +72,7 @@ A web frontend that allows:
   - Web service monitoring
   - Help/FAQ section
   - Wake-on-LAN if supported
+  - Notification page with download options
 
   | ![Screen 1][screen1]                            | ![Screen 2][screen2]                         | ![Screen 3][screen3]                                           | 
   | ----------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------- |
