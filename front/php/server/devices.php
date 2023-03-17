@@ -1047,7 +1047,7 @@ function deleteAllNotifications() {
 
   $regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
   $reports_path = '../../reports/';
-  $files = array_diff(scandir($reports_path, SCANDIR_SORT_DESCENDING), array('.', '..'));
+  $files = array_diff(scandir($reports_path, SCANDIR_SORT_DESCENDING), array('.', '..','download_report.php'));
   $count_all_reports =  sizeof($files);
   foreach ($files as &$item) 
     {

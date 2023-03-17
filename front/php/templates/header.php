@@ -30,114 +30,11 @@ foreach (glob("../db/setting_language*") as $filename) {
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 require 'php/templates/language/'.$pia_lang_selected.'.php';
 
-// Delete WebGUI Reports ---------------------------------------------------------------
+require 'header_func.php';
 
-function useRegex($input) {
-    $regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
-    return preg_match($regex, $input);
-}
+// Web Services Config ---------------------------------------------------------------
 
-function count_webgui_reports() {
-    if (isset($_REQUEST['remove_report'])) {
-        $prep_remove_report = str_replace(array('\'', '"', ',' , ';', '<', '>' , '.' , '/' , '&'), "", $_REQUEST['remove_report']).'.txt';
-        if (useRegex($prep_remove_report) == TRUE) {
-            if (file_exists('./reports/'.$prep_remove_report)) {
-              unlink('./reports/'.$prep_remove_report);
-            }
-        }
-    }
-
-    $files = scandir('./reports');
-    $report_counter = count($files)-2;
-    if ($report_counter == 0) {unset($report_counter);}
-    return $report_counter;
-}
-
-// Pause Arp Scan Section ---------------------------------------------------------------
-
-function arpscanstatus() {
-    global $pia_lang;
-    if (!file_exists('../db/setting_stoparpscan')) {
-      $execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
-      $pia_arpscans = "";
-      exec($execstring, $pia_arpscans);
-      unset($_SESSION['arpscan_timerstart']);
-      $_SESSION['arpscan_result'] = sizeof($pia_arpscans).' '.$pia_lang['Maintenance_arp_status_on'];
-      $_SESSION['arpscan_sidebarstate'] = 'Active';
-      $_SESSION['arpscan_sidebarstate_light'] = 'green-light fa-gradient-green';
-    } else {
-      $_SESSION['arpscan_timerstart'] = date ("H:i:s", filectime('../db/setting_stoparpscan'));
-      $_SESSION['arpscan_result'] = '<span style="color:red;">arp-Scan '.$pia_lang['Maintenance_arp_status_off'] .'</span>';
-      $_SESSION['arpscan_sidebarstate'] = 'Disabled&nbsp;&nbsp;&nbsp;('.$_SESSION['arpscan_timerstart'].')';
-      $_SESSION['arpscan_sidebarstate_light'] = 'red fa-gradient-red';
-    }
-}
-
-// Systeminfo in Sidebar ---------------------------------------------------------------
-
-function getTemperature()
-{
-    if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
-        $output = rtrim(file_get_contents('/sys/class/thermal/thermal_zone0/temp'));
-    } elseif (file_exists('/sys/class/hwmon/hwmon0/temp1_input')) {
-        $output = rtrim(file_get_contents('/sys/class/hwmon/hwmon0/temp1_input'));
-    } else {
-        $output = '';
-    }
-
-    // Test if we succeeded in getting the temperature
-    if (is_numeric($output)) {
-        // $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5
-        // ex. 39007 vs 39
-        $celsius = intval($output);
-        // If celsius is greater than 1 degree and is in the 4-5 digit format
-        if ($celsius > 1000) {
-            // Use multiplication to get around the division-by-zero error
-            $celsius *= 1e-3;
-        }
-        $limit = 60;
-        
-    } else {
-        // Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin)
-        // This is the minimum temperature possible (AKA absolute zero)
-        $celsius = -273.16;
-        // Set templimit to null if no tempsensor was found
-        $limit = null;
-    }
-    return array($celsius, $limit);
-}
-
-function getMemUsage()
-{
-    $data = explode("\n", file_get_contents('/proc/meminfo'));
-    $meminfo = array();
-    if (count($data) > 0) {
-        foreach ($data as $line) {
-            $expl = explode(':', $line);
-            if (count($expl) == 2) {
-                // remove " kB" from the end of the string and make it an integer
-                $meminfo[$expl[0]] = intval(trim(substr($expl[1], 0, -3)));
-            }
-        }
-        $memused = $meminfo['MemTotal'] - $meminfo['MemFree'] - $meminfo['Buffers'] - $meminfo['Cached'];
-        $memusage = $memused / $meminfo['MemTotal'];
-    } else {
-        $memusage = -1;
-    }
-
-    return $memusage;
-}
-
-// Enable SubMenu for Web Services Events ---------------------------------------------------------------
-
-$config_file = "../config/pialert.conf";
-$config_file_lines = file($config_file);
-$config_file_lines_bypass = array_values(preg_grep('/^SCAN_WEBSERVICES\s.*/', $config_file_lines));
-$scan_services_line = explode("=", $config_file_lines_bypass[0]);
-if (strtolower(trim($scan_services_line[1])) == "true") {
-  $_SESSION['Scan_WebServices'] = True;  
-} else {$_SESSION['Scan_WebServices'] = False;}
-
+get_webservices_config();
 
 // ###################################
 // ## GUI settings processing end
@@ -314,58 +211,22 @@ document.addEventListener("visibilitychange",()=>{
         </div>
         <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
 <?php
+        arpscanstatus();
 
-arpscanstatus();
+        echo '<span id="status">
+                <i class="fa fa-w fa-circle text-'.$_SESSION['arpscan_sidebarstate_light'].'"></i> '.$_SESSION['arpscan_sidebarstate'].'&nbsp;&nbsp;
+              </span><br>';
 
-echo '<span id="status">
-        <i class="fa fa-w fa-circle text-'.$_SESSION['arpscan_sidebarstate_light'].'"></i> '.$_SESSION['arpscan_sidebarstate'].'&nbsp;&nbsp;
-      </span><br>';
+        format_sysloadavg(sys_getloadavg());
 
-// (may be less than the number of online processors)
-$nproc = shell_exec('nproc');
-if (!is_numeric($nproc)) {
-    $cpuinfo = file_get_contents('/proc/cpuinfo');
-    preg_match_all('/^processor/m', $cpuinfo, $matches);
-    $nproc = count($matches[0]);
-}
-$loaddata = sys_getloadavg();
-echo '<span title="Detected '.$nproc.' cores"><i class="fa fa-w fa-circle ';
-if ($loaddata[0] > $nproc) {
-    echo 'text-red fa-gradient-red';
-} else {
-    echo 'text-green-light fa-gradient-green';
-}
-echo '"></i> Load:&nbsp;&nbsp;'.$loaddata[0].'&nbsp;&nbsp;'.$loaddata[1].'&nbsp;&nbsp;'.$loaddata[2].'</span>';
+        echo '<br/>';
 
-echo '<br/>';
+        format_MemUsage(getMemUsage());
 
-$memory_usage = getMemUsage();
-echo '<span><i class="fa fa-w fa-circle ';
-if ($memory_usage > 0.75 || $memory_usage < 0.0) {
-    echo 'text-red fa-gradient-red';
-} else {
-    echo 'text-green-light fa-gradient-green';
-}
-if ($memory_usage > 0.0) {
-    echo '"></i> Memory usage:&nbsp;&nbsp;'.sprintf('%.1f', 100.0 * $memory_usage).'&thinsp;%</span>';
-} else {
-    echo '"></i> Memory usage:&nbsp;&nbsp; N/A</span>';
-}
+        echo '<br/>';
 
-echo '<br/>';
-
-list($celsius, $temperaturelimit) = getTemperature();
-
-if ($celsius >= -273.15) {
-    // Only show temp info if any data is available -->
-    $tempcolor = 'text-vivid-blue';
-    if (isset($temperaturelimit) && $celsius > $temperaturelimit) {
-        $tempcolor = 'text-red fa-gradient-red';
-    }
-    echo '<span id="temperature"><i class="fa fa-w fa-fire '.$tempcolor.'" style="width: 1em !important"></i> ';
-    echo 'Temp:&nbsp;<span id="rawtemp" hidden>'.$celsius.'</span>';
-    echo '<span id="tempdisplay"></span></span>';
-}
+        list($celsius, $temperaturelimit) = getTemperature();
+        format_temperature ($celsius, $temperaturelimit);
 ?>
             </div>
       </div>
@@ -383,20 +244,7 @@ if ($celsius >= -273.15) {
           <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network'];?></span></a>
         </li>
 
-<?php
-
-if ($_SESSION['Scan_WebServices'] == True) {
-    echo '<li class="'; 
-    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('services.php') ) ){ echo 'active'; }
-    echo '">
-            <a href="services.php"><i class="fa fa-globe"></i> <span>'.$pia_lang['Navigation_Services'].'</span></a>
-          </li>';
-
-    echo '<li class="header text-uppercase" style="font-size: 0; padding: 1px;">EVENTS</li>';
-
-}
-
-?>
+        <?php toggle_webservices_menu('Main'); ?>
 
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_B'];?></li>
 
@@ -408,15 +256,8 @@ if ($_SESSION['Scan_WebServices'] == True) {
           <a href="presence.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Presence'];?></span></a>
         </li>
 
-<?php
-if ($_SESSION['Scan_WebServices'] == True) {
-    echo '<li class="';
-    if (in_array (basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php') ) ){ echo 'active'; }
-    echo '">
-          <a href="servicesEvents.php"><i class="fa fa-globe"></i> <span>'.$pia_lang['Navigation_Events_Serv'].'</span></a>
-        </li>';
-}
-?>
+        <?php toggle_webservices_menu('Event'); ?>
+
 
 <!--         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('reports.php') ) ){ echo 'active'; } ?>">
           <a href="reports.php"><i class="fa fa-warning"></i> <span><?php echo 'Meldungen';?></span> <span class="label label-danger" style="position: relative; top: -3px;"><?php echo count_webgui_reports();?></span></a>

@@ -17,8 +17,6 @@ if ($_SESSION["login"] != 1)
       exit;
   }
 require 'php/templates/header.php';
-require 'php/server/db.php';
-
 
 function get_notification_class ($filename) {
     $headtitle = explode("-", $filename);
@@ -26,22 +24,22 @@ function get_notification_class ($filename) {
     $temp_class[0] = substr($headeventtype[1], 0, -4);
     if ($temp_class[0] == "Events" || $temp_class[0] == "Down") {
       $temp_class[1] = 'arp';
-      $temp_class[2] = substr($headtitle[0], 0, 4).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 6, 2).' - '.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
+      $temp_class[2] = substr($headtitle[0], 6, 2).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 2, 2).'/'.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
       return $temp_class;
     }
     if ($temp_class[0] == "Services Events" || $temp_class[0] == "Services Down") {
       $temp_class[1] = 'webmon';
-      $temp_class[2] = substr($headtitle[0], 0, 4).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 6, 2).' - '.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
+      $temp_class[2] = substr($headtitle[0], 6, 2).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 2, 2).'/'.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
       return $temp_class;
     }
     if ($temp_class[0] == "Test") {
       $temp_class[1] = 'test';
-      $temp_class[2] = substr($headtitle[0], 0, 4).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 6, 2).' - '.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
+      $temp_class[2] = substr($headtitle[0], 6, 2).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 2, 2).'/'.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
       return $temp_class;
     }
     if ($temp_class[0] == "Rogue DHCP Server") {
       $temp_class[1] = 'rogueDHCP';
-      $temp_class[2] = substr($headtitle[0], 0, 4).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 6, 2).' - '.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
+      $temp_class[2] = substr($headtitle[0], 6, 2).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 2, 2).'/'.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2);
       return $temp_class;
     }
 }
@@ -53,6 +51,7 @@ function process_arp_notifications ($class_name, $event_time, $filename, $direct
             <div class="box-header">
               <h3 class="box-title" style="color: #D81B60"><i class="fa fa-laptop"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
+                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
@@ -67,6 +66,7 @@ function process_webmon_notifications ($class_name, $event_time, $filename, $dir
             <div class="box-header">
               <h3 class="box-title" style="color: #00c0ef"><i class="fa fa-globe"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
+                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
@@ -81,6 +81,7 @@ function process_test_notifications ($class_name, $event_time, $filename, $direc
             <div class="box-header with-border">
               <h3 class="box-title" style="color: #00a65a"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
+                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
@@ -96,6 +97,7 @@ function process_rogueDHCP_notifications ($class_name, $event_time, $filename, $
             <div class="box-header">
               <h3 class="box-title"><i class="fa fa-warning"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
+                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger" style=" border: solid 1px #ddd;"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
