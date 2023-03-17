@@ -772,10 +772,16 @@ if (!$block_restore_button) {
 } else {
     echo '<button type="button" class="btn btn-default dbtools-button disabled" id="btnPiaRestoreDBfromArchive">'.$pia_lang['Maintenance_Tool_restore'].'<br>'.$LATEST_BACKUP_DATE.'</button>';
 }
-
 ?>                            
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_restore_text'];?></div>
+ 
+ <?php
+if (!$block_restore_button) {
+    echo '<div class="db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_restore_text'].' (<a href="./download/database.php">'.$pia_lang['Maintenance_Tool_latestdb_download'].'</a>)</div>';
+} else {
+    echo '<div class="db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_restore_text'].'</div>';
+}
+?> 
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">

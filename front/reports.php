@@ -51,7 +51,7 @@ function process_arp_notifications ($class_name, $event_time, $filename, $direct
             <div class="box-header">
               <h3 class="box-title" style="color: #D81B60"><i class="fa fa-laptop"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
-                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
+                  <a href="./download/report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
@@ -66,7 +66,7 @@ function process_webmon_notifications ($class_name, $event_time, $filename, $dir
             <div class="box-header">
               <h3 class="box-title" style="color: #00c0ef"><i class="fa fa-globe"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
-                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
+                  <a href="./download/report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
@@ -81,7 +81,7 @@ function process_test_notifications ($class_name, $event_time, $filename, $direc
             <div class="box-header with-border">
               <h3 class="box-title" style="color: #00a65a"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
-                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
+                  <a href="./download/report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>
@@ -97,7 +97,7 @@ function process_rogueDHCP_notifications ($class_name, $event_time, $filename, $
             <div class="box-header">
               <h3 class="box-title"><i class="fa fa-warning"></i>&nbsp;&nbsp;'.$event_time.' - '.$class_name.'</h3>
                 <div class="pull-right">
-                  <a href="./reports/download_report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
+                  <a href="./download/report.php?report='.substr($filename, 0, -4).'" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report='.substr($filename, 0, -4).'" class="btn btn-sm btn-danger" style=" border: solid 1px #ddd;"><i class="fa fa-fw fa-trash-o"></i></a>
                 </div>
             </div>

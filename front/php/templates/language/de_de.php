@@ -382,6 +382,7 @@ $pia_lang['Maintenance_Tool_restore_blocked'] = 'nicht verfügbar';
 $pia_lang['Maintenance_Tool_restore_text'] = 'Das neuste Backup kann über diese Funk&shy;tion wie&shy;derhergestellt wer&shy;den. Ältere Sicher&shy;ungen müssen manuell wie&shy;der&shy;hergestellt wer&shy;den. Es empfiehlt sich eine Integritäts&shy;prüfung nach der Wieder&shy;her&shy;stellung zu machen, falls die Datenbank bei der Sicherung geöffnet war.';
 $pia_lang['Maintenance_Tool_restore_noti'] = 'DB Wiederherstellung';
 $pia_lang['Maintenance_Tool_restore_noti_text'] = 'Sind Sie sicher, dass Sie die Datenbank aus der neusten Sicherung wiederherstellen möchten? Prüfen Sie, dass gerade keine Scans stattfinden.';
+$pia_lang['Maintenance_Tool_latestdb_download'] = 'Neuste Sicherung speichern';
 $pia_lang['Maintenance_Tool_purgebackup'] = 'Sicherungen aufräumen';
 $pia_lang['Maintenance_Tool_purgebackup_text'] = 'Es werden, bis auf die letzten 3 Backups, alle übrigen Backups ge&shy;löscht. Dies betrifft die Sicherungen der Daten&shy;bank und die der Kon&shy;fi&shy;gurationsdatei';
 $pia_lang['Maintenance_Tool_purgebackup_noti'] = 'Sicherungen aufräumen';

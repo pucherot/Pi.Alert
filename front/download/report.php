@@ -5,6 +5,7 @@ $filename = str_replace(array('\'', '"', ',' , ';', '<', '>' , '.' , '/' , '&'),
 if (preg_match($regex, $filename) == True) {
 $headtitle = explode("-", $filename);
 $headeventtype = explode("_", $filename);
+//echo getcwd();
 $headline = substr($headtitle[0], 6, 2).'.'.substr($headtitle[0], 4, 2).'.'.substr($headtitle[0], 2, 2).'/'.substr($headtitle[1], 0, 2).':'.substr($headtitle[1], 2, 2).' - '.substr($headeventtype[1], 0, -4);
 $downloadname = substr($headtitle[0], 6, 2).substr($headtitle[0], 4, 2).substr($headtitle[0], 2, 2).'_'.substr($headtitle[1], 0, 2).substr($headtitle[1], 2, 2).'_'.substr($headeventtype[1], 0, -4);
 //header("Content-type:application/pdf");
@@ -38,8 +39,8 @@ class PDF extends FPDF {
     }
     function reportContent($file) {
         // Read text file
-        $f   = fopen($file, 'r');
-        $txt = fread($f, filesize($file));
+        $f   = fopen('../reports/'.$file, 'r');
+        $txt = fread($f, filesize('../reports/'.$file));
         fclose($f);
         $this->SetFont('Courier', '', 10);
         $this->SetTextColor(0, 0, 0);
