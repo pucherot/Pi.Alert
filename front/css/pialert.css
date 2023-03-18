@@ -622,5 +622,9 @@ body.modal-open {
 }
 
 #navbar-reload-button {
-    position: relative; left:0px; width: 42px; height: 50px; display: inline-block; vertical-align: middle; line-height: 50px; text-align: center;
+    position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;
+}
+
+#navbar-reload-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
