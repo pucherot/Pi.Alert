@@ -206,6 +206,30 @@ function read_logfile_vendor () {
         }
 }
 
+function print_logviewer_modal_head ($id, $title) {
+    echo '<div class="modal fade" id="modal-logviewer-'.$id.'">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Viewer: '.$title.'</h4>
+                </div>
+                <div class="modal-body" style="text-align: left;">
+                    <div style="border: none; overflow-y: scroll;">';
+}
+
+function print_logviewer_modal_foot () {
+    global $pia_lang;
+    echo '                <br></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">'.$pia_lang['Gen_Close'].'</button>
+                </div>
+            </div>
+        </div>
+    </div>';
+}
 // Set Tab ----------------------------------------------------------------------------
 
 if ($_REQUEST['tab'] == '1') {
@@ -320,170 +344,55 @@ if ($_SESSION['Scan_WebServices'] == True) {
     </div>
 
 <!-- Log Viewer - Modals Scan ----------------------------------------------------------------- -->
-
-    <div class="modal fade" id="modal-logviewer-scan">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.1.log (File)</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">
-                    <?php read_logfile('pialert.1.log', $pia_lang['Maintenance_Tools_Logviewer_Scan_empty']); ?>
-                    <br></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php 
+print_logviewer_modal_head ('scan', 'pialert.1.log (File)');
+read_logfile('pialert.1.log', $pia_lang['Maintenance_Tools_Logviewer_Scan_empty']); 
+print_logviewer_modal_foot ();
+?>
 
 <!-- Log Viewer - Modals IP ----------------------------------------------------------------- -->
-
-    <div class="modal fade" id="modal-logviewer-iplog">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.IP.log (File)</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">
-                    <?php read_logfile('pialert.IP.log', $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty']); ?>
-                    <br></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php 
+print_logviewer_modal_head ('iplog', 'pialert.IP.log (File)');
+read_logfile('pialert.IP.log', $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty']); 
+print_logviewer_modal_foot ();
+?>
 
 <!-- Log Viewer - Modals Vendor Update ----------------------------------------------------------------- -->
-
-    <div class="modal fade" id="modal-logviewer-vendor">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.vendors.log (File)</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">
-                    <?php
-
-                    read_logfile_vendor();
-                    ?>
-                    <br></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php  
+print_logviewer_modal_head ('vendor', 'pialert.vendors.log (File)');
+read_logfile_vendor();
+print_logviewer_modal_foot ();
+?>
 
 <!-- Log Viewer - Modals Cleanup ----------------------------------------------------------------- -->
-
-    <div class="modal fade" id="modal-logviewer-cleanup">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.cleanup.log (File)</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">
-                    <?php read_logfile('pialert.cleanup.log', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty']); ?>
-                    <br></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php 
+print_logviewer_modal_head ('cleanup', 'pialert.cleanup.log (File)');
+read_logfile('pialert.cleanup.log', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty']); 
+print_logviewer_modal_foot ();
+?>
 
 <!-- Log Viewer - Modals Nmap ----------------------------------------------------------------- -->
-
-    <div class="modal fade" id="modal-logviewer-nmap">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: last Nmap Scan (Memory)</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">
-                    <?php
-                    if (!isset($_SESSION['ScanShortMem_NMAP'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem_NMAP'];}
-                    ?>
-                    <br></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php
+print_logviewer_modal_head ('nmap', 'last Nmap Scan (Memory)');
+if (!isset($_SESSION['ScanShortMem_NMAP'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem_NMAP'];}
+print_logviewer_modal_foot ();
+?>
 
 <!-- Log Viewer - Modals WebServices ----------------------------------------------------------------- -->
 <?php
 if ($_SESSION['Scan_WebServices'] == True) {
-    echo '<div class="modal fade" id="modal-logviewer-webservices">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: pialert.webservices.log (File)</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">';
-
+    print_logviewer_modal_head ('webservices', 'pialert.webservices.log (File)');
     read_logfile('pialert.webservices.log', $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']);
-
-    echo '                <br></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">'.$pia_lang['Gen_Close'].'</button>
-                </div>
-            </div>
-        </div>
-    </div>';
+    print_logviewer_modal_foot ();
 }
 ?>
 
 <!-- Log Viewer - Modals Wake-on-LAN ----------------------------------------------------------------- -->
-
-    <div class="modal fade" id="modal-logviewer-wol">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Viewer: last Wake-on-LAN (Memory)</h4>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">
-                    <?php
-                    if (!isset($_SESSION['ScanShortMem_WOL'])) {echo $pia_lang['Maintenance_Tools_Logviewer_WOL_empty'];} else {echo $_SESSION['ScanShortMem_WOL'];}
-                    ?>
-                    <br></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php
+print_logviewer_modal_head ('wol', 'last Wake-on-LAN (Memory)');
+if (!isset($_SESSION['ScanShortMem_WOL'])) {echo $pia_lang['Maintenance_Tools_Logviewer_WOL_empty'];} else {echo $_SESSION['ScanShortMem_WOL'];}
+print_logviewer_modal_foot ();
+?>
 
 <!-- Tabs ----------------------------------------------------------------- -->
 
@@ -846,7 +755,6 @@ if (!$block_restore_button) {
     <!-- ----------------------------------------------------------------------- -->
 
 </section>
-
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -857,7 +765,6 @@ if (!$block_restore_button) {
 ?>
 
 <script>
-
 // delete devices with emty macs
 function askDeleteDevicesWithEmptyMACs () {
   // Ask 
@@ -1176,6 +1083,7 @@ function check_github_for_updates() {
     })
 }
 
+// Update URL when using the tabs
 function update_tabURL(url, tab) {
     let stateObj = { id: "100" };
     
