@@ -158,6 +158,54 @@ function read_DevListCol() {
     return $output_array;
 }
 
+// Set preset checkboxes for Columnconfig -----------------------------------------------------------------
+
+function set_column_checkboxes ($table_config) {
+    if ($table_config['ConnectionType'] == 1) {$col_checkbox['ConnectionType'] = "checked";}
+    if ($table_config['Favorites'] == 1)      {$col_checkbox['Favorites'] = "checked";}
+    if ($table_config['Group'] == 1)          {$col_checkbox['Group'] = "checked";}
+    if ($table_config['Owner'] == 1)          {$col_checkbox['Owner'] = "checked";}
+    if ($table_config['Type'] == 1)           {$col_checkbox['Type'] = "checked";}
+    if ($table_config['FirstSession'] == 1)   {$col_checkbox['FirstSession'] = "checked";}
+    if ($table_config['LastSession'] == 1)    {$col_checkbox['LastSession'] = "checked";}
+    if ($table_config['LastIP'] == 1)         {$col_checkbox['LastIP'] = "checked";}
+    if ($table_config['MACType'] == 1)        {$col_checkbox['MACType'] = "checked";}
+    if ($table_config['MACAddress'] == 1)     {$col_checkbox['MACAddress'] = "checked";}
+    if ($table_config['Location'] == 1)       {$col_checkbox['Location'] = "checked";}
+    return $col_checkbox;
+}
+
+// Read logfiles -----------------------------------------------------------------
+
+function read_logfile ($logfile, $logmessage) {
+    $file = file_get_contents('./php/server/'.$logfile, true);
+    if ($file == "") {echo $logmessage;}
+    echo str_replace("\n",'<br>',$file); 
+}
+
+function read_logfile_vendor () {
+    global $pia_lang;
+
+    $file = file_get_contents('./php/server/pialert.vendors.log');
+    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Vendor_empty'];} 
+       else {
+            $temp_log = explode("\n", $file);
+            $x=0;
+            while($x < sizeof($temp_log)) {
+              if (strlen($temp_log[$x]) == 0) 
+                {
+                    $y = $x;
+                    while($y < sizeof($temp_log)) {
+                        echo $temp_log[$y].'<br>';
+                       $y++;
+                    } 
+                    break;
+                }
+              $x++;
+            }
+        }
+}
+
 // Set Tab ----------------------------------------------------------------------------
 
 if ($_REQUEST['tab'] == '1') {
@@ -250,22 +298,6 @@ if ($_REQUEST['tab'] == '1') {
       </div>
     </div>
 
-    <script>
-    function check_github_for_updates() {
-        $("#updatecheck").empty();
-        $.ajax({
-            method: "POST",
-            url: "./php/server/updatecheck.php",
-            data: "",
-            beforeSend: function() { $('#updatecheck').addClass("ajax_scripts_loading"); },
-            complete: function() { $('#updatecheck').removeClass("ajax_scripts_loading"); },
-            success: function(data, textStatus) {
-                $("#updatecheck").html(data);
-            }
-        })
-    }
-    </script>
-
 <!-- Log Viewer ----------------------------------------------------------------- -->
 
     <div class="box">
@@ -299,11 +331,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
-                    <?php
-                    $file = file_get_contents('./php/server/pialert.1.log', true);
-                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Scan_empty'];}
-                    echo str_replace("\n",'<br>',$file);
-                    ?>
+                    <?php read_logfile('pialert.1.log', $pia_lang['Maintenance_Tools_Logviewer_Scan_empty']); ?>
                     <br></div>
                 </div>
                 <div class="modal-footer">
@@ -325,11 +353,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
-                    <?php
-                    $file = file_get_contents('./php/server/pialert.IP.log', true);
-                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty'];}
-                    echo str_replace("\n",'<br>',$file);
-                    ?>
+                    <?php read_logfile('pialert.IP.log', $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty']); ?>
                     <br></div>
                 </div>
                 <div class="modal-footer">
@@ -352,24 +376,8 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
                     <?php
-                    $file = file_get_contents('./php/server/pialert.vendors.log');
-                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Vendor_empty'];} 
-                       else {
-                            $temp_log = explode("\n", $file);
-                            $x=0;
-                            while($x < sizeof($temp_log)) {
-                              if (strlen($temp_log[$x]) == 0) 
-                                {
-                                    $y = $x;
-                                    while($y < sizeof($temp_log)) {
-                                        echo $temp_log[$y].'<br>';
-                                       $y++;
-                                    } 
-                                    break;
-                                }
-                              $x++;
-                            }
-                        }
+
+                    read_logfile_vendor();
                     ?>
                     <br></div>
                 </div>
@@ -392,11 +400,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 </div>
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">
-                    <?php
-                    $file = file_get_contents('./php/server/pialert.cleanup.log', true);
-                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty'];}
-                    echo str_replace("\n",'<br>',$file);
-                    ?>
+                    <?php read_logfile('pialert.cleanup.log', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty']); ?>
                     <br></div>
                 </div>
                 <div class="modal-footer">
@@ -444,9 +448,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 <div class="modal-body" style="text-align: left;">
                     <div style="border: none; overflow-y: scroll;">';
 
-                    $file = file_get_contents('./php/server/pialert.webservices.log', true);
-                    if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty'];}
-                    echo str_replace("\n",'<br>',$file);
+    read_logfile('pialert.webservices.log', $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']);
 
     echo '                <br></div>
                 </div>
@@ -487,9 +489,9 @@ if ($_SESSION['Scan_WebServices'] == True) {
 
     <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-        <li class="<?php echo $pia_tab_setting; ?>"><a href="#tab_Settings" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings'];?></a></li>
-        <li class="<?php echo $pia_tab_tool; ?>"><a href="#tab_DBTools" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_Tools'];?></a></li>
-        <li class="<?php echo $pia_tab_backup; ?>"><a href="#tab_BackupRestore" data-toggle="tab"><?php echo $pia_lang['Maintenance_Tools_Tab_BackupRestore'];?></a></li>
+        <li class="<?php echo $pia_tab_setting; ?>"><a href="#tab_Settings" data-toggle="tab" onclick="update_tabURL(window.location.href,'1')"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings'];?></a></li>
+        <li class="<?php echo $pia_tab_tool; ?>"><a href="#tab_DBTools" data-toggle="tab" onclick="update_tabURL(window.location.href,'2')"><?php echo $pia_lang['Maintenance_Tools_Tab_Tools'];?></a></li>
+        <li class="<?php echo $pia_tab_backup; ?>"><a href="#tab_BackupRestore" data-toggle="tab" onclick="update_tabURL(window.location.href,'3')"><?php echo $pia_lang['Maintenance_Tools_Tab_BackupRestore'];?></a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
@@ -579,81 +581,67 @@ if ($_SESSION['Scan_WebServices'] == True) {
                         <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
                         <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 
-<?php
-    $table_config = read_DevListCol();
-    if ($table_config['ConnectionType'] == 1) {$checkbox_connection = "checked";}
-    if ($table_config['Favorites'] == 1) {$checkbox_fav = "checked";}
-    if ($table_config['Group'] == 1) {$checkbox_grp = "checked";}
-    if ($table_config['Owner'] == 1) {$checkbox_own = "checked";}
-    if ($table_config['Type'] == 1) {$checkbox_typ = "checked";}
-    if ($table_config['FirstSession'] == 1) {$checkbox_first_sess = "checked";}
-    if ($table_config['LastSession'] == 1) {$checkbox_last_sess = "checked";}
-    if ($table_config['LastIP'] == 1) {$checkbox_lastip = "checked";}
-    if ($table_config['MACType'] == 1) {$checkbox_mactype = "checked";}
-    if ($table_config['MACAddress'] == 1) {$checkbox_macaddress = "checked";}
-    if ($table_config['Location'] == 1) {$checkbox_loc = "checked";}
-?>
+                        <?php $col_checkbox = set_column_checkboxes(read_DevListCol()); ?>
 
                         <div class="form-group">
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkConnectionType" type="checkbox" <?php echo $checkbox_connection; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkConnectionType" type="checkbox" <?php echo $col_checkbox['ConnectionType']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_ConnectionType'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $checkbox_own; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $col_checkbox['Owner']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_Owner'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" <?php echo $checkbox_typ; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" <?php echo $col_checkbox['Type']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_Type'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" <?php echo $checkbox_fav; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" <?php echo $col_checkbox['Favorites']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_Favorite'];?></label>
                             </div>
                             
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $checkbox_grp; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $col_checkbox['Group']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_Group'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkLocation" type="checkbox" <?php echo $checkbox_loc; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkLocation" type="checkbox" <?php echo $col_checkbox['Location']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_Location'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkfirstSess" type="checkbox" <?php echo $checkbox_first_sess; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkfirstSess" type="checkbox" <?php echo $col_checkbox['FirstSession']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_FirstSession'];?></label>
                             </div>
                             
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chklastSess" type="checkbox" <?php echo $checkbox_last_sess; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chklastSess" type="checkbox" <?php echo $col_checkbox['LastSession']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastSession'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chklastIP" type="checkbox" <?php echo $checkbox_lastip; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chklastIP" type="checkbox" <?php echo $col_checkbox['LastIP']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastIP'];?></label>
                             </div>
                             
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkMACtype" type="checkbox" <?php echo $checkbox_mactype; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkMACtype" type="checkbox" <?php echo $col_checkbox['MACType']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_MAC'];?></label>
                             </div>
 
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkMACaddress" type="checkbox" <?php echo $checkbox_macaddress; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
+                              <input class="icheckbox_minimal-blue" id="chkMACaddress" type="checkbox" <?php echo $col_checkbox['MACAddress']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
                               <label class="control-label"><?php echo $pia_lang['Device_TableHead_MAC'];?>-Address</label>
                             </div>
 
                             <br>
                             <button type="button" class="btn btn-default" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?php echo $pia_lang['Gen_Save'];?></button>
                         </div>
-
 
                     </td>
                 </tr>
@@ -702,14 +690,12 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 <tr class="table_settings_row">
 
 <?php
-
 if (strtolower($_SESSION['WebProtection']) != 'true') {
     echo '          <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">'.$pia_lang['Maintenance_Tool_loginenable'].'</button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_loginenable_text'].'</td>';}
 else {
         echo '      <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-danger dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">'.$pia_lang['Maintenance_Tool_logindisable'].'</button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b">'.$pia_lang['Maintenance_Tool_logindisable_text'].'</td>';}
-
 ?>
 
                 </tr>
@@ -1174,6 +1160,30 @@ function DeleteInactiveHosts() {
   });
 }
 
+// Update Check
+function check_github_for_updates() {
+    $("#updatecheck").empty();
+    $.ajax({
+        method: "POST",
+        url: "./php/server/updatecheck.php",
+        data: "",
+        beforeSend: function() { $('#updatecheck').addClass("ajax_scripts_loading"); },
+        complete: function() { $('#updatecheck').removeClass("ajax_scripts_loading"); },
+        success: function(data, textStatus) {
+            $("#updatecheck").html(data);
+        }
+    })
+}
+
+function update_tabURL(url, tab) {
+    let stateObj = { id: "100" };
+    
+    url = url.replace('?tab=1','');
+    url = url.replace('?tab=2','');
+    url = url.replace('?tab=3','');
+    window.history.pushState(stateObj,
+             "Tab"+tab, url + "?tab=" + tab);
+}
 </script>
 
 
