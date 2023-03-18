@@ -775,6 +775,7 @@ if (!$block_restore_button) {
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_purgebackup_text'];?></div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -1181,6 +1182,7 @@ function update_tabURL(url, tab) {
     url = url.replace('?tab=1','');
     url = url.replace('?tab=2','');
     url = url.replace('?tab=3','');
+    url = url.replace('#','');
     window.history.pushState(stateObj,
              "Tab"+tab, url + "?tab=" + tab);
 }
