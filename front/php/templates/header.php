@@ -147,6 +147,9 @@ document.addEventListener("visibilitychange",()=>{
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle_systeminfobox()">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <a id="navbar-reload-button" href="" role="button" onclick="location.reload()" style="">
+        <i class="fa fa-repeat"></i>
+      </a>
       <script>
           function toggle_systeminfobox() {
             $("#sidebar_systeminfobox").toggleClass("collapse");
