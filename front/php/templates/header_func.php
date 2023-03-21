@@ -123,7 +123,7 @@ function format_sysloadavg($loaddata) {
     } else {
         echo 'text-green-light fa-gradient-green';
     }
-    echo '"></i> Load:&nbsp;&nbsp;'.$loaddata[0].'&nbsp;&nbsp;'.$loaddata[1].'&nbsp;&nbsp;'.$loaddata[2].'</span>';
+    echo '"></i> Load:&nbsp;&nbsp;'.round($loaddata[0],2).'&nbsp;&nbsp;'.round($loaddata[1],2).'&nbsp;&nbsp;'.round($loaddata[2],2).'</span>';
 }
 
 function format_temperature ($celsius, $temperaturelimit) {
