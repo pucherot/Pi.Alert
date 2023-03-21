@@ -578,6 +578,7 @@ publish_pialert() {
   chmod go+x $INSTALL_DIR
   sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
   sudo chmod -R 775 $PIALERT_HOME/db                              2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/db/temp                         2>&1 >> "$LOG"
   sudo chgrp www-data $PIALERT_HOME/config                        2>&1 >> "$LOG"
   sudo chmod -R 775 $PIALERT_HOME/config                          2>&1 >> "$LOG"
   sudo chgrp www-data $PIALERT_HOME/config/pialert.conf           2>&1 >> "$LOG"

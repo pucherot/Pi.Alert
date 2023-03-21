@@ -21,6 +21,7 @@ PYTHON_BIN=python
 # Main
 # ------------------------------------------------------------------------------
 main() {
+  update_warning
   print_superheader "Pi.Alert Update"
   log "`date`"
   log "Logfile: $LOG"
@@ -48,6 +49,21 @@ main() {
   print_msg ""
 
   move_logfile
+}
+
+update_warning() {
+  clear
+  print_msg "############################################################"
+  print_msg "# You are planning to update Pi.Alert. Please make sure    #"
+  print_msg "# that no scan takes place during the update to avoid      #"
+  print_msg "# possible database errors afterwards!!! This can be done  #"
+  print_msg "# by pausing the Arp scan via the settings page. However,  #"
+  print_msg "# scans that are already running will not be terminated.   #"
+  print_msg "############################################################"
+  print_msg ""
+  print_msg ""
+  printf "%s " "Press enter to continue"
+  read ans
 }
 
 # ------------------------------------------------------------------------------
@@ -265,25 +281,6 @@ update_db() {
 #    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE TABLE Parameters (par_ID STRING (50) PRIMARY KEY NOT NULL COLLATE NOCASE, par_Value STRING (250) );"   2>&1 >> "$LOG"
 #    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_par_ID ON Parameters (par_ID COLLATE NOCASE);"                                               2>&1 >> "$LOG"
 #  fi
-  
- print_msg "- Checking Devices new columns..."
- COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Model' COLLATE NOCASE";`                  2>&1 >> "$LOG"
- if [ "$COL" == "0" ] ; then
-   print_msg "  - Adding column 'Model' to 'Devices'..."
-   sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Model STRING(250);"  2>&1 >> "$LOG"
- fi
-
- COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Serialnumber' COLLATE NOCASE";`           2>&1 >> "$LOG"
- if [ "$COL" == "0" ] ; then
-   print_msg "  - Adding column 'Serialnumber' to 'Devices'..."
-   sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Serialnumber STRING(100);"  2>&1 >> "$LOG"
- fi
-
- COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_ConnectionType' COLLATE NOCASE";`         2>&1 >> "$LOG"
- if [ "$COL" == "0" ] ; then
-   print_msg "  - Adding column 'ConnectionType' to 'Devices'..."
-   sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_ConnectionType STRING(30);"  2>&1 >> "$LOG"
- fi
 
 #  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Location' COLLATE NOCASE";`             2>&1 >> "$LOG"
 #  if [ "$COL" == "0" ] ; then
@@ -309,6 +306,7 @@ update_db() {
 update_permissions() {
   print_msg "- Set Permissions..."
   sudo chgrp -R www-data "$PIALERT_HOME/db"                         2>&1 >> "$LOG"
+  sudo chmod -R 775 "$PIALERT_HOME/db/temp"                         2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/arm64/shoutrrr"             2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/armhf/shoutrrr"             2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/shoutrrr/x86/shoutrrr"               2>&1 >> "$LOG"

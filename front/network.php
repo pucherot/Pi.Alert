@@ -25,7 +25,7 @@ require 'php/server/db.php';
 $DBFILE = '../db/pialert.db';
 OpenDB();
 // #####################################
-// ## Create Table if not exists'
+// ## update db dependencies
 // #####################################
 $sql = 'CREATE TABLE IF NOT EXISTS "network_infrastructure" (
 	"device_id"	INTEGER,
@@ -35,11 +35,8 @@ $sql = 'CREATE TABLE IF NOT EXISTS "network_infrastructure" (
   "net_downstream_devices" TEXT,
 	PRIMARY KEY("device_id" AUTOINCREMENT)
 )';
-
 $result = $db->query($sql);
-// #####################################
-// ## Expand Devices Table
-// #####################################
+
 $sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure" INTEGER';
 $result = $db->query($sql);
 $sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure_port" INTEGER';

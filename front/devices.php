@@ -19,6 +19,18 @@ if ($_SESSION["login"] != 1)
 require 'php/server/db.php';
 require 'php/templates/header.php';
 require 'php/templates/graph.php';
+
+$DBFILE = '../db/pialert.db';
+OpenDB();
+// #####################################
+// ## update db dependencies
+// #####################################
+$sql = 'ALTER TABLE "Devices" ADD "dev_Model" STRING(250)';
+$result = $db->query($sql);
+$sql = 'ALTER TABLE "Devices" ADD "dev_Serialnumber" STRING(100)';
+$result = $db->query($sql);
+$sql = 'ALTER TABLE "Devices" ADD "dev_ConnectionType" STRING(30)';
+$result = $db->query($sql);
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->

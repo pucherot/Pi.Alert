@@ -326,27 +326,66 @@ function deleteActHistory() {
 //------------------------------------------------------------------------------
 function PiaBackupDBtoArchive() {
   // prepare fast Backup
-  $file = '../../../db/pialert.db';
-  $newfile = '../../../db/pialert.db.latestbackup';
+  #$file = '../../../db/pialert.db';
+
+  $db_file_path = '../../../db';
+  $db_file_name_org = 'pialert.db';
+  $db_file_path_temp = '../../../db/temp';
+  $db_file_name_temp = 'temp_backup.db';
+
+  $db_file_org_full = $db_file_path.'/'.$db_file_name_org; # ../../../db/pialert.db
+  $db_file_temp_full = $db_file_path.'/'.$db_file_name_temp; # ../../../db/temp_backup.db
+  $db_file_new_full = $db_file_path_temp.'/'.$db_file_name_org; # ../../../db/temp/pialert.db
+
+  $Pia_Archive_Name = 'pialertdb_'.date("Ymd_His").'.zip';
+  $Pia_Archive_Path = '../../../db/';
+
+  #$tempbackupdir = $Pia_Archive_Path.'temp';
   global $pia_lang;
 
-  // copy files as a fast Backup
-  if (!copy($file, $newfile)) {
-      echo $pia_lang['BackDevices_Backup_CopError'];
-  } else {
-    // Create archive with actual date
-    $Pia_Archive_Name = 'pialertdb_'.date("Ymd_His").'.zip';
-    $Pia_Archive_Path = '../../../db/';
-    exec('zip -j '.$Pia_Archive_Path.$Pia_Archive_Name.' ../../../db/pialert.db', $output);
-    // chheck if archive exists
-    if (file_exists($Pia_Archive_Path.$Pia_Archive_Name) && filesize($Pia_Archive_Path.$Pia_Archive_Name) > 0) {
-      echo $pia_lang['BackDevices_Backup_okay'].': ('.$Pia_Archive_Name.')';
-      unlink($newfile);
-      echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
-    } else {
-      echo $pia_lang['BackDevices_Backup_Failed'].' (pialert.db.latestbackup)';
-    }
+  // Check if DB has open transactions
+  if (filesize($db_file_org_full.'-wal') != "0") {
+      //DEBUG
+      echo filesize($db_file_org_full.'-shm').' - '.filesize($db_file_org_full.'-wal');
+      echo $pia_lang['BackDevices_Backup_WALError']; exit;
   }
+
+  // copy database
+  exec('sqlite3 "'.$db_file_org_full.'" ".backup '.$db_file_temp_full.'"', $output);
+  //print_r($output);
+  //echo 'sqlite3 "'.$file.'" ".backup '.$tempbackupdir.'/'.$newfile.'"';
+  if (file_exists($db_file_temp_full)) {
+      // Integrity Check if file copy exists
+      $sql1 = "PRAGMA integrity_check";
+      $sql2 = "PRAGMA foreign_key_check";
+      exec('sqlite3 '.$db_file_temp_full.' "'.$sql1.'"', $output_a);
+      exec('sqlite3 '.$db_file_temp_full.' "'.$sql2.'"', $output_b);
+
+      if (($output_a[0] == "ok") && (sizeof($output_b) == 0)) {
+            // Integrity Check is okay
+            // move file to temp dir
+            rename($db_file_temp_full, $db_file_new_full);
+            // Create archive with actual date
+            exec('zip -j '.$Pia_Archive_Path.$Pia_Archive_Name.' '.$db_file_new_full, $output);
+            // check if archive exists
+            if (file_exists($Pia_Archive_Path.$Pia_Archive_Name) && filesize($Pia_Archive_Path.$Pia_Archive_Name) > 0) {
+              // if archive exists
+              echo $pia_lang['BackDevices_Backup_okay'].' / Integrity Checked: ('.$Pia_Archive_Name.')';
+              unlink($db_file_new_full);
+              echo("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
+            } else {
+              // if archive not exists
+              echo $pia_lang['BackDevices_Backup_Failed'].' / Integrity Checked (pialert-latestbackup.db)';
+            }
+          } else {
+            // Integrity Check is okay
+            echo $pia_lang['BackDevices_Backup_IntegrityError']; exit;
+          }
+    } else {
+    // File does not exists
+    echo $pia_lang['BackDevices_Backup_CopError']; exit;
+  }
+
 }
 
 //------------------------------------------------------------------------------

@@ -58,7 +58,6 @@ function OpenDB () {
   
   $db->busyTimeout(2000);
   $db->exec('PRAGMA journal_mode = wal;');
-
 }
-   
+
 ?>
