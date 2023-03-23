@@ -92,8 +92,8 @@ $DB_MOD_DATA = date ("d.m.Y, H:i:s", filemtime($DB_SOURCE)).' Uhr';
 $CONFIG_FILE_DIR = str_replace('front', 'config', getcwd()).'/';
 $files = glob($CONFIG_FILE_DIR."pialert-20*.bak");
 if ($files){
- $pia_config_count = count($files);
-}
+ $CONFIG_FILE_COUNT = count($files);
+} else { $CONFIG_FILE_COUNT = 0;}
 
 // Count and Calc DB Backups -------------------------------------------------------
 
@@ -280,7 +280,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_config_backup'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $pia_config_count.' '.$pia_lang['Maintenance_database_backup_found'];?>
+                        <?php echo $CONFIG_FILE_COUNT.' '.$pia_lang['Maintenance_database_backup_found'];?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
