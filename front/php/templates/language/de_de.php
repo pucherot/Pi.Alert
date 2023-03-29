@@ -92,6 +92,19 @@ $pia_lang['Device_Table_info'] = 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen
 $pia_lang['Device_Table_nav_next'] = 'Nächste';
 $pia_lang['Device_Table_nav_prev'] = 'Zurück';
 
+$pia_lang['Device_bulkEditor_mode'] = 'Massenbearbeitung';
+$pia_lang['Device_bulkEditor_mode_quit'] = 'Editor beenden';
+$pia_lang['Device_bulkEditor_selectall'] = 'Alle auswählen';
+$pia_lang['Device_bulkEditor_selectnone'] = 'Alle abwählen';
+
+$pia_lang['Device_bulkEditor_savebox_title'] = 'Felder wurden gespeichert';
+$pia_lang['Device_bulkEditor_savebox_noselection'] = 'Es wurde keine Felder zur Änderung ausgewählt';
+$pia_lang['Device_bulkEditor_savebox_mod_devices'] = 'Geänderte Geräte';
+$pia_lang['Device_bulkEditor_savebox_mod_fields'] = 'Geänderte Werte';
+
+$pia_lang['Device_bulkEditor_hostbox_title'] = 'Wähle die zu bearbeitenden Geräte aus';
+$pia_lang['Device_bulkEditor_inputbox_title'] = 'Felder bearbeiten';
+
 //////////////////////////////////////////////////////////////////
 // Presence Page
 //////////////////////////////////////////////////////////////////
@@ -391,25 +404,25 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Löschen der Netzwerkaktivität'
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'Der Graph für die Netz&shy;werkaktivität wird zu&shy;rück&shy;gesetzt. Die Events wer&shy;den hiervon nicht beeinflusst.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Netzwerkaktivität löschen';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = 'Sind Sie sicher, dass Sie die Netzwerkaktivität zurücksetzen möchten?';
-$pia_lang['Maintenance_Github_package_a'] ='Die neuste Version ist vom ';
-$pia_lang['Maintenance_Github_package_b'] ='Uhr.';
-$pia_lang['Maintenance_Tool_loginenable'] ='Login aktivieren';
-$pia_lang['Maintenance_Tool_loginenable_text'] ='Nach der Aktivierung gelangst du automatisch auf die Anmeldeseite. Wenn du zuvor noch kein Passwort gesetzt hast, ist "123456" das Standardpasswort.';
-$pia_lang['Maintenance_Tool_loginenable_noti'] ='Login aktivieren';
-$pia_lang['Maintenance_Tool_loginenable_noti_text'] ='Bist du dir sicher, dass du den Login aktivieren möchtest?';
-$pia_lang['Maintenance_Tool_logindisable'] ='Login deaktivieren';
-$pia_lang['Maintenance_Tool_logindisable_text'] ='Der Login wird de&shy;akti&shy;viert. Jeder Nutzer hat nun wieder die Mög&shy;lich&shy;keit auf die Pi.Alert-Seite zuzugreifen.';
-$pia_lang['Maintenance_Tool_logindisable_noti'] ='Login deaktivieren';
-$pia_lang['Maintenance_Tool_logindisable_noti_text'] ='Bist du dir sicher, dass du den Login deaktivieren möchtest?';
+$pia_lang['Maintenance_Github_package_a'] = 'Die neuste Version ist vom ';
+$pia_lang['Maintenance_Github_package_b'] = 'Uhr.';
+$pia_lang['Maintenance_Tool_loginenable'] = 'Login aktivieren';
+$pia_lang['Maintenance_Tool_loginenable_text'] = 'Nach der Aktivierung gelangst du automatisch auf die Anmeldeseite. Wenn du zuvor noch kein Passwort gesetzt hast, ist "123456" das Standardpasswort.';
+$pia_lang['Maintenance_Tool_loginenable_noti'] = 'Login aktivieren';
+$pia_lang['Maintenance_Tool_loginenable_noti_text'] = 'Bist du dir sicher, dass du den Login aktivieren möchtest?';
+$pia_lang['Maintenance_Tool_logindisable'] = 'Login deaktivieren';
+$pia_lang['Maintenance_Tool_logindisable_text'] = 'Der Login wird de&shy;akti&shy;viert. Jeder Nutzer hat nun wieder die Mög&shy;lich&shy;keit auf die Pi.Alert-Seite zuzugreifen.';
+$pia_lang['Maintenance_Tool_logindisable_noti'] = 'Login deaktivieren';
+$pia_lang['Maintenance_Tool_logindisable_noti_text'] = 'Bist du dir sicher, dass du den Login deaktivieren möchtest?';
 $pia_lang['Maintenance_ConfEditor_Start'] = 'Pi.Alert Config bearbeiten';
 $pia_lang['Maintenance_ConfEditor_Hint'] = 'Hinweise zum Editor';
-$pia_lang['Maintenance_ConfEditor_Backup'] ='Backup anlegen';
-$pia_lang['Maintenance_ConfEditor_Restore'] ='Vorherige Version';
-$pia_lang['Maintenance_ConfEditor_Restore_noti'] ='Vorherige Version';
-$pia_lang['Maintenance_ConfEditor_Restore_noti_text'] ='Es wird die letzte Version der Konfigurationsdatei zurückgespielt. Die "vorherige Version" ist entweder, die des letzten Backups, oder die Version vor der letzten Speicherung. Je nachdem welche aktueller ist.';
-$pia_lang['Maintenance_ConfEditor_Backup_info'] ='Neben der Datei "pialert-prev.bak" wird eine weitere Sich&shy;erung mit dem aktuellen Datum inkl. Uhrzeit angelegt. Diese Sicherung muss im Bedarfsfall manuell wieder&shy;her&shy;gestellt werden (umbenennen in "pialert.conf"). Eine vorhandene "pialert-prev.bak"-Datei wird im&shy;mer wieder überschrieben.';
-$pia_lang['Maintenance_ConfEditor_Restore_info'] ='Diese Funktion stellt die Kon&shy;fi&shy;gura&shy;tionsdatei aus der Datei "pialert-prev.bak" wieder her. Die Datei "pialert-prev.bak" wird beim Speichern und bei der Erstellung einer Sicherung er&shy;zeugt.';
-$pia_lang['Maintenance_ConfEditor_Save_info'] ='Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" ge&shy;spei&shy;chert. Die vorherige Kon&shy;figu&shy;ration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" wieder mit der vorherigen Version der Kon&shy;figu&shy;rationsdatei überschrieben.';
+$pia_lang['Maintenance_ConfEditor_Backup'] = 'Backup anlegen';
+$pia_lang['Maintenance_ConfEditor_Restore'] = 'Vorherige Version';
+$pia_lang['Maintenance_ConfEditor_Restore_noti'] = 'Vorherige Version';
+$pia_lang['Maintenance_ConfEditor_Restore_noti_text'] = 'Es wird die letzte Version der Konfigurationsdatei zurückgespielt. Die "vorherige Version" ist entweder, die des letzten Backups, oder die Version vor der letzten Speicherung. Je nachdem welche aktueller ist.';
+$pia_lang['Maintenance_ConfEditor_Backup_info'] = 'Neben der Datei "pialert-prev.bak" wird eine weitere Sich&shy;erung mit dem aktuellen Datum inkl. Uhrzeit angelegt. Diese Sicherung muss im Bedarfsfall manuell wieder&shy;her&shy;gestellt werden (umbenennen in "pialert.conf"). Eine vorhandene "pialert-prev.bak"-Datei wird im&shy;mer wieder überschrieben.';
+$pia_lang['Maintenance_ConfEditor_Restore_info'] = 'Diese Funktion stellt die Kon&shy;fi&shy;gura&shy;tionsdatei aus der Datei "pialert-prev.bak" wieder her. Die Datei "pialert-prev.bak" wird beim Speichern und bei der Erstellung einer Sicherung er&shy;zeugt.';
+$pia_lang['Maintenance_ConfEditor_Save_info'] = 'Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" ge&shy;spei&shy;chert. Die vorherige Kon&shy;figu&shy;ration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" wieder mit der vorherigen Version der Kon&shy;figu&shy;rationsdatei überschrieben.';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)
@@ -520,13 +533,13 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob d
               								 </span><br>
               								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
-$pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span> 
+$pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Hinweise zur Migrating von pucherot zu diesem Fork.';
-$pia_lang['HelpFAQ_Cat_General_104_text'] = 'Die Datenbank in diesem Fork wurde um einige Felder erweitert. Um die Datenbank vom originalen Pi.Alert <b>(pucherot)</b> zu übernehmen, steht mit dem Script <span class="text-maroon help_faq_code">pialert-cli</span> im Verzeichnis 
+$pia_lang['HelpFAQ_Cat_General_104_text'] = 'Die Datenbank in diesem Fork wurde um einige Felder erweitert. Um die Datenbank vom originalen Pi.Alert <b>(pucherot)</b> zu übernehmen, steht mit dem Script <span class="text-maroon help_faq_code">pialert-cli</span> im Verzeichnis
 											 <span class="text-maroon help_faq_code">~/pialert/back</span> eine Möglichkeit zum Upgrade zur Verfügung. Der Befehl lautet dann <span class="text-maroon help_faq_code">./pialert-cli update_db</span>';
 $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
-$pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class="text-maroon help_faq_code">pialert-cli</span> befindet sich im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> und bietet die Möglichkeit, Einstellungen an Pi.Alert ohne Webseite, oder manuelle Veränderungen an der 
+$pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class="text-maroon help_faq_code">pialert-cli</span> befindet sich im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> und bietet die Möglichkeit, Einstellungen an Pi.Alert ohne Webseite, oder manuelle Veränderungen an der
                                              Konfigurationsdatei vornehmen zu können. Mit dem Kommando <span class="text-maroon help_faq_code">./pialert-cli help</span> kann eine Liste mit den unterstützen Funktionen aufgerufen werden.
 											 <table style="margin-top: 20px;" border="1">
 											    <tr>
@@ -584,34 +597,34 @@ $pia_lang['HelpFAQ_Cat_General_106_text'] = 'Wenn ein Nicht-Standard-Benutzer ve
 											 Dazu wird die folgende Datei erstellt: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-arpscan</span><br>
 											 Diese Datei wird geöffnet und mit folgendem Inhalt abgespeichert ("piadmin" ist durch den entsprechenden Usernamen zu ersetzen):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan</span>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
-$pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und 
-         									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen. 
+$pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und
+         									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen.
          									Wenn ja, lösche diese dort ebenfalls. Sollten diese Geräte auch nach dem Löschen in Pi-hole immer wider auftauchen, starte den Dienst <span class="text-maroon help_faq_code">pihole-FTL</span> neu. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = 'Was bedeutet ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'meint ein Netzwerkgerät, welches über die Netzwerk-Seite erstellt wurde.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'bezeichnet die Anschlussnummer/Portnummer, an der das gerade bearbeitete Gerät mit diesem Netzwerkgerät verbunden ist.';
 $pia_lang['HelpFAQ_Cat_Detail_301_head_a'] = 'Wann wird nun gescannt? Bei ';
 $pia_lang['HelpFAQ_Cat_Detail_301_head_b'] = ' steht 1min aber der Graph zeigt 5min - Abstände an.';
-$pia_lang['HelpFAQ_Cat_Detail_301_text'] = 'Den zeitlichen Abstand zwischen den Scans legt der "Cronjob" fest, welcher standardmäßig auf 5min eingestellt ist. Die Benennung "1min" bezieht sich auf die zu erwartende Dauer des Scans. 
+$pia_lang['HelpFAQ_Cat_Detail_301_text'] = 'Den zeitlichen Abstand zwischen den Scans legt der "Cronjob" fest, welcher standardmäßig auf 5min eingestellt ist. Die Benennung "1min" bezieht sich auf die zu erwartende Dauer des Scans.
         									Abhängig vor der Netzwerkkonfiguration kann diese Zeitangabe variieren. Um den Cronjob zu bearbeiten, kannst du im Terminal/der Konsole <span class="text-maroon help_faq_code">crontab -e</span>
         									eingeben und den Intervall ändern.';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_a'] = 'Was bedeutet ';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_b'] = ' und warum kann ich das nicht auswählen?';
-$pia_lang['HelpFAQ_Cat_Detail_302_text'] = 'Einige moderne Geräte generieren aus Datenschutzgründen zufällige MAC-Adressen, die keinem Hersteller mehr zugeordnet werden können und welche sich mit jeder neuen Verbindung wieder ändern. 
-        									Pi.Alert erkennt, ob es sich um eine solche zufällige MAC-Adresse handelt und aktiviert diese "Feld" automatisch. Um das Verhalten abzustellen, muss du in deinem Endgerät schauen, wie du die 
+$pia_lang['HelpFAQ_Cat_Detail_302_text'] = 'Einige moderne Geräte generieren aus Datenschutzgründen zufällige MAC-Adressen, die keinem Hersteller mehr zugeordnet werden können und welche sich mit jeder neuen Verbindung wieder ändern.
+        									Pi.Alert erkennt, ob es sich um eine solche zufällige MAC-Adresse handelt und aktiviert diese "Feld" automatisch. Um das Verhalten abzustellen, muss du in deinem Endgerät schauen, wie du die
         									MAC-Adressen-Generierung deaktivierst.';
 $pia_lang['HelpFAQ_Cat_Detail_303_head'] = 'Was ist Nmap und wozu dient es?';
 $pia_lang['HelpFAQ_Cat_Detail_303_text'] = 'Nmap ist ein Netzwerkscanner mit vielfältigen Möglichkeiten.<br>
         									Wenn ein neues Gerät in deiner Liste auftaucht, hast du die Möglichkeit über den Nmap-Scan genauere Informationen über das Gerät zu erhalten.';
 $pia_lang['HelpFAQ_Cat_Presence_400_head'] = 'Geräte werden mit einer gelben Markierung und dem Hinweis "missing Event" angezeigt.';
-$pia_lang['HelpFAQ_Cat_Presence_400_text'] = 'Wenn dies geschieht hast du die Möglickeit, bei dem betreffenden Gerät (Detailsansicht) die Events zu löschen. Eine andere Möglichkeit wäre, das Gerät einzuschalten und zu warten, bis Pi.Alert mit dem nächsten 
+$pia_lang['HelpFAQ_Cat_Presence_400_text'] = 'Wenn dies geschieht hast du die Möglickeit, bei dem betreffenden Gerät (Detailsansicht) die Events zu löschen. Eine andere Möglichkeit wäre, das Gerät einzuschalten und zu warten, bis Pi.Alert mit dem nächsten
         									  Scan das Gerät als "Online" erkennt und anschließend das Gerät einfach wieder ausschalten. Nun sollte Pi.Alert mit dem nächsten Scan den Zustand des Gerätes ordentlich in der Datenbank vermerken.';
 $pia_lang['HelpFAQ_Cat_Presence_401_head'] = 'Ein Gerät wird als Anwesend angezeigt, obwohl es "Offline" ist.';
-$pia_lang['HelpFAQ_Cat_Presence_401_text'] = 'Wenn dies geschieht hast du die Möglickeit, bei dem betreffenden Gerät (Detailsansicht) die Events zu löschen. Eine andere Möglichkeit wäre, das Gerät einzuschalten und zu warten, bis Pi.Alert mit dem nächsten 
+$pia_lang['HelpFAQ_Cat_Presence_401_text'] = 'Wenn dies geschieht hast du die Möglickeit, bei dem betreffenden Gerät (Detailsansicht) die Events zu löschen. Eine andere Möglichkeit wäre, das Gerät einzuschalten und zu warten, bis Pi.Alert mit dem nächsten
         									  Scan das Gerät als "Online" erkennt und anschließend das Gerät einfach wieder ausschalten. Nun sollte Pi.Alert mit dem nächsten Scan den Zustand des Gerätes ordentlich in der Datenbank vermerken.';
 $pia_lang['HelpFAQ_Cat_Network_600_head'] = 'Was bringt mir diese Seite?';
 $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Diese Seite soll dir die Möglichkeit bieten, die Belegung deiner Netzwerkgeräte abzubilden. Dazu kannst du einen oder mehrere Switches, WLANs, Router, etc. erstellen,
-        									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen 
+        									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen
         									 an welchem Port ein Host angeschlossen und ob er online ist. Es ist möglich ein Gerät mehreren Ports (bei Portbündelung), als auch mehrere Geräte einem Port (virtuelle Maschinen), zuzuordnen.';
 $pia_lang['HelpFAQ_Cat_Network_601_head'] = 'Wie funktioniert die Netzwerk Seite?';
 $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ein Switch erstellt. Dazu biete ich bereits entsprechende Geräte in der Auswahlliste an. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
@@ -629,7 +642,7 @@ $pia_lang['HelpFAQ_Cat_Service_700_text'] = 'Es gibt insgesamt 5 verschiedene Fa
 											 <span class="bg-orange-custom">&nbsp;&nbsp;&nbsp;</span> - HTTP Status Code 5xx<br>
 											 <span class="bg-red">&nbsp;&nbsp;&nbsp;</span> - Offline';
 $pia_lang['HelpFAQ_Cat_Service_701_head'] = 'Welche HTTP Status Codes gibt es? (englisch)';
-											// von json
+// von json
 $pia_lang['HelpFAQ_Cat_Service_702_head'] = 'Welche Änderungen werden gemeldet?';
 $pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Feststellbare Events sind:<br>
 												<ul>
@@ -641,12 +654,12 @@ $pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Feststellbare Events sind:<br>
 $pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'] = 'Ich kann nicht alle Felder bearbeiten.';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Nicht jedes Feld, was auf dieser Seite angezeigt wird, kann auch bearbeitet werden. Bearbeitbare Felder sind:
 													<ul>
-														<li>'.$pia_lang['WebServices_label_Tags'].'</li>
-														<li>'.$pia_lang['WebServices_label_MAC'].' (eventuell ein Gerät, welchem dieser Web Service zugeordnet ist)<br>
-															Hier wird eine MAC-Adresse erwartet. Wenn hier etwas anderes (z.B. "Laptop") eingetragen wird, erscheint in der Übersicht "'.$pia_lang['WebServices_unknown_Device'].' (Laptop)". 
-															Services ohne diesen Eintrag werden unter "'.$pia_lang['WebServices_BoxTitle_General'].'" aufgelistet.</li>
-														<li>CheckBox: '.$pia_lang['WebServices_Events_all'].'</li>
-														<li>CheckBox: '.$pia_lang['WebServices_Events_down'].'</li>
+														<li>' . $pia_lang['WebServices_label_Tags'] . '</li>
+														<li>' . $pia_lang['WebServices_label_MAC'] . ' (eventuell ein Gerät, welchem dieser Web Service zugeordnet ist)<br>
+															Hier wird eine MAC-Adresse erwartet. Wenn hier etwas anderes (z.B. "Laptop") eingetragen wird, erscheint in der Übersicht "' . $pia_lang['WebServices_unknown_Device'] . ' (Laptop)".
+															Services ohne diesen Eintrag werden unter "' . $pia_lang['WebServices_BoxTitle_General'] . '" aufgelistet.</li>
+														<li>CheckBox: ' . $pia_lang['WebServices_Events_all'] . '</li>
+														<li>CheckBox: ' . $pia_lang['WebServices_Events_down'] . '</li>
 													</ul>';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Das Filtern der Ereignisse über die bunten Kacheln funktioniert nicht.';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Ja, das stimmt.';

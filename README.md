@@ -53,10 +53,9 @@ In charge of:
 There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file ~/pialert/config/pialert.conf or via [pialert-cli](docs/PIALERTCLI.md).
 
 A web frontend that allows:
-  - Manage the devices inventory and the characteristics
+  - Manage the devices inventory and the characteristics (individually or with a [bulk editor](docs/BULKEDITOR.md))
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
-  - Manual Nmap scans
-  - Speedtest for device "Internet" in the details view
+  - Manual Nmap scans for regular devices and speedtest for the device "Internet" in the details view
   - Simple network relationship display
   - Maintenance tasks and settings like:
     - Status information *(active scans, database size, backup counter)*
@@ -71,7 +70,7 @@ A web frontend that allows:
     - Config file editor
   - Web service monitoring
   - Help/FAQ section
-  - Wake-on-LAN if supported
+  - Wake-on-LAN (must be supported by the target device)
   - Notification page with download options
 
   | ![Screen 1][screen1]                            | ![Screen 2][screen2]                         | ![Screen 3][screen3]                                           | 
@@ -85,7 +84,6 @@ Based on the original, I have created new icons according to the skins. Since I 
 Instead of 'glass_black_white.png' you can use one of the following files.
 
 [List of Favicons/Homescreen icons](docs/ICONS.md)
-
 
 ### API
 A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 4 things:
@@ -162,8 +160,8 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 [screen4]: ./docs/img/3_presence.jpg          "Screen 4"
 [report1]: ./docs/img/4_report_1.jpg          "Report sample 1"
 [report2]: ./docs/img/4_report_2.jpg          "Report sample 2"
-[webservices_dark]: /docs/img/7_webservices.jpg                   "Webservices screen dark"
-[webservices_details_dark]: /docs/img/8_webservices_details.jpg   "Webservices Details screen dark"
+[webservices_dark]: ./docs/img/7_webservices.jpg                   "Webservices screen dark"
+[webservices_details_dark]: ./docs/img/8_webservices_details.jpg   "Webservices Details screen dark"
 [glass_black_white]: /favicons/glass_black_white.png       "glass_black_white.png"
 [glass_blue_white]: /favicons/glass_blue_white.png       "glass_blue_white.png"
 [glass_green_white]: /favicons/glass_green_white.png       "glass_green_white.png"
