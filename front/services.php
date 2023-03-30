@@ -1,7 +1,7 @@
 <?php
 //------------------------------------------------------------------------------
 //  Pi.Alert
-//  Open Source Network Guard / WIFI & LAN intrusion detector 
+//  Open Source Network Guard / WIFI & LAN intrusion detector
 //
 //  services.php - Front module. Server side. Manage Devices
 //------------------------------------------------------------------------------
@@ -13,11 +13,10 @@ session_start();
 // Turn off php errors
 error_reporting(0);
 
-if ($_SESSION["login"] != 1)
-  {
-      header('Location: /pialert/index.php');
-      exit;
-  }
+if ($_SESSION["login"] != 1) {
+	header('Location: /pialert/index.php');
+	exit;
+}
 
 require 'php/templates/header.php';
 require 'php/server/db.php';
@@ -32,204 +31,201 @@ OpenDB();
 // ===============================================================================
 // End prepare data
 // ===============================================================================
-function open_http_status_code_json () {
-    $jsonfile = file_get_contents("./lib/http-status-code/index.json");
-    $array = json_decode($jsonfile, true);
-    return $array;
+function open_http_status_code_json() {
+	$jsonfile = file_get_contents("./lib/http-status-code/index.json");
+	$array = json_decode($jsonfile, true);
+	return $array;
 }
 
 // -----------------------------------------------------------------------------------------------
-function getDeviceMacs () {
-    global $db;
-    $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
-    $code_array = array();
-    while ($row = $dev_res->fetchArray()) {
-        echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'serviceMAC\',\''.$row['dev_MAC'].'\')">'.$row['dev_Name'].'</a></li>';
-    }
+function getDeviceMacs() {
+	global $db;
+	$dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
+	$code_array = array();
+	while ($row = $dev_res->fetchArray()) {
+		echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'serviceMAC\',\'' . $row['dev_MAC'] . '\')">' . $row['dev_Name'] . '</a></li>';
+	}
 }
 
 // -----------------------------------------------------------------------------------------------
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_latency_from_url($service_URL) {
-    global $db;
-    unset($code_array, $i, $moneve_res);
-    $moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
-    $i = 0;
-    $code_array = array();
-    while ($row = $moneve_res->fetchArray()) {
-        if ($row['moneve_URL'] == $service_URL) {
-            $code_array[17-$i] = $row['moneve_Latency'];
-            $i++;
-        }
-        if ($i == 18) {break;}
-    }
-    return $code_array;
+	global $db;
+	unset($code_array, $i, $moneve_res);
+	$moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
+	$i = 0;
+	$code_array = array();
+	while ($row = $moneve_res->fetchArray()) {
+		if ($row['moneve_URL'] == $service_URL) {
+			$code_array[17 - $i] = $row['moneve_Latency'];
+			$i++;
+		}
+		if ($i == 18) {break;}
+	}
+	return $code_array;
 }
 
 // -----------------------------------------------------------------------------------------------
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_statuscodes_from_url($service_URL) {
-    global $db;
-    unset($code_array, $i, $moneve_res);
-    $moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
-    $i = 0;
-    $code_array = array();
-    while ($row = $moneve_res->fetchArray()) {
-        if ($row['moneve_URL'] == $service_URL) {
-            $code_array[17-$i] = $row['moneve_StatusCode'];
-            $i++;
-        }
-        if ($i == 18) {break;}
-    }
-    return $code_array;
+	global $db;
+	unset($code_array, $i, $moneve_res);
+	$moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
+	$i = 0;
+	$code_array = array();
+	while ($row = $moneve_res->fetchArray()) {
+		if ($row['moneve_URL'] == $service_URL) {
+			$code_array[17 - $i] = $row['moneve_StatusCode'];
+			$i++;
+		}
+		if ($i == 18) {break;}
+	}
+	return $code_array;
 }
 
 // -----------------------------------------------------------------------------------------------
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_scans_from_url($service_URL) {
-    global $db;
-    unset($code_array, $i, $moneve_res);
-    $moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
-    $i = 0;
-    $code_array = array();
-    while ($row = $moneve_res->fetchArray()) {
-        if ($row['moneve_URL'] == $service_URL) {
-            $code_array[17-$i] = $row['moneve_DateTime'];
-            $i++;
-        }
-        if ($i == 18) {break;}
-    }
-    return $code_array;
+	global $db;
+	unset($code_array, $i, $moneve_res);
+	$moneve_res = $db->query('SELECT * FROM Services_Events ORDER BY moneve_DateTime DESC');
+	$i = 0;
+	$code_array = array();
+	while ($row = $moneve_res->fetchArray()) {
+		if ($row['moneve_URL'] == $service_URL) {
+			$code_array[17 - $i] = $row['moneve_DateTime'];
+			$i++;
+		}
+		if ($i == 18) {break;}
+	}
+	return $code_array;
 }
 
 // -----------------------------------------------------------------------------------------------
 // Get Name from Devices
 function get_device_name($service_MAC) {
-    global $db;
-    $dev_res = $db->query('SELECT * FROM Devices');
-    while ($row = $dev_res->fetchArray()) {
-        if ($row['dev_MAC'] == $service_MAC) {
-            return $row['dev_Name'];
-        }
-    }
+	global $db;
+	$dev_res = $db->query('SELECT * FROM Devices');
+	while ($row = $dev_res->fetchArray()) {
+		if ($row['dev_MAC'] == $service_MAC) {
+			return $row['dev_Name'];
+		}
+	}
 }
 
 // -----------------------------------------------------------------------------------------------
 // Print a list of all monitored URLs
 function list_all_services() {
-    global $db;
-    $mon_res = $db->query('SELECT * FROM Services');
-    while ($row = $mon_res->fetchArray()) {
-        echo $row['mon_URL'].' - '.$row['mon_MAC'].' - '.$row['mon_TargetIP'].'<br>';
-    }
+	global $db;
+	$mon_res = $db->query('SELECT * FROM Services');
+	while ($row = $mon_res->fetchArray()) {
+		echo $row['mon_URL'] . ' - ' . $row['mon_MAC'] . ' - ' . $row['mon_TargetIP'] . '<br>';
+	}
 }
 
 // -----------------------------------------------------------------------------------------------
 // get Count of all standalone services
 function get_count_standalone_services() {
-    global $db;
-    $mon_res = $db->query('SELECT * FROM Services');
-    $func_count = 0;
-    while ($row = $mon_res->fetchArray()) {
-        if ($row['mon_MAC'] == "") {$func_count++;}
-    }
-    return $func_count;
+	global $db;
+	$mon_res = $db->query('SELECT * FROM Services');
+	$func_count = 0;
+	while ($row = $mon_res->fetchArray()) {
+		if ($row['mon_MAC'] == "") {$func_count++;}
+	}
+	return $func_count;
 }
 
 // -----------------------------------------------------------------------------------------------
 // get String with the selected notifications
 function get_notifications($alertDown, $alertEvent) {
-    global $pia_lang;
+	global $pia_lang;
 
-    if ($alertEvent == "1" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_all'].", ".$pia_lang['WebServices_Events_down'];}
-    elseif ($alertEvent == "0" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_down'];}
-    elseif ($alertEvent == "1" && $alertDown == "0") {$notification_type = $pia_lang['WebServices_Events_all'];}
-    else {$notification_type = $pia_lang['WebServices_Events_none'];}
-    return $notification_type;
+	if ($alertEvent == "1" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_all'] . ", " . $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "0" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "1" && $alertDown == "0") {$notification_type = $pia_lang['WebServices_Events_all'];} else { $notification_type = $pia_lang['WebServices_Events_none'];}
+	return $notification_type;
 }
 
 // -----------------------------------------------------------------------------------------------
 // get color from status code
 function get_icon_color($statuscode) {
-    if (substr($statuscode,0,1) == "2") {$code_icon_color = "bg-green";}
-    if (substr($statuscode,0,1) == "3") {$code_icon_color = "bg-yellow";}
-    if (substr($statuscode,0,1) == "4") {$code_icon_color = "bg-yellow";}
-    if (substr($statuscode,0,1) == "5") {$code_icon_color = "bg-orange-custom";}
-    if ($statuscode == "0") {$code_icon_color = "bg-red";}
-    return $code_icon_color;
+	if (substr($statuscode, 0, 1) == "2") {$code_icon_color = "bg-green";}
+	if (substr($statuscode, 0, 1) == "3") {$code_icon_color = "bg-yellow";}
+	if (substr($statuscode, 0, 1) == "4") {$code_icon_color = "bg-yellow";}
+	if (substr($statuscode, 0, 1) == "5") {$code_icon_color = "bg-orange-custom";}
+	if ($statuscode == "0") {$code_icon_color = "bg-red";}
+	return $code_icon_color;
 }
 
 // -----------------------------------------------------------------------------------------------
 // Print a list of all monitored URLs without a MAC Adresse
 function list_standalone_services() {
-    global $pia_lang;
-    global $http_status_code;
-    global $db;
+	global $pia_lang;
+	global $http_status_code;
+	global $db;
 
-    $mon_res = $db->query('SELECT * FROM Services');
-    // General Box for all Services without MAC
-    echo '<div class="box">
+	$mon_res = $db->query('SELECT * FROM Services ORDER BY mon_Tags COLLATE NOCASE ASC');
+	// General Box for all Services without MAC
+	echo '<div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">'.$pia_lang['WebServices_BoxTitle_General'].'</h3>
+              <h3 class="box-title">' . $pia_lang['WebServices_BoxTitle_General'] . '</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">';
 
-    // Print Services Loop
-    while ($row = $mon_res->fetchArray()) {
-        if ($row['mon_MAC'] == "") {
-            if (substr($row['mon_LastStatus'],0,1) == "2") {$code_icon_color = "bg-green";}
+	// Print Services Loop
+	while ($row = $mon_res->fetchArray()) {
+		if ($row['mon_MAC'] == "") {
+			if (substr($row['mon_LastStatus'], 0, 1) == "2") {$code_icon_color = "bg-green";}
 
-            $notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
+			$notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
 
-            $code_icon_color = get_icon_color($row['mon_LastStatus']);
-            
-            $url_array = explode('://', $row['mon_URL']);
+			$code_icon_color = get_icon_color($row['mon_LastStatus']);
 
-            if ($http_status_code[$row['mon_LastStatus']] != "") {
-                $status_description = $http_status_code[$row['mon_LastStatus']]['description'];
-            } else {
-                $status_description = 'No status code was received from the server. The server may be offline or the network may have a problem.';
-            }
+			$url_array = explode('://', $row['mon_URL']);
 
-            echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
-                    <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="'.$status_description.'">
+			if ($http_status_code[$row['mon_LastStatus']] != "") {
+				$status_description = $http_status_code[$row['mon_LastStatus']]['description'];
+			} else {
+				$status_description = 'No status code was received from the server. The server may be offline or the network may have a problem.';
+			}
+
+			echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
+                    <div class="' . $code_icon_color . '" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
                         <div style="width: 70px; height: 70px; text-align: center; padding-top: 5px;">
-                            <span style="font-size:18px;">'.strtoupper($url_array[0]).'</span><br>
-                            <span style="font-size:24px;">'.$row['mon_LastStatus'].'</span>
+                            <span style="font-size:18px;">' . strtoupper($url_array[0]) . '</span><br>
+                            <span style="font-size:24px;">' . $row['mon_LastStatus'] . '</span>
                         </div>
                     </div>
                     <div style="display: inline-block; width: 100%;">
                         <div style="margin: 0px 15px;">
-                           <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;'.$row['mon_Tags'].'</span></td></tr></table>';
-            // Render Progressbar
-            echo'          <div class="progress-segment">';
+                           <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url=' . $row['mon_URL'] . '"><span class="">' . $url_array[1] . '</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;' . $row['mon_Tags'] . '</span></td></tr></table>';
+			// Render Progressbar
+			echo '          <div class="progress-segment">';
 
-            // Get Tooltip values
-            $func_scans = get_latest_scans_from_url($row['mon_URL']);
-            $func_httpcodes = get_latest_statuscodes_from_url($row['mon_URL']);
-            $func_latency = get_latest_latency_from_url($row['mon_URL']);
+			// Get Tooltip values
+			$func_scans = get_latest_scans_from_url($row['mon_URL']);
+			$func_httpcodes = get_latest_statuscodes_from_url($row['mon_URL']);
+			$func_latency = get_latest_latency_from_url($row['mon_URL']);
 
-            for($x = 0; $x < 18; $x++) {
-                unset($codecolor);
-                $for_httpcode = $func_httpcodes[$x];
-                if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
-                if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
-                if ($for_httpcode == "0") {$codecolor = "bg-red";}
-                echo '       <div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
+			for ($x = 0; $x < 18; $x++) {
+				unset($codecolor);
+				$for_httpcode = $func_httpcodes[$x];
+				if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
+				if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
+				if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
+				if ($for_httpcode == "0") {$codecolor = "bg-red";}
+				echo '       <div class="item ' . $codecolor . '" title="' . $func_scans[$x] . ' / HTTP: ' . $for_httpcode . ' / Latency: ' . $func_latency[$x] . 's"></div>';
 
-            }
+			}
 
-            echo '         </div>';
-            echo '         <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
+			echo '         </div>';
+			echo '         <table height="20px" width="100%"><tr><td><span class="progress-description">IP: ' . $row['mon_TargetIP'] . '</span></td><td align="right">' . $pia_lang['WebServices_label_Notification'] . ': ' . $notification_type . '</td></tr></table>
                         </div>
                     </div>
                   </div>';
-        }
-    }
+		}
+	}
 
-    echo '  <!-- /.box-body -->
+	echo '  <!-- /.box-body -->
             </div>
           </div>';
 }
@@ -237,79 +233,78 @@ function list_standalone_services() {
 // -----------------------------------------------------------------------------------------------
 // Get a array of unique devices with monitored URLs
 function get_devices_from_services() {
-    global $db;
-    $mon_res = $db->query('SELECT * FROM Services');
-    $func_unique_devices = array();
-    while ($row = $mon_res->fetchArray()) {
-        array_push($func_unique_devices, $row['mon_MAC']);
-    }
-    $func_unique_devices = array_values(array_unique(array_filter($func_unique_devices)));
-    return $func_unique_devices;
+	global $db;
+	$mon_res = $db->query('SELECT * FROM Services');
+	$func_unique_devices = array();
+	while ($row = $mon_res->fetchArray()) {
+		array_push($func_unique_devices, $row['mon_MAC']);
+	}
+	$func_unique_devices = array_values(array_unique(array_filter($func_unique_devices)));
+	return $func_unique_devices;
 }
 
 // -----------------------------------------------------------------------------------------------
 // Print a list of all monitored URLs of an unique device
 function get_service_from_unique_device($func_unique_device) {
-    global $pia_lang;
-    global $http_status_code;
-    global $db;
+	global $pia_lang;
+	global $http_status_code;
+	global $db;
 
-    $mon_res = $db->query('SELECT * FROM Services ORDER BY mon_Tags ASC');
-    // Print Services Loop
-    while ($row = $mon_res->fetchArray()) {
-        if ($row['mon_MAC'] == $func_unique_device) {
-            unset($func_httpcodes);
+	$mon_res = $db->query('SELECT * FROM Services ORDER BY mon_Tags ASC');
+	// Print Services Loop
+	while ($row = $mon_res->fetchArray()) {
+		if ($row['mon_MAC'] == $func_unique_device) {
+			unset($func_httpcodes);
 
-            $notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
+			$notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
 
-            $code_icon_color = get_icon_color($row['mon_LastStatus']);
+			$code_icon_color = get_icon_color($row['mon_LastStatus']);
 
-            $url_array = explode('://', $row['mon_URL']);
+			$url_array = explode('://', $row['mon_URL']);
 
-            if ($http_status_code[$row['mon_LastStatus']] != "") {
-                $status_description = $http_status_code[$row['mon_LastStatus']]['description'];
-            } else {
-                $status_description = 'No status code was received from the server. The server may be offline or the network could have a problem.';
-            }
+			if ($http_status_code[$row['mon_LastStatus']] != "") {
+				$status_description = $http_status_code[$row['mon_LastStatus']]['description'];
+			} else {
+				$status_description = 'No status code was received from the server. The server may be offline or the network could have a problem.';
+			}
 
-            echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
-                    <div class="'.$code_icon_color.'" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="'.$status_description.'">
+			echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
+                    <div class="' . $code_icon_color . '" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
                         <div style="width: 70px; height: 70px; text-align: center; padding-top: 5px;">
-                            <span style="font-size:18px;">'.strtoupper($url_array[0]).'</span><br>
-                            <span style="font-size:24px;">'.$row['mon_LastStatus'].'</span>
+                            <span style="font-size:18px;">' . strtoupper($url_array[0]) . '</span><br>
+                            <span style="font-size:24px;">' . $row['mon_LastStatus'] . '</span>
                         </div>
                     </div>
                     <div style="display: inline-block; width: 100%;">
                         <div style="margin: 0px 15px;">
-                             <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url='.$row['mon_URL'].'"><span class="">'.$url_array[1].'</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;'.$row['mon_Tags'].'</span></td></tr></table>';
-            // Render Progressbar
-            echo'                <div class="progress-segment">';
+                             <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url=' . $row['mon_URL'] . '"><span class="">' . $url_array[1] . '</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;' . $row['mon_Tags'] . '</span></td></tr></table>';
+			// Render Progressbar
+			echo '                <div class="progress-segment">';
 
-            // Get Tooltip values
-            $func_scans = get_latest_scans_from_url($row['mon_URL']);
-            $func_httpcodes = get_latest_statuscodes_from_url($row['mon_URL']);
-            $func_latency = get_latest_latency_from_url($row['mon_URL']);
+			// Get Tooltip values
+			$func_scans = get_latest_scans_from_url($row['mon_URL']);
+			$func_httpcodes = get_latest_statuscodes_from_url($row['mon_URL']);
+			$func_latency = get_latest_latency_from_url($row['mon_URL']);
 
-            for($x = 0; $x < 18; $x++) {
-                unset($codecolor);
-                $for_httpcode = $func_httpcodes[$x];
-                if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
-                if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
-                if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
-                if ($for_httpcode == "0") {$codecolor = "bg-red";}
-                echo '              <div class="item '.$codecolor.'" title="'.$func_scans[$x].' / HTTP: '.$for_httpcode.' / Latency: '.$func_latency[$x].'s"></div>';
+			for ($x = 0; $x < 18; $x++) {
+				unset($codecolor);
+				$for_httpcode = $func_httpcodes[$x];
+				if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
+				if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
+				if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
+				if ($for_httpcode == "0") {$codecolor = "bg-red";}
+				echo '              <div class="item ' . $codecolor . '" title="' . $func_scans[$x] . ' / HTTP: ' . $for_httpcode . ' / Latency: ' . $func_latency[$x] . 's"></div>';
 
-            }
+			}
 
-            echo '        </div>';                        
-            echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: '.$row['mon_TargetIP'].'</span></td><td align="right">'.$pia_lang['WebServices_label_Notification'].': '.$notification_type.'</td></tr></table>
+			echo '        </div>';
+			echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: ' . $row['mon_TargetIP'] . '</span></td><td align="right">' . $pia_lang['WebServices_label_Notification'] . ': ' . $notification_type . '</td></tr></table>
                         </div>
                     </div>
                   </div>';
-        }
-    }
+		}
+	}
 }
-
 
 ?>
 <!-- Page ------------------------------------------------------------------ -->
@@ -330,9 +325,9 @@ function get_service_from_unique_device($func_unique_device) {
 
 <!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
-    <?php require 'php/templates/notification.php'; ?>
+    <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['WebServices_Title'];?> 
+         <?php echo $pia_lang['WebServices_Title']; ?>
       <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-add-monitoringURL" style="display: inline-block; margin-top: -5px; margin-left: 15px;"><i class="bi bi-plus-lg" style="font-size:1.5rem"></i></button>
       </h1>
 
@@ -345,31 +340,31 @@ function get_service_from_unique_device($func_unique_device) {
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title"><?php echo $pia_lang['WebServices_headline_NewService'];?></h4>
+                            <h4 class="modal-title"><?php echo $pia_lang['WebServices_headline_NewService']; ?></h4>
                         </div>
                         <div class="modal-body">
                             <div style="height: 230px;">
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_URL'];?></label>
+                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_URL']; ?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="serviceURL" placeholder="Service URL">
                               </div>
                             </div>
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_Tags'];?></label>
+                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_Tags']; ?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="serviceTag" placeholder="Tag">
                               </div>
                             </div>
                               <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_MAC'];?></label>
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_MAC']; ?></label>
                                 <div class="col-xs-9">
                                   <div class="input-group">
                                     <div class="input-group-btn">
-                                      <button type="button" class="btn btn-default dropdown-toggle black-tooltip" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select'];?>
+                                      <button type="button" class="btn btn-default dropdown-toggle black-tooltip" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select']; ?>
                                         <span class="fa fa-caret-down"></span></button>
                                       <ul class="dropdown-menu">
-                                        <?php getDeviceMacs (); ?>
+                                        <?php getDeviceMacs();?>
                                       </ul>
                                     </div>
                                     <!-- /btn-group -->
@@ -378,13 +373,13 @@ function get_service_from_unique_device($func_unique_device) {
                                 </div>
                               </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents'];?></label>
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents']; ?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox blue" id="insAlertEvents" type="checkbox">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertDown'];?></label>
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertDown']; ?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox red" id="insAlertDown" type="checkbox">
                                 </div>
@@ -392,8 +387,8 @@ function get_service_from_unique_device($func_unique_device) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php echo $pia_lang['Gen_Close'];?></button>
-                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewService()" ><?php echo $pia_lang['Gen_Save'];?></button>
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php echo $pia_lang['Gen_Close']; ?></button>
+                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewService()" ><?php echo $pia_lang['Gen_Save']; ?></button>
                         </div>
                     </div>
                 </div>
@@ -421,25 +416,24 @@ $unique_devices = get_devices_from_services();
 // #######################################################
 // Print a Box for every unique Device (MAC Address)
 $i = 0;
-while($i < count($unique_devices))
-{
-    $device_name = get_device_name($unique_devices[$i]);
-    if ($device_name == "") {$device_name = $pia_lang['WebServices_unknown_Device'].' ('.$unique_devices[$i].')';}
-    echo '<div class="box">
+while ($i < count($unique_devices)) {
+	$device_name = get_device_name($unique_devices[$i]);
+	if ($device_name == "") {$device_name = $pia_lang['WebServices_unknown_Device'] . ' (' . $unique_devices[$i] . ')';}
+	echo '<div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">'.$device_name.'</h3>
+              <h3 class="box-title">' . $device_name . '</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">';
 
-    get_service_from_unique_device($unique_devices[$i]);
+	get_service_from_unique_device($unique_devices[$i]);
 
-    echo '  <!-- /.box-body -->
+	echo '  <!-- /.box-body -->
             </div>
           </div>';
 
-    echo '<br>';
-    $i++;
+	echo '<br>';
+	$i++;
 }
 
 // #######################################################
@@ -451,7 +445,7 @@ $count_standalone = get_count_standalone_services();
 
 // Print a Box for all Device without MAC Address
 if ($count_standalone > 0) {
-    list_standalone_services();    
+	list_standalone_services();
 }
 
 // ===============================================================================
@@ -470,7 +464,7 @@ if ($count_standalone > 0) {
 
 <!-- ----------------------------------------------------------------------- -->
 <?php
-  require 'php/templates/footer.php';
+require 'php/templates/footer.php';
 ?>
 
 <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
@@ -523,7 +517,7 @@ function insertNewService(refreshCallback='') {
     + '&alertevents='     + ($('#insAlertDown')[0].checked * 1)
     , function(msg) {
 
-    // deactivate button 
+    // deactivate button
     // deactivateSaveRestoreData ();
     showMessage (msg);
     // Callback fuction
