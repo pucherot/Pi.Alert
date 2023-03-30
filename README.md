@@ -68,7 +68,7 @@ A web frontend that allows:
     - DB maintenance tools and a possibility for backup, restore and cleanup the database and the config file
     - Send test notifications
     - Config file editor
-  - Web service monitoring
+  - [Web service monitoring](docs/WEBSERVICES.md)
   - Help/FAQ section
   - Wake-on-LAN (must be supported by the target device)
   - Notification page with download options
