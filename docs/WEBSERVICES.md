@@ -37,7 +37,7 @@ If you hover over the box with the status code, you will get a short explanation
 
 ![WSM statuscode][wsm_statuscode]
 
-By clicking on the blue URL, you will get to the details page of the service, where you can change the tag, the assigned device and the desired alert. You also have the option to delete the service or view more details.
+By clicking on the blue URL, you will get to the details page of the service, where you can change the tag, the assigned device and the desired alert. You also have the option to delete the service or view more details. Information about the colors used and a list of the different HTTP status codes can be found on the Help/FAQ page in Pi.Alert.
 
 [Back](https://github.com/leiweibau/Pi.Alert#front)
 
