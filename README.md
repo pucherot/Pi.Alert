@@ -38,7 +38,7 @@ In charge of:
   - Scan the network searching connected devices using the scanning methods
     described
   - Store the information in the DB
-  - Report the changes detected by e-mail and/or other services (Pushsafer, NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
+  - Report the changes detected by e-mail and/or other services ([Pushsafer](https://www.pushsafer.com/), NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
   - DB cleanup tasks via cron
   - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
 
@@ -50,13 +50,13 @@ In charge of:
   | -------------------- | -------------------- |
 
 ### Front
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file ~/pialert/config/pialert.conf or via [pialert-cli](docs/PIALERTCLI.md).
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
 
 A web frontend that allows:
   - Manage the devices inventory and the characteristics (individually or with a [bulk editor](docs/BULKEDITOR.md))
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
   - Manual Nmap scans for regular devices and speedtest for the device "Internet" in the details view
-  - Simple network relationship display
+  - Simple [network relationship](docs/NETWORK_RELATIONSHIP.md) display
   - Maintenance tasks and settings like:
     - Status information *(active scans, database size, backup counter)*
     - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
