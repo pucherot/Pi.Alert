@@ -59,7 +59,7 @@ function print_box_bottom_element() {
 if ($_REQUEST['mod'] == 'bulkedit') {
 
 	echo '<section class="content-header">
-          <h1 id="pageTitle">' . $pia_lang['Device_Title'] . ' - ' . $pia_lang['Device_bulkEditor_mode'] . ' (Beta)</h1>
+          <h1 id="pageTitle">' . $pia_lang['Device_Title'] . ' - ' . $pia_lang['Device_bulkEditor_mode'] . '</h1>
           <a href="./devices.php" class="btn btn-success pull-right" role="button" style="position: absolute; display: inline-block; top: 5px; right: 15px;">' . $pia_lang['Device_bulkEditor_mode_quit'] . '</a>
         </section>';
 
