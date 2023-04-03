@@ -44,7 +44,7 @@ Internet, WLAN and Powerline.
 
 #### <ins>Create a device Router:</ins>
 
-To create a router on the network side, I select a device of type "Router" from the list, specify the type again, followed by the number of ports.
+To create a router on the network page, I select a device of type "Router" from the list, specify the type again, followed by the number of ports.
 
 ![Manage Net Devices - add 2][Manage_Net_Devices_add_2]
 
@@ -101,6 +101,10 @@ Mac address can be selected from the drop-down list. Further MAC addresses must 
 
 #### <ins>Delete a device:</ins>
 
+To delete a network component from this display, select the corresponding device in the "Manage Devices" box in the "Delete Device" area and continue with "Delete". 
+Only devices that were created via "Manage Devices" can be deleted. If already recognized devices were used as a template, these already recognized devices remain 
+unaffected. Only the entry on the "Network" page is deleted. The assignments that were made for the individual devices remain in the database and can be updated on 
+occasion.
 
 ### Assign Devices
 
