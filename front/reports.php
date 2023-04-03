@@ -138,7 +138,7 @@ foreach ($scanned_directory as $file) {
 		if ($notification_class[1] == "arp") {
 			array_push($standard_notification, process_arp_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "internet") {
-			array_push($special_notification, process_internet_notifications($notification_class[0], $notification_class[2], $file, $directory));
+			array_push($standard_notification, process_internet_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "webmon") {
 			array_push($standard_notification, process_webmon_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "test") {
