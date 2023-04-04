@@ -99,6 +99,18 @@ Mac address can be selected from the drop-down list. Further MAC addresses must 
 
 #### <ins>Create a device WLAN:</ins>
 
+To create a WLAN, it is not necessary to select an already detected device on the drop-down menu. The idea here is to use the SSID, for example. As "Device Type" "WLAN" 
+is selected, while the "Port - Count" is left empty. After adding the device, a new tab appears with the assigned name.
+
+| ![Manage Net Devices - add 4][Manage_Net_Devices_add_4] | ![Management Tab 7][Management_tab_7] |
+| --------------------------------------------------------|---------------------------------------|
+
+Now it is possible to assign a device from the devices list to this WLAN. It is not necessary to specify a port for the WLAN type. At the moment it is not possible to 
+assign a device to multiple WLANs. Possibly this will change in the future.
+
+| ![Management Device Add Host][Management_Device_Add_Host] | ![Management Tab 8][Management_tab_8] |
+| ----------------------------------------------------------|---------------------------------------|
+
 #### <ins>Delete a device:</ins>
 
 To delete a network component from this display, select the corresponding device in the "Manage Devices" box in the "Delete Device" area and continue with "Delete". 
@@ -124,6 +136,7 @@ there are, for example, servers that are configured with link aggregation, which
 [Manage_Net_Devices_add_1]:           ./img/netrel_management_add_1.jpg            "Manage Net Devices - add 1"
 [Manage_Net_Devices_add_2]:           ./img/netrel_management_add_2.jpg            "Manage Net Devices - add 2"
 [Manage_Net_Devices_add_3]:           ./img/netrel_management_add_3.jpg            "Manage Net Devices - add 3"
+[Manage_Net_Devices_add_4]:           ./img/netrel_management_add_4.jpg            "Manage Net Devices - add 4"
 
 [Management_tab_1]:      		      ./img/netrel_management_tab_1.jpg            "Management Tab 1"
 [Management_tab_2]:      		      ./img/netrel_management_tab_2.jpg            "Management Tab 2"
@@ -131,9 +144,12 @@ there are, for example, servers that are configured with link aggregation, which
 [Management_tab_4]:      		      ./img/netrel_management_tab_4.jpg            "Management Tab 4"
 [Management_tab_5]:      		      ./img/netrel_management_tab_5.jpg            "Management Tab 5"
 [Management_tab_6]:      		      ./img/netrel_management_tab_6.jpg            "Management Tab 6"
+[Management_tab_7]:      		      ./img/netrel_management_tab_7.jpg            "Management Tab 7"
+[Management_tab_8]:      		      ./img/netrel_management_tab_8.jpg            "Management Tab 8"
 [Management_Device_Add_Internet]:     ./img/netrel_management_assign_internet.jpg  "Management Device Add Internet"
 [Management_Device_Add_Router_1]:     ./img/netrel_management_assign_router_1.jpg  "Management Device Add Router 1"
 [Management_Device_Add_Router_2]:     ./img/netrel_management_assign_router_2.jpg  "Management Device Add Router 2"
+[Management_Device_Add_Host]:         ./img/netrel_management_assign_host.jpg      "Management Device Add Host"
 
 [Management_Device_Update_Switch_1]:  ./img/netrel_management_update_switch_1.jpg  "Management Device Update Switch 1"
 [Management_Device_Update_Switch_2]:  ./img/netrel_management_update_switch_2.jpg  "Management Device Update Switch 2"
