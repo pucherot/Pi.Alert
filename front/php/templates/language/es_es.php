@@ -593,6 +593,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td style="vertical-align: top; padding-left:5px;">reporting_test</td>
 											        <td style="padding-left:5px;">- Test reporting for all activated services.<br>&nbsp;</td>
 											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">rewrite_config</td>
+											        <td style="padding-left:5px;">- A new decluttered configuration file (pialert-rewritten.conf) is created.<br>&nbsp;</td>
+											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Tengo dispositivos en mi lista que no conozco. Después de borrarlos, siempre vuelven a aparecer.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Si utiliza Pi-hole, tenga en cuenta que Pi.Alert recupera información de Pi-hole. Ponga en pausa Pi.Alert, vaya a la página de configuración de Pi-hole y

@@ -1,8 +1,9 @@
 #!/bin/bash
-SCRIPTVERSION='v0.81'
+SCRIPTVERSION='v0.9'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
+PIA_CONF_FILE_PATH=${SCRIPTPATH}'/../config'
 PIA_DB_FILE=${SCRIPTPATH}'/../db/pialert.db'
 PIA_DB_FILE_PATH=${SCRIPTPATH}'/../db'
 
@@ -53,6 +54,8 @@ case $1 in
     echo "                            replaced."
     echo ""
     echo " reporting_test           - Test reporting for all activated services."
+    echo ""
+    echo " rewrite_config           - A new decluttered configuration file (pialert-rewritten.conf) is created."
     echo ""
     ;;
 
@@ -222,6 +225,229 @@ case $1 in
     ## test reporting
     /bin/python3 ${SCRIPTPATH}/pialert.py reporting_test
     echo "Test executed"
+    ;;
+
+  rewrite_config)
+    ## Check if PIALERT_WEB_PROTECTION exists
+
+    # Input file
+    input_file=$PIA_CONF_FILE
+    echo "    The existing configuration will not be replaced."
+    echo "    Only a new decluttered configuration file (pialert-rewritten.conf) is created."
+
+    # Get Value from config file
+    # -------------------------------------------------------------------------------
+    # General
+    REWRITE_PIALERT_PATH=$(grep "^PIALERT_PATH" $input_file)
+    REWRITE_DB_PATH=$(grep "^DB_PATH" $input_file)
+    REWRITE_LOG_PATH=$(grep "^LOG_PATH" $input_file)
+    REWRITE_PRINT_LOG=$(grep "^PRINT_LOG" $input_file)
+    REWRITE_VENDORS_DB=$(grep "^VENDORS_DB" $input_file)
+    REWRITE_PIALERT_WEB_PROTECTION=$(grep "^PIALERT_WEB_PROTECTION" $input_file)
+    REWRITE_PIALERT_WEB_PASSWORD=$(grep "^PIALERT_WEB_PASSWORD" $input_file)
+    REWRITE_SCAN_WEBSERVICES=$(grep "^SCAN_WEBSERVICES" $input_file)
+    # Special Protocol Scanning
+    REWRITE_SCAN_ROGUE_DHCP=$(grep "^SCAN_ROGUE_DHCP" $input_file)
+    REWRITE_DHCP_SERVER_ADDRESS=$(grep "^DHCP_SERVER_ADDRESS" $input_file)
+    # Mail-Account Settings
+    REWRITE_SMTP_SERVER=$(grep "^SMTP_SERVER" $input_file)
+    REWRITE_SMTP_PORT=$(grep "^SMTP_PORT" $input_file)
+    REWRITE_SMTP_USER=$(grep "^SMTP_USER" $input_file)
+    REWRITE_SMTP_PASS=$(grep "^SMTP_PASS" $input_file)
+    REWRITE_SMTP_SKIP_TLS=$(grep "^SMTP_SKIP_TLS" $input_file)
+    REWRITE_SMTP_SKIP_LOGIN=$(grep "^SMTP_SKIP_LOGIN" $input_file)
+    # WebGUI Reporting
+    REWRITE_REPORT_WEBGUI=$(grep "^REPORT_WEBGUI " $input_file)
+    REWRITE_REPORT_WEBGUI_WEBMON=$(grep "^REPORT_WEBGUI_WEBMON" $input_file)
+    # Mail Reporting
+    REWRITE_REPORT_MAIL=$(grep "^REPORT_MAIL " $input_file)
+    REWRITE_REPORT_MAIL_WEBMON=$(grep "^REPORT_MAIL_WEBMON" $input_file)
+    REWRITE_REPORT_FROM=$(grep "^REPORT_FROM" $input_file)
+    REWRITE_REPORT_TO=$(grep "^REPORT_TO" $input_file)
+    REWRITE_REPORT_DEVICE_URL=$(grep "^REPORT_DEVICE_URL" $input_file)
+    REWRITE_REPORT_DASHBOARD_URL=$(grep "^REPORT_DASHBOARD_URL" $input_file)
+    # Pushsafer
+    REWRITE_REPORT_PUSHSAFER=$(grep "^REPORT_PUSHSAFER " $input_file)
+    REWRITE_REPORT_PUSHSAFER_WEBMON=$(grep "^REPORT_PUSHSAFER_WEBMON" $input_file)
+    REWRITE_PUSHSAFER_TOKEN=$(grep "^PUSHSAFER_TOKEN" $input_file)
+    REWRITE_PUSHSAFER_DEVICE=$(grep "^PUSHSAFER_DEVICE" $input_file)
+    # ntfy
+    REWRITE_REPORT_NTFY=$(grep "^REPORT_NTFY " $input_file)
+    REWRITE_REPORT_NTFY_WEBMON=$(grep "^REPORT_NTFY_WEBMON" $input_file)
+    REWRITE_NTFY_HOST=$(grep "^NTFY_HOST" $input_file)
+    REWRITE_NTFY_TOPIC=$(grep "^NTFY_TOPIC" $input_file)
+    REWRITE_NTFY_USER=$(grep "^NTFY_USER" $input_file)
+    REWRITE_NTFY_PASSWORD=$(grep "^NTFY_PASSWORD" $input_file)
+    REWRITE_NTFY_PRIORITY=$(grep "^NTFY_PRIORITY" $input_file)
+    # Shoutrrr
+    REWRITE_SHOUTRRR_BINARY=$(grep "^SHOUTRRR_BINARY" $input_file)
+    # Telegram via Shoutrrr
+    REWRITE_REPORT_TELEGRAM=$(grep "^REPORT_TELEGRAM " $input_file)
+    REWRITE_REPORT_TELEGRAM_WEBMON=$(grep "^REPORT_TELEGRAM_WEBMON" $input_file)
+    REWRITE_TELEGRAM_BOT_TOKEN_URL=$(grep "^TELEGRAM_BOT_TOKEN_URL" $input_file)
+    # DynDNS
+    REWRITE_QUERY_MYIP_SERVER=$(grep "^QUERY_MYIP_SERVER" $input_file)
+    REWRITE_DDNS_ACTIVE=$(grep "^DDNS_ACTIVE" $input_file)
+    REWRITE_DDNS_DOMAIN=$(grep "^DDNS_DOMAIN" $input_file)
+    REWRITE_DDNS_USER=$(grep "^DDNS_USER" $input_file)
+    REWRITE_DDNS_PASSWORD=$(grep "^DDNS_PASSWORD" $input_file)
+    REWRITE_DDNS_UPDATE_URL=$(grep "^DDNS_UPDATE_URL" $input_file)
+    # Pi-hole Configuration
+    REWRITE_PIHOLE_ACTIVE=$(grep "^PIHOLE_ACTIVE" $input_file)
+    REWRITE_PIHOLE_DB=$(grep "^PIHOLE_DB" $input_file)
+    REWRITE_DHCP_ACTIVE=$(grep "^DHCP_ACTIVE" $input_file)
+    REWRITE_DHCP_LEASES=$(grep "^DHCP_LEASES" $input_file)
+    # Maintenance Tasks Cron
+    REWRITE_DAYS_TO_KEEP_ONLINEHISTORY=$(grep "^DAYS_TO_KEEP_ONLINEHISTORY" $input_file)
+    REWRITE_DAYS_TO_KEEP_EVENTS=$(grep "^DAYS_TO_KEEP_EVENTS" $input_file)
+    # Arp-scan Options & Samples
+    REWRITE_SCAN_SUBNETS=$(grep "^SCAN_SUBNETS" $input_file)
+
+    # Set defaults if empty
+    # -------------------------------------------------------------------------------
+    if [ -z "$REWRITE_PIALERT_WEB_PROTECTION" ]
+    then
+        REWRITE_PIALERT_WEB_PROTECTION="PIALERT_WEB_PROTECTION = False"
+    fi
+
+    if [ -z "$REWRITE_PIALERT_WEB_PASSWORD" ]
+    then
+        REWRITE_PIALERT_WEB_PASSWORD="PIALERT_WEB_PASSWORD   = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'"
+    fi
+
+    if [ -z "$REWRITE_SCAN_WEBSERVICES" ]
+    then
+        REWRITE_SCAN_WEBSERVICES="SCAN_WEBSERVICES       = True"
+    fi
+
+    if [ -z "$REWRITE_SCAN_ROGUE_DHCP" ]
+    then
+        REWRITE_SCAN_ROGUE_DHCP="SCAN_ROGUE_DHCP        = False"
+    fi
+
+    if [ -z "$REWRITE_DHCP_SERVER_ADDRESS" ]
+    then
+        REWRITE_DHCP_SERVER_ADDRESS="DHCP_SERVER_ADDRESS    = '0.0.0.0'"
+    fi
+
+    if [ -z "$REWRITE_REPORT_WEBGUI" ]
+    then
+        REWRITE_REPORT_WEBGUI="REPORT_WEBGUI         = True"
+    fi
+
+    if [ -z "$REWRITE_REPORT_WEBGUI_WEBMON" ]
+    then
+        REWRITE_REPORT_WEBGUI_WEBMON="REPORT_WEBGUI_WEBMON  = True"
+    fi
+
+    # Write clean Config
+    # -------------------------------------------------------------------------------
+    cat >$PIA_CONF_FILE_PATH/pialert-rewritten.conf <<EOL
+# General Settings
+# ----------------------
+${REWRITE_PIALERT_PATH}
+${REWRITE_DB_PATH}
+${REWRITE_LOG_PATH}
+${REWRITE_PRINT_LOG}
+${REWRITE_VENDORS_DB}
+${REWRITE_PIALERT_WEB_PROTECTION}
+${REWRITE_PIALERT_WEB_PASSWORD}
+${REWRITE_SCAN_WEBSERVICES}
+
+# Special Protocol Scanning
+# ----------------------
+${REWRITE_SCAN_ROGUE_DHCP}
+${REWRITE_DHCP_SERVER_ADDRESS}
+
+# Mail-Account Settings
+# ----------------------
+${REWRITE_SMTP_SERVER}
+${REWRITE_SMTP_PORT}
+${REWRITE_SMTP_USER}
+${REWRITE_SMTP_PASS}
+${REWRITE_SMTP_SKIP_TLS}
+${REWRITE_SMTP_SKIP_LOGIN}
+
+# WebGUI Reporting
+# ----------------------
+${REWRITE_REPORT_WEBGUI}
+${REWRITE_REPORT_WEBGUI_WEBMON}
+
+# Mail Reporting
+# ----------------------
+${REWRITE_REPORT_MAIL}
+${REWRITE_REPORT_MAIL_WEBMON}
+${REWRITE_REPORT_FROM}
+${REWRITE_REPORT_TO}
+${REWRITE_REPORT_DEVICE_URL}
+${REWRITE_REPORT_DASHBOARD_URL}
+
+# Pushsafer
+# ----------------------
+${REWRITE_REPORT_PUSHSAFER}
+${REWRITE_REPORT_PUSHSAFER_WEBMON}
+${REWRITE_PUSHSAFER_TOKEN}
+${REWRITE_PUSHSAFER_DEVICE}
+
+# ntfy
+# ----------------------
+${REWRITE_REPORT_NTFY}
+${REWRITE_REPORT_NTFY_WEBMON}
+${REWRITE_NTFY_HOST}
+${REWRITE_NTFY_TOPIC}
+${REWRITE_NTFY_USER}
+${REWRITE_NTFY_PASSWORD}
+${REWRITE_NTFY_PRIORITY}
+
+# Shoutrrr
+# ----------------------
+${REWRITE_SHOUTRRR_BINARY}
+# SHOUTRRR_BINARY    = 'armhf'
+# SHOUTRRR_BINARY    = 'arm64'
+# SHOUTRRR_BINARY    = 'x86'
+
+# Telegram via Shoutrrr
+# ----------------------
+${REWRITE_REPORT_TELEGRAM}
+${REWRITE_REPORT_TELEGRAM_WEBMON}
+${REWRITE_TELEGRAM_BOT_TOKEN_URL}
+
+# DynDNS
+# ----------------------
+${REWRITE_QUERY_MYIP_SERVER}
+${REWRITE_DDNS_ACTIVE}
+${REWRITE_DDNS_DOMAIN}
+${REWRITE_DDNS_USER}
+${REWRITE_DDNS_PASSWORD}
+${REWRITE_DDNS_UPDATE_URL}
+
+# Pi-hole Configuration
+# ----------------------
+${REWRITE_PIHOLE_ACTIVE}
+${REWRITE_PIHOLE_DB}
+${REWRITE_DHCP_ACTIVE}
+${REWRITE_DHCP_LEASES}
+
+# Maintenance Tasks Cron
+# ----------------------
+${REWRITE_DAYS_TO_KEEP_ONLINEHISTORY}
+${REWRITE_DAYS_TO_KEEP_EVENTS}
+
+# Arp-scan Options & Samples
+# ----------------------
+${REWRITE_SCAN_SUBNETS}
+# Scan local network (default)
+# SCAN_SUBNETS    = '--localnet'
+#
+# Scan using interface eth0
+# SCAN_SUBNETS    = '--localnet --interface=eth0'
+#
+# Scan multiple interfaces (eth1 and eth0):
+# SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth0', '192.168.2.0/24 --interface=eth1' ]
+
+EOL
+
+    
     ;;
 
   *)

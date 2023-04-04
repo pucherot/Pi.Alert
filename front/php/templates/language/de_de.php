@@ -92,7 +92,7 @@ $pia_lang['Device_Table_info'] = 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen
 $pia_lang['Device_Table_nav_next'] = 'Nächste';
 $pia_lang['Device_Table_nav_prev'] = 'Zurück';
 
-$pia_lang['Device_bulkEditor_mode'] = 'Massenbearbeitung';
+$pia_lang['Device_bulkEditor_mode'] = 'Massen-Editor';
 $pia_lang['Device_bulkEditor_mode_quit'] = 'Editor beenden';
 $pia_lang['Device_bulkEditor_selectall'] = 'Alle auswählen';
 $pia_lang['Device_bulkEditor_selectnone'] = 'Alle abwählen';
@@ -590,6 +590,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											    <tr>
 											        <td style="vertical-align: top; padding-left:5px;">reporting_test</td>
 											        <td style="padding-left:5px;">- Testet alle aktiven Benachrichtigungsdienste<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">rewrite_config</td>
+											        <td style="padding-left:5px;">- Eine neue, aufgeräumte Konfigurationsdatei (pialert-rewritten.conf) wird erstellt.<br>&nbsp;</td>
 											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan benötigt sudo-Berechtigungen</span>';

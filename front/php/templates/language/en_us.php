@@ -594,6 +594,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td style="vertical-align: top; padding-left:5px;">reporting_test</td>
 											        <td style="padding-left:5px;">- Test reporting for all activated services.<br>&nbsp;</td>
 											    </tr>
+											    <tr>
+											        <td style="vertical-align: top; padding-left:5px;">rewrite_config</td>
+											        <td style="padding-left:5px;">- A new decluttered configuration file (pialert-rewritten.conf) is created.<br>&nbsp;</td>
+											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan needs sudo privledges</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'When a non-standard user is used, e.g. piadmin then the arp-scan fails in the cronjob.<br>
