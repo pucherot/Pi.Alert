@@ -55,7 +55,8 @@ case $1 in
     echo ""
     echo " reporting_test           - Test reporting for all activated services."
     echo ""
-    echo " rewrite_config           - A new decluttered configuration file (pialert-rewritten.conf) is created."
+    echo " rewrite_config           - A new decluttered configuration file (pialert-rewritten.conf) will"
+    echo "                            be created."
     echo ""
     ;;
 
