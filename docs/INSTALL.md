@@ -174,7 +174,7 @@ block is not necessary
 
 4.3 - Installing nmap and zip
   ```
-  sudo apt-get install nmap zip -y
+  sudo apt-get install nmap zip wakeonlan -y
   ```
 
 4.4 - Test Python
@@ -198,13 +198,11 @@ block is not necessary
 4.5 - If Python is not installed in your system, you can install it with this
   command:
   ```
-  sudo apt-get install python python-pip
-  pip install requests
+  sudo apt-get install python python-pip python-requests
   ```
-  Or this one if you prefer Python 3:
+  Or this one if you prefer Python 3 (recommended):
   ```
-  sudo apt-get install python3 python3-pip python-is-python3
-  python3 -m pip install requests
+  sudo apt-get install python3 python3-pip python3-requests python-is-python3
   ```
 
 ### Pi.Alert
@@ -306,27 +304,32 @@ block is not necessary
 
 5.10 - Add necessary permissions
   ```
-  sudo chgrp -R www-data ~/pialert/db
-  chmod -R 770 ~/pialert/db
   chmod go+x ~/pialert
-
   sudo chgrp -R www-data ~/pialert/db
+  sudo chmod -R 775 ~/pialert/db
+  sudo chmod -R 775 ~/pialert/db/temp
   sudo chgrp www-data ~/pialert/config
+  sudo chmod -R 775 ~/pialert/config
   sudo chgrp www-data ~/pialert/config/pialert.conf
-  chmod -R g+rwx ~/pialert/db
-  chmod 770 ~/pialert/config
-  chmod g+rw ~/pialert/config/pialert.conf
+  sudo chmod -R 775 ~/pialert/front/reports
+  sudo chgrp -R www-data ~/pialert/front/reports
   chmod +x ~/pialert/back/shoutrrr/arm64/shoutrrr
   chmod +x ~/pialert/back/shoutrrr/armhf/shoutrrr
-  chmod +x ~/pialert/back/shoutrrr/x64/shoutrrr
   chmod +x ~/pialert/back/shoutrrr/x86/shoutrrr
   ```
 
 5.11 - Create Symlinks for the Log-Viewer
   ```
+  touch "~/pialert/log/pialert.vendors.log"
+  touch "~/pialert/log/pialert.IP.log"
+  touch "~/pialert/log/pialert.1.log"
+  touch "~/pialert/log/pialert.cleanup.log"
+  touch "~/pialert/log/pialert.webservices.log"
   ln -s "~/pialert/log/pialert.vendors.log" "~/pialert/front/php/server/pialert.vendors.log"
   ln -s "~/pialert/log/pialert.IP.log" "~/pialert/front/php/server/pialert.IP.log"
   ln -s "~/pialert/log/pialert.1.log" "~/pialert/front/php/server/pialert.1.log"
+  ln -s "~/pialert/log/pialert.cleanup.log" "~/pialert/front/php/server/pialert.cleanup.log"
+  ln -s "~/pialert/log/pialert.webservices.log" "~/pialert/front/php/server/pialert.webservices.log"
   ```
 
 5.12 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole
