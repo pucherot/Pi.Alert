@@ -1767,6 +1767,11 @@ def service_monitoring_notification():
             send_pushsafer (mail_text_webservice)
         else :
             print ('    Skip PUSHSAFER...')
+        if REPORT_PUSHOVER :
+            print ('    Sending report by PUSHOVER...')
+            send_pushover (mail_text_webservice)
+        else :
+            print ('    Skip PUSHOVER...')
         if REPORT_TELEGRAM_WEBMON :
             print ('    Sending report by Telegram...')
             send_telegram (mail_text_webservice)
@@ -1775,6 +1780,8 @@ def service_monitoring_notification():
         if REPORT_NTFY_WEBMON :
             print ('    Sending report by NTFY...')
             send_ntfy (mail_text_webservice)
+        else :
+            print ('    Skip NTFY...')
         if REPORT_WEBGUI_WEBMON :
             print ('    Save report to file...')
             send_webgui (mail_text_webservice)
@@ -2019,24 +2026,37 @@ def email_reporting ():
     # Send Mail
     if mail_section_Internet == True or mail_section_new_devices == True \
     or mail_section_devices_down == True or mail_section_events == True :
+        # Send Mail
         if REPORT_MAIL :
             print ('    Sending report by email...')
             send_email (mail_text, mail_html)
         else :
             print ('    Skip mail...')
+        # Send Pushsafer
         if REPORT_PUSHSAFER :
             print ('    Sending report by PUSHSAFER...')
             send_pushsafer (mail_text)
         else :
             print ('    Skip PUSHSAFER...')
+        # Send Pushover
+        if REPORT_PUSHOVER :
+            print ('    Sending report by PUSHOVER...')
+            send_pushover (mail_text)
+        else :
+            print ('    Skip PUSHOVER...')
+        # Send Telegram
         if REPORT_TELEGRAM :
             print ('    Sending report by Telegram...')
             send_telegram (mail_text)
         else :
             print ('    Skip Telegram...')
+        # Send NTFY
         if REPORT_NTFY :
             print ('    Sending report by NTFY...')
             send_ntfy (mail_text)
+        else :
+            print ('    Skip NTFY...')
+        # Send WebGUI
         if REPORT_WEBGUI :
             print ('    Save report to file...')
             send_webgui (mail_text)
@@ -2100,16 +2120,24 @@ def send_pushsafer (_Text):
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
-# def send_ntfy (_Text):
-#     requests.post("https://ntfy.sh/{}".format(NTFY_TOPIC),
-#     data=_Text,
-#     headers={
-#         "Title": "Pi.Alert Notification",
-#         "Click": REPORT_DASHBOARD_URL,
-#         "Priority": "urgent",
-#         "Tags": "warning"
-#     })
+def send_pushover (_Text):
 
+    # Remove one linebrake between "Server" and the headline of the event type
+    _pushover_Text = _Text.replace('\n\n\n', '\n\n')
+    # extract event type headline to use it in the notification headline
+    findsubheadline = _pushover_Text.split('\n')
+    subheadline = findsubheadline[3]
+    url = 'https://api.pushover.net/1/messages.json'
+    post_fields = {
+        "token": PUSHOVER_TOKEN,
+        "user": PUSHOVER_USER,
+        "title" : 'Pi.Alert Message - '+subheadline,
+        "message" : _pushover_Text,
+        }
+    
+    requests.post(url, data=post_fields)
+
+#-------------------------------------------------------------------------------
 def send_ntfy (_Text):
     headers = {
         "Title": "Pi.Alert Notification",
@@ -2177,25 +2205,36 @@ def email_reporting_test (_Mode):
         send_email (notiMessage, notiMessage)
     else :
         print ('    Skip mail...')
+    # Send Pushsafer
     if REPORT_PUSHSAFER or REPORT_PUSHSAFER_WEBMON:
         print ('    Sending report by PUSHSAFER...')
         send_pushsafer_test (notiMessage)
     else :
         print ('    Skip PUSHSAFER...')
+    # Send Pushover
+    if REPORT_PUSHOVER or REPORT_PUSHOVER_WEBMON:
+        print ('    Sending report by PUSHOVER...')
+        send_pushover_test (notiMessage)
+    else :
+        print ('    Skip PUSHOVER...')
+    # Send Telegram
+    if REPORT_TELEGRAM or REPORT_TELEGRAM_WEBMON:
+        print ('    Sending report by Telegram...')
+        send_telegram_test (notiMessage)
+    else :
+        print ('    Skip Telegram...')
+    # Send NTFY
     if REPORT_NTFY or REPORT_NTFY_WEBMON:
         print ('    Sending report by NTFY...')
         send_ntfy_test (notiMessage)
     else :
         print ('    Skip NTFY...')
-    if REPORT_TELEGRAM or REPORT_TELEGRAM_WEBMON:
-        print ('    Sending report by Telegram...')
-        send_telegram_test (notiMessage)
+    # Send WebGUI
     if REPORT_WEBGUI or REPORT_WEBGUI_WEBMON:
         print ('    Save report to file...')
         send_webgui_test (notiMessage)
     else :
-        print ('    Skip Telegram...')
-        
+        print ('    Skip WebGUI...')        
     return 0
 
 #-------------------------------------------------------------------------------
@@ -2241,6 +2280,19 @@ def send_pushsafer_test (_notiMessage):
         "k" : PUSHSAFER_TOKEN,
         }
 
+    requests.post(url, data=post_fields)
+
+#-------------------------------------------------------------------------------
+def send_pushover_test (_notiMessage):
+
+    url = 'https://api.pushover.net/1/messages.json'
+    post_fields = {
+        "token": PUSHOVER_TOKEN,
+        "user": PUSHOVER_USER,
+        "title" : 'Pi.Alert Message',
+        "message" : _notiMessage,
+        }
+    
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------

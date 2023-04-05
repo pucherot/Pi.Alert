@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.9'
+SCRIPTVERSION='v0.91'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -55,8 +55,7 @@ case $1 in
     echo ""
     echo " reporting_test           - Test reporting for all activated services."
     echo ""
-    echo " rewrite_config           - A new decluttered configuration file (pialert-rewritten.conf) will"
-    echo "                            be created."
+    echo " rewrite_config           - A new decluttered configuration file (pialert-rewritten.conf) is created."
     echo ""
     ;;
 
@@ -272,6 +271,11 @@ case $1 in
     REWRITE_REPORT_PUSHSAFER_WEBMON=$(grep "^REPORT_PUSHSAFER_WEBMON" $input_file)
     REWRITE_PUSHSAFER_TOKEN=$(grep "^PUSHSAFER_TOKEN" $input_file)
     REWRITE_PUSHSAFER_DEVICE=$(grep "^PUSHSAFER_DEVICE" $input_file)
+    # Pushover
+    REWRITE_REPORT_PUSHOVER=$(grep "^REPORT_PUSHOVER " $input_file)
+    REWRITE_REPORT_PUSHOVER_WEBMON=$(grep "^REPORT_PUSHOVER_WEBMON" $input_file)
+    REWRITE_PUSHOVER_TOKEN=$(grep "^PUSHOVER_TOKEN" $input_file)
+    REWRITE_PUSHOVER_USER=$(grep "^PUSHOVER_USER" $input_file)
     # ntfy
     REWRITE_REPORT_NTFY=$(grep "^REPORT_NTFY " $input_file)
     REWRITE_REPORT_NTFY_WEBMON=$(grep "^REPORT_NTFY_WEBMON" $input_file)
@@ -389,6 +393,13 @@ ${REWRITE_REPORT_PUSHSAFER}
 ${REWRITE_REPORT_PUSHSAFER_WEBMON}
 ${REWRITE_PUSHSAFER_TOKEN}
 ${REWRITE_PUSHSAFER_DEVICE}
+
+# Pushover
+# ----------------------
+${REWRITE_REPORT_PUSHOVER}
+${REWRITE_REPORT_PUSHOVER_WEBMON}
+${REWRITE_PUSHOVER_TOKEN}
+${REWRITE_PUSHOVER_USER}
 
 # ntfy
 # ----------------------
