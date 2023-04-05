@@ -269,7 +269,7 @@ if ! grep -Fq "# Pushover" "$PIALERT_HOME/config/pialert.conf" ; then
 REPORT_PUSHOVER         = False
 REPORT_PUSHOVER_WEBMON  = False
 PUSHOVER_TOKEN          = '<Token>'
-PUSHOVER_USER           = '<APP-API>'
+PUSHOVER_USER           = '<User>'
 EOF
 fi
 
