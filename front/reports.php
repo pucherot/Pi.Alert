@@ -97,8 +97,8 @@ function process_test_notifications($class_name, $event_time, $filename, $direct
 	$webgui_report = file_get_contents($directory . $filename);
 	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
 	return '<div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title" style="color: #00a65a"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
+            <div class="box-header">
+              <h3 class="box-title" style="color: #00a65a"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;' . $event_time . ' - System Message</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
@@ -145,8 +145,6 @@ foreach ($scanned_directory as $file) {
 			array_push($standard_notification, process_test_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "rogueDHCP") {
 			array_push($special_notification, process_rogueDHCP_notifications($notification_class[0], $notification_class[2], $file, $directory));
-		} else {
-			echo 'Forget it';
 		}
 	}
 }
