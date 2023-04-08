@@ -1,8 +1,8 @@
 <!-- ---------------------------------------------------------------------------
 #  Pi.Alert
-#  Open Source Network Guard / WIFI & LAN intrusion detector 
+#  Open Source Network Guard / WIFI & LAN intrusion detector
 #
-#  header.php - Front module. Common header to all the web pages 
+#  header.php - Front module. Common header to all the web pages
 #-------------------------------------------------------------------------------
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
 #--------------------------------------------------------------------------- -->
@@ -14,21 +14,21 @@ error_reporting(0);
 // ## GUI settings processing start
 // ###################################
 if (file_exists('../db/setting_darkmode')) {
-    $ENABLED_DARKMODE = True;
+	$ENABLED_DARKMODE = True;
 }
 if (file_exists('../db/setting_noonlinehistorygraph')) {
-    $ENABLED_HISTOY_GRAPH = False;
+	$ENABLED_HISTOY_GRAPH = False;
 }
 foreach (glob("../db/setting_skin*") as $filename) {
-    $pia_skin_selected = str_replace('setting_','',basename($filename));
+	$pia_skin_selected = str_replace('setting_', '', basename($filename));
 }
 if (strlen($pia_skin_selected) == 0) {$pia_skin_selected = 'skin-blue';}
 
 foreach (glob("../db/setting_language*") as $filename) {
-    $pia_lang_selected = str_replace('setting_language_','',basename($filename));
+	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
 }
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
-require 'php/templates/language/'.$pia_lang_selected.'.php';
+require 'php/templates/language/' . $pia_lang_selected . '.php';
 
 require 'header_func.php';
 
@@ -41,7 +41,7 @@ get_webservices_config();
 // ###################################
 ?>
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 
 <!-- ----------------------------------------------------------------------- -->
@@ -52,14 +52,14 @@ get_webservices_config();
   <meta http-equiv="cache-control" content="max-age=60,private">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <link rel="manifest" href="img/manifest.json">
-  <title>Pi.Alert - <?php echo gethostname();?></title>
+  <title>Pi.Alert - <?php echo gethostname(); ?></title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
   <!-- Bootstrap 3.4.1 -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  
+
   <!-- Bootstrap Icons v1.10.3 -->
   <link href="lib/AdminLTE/bower_components/bootstrap-icons/font/bootstrap-icons.css" media="all" rel="stylesheet" type="text/css" />
 
@@ -73,7 +73,7 @@ get_webservices_config();
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/AdminLTE.min.css">
 
   <!-- AdminLTE Skins. -->
-  <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?php echo $pia_skin_selected;?>.min.css">
+  <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?php echo $pia_skin_selected; ?>.min.css">
 
   <!-- Pi.Alert CSS -->
   <link rel="stylesheet" href="css/pialert.css">
@@ -90,9 +90,9 @@ get_webservices_config();
   <!-- Dark-Mode Patch -->
 <?php
 if ($ENABLED_DARKMODE === True) {
-    echo '<link rel="stylesheet" href="css/dark-patch.css">';
-    $BACKGROUND_IMAGE_PATCH='style="background-image: url(\'img/boxed-bg-dark.png\');"';
-} else { $BACKGROUND_IMAGE_PATCH='style="background-image: url(\'img/background.png\');"';}
+	echo '<link rel="stylesheet" href="css/dark-patch.css">';
+	$BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/boxed-bg-dark.png\');"';
+} else { $BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/background.png\');"';}
 ?>
 <!-- Servertime to the right of the hostname -->
 <script>
@@ -124,7 +124,7 @@ document.addEventListener("visibilitychange",()=>{
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed Yellow -->
-<body class="hold-transition <?php echo $pia_skin_selected;?> sidebar-mini" <?php echo $BACKGROUND_IMAGE_PATCH;?> onLoad="show_pia_servertime();" >
+<body class="hold-transition <?php echo $pia_skin_selected; ?> sidebar-mini" <?php echo $BACKGROUND_IMAGE_PATCH; ?> onLoad="show_pia_servertime();" >
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -160,7 +160,7 @@ document.addEventListener("visibilitychange",()=>{
         <ul class="nav navbar-nav">
 
           <!-- Server Name -->
-          <li><a style="pointer-events:none; display: inline-block; height: 50px; padding-top: 15px"><?php echo gethostname();?> <span id="PIA_Servertime_place"></span></a></li>
+          <li><a style="pointer-events:none; display: inline-block; height: 50px; padding-top: 15px"><?php echo gethostname(); ?> <span id="PIA_Servertime_place"></span></a></li>
 
           <!-- Header right info -->
           <li class="dropdown user user-menu">
@@ -170,15 +170,15 @@ document.addEventListener("visibilitychange",()=>{
               <img src="img/pialertLogoWhite.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <!-- <span class="hidden-xs">Pi.Alert</span> -->
-              <span class="label label-danger"><?php echo count_webgui_reports();?></span>
+              <span class="label label-danger"><?php echo count_webgui_reports(); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header" style=" height: 100px;">
                 <img src="img/pialertLogoWhite.png" class="img-circle" alt="Pi.Alert Logo" style="border-color:transparent; height: 50px; width: 50px; margin-top:15px;">
                 <p style="float: right; width: 200px">
-                <?php echo $pia_lang['About_Title'];?>
-                  <small><?php echo $pia_lang['About_Design'];?> Raspberry Pi</small>
+                <?php echo $pia_lang['About_Title']; ?>
+                  <small><?php echo $pia_lang['About_Design']; ?> Raspberry Pi</small>
                 </p>
               </li>
 
@@ -186,10 +186,10 @@ document.addEventListener("visibilitychange",()=>{
 
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="./reports.php" id="custom-menu-report-button" class="btn btn-warning"><?php echo $pia_lang['About_Reports'];?></a>
+                  <a href="./reports.php" id="custom-menu-report-button" class="btn btn-warning"><?php echo $pia_lang['About_Reports']; ?></a>
                 </div>
                 <div class="pull-right">
-                  <a href="./index.php?action=logout" id="custom-menu-logout-button" class="btn btn-danger"><?php echo $pia_lang['About_Exit'];?></a>
+                  <a href="./index.php?action=logout" id="custom-menu-logout-button" class="btn btn-danger"><?php echo $pia_lang['About_Exit']; ?></a>
                 </div>
               </li>
             </ul>
@@ -212,68 +212,65 @@ document.addEventListener("visibilitychange",()=>{
         <div class="logo" style="width:50%; margin:auto;">
            <a href="./"><img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/></a>
         </div>
-        <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
+        <a href="systeminfo.php">
+          <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
 <?php
-        arpscanstatus();
+arpscanstatus();
 
-        echo '<span id="status">
-                <i class="fa fa-w fa-circle text-'.$_SESSION['arpscan_sidebarstate_light'].'"></i> '.$_SESSION['arpscan_sidebarstate'].'&nbsp;&nbsp;
+echo '<span id="status">
+                <i class="fa fa-w fa-circle text-' . $_SESSION['arpscan_sidebarstate_light'] . '"></i> ' . $_SESSION['arpscan_sidebarstate'] . '&nbsp;&nbsp;
               </span><br>';
 
-        format_sysloadavg(sys_getloadavg());
+format_sysloadavg(sys_getloadavg());
 
-        echo '<br/>';
+echo '<br/>';
 
-        format_MemUsage(getMemUsage());
+format_MemUsage(getMemUsage());
 
-        echo '<br/>';
+echo '<br/>';
 
-        list($celsius, $temperaturelimit) = getTemperature();
-        format_temperature ($celsius, $temperaturelimit);
+list($celsius, $temperaturelimit) = getTemperature();
+format_temperature($celsius, $temperaturelimit);
 ?>
-            </div>
+          </div>
+        </a>
       </div>
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
 
-        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_A'];?></li>
+        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_A']; ?></li>
 
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devices.php', 'deviceDetails.php') ) ){ echo 'active'; } ?>">
-          <a href="devices.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Devices'];?></span></a>
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('devices.php', 'deviceDetails.php'))) {echo 'active';}?>">
+          <a href="devices.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Devices']; ?></span></a>
         </li>
 
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('network.php') ) ){ echo 'active'; } ?>">
-          <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network'];?></span></a>
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('network.php'))) {echo 'active';}?>">
+          <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network']; ?></span></a>
         </li>
 
-        <?php toggle_webservices_menu('Main'); ?>
+        <?php toggle_webservices_menu('Main');?>
 
-        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_B'];?></li>
+        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_B']; ?></li>
 
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php') ) ){ echo 'active'; } ?>">
-          <a href="devicesEvents.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Events_Dev'];?></span></a>
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php'))) {echo 'active';}?>">
+          <a href="devicesEvents.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Events_Dev']; ?></span></a>
         </li>
 
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('presence.php') ) ){ echo 'active'; } ?>">
-          <a href="presence.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Presence'];?></span></a>
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('presence.php'))) {echo 'active';}?>">
+          <a href="presence.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Presence']; ?></span></a>
         </li>
 
-        <?php toggle_webservices_menu('Event'); ?>
+        <?php toggle_webservices_menu('Event');?>
 
+        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_C']; ?></li>
 
-<!--         <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('reports.php') ) ){ echo 'active'; } ?>">
-          <a href="reports.php"><i class="fa fa-warning"></i> <span><?php echo 'Meldungen';?></span> <span class="label label-danger" style="position: relative; top: -3px;"><?php echo count_webgui_reports();?></span></a>
-        </li> -->
-
-        <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_C'];?></li>
-
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('maintenance.php') ) ){ echo 'active'; } ?>">
-          <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Maintenance'];?></span></a>
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('maintenance.php'))) {echo 'active';}?>">
+          <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Maintenance']; ?></span></a>
         </li>
 
-        <li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('help_faq.php') ) ){ echo 'active'; } ?>">
-          <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ'];?></span></a>
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('help_faq.php'))) {echo 'active';}?>">
+          <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ']; ?></span></a>
         </li>
 
       </ul>
