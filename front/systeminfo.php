@@ -37,13 +37,13 @@ $prevArr = explode("\n", trim($prevVal));
 $stat['cpu'] = sizeof($prevArr);
 $cpu_result = shell_exec("cat /proc/cpuinfo | grep Model");
 $stat['cpu_model'] = strstr($cpu_result, "\n", true);
-$stat['cpu_model'] = str_replace("Model    : ", "", $stat['cpu_model']);
+$stat['cpu_model'] = str_replace(":", "", trim(str_replace("Model", "", $stat['cpu_model'])));
 if ($stat['cpu_model'] == '') {
 	$cpu_result = shell_exec("cat /proc/cpuinfo | grep model\ name");
 	$stat['cpu_model'] = strstr($cpu_result, "\n", true);
-	$stat['cpu_model'] = str_replace("model name      : ", "", $stat['cpu_model']);
+	$stat['cpu_model'] = str_replace(":", "", trim(str_replace("model name", "", $stat['cpu_model'])));
 }
-
+$stat['cpu_frequ'] = exec('cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq') / 1000;
 //memory stat
 $mem_result = shell_exec("cat /proc/meminfo | grep MemTotal");
 $stat['mem_total'] = round(preg_replace("#[^0-9]+(?:\.[0-9]*)?#", "", $mem_result) / 1024 / 1024, 3);
@@ -109,7 +109,7 @@ echo '<div class="box box-solid">
 				</div>
 				<div class="row">
 				  <div class="col-sm-2" style="font-weight: bold;">CPU Cores:</div>
-				  <div class="col-sm-10" style="padding-left: 30px;">' . $stat['cpu'] . '</div>
+				  <div class="col-sm-10" style="padding-left: 30px;">' . $stat['cpu'] . ' @ ' . $stat['cpu_frequ'] . ' MHz</div>
 				</div>
 				<div class="row">
 				  <div class="col-sm-2" style="font-weight: bold;">Memory:</div>
@@ -156,7 +156,7 @@ for ($x = 0; $x < sizeof($net_interfaces); $x++) {
 
 	echo '<div class="row">';
 	echo '<div class="col-sm-2" style="font-weight: bold; white-space: nowrap;">' . $interface_name . '</div>';
-	echo '<div class="col-sm-3" style="padding-left: 30px; white-space: nowrap;">IP  ' . $interface_ip_arr[1] . '</div>';
+	echo '<div class="col-sm-3" style="padding-left: 30px; white-space: nowrap;">' . $interface_ip_arr[1] . '</div>';
 	echo '<div class="col-sm-3" style="padding-left: 30px; white-space: nowrap;">RX: <div style="display: inline-block; width: 120px; text-align: right;">' . number_format(round(($net_interfaces_rx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
 	echo '<div class="col-sm-3" style="padding-left: 30px; white-space: nowrap;">TX: <div style="display: inline-block; width: 120px; text-align: right;">' . number_format(round(($net_interfaces_tx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
 	echo '</div>';
