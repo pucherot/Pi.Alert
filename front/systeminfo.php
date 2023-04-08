@@ -21,7 +21,6 @@ if ($_SESSION["login"] != 1) {
 require 'php/templates/header.php';
 
 // https://stackoverflow.com/a/19209082
-
 $os_version = '';
 // Raspbian
 if ($os_version == '') {$os_version = exec('cat /etc/os-release | grep PRETTY_NAME');}
@@ -29,7 +28,6 @@ if ($os_version == '') {$os_version = exec('cat /etc/os-release | grep PRETTY_NA
 if ($os_version == '') {$os_version = exec('uname -o');}
 //$os_version_arr = explode("\n", trim($os_version));
 $stat['os_version'] = str_replace('"', '', str_replace('PRETTY_NAME=', '', $os_version));
-
 $stat['uptime'] = str_replace('up ', '', shell_exec("uptime -p"));
 //cpu stat
 $prevVal = shell_exec("cat /proc/cpuinfo | grep processor");
@@ -71,7 +69,6 @@ $hdd_devices_mount = explode("\n", trim($hdd_result));
 //usb devices
 $usb_result = shell_exec("lsusb");
 $usb_devices_mount = explode("\n", trim($usb_result));
-
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -92,28 +89,28 @@ $usb_devices_mount = explode("\n", trim($usb_result));
 // General ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title" style="color: #00c0ef">General</h3>
+              <h3 class="box-title sysinfo_headline">General</h3>
             </div>
             <div class="box-body">
 				<div class="row">
-				  <div class="col-sm-2" style="font-weight: bold;">Uptime</div>
-				  <div class="col-sm-10" style="padding-left: 30px;">' . $stat['uptime'] . '</div>
+				  <div class="col-sm-2 sysinfo_gerneral_a">Uptime</div>
+				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['uptime'] . '</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2" style="font-weight: bold;">OS</div>
-				  <div class="col-sm-10" style="padding-left: 30px;">' . $stat['os_version'] . '</div>
+				  <div class="col-sm-2 sysinfo_gerneral_a">OS</div>
+				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['os_version'] . '</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2" style="font-weight: bold;">CPU Name:</div>
-				  <div class="col-sm-10" style="padding-left: 30px;">' . $stat['cpu_model'] . '</div>
+				  <div class="col-sm-2 sysinfo_gerneral_a">CPU Name:</div>
+				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['cpu_model'] . '</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2" style="font-weight: bold;">CPU Cores:</div>
-				  <div class="col-sm-10" style="padding-left: 30px;">' . $stat['cpu'] . ' @ ' . $stat['cpu_frequ'] . ' MHz</div>
+				  <div class="col-sm-2 sysinfo_gerneral_a">CPU Cores:</div>
+				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['cpu'] . ' @ ' . $stat['cpu_frequ'] . ' MHz</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2" style="font-weight: bold;">Memory:</div>
-				  <div class="col-sm-10" style="padding-left: 30px;">' . $stat['mem_total'] . ' MB / ' . $stat['mem_used'] . '% is used</div>
+				  <div class="col-sm-2 sysinfo_gerneral_a">Memory:</div>
+				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['mem_total'] . ' MB / ' . $stat['mem_used'] . '% is used</div>
 				</div>
             </div>
       </div>';
@@ -121,18 +118,17 @@ echo '<div class="box box-solid">
 // Storage ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title" style="color: #00c0ef">Storage</h3>
+              <h3 class="box-title sysinfo_headline">Storage</h3>
             </div>
             <div class="box-body">';
 
 for ($x = 0; $x < sizeof($hdd_devices); $x++) {
 	if (stristr($hdd_devices[$x], '/dev/')) {
 		echo '<div class="row">';
-		echo '<div class="col-sm-3" style="font-weight: bold; ">Mount point "' . $hdd_devices_mount[$x] . '"</div>';
-		echo '<div class="col-sm-2" style="padding-left: 30px; white-space: nowrap;">Total ' . number_format(round(($hdd_devices_total[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB</div>';
-		echo '<div class="col-sm-2" style="padding-left: 30px; white-space: nowrap;">Used ' . number_format(round(($hdd_devices_used[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB</div>';
-		echo '<div class="col-sm-2" style="padding-left: 30px; white-space: nowrap;">Free ' . number_format(round(($hdd_devices_free[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB</div>';
-		echo '<div class="col-sm-2" style="padding-left: 30px; white-space: nowrap;">Usage ' . number_format($hdd_devices_percent[$x], 1, ',', '.') . '%</div>';
+		echo '<div class="col-sm-4 sysinfo_gerneral_a">Mount point "' . $hdd_devices_mount[$x] . '"</div>';
+		echo '<div class="col-sm-2 sysinfo_gerneral_b">Total: ' . number_format(round(($hdd_devices_total[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB</div>';
+		echo '<div class="col-sm-3 sysinfo_gerneral_b">Used: ' . number_format(round(($hdd_devices_used[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB (' . number_format($hdd_devices_percent[$x], 1, ',', '.') . '%)</div>';
+		echo '<div class="col-sm-2 sysinfo_gerneral_b">Free: ' . number_format(round(($hdd_devices_free[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB</div>';
 		echo '</div>';
 	}
 }
@@ -143,7 +139,7 @@ echo '      </div>
 // Network ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title" style="color: #00c0ef">Network</h3>
+              <h3 class="box-title sysinfo_headline">Network</h3>
             </div>
             <div class="box-body">';
 
@@ -155,10 +151,10 @@ for ($x = 0; $x < sizeof($net_interfaces); $x++) {
 	if (!isset($interface_ip_arr[1])) {$interface_ip_arr[1] = '--';}
 
 	echo '<div class="row">';
-	echo '<div class="col-sm-2" style="font-weight: bold; white-space: nowrap;">' . $interface_name . '</div>';
-	echo '<div class="col-sm-3" style="padding-left: 30px; white-space: nowrap;">' . $interface_ip_arr[1] . '</div>';
-	echo '<div class="col-sm-3" style="padding-left: 30px; white-space: nowrap;">RX: <div style="display: inline-block; width: 120px; text-align: right;">' . number_format(round(($net_interfaces_rx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
-	echo '<div class="col-sm-3" style="padding-left: 30px; white-space: nowrap;">TX: <div style="display: inline-block; width: 120px; text-align: right;">' . number_format(round(($net_interfaces_tx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
+	echo '<div class="col-sm-2 sysinfo_network_a">' . $interface_name . '</div>';
+	echo '<div class="col-sm-2 sysinfo_network_b">' . $interface_ip_arr[1] . '</div>';
+	echo '<div class="col-sm-3 sysinfo_network_b">RX: <div class="sysinfo_network_value">' . number_format(round(($net_interfaces_rx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
+	echo '<div class="col-sm-3 sysinfo_network_b">TX: <div class="sysinfo_network_value">' . number_format(round(($net_interfaces_tx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
 	echo '</div>';
 
 }
@@ -169,7 +165,7 @@ echo '      </div>
 // Services ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title" style="color: #00c0ef">Services running</h3>
+              <h3 class="box-title sysinfo_headline">Services running</h3>
             </div>
             <div class="box-body">';
 
@@ -201,7 +197,7 @@ echo '      </div>
 // USB ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-               <h3 class="box-title" style="color: #00c0ef">USB Devices</h3>
+               <h3 class="box-title sysinfo_headline">USB Devices</h3>
             </div>
             <div class="box-body">';
 

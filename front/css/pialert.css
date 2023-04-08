@@ -628,3 +628,34 @@ body.modal-open {
 #navbar-reload-button:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+/* -----------------------------------------------------------------------------
+   System Info
+----------------------------------------------------------------------------- */
+.sysinfo_headline {
+    color: #00c0ef;
+}
+
+.sysinfo_gerneral_a {
+    font-weight: bold; padding-top: 2px; padding-bottom: 2px;
+}
+.sysinfo_gerneral_b {
+    padding-left: 30px; padding-top: 2px; padding-bottom: 2px;
+}
+
+.sysinfo_storage_a {
+    font-weight: bold; padding-top: 2px; padding-bottom: 2px;
+}
+.sysinfo_storage_b {
+    padding-left: 30px; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;
+}
+
+.sysinfo_network_a {
+    font-weight: bold; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;
+}
+.sysinfo_network_b {
+    padding-left: 30px; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;
+}
+.sysinfo_network_value {
+    display: inline-block; width: 120px; text-align: right;
+}
