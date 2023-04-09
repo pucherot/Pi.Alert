@@ -93,24 +93,24 @@ echo '<div class="box box-solid">
             </div>
             <div class="box-body">
 				<div class="row">
-				  <div class="col-sm-2 sysinfo_gerneral_a">Uptime</div>
-				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['uptime'] . '</div>
+				  <div class="col-sm-3 sysinfo_gerneral_a">Uptime</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['uptime'] . '</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2 sysinfo_gerneral_a">OS</div>
-				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['os_version'] . '</div>
+				  <div class="col-sm-3 sysinfo_gerneral_a">Operating System</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['os_version'] . '</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2 sysinfo_gerneral_a">CPU Name:</div>
-				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['cpu_model'] . '</div>
+				  <div class="col-sm-3 sysinfo_gerneral_a">CPU Name:</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['cpu_model'] . '</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2 sysinfo_gerneral_a">CPU Cores:</div>
-				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['cpu'] . ' @ ' . $stat['cpu_frequ'] . ' MHz</div>
+				  <div class="col-sm-3 sysinfo_gerneral_a">CPU Cores:</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['cpu'] . ' @ ' . $stat['cpu_frequ'] . ' MHz</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-2 sysinfo_gerneral_a">Memory:</div>
-				  <div class="col-sm-10 sysinfo_gerneral_b">' . $stat['mem_total'] . ' MB / ' . $stat['mem_used'] . '% is used</div>
+				  <div class="col-sm-3 sysinfo_gerneral_a">Memory:</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['mem_total'] . ' MB / ' . $stat['mem_used'] . '% is used</div>
 				</div>
             </div>
       </div>';
@@ -203,7 +203,15 @@ echo '<div class="box box-solid">
 
 sort($usb_devices_mount);
 for ($x = 0; $x < sizeof($usb_devices_mount); $x++) {
-	echo '' . $usb_devices_mount[$x] . '<br>';
+	$cut_pos = strpos($usb_devices_mount[$x], ':');
+	$usb_bus = substr($usb_devices_mount[$x], 0, $cut_pos);
+	$usb_dev = substr($usb_devices_mount[$x], $cut_pos + 1);
+	echo '<div class="row">';
+	echo '<div class="col-sm-3 sysinfo_usbdev_a">' . $usb_bus . '</div>';
+	echo '<div class="col-sm-9 sysinfo_usbdev_b">' . $usb_dev . '</div>';
+	echo '</div>';
+
+	//echo '<div class="sysinfo_usbdev">' . $usb_devices_mount[$x] . '</div>';
 }
 
 echo '      </div>
