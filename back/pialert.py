@@ -17,6 +17,8 @@ from __future__ import print_function
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from fritzconnection.lib.fritzhosts import FritzHosts
+from mac_vendor_lookup import MacLookup
 from time import sleep, time, strftime
 from base64 import b64encode
 # from urllib.parse import urlparse
@@ -416,6 +418,10 @@ def update_devices_MAC_vendors (pArg = ''):
     # DEBUG - print list of record to update
         # print (recordsToUpdate)
 
+    # mac-vendor-lookup update
+    mac = MacLookup()
+    mac.update_vendors()
+
     # update devices
     sql.executemany ("UPDATE Devices SET dev_Vendor = ? WHERE dev_MAC = ? ",
         recordsToUpdate )
@@ -492,6 +498,12 @@ def scan_network ():
     # DHCP Leases method
     print ('    DHCP Leases Method...')
     read_DHCP_leases ()
+
+    # Fritzbox method
+    print ('    Fritzbox Method...')
+    openDB()
+    print_log ('Fritzbox copy starts...')
+    read_fritzbox_active_hosts()
 
     # Load current scan data
     print ('\nProcessing scan results...')
@@ -649,7 +661,7 @@ def execute_arpscan_on_interface (SCAN_SUBNETS):
 def copy_pihole_network ():
     # check if Pi-hole is active
     if not PIHOLE_ACTIVE :
-        return    
+        return
 
     # Open Pi-hole DB
     sql.execute ("ATTACH DATABASE '"+ PIHOLE_DB +"' AS PH")
@@ -675,10 +687,48 @@ def copy_pihole_network ():
     sql.execute ("DETACH PH")
 
 #-------------------------------------------------------------------------------
+def read_fritzbox_active_hosts ():
+    # create table if not exists
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS Fritzbox_Network(
+                                "FB_MAC" STRING(50) NOT NULL COLLATE NOCASE,
+                                "FB_IP" STRING(50) COLLATE NOCASE,
+                                "FB_Name" STRING(50),
+                                "FB_Vendor" STRING(250)
+                            ); """
+    sql.execute(sql_create_table)
+    sql_connection.commit()
+
+    # empty Fritzbox Network list
+    sql.execute ("DELETE FROM Fritzbox_Network")
+
+    # check if Pi-hole is active
+    if not FRITZBOX_ACTIVE :
+        return
+
+    # copy Fritzbox Network list
+    fh = FritzHosts(address=FRITZBOX_IP, user=FRITZBOX_USER, password=FRITZBOX_PASS)
+    hosts = fh.get_hosts_info()
+    for index, host in enumerate(hosts, start=1):
+        if host['status'] :
+            # status = 'active' if host['status'] else  '-'
+            ip = host['ip'] if host['ip'] else 'no IP'
+            mac = host['mac'].lower() if host['mac'] else '-'
+            hostname = host['name']
+            try:
+                vendor = MacLookup().lookup(host['mac'])
+            except:
+                vendor = "Prefix is not registered"
+            
+            # DEBUG
+            # print(f'{ip:<16} {hostname:<28} {mac:<20} {vendor}')
+            sql.execute ("INSERT INTO Fritzbox_Network (FB_MAC, FB_IP, FB_Name, FB_Vendor) "+
+                         "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
+
+#-------------------------------------------------------------------------------
 def read_DHCP_leases ():
     # check DHCP Leases is active
     if not DHCP_ACTIVE :
-        return    
+        return
             
     # Read DHCP Leases
     # Bugfix #1 - dhcp.leases: lines with different number of columns (5 col)
@@ -727,6 +777,15 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
                      (int(startTime.strftime('%s')) - 60 * p_cycle_interval),
                      cycle) )
 
+    # Insert Fritzbox devices
+    sql.execute ("""INSERT INTO CurrentScan (cur_ScanCycle, cur_MAC, 
+                        cur_IP, cur_Vendor, cur_ScanMethod)
+                    SELECT ?, FB_MAC, FB_IP, FB_Vendor, 'Fritzbox'
+                    FROM Fritzbox_Network
+                    WHERE NOT EXISTS (SELECT 'X' FROM CurrentScan
+                                      WHERE cur_MAC = FB_MAC )""",
+                    (cycle) )
+
     # Check Internet connectivity
     internet_IP = get_internet_IP()
         # TESTING - Force IP
@@ -774,6 +833,12 @@ def print_scan_stats ():
                     WHERE cur_ScanMethod='PiHole' AND cur_ScanCycle = ? """,
                     (cycle,))
     print ('        Pi-hole Method.....: +' + str (sql.fetchone()[0]) )
+
+    # Devices Pi-hole
+    sql.execute ("""SELECT COUNT(*) FROM CurrentScan
+                    WHERE cur_ScanMethod='Fritzbox' AND cur_ScanCycle = ? """,
+                    (cycle,))
+    print ('        Fritzbox Method.....: +' + str (sql.fetchone()[0]) )
 
     # New Devices
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan

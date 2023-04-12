@@ -269,10 +269,22 @@ if ! grep -Fq "# Pushover" "$PIALERT_HOME/config/pialert.conf" ; then
 REPORT_PUSHOVER         = False
 REPORT_PUSHOVER_WEBMON  = False
 PUSHOVER_TOKEN          = '<Token>'
-PUSHOVER_USER           = '<User>'
+PUSHOVER_USER           = '<APP-API>'
 EOF
 fi
 
+
+if ! grep -Fq "# Fritzbox Configuration" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# Fritzbox Configuration
+# ----------------------
+FRITZBOX_ACTIVE   = False
+FRITZBOX_IP       = '192.168.17.1'
+FRITZBOX_USER     = 'user'
+FRITZBOX_PASS     = 'password'
+EOF
+fi
 
 }
 
@@ -379,8 +391,11 @@ check_python_version() {
   print_msg "- Checking Python..."
   if [ -f /usr/bin/python ] ; then
     PYTHON_BIN="python"
+
   elif [ -f /usr/bin/python3 ] ; then
     PYTHON_BIN="python3"
+    pip3 install mac-vendor-lookup
+    pip3 install fritzconnection
   else
     process_error "Python NOT installed"
   fi

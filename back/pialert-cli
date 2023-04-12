@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.91'
+SCRIPTVERSION='v0.92'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -302,6 +302,11 @@ case $1 in
     REWRITE_PIHOLE_DB=$(grep "^PIHOLE_DB" $input_file)
     REWRITE_DHCP_ACTIVE=$(grep "^DHCP_ACTIVE" $input_file)
     REWRITE_DHCP_LEASES=$(grep "^DHCP_LEASES" $input_file)
+    # Fritzbox Configuration
+    REWRITE_FRITZBOX_ACTIVE=$(grep "^FRITZBOX_ACTIVE" $input_file)
+    REWRITE_FRITZBOX_IP=$(grep "^FRITZBOX_IP" $input_file)
+    REWRITE_FRITZBOX_USER=$(grep "^FRITZBOX_USER" $input_file)
+    REWRITE_FRITZBOX_PASS=$(grep "^FRITZBOX_PASS" $input_file)
     # Maintenance Tasks Cron
     REWRITE_DAYS_TO_KEEP_ONLINEHISTORY=$(grep "^DAYS_TO_KEEP_ONLINEHISTORY" $input_file)
     REWRITE_DAYS_TO_KEEP_EVENTS=$(grep "^DAYS_TO_KEEP_EVENTS" $input_file)
@@ -439,6 +444,13 @@ ${REWRITE_PIHOLE_ACTIVE}
 ${REWRITE_PIHOLE_DB}
 ${REWRITE_DHCP_ACTIVE}
 ${REWRITE_DHCP_LEASES}
+
+# Fritzbox Configuration
+# ----------------------
+${REWRITE_FRITZBOX_ACTIVE}
+${REWRITE_FRITZBOX_IP}
+${REWRITE_FRITZBOX_USER}
+${REWRITE_FRITZBOX_PASS}
 
 # Maintenance Tasks Cron
 # ----------------------
