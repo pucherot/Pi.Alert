@@ -840,7 +840,7 @@ def print_scan_stats ():
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Fritzbox' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        Fritzbox Method.....: +' + str (sql.fetchone()[0]) )
+    print ('        Fritzbox Method....: +' + str (sql.fetchone()[0]) )
 
     # New Devices
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
@@ -1427,9 +1427,9 @@ def rogue_dhcp_notification ():
     if len(rows) == 2:
         if validate_dhcp_address(rows[1][0]):
             if rows[1][0] == DHCP_SERVER_ADDRESS :
-                print ('    One DHCP Server detected......:' + rows[1][0] + ' (valid)')
+                print ('    One DHCP Server detected......: ' + rows[1][0] + ' (valid)')
             else:
-                print ('    One DHCP Server detected......:' + rows[1][0] + ' (invalid)')
+                print ('    One DHCP Server detected......: ' + rows[1][0] + ' (invalid)')
                 rogue_dhcp_server_list.append(rows[1][0])
         else:
             print ('    Detection Error')
@@ -1647,11 +1647,12 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
 
 # -----------------------------------------------------------------------------
 def service_monitoring_log(site, status, latency):
+    status_str = str(status)
 
     # Log status message to log file
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
         monitor_logfile.write("{} |        {} |     {} | {}\n".format(strftime("%Y-%m-%d %H:%M:%S"),
-                                                status,
+                                                status_str.zfill(3),
                                                 latency,
                                                 site
                                                 )
@@ -1710,13 +1711,13 @@ def print_service_monitoring_changes():
 
     print("    Services Monitoring Changes...")
     changedStatusCode = sql.execute("SELECT COUNT() FROM Services_CurrentScan WHERE cur_StatusChanged = 1").fetchone()[0]
-    print("        Changed StatusCodes: ", str(changedStatusCode))
+    print("        Changed StatusCodes.....:", str(changedStatusCode))
     changedLatency = sql.execute("SELECT COUNT() FROM Services_CurrentScan WHERE cur_LatencyChanged = 1").fetchone()[0]
-    print("        Changed Reachability: ", str(changedLatency))
+    print("        Changed Reachability....:", str(changedLatency))
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
         monitor_logfile.write("\nServices Monitoring Changes:\n")
-        monitor_logfile.write("- Changed StatusCodes: " + str(changedStatusCode))
-        monitor_logfile.write("\n- Changed Reachability: " + str(changedLatency))
+        monitor_logfile.write("- Changed StatusCodes.....: " + str(changedStatusCode))
+        monitor_logfile.write("\n- Changed Reachability....: " + str(changedLatency))
         monitor_logfile.write("\n")
         monitor_logfile.close()
 
