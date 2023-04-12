@@ -20,11 +20,11 @@ Multiple scanning methods are used:
         method 1. If the Pi-hole DNS server is active, Pi.Alert examines its
         activity looking for active devices using DNS that have not been
         detected by method 1.
-  - **Method 3. dnsmasq**. This method is optional and complementary to the
+  - **Method 3: dnsmasq**. This method is optional and complementary to the
         previous methods. If the DHCP server dnsmasq is active, Pi.Alert
         examines the DHCP leases (addresses assigned) to find active devices
         that were not discovered by the other methods.
-  - **Method 4. Fritzbox**. This method is optional and complementary to the
+  - **Method 4: Fritzbox**. This method is optional and complementary to the
         previous methods. If you use a Fritzbox (a router from the AVM company), 
         it is possible to perform a query of the active hosts. This also 
         includes hosts of the guest WLAN and Powerline devices from AVM.
