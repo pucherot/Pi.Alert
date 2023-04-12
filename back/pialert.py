@@ -659,6 +659,9 @@ def execute_arpscan_on_interface (SCAN_SUBNETS):
 
 #-------------------------------------------------------------------------------
 def copy_pihole_network ():
+    # empty Fritzbox Network table
+    sql.execute ("DELETE FROM PiHole_Network")
+
     # check if Pi-hole is active
     if not PIHOLE_ACTIVE :
         return
@@ -667,7 +670,6 @@ def copy_pihole_network ():
     sql.execute ("ATTACH DATABASE '"+ PIHOLE_DB +"' AS PH")
 
     # Copy Pi-hole Network table
-    sql.execute ("DELETE FROM PiHole_Network")
     sql.execute ("""INSERT INTO PiHole_Network (PH_MAC, PH_Vendor, PH_LastQuery,
                         PH_Name, PH_IP)
                     SELECT hwaddr, macVendor, lastQuery,
@@ -698,7 +700,7 @@ def read_fritzbox_active_hosts ():
     sql.execute(sql_create_table)
     sql_connection.commit()
 
-    # empty Fritzbox Network list
+    # empty Fritzbox Network table
     sql.execute ("DELETE FROM Fritzbox_Network")
 
     # check if Pi-hole is active
@@ -830,7 +832,7 @@ def print_scan_stats ():
 
     # Devices Pi-hole
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
-                    WHERE cur_ScanMethod='PiHole' AND cur_ScanCycle = ? """,
+                    WHERE cur_ScanMethod='Pi-hole' AND cur_ScanCycle = ? """,
                     (cycle,))
     print ('        Pi-hole Method.....: +' + str (sql.fetchone()[0]) )
 
