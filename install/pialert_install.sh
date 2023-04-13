@@ -160,11 +160,10 @@ ask_config() {
   fi
   
   # Ask Python version
-  ask_option "What Python version do you want to use ?" \
-              3 \
-              0 " - Use Python already installed in the system (DEFAULT)" \
-              2 " - Use Python 2 (NOT RECOMMENDED)" \
-              3 " - Use Python 3"
+  ask_option "Is Python 3 already installed in the system ?" \
+              2 \
+              0 " - Yes it is (DEFAULT)" \
+              3 " - Install Python 3"
   if [ "$ANSWER" = "" ] ; then
     USE_PYTHON_VERSION=0
   else
@@ -373,8 +372,9 @@ install_python() {
       print_msg "  - Python 3 is available"
       USE_PYTHON_VERSION=3
     elif $PYTHON2 ; then
-      print_msg "  - Python 2 is available"
-      USE_PYTHON_VERSION=2
+      print_msg "  - Python 2 is available but no longer compatible with Pi.Alert"
+      print_msg "    - Python 3 will be installed"
+      USE_PYTHON_VERSION=3
     else
       print_msg "  - Python is not available in this system"
       print_msg "    - Python 3 will be installed"
@@ -383,17 +383,7 @@ install_python() {
     echo ""
   fi
 
-  if [ $USE_PYTHON_VERSION -eq 2 ] ; then
-    if $PYTHON2 ; then
-      print_msg "- Using Python 2"
-      sudo apt-get install python-pip python-requests -y                                     2>&1 >> "$LOG"
-    else
-      print_msg "- Installing Python 2..."
-      sudo apt-get install python python-pip python-requests -y                              2>&1 >> "$LOG"
-      pip install requests
-    fi
-    PYTHON_BIN="python"
-  elif [ $USE_PYTHON_VERSION -eq 3 ] ; then
+  if [ $USE_PYTHON_VERSION -eq 3 ] ; then
     if $PYTHON3 ; then
       print_msg "- Using Python 3"
       sudo apt-get install python3-pip python3-requests python-is-python3 -y                 2>&1 >> "$LOG"
@@ -401,6 +391,10 @@ install_python() {
       print_msg "- Installing Python 3..."
       sudo apt-get install python3 python3-pip python3-requests python-is-python3 -y         2>&1 >> "$LOG"
     fi
+    print_msg "    - Install additional packages"
+    pip3 install mac-vendor-lookup
+    pip3 install fritzconnection
+
     PYTHON_BIN="python3"
   else
     process_error "Unknown Python version to use: $USE_PYTHON_VERSION"
