@@ -249,18 +249,6 @@ DHCP_SERVER_ADDRESS    = '0.0.0.0'
 EOF
 fi
 
-if ! grep -Fq "# ntfy (extended)" "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
-
-# ntfy (extended)
-# ----------------------
-NTFY_HOST           = 'https://ntfy.sh'
-NTFY_USER           = 'user'
-NTFY_PASSWORD       = 'password'
-NTFY_PRIORITY       = 'default'
-EOF
-fi
-
 if ! grep -Fq "# Pushover" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
