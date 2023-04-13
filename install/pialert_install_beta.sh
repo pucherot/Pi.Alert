@@ -383,7 +383,7 @@ install_python() {
     echo ""
   fi
 
-  elif [ $USE_PYTHON_VERSION -eq 3 ] ; then
+  if [ $USE_PYTHON_VERSION -eq 3 ] ; then
     if $PYTHON3 ; then
       print_msg "- Using Python 3"
       sudo apt-get install python3-pip python3-requests python-is-python3 -y                 2>&1 >> "$LOG"
