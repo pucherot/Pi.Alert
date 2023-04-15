@@ -14,7 +14,7 @@
 INSTALL_DIR=~
 PIALERT_HOME="$INSTALL_DIR/pialert"
 LOG="pialert_update_`date +"%Y-%m-%d_%H-%M"`.log"
-PYTHON_BIN=python
+PYTHON_BIN=python3
 
 
 # ------------------------------------------------------------------------------
@@ -287,29 +287,6 @@ update_db() {
   print_msg "- Installing sqlite3..."
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
 
-#  print_msg "- Checking 'Parameters' table..."
-#  TAB=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Parameters' COLLATE NOCASE;"`              2>&1 >> "$LOG"
-#  if [ "$TAB" == "0" ] ; then
-#    print_msg "  - Creating 'Parameters' table..."
-#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE TABLE Parameters (par_ID STRING (50) PRIMARY KEY NOT NULL COLLATE NOCASE, par_Value STRING (250) );"   2>&1 >> "$LOG"
-#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_par_ID ON Parameters (par_ID COLLATE NOCASE);"                                               2>&1 >> "$LOG"
-#  fi
-
-#  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Location' COLLATE NOCASE";`             2>&1 >> "$LOG"
-#  if [ "$COL" == "0" ] ; then
-#    print_msg "  - Adding column 'Location' to 'Devices'..."
-#    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Location STRING(250) COLLATE NOCASE;"                                      2>&1 >> "$LOG"
-#  fi
-
-#  COL=`sqlite3 $PIALERT_HOME/db/pialert.db "SELECT COUNT(*) FROM PRAGMA_TABLE_INFO ('Devices') WHERE name='dev_Archived' COLLATE NOCASE";`               2>&1 >> "$LOG"
-#  if [ "$COL" == "0" ] ; then
-#    print_msg "  - Adding column 'Archived / Hidden' to 'Devices'..."
-#    sqlite3 $PIALERT_HOME/db/pialert.db "ALTER TABLE Devices ADD COLUMN dev_Archived BOOLEAN NOT NULL DEFAULT (0) CHECK (dev_Archived IN (0, 1) );"    2>&1 >> "$LOG"
-#    sqlite3 $PIALERT_HOME/db/pialert.db "CREATE INDEX IDX_dev_Archived ON Devices (dev_Archived);"                                                     2>&1 >> "$LOG"
-#  fi
-
-#  print_msg "- Cheking Internet scancycle..."
-#  sqlite3 $PIALERT_HOME/db/pialert.db "UPDATE Devices set dev_ScanCycle=1, dev_AlertEvents=1, dev_AlertDeviceDown=1 WHERE dev_MAC='Internet' AND dev_ScanCycle=0;"  2>&1 >> "$LOG"
 }
 
 
@@ -341,7 +318,6 @@ update_permissions() {
   ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"
   ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"
   ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"
-
 
 }
 
@@ -378,14 +354,17 @@ check_pialert_home() {
 check_python_version() {
   print_msg "- Checking Python..."
   if [ -f /usr/bin/python ] ; then
-    PYTHON_BIN="python"
+    # PYTHON_BIN="python"
+    print_msg "Python 2 no longer supported by Pi.Alert"
+  fi
 
-  elif [ -f /usr/bin/python3 ] ; then
+  if [ -f /usr/bin/python3 ] ; then
     PYTHON_BIN="python3"
+    print_msg "Python 3 is installed on your system"
     pip3 install mac-vendor-lookup
     pip3 install fritzconnection
   else
-    process_error "Python NOT installed"
+    process_error "Python 3 NOT installed"
   fi
 }
 
