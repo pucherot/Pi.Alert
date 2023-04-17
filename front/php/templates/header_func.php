@@ -28,11 +28,11 @@ function count_webgui_reports() {
 function arpscanstatus() {
 	global $pia_lang;
 	if (!file_exists('../db/setting_stoparpscan')) {
-		$execstring = 'ps -f -u root | grep "sudo arp-scan" 2>&1';
+		$execstring = 'ps aux | grep "~/pialert/back/pialert.py 1" 2>&1';
 		$pia_arpscans = "";
 		exec($execstring, $pia_arpscans);
 		unset($_SESSION['arpscan_timerstart']);
-		$_SESSION['arpscan_result'] = sizeof($pia_arpscans) . ' ' . $pia_lang['Maintenance_arp_status_on'];
+		$_SESSION['arpscan_result'] = sizeof($pia_arpscans) - 2 . ' ' . $pia_lang['Maintenance_arp_status_on'];
 		$_SESSION['arpscan_sidebarstate'] = 'Active';
 		$_SESSION['arpscan_sidebarstate_light'] = 'green-light fa-gradient-green';
 	} else {
