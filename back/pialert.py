@@ -1905,9 +1905,11 @@ def service_monitoring():
     while sites:
         for site in sites:
             status,latency = check_services_health(site)
+            site_retry = ''
             if latency == "99999999" :
                 # Retry if the first attempt fails
                 status,latency = check_services_health(site)
+                site_retry = '*'
 
             scantime = strftime("%Y-%m-%d %H:%M:%S")
 
@@ -1920,7 +1922,7 @@ def service_monitoring():
             else:
                 domain_ip = ""
             # Write Logfile
-            service_monitoring_log(site, status, latency)
+            service_monitoring_log(site + ' ' + site_retry, status, latency)
             # Insert Services_Events with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
             set_services_events(site, scantime, status, latency, domain_ip)
             # Insert Services_CurrentScan with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
