@@ -89,7 +89,7 @@ $usb_devices_mount = explode("\n", trim($usb_result));
 // General ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title sysinfo_headline">General</h3>
+              <h3 class="box-title sysinfo_headline"><i class="bi bi-info-circle"></i> General</h3>
             </div>
             <div class="box-body">
 				<div class="row">
@@ -118,7 +118,7 @@ echo '<div class="box box-solid">
 // Storage ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title sysinfo_headline">Storage</h3>
+              <h3 class="box-title sysinfo_headline"><i class="bi bi-hdd"></i> Storage</h3>
             </div>
             <div class="box-body">';
 
@@ -139,7 +139,7 @@ echo '      </div>
 // Network ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title sysinfo_headline">Network</h3>
+              <h3 class="box-title sysinfo_headline"><i class="bi bi-hdd-network"></i> Network</h3>
             </div>
             <div class="box-body">';
 
@@ -165,10 +165,10 @@ echo '      </div>
 // Services ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title sysinfo_headline">Services running</h3>
+              <h3 class="box-title sysinfo_headline"><i class="bi bi-database-gear"></i> Services (running)</h3>
             </div>
             <div class="box-body">';
-
+echo '<div style="height: 300px; overflow: scroll;">';
 exec('systemctl --type=service --state=running', $running_services);
 echo '<table class="table table-bordered table-hover table-striped dataTable no-footer" style="margin-bottom: 10px;">';
 echo '<thead>
@@ -190,6 +190,7 @@ for ($x = 0; $x < sizeof($running_services); $x++) {
 	}
 }
 echo '</table>';
+echo '</div>';
 
 echo '      </div>
       </div>';
@@ -197,26 +198,24 @@ echo '      </div>
 // USB ----------------------------------------------------------
 echo '<div class="box box-solid">
             <div class="box-header">
-               <h3 class="box-title sysinfo_headline">USB Devices</h3>
+               <h3 class="box-title sysinfo_headline"><i class="bi bi-usb-symbol"></i> USB Devices</h3>
             </div>
             <div class="box-body">';
+echo '         <table class="table table-bordered table-hover table-striped dataTable no-footer" style="margin-bottom: 10px;">';
 
+$table_color = 'odd';
 sort($usb_devices_mount);
 for ($x = 0; $x < sizeof($usb_devices_mount); $x++) {
 	$cut_pos = strpos($usb_devices_mount[$x], ':');
 	$usb_bus = substr($usb_devices_mount[$x], 0, $cut_pos);
 	$usb_dev = substr($usb_devices_mount[$x], $cut_pos + 1);
-	echo '<div class="row">';
-	echo '<div class="col-sm-3 sysinfo_usbdev_a">' . $usb_bus . '</div>';
-	echo '<div class="col-sm-9 sysinfo_usbdev_b">' . $usb_dev . '</div>';
-	echo '</div>';
 
-	//echo '<div class="sysinfo_usbdev">' . $usb_devices_mount[$x] . '</div>';
+	if ($table_color == 'odd') {$table_color = 'even';} else { $table_color = 'odd';}
+	echo '<tr class="' . $table_color . '"><td style="padding: 3px; padding-left: 10px; width: 150px;"><b>' . str_replace('Device', 'Dev.', $usb_bus) . '</b></td><td style="padding: 3px; padding-left: 10px;">' . $usb_dev . '</td></tr>';
 }
-
+echo '         </table>';
 echo '      </div>
       </div>';
-
 echo '<br>';
 
 ?>
