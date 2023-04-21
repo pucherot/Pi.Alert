@@ -1491,7 +1491,7 @@ def rogue_dhcp_notification ():
             print ('    Skip Telegram...')
 
 #===============================================================================
-# nmap Scan of a single device
+# nmap Scan of a single device (inactive)
 #
 # Maybe outsource to an extra script because of longer runtime
 #===============================================================================
@@ -1527,6 +1527,7 @@ def execute_nmap_scan(_IP):
     stream = os.popen('nmap -n -p -10000 ' + _IP)
     output = stream.read()
     nmap_scan = output.split("\n")
+    # get MAC of current ip. Both should be insert in the Database for a unique host
     process_nmap_scan(nmap_scan)
 
 #-------------------------------------------------------------------------------
@@ -1904,14 +1905,11 @@ def service_monitoring():
     while sites:
         for site in sites:
             status,latency = check_services_health(site)
-            scantime = strftime("%Y-%m-%d %H:%M:%S")
+            if latency == "99999999" :
+                # Retry if the first attempt fails
+                status,latency = check_services_health(site)
 
-            # DEBUG 
-            # print("{} - {} STATUS: {} ResponseTime: {}".format(strftime("%Y-%m-%d %H:%M:%S"),
-            #                     site,
-            #                     status,
-            #                     latency)
-            #      )
+            scantime = strftime("%Y-%m-%d %H:%M:%S")
 
             #Get IP from Domain
             if latency != "99999999":
@@ -2219,6 +2217,8 @@ def send_pushover (_Text):
 
 #-------------------------------------------------------------------------------
 def send_ntfy (_Text):
+
+    # Prepare header
     headers = {
         "Title": "Pi.Alert Notification",
         "Click": REPORT_DASHBOARD_URL,
@@ -2240,6 +2240,7 @@ def send_ntfy (_Text):
 
 #-------------------------------------------------------------------------------
 def send_telegram (_Text):
+
     # Remove one linebrake between "Server" and the headline of the event type
     _telegram_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
@@ -2250,6 +2251,7 @@ def send_telegram (_Text):
 
 #-------------------------------------------------------------------------------
 def send_webgui (_Text):
+
     # Remove one linebrake between "Server" and the headline of the event type
     #_webgui_Text = _Text
     _webgui_Text = _Text.replace('\n\n\n', '\n\n')
