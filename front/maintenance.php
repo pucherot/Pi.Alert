@@ -179,7 +179,7 @@ function set_column_checkboxes($table_config) {
 function read_logfile($logfile, $logmessage) {
 	$file = file_get_contents('./php/server/' . $logfile, true);
 	if ($file == "") {echo $logmessage;}
-	echo str_replace("\n", '<br>', $file);
+	echo str_replace("\n", '<br>', str_replace("    ", '&nbsp;&nbsp;&nbsp;&nbsp;', str_replace("        ", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $file)));
 }
 
 function read_logfile_vendor() {
