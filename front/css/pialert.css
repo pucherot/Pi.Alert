@@ -663,3 +663,12 @@ body.modal-open {
 .servicebox_text {display: inline-block; width: 100%;}
 .servicebox_text_m {margin: 0px 15px;}
 .servicebox_text_tag {font-weight: bolder; font-size:16px;}
+
+.progress-segment {display: flex; margin-bottom: 5px; margin-top: 10px;}
+.single_scan {width: 100%; background-color: lightgray; margin-right: 2px; height: 12px;
+  &:first-child {border-top-left-radius: 3px; border-bottom-left-radius: 3px;}
+  &:last-child {border-top-right-radius: 3px; border-bottom-right-radius: 3px;}
+}
+.orange-common {background-color: #f04500 !important;}
+.single_scan:hover:after {position: absolute; display: flex; content: attr(title); left: 0px; top: 0px; padding: 5px; padding-top: 8px; background-color: #913225; font-size: 16px; color: white; width: 100%; height: 38px;}
+.single_scan:hover {background-color: #aaa !important;}
