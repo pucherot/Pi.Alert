@@ -397,7 +397,9 @@ def update_devices_MAC_vendors (pArg = ''):
     # All devices loop
     print ('\nSearching devices vendor', end='')
     openDB()
-    for device in sql.execute ("SELECT * FROM Devices") :
+    # Only the devices for which no vendor has yet been entered are attempted to be updated.
+    # for device in sql.execute ("SELECT * FROM Devices") :
+    for device in sql.execute ("SELECT * FROM Devices WHERE dev_Vendor = ''") :
         # Search vendor in HW Vendors DB
         vendor = query_MAC_vendor (device['dev_MAC'])
         if vendor == -1 :
