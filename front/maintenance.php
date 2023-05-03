@@ -213,7 +213,7 @@ function print_logviewer_modal_head($id, $title) {
                     <h4 class="modal-title">Viewer: ' . $title . '</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll;">';
+                    <div style="border: none; overflow-y: scroll; white-space: nowrap;">';
 }
 
 function print_logviewer_modal_foot() {
