@@ -188,16 +188,16 @@ function list_standalone_services() {
 				$status_description = 'No status code was received from the server. The server may be offline or the network may have a problem.';
 			}
 
-			echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
-                    <div class="' . $code_icon_color . '" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
-                        <div style="width: 70px; height: 70px; text-align: center; padding-top: 5px;">
-                            <span style="font-size:18px;">' . strtoupper($url_array[0]) . '</span><br>
-                            <span style="font-size:24px;">' . $row['mon_LastStatus'] . '</span>
+			echo '<div class="servicelist_entry">
+                    <div class="' . $code_icon_color . ' servicebox_httpstat_hover" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
+                        <div class="servicebox_box">
+                            <span class="servicebox_box_prot">' . strtoupper($url_array[0]) . '</span><br>
+                            <span class="servicebox_box_code">' . $row['mon_LastStatus'] . '</span>
                         </div>
                     </div>
-                    <div style="display: inline-block; width: 100%;">
-                        <div style="margin: 0px 15px;">
-                           <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url=' . $row['mon_URL'] . '"><span class="">' . $url_array[1] . '</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;' . $row['mon_Tags'] . '</span></td></tr></table>';
+                    <div class="servicebox_text">
+                        <div class="servicebox_text_m">
+                           <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url=' . $row['mon_URL'] . '"><span class="">' . $url_array[1] . '</span></a></td><td align="right"><span class="servicebox_text_tag">&nbsp;' . $row['mon_Tags'] . '</span></td></tr></table>';
 			// Render Progressbar
 			echo '          <div class="progress-segment">';
 
@@ -270,16 +270,16 @@ function get_service_from_unique_device($func_unique_device) {
 				$status_description = 'No status code was received from the server. The server may be offline or the network could have a problem.';
 			}
 
-			echo '<div style="display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;">
-                    <div class="' . $code_icon_color . '" style="display: flex; width: 70px; height: 70px;" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
-                        <div style="width: 70px; height: 70px; text-align: center; padding-top: 5px;">
-                            <span style="font-size:18px;">' . strtoupper($url_array[0]) . '</span><br>
-                            <span style="font-size:24px;">' . $row['mon_LastStatus'] . '</span>
+			echo '<div class="servicelist_entry">
+                    <div class="' . $code_icon_color . ' servicebox_httpstat_hover" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
+                        <div class="servicebox_box">
+                            <span class="servicebox_box_prot">' . strtoupper($url_array[0]) . '</span><br>
+                            <span class="servicebox_box_code">' . $row['mon_LastStatus'] . '</span>
                         </div>
                     </div>
-                    <div style="display: inline-block; width: 100%;">
-                        <div style="margin: 0px 15px;">
-                             <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url=' . $row['mon_URL'] . '"><span class="">' . $url_array[1] . '</span></a></td><td align="right"><span style="font-weight: bolder; font-size:16px;">&nbsp;' . $row['mon_Tags'] . '</span></td></tr></table>';
+                    <div class="servicebox_text">
+                        <div class="servicebox_text_m">
+                             <table height="20px" width="100%"><tr><td><a href="serviceDetails.php?url=' . $row['mon_URL'] . '"><span class="">' . $url_array[1] . '</span></a></td><td align="right"><span class="servicebox_text_tag">&nbsp;' . $row['mon_Tags'] . '</span></td></tr></table>';
 			// Render Progressbar
 			echo '                <div class="progress-segment">';
 

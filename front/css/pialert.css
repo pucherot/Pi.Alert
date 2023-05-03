@@ -651,3 +651,15 @@ body.modal-open {
 #updatecheck {text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;}
 #configeditor {text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;}
 .configeditor_help {text-align: left; margin-top: 10px;}
+
+/* -----------------------------------------------------------------------------
+   Services
+----------------------------------------------------------------------------- */
+.servicelist_entry {display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;}
+.servicebox_httpstat_hover {display: flex; width: 70px; height: 70px;}
+.servicebox_box {width: 70px; height: 70px; text-align: center; padding-top: 5px;}
+.servicebox_box_prot {font-size:18px;}
+.servicebox_box_code {font-size:24px;}
+.servicebox_text {display: inline-block; width: 100%;}
+.servicebox_text_m {margin: 0px 15px;}
+.servicebox_text_tag {font-weight: bolder; font-size:16px;}
