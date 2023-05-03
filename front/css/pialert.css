@@ -464,20 +464,6 @@
     display: none;
 }
 
-.dbtools-button { display: inline-block; width: 160px; height: 73px; white-space: normal; word-wrap: break-word; font-size: 16px; padding: 4px;}
-
-.db_info_table_cell:nth-child(1) { background: white }
-.db_info_table_cell:nth-child(2) { background: white }
-.db_tools_table_cell_a:nth-child(1) { background: white }
-.db_tools_table_cell_a:nth-child(2) { background: white }
-.db_tools_table_cell_b:nth-child(1) { background: white }
-.db_tools_table_cell_b:nth-child(2) { background: white }
-.db_info_table { display: table; border-spacing: 0em; font-weight: 400; font-size: 15px; width: 100%; margin: auto;}
-.db_info_table_row { display: table-row; padding: 3px; }
-.db_info_table_cell { display: table-cell; padding: 3px; padding-left: 10px;}
-.db_tools_table_cell_a { display: table-cell; text-align: center; padding: 10px; min-width: 180px; width: 20%; vertical-align: top;}
-.db_tools_table_cell_b { display: table-cell; text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px;}
-
 .table_settings { border-spacing: 0em; font-weight: 400; font-size: 15px; width: 100%; margin: auto; }
 .table_settings_row { padding: 3px;}
 .table_settings_cell { padding: 3px; padding-left: 10px;}
@@ -632,36 +618,36 @@ body.modal-open {
 /* -----------------------------------------------------------------------------
    System Info
 ----------------------------------------------------------------------------- */
-.sysinfo_headline {
-    color: #00c0ef;
-}
+.sysinfo_headline {color: #00c0ef;}
+.sysinfo_gerneral_a {font-weight: bold; padding-top: 2px; padding-bottom: 2px;}
+.sysinfo_gerneral_b {padding-left: 30px; padding-top: 2px; padding-bottom: 2px;}
+.sysinfo_storage_a {font-weight: bold; padding-top: 2px; padding-bottom: 2px;}
+.sysinfo_storage_b {padding-left: 30px; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;}
+.sysinfo_network_a { font-weight: bold; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;}
+.sysinfo_network_b {padding-left: 30px; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;}
+.sysinfo_network_value {display: inline-block; width: 120px; text-align: right;}
+.sysinfo_usbdev_a {font-weight: bold; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;}
+.sysinfo_usbdev_b {padding-left: 30px;  padding-top: 2px; padding-bottom: 2px;}
 
-.sysinfo_gerneral_a {
-    font-weight: bold; padding-top: 2px; padding-bottom: 2px;
-}
-.sysinfo_gerneral_b {
-    padding-left: 30px; padding-top: 2px; padding-bottom: 2px;
-}
-
-.sysinfo_storage_a {
-    font-weight: bold; padding-top: 2px; padding-bottom: 2px;
-}
-.sysinfo_storage_b {
-    padding-left: 30px; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;
-}
-
-.sysinfo_network_a {
-    font-weight: bold; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;
-}
-.sysinfo_network_b {
-    padding-left: 30px; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;
-}
-.sysinfo_network_value {
-    display: inline-block; width: 120px; text-align: right;
-}
-.sysinfo_usbdev_a {
-    font-weight: bold; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;
-}
-.sysinfo_usbdev_b {
-    padding-left: 30px;  padding-top: 2px; padding-bottom: 2px;
-}
+/* -----------------------------------------------------------------------------
+   Maintenance
+----------------------------------------------------------------------------- */
+.dbtools-button { display: inline-block; width: 160px; height: 73px; white-space: normal; word-wrap: break-word; font-size: 16px; padding: 4px;}
+.db_info_table_cell:nth-child(1) { background: white }
+.db_info_table_cell:nth-child(2) { background: white }
+.db_tools_table_cell_a:nth-child(1) { background: white }
+.db_tools_table_cell_a:nth-child(2) { background: white }
+.db_tools_table_cell_b:nth-child(1) { background: white }
+.db_tools_table_cell_b:nth-child(2) { background: white }
+.db_info_table { display: table; border-spacing: 0em; font-weight: 400; font-size: 15px; width: 100%; margin: auto;}
+.db_info_table_row { display: table-row; padding: 3px; }
+.db_info_table_cell { display: table-cell; padding: 3px; padding-left: 10px;}
+.db_tools_table_cell_a { display: table-cell; text-align: center; padding: 10px; min-width: 180px; width: 20%; vertical-align: top;}
+.db_tools_table_cell_b { display: table-cell; text-align: justify; font-size: 16px; vertical-align: middle; padding: 10px;}
+.main_logviwer_text_layout {text-align: left;}
+.main_logviwer_log {border: none; overflow-y: scroll; white-space: nowrap;}
+.main_logviwer_buttonbox {text-align: center; padding-top: 5px; padding-bottom: 5px;}
+.main_logviwer_button_m {margin: 5px;}
+#updatecheck {text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;}
+#configeditor {text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;}
+.configeditor_help {text-align: left; margin-top: 10px;}

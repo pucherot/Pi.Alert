@@ -212,8 +212,8 @@ function print_logviewer_modal_head($id, $title) {
                         <span aria-hidden="true">×</span></button>
                     <h4 class="modal-title">Viewer: ' . $title . '</h4>
                 </div>
-                <div class="modal-body" style="text-align: left;">
-                    <div style="border: none; overflow-y: scroll; white-space: nowrap;">';
+                <div class="modal-body main_logviwer_text_layout">
+                    <div class="main_logviwer_log">';
 }
 
 function print_logviewer_modal_foot() {
@@ -296,19 +296,19 @@ if ($_REQUEST['tab'] == '1') {
 read_arpscan_timer(); ?></div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell" style="min-width: 140px">Api-Key</div>
+                    <div class="db_info_table_cell">Api-Key</div>
                     <div class="db_info_table_cell" style="overflow-wrap: anywhere;">
                         <input readonly value="<?php echo $APIKEY; ?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_notification_config']; ?></div>
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_notification_config']; ?></div>
                     <div class="db_info_table_cell">
                         <?php echo format_notifications($CONFIG_FILE_FILTER_VALUE_ARP); ?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_notification_config_webmon']; ?></div>
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_notification_config_webmon']; ?></div>
                     <div class="db_info_table_cell">
                         <?php echo format_notifications($CONFIG_FILE_FILTER_VALUE_WEB); ?>
                     </div>
@@ -324,7 +324,7 @@ read_arpscan_timer(); ?></div>
 <!-- Update Check ----------------------------------------------------------------- -->
 
     <div class="box">
-        <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
+        <div class="box-body" id="updatecheck">
             <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?php echo $pia_lang['Maintenance_Tools_Updatecheck']; ?></button>
       </div>
     </div>
@@ -335,16 +335,16 @@ read_arpscan_timer(); ?></div>
         <div class="box-header with-border">
             <h3 class="box-title">Log Viewer</h3>
         </div>
-        <div class="box-body" id="logviewer" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
-            <button type="button" id="oisjmofeirfj" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-scan" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Scan']; ?></button>
-            <button type="button" id="wefwfwefewdf" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-iplog" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog']; ?></button>
-            <button type="button" id="tzhrsreawefw" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-vendor" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor']; ?></button>
-            <button type="button" id="arzuozhrsfga" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-cleanup" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup']; ?></button>
-            <button type="button" id="ufiienfflgze" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-nmap" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap']; ?></button>
-            <button type="button" id="lgnsisnuhzgd" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-wol" style="margin: 5px;"><?php echo $pia_lang['Maintenance_Tools_Logviewer_WOL']; ?></button>
+        <div class="box-body main_logviwer_buttonbox" id="logviewer">
+            <button type="button" id="oisjmofeirfj" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-scan"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Scan']; ?></button>
+            <button type="button" id="wefwfwefewdf" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-iplog"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog']; ?></button>
+            <button type="button" id="tzhrsreawefw" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-vendor"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor']; ?></button>
+            <button type="button" id="arzuozhrsfga" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-cleanup"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup']; ?></button>
+            <button type="button" id="ufiienfflgze" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-nmap"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap']; ?></button>
+            <button type="button" id="lgnsisnuhzgd" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-wol"><?php echo $pia_lang['Maintenance_Tools_Logviewer_WOL']; ?></button>
 <?php
 if ($_SESSION['Scan_WebServices'] == True) {
-	echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary" data-toggle="modal" data-target="#modal-logviewer-webservices" style="margin: 5px;">' . $pia_lang['Maintenance_Tools_Logviewer_WebServices'] . '</button>';
+	echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-webservices">' . $pia_lang['Maintenance_Tools_Logviewer_WebServices'] . '</button>';
 }
 ?>
       </div>
@@ -699,8 +699,8 @@ if (!$block_restore_button) {
 <!-- Config Editor ----------------------------------------------------------------- -->
 
  <div class="box">
-        <div class="box-body" id="updatecheck" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
-           <button type="button" id="oisggfjmofeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor"><?php echo $pia_lang['Maintenance_ConfEditor_Start']; ?></button>
+        <div class="box-body" id="configeditor">
+           <button type="button" id="oisggfjergfeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor"><?php echo $pia_lang['Maintenance_ConfEditor_Start']; ?></button>
       </div>
     </div>
 
@@ -712,7 +712,7 @@ if (!$block_restore_button) {
           </div>
     </div>
     <div class="box-body">
-           <table class="table" style="text-align: left; margin-top: 10px;">
+           <table class="table configeditor_help">
               <tbody>
                 <tr>
                   <th scope="row" class="text-nowrap text-danger"><?php echo $pia_lang['Maintenance_ConfEditor_Restore']; ?></th>
