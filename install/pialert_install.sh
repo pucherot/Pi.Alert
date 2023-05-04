@@ -392,8 +392,8 @@ install_python() {
       sudo apt-get install python3 python3-pip python3-requests python-is-python3 -y         2>&1 >> "$LOG"
     fi
     print_msg "    - Install additional packages"
-    pip3 install mac-vendor-lookup
-    pip3 install fritzconnection
+    sudo pip3 install mac-vendor-lookup
+    sudo pip3 install fritzconnection
 
     PYTHON_BIN="python3"
   else
