@@ -180,7 +180,7 @@ function read_logfile($logfile, $logmessage) {
 	$file = file_get_contents('./php/server/' . $logfile, true);
 	if ($file == "") {echo $logmessage;}
 	if ($logfile == "pialert.webservices.log") {
-		$file = str_replace("Start Services Monitoring\n\n", "Start Services Monitoring\n\n<pre>", $file);
+		$file = str_replace("Start Services Monitoring\n\n", "Start Services Monitoring\n\n<pre style=\"border: solid 1px #666; background-color: transparent;\">", $file);
 		$file = str_replace("\nServices Monitoring Changes:", "\n</pre>Services Monitoring Changes:", $file);
 	}
 	echo str_replace("\n", '<br>', str_replace("    ", '&nbsp;&nbsp;&nbsp;&nbsp;', str_replace("        ", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $file)));
