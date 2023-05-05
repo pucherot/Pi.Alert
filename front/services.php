@@ -323,7 +323,7 @@ function get_service_from_unique_device($func_unique_device) {
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
          <?php echo $pia_lang['WebServices_Title']; ?>
-      <button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#modal-add-monitoringURL" style="display: inline-block; margin-top: -5px; margin-left: 15px;"><i class="bi bi-plus-lg" style="font-size:1.5rem"></i></button>
+      <button type="button" class="btn btn-xs btn-success servicelist_add_serv" data-toggle="modal" data-target="#modal-add-monitoringURL"><i class="bi bi-plus-lg" style="font-size:1.5rem"></i></button>
       </h1>
 
 <!-- Modals New URL ----------------------------------------------------------------- -->

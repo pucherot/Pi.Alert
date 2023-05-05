@@ -1,6 +1,6 @@
 <!-- ---------------------------------------------------------------------------
 #  Pi.Alert
-#  Open Source Network Guard / WIFI & LAN intrusion detector 
+#  Open Source Network Guard / WIFI & LAN intrusion detector
 #
 #  serviceDetails.php - Front module. Service management page
 #-------------------------------------------------------------------------------
@@ -11,11 +11,10 @@
 <?php
 session_start();
 
-if ($_SESSION["login"] != 1)
-  {
-      header('Location: /pialert/index.php');
-      exit;
-  }
+if ($_SESSION["login"] != 1) {
+	header('Location: /pialert/index.php');
+	exit;
+}
 
 require 'php/templates/header.php';
 # require 'php/server/db.php';
@@ -28,26 +27,26 @@ $db = new SQLite3($db_file);
 $db->exec('PRAGMA journal_mode = wal;');
 
 function get_service_details($service_URL) {
-    global $db;
+	global $db;
 
-    $mon_res = $db->query('SELECT * FROM Services WHERE mon_URL="'.$service_URL.'"');
-    $row = $mon_res->fetchArray();
-    return $row;
+	$mon_res = $db->query('SELECT * FROM Services WHERE mon_URL="' . $service_URL . '"');
+	$row = $mon_res->fetchArray();
+	return $row;
 }
 
 function get_service_events_table($service_URL) {
-    global $db;
+	global $db;
 
-    $moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="'.$service_URL.'"');
-    while ($row = $moneve_res->fetchArray()) {
-        if ($row['moneve_TargetIP'] == '') {$func_TargetIP = 'n.a.';} else {$func_TargetIP = $row['moneve_TargetIP'];}
-        echo  '<tr>
-                  <td>'.$func_TargetIP.'</td>
-                  <td>'.$row['moneve_DateTime'].'</td>
-                  <td>'.$row['moneve_StatusCode'].'</td>
-                  <td>'.$row['moneve_Latency'].'</td>
+	$moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="' . $service_URL . '"');
+	while ($row = $moneve_res->fetchArray()) {
+		if ($row['moneve_TargetIP'] == '') {$func_TargetIP = 'n.a.';} else { $func_TargetIP = $row['moneve_TargetIP'];}
+		echo '<tr>
+                  <td>' . $func_TargetIP . '</td>
+                  <td>' . $row['moneve_DateTime'] . '</td>
+                  <td>' . $row['moneve_StatusCode'] . '</td>
+                  <td>' . $row['moneve_Latency'] . '</td>
               </tr>';
-    }
+	}
 }
 
 $servicedetails = get_service_details($service_details_title);
@@ -59,13 +58,13 @@ $servicedetails = get_service_details($service_details_title);
 
 <!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
-      <?php require 'php/templates/notification.php'; ?>
+      <?php require 'php/templates/notification.php';?>
 
       <h1 id="pageTitle">
-        <?php echo '['.strtoupper($service_details_title_array[0]).'] '.$service_details_title_array[1];?>
+        <?php echo '[' . strtoupper($service_details_title_array[0]) . '] ' . $service_details_title_array[1]; ?>
       </h1>
     </section>
-    
+
 <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
@@ -76,7 +75,7 @@ $servicedetails = get_service_details($service_details_title);
           <a href="#" onclick="javascript: getEventsTotalsforService('all');">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_All'];?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_All']; ?></p>
               </div>
               <div class="icon"> <i class="fa fa-bolt text-aqua-40"></i> </div>
             </div>
@@ -88,7 +87,7 @@ $servicedetails = get_service_details($service_details_title);
           <a href="#" onclick="javascript: getEventsTotalsforService('2');">
             <div class="small-box bg-green">
               <div class="inner"> <h3 id="events2xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP2xx'];?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP2xx']; ?></p>
               </div>
               <div class="icon"> <i class="bi bi-check2-square text-green-40"></i> </div>
             </div>
@@ -100,7 +99,7 @@ $servicedetails = get_service_details($service_details_title);
           <a href="#" onclick="javascript: getEventsTotalsforService('3');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events3xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP3xx'];?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP3xx']; ?></p>
               </div>
               <div class="icon"> <i class="bi bi-sign-turn-right text-yellow-40"></i> </div>
             </div>
@@ -112,7 +111,7 @@ $servicedetails = get_service_details($service_details_title);
           <a href="#" onclick="javascript: getEventsTotalsforService('4');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events4xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP4xx'];?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP4xx']; ?></p>
               </div>
               <div class="icon"> <i class="bi bi-exclamation-square text-yellow-40"></i> </div>
             </div>
@@ -124,7 +123,7 @@ $servicedetails = get_service_details($service_details_title);
           <a href="#" onclick="javascript: getEventsTotalsforService('5');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events5xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP5xx'];?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP5xx']; ?></p>
               </div>
               <div class="icon"> <i class="bi bi-database-x text-yellow-40"></i> </div>
             </div>
@@ -136,7 +135,7 @@ $servicedetails = get_service_details($service_details_title);
           <a href="#" onclick="javascript: getEventsTotalsforService('99999999');">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsDown"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_Down'];?></p>
+                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_Down']; ?></p>
               </div>
               <div class="icon"> <i class="bi bi-exclamation-diamond-fill text-red-40"></i> </div>
             </div>
@@ -154,8 +153,8 @@ $servicedetails = get_service_details($service_details_title);
 
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
-              <li> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details'];?>  </a></li>
-              <li> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events'];?>   </a></li>
+              <li> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
+              <li> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
 
 
             </ul>
@@ -173,39 +172,39 @@ $servicedetails = get_service_details($service_details_title);
                 <div class="row">
     <!-- column 1 -->
                   <div class="col-sm-6 col-xs-12">
-                    <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_MainInfo_Title'];?></h4>
+                    <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_MainInfo_Title']; ?></h4>
                     <div class="box-body form-horizontal">
 
                       <!-- URL -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_URL'];?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_URL']; ?></label>
                         <div class="col-sm-9">
-                          <input class="form-control" id="txtURL" type="text" readonly value="<?php echo $servicedetails['mon_URL']?>">
+                          <input class="form-control" id="txtURL" type="text" readonly value="<?php echo $servicedetails['mon_URL'] ?>">
                         </div>
                       </div>
-      
+
                       <!-- Tags -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_Tags'];?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_Tags']; ?></label>
                         <div class="col-sm-9">
-                          <input class="form-control" id="txtTags" type="text" value="<?php echo $servicedetails['mon_Tags']?>">
+                          <input class="form-control" id="txtTags" type="text" value="<?php echo $servicedetails['mon_Tags'] ?>">
                         </div>
                       </div>
 
 
 
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_MAC'];?></label>
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_MAC']; ?></label>
                         <div class="col-sm-9">
                           <div class="input-group">
                             <div class="input-group-btn">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select'];?>
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select']; ?>
                                 <span class="fa fa-caret-down"></span></button>
                               <ul class="dropdown-menu">
 <?php
 
 if ($servicedetails['mon_MAC'] != "") {
-    echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\''.$servicedetails['mon_MAC'].'\')">'.$servicedetails['mon_MAC'].'</a></li>';
+	echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\'' . $servicedetails['mon_MAC'] . '\')">' . $servicedetails['mon_MAC'] . '</a></li>';
 }
 
 echo '<li> -----  </li>';
@@ -215,72 +214,72 @@ echo '<li> -----  </li>';
 $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
 $code_array = array();
 while ($row = $dev_res->fetchArray()) {
-    echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\''.$row['dev_MAC'].'\')">'.$row['dev_Name'].'</a></li>';
+	echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\'' . $row['dev_MAC'] . '\')">' . $row['dev_Name'] . '</a></li>';
 }
 
 ?>
                               </ul>
                             </div>
                             <!-- /btn-group -->
-                            <input type="text" id="txtMAC" class="form-control" data-enpassusermodified="yes" value="<?php echo $servicedetails['mon_MAC'];?>">
+                            <input type="text" id="txtMAC" class="form-control" data-enpassusermodified="yes" value="<?php echo $servicedetails['mon_MAC']; ?>">
                           </div>
                         </div>
                       </div>
 
-                    </div>         
+                    </div>
                   </div>
 
 
     <!-- column 2 -->
                   <div class="col-sm-6 col-xs-12" style="margin-bottom: 50px;">
-                    <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_EveandAl_Title'];?></h4>
+                    <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_EveandAl_Title']; ?></h4>
                     <div class="box-body form-horizontal">
 
                       <!-- Last HTTP Status -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_StatusCode'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_StatusCode']; ?></label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?php echo $servicedetails['mon_LastStatus']?>">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?php echo $servicedetails['mon_LastStatus'] ?>">
                         </div>
                       </div>
 
                       <!-- Last IP -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_TargetIP'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_TargetIP']; ?></label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txtLastIP" type="text" readonly value="<?php echo $servicedetails['mon_TargetIP']?>">
+                          <input class="form-control" id="txtLastIP" type="text" readonly value="<?php echo $servicedetails['mon_TargetIP'] ?>">
                         </div>
                       </div>
 
                       <!-- Last Scan -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_ScanTime'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_ScanTime']; ?></label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $servicedetails['mon_LastScan']?>">
+                          <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $servicedetails['mon_LastScan'] ?>">
                         </div>
                       </div>
 
                       <!-- Last Latency -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_Response_Time'];?></label>
+                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_Response_Time']; ?></label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txtLastLatency" type="text" readonly value="<?php echo $servicedetails['mon_LastLatency']?>">
+                          <input class="form-control" id="txtLastLatency" type="text" readonly value="<?php echo $servicedetails['mon_LastLatency'] ?>">
                         </div>
                       </div>
 
                       <!-- Alert events -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents'];?></label>
+                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents']; ?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
-                          <input class="checkbox blue" id="chkAlertEvents" <?php if($servicedetails['mon_AlertEvents'] == 1) {echo 'checked';}?> type="checkbox">
+                          <input class="checkbox blue" id="chkAlertEvents" <?php if ($servicedetails['mon_AlertEvents'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
                       </div>
-      
+
                       <!-- Alert Down -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertDown'];?></label>
+                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertDown']; ?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
-                          <input class="checkbox red" id="chkAlertDown" <?php if($servicedetails['mon_AlertDown'] == 1) {echo 'checked';}?> type="checkbox">
+                          <input class="checkbox red" id="chkAlertDown" <?php if ($servicedetails['mon_AlertDown'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
                       </div>
 
@@ -290,34 +289,28 @@ while ($row = $dev_res->fetchArray()) {
                   <!-- Buttons -->
                   <div class="col-xs-12">
                     <div class="pull-right">
-                        <!-- <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;" -->
-                        <button type="button" class="btn btn-danger"  style="margin-left:6px; margin-top:6px;"
-                          id="btnDelete"   onclick="askDeleteService()"> <?php echo $pia_lang['Gen_Delete'];?> </button>
-                        <!-- <button type="button" class="btn btn-default pa-btn" style="margin-left:6px;"  -->
-                        <button type="button" class="btn btn-default" style="margin-left:6px; margin-top:6px;" 
-                          id="btnRestore"  onclick="location.reload()"> <?php echo $pia_lang['Gen_Cancel'];?> </button>
-                        <!-- <button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px;"  -->
-                        <button type="button" class="btn btn-primary" style="margin-left:6px; margin-top:6px;" 
-                          id="btnSave"     onclick="setServiceData()" > <?php echo $pia_lang['Gen_Save'];?> </button>
+                        <button type="button" class="btn btn-danger servicedet_button_space"  id="btnDelete"   onclick="askDeleteService()"> <?php echo $pia_lang['Gen_Delete']; ?> </button>
+                        <button type="button" class="btn btn-default servicedet_button_space" id="btnRestore"  onclick="location.reload()">  <?php echo $pia_lang['Gen_Cancel']; ?> </button>
+                        <button type="button" class="btn btn-primary servicedet_button_space" id="btnSave"     onclick="setServiceData()" >  <?php echo $pia_lang['Gen_Save']; ?> </button>
                     </div>
                   </div>
 
                 </div>
-              </div>                                                                         
+              </div>
 
 <!-- tab page 4 ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panEvents">
-                
+
                 <!-- Datatable Events -->
 
                 <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                   <thead>
                   <tr>
                     <!-- <th>Service URL</th> -->
-                    <th><?php echo $pia_lang['WebServices_tablehead_TargetIP'];?></th>
-                    <th><?php echo $pia_lang['WebServices_tablehead_ScanTime'];?></th>
-                    <th><?php echo $pia_lang['WebServices_tablehead_Status_Code'];?></th>
-                    <th><?php echo $pia_lang['WebServices_tablehead_Response_Time'];?></th>
+                    <th><?php echo $pia_lang['WebServices_tablehead_TargetIP']; ?></th>
+                    <th><?php echo $pia_lang['WebServices_tablehead_ScanTime']; ?></th>
+                    <th><?php echo $pia_lang['WebServices_tablehead_Status_Code']; ?></th>
+                    <th><?php echo $pia_lang['WebServices_tablehead_Response_Time']; ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -351,7 +344,7 @@ get_service_events_table($service_details_title);
 
 <!-- ----------------------------------------------------------------------- -->
 <?php
-  require 'php/templates/footer.php';
+require 'php/templates/footer.php';
 ?>
 
 
@@ -375,7 +368,7 @@ get_service_events_table($service_details_title);
 <!-- Dark-Mode Patch -->
 <?php
 if ($ENABLED_DARKMODE === True) {
-   echo '<link rel="stylesheet" href="css/dark-patch-cal.css">';
+	echo '<link rel="stylesheet" href="css/dark-patch-cal.css">';
 }
 ?>
 
@@ -399,7 +392,7 @@ if ($ENABLED_DARKMODE === True) {
 // -----------------------------------------------------------------------------
 
 function main () {
-  url = '<?php echo $service_details_title;?>'
+  url = '<?php echo $service_details_title; ?>'
   initializeTabs();
   initializeiCheck();
   getEventsTotalsforService();
@@ -440,7 +433,7 @@ function getEventsTotalsforService() {
   // stopTimerRefreshData();
 
   // get totals and put in boxes
-  $.get('php/server/services.php?action=getEventsTotalsforService&url=<?php echo $servicedetails['mon_URL']?>', function(data) {
+  $.get('php/server/services.php?action=getEventsTotalsforService&url=<?php echo $servicedetails['mon_URL'] ?>', function(data) {
     var totalsEvents = JSON.parse(data);
 
     $('#eventsAll').html      (totalsEvents[0].toLocaleString());
@@ -493,13 +486,13 @@ function initializeDatatable () {
     'language'    : {
       processing: '<table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td></table>',
       emptyTable: 'No data',
-      "lengthMenu": "<?php echo $pia_lang['Events_Tablelenght'];?>",
-      "search":     "<?php echo $pia_lang['Events_Searchbox'];?>: ",
+      "lengthMenu": "<?php echo $pia_lang['Events_Tablelenght']; ?>",
+      "search":     "<?php echo $pia_lang['Events_Searchbox']; ?>: ",
       "paginate": {
-          "next":       "<?php echo $pia_lang['Events_Table_nav_next'];?>",
-          "previous":   "<?php echo $pia_lang['Events_Table_nav_prev'];?>"
+          "next":       "<?php echo $pia_lang['Events_Table_nav_next']; ?>",
+          "previous":   "<?php echo $pia_lang['Events_Table_nav_prev']; ?>"
       },
-      "info":           "<?php echo $pia_lang['Events_Table_info'];?>",
+      "info":           "<?php echo $pia_lang['Events_Table_info']; ?>",
     },
   });
 };
@@ -520,7 +513,7 @@ function setServiceData(refreshCallback='') {
     + '&alertevents='     + ($('#chkAlertEvents')[0].checked * 1)
     , function(msg) {
 
-    // deactivate button 
+    // deactivate button
     // deactivateSaveRestoreData ();
     showMessage (msg);
     // Callback fuction
@@ -538,8 +531,8 @@ function askDeleteService () {
   }
 
   // Ask delete device
-  showModalWarning ('<?php echo $pia_lang['WebServices_button_Delete_label'];?>', '<?php echo $pia_lang['WebServices_button_Delete_Warning'];?>',
-    '<?php echo $pia_lang['Gen_Cancel'];?>', '<?php echo $pia_lang['Gen_Delete'];?>', 'deleteService');
+  showModalWarning ('<?php echo $pia_lang['WebServices_button_Delete_label']; ?>', '<?php echo $pia_lang['WebServices_button_Delete_Warning']; ?>',
+    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteService');
 }
 
 
