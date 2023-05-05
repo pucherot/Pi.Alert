@@ -1699,7 +1699,7 @@ def check_services_health(site):
 def get_services_list():
 
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
-        monitor_logfile.write("- Get Services List\n")
+        monitor_logfile.write("    Get Services List\n")
         monitor_logfile.close()
 
     sql.execute("SELECT mon_URL FROM Services")
@@ -1715,7 +1715,7 @@ def get_services_list():
 def flush_services_current_scan():
 
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
-        monitor_logfile.write("- Flush previous scan results\n")
+        monitor_logfile.write("    Flush previous scan results\n")
         monitor_logfile.close()
 
     sql.execute("DELETE FROM Services_CurrentScan")
@@ -1731,8 +1731,8 @@ def print_service_monitoring_changes():
     print("        Changed Reachability....:", str(changedLatency))
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
         monitor_logfile.write("\nServices Monitoring Changes:\n")
-        monitor_logfile.write("- Changed StatusCodes.....: " + str(changedStatusCode))
-        monitor_logfile.write("\n- Changed Reachability....: " + str(changedLatency))
+        monitor_logfile.write("    Changed StatusCodes.....: " + str(changedStatusCode))
+        monitor_logfile.write("\n    Changed Reachability....: " + str(changedLatency))
         monitor_logfile.write("\n")
         monitor_logfile.close()
 
@@ -1890,7 +1890,7 @@ def service_monitoring():
         monitor_logfile.write("\nPi.Alert " + VERSION + " (" + VERSION_DATE + "):\n---------------------------------------------------------\n")
         monitor_logfile.write("Current User: %s \n\n" % get_username())
         monitor_logfile.write("Monitor Web-Services\n")
-        monitor_logfile.write("- Timestamp: " + strftime("%Y-%m-%d %H:%M:%S") + "\n")
+        monitor_logfile.write("    Timestamp: " + strftime("%Y-%m-%d %H:%M:%S") + "\n")
         monitor_logfile.close()
 
     print("    Get Services List...")
@@ -1909,9 +1909,13 @@ def service_monitoring():
             status,latency = check_services_health(site)
             site_retry = ''
             if latency == "99999999" :
-                # Retry if the first attempt fails
+                # 2nd Retry if the first attempt fails
                 status,latency = check_services_health(site)
                 site_retry = '*'
+                if latency == "99999999" :
+                    # 3rd Retry if the second attempt fails
+                    status,latency = check_services_health(site)
+                    site_retry = '**'
 
             scantime = strftime("%Y-%m-%d %H:%M:%S")
 
