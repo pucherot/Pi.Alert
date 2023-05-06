@@ -186,7 +186,7 @@ for ($x = 0; $x < sizeof($running_services); $x++) {
 		$servives_description = implode(" ", $temp_services_arr);
 		if ($table_color == 'odd') {$table_color = 'even';} else { $table_color = 'odd';}
 
-		echo '<tr class="' . $table_color . '"><td style="padding: 3px; padding-left: 10px;">' . $servives_name . '</td><td style="padding: 3px; padding-left: 10px;">' . $servives_description . '</td></tr>';
+		echo '<tr class="' . $table_color . '"><td style="padding: 3px; padding-left: 10px;">' . substr($servives_name, 0, -8) . '</td><td style="padding: 3px; padding-left: 10px;">' . $servives_description . '</td></tr>';
 	}
 }
 echo '</table>';
