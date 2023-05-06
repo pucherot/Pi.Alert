@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.92'
+SCRIPTVERSION='v0.93'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -315,39 +315,90 @@ case $1 in
 
     # Set defaults if empty
     # -------------------------------------------------------------------------------
+    # General Settings
     if [ -z "$REWRITE_PIALERT_WEB_PROTECTION" ]
     then
         REWRITE_PIALERT_WEB_PROTECTION="PIALERT_WEB_PROTECTION = False"
     fi
-
     if [ -z "$REWRITE_PIALERT_WEB_PASSWORD" ]
     then
         REWRITE_PIALERT_WEB_PASSWORD="PIALERT_WEB_PASSWORD   = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'"
     fi
-
     if [ -z "$REWRITE_SCAN_WEBSERVICES" ]
     then
         REWRITE_SCAN_WEBSERVICES="SCAN_WEBSERVICES       = True"
     fi
 
+
+    # Special Protocol Scanning
     if [ -z "$REWRITE_SCAN_ROGUE_DHCP" ]
     then
         REWRITE_SCAN_ROGUE_DHCP="SCAN_ROGUE_DHCP        = False"
     fi
-
     if [ -z "$REWRITE_DHCP_SERVER_ADDRESS" ]
     then
         REWRITE_DHCP_SERVER_ADDRESS="DHCP_SERVER_ADDRESS    = '0.0.0.0'"
     fi
 
+
+    # WebGUI Reporting
     if [ -z "$REWRITE_REPORT_WEBGUI" ]
     then
         REWRITE_REPORT_WEBGUI="REPORT_WEBGUI         = True"
     fi
-
     if [ -z "$REWRITE_REPORT_WEBGUI_WEBMON" ]
     then
         REWRITE_REPORT_WEBGUI_WEBMON="REPORT_WEBGUI_WEBMON  = True"
+    fi
+
+
+    # ntfy
+    if [ -z "$REWRITE_REPORT_NTFY" ]
+    then
+        REWRITE_REPORT_NTFY="REPORT_NTFY         = False"
+    fi
+    if [ -z "$REWRITE_REPORT_NTFY_WEBMON" ]
+    then
+        REWRITE_REPORT_NTFY_WEBMON="REPORT_NTFY_WEBMON  = False"
+    fi
+    if [ -z "$REWRITE_NTFY_HOST" ]
+    then
+        REWRITE_NTFY_HOST="NTFY_HOST           = 'https://ntfy.sh'"
+    fi
+    if [ -z "$REWRITE_NTFY_TOPIC" ]
+    then
+        REWRITE_NTFY_TOPIC="NTFY_TOPIC          = 'replace_my_secure_topicname_91h889f28'"
+    fi
+    if [ -z "$REWRITE_NTFY_USER" ]
+    then
+        REWRITE_NTFY_USER="NTFY_USER           = 'user'"
+    fi
+    if [ -z "$REWRITE_NTFY_PASSWORD" ]
+    then
+        REWRITE_NTFY_PASSWORD="NTFY_PASSWORD        = 'password'"
+    fi
+    if [ -z "$REWRITE_NTFY_PRIORITY" ]
+    then
+        REWRITE_NTFY_PRIORITY="NTFY_PRIORITY        = 'default'"
+    fi
+
+
+    # Fritzbox Configuration
+    if [ -z "$REWRITE_FRITZBOX_ACTIVE" ]
+    then
+        REWRITE_FRITZBOX_ACTIVE="FRITZBOX_ACTIVE   = False"
+    fi
+    if [ -z "$REWRITE_FRITZBOX_IP" ]
+    then
+        REWRITE_FRITZBOX_IP="FRITZBOX_IP       = '192.168.17.1'"
+    fi
+    if [ -z "$REWRITE_FRITZBOX_USER" ]
+    then
+        REWRITE_FRITZBOX_USER="FRITZBOX_USER     = 'user'"
+    fi
+    if [ -z "$REWRITE_FRITZBOX_PASS" ]
+    then
+        REWRITE_FRITZBOX_PASS="FRITZBOX_PASS     = 'password'"
     fi
 
     # Write clean Config
