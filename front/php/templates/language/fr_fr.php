@@ -672,4 +672,10 @@ $pia_lang['Reports_delete_all_noti'] = 'Supprimer toutes les notifications';
 $pia_lang['Reports_delete_all_noti_text'] = 'Toutes les notifications sont supprimées. Le compteur est ainsi remis à zéro.';
 $pia_lang['Reports_Rogue_hint'] = 'Un nouveau message concernant un serveur DHCP inconnu n&apos;est envoyé qu&apos;après la suppression de ce message.';
 
+//////////////////////////////////////////////////////////////////
+// System Info Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['SysInfo_storage_note'] = 'Il est possible que l&apos;utilisation de la mémoire ne puisse pas être déterminée pour tous les lecteurs énumérés ci-dessus. Cela dépend de l&apos;utilisateur sous lequel les lecteurs sont montés.';
+
 ?>

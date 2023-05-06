@@ -681,4 +681,10 @@ $pia_lang['Reports_delete_all_noti'] = 'Delete all notifications';
 $pia_lang['Reports_delete_all_noti_text'] = 'All notifications are deleted. The counter is being reset with this.';
 $pia_lang['Reports_Rogue_hint'] = 'A new message about an unknown DHCP server will only be displayed after this message has been deleted.';
 
+//////////////////////////////////////////////////////////////////
+// System Info Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['SysInfo_storage_note'] = 'It is possible that the memory usage cannot be determined for all drives listed above. This depends on the user under which the drives are mounted.';
+
 ?>

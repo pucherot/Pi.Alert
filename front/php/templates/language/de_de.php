@@ -678,4 +678,10 @@ $pia_lang['Reports_delete_all_noti'] = 'Alle Benachrichtigungen löschen';
 $pia_lang['Reports_delete_all_noti_text'] = 'Es werden alle Benachrichtigungen gelöscht. Der Zähler wird damit zurückgesetzt.';
 $pia_lang['Reports_Rogue_hint'] = 'Eine erneute Meldung über einen unbekannten DHCP Server erfolgt erst nach dem Löschen dieser Meldung.';
 
+//////////////////////////////////////////////////////////////////
+// System Info Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung nicht für alle oben gelisteten Laufwerke ermittelt werden kann. Dies ist abhängig davon, unter welchem Benutzer die Laufwerke gemoutet sind.';
+
 ?>

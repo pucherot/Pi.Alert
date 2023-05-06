@@ -676,4 +676,10 @@ $pia_lang['Reports_delete_all_noti'] = 'Borrar todas las notificaciones';
 $pia_lang['Reports_delete_all_noti_text'] = 'Se borran todas las notificaciones. El contador se pone a cero.';
 $pia_lang['Reports_Rogue_hint'] = 'Un nuevo mensaje sobre un servidor DHCP desconocido sólo se muestra después de haber borrado este mensaje.';
 
+//////////////////////////////////////////////////////////////////
+// System Info Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['SysInfo_storage_note'] = 'Es posible que no se pueda determinar el uso de memoria para todas las unidades enumeradas anteriormente. Esto depende del usuario bajo el cual están montadas las unidades.';
+
 ?>
