@@ -666,7 +666,7 @@ $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Nicht jedes Feld, was auf di
 														<li>CheckBox: ' . $pia_lang['WebServices_Events_down'] . '</li>
 													</ul>';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Das Filtern der Ereignisse über die bunten Kacheln funktioniert nicht.';
-$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Ja, das stimmt.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Ab Version 2023.05.10 ist dies möglich.';
 
 //////////////////////////////////////////////////////////////////
 // Reports Page

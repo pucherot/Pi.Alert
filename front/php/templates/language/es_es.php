@@ -664,7 +664,7 @@ $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Not every field that is disp
 														<li>CheckBox: ' . $pia_lang['WebServices_Events_down'] . '</li>
 													</ul>';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Filtering the events via the colored tiles does not work.';
-$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Yes, that\'s right.';
+$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'With version 2023.05.10 it is possible.';
 
 //////////////////////////////////////////////////////////////////
 // Reports Page

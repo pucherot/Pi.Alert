@@ -16,12 +16,21 @@ if ($_SESSION["login"] != 1) {
 	exit;
 }
 
+# Validate URL
+$_REQUEST['url'] = filter_var($_REQUEST['url'], FILTER_SANITIZE_URL);
+
+if (filter_var($_REQUEST['url'], FILTER_VALIDATE_URL)) {
+	$service_details_title = $_REQUEST['url'];
+	$service_details_title_array = explode('://', $_REQUEST['url']);
+} else {
+	header('Location: /pialert/index.php');
+	exit;
+}
+
 require 'php/templates/header.php';
 # require 'php/server/db.php';
 
-$service_details_title = $_REQUEST['url'];
-$service_details_title_array = explode('://', $_REQUEST['url']);
-
+# Init DB Connection
 $db_file = '../db/pialert.db';
 $db = new SQLite3($db_file);
 $db->exec('PRAGMA journal_mode = wal;');
@@ -34,10 +43,30 @@ function get_service_details($service_URL) {
 	return $row;
 }
 
-function get_service_events_table($service_URL) {
+# Set Filter of fallback to default
+$http_filter = $_REQUEST['filter'];
+if (!isset($http_filter)) {$http_filter = 'all';}
+
+function get_service_events_table($service_URL, $service_filter) {
 	global $db;
 
-	$moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="' . $service_URL . '"');
+	#echo $service_filter;
+
+	if ($service_filter == 'all') {
+		$filter_sql = "";
+	} elseif ($service_filter == 2) {
+		$filter_sql = 'AND moneve_StatusCode LIKE "2%"';
+	} elseif ($service_filter == 3) {
+		$filter_sql = 'AND moneve_StatusCode LIKE "3%"';
+	} elseif ($service_filter == 4) {
+		$filter_sql = 'AND moneve_StatusCode LIKE "4%"';
+	} elseif ($service_filter == 5) {
+		$filter_sql = 'AND moneve_StatusCode LIKE "5%"';
+	} elseif ($service_filter == "99999999") {
+		$filter_sql = 'AND moneve_Latency="99999999"';
+	}
+
+	$moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="' . $service_URL . '"' . $filter_sql);
 	while ($row = $moneve_res->fetchArray()) {
 		if ($row['moneve_TargetIP'] == '') {$func_TargetIP = 'n.a.';} else { $func_TargetIP = $row['moneve_TargetIP'];}
 		echo '<tr>
@@ -47,6 +76,25 @@ function get_service_events_table($service_URL) {
                   <td>' . $row['moneve_Latency'] . '</td>
               </tr>';
 	}
+}
+
+function set_table_headline($service_filter) {
+	global $pia_lang;
+
+	if ($service_filter == 'all') {
+		echo '<h3 class="text-aqua" style="display: inline-block;font-size: 18px; margin: 0; line-height: 1;">' . $pia_lang['WebServices_Events_Shortcut_All'] . '</h3>';
+	} elseif ($service_filter == 2) {
+		echo '<h3 class="text-green" style="display: inline-block;font-size: 18px; margin: 0; line-height: 1;">' . $pia_lang['WebServices_Events_Shortcut_HTTP2xx'] . '</h3>';
+	} elseif ($service_filter == 3) {
+		echo '<h3 class="text-yellow" style="display: inline-block;font-size: 18px; margin: 0; line-height: 1;">' . $pia_lang['WebServices_Events_Shortcut_HTTP3xx'] . '</h3>';
+	} elseif ($service_filter == 4) {
+		echo '<h3 class="text-yellow" style="display: inline-block;font-size: 18px; margin: 0; line-height: 1;">' . $pia_lang['WebServices_Events_Shortcut_HTTP4xx'] . '</h3>';
+	} elseif ($service_filter == 5) {
+		echo '<h3 class="text-yellow" style="display: inline-block;font-size: 18px; margin: 0; line-height: 1;">' . $pia_lang['WebServices_Events_Shortcut_HTTP5xx'] . '</h3>';
+	} elseif ($service_filter == "99999999") {
+		echo '<h3 class="text-red" style="display: inline-block;font-size: 18px; margin: 0; line-height: 1;">' . $pia_lang['WebServices_Events_Shortcut_Down'] . '</h3>';
+	}
+
 }
 
 $servicedetails = get_service_details($service_details_title);
@@ -72,7 +120,7 @@ $servicedetails = get_service_details($service_details_title);
       <div class="row">
 
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEventsTotalsforService('all');">
+          <a href="./serviceDetails.php?url=<?php echo $service_details_title ?>&filter=all" onclick="javascript: getEventsTotalsforService('all');">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_All']; ?></p>
@@ -84,7 +132,7 @@ $servicedetails = get_service_details($service_details_title);
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEventsTotalsforService('2');">
+          <a href="./serviceDetails.php?url=<?php echo $service_details_title ?>&filter=2" onclick="javascript: getEventsTotalsforService('2');">
             <div class="small-box bg-green">
               <div class="inner"> <h3 id="events2xx"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP2xx']; ?></p>
@@ -96,7 +144,7 @@ $servicedetails = get_service_details($service_details_title);
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEventsTotalsforService('3');">
+          <a href="./serviceDetails.php?url=<?php echo $service_details_title ?>&filter=3" onclick="javascript: getEventsTotalsforService('3');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events3xx"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP3xx']; ?></p>
@@ -108,7 +156,7 @@ $servicedetails = get_service_details($service_details_title);
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEventsTotalsforService('4');">
+          <a href="./serviceDetails.php?url=<?php echo $service_details_title ?>&filter=4" onclick="javascript: getEventsTotalsforService('4');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events4xx"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP4xx']; ?></p>
@@ -120,7 +168,7 @@ $servicedetails = get_service_details($service_details_title);
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEventsTotalsforService('5');">
+          <a href="./serviceDetails.php?url=<?php echo $service_details_title ?>&filter=5" onclick="javascript: getEventsTotalsforService('5');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events5xx"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP5xx']; ?></p>
@@ -132,7 +180,7 @@ $servicedetails = get_service_details($service_details_title);
 
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
-          <a href="#" onclick="javascript: getEventsTotalsforService('99999999');">
+          <a href="./serviceDetails.php?url=<?php echo $service_details_title ?>&filter=99999999" onclick="javascript: getEventsTotalsforService('99999999');">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsDown"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_Down']; ?></p>
@@ -150,16 +198,13 @@ $servicedetails = get_service_details($service_details_title);
         <div class="col-lg-12 col-sm-12 col-xs-12">
         <!-- <div class="box-transparent"> -->
 
-
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
-              <li> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
-              <li> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
+              <li class=""> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
+              <li class=""> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
 
 
             </ul>
-
-
 
             <div class="tab-content" style="min-height: 430px;">
 
@@ -228,7 +273,6 @@ while ($row = $dev_res->fetchArray()) {
 
                     </div>
                   </div>
-
 
     <!-- column 2 -->
                   <div class="col-sm-6 col-xs-12" style="margin-bottom: 50px;">
@@ -301,6 +345,11 @@ while ($row = $dev_res->fetchArray()) {
 <!-- tab page 4 ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panEvents">
 
+<?php
+# Create Event table headline
+set_table_headline($http_filter);
+
+?>
                 <!-- Datatable Events -->
 
                 <table id="tableEvents" class="table table-bordered table-hover table-striped ">
@@ -316,13 +365,14 @@ while ($row = $dev_res->fetchArray()) {
                   <tbody>
 
 <?php
-
-get_service_events_table($service_details_title);
+# Create Event table
+get_service_events_table($service_details_title, $http_filter);
 
 ?>
                 </tbody>
 
                 </table>
+
               </div>
 
             </div>
@@ -397,6 +447,13 @@ function main () {
   initializeiCheck();
   getEventsTotalsforService();
   initializeDatatable();
+
+<?php
+if (isset($_REQUEST['filter'])) {
+	echo "$('.nav-tabs a[id=tabEvents]').tab('show');";
+}
+?>
+
 }
 
 function initializeTabs () {
@@ -468,10 +525,6 @@ function initializeDatatable () {
 
     'columnDefs'  : [
       {className: 'text-center', targets: [1,2,3] },
-      //{className: 'text-right',  targets: [1] },
-      //{width:     '220px',       targets: [0] },
-      //{width:     '120px',       targets: [1] },
-      //{width:     '80px',        targets: [3] },
 
       //Device Name
       {targets: [0],
