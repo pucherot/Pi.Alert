@@ -283,21 +283,12 @@ block is not necessary
   python3 ~/pialert/back/pialert.py 1
   ```
 
-5.8 - Update crontab template with python3
-
-  If you prefer to use Python 3 (installed in the previous block), you must
-  update `pialert.cron` file with the correct command: `python3` instead of
-  `python`
-  ```
-  sed -i 's/python/python3/g' ~/pialert/install/pialert.cron
-  ```
-
-5.9 - Add crontab jobs
+5.8 - Add crontab jobs
   ```
   (crontab -l 2>/dev/null; cat ~/pialert/install/pialert.cron) | crontab -
   ```
 
-5.10 - Add necessary permissions
+5.9 - Add necessary permissions
   ```
   chmod go+x ~/pialert
   sudo chgrp -R www-data ~/pialert/db
@@ -313,7 +304,7 @@ block is not necessary
   chmod +x ~/pialert/back/shoutrrr/x86/shoutrrr
   ```
 
-5.11 - Create Symlinks for the Log-Viewer
+5.10 - Create Symlinks for the Log-Viewer
   ```
   touch "~/pialert/log/pialert.vendors.log"
   touch "~/pialert/log/pialert.IP.log"
@@ -327,7 +318,7 @@ block is not necessary
   ln -s "~/pialert/log/pialert.webservices.log" "~/pialert/front/php/server/pialert.webservices.log"
   ```
 
-5.12 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole
+5.11 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole
   installation)
   - Add pi.alert DNS Record
     ```
@@ -341,7 +332,7 @@ block is not necessary
       - pi.alert    192.168.1.x
       - (*replace 192.168.1.x with your Raspberry IP*)
 
-5.13 - Use admin panel to configure the devices
+5.12 - Use admin panel to configure the devices
   - http://pi.alert/
   - http://192.168.1.x/pialert/
     - (*replace 192.168.1.x with your Raspberry IP*)

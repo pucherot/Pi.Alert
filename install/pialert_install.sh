@@ -552,9 +552,9 @@ add_jobs_to_crontab() {
   fi
 
   print_msg "- Adding jobs to the crontab..."
-  if [ $USE_PYTHON_VERSION -eq 3 ] ; then
-    sed -i "s/\<python\>/$PYTHON_BIN/g" $PIALERT_HOME/install/pialert.cron
-  fi
+  # if [ $USE_PYTHON_VERSION -eq 3 ] ; then
+  #   sed -i "s/\<python\>/$PYTHON_BIN/g" $PIALERT_HOME/install/pialert.cron
+  # fi
 
   (crontab -l 2>/dev/null || : ; cat $PIALERT_HOME/install/pialert.cron) | crontab -
 }
