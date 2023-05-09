@@ -172,7 +172,7 @@ block is not necessary
   sudo apt-get install dnsutils net-tools -y
   ```
 
-4.3 - Installing nmap and zip
+4.3 - Installing nmap, zip and wakeonlan
   ```
   sudo apt-get install nmap zip wakeonlan -y
   ```
@@ -184,25 +184,29 @@ block is not necessary
   ```
   python -V
   ```
-
-  New versions of Ubuntu includes Python 3. You can choose between use `python3`
-  command or to install Python 2 (that includes `python` command).
-  
-  
-  If you prefer to use Python 3, in the next installation block, you must update
-  `pialert.cron` file with the correct command: `python3` instead of `python`.
+  or
   ```
   python3 -V
   ```
 
-4.5 - If Python is not installed in your system, you can install it with this
+  Python 3 is required for this installation. If Python 2 is installed on 
+  the system, an installation of Python 3 is mandatory.
+
+  If Python 3 is installed, necessary packages have to be installed afterwards.
+  ```
+  sudo apt-get install python3-pip python3-requests
+  ```
+
+4.5 - If Python 3 is not installed in your system, you can install it with this
   command:
   ```
-  sudo apt-get install python python-pip python-requests
+  sudo apt-get install python3 python3-pip python3-requests
   ```
-  Or this one if you prefer Python 3 (recommended):
+
+4.6 - Install additional packages
   ```
-  sudo apt-get install python3 python3-pip python3-requests python-is-python3
+  sudo pip3 install mac-vendor-lookup
+  sudo pip3 install fritzconnection
   ```
 
 ### Pi.Alert
@@ -270,19 +274,10 @@ block is not necessary
 
 5.6 - Update vendors DB
   ```
-  python ~/pialert/back/pialert.py update_vendors
-  ```
-  or
-  ```
   python3 ~/pialert/back/pialert.py update_vendors
   ```
 
 5.7 - Test Pi.Alert Scan
-  ```
-  python ~/pialert/back/pialert.py internet_IP
-  python ~/pialert/back/pialert.py 1
-  ```
-  or
   ```
   python3 ~/pialert/back/pialert.py internet_IP
   python3 ~/pialert/back/pialert.py 1

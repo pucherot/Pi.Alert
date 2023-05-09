@@ -353,7 +353,7 @@ install_arpscan() {
   print_msg "- Installing dnsutils & net-tools..."
   sudo apt-get install dnsutils net-tools -y                      2>&1 >> "$LOG"
 
-  print_msg "- Installing nmap and zip..."
+  print_msg "- Installing nmap, zip and wakeonlan"
   sudo apt-get install nmap zip wakeonlan -y                      2>&1 >> "$LOG"
 }
   
@@ -386,14 +386,14 @@ install_python() {
   if [ $USE_PYTHON_VERSION -eq 3 ] ; then
     if $PYTHON3 ; then
       print_msg "- Using Python 3"
-      sudo apt-get install python3-pip python3-requests python-is-python3 -y                 2>&1 >> "$LOG"
+      sudo apt-get install python3-pip python3-requests -y                 2>&1 >> "$LOG"
     else
       print_msg "- Installing Python 3..."
-      sudo apt-get install python3 python3-pip python3-requests python-is-python3 -y         2>&1 >> "$LOG"
+      sudo apt-get install python3 python3-pip python3-requests -y         2>&1 >> "$LOG"
     fi
     print_msg "    - Install additional packages"
-    sudo pip3 install mac-vendor-lookup
-    sudo pip3 install fritzconnection
+    sudo pip3 install mac-vendor-lookup                                    2>&1 >> "$LOG"
+    sudo pip3 install fritzconnection                                      2>&1 >> "$LOG"
 
     PYTHON_BIN="python3"
   else
