@@ -167,4 +167,22 @@ function get_webservices_config() {
 	} else { $_SESSION['Scan_WebServices'] = False;}
 }
 
+// Back button for details pages ---------------------------------------------------------------
+function insert_back_button() {
+	$pagename = basename($_SERVER['PHP_SELF']);
+
+	if ($pagename == 'serviceDetails.php') {
+		$backto = 'services.php';
+	}
+
+	if ($pagename == 'deviceDetails.php') {
+		$backto = 'devices.php';
+	}
+
+	if (isset($backto)) {
+		echo '<a id="navbar-back-button" href="./' . $backto . '" role="button" style="">
+        <i class="fa fa-chevron-left"></i>
+      </a>';
+	}
+}
 ?>

@@ -147,6 +147,13 @@ document.addEventListener("visibilitychange",()=>{
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle_systeminfobox()">
         <span class="sr-only">Toggle navigation</span>
       </a>
+
+<?php
+
+insert_back_button();
+
+?>
+
       <a id="navbar-reload-button" href="" role="button" onclick="location.reload()" style="">
         <i class="fa fa-repeat"></i>
       </a>

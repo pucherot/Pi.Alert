@@ -598,18 +598,14 @@ body.modal-open {
     color: #FFF;
 }
 
-#custom-menu-logout-button {
-    background-color: #d73925;
-    color: #FFF;
-}
-
-#navbar-reload-button {
-    position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;
-}
-
-#navbar-reload-button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
+/* -----------------------------------------------------------------------------
+   Header
+----------------------------------------------------------------------------- */
+#custom-menu-logout-button {background-color: #d73925; color: #FFF;}
+#navbar-reload-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
+#navbar-reload-button:hover {background-color: rgba(0, 0, 0, 0.1);}
+#navbar-back-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
+#navbar-back-button:hover {background-color: rgba(0, 0, 0, 0.1);}
 
 /* -----------------------------------------------------------------------------
    System Info
