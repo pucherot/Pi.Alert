@@ -129,8 +129,11 @@ check_packages() {
   print_msg "- Checking packages dnsutils & net-tools..."
   sudo apt-get install dnsutils net-tools wakeonlan -y            2>&1 >> "$LOG"
 
-  print_msg "- Checking packages php-curl..."
+  print_msg "- Checking package php-curl..."
   sudo apt-get install php-curl -y                                2>&1 >> "$LOG"
+
+  print_msg "- Checking packages perl ansd python3-requests..."
+  sudo apt-get install python3-requests libwww-perl -y            2>&1 >> "$LOG"
 }
 
 
