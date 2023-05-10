@@ -351,7 +351,7 @@ install_arpscan() {
   sudo arp-scan -l | head -n -3 | tail +3                        | tee -a "$LOG"
 
   print_msg "- Installing dnsutils & net-tools..."
-  sudo apt-get install dnsutils net-tools -y                      2>&1 >> "$LOG"
+  sudo apt-get install dnsutils net-tools libwww-perl -y          2>&1 >> "$LOG"
 
   print_msg "- Installing nmap, zip and wakeonlan"
   sudo apt-get install nmap zip wakeonlan -y                      2>&1 >> "$LOG"

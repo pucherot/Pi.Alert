@@ -169,7 +169,7 @@ block is not necessary
 
 4.2 - Install dnsutils & net-tools utilities
   ```
-  sudo apt-get install dnsutils net-tools -y
+  sudo apt-get install dnsutils net-tools libwww-perl -y
   ```
 
 4.3 - Installing nmap, zip and wakeonlan
