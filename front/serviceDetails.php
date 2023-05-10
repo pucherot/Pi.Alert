@@ -35,6 +35,7 @@ $db_file = '../db/pialert.db';
 $db = new SQLite3($db_file);
 $db->exec('PRAGMA journal_mode = wal;');
 
+// -----------------------------------------------------------------------------------
 function get_service_details($service_URL) {
 	global $db;
 
@@ -43,6 +44,7 @@ function get_service_details($service_URL) {
 	return $row;
 }
 
+// -----------------------------------------------------------------------------------
 # Set Filter of fallback to default
 $http_filter = $_REQUEST['filter'];
 if (!isset($http_filter)) {$http_filter = 'all';}
@@ -78,6 +80,7 @@ function get_service_events_table($service_URL, $service_filter) {
 	}
 }
 
+// -----------------------------------------------------------------------------------
 function set_table_headline($service_filter) {
 	global $pia_lang;
 
@@ -235,8 +238,6 @@ $servicedetails = get_service_details($service_details_title);
                           <input class="form-control" id="txtTags" type="text" value="<?php echo $servicedetails['mon_Tags'] ?>">
                         </div>
                       </div>
-
-
 
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_MAC']; ?></label>
@@ -587,7 +588,6 @@ function askDeleteService () {
   showModalWarning ('<?php echo $pia_lang['WebServices_button_Delete_label']; ?>', '<?php echo $pia_lang['WebServices_button_Delete_Warning']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteService');
 }
-
 
 // -----------------------------------------------------------------------------
 function deleteService () {

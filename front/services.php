@@ -140,7 +140,7 @@ function get_count_standalone_services() {
 function get_notifications($alertDown, $alertEvent) {
 	global $pia_lang;
 
-	if ($alertEvent == "1" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_all'] . ", " . $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "0" && $alertDown == "1") {$notification_type = $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "1" && $alertDown == "0") {$notification_type = $pia_lang['WebServices_Events_all'];} else { $notification_type = $pia_lang['WebServices_Events_none'];}
+	if ($alertEvent == "1" && $alertDown == "1") {$notification_type = '<i class="fa fa-fw fa-bell-o"></i> ' . $pia_lang['WebServices_Events_all'] . ", " . $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "0" && $alertDown == "1") {$notification_type = '<i class="fa fa-fw fa-bell-o"></i> ' . $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "1" && $alertDown == "0") {$notification_type = '<i class="fa fa-fw fa-bell-o"></i> ' . $pia_lang['WebServices_Events_all'];} else { $notification_type = '<i class="fa fa-fw fa-bell-slash-o"></i>';}
 	return $notification_type;
 }
 
@@ -220,7 +220,7 @@ function list_standalone_services() {
 			}
 
 			echo '         </div>';
-			echo '         <table height="20px" width="100%"><tr><td><span class="progress-description">IP: ' . $row['mon_TargetIP'] . '</span></td><td align="right">' . $pia_lang['WebServices_label_Notification'] . ': ' . $notification_type . '</td></tr></table>
+			echo '         <table height="20px" width="100%"><tr><td><span class="progress-description">IP: ' . $row['mon_TargetIP'] . '</span></td><td align="right">' . $notification_type . '</td></tr></table>
                         </div>
                     </div>
                   </div>';
@@ -303,7 +303,7 @@ function get_service_from_unique_device($func_unique_device) {
 			}
 
 			echo '        </div>';
-			echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: ' . $row['mon_TargetIP'] . '</span></td><td align="right">' . $pia_lang['WebServices_label_Notification'] . ': ' . $notification_type . '</td></tr></table>
+			echo '              <table height="20px" width="100%"><tr><td><span class="progress-description">IP: ' . $row['mon_TargetIP'] . '</span></td><td align="right">' . $notification_type . '</td></tr></table>
                         </div>
                     </div>
                   </div>';
