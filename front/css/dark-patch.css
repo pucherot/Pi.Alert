@@ -815,4 +815,6 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .systemstatusbox {
   color: #fff;
 }
-
+.panel-body {
+  background-color: #272c30 !important;
+}
