@@ -543,60 +543,60 @@ $pia_lang['HelpFAQ_Cat_General_104_text'] = 'The database in this fork has been 
 $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
 $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-maroon help_faq_code">pialert-cli</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert
                                              without web page or change to the configuration file. With the command <span class="text-maroon help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
-											 <table style="margin-top: 20px;" border="1">
+											 <table class="help_table_gen">
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_login</td>
-											        <td style="padding-left:5px;">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE<br>
+											        <td class="help_table_gen_a">set_login</td>
+											        <td class="help_table_gen_b">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE<br>
 											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">unset_login</td>
-											        <td style="padding-left:5px;">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE<br>
+											        <td class="help_table_gen_a">unset_login</td>
+											        <td class="help_table_gen_b">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE<br>
 											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_password &lt;password&gt;</td>
-											        <td style="padding-left:5px;">- Sets the new password as a hashed value.<br>
+											        <td class="help_table_gen_a">set_password &lt;password&gt;</td>
+											        <td class="help_table_gen_b">- Sets the new password as a hashed value.<br>
 											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_autopassword</td>
-											        <td style="padding-left:5px;">- Sets a new random password as a hashed value and show it plaintext in the console.<br>
+											        <td class="help_table_gen_a">set_autopassword</td>
+											        <td class="help_table_gen_b">- Sets a new random password as a hashed value and show it plaintext in the console.<br>
 											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">disable_scan &lt;MIN&gt;</td>
-											        <td style="padding-left:5px;">- Stops all active scans.<br>
+											        <td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
+											        <td class="help_table_gen_b">- Stops all active scans.<br>
 											            - Prevents new scans from starting.<br>
 											            - You can set a Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with the next scan after 10min.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">enable_scan</td>
-											        <td style="padding-left:5px;">- Allows the start of new scans again.<br>&nbsp;</td>
+											        <td class="help_table_gen_a">enable_scan</td>
+											        <td class="help_table_gen_b">- Allows the start of new scans again.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">enable_service_mon</td>
-											        <td style="padding-left:5px;">- Enable Web Service Monitoring<br>&nbsp;</td>
+											        <td class="help_table_gen_a">enable_service_mon</td>
+											        <td class="help_table_gen_b">- Enable Web Service Monitoring<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">disable_service_mon</td>
-											        <td style="padding-left:5px;">- Disable Web Service Monitoring<br>&nbsp;</td>
+											        <td class="help_table_gen_a">disable_service_mon</td>
+											        <td class="help_table_gen_b">- Disable Web Service Monitoring<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
-											        <td style="padding-left:5px;">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
+											        <td class="help_table_gen_a">update_db</td>
+											        <td class="help_table_gen_b">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_apikey</td>
-											        <td style="padding-left:5px;">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td>
+											        <td class="help_table_gen_a">set_apikey</td>
+											        <td class="help_table_gen_b">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">reporting_test</td>
-											        <td style="padding-left:5px;">- Test reporting for all activated services.<br>&nbsp;</td>
+											        <td class="help_table_gen_a">reporting_test</td>
+											        <td class="help_table_gen_b">- Test reporting for all activated services.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">rewrite_config</td>
-											        <td style="padding-left:5px;">- A new decluttered configuration file (pialert-rewritten.conf) is created.<br>&nbsp;</td>
+											        <td class="help_table_gen_a">rewrite_config</td>
+											        <td class="help_table_gen_b">- A new decluttered configuration file (pialert-rewritten.conf) is created.<br>&nbsp;</td>
 											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan needs sudo privledges</span>';
@@ -668,8 +668,6 @@ $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Not every field that is disp
 														<li>CheckBox: ' . $pia_lang['WebServices_Events_all'] . '</li>
 														<li>CheckBox: ' . $pia_lang['WebServices_Events_down'] . '</li>
 													</ul>';
-$pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Filtering the events via the colored tiles does not work.';
-$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'With version 2023.05.10 it is possible.';
 
 //////////////////////////////////////////////////////////////////
 // Reports Page
