@@ -541,65 +541,230 @@ $pia_lang['HelpFAQ_Cat_General_104_text'] = 'Die Datenbank in diesem Fork wurde 
 $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
 $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class="text-maroon help_faq_code">pialert-cli</span> befindet sich im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> und bietet die Möglichkeit, Einstellungen an Pi.Alert ohne Webseite, oder manuelle Veränderungen an der
                                              Konfigurationsdatei vornehmen zu können. Mit dem Kommando <span class="text-maroon help_faq_code">./pialert-cli help</span> kann eine Liste mit den unterstützen Funktionen aufgerufen werden.
-											 <table style="margin-top: 20px;" border="1">
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_login</td>
-											        <td style="padding-left:5px;">- Setzt den Parameter PIALERT_WEB_PROTECTION in der Konfigurationsdatei auf TRUE<br>
-											            - Wenn der Parameter nicht vorhanden ist, wird er erstellt. Zusätzlich wird dann das Standard-Passwort "123456" festgelegt.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">unset_login</td>
-											        <td style="padding-left:5px;">- Setzt den Parameter PIALERT_WEB_PROTECTION in der Konfigurationsdatei auf FALSE<br>
-											            - Wenn der Parameter nicht vorhanden ist, wird er erstellt. Zusätzlich wird dann das Standard-Passwort "123456" festgelegt.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_password &lt;password&gt;</td>
-											        <td style="padding-left:5px;">- Legt das neue Passwort als Hash-Wert fest.<br>
-											            - Wenn der Parameter PIALERT_WEB_PROTECTION noch nicht vorhanden ist, wird er erstellt und auf "TRUE" gesetzt (Anmeldung aktiviert)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_autopassword</td>
-											        <td style="padding-left:5px;">- Legt ein neues Zufallspasswort als Hashwert fest und zeigt es im Klartext in der der Konsole an.<br>
-											            - Wenn der Parameter PIALERT_WEB_PROTECTION noch nicht vorhanden ist, wird er erstellt und auf "TRUE" gesetzt (Anmeldung aktiviert)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">disable_scan &lt;MIN&gt;</td>
-											        <td style="padding-left:5px;">- Stoppt alle aktiven Scans.<br>
-											            - Verhindert den Start neuer Scans.<br>- Sie können eine Zeitspanne in Minuten festlegen. Wenn keine Zeitspanne festgelegt wird, startet Pi.Alert mit dem nächsten Scan nach 10 Minuten neu.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">enable_scan</td>
-											        <td style="padding-left:5px;">- Erlaubt wieder den Start neuer Scans.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">enable_service_mon</td>
-											        <td style="padding-left:5px;">- Aktiviert die Web Service Überwachung.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">disable_service_mon</td>
-											        <td style="padding-left:5px;">- Deaktiviert die Web Service Überwachung.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">update_db</td>
-											        <td style="padding-left:5px;">- Erstellt die benötigten Datenbankfelder, welche für diesen Fork benötigt werden.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">set_apikey</td>
-											        <td style="padding-left:5px;">- Mit dem API-Schlüssel ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Webseite zu benutzen. Wenn bereits ein API-Schlüssel existiert, wird er ersetzt.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">reporting_test</td>
-											        <td style="padding-left:5px;">- Testet alle aktiven Benachrichtigungsdienste<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td style="vertical-align: top; padding-left:5px;">rewrite_config</td>
-											        <td style="padding-left:5px;">- Eine neue, aufgeräumte Konfigurationsdatei (pialert-rewritten.conf) wird erstellt.<br>&nbsp;</td>
-											    </tr>
+											 <table class="help_table_gen">
+											    <tr><td class="help_table_gen_a">set_login</td>
+											        <td class="help_table_gen_b">- Setzt den Parameter PIALERT_WEB_PROTECTION in der Konfigurationsdatei auf TRUE<br>
+											            - Wenn der Parameter nicht vorhanden ist, wird er erstellt. Zusätzlich wird dann das Standard-Passwort "123456" festgelegt</td></tr>
+											    <tr><td class="help_table_gen_a">unset_login</td>
+											        <td class="help_table_gen_b">- Setzt den Parameter PIALERT_WEB_PROTECTION in der Konfigurationsdatei auf FALSE<br>
+											            - Wenn der Parameter nicht vorhanden ist, wird er erstellt. Zusätzlich wird dann das Standard-Passwort "123456" festgelegt</td></tr>
+											    <tr><td class="help_table_gen_a">set_password &lt;password&gt;</td>
+											        <td class="help_table_gen_b">- Legt das neue Passwort als Hash-Wert fest.<br>
+											            - Wenn der Parameter PIALERT_WEB_PROTECTION noch nicht vorhanden ist, wird er erstellt und auf "TRUE" gesetzt (Anmeldung aktiviert)</td></tr>
+											    <tr><td class="help_table_gen_a">set_autopassword</td>
+											        <td class="help_table_gen_b">- Legt ein neues Zufallspasswort als Hashwert fest und zeigt es im Klartext in der der Konsole an.<br>
+											            - Wenn der Parameter PIALERT_WEB_PROTECTION noch nicht vorhanden ist, wird er erstellt und auf "TRUE" gesetzt (Anmeldung aktiviert)</td></tr>
+											    <tr><td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
+											        <td class="help_table_gen_b">- Stoppt alle aktiven Scans.<br>
+											            - Verhindert den Start neuer Scans.<br>- Sie können eine Zeitspanne in Minuten festlegen. Wenn keine Zeitspanne festgelegt wird, startet Pi.Alert mit dem nächsten Scan nach 10 Minuten neu</td></tr>
+											    <tr><td class="help_table_gen_a">enable_scan</td>
+											        <td class="help_table_gen_b">- Aktiviert den Start neuer Scans wieder</td></tr>
+											    <tr><td class="help_table_gen_a">disable_service_mon</td>
+											        <td class="help_table_gen_b">- Deaktiviert die Web Service Überwachung</td></tr>
+											    <tr><td class="help_table_gen_a">enable_service_mon</td>
+											        <td class="help_table_gen_b">- Aktiviert die Web Service Überwachung</td></tr>
+											    <tr><td class="help_table_gen_a">update_db</td>
+											        <td class="help_table_gen_b">- Erstellt die benötigten Datenbankfelder, welche für diesen Fork benötigt werden</td></tr>
+											    <tr><td class="help_table_gen_a">set_apikey</td>
+											        <td class="help_table_gen_b">- Mit dem API-Schlüssel ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Webseite zu benutzen. Wenn bereits ein API-Schlüssel existiert, wird er ersetzt</td></tr>
+											    <tr><td class="help_table_gen_a">reporting_test</td>
+											        <td class="help_table_gen_b">- Testet alle aktiven Benachrichtigungsdienste</td></tr>
+											    <tr><td class="help_table_gen_a">rewrite_config</td>
+											        <td class="help_table_gen_b">- Eine neue, aufgeräumte Konfigurationsdatei (pialert-rewritten.conf) wird erstellt</td></tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan benötigt sudo-Berechtigungen</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'Wenn ein Nicht-Standard-Benutzer verwendet wird, z. B. piadmin, schlägt der arp-scan im Cronjob fehl.<br>
 											 Dazu wird die folgende Datei erstellt: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-arpscan</span><br>
 											 Diese Datei wird geöffnet und mit folgendem Inhalt abgespeichert ("piadmin" ist durch den entsprechenden Usernamen zu ersetzen):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan</span>';
+
+$pia_lang['HelpFAQ_Cat_General_108_head'] = '<span class="text-maroon help_faq_code">"SCAN_ROGUE_DHCP" benötigt sudo-Berechtigungen</span>';
+$pia_lang['HelpFAQ_Cat_General_108_text'] = 'Wenn ein Nicht-Standard-Benutzer verwendet wird, z. B. piadmin, schlägt der Scan nach unbekannten DHCP-Servern im Cronjob fehl.<br>
+											 Dazu wird die folgende Datei erstellt: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-nmapscan</span><br>
+											 Diese Datei wird geöffnet und mit folgendem Inhalt abgespeichert ("piadmin" ist durch den entsprechenden Usernamen zu ersetzen):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/bin/nmap</span>';
+
+$pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
+$pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon help_faq_code">pialert.conf</span> befindet sich im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/config</span>.
+											 In dieser Konfigurationsdatei können viele Funktionen von Pi.Alert ensprechend der persönlichen Wünsche eingestellt werden.
+											 Da die Möglichkeiten vielfältig sind, möchte ich eine kurze Erklärung zu den einzelnen Punkten geben.
+											 <table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">General Settings</td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_PATH</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt und sollte nicht mehr verändert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">DB_PATH</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt und sollte nicht mehr verändert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">LOG_PATH</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt und sollte nicht mehr verändert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">PRINT_LOG</td>
+											        <td class="help_table_gen_b">Wenn dieser Eintrag auf <span class="text-maroon help_faq_code">True</span> steht, werden dem Scan-Log zusätzlich Zeitstempel für die einzelnen Unterfunktionen hinzugefügt. Standardmäßig steht dieser Eintrag auf <span class="text-maroon help_faq_code">False</span></td></tr>
+											    <tr><td class="help_table_gen_a">VENDORS_DB</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt und sollte nicht mehr verändert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_APIKEY</td>
+											        <td class="help_table_gen_b">Mit dem API-Schlüssel ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Webseite zu benutzen. Der API-Schlüssel ist eine zufällige Zeichenfolge, die über die Einstellungen oder über <span class="text-maroon help_faq_code">pialert-cli</span> gesetzt werden kann</td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_WEB_PROTECTION</td>
+											        <td class="help_table_gen_b">Aktiviert bzw. deaktiviert den Passwortschutz der Weboberfläche von Pi.Alert</td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_WEB_PASSWORD</td>
+											        <td class="help_table_gen_b">Dieses Feld beinhaltet das "gehashte" Passwort für die Weboberfläche. Das Passwort kann nicht im Klartext hier eingetragen, sondern muss mit <span class="text-maroon help_faq_code">pialert-cli</span> gesetzt werden</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_WEBSERVICES</td>
+											        <td class="help_table_gen_b">Hier kann die Funktion zur Überwachung von Webservices an- (<span class="text-maroon help_faq_code">True</span>) bzw. ausgeschaltet (<span class="text-maroon help_faq_code">False</span>) werden</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Special Protocol Scanning</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_ROGUE_DHCP</td>
+											        <td class="help_table_gen_b">Aktiviert die Suche nach fremden, auch "rogue" genannt, DHCP Servern. Diese Funktion dient dazu, zu erkennen, ob sich ein fremder DHCP Server im Netzwerk befindet, welcher die Kontrolle über die IP Verwaltung übernehmen könnte.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_SERVER_ADDRESS</td>
+											        <td class="help_table_gen_b">Hier wird die IP des bekannten DHCP Servers hinterlegt.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
+											        <td class="help_table_gen_b">
+											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
+											        	Im Normalfall ist diese Option bereits die korrekte Einstellungen. Diese Einstellung wird gewählt, wenn Pi.Alert auf einem Gerät mit einer Netzwerkkarte installiert ist und keine weiteren Netzwerke konfiguriert sind.<br><br>
+											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
+											        	Diese Konfiguration wird gewählt, wenn Pi.Alert auf einem System, mit mindestens 2 Netzwerkkarten und einem konfigurierten Netzwerk, installiert ist. Die Interface-Bezeichnung kann jedoch abweichen und muss den Gegebenheiten des Systems angepasst werden.<br><br>
+											        	&lsquo;<span class="text-maroon help_faq_code">192.168.1.0/24 --interface=eth0, 192.168.2.0/24 --interface=eth1</span>&rsquo;<br>
+											        	Die letzte Konfiguration ist dann notwendig, wenn mehrere Netzwerke überwacht werden sollen. Für jedes, zu überwachenden Netzwerk, muss eine entsprechende Netzwerkkarte konfiguriert sein. Dies ist deshalb notwendig, da der verwendete "arp-scan" nicht geroutet wird, also nur innerhalb des eigenen Subnetzes funktioniert. Jede Schnittstelle wird hier mit dem dazugehörigen Netzwerk eingetragen. Die Interface-Bezeichnung muss den Gegebenheiten des Systems angepasst werden.
+											        </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Mail-Account Settings</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_SERVER</td>
+											        <td class="help_table_gen_b">Addresse des eMail Servers. (z.B. smtp.gmail.com)</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_PORT</td>
+											        <td class="help_table_gen_b">Der Port des SMTP-Servers. Der Port kann je nach Serverkonfiguration variieren.</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_USER</td>
+											        <td class="help_table_gen_b">Benutzername</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_PASS</td>
+											        <td class="help_table_gen_b">Passwort</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_SKIP_TLS</td>
+											        <td class="help_table_gen_b">Wenn dieser Eintrag auf <span class="text-maroon help_faq_code">True</span> steht, ist die Transportverschlüsselung der eMail aktiviert. Wenn der Server dies nicht unterstützt, muss der Eintrag auf <span class="text-maroon help_faq_code">False</span> gesetzt werden.</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_SKIP_LOGIN</td>
+											        <td class="help_table_gen_b">Es gibt SMTP Server, die keine Anmeldung benötigen. In einem solchen Fall, kann dieser Wert auf <span class="text-maroon help_faq_code">True</span> gesetzt werden</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">WebGUI Reporting</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_WEBGUI</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen im Netzwerk in der Weboberfläche.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_WEBGUI_WEBMON</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen der überwachten Webservices in der Weboberfläche.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr>
+											        <td class="help_table_gen_section" colspan="2">Mail Reporting</td>
+											    </tr>
+											    <tr><td class="help_table_gen_a">REPORT_MAIL</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen im Netzwerk per eMail.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_MAIL_WEBMON</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen der überwachten Webservices per eMail.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_FROM</td>
+											        <td class="help_table_gen_b">Name oder Bezeichnung des Absenders.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TO</td>
+											        <td class="help_table_gen_b">eMail-Adresse, an die die Benachrichtigung gesendet werden soll.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_DEVICE_URL</td>
+											        <td class="help_table_gen_b">URL der Pi.Alert Installation, um einen klickbaren Link in der eMail, zum erkannten Gerät, erzeugen zu können.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_DASHBOARD_URL</td>
+											        <td class="help_table_gen_b">URL der Pi.Alert Installation, um einen klickbaren Link in der eMail erzeugen zu können.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr>
+											        <td class="help_table_gen_section" colspan="2">Pushsafer</td>
+											    </tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHSAFER</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen im Netzwerk via Pushsafer</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHSAFER_WEBMON</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen der überwachten Webservices via Pushsafer</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHSAFER_TOKEN</td>
+											        <td class="help_table_gen_b">Hierbei handelt es sich um den privaten Schlüssel, den man auf der pushsafer-Seite einsehen kann.</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHSAFER_DEVICE</td>
+											        <td class="help_table_gen_b">Die Device-ID, an die die Nachricht gesendet wird. &lsquo;<span class="text-maroon help_faq_code">a</span>&rsquo; bedeutet, die Nachricht wird an alle konfigurieren Geräte gesendet und verbraucht entsprechend viele API-Calls</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Pushover</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHOVER</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen im Netzwerk via Pushover</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHOVER_WEBMON</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen der überwachten Webservices via Pushover</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHOVER_TOKEN</td>
+											        <td class="help_table_gen_b">Auch "APP TOKEN" oder "API TOKEN" genannt. Dieser Token kann auf der pushover-Seite abgefragt werden</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHOVER_USER</td>
+											        <td class="help_table_gen_b">Oder auch "USER KEY". Dieser Key wird gleich nach dem Login auf der Startseite angezeigt.</td></tr>
+											</table>
+											<table class="help_table_gen">
+					    						<tr><td class="help_table_gen_section" colspan="2">NTFY</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_NTFY</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen im Netzwerk über NTFY</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_NTFY_WEBMON</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen der überwachten Webservices über NTFY</td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_HOST</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_TOPIC</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_USER</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_PASSWORD</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_PRIORITY</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Shoutrrr</td></tr>
+											    <tr><td class="help_table_gen_a">SHOUTRRR_BINARY</td>
+											        <td class="help_table_gen_b">Hier muss konfiguriert werden, welches Binary von shoutrrr zum einsatz gebracht werden muss. Dies richtet sich danach, auf welcher Hardware Pi.Alert installiert wurde,</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Telegram via Shoutrrr</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TELEGRAM</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen im Netzwerk via Telegram</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TELEGRAM_WEBMON</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen der überwachten Webservices via Telegram</td></tr>
+											    <tr><td class="help_table_gen_a">TELEGRAM_BOT_TOKEN_URL</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">DynDNS and IP</td></tr>
+											    <tr><td class="help_table_gen_a">QUERY_MYIP_SERVER</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_ACTIVE</td>
+											        <td class="help_table_gen_b">Aktiviert/Deaktiviert den konfigurierten DDNS Service in Pi.Alert. DDNS, auch als DynDNS bezeichnet, ermöglicht es, einen Domainnamen mit einer, sich regelmäßig ändernden, IP-Adresse zu aktualisieren. Diesen Service bieten verschiedene Dienstleister an.</td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_DOMAIN</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_USER</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_PASSWORD</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_UPDATE_URL</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Pi-hole Configuration</td></tr>
+											    <tr><td class="help_table_gen_a">PIHOLE_ACTIVE</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt.</td></tr>
+											    <tr><td class="help_table_gen_a">PIHOLE_DB</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt und sollte nicht mehr verändert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_ACTIVE</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_LEASES</td>
+											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt und sollte nicht mehr verändert werden.</td></tr>
+											</table>
+											<table class="help_table_gen">
+					    						<tr><td class="help_table_gen_section" colspan="2">Fritzbox Configuration</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_ACTIVE</td>
+											        <td class="help_table_gen_b">Wenn eine Fritzbox im Netzwerk zum Einsatz kommt, kann diese als Datenquelle genutzt werden. An dieser Stelle kann dies aktiviert oder deaktiviert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_IP</td>
+											        <td class="help_table_gen_b">IP-Adresse der Fritzbox.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_USER</td>
+											        <td class="help_table_gen_b">Benutzername<br>Dies setzt voraus, dass die Fritzbox für eine Anmeldung mit Benutzername und Passwort, anstatt nur mit Passwort, konfiguiert ist. Eine Anmeldung, nur mit Passwort, wird nicht unterstützt.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_PASS</td>
+											        <td class="help_table_gen_b">Passwort</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Maintenance Tasks Cron</td></tr>
+											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_ONLINEHISTORY</td>
+											        <td class="help_table_gen_b">Anzahl der Tage, für die die Online-Historie (Aktivitäts-Diagramm) in der Datenbank gespeichert werden soll. Ein Tag generiert 288 solcher Datensätze.</td></tr>
+											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_EVENTS</td>
+											        <td class="help_table_gen_b">Anzahl der Tage, für die die Events der einzelnen Geräte gespeichert werden sollen.</td></tr>
+											</table>';
+
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und
          									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen.
@@ -665,8 +830,6 @@ $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Nicht jedes Feld, was auf di
 														<li>CheckBox: ' . $pia_lang['WebServices_Events_all'] . '</li>
 														<li>CheckBox: ' . $pia_lang['WebServices_Events_down'] . '</li>
 													</ul>';
-$pia_lang['HelpFAQ_Cat_ServiceDetails_751_head'] = 'Das Filtern der Ereignisse über die bunten Kacheln funktioniert nicht.';
-$pia_lang['HelpFAQ_Cat_ServiceDetails_751_text'] = 'Ab Version 2023.05.10 ist dies möglich.';
 
 //////////////////////////////////////////////////////////////////
 // Reports Page

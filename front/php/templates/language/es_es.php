@@ -598,6 +598,196 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td class="help_table_gen_b">- A new decluttered configuration file (pialert-rewritten.conf) is created.<br>&nbsp;</td>
 											    </tr>
 											</table>';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan needs sudo privledges</span>';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'When a non-standard user is used, e.g. piadmin then the arp-scan fails in the cronjob.<br>
+											 A file needs to be created: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-arpscan</span><br>
+											 This file is opened and saved with the following content ("piadmin" is to be replaced by the corresponding user name):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan</span>';
+$pia_lang['HelpFAQ_Cat_General_108_head'] = '<span class="text-maroon help_faq_code">"SCAN_ROGUE_DHCP" needs sudo privledges</span>';
+$pia_lang['HelpFAQ_Cat_General_108_text'] = 'When a non-standard user is used, e.g. piadmin then the scan for unknown dhcp servers fails in the cronjob.<br>
+											 A file needs to be created: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-nmapscan</span><br>
+											 This file is opened and saved with the following content ("piadmin" is to be replaced by the corresponding user name):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/bin/nmap</span>';
+$pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
+$pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon help_faq_code">pialert.conf</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/config</span>.
+											 In this configuration file many functions of Pi.Alert can be set according to the personal wishes. Since the possibilities are various, I would like to give a
+											 short explanation to the individual points.
+											 <table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">General Settings</td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_PATH</td>
+											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
+											    <tr><td class="help_table_gen_a">DB_PATH</td>
+											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
+											    <tr><td class="help_table_gen_a">LOG_PATH</td>
+											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
+											    <tr><td class="help_table_gen_a">PRINT_LOG</td>
+											        <td class="help_table_gen_b">If this entry is set to <span class="text-maroon help_faq_code">True</span>, additional timestamps for the individual sub-functions are added to the scan log. By default this entry is set to <span class="text-maroon help_faq_code">False</span></td></tr>
+											    <tr><td class="help_table_gen_a">VENDORS_DB</td>
+											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_APIKEY</td>
+											        <td class="help_table_gen_b">With the API key it is possible to make queries to the database without using the web page. The API key is a random string that can be set via the settings or via <span class="text-maroon help_faq_code">pialert-cli</span></td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_WEB_PROTECTION</td>
+											        <td class="help_table_gen_b">Enables or disables the password protection of the Pi.Alert web interface.</td></tr>
+											    <tr><td class="help_table_gen_a">PIALERT_WEB_PASSWORD</td>
+											        <td class="help_table_gen_b">This field contains the hashed password for the web interface. The password cannot be entered here in plain text, but must be set with <span class="text-maroon help_faq_code">pialert-cli</span></td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_WEBSERVICES</td>
+											        <td class="help_table_gen_b">Here the function for monitoring web services can be switched on (<span class="text-maroon help_faq_code">True</span>) or off (<span class="text-maroon help_faq_code">False</span>)</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Special Protocol Scanning</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_ROGUE_DHCP</td>
+											        <td class="help_table_gen_b">Activates the search for foreign, also called "rogue", DHCP servers. This function is used to detect whether there is a foreign DHCP server in the network that could take control of IP management.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_SERVER_ADDRESS</td>
+											        <td class="help_table_gen_b">The IP of the known DHCP server is stored here.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
+											        <td class="help_table_gen_b">
+											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
+											        	Normally this option is already the correct settings. This setting is selected when Pi.Alert is installed on a device with a network card and no other networks are configured.<br><br>
+											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
+											        	This configuration is selected if Pi.Alert is installed on a system with at least 2 network cards and a configured network. However, the interface designation may differ and must be adapted to the conditions of the system.<br><br>
+											        	&lsquo;<span class="text-maroon help_faq_code">192.168.1.0/24 --interface=eth0, 192.168.2.0/24 --interface=eth1</span>&rsquo;<br>
+											        	The last configuration is necessary if several networks are to be monitored. For each network to be monitored, a corresponding network card must be configured. This is necessary because the "arp-scan" used is not routed, i.e. it only works within its own subnet. Each interface is entered here with the corresponding network. The interface designation must be adapted to the conditions of the system.
+											        </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Mail-Account Settings</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_SERVER</td>
+											        <td class="help_table_gen_b">Address of the e-mail server (e.g. smtp.gmail.com)</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_PORT</td>
+											        <td class="help_table_gen_b">The port of the SMTP server. The port may vary depending on the server configuration.</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_USER</td>
+											        <td class="help_table_gen_b">User name</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_PASS</td>
+											        <td class="help_table_gen_b">Password</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_SKIP_TLS</td>
+											        <td class="help_table_gen_b">If this entry is set to <span class="text-maroon help_faq_code">True</span>, transport encryption of the e-mail is enabled. If the server does not support this, the entry must be set to <span class="text-maroon help_faq_code">False</span>.</td></tr>
+											    <tr><td class="help_table_gen_a">SMTP_SKIP_LOGIN</td>
+											        <td class="help_table_gen_b">There are SMTP servers which do not require a login. In such a case, this value can be set to <span class="text-maroon help_faq_code">True</span>.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">WebGUI Reporting</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_WEBGUI</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the network in the web interface.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_WEBGUI_WEBMON</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the monitored web services in the web interface.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr>
+											        <td class="help_table_gen_section" colspan="2">Mail Reporting</td>
+											    </tr>
+											    <tr><td class="help_table_gen_a">REPORT_MAIL</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the network via e-mail.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_MAIL_WEBMON</td>
+											        <td class="help_table_gen_b">Enables/disables the notification of changes in the monitored web services by e-mail.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_FROM</td>
+											        <td class="help_table_gen_b">Name or identifier of the sender.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TO</td>
+											        <td class="help_table_gen_b">E-mail address to which the notification should be sent.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_DEVICE_URL</td>
+											        <td class="help_table_gen_b">URL of the Pi.Alert installation to create a clickable link in the e-mail to the detected device.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_DASHBOARD_URL</td>
+											        <td class="help_table_gen_b">URL of the Pi.Alert installation, to be able to create a clickable link in the e-mail.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr>
+											        <td class="help_table_gen_section" colspan="2">Pushsafer</td>
+											    </tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHSAFER</td>
+											        <td class="help_table_gen_b">Enables/disables notifications about changes in the network via Pushsafer.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHSAFER_WEBMON</td>
+											        <td class="help_table_gen_b">Enables/disables notifications about changes in the monitored web services via Pushsafer.</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHSAFER_TOKEN</td>
+											        <td class="help_table_gen_b">This is the private key that can be viewed on the pushsafer page.</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHSAFER_DEVICE</td>
+											        <td class="help_table_gen_b">The device ID to which the message will be sent. &lsquo;<span class="text-maroon help_faq_code">a</span>&rsquo; means the message will be sent to all configuring devices and will consume a corresponding number of API calls.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Pushover</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHOVER</td>
+											        <td class="help_table_gen_b">Enables/disables notifications about changes in the network via Pushover.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_PUSHOVER_WEBMON</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the monitored web services via Pushover.</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHOVER_TOKEN</td>
+											        <td class="help_table_gen_b">Also called "APP TOKEN" or "API TOKEN". This token can be queried on the pushover page.</td></tr>
+											    <tr><td class="help_table_gen_a">PUSHOVER_USER</td>
+											        <td class="help_table_gen_b">Also called "USER KEY". This key is displayed right after login on the start page.</td></tr>
+											</table>
+											<table class="help_table_gen">
+					    						<tr><td class="help_table_gen_section" colspan="2">NTFY</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_NTFY</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the network via NTFY.</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_NTFY_WEBMON</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the monitored web services via NTFY.</td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_HOST</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_TOPIC</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_USER</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_PASSWORD</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">NTFY_PRIORITY</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Shoutrrr</td></tr>
+											    <tr><td class="help_table_gen_a">SHOUTRRR_BINARY</td>
+											        <td class="help_table_gen_b">Here you have to configure which binary of shoutrrr has to be used. This depends on the hardware Pi.Alert was installed on.</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Telegram via Shoutrrr</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TELEGRAM</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the network via Telegram</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TELEGRAM_WEBMON</td>
+											        <td class="help_table_gen_b">Enables/disables the notifications about changes in the monitored web services via Telegram</td></tr>
+											    <tr><td class="help_table_gen_a">TELEGRAM_BOT_TOKEN_URL</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">DynDNS and IP</td></tr>
+											    <tr><td class="help_table_gen_a">QUERY_MYIP_SERVER</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_ACTIVE</td>
+											        <td class="help_table_gen_b">Enables/disables the configured DDNS service in Pi.Alert. DDNS, also known as DynDNS, allows you to update a domain name with a regularly changing IP address. This service is offered by several service providers.</td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_DOMAIN</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_USER</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_PASSWORD</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_UPDATE_URL</td>
+											        <td class="help_table_gen_b">    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Pi-hole Configuration</td></tr>
+											    <tr><td class="help_table_gen_a">PIHOLE_ACTIVE</td>
+											        <td class="help_table_gen_b">This variable is set during installation.</td></tr>
+											    <tr><td class="help_table_gen_a">PIHOLE_DB</td>
+											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_ACTIVE</td>
+											        <td class="help_table_gen_b">This variable is set during installation.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_LEASES</td>
+											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
+											</table>
+											<table class="help_table_gen">
+					    						<tr><td class="help_table_gen_section" colspan="2">Fritzbox Configuration</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_ACTIVE</td>
+											        <td class="help_table_gen_b">If a Fritzbox is used in the network, it can be used as a data source. This can be activated or deactivated at this point.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_IP</td>
+											        <td class="help_table_gen_b">IP address of the Fritzbox.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_USER</td>
+											        <td class="help_table_gen_b">User name<br>This assumes that the Fritzbox is configured for a login with username and password, instead of password only. A login with password only is not supported.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_PASS</td>
+											        <td class="help_table_gen_b">Password</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Maintenance Tasks Cron</td></tr>
+											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_ONLINEHISTORY</td>
+											        <td class="help_table_gen_b">Number of days for which the online history (activity graph) is to be stored in the database. One day generates 288 such records.</td></tr>
+											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_EVENTS</td>
+											        <td class="help_table_gen_b">Number of days for which the events of the individual devices are to be stored.</td></tr>
+											</table>';
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Tengo dispositivos en mi lista que no conozco. Después de borrarlos, siempre vuelven a aparecer.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Si utiliza Pi-hole, tenga en cuenta que Pi.Alert recupera información de Pi-hole. Ponga en pausa Pi.Alert, vaya a la página de configuración de Pi-hole y
 											elimine la concesión DHCP si es necesario. Luego, también en Pi-hole, revise en Herramientas -> Red para ver si puede encontrar los hosts recurrentes allí.

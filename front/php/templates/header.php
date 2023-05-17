@@ -10,6 +10,10 @@
 <?php
 error_reporting(0);
 
+// Get Version from version.conf
+$conf_file = '../config/version.conf';
+$conf_data = parse_ini_file($conf_file);
+
 // ###################################
 // ## GUI settings processing start
 // ###################################
@@ -76,7 +80,7 @@ get_webservices_config();
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?php echo $pia_skin_selected; ?>.min.css">
 
   <!-- Pi.Alert CSS -->
-  <link rel="stylesheet" href="css/pialert.css">
+  <link rel="stylesheet" href="css/pialert.css?<?php echo $conf_data['VERSION_DATE']; ?>">
 
   <!-- Offline Font -->
   <link rel="stylesheet" href="css/offline-font.css">
@@ -90,7 +94,7 @@ get_webservices_config();
   <!-- Dark-Mode Patch -->
 <?php
 if ($ENABLED_DARKMODE === True) {
-	echo '<link rel="stylesheet" href="css/dark-patch.css">';
+	echo '<link rel="stylesheet" href="css/dark-patch.css?' . $conf_data['VERSION_DATE'] . '">';
 	$BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/boxed-bg-dark.png\');"';
 } else { $BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/background.png\');"';}
 ?>

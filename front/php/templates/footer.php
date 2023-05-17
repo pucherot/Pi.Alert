@@ -1,8 +1,8 @@
 <!-- ---------------------------------------------------------------------------
 #  Pi.Alert
-#  Open Source Network Guard / WIFI & LAN intrusion detector 
+#  Open Source Network Guard / WIFI & LAN intrusion detector
 #
-#  footer.php - Front module. Common footer to all the web pages 
+#  footer.php - Front module. Common footer to all the web pages
 #-------------------------------------------------------------------------------
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
 #--------------------------------------------------------------------------- -->
@@ -12,20 +12,16 @@
     <!-- Default to the left -->
 
     <!-- &copy; 2020 Puche -->
-    <?php
-      $conf_file = '../config/version.conf';
-      $conf_data = parse_ini_file($conf_file);
-      echo '<span style="display:inline-block; transform: rotate(180deg)">&copy;</span> '. $conf_data['VERSION_YEAR'] .' Puche & leiweibau';
-    ?>
+<?php
+echo '<span style="display:inline-block; transform: rotate(180deg)">&copy;</span> ' . $conf_data['VERSION_YEAR'] . ' Puche & leiweibau';
+?>
     <!-- To the right -->
     <div class="pull-right no-hidden-xs">
 
     <!-- Pi.Alert  2.50  <small>(2019-12-30)</small> -->
-    <?php
-      $conf_file = '../config/version.conf';
-      $conf_data = parse_ini_file($conf_file);
-      echo ''. $conf_data['VERSION'] .'&nbsp;&nbsp;<small>('. $conf_data['VERSION_DATE'] .')</small>';
-    ?>
+<?php
+echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_DATE'] . ')</small>';
+?>
     </div>
   </footer>
 

@@ -111,6 +111,16 @@ $trip_div_close = '
         <?php echo $trip_div_close; ?>
 
         <?php echo $help_faq_toptemp; ?>
+              <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse107">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_107_head']; ?></a>
+            </h4>
+          </div>
+          <div id="collapse107" class="panel-collapse collapse" style="font-size: 16px;">
+            <div class="panel-body">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_107_text']; ?>
+        <?php echo $trip_div_close; ?>
+
+        <?php echo $help_faq_toptemp; ?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse106">
               <?php echo $pia_lang['HelpFAQ_Cat_General_106_head']; ?></a>
             </h4>
@@ -118,6 +128,16 @@ $trip_div_close = '
           <div id="collapse106" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
               <?php echo $pia_lang['HelpFAQ_Cat_General_106_text']; ?>
+        <?php echo $trip_div_close; ?>
+
+        <?php echo $help_faq_toptemp; ?>
+              <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse108">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_108_head']; ?></a>
+            </h4>
+          </div>
+          <div id="collapse108" class="panel-collapse collapse" style="font-size: 16px;">
+            <div class="panel-body">
+              <?php echo $pia_lang['HelpFAQ_Cat_General_108_text']; ?>
         <?php echo $trip_div_close; ?>
 
       </div>
@@ -280,16 +300,6 @@ foreach ($code_array as $key => $jsons) {
           <div id="collapse750" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
               <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text']; ?>
-        <?php echo $trip_div_close; ?>
-
-        <?php echo $help_faq_toptemp; ?>
-              <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse751">
-              <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_751_head']; ?></a>
-            </h4>
-          </div>
-          <div id="collapse751" class="panel-collapse collapse" style="font-size: 16px;">
-            <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_751_text']; ?>
         <?php echo $trip_div_close; ?>
 
         </div>
