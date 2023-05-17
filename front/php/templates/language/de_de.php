@@ -639,7 +639,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											    <tr><td class="help_table_gen_a">SMTP_SKIP_TLS</td>
 											        <td class="help_table_gen_b">Wenn dieser Eintrag auf <span class="text-maroon help_faq_code">True</span> steht, ist die Transportverschlüsselung der eMail aktiviert. Wenn der Server dies nicht unterstützt, muss der Eintrag auf <span class="text-maroon help_faq_code">False</span> gesetzt werden.</td></tr>
 											    <tr><td class="help_table_gen_a">SMTP_SKIP_LOGIN</td>
-											        <td class="help_table_gen_b">Es gibt SMTP Server, die keine Anmeldung benötigen. In einem solchen Fall, kann dieser Wert auf <span class="text-maroon help_faq_code">True</span> gesetzt werden</td></tr>
+											        <td class="help_table_gen_b">Es gibt SMTP Server, die keine Anmeldung benötigen. In einem solchen Fall, muss dieser Wert auf <span class="text-maroon help_faq_code">True</span> gesetzt werden</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">WebGUI Reporting</td></tr>
@@ -687,7 +687,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											    <tr><td class="help_table_gen_a">PUSHOVER_TOKEN</td>
 											        <td class="help_table_gen_b">Auch "APP TOKEN" oder "API TOKEN" genannt. Dieser Token kann auf der pushover-Seite abgefragt werden</td></tr>
 											    <tr><td class="help_table_gen_a">PUSHOVER_USER</td>
-											        <td class="help_table_gen_b">Oder auch "USER KEY". Dieser Key wird gleich nach dem Login auf der Startseite angezeigt.</td></tr>
+											        <td class="help_table_gen_b">Oder auch "USER KEY". Dieser Key wird, gleich nach dem Login, auf der pushover-Startseite angezeigt.</td></tr>
 											</table>
 											<table class="help_table_gen">
 					    						<tr><td class="help_table_gen_section" colspan="2">NTFY</td></tr>
@@ -696,20 +696,20 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											    <tr><td class="help_table_gen_a">REPORT_NTFY_WEBMON</td>
 											        <td class="help_table_gen_b">Aktiviert/Deaktiviert die Benachrichtigungen über Änderungen der überwachten Webservices über NTFY</td></tr>
 											    <tr><td class="help_table_gen_a">NTFY_HOST</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Der Hostname oder die IP-Adresse des NTFY-Servers.</td></tr>
 											    <tr><td class="help_table_gen_a">NTFY_TOPIC</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Der Betreff von Benachrichtigungen, die über NTFY gesendet werden.</td></tr>
 											    <tr><td class="help_table_gen_a">NTFY_USER</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Der Benutzername, der für die Authentifizierung beim NTFY-Server verwendet wird.</td></tr>
 											    <tr><td class="help_table_gen_a">NTFY_PASSWORD</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Das Passwort, das für die Authentifizierung beim NTFY-Server verwendet wird.</td></tr>
 											    <tr><td class="help_table_gen_a">NTFY_PRIORITY</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Priorisierung der über NTFY gesendeten Benachrichtigungen</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Shoutrrr</td></tr>
 											    <tr><td class="help_table_gen_a">SHOUTRRR_BINARY</td>
-											        <td class="help_table_gen_b">Hier muss konfiguriert werden, welches Binary von shoutrrr zum einsatz gebracht werden muss. Dies richtet sich danach, auf welcher Hardware Pi.Alert installiert wurde,</td></tr>
+											        <td class="help_table_gen_b">Hier muss konfiguriert werden, welches Binary von shoutrrr zum einsatz gebracht werden muss. Dies richtet sich danach, auf welcher Hardware Pi.Alert installiert wurde.</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Telegram via Shoutrrr</td></tr>
@@ -723,15 +723,15 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">DynDNS and IP</td></tr>
 											    <tr><td class="help_table_gen_a">QUERY_MYIP_SERVER</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Server URL, welche die aktuelle öffentliche IP ermittelt und zurückgibt.</td></tr>
 											    <tr><td class="help_table_gen_a">DDNS_ACTIVE</td>
 											        <td class="help_table_gen_b">Aktiviert/Deaktiviert den konfigurierten DDNS Service in Pi.Alert. DDNS, auch als DynDNS bezeichnet, ermöglicht es, einen Domainnamen mit einer, sich regelmäßig ändernden, IP-Adresse zu aktualisieren. Diesen Service bieten verschiedene Dienstleister an.</td></tr>
 											    <tr><td class="help_table_gen_a">DDNS_DOMAIN</td>
 											        <td class="help_table_gen_b">    </td></tr>
 											    <tr><td class="help_table_gen_a">DDNS_USER</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Benutzername</td></tr>
 											    <tr><td class="help_table_gen_a">DDNS_PASSWORD</td>
-											        <td class="help_table_gen_b">    </td></tr>
+											        <td class="help_table_gen_b">Passwort</td></tr>
 											    <tr><td class="help_table_gen_a">DDNS_UPDATE_URL</td>
 											        <td class="help_table_gen_b">    </td></tr>
 											</table>
@@ -760,9 +760,9 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Maintenance Tasks Cron</td></tr>
 											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_ONLINEHISTORY</td>
-											        <td class="help_table_gen_b">Anzahl der Tage, für die die Online-Historie (Aktivitäts-Diagramm) in der Datenbank gespeichert werden soll. Ein Tag generiert 288 solcher Datensätze.</td></tr>
+											        <td class="help_table_gen_b">Anzahl der Tage, für welche die Online-Historie (Aktivitäts-Diagramm) in der Datenbank gespeichert werden soll. Ein Tag generiert 288 solcher Datensätze.</td></tr>
 											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_EVENTS</td>
-											        <td class="help_table_gen_b">Anzahl der Tage, für die die Events der einzelnen Geräte gespeichert werden sollen.</td></tr>
+											        <td class="help_table_gen_b">Anzahl der Tage, für welche die Events der einzelnen Geräte gespeichert werden sollen.</td></tr>
 											</table>';
 
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
