@@ -545,58 +545,58 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
                                              without web page or change to the configuration file. With the command <span class="text-maroon help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
 											 <table class="help_table_gen">
 											    <tr>
-											        <td class="help_table_gen_a">set_login</td>
-											        <td class="help_table_gen_b">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE<br>
-											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">unset_login</td>
-											        <td class="help_table_gen_b">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE<br>
-											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_password &lt;password&gt;</td>
-											        <td class="help_table_gen_b">- Sets the new password as a hashed value.<br>
-											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_autopassword</td>
-											        <td class="help_table_gen_b">- Sets a new random password as a hashed value and show it plaintext in the console.<br>
-											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
-											        <td class="help_table_gen_b">- Stops all active scans.<br>
-											            - Prevents new scans from starting.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_scan</td>
-											        <td class="help_table_gen_b">- Allows the start of new scans again.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_service_mon</td>
-											        <td class="help_table_gen_b">- Enable Web Service Monitoring<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_service_mon</td>
-											        <td class="help_table_gen_b">- Disable Web Service Monitoring<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">update_db</td>
-											        <td class="help_table_gen_b">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_apikey</td>
-											        <td class="help_table_gen_b">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">reporting_test</td>
-											        <td class="help_table_gen_b">- Test reporting for all activated services.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">rewrite_config</td>
-											        <td class="help_table_gen_b">- A new decluttered configuration file (pialert-rewritten.conf) is created.<br>&nbsp;</td>
-											    </tr>
+												    <td class="help_table_gen_a">set_login</td>
+												    <td class="help_table_gen_b">- Establece el parámetro PIALERT_WEB_PROTECTION en el archivo de configuración a TRUE.<br>
+												        - Si el parámetro no está presente, se creará. Además, se establecerá la contraseña predeterminada "123456".</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">unset_login</td>
+												    <td class="help_table_gen_b">- Establece el parámetro PIALERT_WEB_PROTECTION en el archivo de configuración a FALSE.<br>
+												        - Si el parámetro no está presente, se creará. Además, se establecerá la contraseña predeterminada "123456".</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">set_password &lt;password&gt;</td>
+												    <td class="help_table_gen_b">- Establece la nueva contraseña como un valor hash.<br>
+												        - Si el parámetro PIALERT_WEB_PROTECTION no existe aún, se creará y se establecerá en "TRUE" (inicio de sesión habilitado).</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">set_autopassword</td>
+												    <td class="help_table_gen_b">- Establece una nueva contraseña aleatoria como un valor hash y la muestra en texto sin formato en la consola.<br>
+												        - Si el parámetro PIALERT_WEB_PROTECTION no existe aún, se creará y se establecerá en "TRUE" (inicio de sesión habilitado).</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
+												    <td class="help_table_gen_b">- Detiene todas las exploraciones activas.<br>
+												        - Impide que se inicien nuevas exploraciones.</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">enable_scan</td>
+												    <td class="help_table_gen_b">- Permite el inicio de nuevas exploraciones nuevamente.</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">enable_service_mon</td>
+												    <td class="help_table_gen_b">- Habilita la supervisión de servicios web.</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">disable_service_mon</td>
+												    <td class="help_table_gen_b">- Deshabilita la supervisión de servicios web.</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">update_db</td>
+												    <td class="help_table_gen_b">- El script intenta hacer que la base de datos sea compatible con esta bifurcación.</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">set_apikey</td>
+												    <td class="help_table_gen_b">- Con la clave API es posible hacer consultas a la base de datos sin utilizar la página web. Si ya existe una clave API, se reemplazará.</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">reporting_test</td>
+												    <td class="help_table_gen_b">- Prueba de informes para todos los servicios activados.</td>
+												</tr>
+												<tr>
+												    <td class="help_table_gen_a">rewrite_config</td>
+												    <td class="help_table_gen_b">- Se crea un nuevo archivo de configuración desordenado (pialert-rewritten.conf).</td>
+												</tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan needs sudo privledges</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'When a non-standard user is used, e.g. piadmin then the arp-scan fails in the cronjob.<br>
@@ -613,42 +613,42 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											 <table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">General Settings</td></tr>
 											    <tr><td class="help_table_gen_a">PIALERT_PATH</td>
-											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
-											    <tr><td class="help_table_gen_a">DB_PATH</td>
-											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
-											    <tr><td class="help_table_gen_a">LOG_PATH</td>
-											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
-											    <tr><td class="help_table_gen_a">PRINT_LOG</td>
-											        <td class="help_table_gen_b">If this entry is set to <span class="text-maroon help_faq_code">True</span>, additional timestamps for the individual sub-functions are added to the scan log. By default this entry is set to <span class="text-maroon help_faq_code">False</span></td></tr>
-											    <tr><td class="help_table_gen_a">VENDORS_DB</td>
-											        <td class="help_table_gen_b">This variable is set during installation and should not be changed.</td></tr>
-											    <tr><td class="help_table_gen_a">PIALERT_APIKEY</td>
-											        <td class="help_table_gen_b">With the API key it is possible to make queries to the database without using the web page. The API key is a random string that can be set via the settings or via <span class="text-maroon help_faq_code">pialert-cli</span></td></tr>
-											    <tr><td class="help_table_gen_a">PIALERT_WEB_PROTECTION</td>
-											        <td class="help_table_gen_b">Enables or disables the password protection of the Pi.Alert web interface.</td></tr>
-											    <tr><td class="help_table_gen_a">PIALERT_WEB_PASSWORD</td>
-											        <td class="help_table_gen_b">This field contains the hashed password for the web interface. The password cannot be entered here in plain text, but must be set with <span class="text-maroon help_faq_code">pialert-cli</span></td></tr>
-											    <tr><td class="help_table_gen_a">SCAN_WEBSERVICES</td>
-											        <td class="help_table_gen_b">Here the function for monitoring web services can be switched on (<span class="text-maroon help_faq_code">True</span>) or off (<span class="text-maroon help_faq_code">False</span>)</td></tr>
+												    <td class="help_table_gen_b">Esta variable se establece durante la instalación y no debe modificarse.</td></tr>
+												<tr><td class="help_table_gen_a">DB_PATH</td>
+												    <td class="help_table_gen_b">Esta variable se establece durante la instalación y no debe modificarse.</td></tr>
+												<tr><td class="help_table_gen_a">LOG_PATH</td>
+												    <td class="help_table_gen_b">Esta variable se establece durante la instalación y no debe modificarse.</td></tr>
+												<tr><td class="help_table_gen_a">PRINT_LOG</td>
+												    <td class="help_table_gen_b">Si esta entrada se establece en <span class="text-maroon help_faq_code">True</span>, se agregan marcas de tiempo adicionales para las subfunciones individuales en el registro de escaneo. De forma predeterminada, esta entrada se establece en <span class="text-maroon help_faq_code">False</span>.</td></tr>
+												<tr><td class="help_table_gen_a">VENDORS_DB</td>
+												    <td class="help_table_gen_b">Esta variable se establece durante la instalación y no debe modificarse.</td></tr>
+												<tr><td class="help_table_gen_a">PIALERT_APIKEY</td>
+												    <td class="help_table_gen_b">Con la clave de API, es posible realizar consultas a la base de datos sin utilizar la página web. La clave de API es una cadena aleatoria que se puede establecer a través de la configuración o mediante <span class="text-maroon help_faq_code">pialert-cli</span>.</td></tr>
+												<tr><td class="help_table_gen_a">PIALERT_WEB_PROTECTION</td>
+												    <td class="help_table_gen_b">Activa o desactiva la protección con contraseña de la interfaz web de Pi.Alert.</td></tr>
+												<tr><td class="help_table_gen_a">PIALERT_WEB_PASSWORD</td>
+												    <td class="help_table_gen_b">Este campo contiene la contraseña cifrada para la interfaz web. La contraseña no se puede ingresar aquí en texto plano, sino que debe establecerse con <span class="text-maroon help_faq_code">pialert-cli</span>.</td></tr>
+												<tr><td class="help_table_gen_a">SCAN_WEBSERVICES</td>
+												    <td class="help_table_gen_b">Aquí se puede activar (<span class="text-maroon help_faq_code">True</span>) o desactivar (<span class="text-maroon help_faq_code">False</span>) la función de monitoreo de servicios web.</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Special Protocol Scanning</td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_ROGUE_DHCP</td>
-											        <td class="help_table_gen_b">Activates the search for foreign, also called "rogue", DHCP servers. This function is used to detect whether there is a foreign DHCP server in the network that could take control of IP management.</td></tr>
-											    <tr><td class="help_table_gen_a">DHCP_SERVER_ADDRESS</td>
-											        <td class="help_table_gen_b">The IP of the known DHCP server is stored here.</td></tr>
+												    <td class="help_table_gen_b">Activa la búsqueda de servidores DHCP externos, también conocidos como "rogue". Esta función se utiliza para detectar si hay un servidor DHCP externo en la red que podría tomar el control de la gestión de IP.</td></tr>
+												<tr><td class="help_table_gen_a">DHCP_SERVER_ADDRESS</td>
+												    <td class="help_table_gen_b">Aquí se almacena la dirección IP del servidor DHCP conocido.</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
-											        <td class="help_table_gen_b">
-											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
-											        	Normally this option is already the correct settings. This setting is selected when Pi.Alert is installed on a device with a network card and no other networks are configured.<br><br>
-											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
-											        	This configuration is selected if Pi.Alert is installed on a system with at least 2 network cards and a configured network. However, the interface designation may differ and must be adapted to the conditions of the system.<br><br>
-											        	&lsquo;<span class="text-maroon help_faq_code">192.168.1.0/24 --interface=eth0, 192.168.2.0/24 --interface=eth1</span>&rsquo;<br>
-											        	The last configuration is necessary if several networks are to be monitored. For each network to be monitored, a corresponding network card must be configured. This is necessary because the "arp-scan" used is not routed, i.e. it only works within its own subnet. Each interface is entered here with the corresponding network. The interface designation must be adapted to the conditions of the system.
-											        </td></tr>
+												    <td class="help_table_gen_b">
+												        &lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
+												        Normalmente esta opción ya está configurada correctamente. Esta configuración se selecciona cuando Pi.Alert se instala en un dispositivo con una tarjeta de red y no se configuran otras redes.<br><br>
+												        &lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
+												        Esta configuración se selecciona si Pi.Alert se instala en un sistema con al menos 2 tarjetas de red y una red configurada. Sin embargo, la designación de la interfaz puede variar y debe adaptarse a las condiciones del sistema.<br><br>
+												        &lsquo;<span class="text-maroon help_faq_code">192.168.1.0/24 --interface=eth0, 192.168.2.0/24 --interface=eth1</span>&rsquo;<br>
+												        La última configuración es necesaria si se van a monitorear varias redes. Para cada red que se va a monitorear, se debe configurar una tarjeta de red correspondiente. Esto es necesario porque el "arp-scan" utilizado no está enrutado, es decir, solo funciona dentro de su propio subred. Cada interfaz se ingresa aquí con la red correspondiente. La designación de la interfaz debe adaptarse a las condiciones del sistema.
+												    </td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Mail-Account Settings</td></tr>
