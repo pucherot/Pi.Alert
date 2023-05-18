@@ -181,10 +181,10 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
 ?>
                   </select>
               </div>
+<!-- Autofill "Edit" Input fields ---------------------------------------------------------- -->
 <script>
 function handleSelectChange(event) {
     var selectElement = event.target;
-    var value = selectElement.value;
     var value = 'netdev_id_' + selectElement.value;
 
 <?php
@@ -364,7 +364,7 @@ function getNodeOnlineState($pia_node_name) {
 		if ($func_res['dev_PresentLastScan'] == 1) {return '<i class="fa fa-w fa-circle text-green-light fa-gradient-green"></i>&nbsp;';} else {return '<i class="fa fa-w fa-circle text-red fa-gradient-red"></i>&nbsp;';}
 	}
 }
-
+// Create the Tabs
 function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
 	echo '<li class="' . $activetab . '">';
 	echo '<a href="#' . $pia_func_netdevid . '" data-toggle="tab">';
@@ -380,7 +380,7 @@ function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_ne
 	//if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
 	echo '</a></li>';
 }
-
+// Create the Tabspage
 function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
 	global $pia_lang;
 	echo '<div class="tab-pane ' . $activetab . '" id="' . $pia_func_netdevid . '">
@@ -406,9 +406,23 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 	$network_device_portstate = array();
 	// make sql query for Network Hardware ID
 	global $db;
-	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_Infrastructure" = "' . $pia_func_netdevid . '"';
-	$func_result = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
-	while ($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
+	// Query detected Devices
+	$func_sql1 = 'SELECT * FROM "Devices" WHERE "dev_Infrastructure" = "' . $pia_func_netdevid . '"';
+	$func_result1 = $db->query($func_sql1); //->fetchArray(SQLITE3_ASSOC);
+	// Query dumb Devices
+	$func_sql2 = 'SELECT * FROM "network_dumb_dev" WHERE "dev_Infrastructure" = "' . $pia_func_netdevid . '"';
+	$func_result2 = $db->query($func_sql2); //->fetchArray(SQLITE3_ASSOC);
+
+	while ($row1 = $func_result1->fetchArray(SQLITE3_ASSOC)) {
+		$combinedResults[] = $row1;
+	}
+
+	while ($row2 = $func_result2->fetchArray(SQLITE3_ASSOC)) {
+		$combinedResults[] = $row2;
+	}
+
+//	while ($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
+	foreach ($combinedResults as $func_res) {
 		//if(!isset($func_res['dev_Name'])) continue;
 		if ($func_res['dev_PresentLastScan'] == 1) {$port_state = '<div class="badge bg-green text-white" style="width: 60px;">Online</div>';} else { $port_state = '<div class="badge bg-gray text-white" style="width: 60px;">Offline</div>';}
 		// Prepare Table with Port > push values in array
@@ -451,6 +465,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 			// Prepare online/offline badge for later functions
 			$online_badge = '<div class="badge bg-green text-white" style="width: 60px;">Online</div>';
 			$offline_badge = '<div class="badge bg-gray text-white" style="width: 60px;">Offline</div>';
+			$dumb_badge = '<div class="badge bg-yellow text-white" style="width: 60px;">UM</div>';
 			// Set online/offline badge
 			echo '<tr>';
 			echo '<td style="text-align: right; padding-right:16px;">' . $x . '</td>';
@@ -458,7 +473,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 			// Check if multiple badges necessary
 			if (stristr($network_device_portstate[$x], ',') == '') {
 				// Set single online/offline badge
-				if ($network_device_portstate[$x] == 1) {$port_state = $online_badge;} else { $port_state = $offline_badge;}
+				if ($network_device_portstate[$x] == "1") {$port_state = $online_badge;} elseif ($network_device_portstate[$x] === "dumb") {$port_state = $dumb_badge;} else { $port_state = $offline_badge;}
 				echo '<td>' . $port_state . '</td>';
 			} else {
 				// Set multiple online/offline badges
@@ -466,7 +481,8 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 				$multistate = explode(',', $network_device_portstate[$x]);
 				echo '<td>';
 				foreach ($multistate as $key => $value) {
-					if ($value == 1) {$port_state = $online_badge;} else { $port_state = $offline_badge;}
+					//if ($value == "1") {$port_state = $online_badge;} else { $port_state = $offline_badge;}
+					if ($value == "1") {$port_state = $online_badge;} elseif ($value === "dumb") {$port_state = $dumb_badge;} else { $port_state = $offline_badge;}
 					echo $port_state . '<br>';
 				}
 				echo '</td>';
@@ -475,7 +491,13 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 			// Check if multiple Hostnames are set
 			// print single hostname
 			if (stristr($network_device_portmac[$x], ',') == '') {
-				echo '<td style="padding-left: 10px;"><a href="./deviceDetails.php?mac=' . $network_device_portmac[$x] . '"><b>' . $network_device_portname[$x] . '</b></a></td>';
+				if ($network_device_portmac[$x] != "dumb") {
+					// detectable Device
+					echo '<td style="padding-left: 10px;"><a href="./deviceDetails.php?mac=' . $network_device_portmac[$x] . '"><b>' . $network_device_portname[$x] . '</b></a></td>';
+				} else {
+					// dumb Device
+					echo '<td style="padding-left: 10px;"><a href="#"><b>' . $network_device_portname[$x] . '</b></a></td>';
+				}
 			} else {
 				// print multiple hostnames with separate links
 				$multimac = array();
@@ -484,7 +506,14 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 				$multiname = explode(',', $network_device_portname[$x]);
 				echo '<td style="padding-left: 10px;">';
 				foreach ($multiname as $key => $value) {
-					echo '<a href="./deviceDetails.php?mac=' . $multimac[$key] . '"><b>' . $value . '</b></a><br>';
+					//echo '<a href="./deviceDetails.php?mac=' . $multimac[$key] . '"><b>' . $value . '</b></a><br>';
+					if ($multimac[$key] != "dumb") {
+						// detectable Device
+						echo '<a href="./deviceDetails.php?mac=' . $multimac[$key] . '"><b>' . $value . '</b></a><br>';
+					} else {
+						// dumb Device
+						echo '<a href="#"><b>' . $value . '</b></a><br>';
+					}
 				}
 				echo '</td>';
 				unset($multiname, $multimac);
