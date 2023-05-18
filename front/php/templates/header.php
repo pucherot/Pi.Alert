@@ -280,6 +280,10 @@ format_temperature($celsius, $temperaturelimit);
           <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Maintenance']; ?></span></a>
         </li>
 
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('networkSettings.php'))) {echo 'active';}?>">
+          <a href="networkSettings.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Network']; ?></span></a>
+        </li>
+
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('help_faq.php'))) {echo 'active';}?>">
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ']; ?></span></a>
         </li>
