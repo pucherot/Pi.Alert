@@ -43,7 +43,18 @@ $result = $db->query($sql);
 $sql = 'ALTER TABLE "network_infrastructure" ADD "net_downstream_devices" TEXT';
 $result = $db->query($sql);
 
-// #####################################
+$sql = 'CREATE TABLE IF NOT EXISTS "network_dumb_dev" (
+  "dev_Name"  TEXT,
+  "dev_MAC" TEXT,
+  "dev_Infrastructure"  INTEGER,
+  "dev_Infrastructure_port" INTEGER,
+  "dev_PresentLastScan" TEXT,
+  "dev_LastIP"  TEXT,
+  "id"  INTEGER,
+  PRIMARY KEY("id" AUTOINCREMENT)
+)';
+$result = $db->query($sql);
+
 // Add New Network Devices
 // #####################################
 if ($_REQUEST['Networkinsert'] == "yes") {
@@ -52,29 +63,57 @@ if ($_REQUEST['Networkinsert'] == "yes") {
 		$result = $db->query($sql);
 	}
 }
-// #####################################
 // Edit  Network Devices
 // #####################################
 if ($_REQUEST['Networkedit'] == "yes") {
 	if (($_REQUEST['NewNetworkDeviceName'] != "") && isset($_REQUEST['NewNetworkDeviceTyp'])) {
 		$sql = 'UPDATE "network_infrastructure" SET "net_device_name" = "' . $_REQUEST['NewNetworkDeviceName'] . '", "net_device_typ" = "' . $_REQUEST['NewNetworkDeviceTyp'] . '", "net_device_port" = "' . $_REQUEST['NewNetworkDevicePort'] . '", "net_downstream_devices" = "' . $_REQUEST['NetworkDeviceDownlink'] . '" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
-		//$sql = 'INSERT INTO "network_infrastructure" ("net_device_name", "net_device_typ", "net_device_port") VALUES("'.$_REQUEST['NetworkDeviceName'].'", "'.$_REQUEST['NetworkDeviceTyp'].'", "'.$_REQUEST['NetworkDevicePort'].'")';
 		$result = $db->query($sql);
 	}
 
 	if (($_REQUEST['NewNetworkDeviceName'] == "") && isset($_REQUEST['NewNetworkDeviceTyp'])) {
 		$sql = 'UPDATE "network_infrastructure" SET "net_device_typ" = "' . $_REQUEST['NewNetworkDeviceTyp'] . '", "net_device_port" = "' . $_REQUEST['NewNetworkDevicePort'] . '", "net_downstream_devices" = "' . $_REQUEST['NetworkDeviceDownlink'] . '" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
-		//$sql = 'INSERT INTO "network_infrastructure" ("net_device_name", "net_device_typ", "net_device_port") VALUES("'.$_REQUEST['NetworkDeviceName'].'", "'.$_REQUEST['NetworkDeviceTyp'].'", "'.$_REQUEST['NetworkDevicePort'].'")';
 		$result = $db->query($sql);
 	}
 
 }
-// #####################################
 // remove Network Devices
 // #####################################
 if ($_REQUEST['Networkdelete'] == "yes") {
 	if (isset($_REQUEST['NetworkDeviceID'])) {
 		$sql = 'DELETE FROM "network_infrastructure" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
+		$result = $db->query($sql);
+	}
+}
+
+// Add New unmanaged Device
+// #####################################
+if ($_REQUEST['NetworkUnmanagedDevinsert'] == "yes") {
+	if (isset($_REQUEST['NetworkUnmanagedDevName']) && isset($_REQUEST['NetworkUnmanagedDevConnect'])) {
+		$ip = 'Unmanaged';
+		$dumbvar = 'dumb';
+		$sql = 'INSERT INTO "network_dumb_dev" ("dev_Name", "dev_MAC", "dev_Infrastructure", "dev_Infrastructure_port", "dev_PresentLastScan", "dev_LastIP") VALUES("' . $_REQUEST['NetworkUnmanagedDevName'] . '", "' . $dumbvar . '", "' . $_REQUEST['NetworkUnmanagedDevConnect'] . '", "' . $_REQUEST['NetworkUnmanagedDevPort'] . '", "' . $dumbvar . '", "' . $ip . '")';
+		$result = $db->query($sql);
+	}
+}
+// Edit  unmanaged Device
+// #####################################
+if ($_REQUEST['NetworkUnmanagedDevedit'] == "yes") {
+	if (($_REQUEST['NewNetworkUnmanagedDevName'] != "") && isset($_REQUEST['NewNetworkUnmanagedDevConnect']) && isset($_REQUEST['NetworkUnmanagedDevID'])) {
+		$sql = 'UPDATE "network_dumb_dev" SET "dev_Name" = "' . $_REQUEST['NewNetworkUnmanagedDevName'] . '", "dev_Infrastructure" = "' . $_REQUEST['NewNetworkUnmanagedDevConnect'] . '", "dev_Infrastructure_port" = "' . $_REQUEST['NewNetworkUnmanagedDevPort'] . '" WHERE "id"="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
+		$result = $db->query($sql);
+	}
+
+	if (($_REQUEST['NewNetworkUnmanagedDevName'] == "") && isset($_REQUEST['NewNetworkUnmanagedDevConnect']) && isset($_REQUEST['NetworkUnmanagedDevID'])) {
+		$sql = 'UPDATE "network_dumb_dev" SET "dev_Infrastructure" = "' . $_REQUEST['NewNetworkUnmanagedDevConnect'] . '", "dev_Infrastructure_port" = "' . $_REQUEST['NewNetworkUnmanagedDevPort'] . '" WHERE "id"="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
+		$result = $db->query($sql);
+	}
+}
+// remove unmanaged Device
+// #####################################
+if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
+	if (isset($_REQUEST['NetworkUnmanagedDevID'])) {
+		$sql = 'DELETE FROM "network_dumb_dev" WHERE "id"="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
 		$result = $db->query($sql);
 	}
 }
@@ -96,8 +135,8 @@ if ($_REQUEST['Networkdelete'] == "yes") {
     <section class="content">
 
     <!-- Manage Devices ---------------------------------------------------------- -->
-		<div class="box box-default"> <!-- collapsed-box -->
-        <div class="box-header with-border">
+		<div class="box "> <!-- collapsed-box -->
+        <div class="box-header">
           <h3 class="box-title"><?php echo $pia_lang['Network_ManageDevices']; ?></h3>
         </div>
         <!-- /.box-header -->
@@ -154,7 +193,7 @@ network_infrastructurelist();
               <form role="form" method="post" action="./networkSettings.php">
               <div class="form-group has-warning">
               	<label><?php echo $pia_lang['Network_ManageEdit_ID']; ?>:</label>
-                  <select class="form-control" name="NetworkDeviceID" onchange="handleSelectChange(event)">
+                  <select class="form-control" name="NetworkDeviceID" onchange="get_networkdev_values(event)">
                     <option value=""><?php echo $pia_lang['Network_ManageEdit_ID_text']; ?></option>
 <?php
 $sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port", "net_downstream_devices" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC';
@@ -180,7 +219,7 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
               </div>
 <!-- Autofill "Edit" Input fields ---------------------------------------------------------- -->
 <script>
-function handleSelectChange(event) {
+function get_networkdev_values(event) {
     var selectElement = event.target;
     var value = 'netdev_id_' + selectElement.value;
 
@@ -245,7 +284,6 @@ network_device_downlink_mac();
                             </ul>
                           </div>
                   </div>
-
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-warning" name="Networkedit" value="yes"><?php echo $pia_lang['Network_ManageEdit_Submit']; ?></button>
@@ -278,6 +316,141 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
               <!-- /.form-group -->
               <div class="form-group">
                 <button type="submit" class="btn btn-danger" name="Networkdelete" value="yes"><?php echo $pia_lang['Network_ManageDel_Submit']; ?></button>
+              </div>
+           </form>
+              <!-- /.form-group -->
+            </div>
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+
+    <div class="box ">
+        <div class="box-header">
+          <h3 class="box-title"><?php echo $pia_lang['Network_Unmanaged_Devices']; ?></h3>
+        </div>
+        <!-- /.box-header -->
+
+        <div class="box-body" style="">
+          <div class="row">
+            <!-- Add Device ---------------------------------------------------------- -->
+            <div class="col-md-4">
+            <h4 class="box-title"><?php echo $pia_lang['Network_ManageAdd']; ?></h4>
+            <form role="form" method="post" action="./networkSettings.php">
+              <!-- /.form-group -->
+              <div class="form-group has-success">
+                <label for="NetworkUnmanagedDevName"><?php echo $pia_lang['Network_ManageAdd_Name']; ?>:</label>
+                <input type="text" class="form-control" id="NetworkUnmanagedDevName" name="NetworkUnmanagedDevName" placeholder="<?php echo $pia_lang['Network_ManageAdd_Name_text']; ?>">
+              </div>
+
+              <div class="form-group has-success">
+                <label><?php echo $pia_lang['Network_Unmanaged_Devices_Connected']; ?>:</label>
+                  <select class="form-control" name="NetworkUnmanagedDevConnect">
+                    <option value=""><?php echo $pia_lang['Network_Unmanaged_Devices_Connected_text']; ?></option>
+<?php
+$sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port", "net_downstream_devices" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC';
+$result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
+$netdev_all_ids = array();
+while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
+	if (!isset($res['device_id'])) {
+		continue;
+	}
+	echo '<option value="' . $res['device_id'] . '">' . $res['net_device_name'] . ' / ' . substr($res['net_device_typ'], 2) . '</option>';
+}
+?>
+                  </select>
+              </div>
+              <div class="form-group has-success">
+                <label for="NetworkUnmanagedDevPort"><?php echo $pia_lang['Network_Unmanaged_Devices_Port']; ?>:</label>
+                <input type="text" class="form-control" id="NetworkUnmanagedDevPort" name="NetworkUnmanagedDevPort" placeholder="<?php echo $pia_lang['Network_Unmanaged_Devices_Port_text']; ?>">
+              </div>
+              <div class="form-group">
+              <button type="submit" class="btn btn-success" name="NetworkUnmanagedDevinsert" value="yes"><?php echo $pia_lang['Network_ManageAdd_Submit']; ?></button>
+              </div>
+          </form>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <!-- Edit Device ---------------------------------------------------------- -->
+            <div class="col-md-4">
+              <h4 class="box-title"><?php echo $pia_lang['Network_ManageEdit']; ?></h4>
+              <form role="form" method="post" action="./networkSettings.php">
+              <div class="form-group has-warning">
+                <label><?php echo $pia_lang['Network_ManageEdit_ID']; ?>:</label>
+                  <select class="form-control" name="NetworkUnmanagedDevID">
+                    <option value=""><?php echo $pia_lang['Network_ManageEdit_ID_text']; ?></option>
+<?php
+$sql = 'SELECT * FROM "network_dumb_dev" ORDER BY "dev_Name" ASC';
+$result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
+$netdev_all_ids = array();
+while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
+	if (!isset($res['id'])) {
+		continue;
+	}
+	echo '<option value="' . $res['id'] . '">' . $res['dev_Name'] . '</option>';
+}
+?>
+                  </select>
+              </div>
+              <div class="form-group has-warning">
+                <label for="NewNetworkUnmanagedDevName"><?php echo $pia_lang['Network_ManageEdit_Name']; ?>:</label>
+                <input type="text" class="form-control" id="NewNetworkUnmanagedDevName" name="NewNetworkUnmanagedDevName" placeholder="<?php echo $pia_lang['Network_ManageEdit_Name_text']; ?>">
+              </div>
+
+              <div class="form-group has-warning">
+                <label><?php echo $pia_lang['Network_Unmanaged_Devices_Connected']; ?>:</label>
+                  <select class="form-control" name="NewNetworkUnmanagedDevConnect">
+                    <option value=""><?php echo $pia_lang['Network_Unmanaged_Devices_Connected_text']; ?></option>
+<?php
+$sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port", "net_downstream_devices" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC';
+$result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
+$netdev_all_ids = array();
+while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
+	if (!isset($res['device_id'])) {
+		continue;
+	}
+	echo '<option value="' . $res['device_id'] . '">' . $res['net_device_name'] . ' / ' . substr($res['net_device_typ'], 2) . '</option>';
+}
+?>
+                  </select>
+              </div>
+              <div class="form-group has-warning">
+                <label for="NetworkDevicePort"><?php echo $pia_lang['Network_Unmanaged_Devices_Port']; ?>:</label>
+                <input type="text" class="form-control" id="NewNetworkUnmanagedDevPort" name="NewNetworkUnmanagedDevPort" placeholder="<?php echo $pia_lang['Network_Unmanaged_Devices_Port_text']; ?>">
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-warning" name="NetworkUnmanagedDevedit" value="yes"><?php echo $pia_lang['Network_ManageEdit_Submit']; ?></button>
+              </div>
+           </form>
+              <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <!-- Del Device ---------------------------------------------------------- -->
+           <div class="col-md-4">
+            <h4 class="box-title"><?php echo $pia_lang['Network_ManageDel']; ?></h4>
+              <form role="form" method="post" action="./networkSettings.php">
+              <div class="form-group has-error">
+                <label><?php echo $pia_lang['Network_ManageDel_Name']; ?>:</label>
+                  <select class="form-control" name="NetworkUnmanagedDevID">
+                    <option value=""><?php echo $pia_lang['Network_ManageDel_Name_text']; ?></option>
+<?php
+$sql = 'SELECT "id", "dev_Name" FROM "network_dumb_dev" ORDER BY "dev_Name" ASC';
+$result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
+while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
+	if (!isset($res['id'])) {
+		continue;
+	}
+
+	echo '<option value="' . $res['id'] . '">' . $res['dev_Name'] . '</option>';
+}
+?>
+                  </select>
+              </div>
+              <!-- /.form-group -->
+              <div class="form-group">
+                <button type="submit" class="btn btn-danger" name="NetworkUnmanagedDevdelete" value="yes"><?php echo $pia_lang['Network_ManageDel_Submit']; ?></button>
               </div>
            </form>
               <!-- /.form-group -->
