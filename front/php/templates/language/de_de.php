@@ -480,9 +480,9 @@ $pia_lang['BackDevices_Report_Delete'] = ' Benachrichtigung(en) wurde(n) gelösc
 
 $pia_lang['Network_Title'] = 'Netzwerkübersicht';
 $pia_lang['Network_ManageDevices'] = 'Netzwerkelemente verwalten';
-$pia_lang['Network_ManageAdd'] = 'Element hinzufügen';
-$pia_lang['Network_ManageEdit'] = 'Element bearbeiten';
-$pia_lang['Network_ManageDel'] = 'Element löschen';
+$pia_lang['Network_ManageAdd'] = 'Gerät hinzufügen';
+$pia_lang['Network_ManageEdit'] = 'Gerät bearbeiten';
+$pia_lang['Network_ManageDel'] = 'Gerät löschen';
 $pia_lang['Network_ManageAdd_Name'] = 'Name des Gerätes';
 $pia_lang['Network_ManageAdd_Name_text'] = 'Name ohne Sonderzeichen';
 $pia_lang['Network_ManageAdd_Type'] = 'Gerätetyp';
@@ -508,6 +508,12 @@ $pia_lang['Network_Table_State'] = 'Status';
 $pia_lang['Network_Table_Hostname'] = 'Gerätename';
 $pia_lang['Network_Table_IP'] = 'Host IP';
 $pia_lang['Network_UnassignedDevices'] = 'Nicht zugewiesene Geräte';
+
+$pia_lang['Network_Unmanaged_Devices'] = 'Nicht scanbare Geräte verwalten';
+$pia_lang['Network_Unmanaged_Devices_Connected'] = 'Verbunden mit';
+$pia_lang['Network_Unmanaged_Devices_Connected_text'] = 'Gerät auswählen';
+$pia_lang['Network_Unmanaged_Devices_Port'] = 'Am Port';
+$pia_lang['Network_Unmanaged_Devices_Port_text'] = 'Am Portnummer am ausgewählten Gerät';
 
 //////////////////////////////////////////////////////////////////
 // Help Page
@@ -768,7 +774,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und
          									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen.
-         									Wenn ja, lösche diese dort ebenfalls. Sollten diese Geräte auch nach dem Löschen in Pi-hole immer wider auftauchen, starte den Dienst <span class="text-maroon help_faq_code">pihole-FTL</span> neu. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen.';
+         									Wenn ja, lösche diese dort ebenfalls. Sollten diese Geräte auch nach dem Löschen in Pi-hole immer wieder auftauchen, starte den Dienst <span class="text-maroon help_faq_code">pihole-FTL</span> neu. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen. Im Zweifel kann auch ein Neustart nicht schaden.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = 'Was bedeutet ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'meint ein Netzwerkgerät, welches über die Netzwerk-Seite erstellt wurde.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'bezeichnet die Anschlussnummer/Portnummer, an der das gerade bearbeitete Gerät mit diesem Netzwerkgerät verbunden ist.';
