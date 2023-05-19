@@ -508,6 +508,14 @@ $pia_lang['Network_Table_State'] = 'Estado';
 $pia_lang['Network_Table_Hostname'] = 'Nombre de host';
 $pia_lang['Network_Table_IP'] = 'Dirección IP';
 $pia_lang['Network_UnassignedDevices'] = 'Unassigned devices';
+$pia_lang['NetworkSettings_Title'] = 'Configuración: Resumen de la red';
+$pia_lang['Network_ManageDevices_Intro'] = 'Esta sección se utiliza para crear dispositivos transparentes/sin IP (no gestionados), como concentradores o interruptores, así como dispositivos activos como enrutadores, interruptores gestionados o puntos de acceso que influyen en la estructura de la red. Los dispositivos ya detectados por Pi.Alert deben crearse nuevamente aquí para su visualización. La edición o eliminación de dispositivos ya detectados por Pi.Alert es independiente de la lista "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Devices'] . '</span>" y solo tiene relevancia para la página "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>".';
+$pia_lang['Network_Unmanaged_Devices'] = 'Gestionar dispositivos no escaneables';
+$pia_lang['Network_Unmanaged_Devices_Intro'] = 'En este lugar, se pueden crear dispositivos finales que ocupan puertos o conexiones en interruptores o enrutadores, pero que no tienen funcionalidad de red por sí mismos. También se pueden considerar dispositivos que no se pueden detectar pero que se deben mostrar para tener una visión general. Los dispositivos creados aquí solo aparecen en la página "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>".';
+$pia_lang['Network_Unmanaged_Devices_Connected'] = 'Conectado a';
+$pia_lang['Network_Unmanaged_Devices_Connected_text'] = 'Seleccionar dispositivo';
+$pia_lang['Network_Unmanaged_Devices_Port'] = 'En el puerto';
+$pia_lang['Network_Unmanaged_Devices_Port_text'] = 'En el número de puerto del dispositivo seleccionado';
 
 //////////////////////////////////////////////////////////////////
 // Help Page - Update by @TeroRERO 07ago2022

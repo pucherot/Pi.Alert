@@ -509,6 +509,15 @@ $pia_lang['Network_Table_Hostname'] = 'Nom de l&apos;appareil';
 $pia_lang['Network_Table_IP'] = 'IP de l&apos;hôte';
 $pia_lang['Network_UnassignedDevices'] = 'Appareils non attribués';
 
+$pia_lang['NetworkSettings_Title'] = 'Paramètres - Aperçu du réseau';
+$pia_lang['Network_ManageDevices_Intro'] = 'Cette section est utilisée pour créer des appareils transparents/sans IP (non gérés), tels que des concentrateurs ou des commutateurs, ainsi que des appareils actifs tels que des routeurs, des commutateurs gérés ou des points d&apos;accès qui influencent la structure du réseau. Les appareils déjà détectés par Pi.Alert doivent être recréés ici pour être affichés. La modification ou la suppression des appareils déjà détectés par Pi.Alert est indépendante de la liste "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Devices'] . '</span>" et n&apos;a de signification que pour la page "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>".';
+$pia_lang['Network_Unmanaged_Devices'] = 'Gérer les appareils non scannables';
+$pia_lang['Network_Unmanaged_Devices_Intro'] = 'À cet endroit, vous pouvez créer des appareils finaux qui occupent des ports ou des connexions sur des commutateurs ou des routeurs mais qui n&apos;ont pas eux-mêmes de fonctionnalité réseau. Les appareils qui ne peuvent pas être détectés mais qui doivent être affichés pour une vue d&apos;ensemble peuvent également être pris en compte ici. Les appareils créés ici n&apos;apparaissent que sur la page "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>".';
+$pia_lang['Network_Unmanaged_Devices_Connected'] = 'Connecté à';
+$pia_lang['Network_Unmanaged_Devices_Connected_text'] = 'Sélectionner un appareil';
+$pia_lang['Network_Unmanaged_Devices_Port'] = 'Sur le port';
+$pia_lang['Network_Unmanaged_Devices_Port_text'] = 'Sur le numéro de port de l&apos;appareil sélectionné';
+
 //////////////////////////////////////////////////////////////////
 // Help Page
 //////////////////////////////////////////////////////////////////

@@ -127,7 +127,7 @@ if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['Network_Title']; ?>
+         <?php echo $pia_lang['NetworkSettings_Title']; ?>
       </h1>
     </section>
 
@@ -142,6 +142,7 @@ if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
         <!-- /.box-header -->
 
         <div class="box-body" style="">
+          <p><?php echo $pia_lang['Network_ManageDevices_Intro']; ?></p>
           <div class="row">
             <!-- Add Device ---------------------------------------------------------- -->
             <div class="col-md-4">
@@ -333,6 +334,7 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
         <!-- /.box-header -->
 
         <div class="box-body" style="">
+          <p><?php echo $pia_lang['Network_Unmanaged_Devices_Intro']; ?></p>
           <div class="row">
             <!-- Add Device ---------------------------------------------------------- -->
             <div class="col-md-4">

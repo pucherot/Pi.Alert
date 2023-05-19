@@ -508,8 +508,15 @@ $pia_lang['Network_Table_State'] = 'Status';
 $pia_lang['Network_Table_Hostname'] = 'Gerätename';
 $pia_lang['Network_Table_IP'] = 'Host IP';
 $pia_lang['Network_UnassignedDevices'] = 'Nicht zugewiesene Geräte';
-
+$pia_lang['NetworkSettings_Title'] = 'Einstellung - Netzwerkübersicht';
+$pia_lang['Network_ManageDevices_Intro'] = 'Dieser Bereich dient dem Erstellen von transparenten/IP-losen (Unmanaged) Geräten, wie Hubs oder Switches, sowie aktiven Geräten wie Router, managed Switches oder AccessPoint,
+											welche die Netzwerkstruktur beeinflussen. Auch bereits durch Pi.Alert erkannte Geräte, müssen hier für die Darstellung neu erstellt werden. Die Bearbeitung, oder das Löschen,
+											bereits durch Pi.Alert erkannter Geräte, ist unabhängig von der "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Devices'] . '</span>"-Liste und hat nur
+											Bedeutung für die "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>" Seite.';
 $pia_lang['Network_Unmanaged_Devices'] = 'Nicht scanbare Geräte verwalten';
+$pia_lang['Network_Unmanaged_Devices_Intro'] = 'An dieser Stelle können Endgeräte, welche zwar Ports oder Verbindungen an z.B Switches oder Routern belegen, selbst jedoch keine Netzwerkfunktionalität haben, erstellt werden.
+											Auch Geräte die nicht erkannt werden können, aber der Übersicht wegen dargestellt werden sollen, können hier berücksichtigt werden. Die hier erstellten Geräte tauchen ausschließlich
+											auf der "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>" Seite auf.';
 $pia_lang['Network_Unmanaged_Devices_Connected'] = 'Verbunden mit';
 $pia_lang['Network_Unmanaged_Devices_Connected_text'] = 'Gerät auswählen';
 $pia_lang['Network_Unmanaged_Devices_Port'] = 'Am Port';

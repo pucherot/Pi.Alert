@@ -508,6 +508,14 @@ $pia_lang['Network_Table_State'] = 'State';
 $pia_lang['Network_Table_Hostname'] = 'Hostname';
 $pia_lang['Network_Table_IP'] = 'IP';
 $pia_lang['Network_UnassignedDevices'] = 'Unassigned devices';
+$pia_lang['NetworkSettings_Title'] = 'Settings - Network Overview';
+$pia_lang['Network_ManageDevices_Intro'] = 'This section is used for creating transparent/IP-less (unmanaged) devices such as hubs or switches, as well as active devices like routers, managed switches, or access points that influence the network structure. Devices already detected by Pi.Alert must be recreated here for display. Editing or deleting devices already detected by Pi.Alert is independent of the "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Devices'] . '</span>" list and only has significance for the "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>" page.';
+$pia_lang['Network_Unmanaged_Devices'] = 'Manage Non-Scannable Devices';
+$pia_lang['Network_Unmanaged_Devices_Intro'] = 'At this location, end devices that occupy ports or connections on switches or routers but do not have network functionality themselves can be created. Devices that cannot be detected but should be displayed for an overview can also be taken into account here. The devices created here only appear on the "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>" page.';
+$pia_lang['Network_Unmanaged_Devices_Connected'] = 'Connected to';
+$pia_lang['Network_Unmanaged_Devices_Connected_text'] = 'Select Device';
+$pia_lang['Network_Unmanaged_Devices_Port'] = 'On Port';
+$pia_lang['Network_Unmanaged_Devices_Port_text'] = 'On Port number on the selected device';
 
 //////////////////////////////////////////////////////////////////
 // Help Page
