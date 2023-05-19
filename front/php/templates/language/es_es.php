@@ -480,9 +480,9 @@ $pia_lang['BackDevices_Report_Delete'] = ' Notificación(es) eliminada(s).';
 
 $pia_lang['Network_Title'] = 'Descripción general de la red';
 $pia_lang['Network_ManageDevices'] = 'Administrar dispositivos';
-$pia_lang['Network_ManageAdd'] = 'Añadir dispositivo';
-$pia_lang['Network_ManageEdit'] = 'Actualizar dispositivo';
-$pia_lang['Network_ManageDel'] = 'Eliminar dispositivo';
+// $pia_lang['Network_ManageAdd'] = 'Añadir dispositivo';
+// $pia_lang['Network_ManageEdit'] = 'Actualizar dispositivo';
+// $pia_lang['Network_ManageDel'] = 'Eliminar dispositivo';
 $pia_lang['Network_ManageAdd_Name'] = 'Nombre del dispositivo';
 $pia_lang['Network_ManageAdd_Name_text'] = 'Nombre sin caracteres especiales';
 $pia_lang['Network_ManageAdd_Type'] = 'Tipo de dispositivo';

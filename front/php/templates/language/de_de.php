@@ -480,16 +480,16 @@ $pia_lang['BackDevices_Report_Delete'] = ' Benachrichtigung(en) wurde(n) gelösc
 
 $pia_lang['Network_Title'] = 'Netzwerkübersicht';
 $pia_lang['Network_ManageDevices'] = 'Netzwerkelemente verwalten';
-$pia_lang['Network_ManageAdd'] = 'Gerät hinzufügen';
-$pia_lang['Network_ManageEdit'] = 'Gerät bearbeiten';
-$pia_lang['Network_ManageDel'] = 'Gerät löschen';
-$pia_lang['Network_ManageAdd_Name'] = 'Name des Gerätes';
+// $pia_lang['Network_ManageAdd'] = 'Gerät hinzufügen';
+// $pia_lang['Network_ManageEdit'] = 'Gerät bearbeiten';
+// $pia_lang['Network_ManageDel'] = 'Gerät löschen';
+$pia_lang['Network_ManageAdd_Name'] = 'Name des neuen Gerätes';
 $pia_lang['Network_ManageAdd_Name_text'] = 'Name ohne Sonderzeichen';
 $pia_lang['Network_ManageAdd_Type'] = 'Gerätetyp';
 $pia_lang['Network_ManageAdd_Type_text'] = '-- Typ wählen --';
 $pia_lang['Network_ManageAdd_Port'] = 'Portanzahl';
 $pia_lang['Network_ManageAdd_Port_text'] = 'bei WLAN oder Powerline leer lassen';
-$pia_lang['Network_ManageAdd_Submit'] = 'Hinzufügen';
+$pia_lang['Network_ManageAdd_Submit'] = 'Gerät hinzufügen';
 $pia_lang['Network_ManageEdit_ID'] = 'Gerät zum Bearbeiten auswählen';
 $pia_lang['Network_ManageEdit_ID_text'] = '-- Gerät wählen --';
 $pia_lang['Network_ManageEdit_Name'] = 'Neuer Name';
@@ -500,10 +500,10 @@ $pia_lang['Network_ManageEdit_Port'] = 'Neue Portanzahl';
 $pia_lang['Network_ManageEdit_Port_text'] = 'Bei WLAN oder Powerline leer lassen';
 $pia_lang['Network_ManageEdit_Downlink'] = 'manuelle Port-Konfiguration (Ziel-MAC,lokaler Port)';
 $pia_lang['Network_ManageEdit_Downlink_text'] = '0a:1b:3c:4d:5e:6f,16;Ziel-MAC 2,Port 2;';
-$pia_lang['Network_ManageEdit_Submit'] = 'Speichern';
+$pia_lang['Network_ManageEdit_Submit'] = 'Bearbeitung speichern';
 $pia_lang['Network_ManageDel_Name'] = 'Gerät zum Löschen auswählen';
 $pia_lang['Network_ManageDel_Name_text'] = '-- Gerät wählen --';
-$pia_lang['Network_ManageDel_Submit'] = 'Löschen';
+$pia_lang['Network_ManageDel_Submit'] = 'Gerät löschen';
 $pia_lang['Network_Table_State'] = 'Status';
 $pia_lang['Network_Table_Hostname'] = 'Gerätename';
 $pia_lang['Network_Table_IP'] = 'Host IP';
@@ -809,12 +809,30 @@ $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Diese Seite soll dir die Möglichke
         									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen
         									 an welchem Port ein Host angeschlossen und ob er online ist. Es ist möglich ein Gerät mehreren Ports (bei Portbündelung), als auch mehrere Geräte einem Port (virtuelle Maschinen), zuzuordnen.';
 $pia_lang['HelpFAQ_Cat_Network_601_head'] = 'Wie funktioniert die Netzwerk Seite?';
-$pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ein Switch erstellt. Dazu biete ich bereits entsprechende Geräte in der Auswahlliste an. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
-											 Auf der Detailansicht hast du nun, bei jedem erkannten Gerät, die Möglichkeit diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
-											 Jetzt zeigt dir die Netzwerk Seite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit, mehrere Ports, die du mit einem Komma trennst, an einem Switch zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server mit mehreren virtuellen Maschinen).<br><br>
-											 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Netzwerk Seite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu klappst du die "Verwaltung" auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast, hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
+
+// $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ein Switch erstellt. Dazu biete ich bereits entsprechende Geräte in der Auswahlliste an. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
+// 											 Auf der Detailansicht hast du nun, bei jedem erkannten Gerät, die Möglichkeit diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
+// 											 Jetzt zeigt dir die Netzwerk Seite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit, mehrere Ports, die du mit einem Komma trennst, an einem Switch zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server mit mehreren virtuellen Maschinen).<br><br>
+// 											 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Netzwerk Seite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu klappst du die "Verwaltung" auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast, hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
+
+$pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Die Seite besteht aus 2 Komponenten: Der Darstellunsseite in der Sektion "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Section_A'] . '</span>"
+											 und der Verwaltungsseite in der Sektion "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Section_C'] . '</span>". Jegliche Bearbeitung auf der
+											 Verwaltungsseite hat auschließlich Auswirkungen auf die Darstellungsseite, jedoch nicht auf die Geräte Liste selbst. <br>
+											 <br>
+											 Auf der Verwaltungsseite wird z.B. ein Switch erstellt. Bereits erkannte Geräte werden in der Auswahlliste angezeigt. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
+ 											 Auf der Detailansicht aller erkannten Geräte, hast du nun die Möglichkeit, diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
+ 											 Jetzt zeigt dir die Netzwerk Darstellunsseite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit,
+											 mehrere Ports an einem Switch, die du mit einem Komma trennst, zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server
+											 mit mehreren virtuellen Maschinen).<br>
+											 <br>
+ 											 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Verwaltungsseite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab
+											 angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu
+											 rufst du die Verwaltungsseite auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast (falls das automatische Ausfüllen nicht
+											 funktioniert), hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach
+											 den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
+
 $pia_lang['HelpFAQ_Cat_Network_602_head'] = 'Ein Switch oder Router wird mir ohne Ports angezeigt.';
-$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'Möglicherweise wurde beim Anlegen des Gerätes auf der Netzwerkseite versäumt, die Portanzahl einzugeben. Auch bei der Bearbeitung des Gerätes auf der Netzwerkseite, ist es notwendig, eine bereits eingegebene Portanzahl, erneut einzugeben.<br>
+$pia_lang['HelpFAQ_Cat_Network_602_text'] = 'Möglicherweise wurde beim Anlegen des Gerätes auf der Netzwerkseite versäumt, die Portanzahl einzugeben. Auch bei der Bearbeitung des Gerätes auf der Netzwerkseite, ist es notwendig, eine bereits eingegebene Portanzahl, erneut einzugeben, falls das automatische Ausfüllen nicht funktioniert.<br>
 											 Sollte also bei einem bereits angelegten Gerät die Portanzzahl fehlen, wird eine Bearbeitung des Gerätes unter Angabe der <span class="text-maroon help_faq_code">Ports</span>, des <span class="text-maroon help_faq_code">Types</span> und ggf. der <span class="text-maroon help_faq_code">manuelle Port-Konfiguration</span> das Problem beseitigen.';
 $pia_lang['HelpFAQ_Cat_Service_700_head'] = 'Was bedeuten die unterschiedlichen Farben in dem farbigen Balken?';
 $pia_lang['HelpFAQ_Cat_Service_700_text'] = 'Es gibt insgesamt 5 verschiedene Farbcodes: <br>

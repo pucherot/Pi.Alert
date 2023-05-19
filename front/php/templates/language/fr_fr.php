@@ -480,9 +480,9 @@ $pia_lang['BackDevices_Report_Delete'] = ' La/les notification(s) a/ont été su
 
 $pia_lang['Network_Title'] = 'Aperçu du réseau';
 $pia_lang['Network_ManageDevices'] = 'Gérer les éléments du réseau';
-$pia_lang['Network_ManageAdd'] = 'Ajouter un élément';
-$pia_lang['Network_ManageEdit'] = 'Modifier un élément';
-$pia_lang['Network_ManageDel'] = 'Supprimer un élément';
+// $pia_lang['Network_ManageAdd'] = 'Ajouter un élément';
+// $pia_lang['Network_ManageEdit'] = 'Modifier un élément';
+// $pia_lang['Network_ManageDel'] = 'Supprimer un élément';
 $pia_lang['Network_ManageAdd_Name'] = 'Nom de l&apos;appareil';
 $pia_lang['Network_ManageAdd_Name_text'] = 'Nom sans caractères spéciaux';
 $pia_lang['Network_ManageAdd_Type'] = 'Type d&apos;appareil';
@@ -508,7 +508,6 @@ $pia_lang['Network_Table_State'] = 'Statut';
 $pia_lang['Network_Table_Hostname'] = 'Nom de l&apos;appareil';
 $pia_lang['Network_Table_IP'] = 'IP de l&apos;hôte';
 $pia_lang['Network_UnassignedDevices'] = 'Appareils non attribués';
-
 $pia_lang['NetworkSettings_Title'] = 'Paramètres - Aperçu du réseau';
 $pia_lang['Network_ManageDevices_Intro'] = 'Cette section est utilisée pour créer des appareils transparents/sans IP (non gérés), tels que des concentrateurs ou des commutateurs, ainsi que des appareils actifs tels que des routeurs, des commutateurs gérés ou des points d&apos;accès qui influencent la structure du réseau. Les appareils déjà détectés par Pi.Alert doivent être recréés ici pour être affichés. La modification ou la suppression des appareils déjà détectés par Pi.Alert est indépendante de la liste "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Devices'] . '</span>" et n&apos;a de signification que pour la page "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Network'] . '</span>".';
 $pia_lang['Network_Unmanaged_Devices'] = 'Gérer les appareils non scannables';
