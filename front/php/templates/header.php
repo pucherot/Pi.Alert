@@ -116,11 +116,13 @@ function show_pia_servertime() {
     if (document.getElementById) { document.getElementById("PIA_Servertime_place").innerHTML = realtime_pia_servertime; } setTimeout("show_pia_servertime()", 1000);
 }
 
-document.addEventListener("visibilitychange",()=>{
-   if(document.visibilityState==="visible"){
-       window.location.href = window.location.href.split('#')[0];
-   }
-})
+if (window.navigator.standalone || document.referrer.includes("android-app://") ||  window.matchMedia("(display-mode: standalone)").matches) {
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+      window.location.href = window.location.href.split('#')[0];
+    }
+  });
+}
 
 </script>
 
@@ -188,7 +190,8 @@ insert_back_button();
               <li class="user-header" style=" height: 100px;">
                 <img src="img/pialertLogoWhite.png" class="img-circle" alt="Pi.Alert Logo" style="border-color:transparent; height: 50px; width: 50px; margin-top:15px;">
                 <p style="float: right; width: 200px">
-                <?php echo $pia_lang['About_Title']; ?>
+                <?php
+echo $pia_lang['About_Title']; ?>
                   <small><?php echo $pia_lang['About_Design']; ?> Raspberry Pi</small>
                 </p>
               </li>
