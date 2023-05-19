@@ -78,7 +78,7 @@ $result = $db->query($sql);
 
 function unassigned_devices() {
 	global $db;
-	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_Infrastructure" = "" OR "dev_Infrastructure" IS NULL';
+	$func_sql = 'SELECT * FROM "Devices" WHERE ("dev_Infrastructure" = "" OR "dev_Infrastructure" IS NULL) AND "dev_Archived" = 0';
 	$func_result = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
 	while ($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
 		echo '<a href="./deviceDetails.php?mac=' . $func_res['dev_MAC'] . '"><div style="display: inline-block; padding: 5px 15px; font-weight: bold;">' . $func_res['dev_Name'] . '</div></a>';
