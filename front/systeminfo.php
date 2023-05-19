@@ -85,6 +85,22 @@ $usb_devices_mount = explode("\n", trim($usb_result));
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 <?php
+// Client ----------------------------------------------------------
+echo '<div class="box box-solid">
+            <div class="box-header">
+              <h3 class="box-title sysinfo_headline"><i class="bi bi-globe"></i> This Client</h3>
+            </div>
+            <div class="box-body">
+				<div class="row">
+				  <div class="col-sm-3 sysinfo_gerneral_a">User Agent</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $_SERVER['HTTP_USER_AGENT'] . '</div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-3 sysinfo_gerneral_a">Browser Resolution:</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b" id="resolution"></div>
+				</div>
+            </div>
+      </div>';
 
 // General ----------------------------------------------------------
 echo '<div class="box box-solid">
@@ -114,6 +130,17 @@ echo '<div class="box box-solid">
 				</div>
             </div>
       </div>';
+
+echo '<script>
+	var ratio = window.devicePixelRatio || 1;
+	var w = window.screen.width;
+	var h = window.screen.height;
+	var rw = window.screen.width * ratio;
+	var rh = window.screen.height * ratio;
+
+	var resolutionDiv = document.getElementById("resolution");
+	resolutionDiv.innerHTML = "Width: " + w + "px / Height: " + h + "px<br> " + "Width: " + rw + "px / Height: " + rh + "px (native)";
+</script>';
 
 // Storage ----------------------------------------------------------
 echo '<div class="box box-solid">
