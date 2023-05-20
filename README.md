@@ -118,6 +118,8 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 
 - One-step Automated Update:
   #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh | bash`
+  
+There are no updates as release package, because the update function is done by the "curl" command anyway. From the settings page of Pi.Alert, I provide a function to view the latest update. After clicking on the (i) next to the update notification I provide a link to the update archive on my homepage in case an older version is needed.
 
 # Uninstall process
 <!--- --------------------------------------------------------------------- --->
