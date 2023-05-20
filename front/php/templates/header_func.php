@@ -185,4 +185,14 @@ function insert_back_button() {
       </a>';
 	}
 }
+
+// Adjust Logo Color ---------------------------------------------------------------
+function set_iconcolur_for_skin($skinname) {
+	//echo $skinname;
+	//$PIALERTLOGO_LINK = 'pialertLogoWhite';
+	if ($skinname == 'skin-black-light' || $skinname == 'skin-black') {
+		return 'pialertLogoBlack';
+	} else {return 'pialertLogoWhite';}
+
+}
 ?>

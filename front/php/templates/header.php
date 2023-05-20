@@ -96,7 +96,9 @@ get_webservices_config();
 if ($ENABLED_DARKMODE === True) {
 	echo '<link rel="stylesheet" href="css/dark-patch.css?' . $conf_data['VERSION_DATE'] . '">';
 	$BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/boxed-bg-dark.png\');"';
-} else { $BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/background.png\');"';}
+} else {
+	$BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/background.png\');"';
+}
 ?>
 <!-- Servertime to the right of the hostname -->
 <script>
@@ -155,9 +157,8 @@ if (window.navigator.standalone || document.referrer.includes("android-app://") 
       </a>
 
 <?php
-
 insert_back_button();
-
+$PIALERTLOGO_LINK = set_iconcolur_for_skin($pia_skin_selected);
 ?>
 
       <a id="navbar-reload-button" href="" role="button" onclick="location.reload()" style="">
@@ -180,7 +181,7 @@ insert_back_button();
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px; padding-top: 15px">
               <!-- The user image in the navbar-->
-              <img src="img/pialertLogoWhite.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
+              <img src="img/<?php echo $PIALERTLOGO_LINK; ?>.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <!-- <span class="hidden-xs">Pi.Alert</span> -->
               <span class="label label-danger"><?php echo count_webgui_reports(); ?></span>
