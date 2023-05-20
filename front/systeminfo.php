@@ -133,10 +133,10 @@ echo '<div class="box box-solid">
 
 echo '<script>
 	var ratio = window.devicePixelRatio || 1;
-	var w = window.screen.width;
-	var h = window.screen.height;
-	var rw = window.screen.width * ratio;
-	var rh = window.screen.height * ratio;
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+	var rw = window.innerWidth * ratio;
+	var rh = window.innerHeight * ratio;
 
 	var resolutionDiv = document.getElementById("resolution");
 	resolutionDiv.innerHTML = "Width: " + w + "px / Height: " + h + "px<br> " + "Width: " + rw + "px / Height: " + rh + "px (native)";
