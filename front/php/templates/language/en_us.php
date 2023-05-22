@@ -311,7 +311,6 @@ $pia_lang['Maintenance_arp_status_off'] = 'is currently disabled';
 $pia_lang['Maintenance_arp_status_on'] = 'scan(s) currently running';
 $pia_lang['Maintenance_notification_config'] = 'Notifications';
 $pia_lang['Maintenance_notification_config_webmon'] = 'Notifications (Service Mon.)';
-$pia_lang['Maintenance_Tools_Updatecheck'] = 'Check for Updates';
 $pia_lang['Maintenance_Tools_Logviewer_Scan'] = 'Scan';
 $pia_lang['Maintenance_Tools_Logviewer_Scan_empty'] = 'It is probably currently running scan';
 $pia_lang['Maintenance_Tools_Logviewer_IPLog'] = 'Internet IP';
@@ -404,8 +403,6 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Deleting the network activity';
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'The network activity graph is reset. This does not affect the events.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Delete network activity';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = 'Are you sure you want to reset the network activity?';
-$pia_lang['Maintenance_Github_package_a'] = 'The latest version was released on ';
-$pia_lang['Maintenance_Github_package_b'] = '';
 $pia_lang['Maintenance_Tool_loginenable'] = 'Enable Login';
 $pia_lang['Maintenance_Tool_loginenable_text'] = 'After activation, you will automatically be taken to the login page. If you have not set a password before, "123456" is the default password.';
 $pia_lang['Maintenance_Tool_loginenable_noti'] = 'Enable Login';
@@ -872,6 +869,19 @@ $pia_lang['Reports_delete_all'] = 'Delete all notifications';
 $pia_lang['Reports_delete_all_noti'] = 'Delete all notifications';
 $pia_lang['Reports_delete_all_noti_text'] = 'All notifications are deleted. The counter is being reset with this.';
 $pia_lang['Reports_Rogue_hint'] = 'A new message about an unknown DHCP server will only be displayed after this message has been deleted.';
+
+//////////////////////////////////////////////////////////////////
+// UpdateCheck
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['Maintenance_Tools_Updatecheck'] = 'Check for Updates';
+$pia_lang['Maintenance_Github_package_a'] = 'The latest version was released on ';
+$pia_lang['Maintenance_Github_package_b'] = '';
+$pia_lang['Updatecheck_Title'] = 'Update Check';
+$pia_lang['Updatecheck_cur'] = 'Currently used version';
+$pia_lang['Updatecheck_new'] = 'Latest version on Github';
+$pia_lang['Updatecheck_RN'] = 'Update notes';
+$pia_lang['Updatecheck_U2D'] = 'You are already using the latest version';
 
 //////////////////////////////////////////////////////////////////
 // System Info Page

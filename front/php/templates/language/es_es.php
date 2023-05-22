@@ -311,7 +311,6 @@ $pia_lang['Maintenance_arp_status_off'] = 'está actualmente deshabilitado';
 $pia_lang['Maintenance_arp_status_on'] = 'escaneo(s) actualmente en ejecución';
 $pia_lang['Maintenance_notification_config'] = 'Notifications';
 $pia_lang['Maintenance_notification_config_webmon'] = 'Notifications (Service Mon.)';
-$pia_lang['Maintenance_Tools_Updatecheck'] = 'Comprobar las actualizaciones';
 $pia_lang['Maintenance_Tools_Logviewer_Scan'] = 'Scan';
 $pia_lang['Maintenance_Tools_Logviewer_Scan_empty'] = 'Se está realizando una exploración';
 $pia_lang['Maintenance_Tools_Logviewer_IPLog'] = 'Internet IP';
@@ -404,8 +403,6 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Eliminar la actividad de la red'
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'El gráfico de actividad de la red se resetea. Esto no afecta a los eventos.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Borrar la actividad de la red';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = '¿Está seguro de restablecer la actividad de la red?';
-$pia_lang['Maintenance_Github_package_a'] = 'La última versión de Pi.Alert (Fork leiweibau) se publicó en ';
-$pia_lang['Maintenance_Github_package_b'] = '';
 $pia_lang['Maintenance_Tool_loginenable'] = 'Login activado.';
 $pia_lang['Maintenance_Tool_loginenable_text'] = 'Después de la activación, se le llevará automáticamente a la página de inicio de sesión. Si no has establecido una contraseña antes, "123456" es la contraseña por defecto.';
 $pia_lang['Maintenance_Tool_loginenable_noti'] = 'Login activado.';
@@ -867,6 +864,19 @@ $pia_lang['Reports_delete_all'] = 'Borrar todas las notificaciones';
 $pia_lang['Reports_delete_all_noti'] = 'Borrar todas las notificaciones';
 $pia_lang['Reports_delete_all_noti_text'] = 'Se borran todas las notificaciones. El contador se pone a cero.';
 $pia_lang['Reports_Rogue_hint'] = 'Un nuevo mensaje sobre un servidor DHCP desconocido sólo se muestra después de haber borrado este mensaje.';
+
+//////////////////////////////////////////////////////////////////
+// UpdateCheck
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['Maintenance_Tools_Updatecheck'] = 'Comprobar las actualizaciones';
+$pia_lang['Maintenance_Github_package_a'] = 'La última versión se publicó el ';
+$pia_lang['Maintenance_Github_package_b'] = '';
+$pia_lang['Updatecheck_Title'] = 'Update Check';
+$pia_lang['Updatecheck_cur'] = 'Versión actualmente utilizada';
+$pia_lang['Updatecheck_new'] = 'Última versión en Github';
+$pia_lang['Updatecheck_RN'] = 'Notas de actualización';
+$pia_lang['Updatecheck_U2D'] = 'Ya estás utilizando la última versión';
 
 //////////////////////////////////////////////////////////////////
 // System Info Page

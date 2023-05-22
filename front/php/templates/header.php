@@ -87,6 +87,7 @@ get_webservices_config();
 
   <!-- Fav / Homescreen Icon -->
   <link rel="icon" type="image/x-icon" href="img/favicons/flat_blue_white.png">
+  <link rel="apple-touch-icon" href="https://net-dev.de/hs_pialert.png">
 
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
@@ -290,6 +291,10 @@ format_temperature($celsius, $temperaturelimit);
 
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('help_faq.php'))) {echo 'active';}?>">
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ']; ?></span></a>
+        </li>
+
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('updatecheck.php'))) {echo 'active';}?>">
+          <a href="updatecheck.php"><i class="fa fa-rotate-right"></i> <span> <?php echo $pia_lang['Navigation_UpdateCheck']; ?></span></a>
         </li>
 
       </ul>

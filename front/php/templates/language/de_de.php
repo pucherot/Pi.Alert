@@ -52,6 +52,7 @@ $pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Einstellungen';
 $pia_lang['Navigation_Network'] = 'Netzwerk';
 $pia_lang['Navigation_HelpFAQ'] = 'Hilfe / FAQ';
+$pia_lang['Navigation_UpdateCheck'] = 'Update Check';
 $pia_lang['Navigation_Section_A'] = 'HAUPTFUNKTIONEN';
 $pia_lang['Navigation_Section_B'] = 'EVENTS & JOURNAL';
 $pia_lang['Navigation_Section_C'] = 'EINSTELLUNGEN & HILFE';
@@ -311,7 +312,6 @@ $pia_lang['Maintenance_arp_status_off'] = 'ist im Moment deaktiviert';
 $pia_lang['Maintenance_arp_status_on'] = 'Scan(s) sind gerade aktiv';
 $pia_lang['Maintenance_notification_config'] = 'Benachrichtigung (Geräte)';
 $pia_lang['Maintenance_notification_config_webmon'] = 'Benachrichtigung (Services)';
-$pia_lang['Maintenance_Tools_Updatecheck'] = 'Prüfe auf Updates';
 $pia_lang['Maintenance_Tools_Logviewer_Scan'] = 'Scan';
 $pia_lang['Maintenance_Tools_Logviewer_Scan_empty'] = 'Es wird vermutlich gerade Scan ausgeführt';
 $pia_lang['Maintenance_Tools_Logviewer_IPLog'] = 'Internet IP';
@@ -404,8 +404,6 @@ $pia_lang['Maintenance_Tool_del_ActHistory'] = 'Löschen der Netzwerkaktivität'
 $pia_lang['Maintenance_Tool_del_ActHistory_text'] = 'Der Graph für die Netz&shy;werkaktivität wird zu&shy;rück&shy;gesetzt. Die Events wer&shy;den hiervon nicht beeinflusst.';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti'] = 'Netzwerkaktivität löschen';
 $pia_lang['Maintenance_Tool_del_ActHistory_noti_text'] = 'Sind Sie sicher, dass Sie die Netzwerkaktivität zurücksetzen möchten?';
-$pia_lang['Maintenance_Github_package_a'] = 'Die neuste Version ist vom ';
-$pia_lang['Maintenance_Github_package_b'] = 'Uhr.';
 $pia_lang['Maintenance_Tool_loginenable'] = 'Login aktivieren';
 $pia_lang['Maintenance_Tool_loginenable_text'] = 'Nach der Aktivierung gelangst du automatisch auf die Anmeldeseite. Wenn du zuvor noch kein Passwort gesetzt hast, ist "123456" das Standardpasswort.';
 $pia_lang['Maintenance_Tool_loginenable_noti'] = 'Login aktivieren';
@@ -809,12 +807,6 @@ $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Diese Seite soll dir die Möglichke
         									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen
         									 an welchem Port ein Host angeschlossen und ob er online ist. Es ist möglich ein Gerät mehreren Ports (bei Portbündelung), als auch mehrere Geräte einem Port (virtuelle Maschinen), zuzuordnen.';
 $pia_lang['HelpFAQ_Cat_Network_601_head'] = 'Wie funktioniert die Netzwerk Seite?';
-
-// $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Auf der Netzwerk Seite wird z.B. ein Switch erstellt. Dazu biete ich bereits entsprechende Geräte in der Auswahlliste an. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
-// 											 Auf der Detailansicht hast du nun, bei jedem erkannten Gerät, die Möglichkeit diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
-// 											 Jetzt zeigt dir die Netzwerk Seite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit, mehrere Ports, die du mit einem Komma trennst, an einem Switch zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server mit mehreren virtuellen Maschinen).<br><br>
-// 											 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Netzwerk Seite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu klappst du die "Verwaltung" auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast, hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
-
 $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Die Seite besteht aus 2 Komponenten: Der Darstellunsseite in der Sektion "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Section_A'] . '</span>"
 											 und der Verwaltungsseite in der Sektion "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Section_C'] . '</span>". Jegliche Bearbeitung auf der
 											 Verwaltungsseite hat auschließlich Auswirkungen auf die Darstellungsseite, jedoch nicht auf die Geräte Liste selbst. <br>
@@ -871,6 +863,19 @@ $pia_lang['Reports_delete_all'] = 'Alle Benachrichtigungen löschen';
 $pia_lang['Reports_delete_all_noti'] = 'Alle Benachrichtigungen löschen';
 $pia_lang['Reports_delete_all_noti_text'] = 'Es werden alle Benachrichtigungen gelöscht. Der Zähler wird damit zurückgesetzt.';
 $pia_lang['Reports_Rogue_hint'] = 'Eine erneute Meldung über einen unbekannten DHCP Server erfolgt erst nach dem Löschen dieser Meldung.';
+
+//////////////////////////////////////////////////////////////////
+// UpdateCheck
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['Maintenance_Tools_Updatecheck'] = 'Prüfe auf Updates';
+$pia_lang['Maintenance_Github_package_a'] = 'Die neuste Version ist vom ';
+$pia_lang['Maintenance_Github_package_b'] = 'Uhr.';
+$pia_lang['Updatecheck_Title'] = 'Update Check';
+$pia_lang['Updatecheck_cur'] = 'Derzeit genutzte Version';
+$pia_lang['Updatecheck_new'] = 'Aktuellste Version auf Github';
+$pia_lang['Updatecheck_RN'] = 'Update Hinweise';
+$pia_lang['Updatecheck_U2D'] = 'Du nutzt bereits die aktuellest Version';
 
 //////////////////////////////////////////////////////////////////
 // System Info Page
