@@ -41,7 +41,7 @@ $updatenotes_array = array_filter($updatenotes_array);
 // Pi.Alert Versions
 $pialert_cur_version = $conf_data['VERSION_DATE'];
 // DEBUG
-$pialert_cur_version = '2023-05-19';
+// $pialert_cur_version = '2023-05-19';
 $pialert_new_version = substr($updatenotes_array[0], -10);
 
 if ($pialert_cur_version != $pialert_new_version) {
