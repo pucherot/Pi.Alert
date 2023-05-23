@@ -28,7 +28,8 @@ if (filter_var($_REQUEST['url'], FILTER_VALIDATE_URL)) {
 }
 
 require 'php/templates/header.php';
-# require 'php/server/db.php';
+//require 'php/server/db.php';
+require 'php/server/graph.php';
 
 # Init DB Connection
 $db_file = '../db/pialert.db';
@@ -205,6 +206,7 @@ $servicedetails = get_service_details($service_details_title);
             <ul class="nav nav-tabs" style="fon t-size:16px;">
               <li class=""> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
               <li class=""> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
+              <li class=""> <a id="tabGraph"   href="#panGraph"   data-toggle="tab"> <?php echo 'Diagramm'; ?>   </a></li>
 
 
             </ul>
@@ -343,7 +345,7 @@ while ($row = $dev_res->fetchArray()) {
                 </div>
               </div>
 
-<!-- tab page 4 ------------------------------------------------------------ -->
+<!-- Events ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panEvents">
 
 <?php
@@ -373,6 +375,65 @@ get_service_events_table($service_details_title, $http_filter);
                 </tbody>
 
                 </table>
+
+              </div>
+
+<!-- Graph ------------------------------------------------------------ -->
+              <div class="tab-pane fade table-responsive" id="panGraph">
+          <?php
+// Get Online Graph Arrays
+$graph_arrays = array();
+$graph_arrays = prepare_graph_arrays_webservice($service_details_title);
+$Pia_Graph_Service_Time = $graph_arrays[0];
+$Pia_Graph_Service_Down = $graph_arrays[1];
+$Pia_Graph_Service_2xx = $graph_arrays[2];
+$Pia_Graph_Service_3xx = $graph_arrays[3];
+$Pia_Graph_Service_4xx = $graph_arrays[4];
+$Pia_Graph_Service_5xx = $graph_arrays[5];
+$http2xx = $graph_arrays[7];
+$http3xx = $graph_arrays[8];
+$http4xx = $graph_arrays[9];
+$http5xx = $graph_arrays[10];
+$httpdown = $graph_arrays[6];
+
+//print_r($Pia_Graph_Device_Time);
+
+?>
+                <div class="row" style="width: 100%;">
+                    <div class="col-md-12">
+                    <div class="box" id="services" >
+                        <div class="box-header with-border">
+                          <h3 class="box-title"><?php echo 'Service-Status über die letzten '; ?><span class="maxlogage-interval">24</span> <?php echo 'Stunden'; ?></h3>
+                        </div>
+                        <div class="box-body">
+                          <div class="chart" style="height: 200px;">
+                            <script src="lib/AdminLTE/bower_components/chart.js/Chart.js"></script>
+                            <canvas id="ServiceChart"></canvas>
+                          </div>
+                          <div class="row" style="margin-top: 30px;">
+                            <div class="col-sm-4">HTTP Status: 2xx (<?php echo $http2xx; ?>)</div>
+                            <div class="col-sm-4">HTTP Status: 3xx (<?php echo $http3xx; ?>)</div>
+                            <div class="col-sm-4">HTTP Status: 4xx (<?php echo $http4xx; ?>)</div>
+                          </div>
+                          <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-4">HTTP Status: 2xx (<?php echo $http5xx; ?>)</div>
+                            <div class="col-sm-4">HTTP Status: 3xx (<?php echo $httpdown; ?>)</div>
+                          </div>
+                        </div>
+                        <!-- /.box-body -->
+                      </div>
+                    </div>
+                </div>
+                <script src="js/graph_online_history.js"></script>
+                <script>
+                  var pia_js_online_history_time = [<?php pia_graph_devices_data($Pia_Graph_Service_Time);?>];
+                  var pia_js_online_history_down = [<?php pia_graph_devices_data($Pia_Graph_Service_Down);?>];
+                  var pia_js_online_history_2xx = [<?php pia_graph_devices_data($Pia_Graph_Service_2xx);?>];
+                  var pia_js_online_history_3xx = [<?php pia_graph_devices_data($Pia_Graph_Service_3xx);?>];
+                  var pia_js_online_history_4xx = [<?php pia_graph_devices_data($Pia_Graph_Service_4xx);?>];
+                  var pia_js_online_history_5xx = [<?php pia_graph_devices_data($Pia_Graph_Service_5xx);?>];
+                  pia_draw_graph_services_history(pia_js_online_history_time, pia_js_online_history_down, pia_js_online_history_2xx, pia_js_online_history_3xx, pia_js_online_history_4xx, pia_js_online_history_5xx);
+                </script>
 
               </div>
 

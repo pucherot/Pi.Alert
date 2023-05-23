@@ -17,10 +17,11 @@ if ($_SESSION["login"] != 1) {
 }
 require 'php/server/db.php';
 require 'php/templates/header.php';
-require 'php/templates/graph.php';
+require 'php/server/graph.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
+
 // #####################################
 // ## update db dependencies
 // #####################################
@@ -50,6 +51,16 @@ function print_box_bottom_element() {
             </div>
         </div>';
 }
+
+// Get Online Graph Arrays
+$graph_arrays = array();
+$graph_arrays = prepare_graph_arrays_history();
+$Pia_Graph_Device_Time = $graph_arrays[0];
+$Pia_Graph_Device_Down = $graph_arrays[1];
+$Pia_Graph_Device_All = $graph_arrays[2];
+$Pia_Graph_Device_Online = $graph_arrays[3];
+$Pia_Graph_Device_Arch = $graph_arrays[4];
+
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
