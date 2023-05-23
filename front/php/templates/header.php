@@ -87,7 +87,6 @@ get_webservices_config();
 
   <!-- Fav / Homescreen Icon -->
   <link rel="icon" type="image/x-icon" href="img/favicons/flat_blue_white.png">
-  <link rel="apple-touch-icon" href="https://net-dev.de/hs_pialert.png">
 
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
@@ -133,7 +132,7 @@ if (window.navigator.standalone || document.referrer.includes("android-app://") 
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed Yellow -->
-<body class="hold-transition <?php echo $pia_skin_selected; ?> sidebar-mini" <?php echo $BACKGROUND_IMAGE_PATCH; ?> onLoad="show_pia_servertime();" >
+<body class="hold-transition fixed <?php echo $pia_skin_selected; ?> sidebar-mini" <?php echo $BACKGROUND_IMAGE_PATCH; ?> onLoad="show_pia_servertime();" >
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -285,9 +284,9 @@ format_temperature($celsius, $temperaturelimit);
           <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Maintenance']; ?></span></a>
         </li>
 
-        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('networkSettings.php'))) {echo 'active';}?>">
+<!--         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('networkSettings.php'))) {echo 'active';}?>">
           <a href="networkSettings.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Network']; ?></span></a>
-        </li>
+        </li> -->
 
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('help_faq.php'))) {echo 'active';}?>">
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ']; ?></span></a>

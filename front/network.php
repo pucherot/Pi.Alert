@@ -65,6 +65,7 @@ $result = $db->query($sql);
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
          <?php echo $pia_lang['Network_Title']; ?>
+         <a class="btn btn-xs btn-success servicelist_add_serv" href="./networkSettings.php" role="button"><i class="bi bi-plus-lg" style="font-size:1.5rem"></i></a>
       </h1>
     </section>
 
@@ -205,7 +206,14 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 			// Specific icon for devicetype
 			if (substr($pia_func_netdevtyp, 2) == "WLAN") {$dev_port_icon = 'fa-wifi';}
 			if (substr($pia_func_netdevtyp, 2) == "Powerline") {$dev_port_icon = 'fa-flash';}
-			echo '<tr><td style="text-align: center;"><i class="fa ' . $dev_port_icon . '"></i></td><td>' . $port_state . '</td><td style="padding-left: 10px;"><a href="./deviceDetails.php?mac=' . $func_res['dev_MAC'] . '"><b>' . $func_res['dev_Name'] . '</b></a></td><td>' . $func_res['dev_LastIP'] . '</td></tr>';
+
+			if ($func_res['dev_MAC'] != "dumb") {
+				// detectable Device
+				echo '<tr><td style="text-align: center;"><i class="fa ' . $dev_port_icon . '"></i></td><td>' . $port_state . '</td><td style="padding-left: 10px;"><a href="./deviceDetails.php?mac=' . $func_res['dev_MAC'] . '"><b>' . $func_res['dev_Name'] . '</b></a></td><td>' . $func_res['dev_LastIP'] . '</td></tr>';
+			} else {
+				// dumb Devices
+				echo '<tr><td style="text-align: center;"><i class="fa ' . $dev_port_icon . '"></i></td><td>' . $port_state . '</td><td style="padding-left: 10px;"><a href="./networkSettings.php#hostedit"><b>' . $func_res['dev_Name'] . '</b></a></td><td>' . $func_res['dev_LastIP'] . '</td></tr>';
+			}
 		}
 	}
 	// Create table with Port
@@ -253,7 +261,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 					echo '<td style="padding-left: 10px;"><a href="./deviceDetails.php?mac=' . $network_device_portmac[$x] . '"><b>' . $network_device_portname[$x] . '</b></a></td>';
 				} else {
 					// dumb Device
-					echo '<td style="padding-left: 10px;"><a href="#"><b>' . $network_device_portname[$x] . '</b></a></td>';
+					echo '<td style="padding-left: 10px;"><a href="./networkSettings.php#hostedit"><b>' . $network_device_portname[$x] . '</b></a></td>';
 				}
 			} else {
 				// print multiple hostnames with separate links
@@ -269,7 +277,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 						echo '<a href="./deviceDetails.php?mac=' . $multimac[$key] . '"><b>' . $value . '</b></a><br>';
 					} else {
 						// dumb Device
-						echo '<a href="#"><b>' . $value . '</b></a><br>';
+						echo '<a href="./networkSettings.php#hostedit"><b>' . $value . '</b></a><br>';
 					}
 				}
 				echo '</td>';

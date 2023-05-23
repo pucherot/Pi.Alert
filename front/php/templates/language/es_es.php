@@ -52,6 +52,7 @@ $pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Mantenimiento';
 $pia_lang['Navigation_Network'] = 'Red';
 $pia_lang['Navigation_HelpFAQ'] = 'Ayuda / FAQ';
+$pia_lang['Navigation_UpdateCheck'] = 'Update Check';
 $pia_lang['Navigation_Section_A'] = 'MENÚ PRINCIPAL';
 $pia_lang['Navigation_Section_B'] = 'EVENTOS Y REVISTA';
 $pia_lang['Navigation_Section_C'] = 'AJUSTES Y AYUDA';
