@@ -1679,7 +1679,7 @@ def check_services_health(site):
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     """Send GET request to input site and return status code"""
     try:
-        resp = requests.get(site, verify=False, timeout=10)
+        resp = requests.get(site, verify=False, timeout=10, allow_redirects=False)
         latency = resp.elapsed
         latency_str = str(latency)
         latency_str_seconds = latency_str.split(":")

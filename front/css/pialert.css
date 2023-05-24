@@ -590,7 +590,8 @@ body.modal-open {
 }
 
 .bg-orange-custom {
-    background-color: #FE4C00;
+    background-color: #FE4C00 !important;
+    color:  #444;
 }
 
 #custom-menu-report-button {

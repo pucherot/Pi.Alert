@@ -380,7 +380,7 @@ get_service_events_table($service_details_title, $http_filter);
 
 <!-- Graph ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panGraph">
-          <?php
+<?php
 // Get Online Graph Arrays
 $graph_arrays = array();
 $graph_arrays = prepare_graph_arrays_webservice($service_details_title);
@@ -395,34 +395,22 @@ $http3xx = $graph_arrays[8];
 $http4xx = $graph_arrays[9];
 $http5xx = $graph_arrays[10];
 $httpdown = $graph_arrays[6];
-
-//print_r($Pia_Graph_Device_Time);
-
 ?>
-                <div class="row" style="width: 100%;">
-                    <div class="col-md-12">
-                    <div class="box" id="services" >
-                        <div class="box-header with-border">
-                          <h3 class="box-title"><?php echo 'Service-Status über die letzten '; ?><span class="maxlogage-interval">24</span> <?php echo 'Stunden'; ?></h3>
-                        </div>
-                        <div class="box-body">
-                          <div class="chart" style="height: 200px;">
+                <h4 class="text-aqua" style="font-size: 18px;margin: 0;line-height: 1; margin-bottom: 20px;"><?php echo 'Service-Status über die letzten '; ?><span class="maxlogage-interval">24</span> <?php echo 'Stunden'; ?></h4>
+                <div class="col-md-12">
+                    <!-- <div class="col-md-12">
+                    <div class="box" id="services" > -->
+                        <!-- <div class="box-header with-border"> -->
+
+                        <!-- </div> -->
+                        <!-- <div class="box-body"> -->
+                          <div class="chart" style="height: 150px;">
                             <script src="lib/AdminLTE/bower_components/chart.js/Chart.js"></script>
                             <canvas id="ServiceChart"></canvas>
                           </div>
-                          <div class="row" style="margin-top: 30px;">
-                            <div class="col-sm-4">HTTP Status: 2xx (<?php echo $http2xx; ?>)</div>
-                            <div class="col-sm-4">HTTP Status: 3xx (<?php echo $http3xx; ?>)</div>
-                            <div class="col-sm-4">HTTP Status: 4xx (<?php echo $http4xx; ?>)</div>
-                          </div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-sm-4">HTTP Status: 2xx (<?php echo $http5xx; ?>)</div>
-                            <div class="col-sm-4">HTTP Status: 3xx (<?php echo $httpdown; ?>)</div>
-                          </div>
-                        </div>
-                        <!-- /.box-body -->
-                      </div>
-                    </div>
+                        <!-- </div> -->
+<!--                       </div>
+                    </div> -->
                 </div>
                 <script src="js/graph_online_history.js"></script>
                 <script>
@@ -434,6 +422,19 @@ $httpdown = $graph_arrays[6];
                   var pia_js_online_history_5xx = [<?php pia_graph_devices_data($Pia_Graph_Service_5xx);?>];
                   pia_draw_graph_services_history(pia_js_online_history_time, pia_js_online_history_down, pia_js_online_history_2xx, pia_js_online_history_3xx, pia_js_online_history_4xx, pia_js_online_history_5xx);
                 </script>
+
+                <div class="col-md-12">
+                          <div class="row" style="margin-top: 30px;">
+                            <div class="col-sm-4">HTTP Status: 2xx (<?php echo $http2xx; ?>)</div>
+                            <div class="col-sm-4">HTTP Status: 3xx (<?php echo $http3xx; ?>)</div>
+                            <div class="col-sm-4">HTTP Status: 4xx (<?php echo $http4xx; ?>)</div>
+                          </div>
+                          <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-4">HTTP Status: 5xx (<?php echo $http5xx; ?>)</div>
+                            <div class="col-sm-4">Page Down (<?php echo $httpdown; ?>)</div>
+                          </div>
+                </div>
+
 
               </div>
 

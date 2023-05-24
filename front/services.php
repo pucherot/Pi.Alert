@@ -209,8 +209,8 @@ function list_standalone_services() {
 			for ($x = 0; $x < 18; $x++) {
 				unset($codecolor);
 				$for_httpcode = $func_httpcodes[$x];
-				if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
-				if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
+				if ($for_httpcode >= 200 && $for_httpcode < 300) {$codecolor = "bg-green";}
+				if ($for_httpcode >= 300 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
 				if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
 				if ($for_httpcode == "0") {$codecolor = "bg-red";}
 				if ($func_latency[$x] == '99999999') {$loop_latency = 'offline';} else { $loop_latency = $func_latency[$x] . 's';}
@@ -291,8 +291,8 @@ function get_service_from_unique_device($func_unique_device) {
 			for ($x = 0; $x < 18; $x++) {
 				unset($codecolor);
 				$for_httpcode = $func_httpcodes[$x];
-				if ($for_httpcode >= 200 && $for_httpcode < 400) {$codecolor = "bg-green";}
-				if ($for_httpcode >= 400 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
+				if ($for_httpcode >= 200 && $for_httpcode < 300) {$codecolor = "bg-green";}
+				if ($for_httpcode >= 300 && $for_httpcode < 500) {$codecolor = "bg-yellow";}
 				if ($for_httpcode >= 500 && $for_httpcode < 600) {$codecolor = "bg-orange-custom";}
 				if ($for_httpcode == "0") {$codecolor = "bg-red";}
 
