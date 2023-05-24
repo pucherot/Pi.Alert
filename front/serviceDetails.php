@@ -206,7 +206,7 @@ $servicedetails = get_service_details($service_details_title);
             <ul class="nav nav-tabs" style="fon t-size:16px;">
               <li class=""> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
               <li class=""> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
-              <li class=""> <a id="tabGraph"   href="#panGraph"   data-toggle="tab"> <?php echo 'Diagramm'; ?>   </a></li>
+              <li class=""> <a id="tabGraph"   href="#panGraph"   data-toggle="tab"> <?php echo $pia_lang['WebServices_Tab_Graph']; ?>   </a></li>
 
 
             </ul>
@@ -347,35 +347,28 @@ while ($row = $dev_res->fetchArray()) {
 
 <!-- Events ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panEvents">
-
 <?php
 # Create Event table headline
 set_table_headline($http_filter);
-
 ?>
                 <!-- Datatable Events -->
-
                 <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                   <thead>
-                  <tr>
-                    <!-- <th>Service URL</th> -->
-                    <th><?php echo $pia_lang['WebServices_tablehead_TargetIP']; ?></th>
-                    <th><?php echo $pia_lang['WebServices_tablehead_ScanTime']; ?></th>
-                    <th><?php echo $pia_lang['WebServices_tablehead_Status_Code']; ?></th>
-                    <th><?php echo $pia_lang['WebServices_tablehead_Response_Time']; ?></th>
-                  </tr>
+                    <tr>
+                      <!-- <th>Service URL</th> -->
+                      <th><?php echo $pia_lang['WebServices_tablehead_TargetIP']; ?></th>
+                      <th><?php echo $pia_lang['WebServices_tablehead_ScanTime']; ?></th>
+                      <th><?php echo $pia_lang['WebServices_tablehead_Status_Code']; ?></th>
+                      <th><?php echo $pia_lang['WebServices_tablehead_Response_Time']; ?></th>
+                    </tr>
                   </thead>
                   <tbody>
-
 <?php
 # Create Event table
 get_service_events_table($service_details_title, $http_filter);
-
 ?>
-                </tbody>
-
+                  </tbody>
                 </table>
-
               </div>
 
 <!-- Graph ------------------------------------------------------------ -->
@@ -396,21 +389,12 @@ $http4xx = $graph_arrays[9];
 $http5xx = $graph_arrays[10];
 $httpdown = $graph_arrays[6];
 ?>
-                <h4 class="text-aqua" style="font-size: 18px;margin: 0;line-height: 1; margin-bottom: 20px;"><?php echo 'Service-Status über die letzten '; ?><span class="maxlogage-interval">24</span> <?php echo 'Stunden'; ?></h4>
+                <h4 class="text-aqua" style="font-size: 18px;margin: 0;line-height: 1; margin-bottom: 20px;"><?php echo $pia_lang['WebServices_Chart_a']; ?> <span class="maxlogage-interval">24</span> <?php echo $pia_lang['WebServices_Chart_b']; ?></h4>
                 <div class="col-md-12">
-                    <!-- <div class="col-md-12">
-                    <div class="box" id="services" > -->
-                        <!-- <div class="box-header with-border"> -->
-
-                        <!-- </div> -->
-                        <!-- <div class="box-body"> -->
-                          <div class="chart" style="height: 150px;">
-                            <script src="lib/AdminLTE/bower_components/chart.js/Chart.js"></script>
-                            <canvas id="ServiceChart"></canvas>
-                          </div>
-                        <!-- </div> -->
-<!--                       </div>
-                    </div> -->
+                  <div class="chart" style="height: 150px;">
+                    <script src="lib/AdminLTE/bower_components/chart.js/Chart.js"></script>
+                    <canvas id="ServiceChart"></canvas>
+                  </div>
                 </div>
                 <script src="js/graph_online_history.js"></script>
                 <script>
@@ -424,17 +408,37 @@ $httpdown = $graph_arrays[6];
                 </script>
 
                 <div class="col-md-12">
-                          <div class="row" style="margin-top: 30px;">
-                            <div class="col-sm-4">HTTP Status: 2xx (<?php echo $http2xx; ?>)</div>
-                            <div class="col-sm-4">HTTP Status: 3xx (<?php echo $http3xx; ?>)</div>
-                            <div class="col-sm-4">HTTP Status: 4xx (<?php echo $http4xx; ?>)</div>
-                          </div>
-                          <div class="row" style="margin-top: 10px;">
-                            <div class="col-sm-4">HTTP Status: 5xx (<?php echo $http5xx; ?>)</div>
-                            <div class="col-sm-4">Page Down (<?php echo $httpdown; ?>)</div>
-                          </div>
+                  <div class="row" style="margin-top: 30px;">
+                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Code']; ?>:</div>
+                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-green"></i> HTTP-Code 2xx (<?php echo $http2xx; ?>)</div>
+                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-yellow"></i> HTTP-Code 3xx (<?php echo $http3xx; ?>)</div>
+                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-yellow"></i> HTTP-Code 4xx (<?php echo $http4xx; ?>)</div>
+                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-orange-custom"></i> HTTP-Code 5xx (<?php echo $http5xx; ?>)</div>
+                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-red"></i><?php echo $pia_lang['WebServices_Page_down']; ?> (<?php echo $httpdown; ?>)</div>
+                  </div>
                 </div>
+<?php
+// get some stats
+$query = "SELECT AVG(moneve_Latency) AS average_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
+$result = $db->querySingle($query);
+$latency_average = round($result, 4);
+$query_max = "SELECT MAX(moneve_Latency) AS max_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
+$query_min = "SELECT MIN(moneve_Latency) AS min_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
+$result_max = $db->querySingle($query_max);
+$latency_max = round($result_max, 4);
+$result_min = $db->querySingle($query_min);
+$latency_min = round($result_min, 4);
 
+?>
+                <div class="col-md-12">
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Time']; ?>:</div>
+                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_avg']; ?> <?php echo $latency_average; ?> ms</div>
+                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_min']; ?> <?php echo $latency_min; ?> ms</div>
+                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_max']; ?> <?php echo $latency_max; ?> ms</div>
+                    <div class="col-sm-1"></div>
+                  </div>
+                </div>
 
               </div>
 

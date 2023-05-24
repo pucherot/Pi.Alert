@@ -594,6 +594,9 @@ body.modal-open {
     color:  #444;
 }
 
+.text-orange-custom {
+    color: #FE4C00 !important;
+}
 #custom-menu-report-button {
     background-color: #d58512;
     color: #FFF;
