@@ -265,6 +265,7 @@ $pia_lang['WebServices_tablehead_TargetIP'] = 'Ziel IP';
 $pia_lang['WebServices_tablehead_ScanTime'] = 'Aktualisierungszeit';
 $pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status Code';
 $pia_lang['WebServices_tablehead_Response_Time'] = 'Antwortzeit';
+$pia_lang['WebServices_Tab_Graph'] = 'Statistik';
 $pia_lang['WebServices_label_URL'] = 'Service URL';
 $pia_lang['WebServices_label_Tags'] = 'Tag';
 $pia_lang['WebServices_label_MAC'] = 'Gerät';
@@ -276,6 +277,9 @@ $pia_lang['WebServices_label_Response_Time'] = 'Antwortzeit';
 $pia_lang['WebServices_label_AlertEvents'] = 'Alle Events';
 $pia_lang['WebServices_label_AlertDown'] = 'Down';
 $pia_lang['WebServices_label_Notification'] = 'Melde';
+$pia_lang['WebServices_Chart_a'] = 'Service-Status über die letzten';
+$pia_lang['WebServices_Chart_b'] = 'Stunden';
+$pia_lang['WebServices_Page_down'] = 'Offline';
 $pia_lang['WebServices_button_Delete_label'] = 'Service löschen';
 $pia_lang['WebServices_button_Delete_Warning'] = 'Sind Sie sicher, dass Sie diesen Web Service löschen wollen?';
 $pia_lang['WebServices_headline_NewService'] = 'Neuen Service hinzufügen';
@@ -283,6 +287,11 @@ $pia_lang['WebServices_Events_all'] = 'Alle Events';
 $pia_lang['WebServices_Events_down'] = 'Down';
 $pia_lang['WebServices_Events_none'] = 'nichts';
 $pia_lang['WebServices_BoxTitle_General'] = 'Allgemein';
+$pia_lang['WebServices_Stats_Code'] = 'Seiten Status';
+$pia_lang['WebServices_Stats_Time'] = 'Antwortzeit';
+$pia_lang['WebServices_Stats_Time_avg'] = 'durchschnittlich';
+$pia_lang['WebServices_Stats_Time_min'] = 'schnellste';
+$pia_lang['WebServices_Stats_Time_max'] = 'langsamste';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend
@@ -506,7 +515,7 @@ $pia_lang['Network_Table_State'] = 'Status';
 $pia_lang['Network_Table_Hostname'] = 'Gerätename';
 $pia_lang['Network_Table_IP'] = 'Host IP';
 $pia_lang['Network_UnassignedDevices'] = 'Nicht zugewiesene Geräte';
-$pia_lang['NetworkSettings_Title'] = 'Einstellung - Netzwerkübersicht';
+$pia_lang['NetworkSettings_Title'] = 'Netzwerk (Einstellungen)';
 $pia_lang['Network_ManageDevices_Intro'] = 'Dieser Bereich dient dem Erstellen von transparenten/IP-losen (Unmanaged) Geräten, wie Hubs oder Switches, sowie aktiven Geräten wie Router, managed Switches oder AccessPoint,
 											welche die Netzwerkstruktur beeinflussen. Auch bereits durch Pi.Alert erkannte Geräte, müssen hier für die Darstellung neu erstellt werden. Die Bearbeitung, oder das Löschen,
 											bereits durch Pi.Alert erkannter Geräte, ist unabhängig von der "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Devices'] . '</span>"-Liste und hat nur
@@ -546,7 +555,7 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob d
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
-$pia_lang['HelpFAQ_Cat_General_104_head'] = 'Hinweise zur Migrating von pucherot zu diesem Fork.';
+$pia_lang['HelpFAQ_Cat_General_104_head'] = 'Hinweise zur Migration von "pucherot/Pi.Alert" zu diesem Fork.';
 $pia_lang['HelpFAQ_Cat_General_104_text'] = 'Die Datenbank in diesem Fork wurde um einige Felder erweitert. Um die Datenbank vom originalen Pi.Alert <b>(pucherot)</b> zu übernehmen, steht mit dem Script <span class="text-maroon help_faq_code">pialert-cli</span> im Verzeichnis
 											 <span class="text-maroon help_faq_code">~/pialert/back</span> eine Möglichkeit zum Upgrade zur Verfügung. Der Befehl lautet dann <span class="text-maroon help_faq_code">./pialert-cli update_db</span>';
 $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
@@ -826,7 +835,7 @@ $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Die Seite besteht aus 2 Komponenten
 $pia_lang['HelpFAQ_Cat_Network_602_head'] = 'Ein Switch oder Router wird mir ohne Ports angezeigt.';
 $pia_lang['HelpFAQ_Cat_Network_602_text'] = 'Möglicherweise wurde beim Anlegen des Gerätes auf der Netzwerkseite versäumt, die Portanzahl einzugeben. Auch bei der Bearbeitung des Gerätes auf der Netzwerkseite, ist es notwendig, eine bereits eingegebene Portanzahl, erneut einzugeben, falls das automatische Ausfüllen nicht funktioniert.<br>
 											 Sollte also bei einem bereits angelegten Gerät die Portanzzahl fehlen, wird eine Bearbeitung des Gerätes unter Angabe der <span class="text-maroon help_faq_code">Ports</span>, des <span class="text-maroon help_faq_code">Types</span> und ggf. der <span class="text-maroon help_faq_code">manuelle Port-Konfiguration</span> das Problem beseitigen.';
-$pia_lang['HelpFAQ_Cat_Service_700_head'] = 'Was bedeuten die unterschiedlichen Farben in dem farbigen Balken?';
+$pia_lang['HelpFAQ_Cat_Service_700_head'] = 'Was bedeuten die unterschiedlichen Farben der einzelnen Balken?';
 $pia_lang['HelpFAQ_Cat_Service_700_text'] = 'Es gibt insgesamt 5 verschiedene Farbcodes: <br>
 											 <span style="background-color:lightgray;">&nbsp;&nbsp;&nbsp;</span> - noch kein Scan verfügbar<br>
 											 <span class="bg-green">&nbsp;&nbsp;&nbsp;</span> - HTTP Status Code 2xx<br>
@@ -843,6 +852,8 @@ $pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Feststellbare Events sind:<br>
 													<li>Antwortzeit des Servers bzw. das Ausbleiben der Antwort</li>
 												</ul>
 											 Je nach Wahl der Benachrichtigung, wird entweder alles gemeldet, oder nur das Ausbleiben einer Serverantwort.';
+$pia_lang['HelpFAQ_Cat_Service_703_head'] = 'Allgemeines zum "Web Service Monitoring".';
+$pia_lang['HelpFAQ_Cat_Service_703_text'] = 'Das Monitoring basiert ausschließlich auf den Antworten von  HTTP-Requests, welche an die Seite gesendet werden. Je nach Zustand des Servers können hier sinnvolle Fehlerbilder erkannt werden. Falls der Server überhaupt nicht reagiert, wird dies als "Down/Offline" gewertet. Diese Webserver-Anfragen werden alle 10min im Rahmen der Rahmen des normalen Scans durchgeführt.';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'] = 'Ich kann nicht alle Felder bearbeiten.';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Nicht jedes Feld, was auf dieser Seite angezeigt wird, kann auch bearbeitet werden. Bearbeitbare Felder sind:
 													<ul>

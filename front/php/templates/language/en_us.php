@@ -92,17 +92,14 @@ $pia_lang['Device_Tablelenght_all'] = 'All';
 $pia_lang['Device_Table_info'] = 'Showing _START_ to _END_ of _TOTAL_ entries';
 $pia_lang['Device_Table_nav_next'] = 'Next';
 $pia_lang['Device_Table_nav_prev'] = 'Previous';
-
 $pia_lang['Device_bulkEditor_mode'] = 'Bulk Editor';
 $pia_lang['Device_bulkEditor_mode_quit'] = 'Quit Editor';
 $pia_lang['Device_bulkEditor_selectall'] = 'Select all Host&apos;s';
 $pia_lang['Device_bulkEditor_selectnone'] = 'Deselect all Host&apos;s';
-
 $pia_lang['Device_bulkEditor_savebox_title'] = 'Fields were saved';
 $pia_lang['Device_bulkEditor_savebox_noselection'] = 'No fields were selected for modification';
 $pia_lang['Device_bulkEditor_savebox_mod_devices'] = 'Modified devices';
 $pia_lang['Device_bulkEditor_savebox_mod_fields'] = 'Changed values';
-
 $pia_lang['Device_bulkEditor_hostbox_title'] = 'Select the devices to be edited';
 $pia_lang['Device_bulkEditor_inputbox_title'] = 'Edit fields';
 
@@ -265,6 +262,7 @@ $pia_lang['WebServices_tablehead_TargetIP'] = 'Dest. IP';
 $pia_lang['WebServices_tablehead_ScanTime'] = 'Scan Time';
 $pia_lang['WebServices_tablehead_Status_Code'] = 'HTTP Status';
 $pia_lang['WebServices_tablehead_Response_Time'] = 'Response Time';
+$pia_lang['WebServices_Tab_Graph'] = 'Stats';
 $pia_lang['WebServices_label_URL'] = 'URL';
 $pia_lang['WebServices_label_Tags'] = 'Tag';
 $pia_lang['WebServices_label_MAC'] = 'Device';
@@ -276,6 +274,9 @@ $pia_lang['WebServices_label_Response_Time'] = 'Response Time';
 $pia_lang['WebServices_label_AlertEvents'] = 'All Events';
 $pia_lang['WebServices_label_AlertDown'] = 'Down Events';
 $pia_lang['WebServices_label_Notification'] = 'Notify';
+$pia_lang['WebServices_Chart_a'] = 'Service Status over the last';
+$pia_lang['WebServices_Chart_b'] = 'hours';
+$pia_lang['WebServices_Page_down'] = 'Offline';
 $pia_lang['WebServices_button_Delete_label'] = 'Delete Service';
 $pia_lang['WebServices_button_Delete_Warning'] = 'Are you sure you want to delete this web service?';
 $pia_lang['WebServices_headline_NewService'] = 'New Web Service';
@@ -283,6 +284,11 @@ $pia_lang['WebServices_Events_all'] = 'All Events';
 $pia_lang['WebServices_Events_down'] = 'Down';
 $pia_lang['WebServices_Events_none'] = 'none';
 $pia_lang['WebServices_BoxTitle_General'] = 'General';
+$pia_lang['WebServices_Stats_Code'] = 'Page Status';
+$pia_lang['WebServices_Stats_Time'] = 'Response Time';
+$pia_lang['WebServices_Stats_Time_avg'] = 'Average';
+$pia_lang['WebServices_Stats_Time_min'] = 'Fastest';
+$pia_lang['WebServices_Stats_Time_max'] = 'Slowest';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend
@@ -476,7 +482,7 @@ $pia_lang['BackDevices_Report_Delete'] = ' Notification(s) has been deleted.';
 // Network Page
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['Network_Title'] = 'Network overview';
+$pia_lang['Network_Title'] = 'Network Overview';
 $pia_lang['Network_ManageDevices'] = 'Manage Devices';
 // $pia_lang['Network_ManageAdd'] = 'Add Device';
 // $pia_lang['Network_ManageEdit'] = 'Update Device';
@@ -850,6 +856,8 @@ $pia_lang['HelpFAQ_Cat_Service_702_text'] = 'Detectable events are:<br>
 													<li>Response time of the server or the missing of the response.</li>
 												</ul>
 											 Depending on the choice of notification, either everything is reported, or only the absence of a server response.';
+$pia_lang['HelpFAQ_Cat_Service_703_head'] = 'General information about "Web Service Monitoring".';
+$pia_lang['HelpFAQ_Cat_Service_703_text'] = 'The monitoring is based exclusively on the responses of HTTP requests sent to the page. Depending on the state of the server, meaningful error patterns can be detected here. If the server does not respond at all, this is considered as "Down/Offline". These web server requests are performed every 10 min as part of the normal scan.';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'] = 'I cannot edit all the fields.';
 $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'] = 'Not every field that is displayed on this page can be edited. Editable fields are:
 													<ul>

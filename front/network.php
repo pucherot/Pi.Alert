@@ -165,7 +165,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 	// make sql query for Network Hardware ID
 	global $db;
 	// Query detected Devices
-	$func_sql1 = 'SELECT * FROM "Devices" WHERE "dev_Infrastructure" = "' . $pia_func_netdevid . '"';
+	$func_sql1 = 'SELECT * FROM "Devices" WHERE "dev_Infrastructure" = "' . $pia_func_netdevid . '" AND "dev_Archived" = 0';
 	$func_result1 = $db->query($func_sql1); //->fetchArray(SQLITE3_ASSOC);
 	// Query dumb Devices
 	$func_sql2 = 'SELECT * FROM "network_dumb_dev" WHERE "dev_Infrastructure" = "' . $pia_func_netdevid . '"';

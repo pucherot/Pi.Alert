@@ -246,6 +246,16 @@ $trip_div_close = '
       <h4><?php echo $pia_lang['Navigation_Services']; ?></h4>
         <div class="panel-group" id="accordion_pre">
         <?php echo $help_faq_toptemp; ?>
+              <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse703">
+              <?php echo $pia_lang['HelpFAQ_Cat_Service_703_head']; ?></a>
+            </h4>
+          </div>
+          <div id="collapse703" class="panel-collapse collapse" style="font-size: 16px;">
+            <div class="panel-body">
+              <?php echo $pia_lang['HelpFAQ_Cat_Service_703_text']; ?>
+        <?php echo $trip_div_close; ?>
+
+        <?php echo $help_faq_toptemp; ?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse700">
               <?php echo $pia_lang['HelpFAQ_Cat_Service_700_head']; ?></a>
             </h4>
