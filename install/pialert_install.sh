@@ -335,6 +335,9 @@ install_lighttpd() {
 
   print_msg "- Installing sqlite3..."
   sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
+
+  print_msg "- Installing mmdblookup"
+  sudo apt-get install mmdb-bin -y                                2>&1 >> "$LOG"
 }
 
 

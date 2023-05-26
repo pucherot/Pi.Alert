@@ -158,6 +158,10 @@ block is not necessary
   sudo apt-get install sqlite3 -y
   ```
 
+3.7 - Install mmdblookup
+  ```
+  sudo apt-get install mmdb-bin -y
+  ```
 
 ### arp-scan & Python
 <!--- --------------------------------------------------------------------- --->
