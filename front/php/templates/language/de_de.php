@@ -289,9 +289,11 @@ $pia_lang['WebServices_Events_none'] = 'nichts';
 $pia_lang['WebServices_BoxTitle_General'] = 'Allgemein';
 $pia_lang['WebServices_Stats_Code'] = 'Seiten Status';
 $pia_lang['WebServices_Stats_Time'] = 'Antwortzeit';
-$pia_lang['WebServices_Stats_Time_avg'] = 'durchschnittlich';
 $pia_lang['WebServices_Stats_Time_min'] = 'schnellste';
 $pia_lang['WebServices_Stats_Time_max'] = 'langsamste';
+$pia_lang['WebServices_Stats_Location'] = 'Standort';
+$pia_lang['WebServices_Stats_IP'] = 'Aktuelle IP';
+$pia_lang['WebServices_Stats_IPLocation'] = 'Länderzuordnung';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend

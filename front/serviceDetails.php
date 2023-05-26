@@ -493,13 +493,13 @@ if ($output[0] != "######") {
 	$locations = parse_location_array($output);
 	echo '
           <div class="row" style="margin-top: 10px;">
-            <div class="col-sm-12" style="font-weight: 600;">Location: </div>
+            <div class="col-sm-12" style="font-weight: 600;">' . $pia_lang['WebServices_Stats_Location'] . ': </div>
           </div>
           <div class="row">
-            <div class="col-sm-12" style="padding-left: 40px;">aktuelle IP: ' . $current_service_IP . '</div>
+            <div class="col-sm-12" style="padding-left: 40px;"><div style="display: inline-block; width: 130px;">' . $pia_lang['WebServices_Stats_IP'] . ':</div> ' . $current_service_IP . '</div>
           </div>
           <div class="row">
-            <div class="col-sm-12" style="padding-left: 40px;">IP Standort: ' . $locations[1] . ' (' . $locations[0] . ')</div>
+            <div class="col-sm-12" style="padding-left: 40px;"><div style="display: inline-block; width: 130px;">' . $pia_lang['WebServices_Stats_IPLocation'] . ':</div> ' . $locations[1] . ' (' . $locations[0] . ')</div>
           </div>';
 }
 ?>
