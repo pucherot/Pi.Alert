@@ -1604,13 +1604,28 @@ def prepare_service_monitoring_env ():
                                 PRIMARY KEY(mon_URL)
                             ); """
     sql.execute(sql_create_table)
+    
+    # Try to add new column to Services table
+    try:
+        sql_alter_table = """ ALTER TABLE Services ADD COLUMN mon_Notes TEXT; """
+        sql.execute(sql_alter_table)
+    except:
+        dbstate = "Column allready exists"
 
 # -----------------------------------------------------------------------------
-def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP):
+def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect):
 
-    sqlite_insert = """UPDATE Services SET mon_LastScan=?, mon_LastStatus=?, mon_LastLatency=?, mon_TargetIP=? WHERE mon_URL=?;"""
+    if _mon_Redirect != 200 and _mon_lastStatus == 200:
+        _mon_Redirect_Text = "Redirected by " + str(_mon_Redirect)
+    else:
+        _mon_Redirect_Text = ""
 
-    table_data = (_mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_URL)
+    #DEBUG    
+    #print(_mon_URL + " - " + str(_mon_lastScan) + " - " + str(_mon_lastStatus) + " - " + str(_mon_lastLatence) + " - " + str(_mon_TargetIP) + " - " + str(_mon_Redirect) + " - " + str(_mon_Redirect_Text))
+
+    sqlite_insert = """UPDATE Services SET mon_LastScan=?, mon_LastStatus=?, mon_LastLatency=?, mon_TargetIP=?, mon_Notes=? WHERE mon_URL=?;"""
+
+    table_data = (_mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect_Text, _mon_URL)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
@@ -1679,7 +1694,7 @@ def check_services_health(site):
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     """Send GET request to input site and return status code"""
     try:
-        resp = requests.get(site, verify=False, timeout=10, allow_redirects=False)
+        resp = requests.get(site, verify=False, timeout=10)
         latency = resp.elapsed
         latency_str = str(latency)
         latency_str_seconds = latency_str.split(":")
@@ -1694,6 +1709,20 @@ def check_services_health(site):
         latency = "99999999"
         # HTTP Status Code for offline services
         return 0, latency
+
+# -----------------------------------------------------------------------------
+def check_services_redirect(site):
+    # Enable self signed SSL
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+    """Send GET request to input site and return status code"""
+    try:
+        resp = requests.get(site, verify=False, timeout=10, allow_redirects=False)
+        return resp.status_code
+    except requests.exceptions.SSLError:
+        pass
+    except:
+        # HTTP Status Code for offline services
+        return 0
 
 # -----------------------------------------------------------------------------
 def get_services_list():
@@ -1921,12 +1950,14 @@ def service_monitoring():
 
             #Get IP from Domain
             if latency != "99999999":
+                redirect_state = check_services_redirect(site)
                 domain = urlparse(site).netloc
                 domain = domain.split(":")[0]
                 #print(domain)
                 domain_ip = socket.gethostbyname(domain)
             else:
                 domain_ip = ""
+                redirect_state = ""
             # Write Logfile
             service_monitoring_log(site + ' ' + site_retry, status, latency)
             # Insert Services_Events with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
@@ -1937,7 +1968,7 @@ def service_monitoring():
             sys.stdout.flush()
 
             # Update Service with lastLatence, lastScan and lastStatus after compare with services_current_scan
-            set_service_update(site, scantime, status, latency, domain_ip)
+            set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
 
         break
 

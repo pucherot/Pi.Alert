@@ -139,6 +139,9 @@ function init_location_array($HOST_IP) {
 		$location_array = explode("\n", $output_str);
 
 		return $location_array;
+	} else {
+		$nofile = array('######');
+		return $nofile;
 	}
 }
 
@@ -152,12 +155,12 @@ function parse_location_array($LOCATION_ARRAY) {
 		for ($x = 0; $x < sizeof($LOCATION_ARRAY); $x++) {
 			if (stristr($LOCATION_ARRAY[$x], '"' . $language_code . '":')) {
 				$temp_location = str_replace('"', '', strip_tags($LOCATION_ARRAY[$x]));
-				$temp_location = str_replace("$language_code:", '', $temp_location);
+				$temp_location = trim(str_replace("$language_code:", '', $temp_location));
 				array_push($locations, $temp_location);
 			}
 		}
 	}
-	if (sizeof($locations) < 1) {array_push($locations, "no DB found");}
+	if (sizeof($locations) < 1) {array_push($locations, "IP not found in DB");}
 	return $locations;
 }
 
@@ -307,6 +310,14 @@ $latency_min = round($result_min, 4);
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_Tags']; ?></label>
                         <div class="col-sm-9">
                           <input class="form-control" id="txtTags" type="text" value="<?php echo $servicedetails['mon_Tags'] ?>">
+                        </div>
+                      </div>
+
+                      <!-- Notes -->
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label"><?php echo 'Notes'; ?></label>
+                        <div class="col-sm-9">
+                          <input class="form-control" id="txtNotes" type="text" readonly value="<?php echo $servicedetails['mon_Notes'] ?>">
                         </div>
                       </div>
 
@@ -467,27 +478,32 @@ get_service_events_table($service_details_title, $http_filter);
                     <div class="col-sm-2"><i class="fa fa-w fa-circle text-red"></i> <?php echo $pia_lang['WebServices_Page_down']; ?> (<?php echo $httpdown; ?>)</div>
                   </div>
                 </div>
-<?php
-$output = init_location_array($current_service_IP);
-$locations = parse_location_array($output);
-?>
+
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Time']; ?>:</div>
-                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_avg']; ?> <?php echo $latency_average; ?> ms</div>
+                    <div class="col-sm-2">&Oslash; <?php echo $latency_average; ?> ms</div>
                     <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_min']; ?> <?php echo $latency_min; ?> ms</div>
                     <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_max']; ?> <?php echo $latency_max; ?> ms</div>
                     <div class="col-sm-1"></div>
                   </div>
-                  <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-12" style="font-weight: 600;"><?php echo 'Location'; ?>:</div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12" style="padding-left: 40px;">aktuelle IP: <?php echo $current_service_IP; ?></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12" style="padding-left: 40px;">IP Standort: <?php echo $locations[1] . ' (' . $locations[0] . ')'; ?></div>
-                  </div>
+<?php
+$output = init_location_array($current_service_IP);
+if ($output[0] != "######") {
+	$locations = parse_location_array($output);
+	echo '
+          <div class="row" style="margin-top: 10px;">
+            <div class="col-sm-12" style="font-weight: 600;">Location: </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12" style="padding-left: 40px;">aktuelle IP: ' . $current_service_IP . '</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12" style="padding-left: 40px;">IP Standort: ' . $locations[1] . ' (' . $locations[0] . ')</div>
+          </div>';
+}
+?>
+                <!-- Closing  <div class="col-md-12">   -->
                 </div>
 
               </div>
