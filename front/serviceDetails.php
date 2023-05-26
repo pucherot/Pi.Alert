@@ -52,6 +52,7 @@ if (!isset($http_filter)) {$http_filter = 'all';}
 
 function get_service_events_table($service_URL, $service_filter) {
 	global $db;
+	global $current_service_IP;
 
 	#echo $service_filter;
 
@@ -71,7 +72,9 @@ function get_service_events_table($service_URL, $service_filter) {
 
 	$moneve_res = $db->query('SELECT * FROM Services_Events WHERE moneve_URL="' . $service_URL . '"' . $filter_sql);
 	while ($row = $moneve_res->fetchArray()) {
-		if ($row['moneve_TargetIP'] == '') {$func_TargetIP = 'n.a.';} else { $func_TargetIP = $row['moneve_TargetIP'];}
+		if ($row['moneve_TargetIP'] == '') {$func_TargetIP = 'n.a.';} else {
+			$func_TargetIP = $row['moneve_TargetIP'];
+			$current_service_IP = $row['moneve_TargetIP'];}
 		echo '<tr>
                   <td>' . $func_TargetIP . '</td>
                   <td>' . $row['moneve_DateTime'] . '</td>
@@ -103,6 +106,72 @@ function set_table_headline($service_filter) {
 
 $servicedetails = get_service_details($service_details_title);
 
+// -----------------------------------------------------------------------------------
+// Get Online Graph Arrays
+$graph_arrays = array();
+$graph_arrays = prepare_graph_arrays_webservice($service_details_title);
+$Pia_Graph_Service_Time = $graph_arrays[0];
+$Pia_Graph_Service_Down = $graph_arrays[1];
+$Pia_Graph_Service_2xx = $graph_arrays[2];
+$Pia_Graph_Service_3xx = $graph_arrays[3];
+$Pia_Graph_Service_4xx = $graph_arrays[4];
+$Pia_Graph_Service_5xx = $graph_arrays[5];
+$http2xx = $graph_arrays[7];
+$http3xx = $graph_arrays[8];
+$http4xx = $graph_arrays[9];
+$http5xx = $graph_arrays[10];
+$httpdown = $graph_arrays[6];
+
+// -----------------------------------------------------------------------------------
+// Geo Location
+function init_location_array($HOST_IP) {
+	if (file_exists("./lib/geolite2/GeoLite2-Country.mmdb")) {
+		$databasePath = './lib/geolite2/GeoLite2-Country.mmdb';
+
+		$command = "mmdblookup -f {$databasePath} --ip {$HOST_IP}";
+		exec($command, $output);
+		for ($x = 0; $x < sizeof($output); $x++) {
+			$output[$x] = trim($output[$x]);
+		}
+
+		$output_str = implode("\n", $output);
+		$output_str = str_replace(":\n", ":", $output_str);
+		$location_array = explode("\n", $output_str);
+
+		return $location_array;
+	}
+}
+
+// -----------------------------------------------------------------------------------
+function parse_location_array($LOCATION_ARRAY) {
+	global $pia_lang_selected;
+
+	$language_code = substr($pia_lang_selected, 0, 2);
+	$locations = array();
+	if (sizeof($LOCATION_ARRAY) > 1) {
+		for ($x = 0; $x < sizeof($LOCATION_ARRAY); $x++) {
+			if (stristr($LOCATION_ARRAY[$x], '"' . $language_code . '":')) {
+				$temp_location = str_replace('"', '', strip_tags($LOCATION_ARRAY[$x]));
+				$temp_location = str_replace("$language_code:", '', $temp_location);
+				array_push($locations, $temp_location);
+			}
+		}
+	}
+	if (sizeof($locations) < 1) {array_push($locations, "no DB found");}
+	return $locations;
+}
+
+// get some stats
+// -----------------------------------------------------------------------------------
+$query = "SELECT AVG(moneve_Latency) AS average_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
+$result = $db->querySingle($query);
+$latency_average = round($result, 4);
+$query_max = "SELECT MAX(moneve_Latency) AS max_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
+$query_min = "SELECT MIN(moneve_Latency) AS min_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
+$result_max = $db->querySingle($query_max);
+$latency_max = round($result_max, 4);
+$result_min = $db->querySingle($query_min);
+$latency_min = round($result_min, 4);
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -250,11 +319,9 @@ $servicedetails = get_service_details($service_details_title);
                                 <span class="fa fa-caret-down"></span></button>
                               <ul class="dropdown-menu">
 <?php
-
 if ($servicedetails['mon_MAC'] != "") {
 	echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\'' . $servicedetails['mon_MAC'] . '\')">' . $servicedetails['mon_MAC'] . '</a></li>';
 }
-
 echo '<li> -----  </li>';
 
 //global $db_file;
@@ -264,7 +331,6 @@ $code_array = array();
 while ($row = $dev_res->fetchArray()) {
 	echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtMAC\',\'' . $row['dev_MAC'] . '\')">' . $row['dev_Name'] . '</a></li>';
 }
-
 ?>
                               </ul>
                             </div>
@@ -373,22 +439,6 @@ get_service_events_table($service_details_title, $http_filter);
 
 <!-- Graph ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panGraph">
-<?php
-// Get Online Graph Arrays
-$graph_arrays = array();
-$graph_arrays = prepare_graph_arrays_webservice($service_details_title);
-$Pia_Graph_Service_Time = $graph_arrays[0];
-$Pia_Graph_Service_Down = $graph_arrays[1];
-$Pia_Graph_Service_2xx = $graph_arrays[2];
-$Pia_Graph_Service_3xx = $graph_arrays[3];
-$Pia_Graph_Service_4xx = $graph_arrays[4];
-$Pia_Graph_Service_5xx = $graph_arrays[5];
-$http2xx = $graph_arrays[7];
-$http3xx = $graph_arrays[8];
-$http4xx = $graph_arrays[9];
-$http5xx = $graph_arrays[10];
-$httpdown = $graph_arrays[6];
-?>
                 <h4 class="text-aqua" style="font-size: 18px;margin: 0;line-height: 1; margin-bottom: 20px;"><?php echo $pia_lang['WebServices_Chart_a']; ?> <span class="maxlogage-interval">24</span> <?php echo $pia_lang['WebServices_Chart_b']; ?></h4>
                 <div class="col-md-12">
                   <div class="chart" style="height: 150px;">
@@ -414,21 +464,12 @@ $httpdown = $graph_arrays[6];
                     <div class="col-sm-2"><i class="fa fa-w fa-circle text-yellow"></i> HTTP-Code 3xx (<?php echo $http3xx; ?>)</div>
                     <div class="col-sm-2"><i class="fa fa-w fa-circle text-yellow"></i> HTTP-Code 4xx (<?php echo $http4xx; ?>)</div>
                     <div class="col-sm-2"><i class="fa fa-w fa-circle text-orange-custom"></i> HTTP-Code 5xx (<?php echo $http5xx; ?>)</div>
-                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-red"></i><?php echo $pia_lang['WebServices_Page_down']; ?> (<?php echo $httpdown; ?>)</div>
+                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-red"></i> <?php echo $pia_lang['WebServices_Page_down']; ?> (<?php echo $httpdown; ?>)</div>
                   </div>
                 </div>
 <?php
-// get some stats
-$query = "SELECT AVG(moneve_Latency) AS average_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
-$result = $db->querySingle($query);
-$latency_average = round($result, 4);
-$query_max = "SELECT MAX(moneve_Latency) AS max_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
-$query_min = "SELECT MIN(moneve_Latency) AS min_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL";
-$result_max = $db->querySingle($query_max);
-$latency_max = round($result_max, 4);
-$result_min = $db->querySingle($query_min);
-$latency_min = round($result_min, 4);
-
+$output = init_location_array($current_service_IP);
+$locations = parse_location_array($output);
 ?>
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
@@ -437,6 +478,15 @@ $latency_min = round($result_min, 4);
                     <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_min']; ?> <?php echo $latency_min; ?> ms</div>
                     <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_max']; ?> <?php echo $latency_max; ?> ms</div>
                     <div class="col-sm-1"></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-12" style="font-weight: 600;"><?php echo 'Location'; ?>:</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12" style="padding-left: 40px;">aktuelle IP: <?php echo $current_service_IP; ?></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12" style="padding-left: 40px;">IP Standort: <?php echo $locations[1] . ' (' . $locations[0] . ')'; ?></div>
                   </div>
                 </div>
 
