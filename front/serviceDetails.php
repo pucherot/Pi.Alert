@@ -276,7 +276,7 @@ $latency_min = round($result_min, 4);
 
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
-              <li class=""> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
+              <li class="active"> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
               <li class=""> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
               <li class=""> <a id="tabGraph"   href="#panGraph"   data-toggle="tab"> <?php echo $pia_lang['WebServices_Tab_Graph']; ?>   </a></li>
 
@@ -289,7 +289,7 @@ $latency_min = round($result_min, 4);
 <!--
               <div class="tab-pane fade in active" id="panDetails">
 -->
-              <div class="tab-pane fade" id="panDetails">
+              <div class="tab-pane fade in active" id="panDetails">
 
                 <div class="row">
     <!-- column 1 -->
@@ -576,10 +576,23 @@ if ($ENABLED_DARKMODE === True) {
 
 function main () {
   url = '<?php echo $service_details_title; ?>'
-  initializeTabs();
+  //initializeTabs();
   initializeiCheck();
   getEventsTotalsforService();
   initializeDatatable();
+
+  var activeTab = getCookie("serviceTab");
+
+  // Wenn ein aktiver Tab im Cookie vorhanden ist, aktiviere ihn
+  if (activeTab != "") {
+    $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
+  }
+
+  // Speichere den ausgewählten Tab in einem Cookie
+  $('.nav-tabs a').on('shown.bs.tab', function(event) {
+    var selectedTab = $(event.target).attr("href");
+    setCookie("serviceTab", selectedTab, 30);
+  });
 
 <?php
 if (isset($_REQUEST['filter'])) {
@@ -741,4 +754,33 @@ function deleteService () {
 function setTextValue (textElement, textValue) {
   $('#'+textElement).val (textValue);
 }
+
+function getCookie(cookieName) {
+  var name = cookieName + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var cookieArray = decodedCookie.split(';');
+
+  for (var i = 0; i < cookieArray.length; i++) {
+    var cookie = cookieArray[i];
+
+    while (cookie.charAt(0) == ' ') {
+      cookie = cookie.substring(1);
+    }
+
+    if (cookie.indexOf(name) == 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+
+  return "";
+}
+
+// Funktion zum Setzen eines Cookies
+function setCookie(cookieName, cookieValue, expirationDays) {
+  var date = new Date();
+  date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + date.toUTCString();
+  document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+}
+
 </script>
