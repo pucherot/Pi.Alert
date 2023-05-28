@@ -326,7 +326,6 @@ function deleteActHistory() {
 //------------------------------------------------------------------------------
 function PiaBackupDBtoArchive() {
   // prepare fast Backup
-  #$file = '../../../db/pialert.db';
 
   $db_file_path = '../../../db';
   $db_file_name_org = 'pialert.db';
@@ -340,20 +339,18 @@ function PiaBackupDBtoArchive() {
   $Pia_Archive_Name = 'pialertdb_'.date("Ymd_His").'.zip';
   $Pia_Archive_Path = '../../../db/';
 
-  #$tempbackupdir = $Pia_Archive_Path.'temp';
   global $pia_lang;
 
   // Check if DB has open transactions
   if (filesize($db_file_org_full.'-wal') != "0") {
       //DEBUG
-      echo filesize($db_file_org_full.'-shm').' - '.filesize($db_file_org_full.'-wal');
+      //echo filesize($db_file_org_full.'-shm').'-'.filesize($db_file_org_full.'-wal').' - ';
       echo $pia_lang['BackDevices_Backup_WALError']; exit;
   }
 
   // copy database
   exec('sqlite3 "'.$db_file_org_full.'" ".backup '.$db_file_temp_full.'"', $output);
-  //print_r($output);
-  //echo 'sqlite3 "'.$file.'" ".backup '.$tempbackupdir.'/'.$newfile.'"';
+
   if (file_exists($db_file_temp_full)) {
       // Integrity Check if file copy exists
       $sql1 = "PRAGMA integrity_check";
@@ -385,7 +382,6 @@ function PiaBackupDBtoArchive() {
     // File does not exists
     echo $pia_lang['BackDevices_Backup_CopError']; exit;
   }
-
 }
 
 //------------------------------------------------------------------------------
@@ -424,7 +420,7 @@ function PiaPurgeDBBackups() {
   // Clean DB Backups
   $Pia_Archive_Path = '../../../db';
   $Pia_Backupfiles = array();
-  $files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip'));
+  $files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip', 'temp'));
   foreach ($files as &$item) 
     {
       $item = $Pia_Archive_Path.'/'.$item;
