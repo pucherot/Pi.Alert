@@ -276,7 +276,7 @@ $latency_min = round($result_min, 4);
 
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
-              <li class="active"> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
+              <li class=""> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
               <li class=""> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
               <li class=""> <a id="tabGraph"   href="#panGraph"   data-toggle="tab"> <?php echo $pia_lang['WebServices_Tab_Graph']; ?>   </a></li>
 
@@ -289,7 +289,7 @@ $latency_min = round($result_min, 4);
 <!--
               <div class="tab-pane fade in active" id="panDetails">
 -->
-              <div class="tab-pane fade in active" id="panDetails">
+              <div class="tab-pane" id="panDetails">
 
                 <div class="row">
     <!-- column 1 -->
@@ -576,23 +576,10 @@ if ($ENABLED_DARKMODE === True) {
 
 function main () {
   url = '<?php echo $service_details_title; ?>'
-  //initializeTabs();
+  initializeTabs();
   initializeiCheck();
   getEventsTotalsforService();
   initializeDatatable();
-
-  var activeTab = getCookie("serviceTab");
-
-  // Wenn ein aktiver Tab im Cookie vorhanden ist, aktiviere ihn
-  if (activeTab != "") {
-    $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
-  }
-
-  // Speichere den ausgewählten Tab in einem Cookie
-  $('.nav-tabs a').on('shown.bs.tab', function(event) {
-    var selectedTab = $(event.target).attr("href");
-    setCookie("serviceTab", selectedTab, 30);
-  });
 
 <?php
 if (isset($_REQUEST['filter'])) {
@@ -604,7 +591,19 @@ if (isset($_REQUEST['filter'])) {
 
 function initializeTabs () {
   // Activate panel
-  $('.nav-tabs a[id='+ tab +']').tab('show');
+  var activeTab = getCookie("serviceTab");
+
+  // If there is an active tab in the cookie, activate it
+  if (activeTab != "") {
+    $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
+  }
+
+  // Save the selected tab in a cookie
+  $('.nav-tabs a').on('shown.bs.tab', function(event) {
+    var selectedTab = $(event.target).attr("href");
+    setCookie("serviceTab", selectedTab, 30);
+  });
+  //$('.nav-tabs a[id='+ tab +']').tab('show');
 }
 
 function initializeiCheck () {
