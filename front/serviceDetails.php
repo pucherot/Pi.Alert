@@ -54,8 +54,6 @@ function get_service_events_table($service_URL, $service_filter) {
 	global $db;
 	global $current_service_IP;
 
-	#echo $service_filter;
-
 	if ($service_filter == 'all') {
 		$filter_sql = "";
 	} elseif ($service_filter == 2) {
@@ -101,7 +99,6 @@ function set_table_headline($service_filter) {
 	} elseif ($service_filter == "99999999") {
 		echo '<h3 class="text-red" style="display: inline-block;font-size: 18px; margin: 0; line-height: 1;">' . $pia_lang['WebServices_Events_Shortcut_Down'] . '</h3>';
 	}
-
 }
 
 $servicedetails = get_service_details($service_details_title);
@@ -313,14 +310,7 @@ $latency_min = round($result_min, 4);
                         </div>
                       </div>
 
-                      <!-- Notes -->
-                      <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo 'Notes'; ?></label>
-                        <div class="col-sm-9">
-                          <input class="form-control" id="txtNotes" type="text" readonly value="<?php echo $servicedetails['mon_Notes'] ?>">
-                        </div>
-                      </div>
-
+                      <!-- Mac address -->
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_MAC']; ?></label>
                         <div class="col-sm-9">
@@ -348,6 +338,14 @@ while ($row = $dev_res->fetchArray()) {
                             <!-- /btn-group -->
                             <input type="text" id="txtMAC" class="form-control" data-enpassusermodified="yes" value="<?php echo $servicedetails['mon_MAC']; ?>">
                           </div>
+                        </div>
+                      </div>
+
+                      <!-- Notes -->
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_Notes']; ?></label>
+                        <div class="col-sm-9">
+                          <input class="form-control" id="txtNotes" type="text" readonly value="<?php echo $servicedetails['mon_Notes'] ?>">
                         </div>
                       </div>
 

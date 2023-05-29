@@ -270,6 +270,7 @@ $pia_lang['WebServices_label_URL'] = 'Service URL';
 $pia_lang['WebServices_label_Tags'] = 'Tag';
 $pia_lang['WebServices_label_MAC'] = 'Gerät';
 $pia_lang['WebServices_label_MAC_Select'] = 'Auswahl';
+$pia_lang['WebServices_label_Notes'] = 'Hinweis';
 $pia_lang['WebServices_label_TargetIP'] = 'Ziel IP';
 $pia_lang['WebServices_label_StatusCode'] = 'HTTP Status';
 $pia_lang['WebServices_label_ScanTime'] = 'Aktualisierungszeit';

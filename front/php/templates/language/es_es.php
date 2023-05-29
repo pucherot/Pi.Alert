@@ -267,6 +267,7 @@ $pia_lang['WebServices_label_URL'] = 'URL';
 $pia_lang['WebServices_label_Tags'] = 'Tag';
 $pia_lang['WebServices_label_MAC'] = 'Device';
 $pia_lang['WebServices_label_MAC_Select'] = 'Select';
+$pia_lang['WebServices_label_Notes'] = 'Note';
 $pia_lang['WebServices_label_TargetIP'] = 'IP objetivo';
 $pia_lang['WebServices_label_StatusCode'] = 'HTTP Status';
 $pia_lang['WebServices_label_ScanTime'] = 'Tiempo de exploración';
