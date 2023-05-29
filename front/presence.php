@@ -254,7 +254,7 @@ function initializeCalendar () {
     header: {
       left            : 'prev,next today',
       center          : 'title',
-      right           : 'timelineYear,timelineMonth,timelineWeek'
+      right           : 'timelineYear,timelineMonth,timelineWeek,timelineDay'
     },
     defaultView       : 'timelineMonth',
     height            : 'auto',
@@ -281,7 +281,6 @@ function initializeCalendar () {
         // Hack to show partial day events not as fullday events
         slotDuration      : {minutes: 44641}
       },
-
       timelineQuarter: {
         type              : 'timeline',
         duration          : { month: 3 },
@@ -290,7 +289,6 @@ function initializeCalendar () {
         // Hack to show partial day events not as fullday events
         slotDuration      : {minutes: 44641}
       },
-
       timelineMonth: {
         type              : 'timeline',
         duration          : { month: 1 },
@@ -299,13 +297,19 @@ function initializeCalendar () {
         // Hack to show partial day events not as fullday events
         slotDuration      : '24:00:01'
       },
-
       timelineWeek: {
         type              : 'timeline',
         duration          : { week: 1 },
         buttonText        : '<?php echo $pia_lang['Presence_CalHead_week']; ?>',
         slotLabelFormat   : 'D',
         slotDuration      : '24:00:01'
+      },
+      timelineDay: {
+        type              : 'timeline',
+        duration          : { day: 1 },
+        buttonText        : '<?php echo $pia_lang['Presence_CalHead_day']; ?>',
+        slotLabelFormat   : 'H',
+        slotDuration      : '00:30:00'
       }
     },
 
@@ -325,6 +329,16 @@ function initializeCalendar () {
 
       if (date.format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
           cell.addClass ('fc-today'); };
+
+      if ($('#calendar').fullCalendar('getView').name == 'timelineDay') {
+        cell.removeClass('fc-sat');
+        cell.removeClass('fc-sun');
+        cell.removeClass('fc-today');
+        if (date.format('YYYY-MM-DD HH') == moment().format('YYYY-MM-DD HH')) {
+          cell.addClass('fc-today');
+        }
+      };
+
     },
 
     resourceRender: function (resourceObj, labelTds, bodyTds) {

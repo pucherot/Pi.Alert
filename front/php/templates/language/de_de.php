@@ -92,17 +92,14 @@ $pia_lang['Device_Tablelenght_all'] = 'Alle';
 $pia_lang['Device_Table_info'] = 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen';
 $pia_lang['Device_Table_nav_next'] = 'Nächste';
 $pia_lang['Device_Table_nav_prev'] = 'Zurück';
-
 $pia_lang['Device_bulkEditor_mode'] = 'Massen-Editor';
 $pia_lang['Device_bulkEditor_mode_quit'] = 'Editor beenden';
 $pia_lang['Device_bulkEditor_selectall'] = 'Alle auswählen';
 $pia_lang['Device_bulkEditor_selectnone'] = 'Alle abwählen';
-
 $pia_lang['Device_bulkEditor_savebox_title'] = 'Felder wurden gespeichert';
 $pia_lang['Device_bulkEditor_savebox_noselection'] = 'Es wurde keine Felder zur Änderung ausgewählt';
 $pia_lang['Device_bulkEditor_savebox_mod_devices'] = 'Geänderte Geräte';
 $pia_lang['Device_bulkEditor_savebox_mod_fields'] = 'Geänderte Werte';
-
 $pia_lang['Device_bulkEditor_hostbox_title'] = 'Wähle die zu bearbeitenden Geräte aus';
 $pia_lang['Device_bulkEditor_inputbox_title'] = 'Felder bearbeiten';
 
@@ -126,6 +123,7 @@ $pia_lang['Presence_CalHead_year'] = 'Jahr';
 $pia_lang['Presence_CalHead_quarter'] = 'Quartal';
 $pia_lang['Presence_CalHead_month'] = 'Monat';
 $pia_lang['Presence_CalHead_week'] = 'Woche';
+$pia_lang['Presence_CalHead_day'] = 'Tag';
 
 //////////////////////////////////////////////////////////////////
 // Events Page

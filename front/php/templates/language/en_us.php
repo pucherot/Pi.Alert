@@ -123,6 +123,7 @@ $pia_lang['Presence_CalHead_year'] = 'year';
 $pia_lang['Presence_CalHead_quarter'] = 'quarter';
 $pia_lang['Presence_CalHead_month'] = 'month';
 $pia_lang['Presence_CalHead_week'] = 'week';
+$pia_lang['Presence_CalHead_day'] = 'day';
 
 //////////////////////////////////////////////////////////////////
 // Events Page

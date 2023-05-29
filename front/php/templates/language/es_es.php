@@ -123,6 +123,7 @@ $pia_lang['Presence_CalHead_year'] = 'año';
 $pia_lang['Presence_CalHead_quarter'] = 'trimestre';
 $pia_lang['Presence_CalHead_month'] = 'mes';
 $pia_lang['Presence_CalHead_week'] = 'semana';
+$pia_lang['Presence_CalHead_day'] = 'day';
 
 //////////////////////////////////////////////////////////////////
 // Events Page - Update by @TeroRERO 25jul2022
