@@ -884,8 +884,9 @@ $pia_lang['Maintenance_Tools_Updatecheck'] = 'Prüfe auf Updates';
 $pia_lang['Maintenance_Github_package_a'] = 'Die neuste Version ist vom ';
 $pia_lang['Maintenance_Github_package_b'] = 'Uhr.';
 $pia_lang['Updatecheck_Title'] = 'Update Check';
-$pia_lang['Updatecheck_cur'] = 'Derzeit genutzte Version';
-$pia_lang['Updatecheck_new'] = 'Aktuellste Version auf Github';
+$pia_lang['Updatecheck_cur'] = 'Derzeit genutzte Pi.Alert Version';
+$pia_lang['Updatecheck_new'] = 'Aktuellste Pi.Alert Version auf Github';
+$pia_lang['GeoLiteDB_new'] = 'GeoLite2 Datenbank-Aktualisierung';
 $pia_lang['Updatecheck_RN'] = 'Update Hinweise';
 $pia_lang['Updatecheck_U2D'] = 'Du nutzt bereits die aktuellest Version';
 

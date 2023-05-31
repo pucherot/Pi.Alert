@@ -122,8 +122,8 @@ $httpdown = $graph_arrays[6];
 // -----------------------------------------------------------------------------------
 // Geo Location
 function init_location_array($HOST_IP) {
-	if (file_exists("./lib/geolite2/GeoLite2-Country.mmdb")) {
-		$databasePath = './lib/geolite2/GeoLite2-Country.mmdb';
+	if (file_exists("../db/GeoLite2-Country.mmdb")) {
+		$databasePath = '../db/GeoLite2-Country.mmdb';
 
 		$command = "mmdblookup -f {$databasePath} --ip {$HOST_IP}";
 		exec($command, $output);
@@ -498,6 +498,38 @@ if ($output[0] != "######") {
           </div>
           <div class="row">
             <div class="col-sm-12" style="padding-left: 40px;"><div style="display: inline-block; width: 130px;">' . $pia_lang['WebServices_Stats_IPLocation'] . ':</div> ' . $locations[1] . ' (' . $locations[0] . ')</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12" style="">
+              <p style="margin-top: 40px;">Die Datenbank wird von <a href="https://github.com/P3TERX/GeoLite.mmdb">github.com/P3TERX/GeoLite.mmdb</a> heruntergeladen. Die GeoLite2 Datenbank ist ein Produkt von <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">MaxMind</a></p>
+            </div>
+          </div>';
+} else {
+	echo '
+          <div class="row" style="margin-top: 30px;">
+            <style>
+                .downloader {
+                    border: 6px solid #f3f3f3; /* Light gray */
+                    border-top: 6px solid #3498db; /* Blue */
+                    border-radius: 50%;
+                    width: 32px;
+                    height: 32px;
+                    animation: spin 2s linear infinite;
+                    margin-left: 50px;
+                }
+
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>
+            <div class="col-sm-12" style="">
+              <div style="height: 60px;">
+                <div class="downloader" id="downloader" style="display: none;"></div>
+                <button class="btn btn-default" id="download-button">Installiere Datenbank</button>
+              </div>
+              <p style="margin-top: 20px;">Die Datenbank wird von <a href="https://github.com/P3TERX/GeoLite.mmdb">github.com/P3TERX/GeoLite.mmdb</a> heruntergeladen. Die GeoLite2 Datenbank ist ein Produkt von <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">MaxMind</a></p>
+            </div>
           </div>';
 }
 ?>
@@ -593,6 +625,9 @@ function initializeTabs () {
 
   // If there is an active tab in the cookie, activate it
   if (activeTab != "") {
+    $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
+  } else {
+    activeTab = "#panDetails";
     $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
   }
 
@@ -780,4 +815,34 @@ function setCookie(cookieName, cookieValue, expirationDays) {
   document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
 }
 
+$('#download-button').on('click', function() {
+    var loader = $("#downloader");
+    var downloadButton = $(this);
+
+    // Hide the download button
+    downloadButton.hide();
+
+    // Display the loading animation
+    loader.show();
+
+    // Send an AJAX request to initiate the file download
+    $.ajax({
+        url: './php/server/services.php?action=downloadGeoDB',
+        method: 'GET',
+        success: function(response) {
+            // Hide the loading animation
+            //loader.hide();
+            console.log('Download complete!');
+        },
+        error: function() {
+            console.error('Download error!');
+        },
+        complete: function() {
+            // Show the download button again
+            setTimeout(function () {
+              location.reload(true);
+            }, 1000);
+        }
+    });
+});
 </script>

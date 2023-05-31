@@ -884,6 +884,7 @@ $pia_lang['Maintenance_Github_package_b'] = 'h.';
 $pia_lang['Updatecheck_Title'] = 'Update Check';
 $pia_lang['Updatecheck_cur'] = 'Version actuellement utilisée';
 $pia_lang['Updatecheck_new'] = 'Dernière version sur Github';
+$pia_lang['GeoLiteDB_new'] = 'GeoLite2 Update';
 $pia_lang['Updatecheck_RN'] = 'Notes de mise à jour';
 $pia_lang['Updatecheck_U2D'] = 'Vous utilisez déjà la dernière version';
 

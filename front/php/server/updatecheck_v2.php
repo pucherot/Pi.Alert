@@ -14,6 +14,8 @@ $conf_data = parse_ini_file($conf_file);
     <div class="box-body">
 		<h4 class="text-aqua" style="text-align: center;"><?php echo $pia_lang['Maintenance_Github_package_a']; ?>
 <?php
+// Get MaxMind DB Release
+// https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest
 
 $curl_handle = curl_init();
 curl_setopt($curl_handle, CURLOPT_URL, 'https://api.github.com/repos/leiweibau/Pi.Alert/commits?path=tar%2Fpialert_latest.tar&page=1&per_page=1');
@@ -23,9 +25,21 @@ curl_setopt($curl_handle, CURLOPT_USERAGENT, 'PHP');
 $query = curl_exec($curl_handle);
 curl_close($curl_handle);
 
-$data = json_decode($query, true);
+$pialert_update = json_decode($query, true);
 
-$utc_ts = strtotime($data['0']['commit']['author']['date']);
+$curl_handle = curl_init();
+curl_setopt($curl_handle, CURLOPT_URL, 'https://api.github.com/repos/P3TERX/GeoLite.mmdb/releases/latest');
+curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($curl_handle, CURLOPT_USERAGENT, 'PHP');
+$query = curl_exec($curl_handle);
+curl_close($curl_handle);
+
+$geolite_update = json_decode($query, true);
+// Pi.Alert Versions
+$geolite_new_version = $geolite_update['name'];
+
+$utc_ts = strtotime($pialert_update['0']['commit']['author']['date']);
 $offset = date("Z");
 $local_ts = $utc_ts + $offset;
 $local_time = date("d.m.Y, H:i", $utc_ts);
@@ -35,7 +49,7 @@ echo $pia_lang['Maintenance_Github_package_b'];
 echo '</h4>';
 
 // Get latest Release notes from Github
-$updatenotes_array = explode("\n", $data['0']['commit']['message']);
+$updatenotes_array = explode("\n", $pialert_update['0']['commit']['message']);
 $updatenotes_array = array_filter($updatenotes_array);
 
 // Pi.Alert Versions
@@ -47,7 +61,8 @@ $pialert_new_version = substr($updatenotes_array[0], -10);
 if ($pialert_cur_version != $pialert_new_version) {
 	echo '<p style="font-size: 16px; font-weight: bold;">
 			' . $pia_lang['Updatecheck_cur'] . ': 	<span class="text-green">	' . $pialert_cur_version . '</span><br>';
-	echo '  ' . $pia_lang['Updatecheck_new'] . ': 	<span class="text-red">		' . $pialert_new_version . '</span></p>';
+	echo '  ' . $pia_lang['Updatecheck_new'] . ': 	<span class="text-red">		' . $pialert_new_version . '</span><br>';
+	echo '  ' . $pia_lang['GeoLiteDB_new'] . ': 	<span class="text-red">		' . $geolite_new_version . '</span></p>';
 	echo '</div>';
 	echo '</div>';
 
