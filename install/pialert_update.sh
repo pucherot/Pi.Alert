@@ -107,13 +107,13 @@ move_files() {
 # ------------------------------------------------------------------------------
 clean_files() {
   print_msg "- Cleaning previous version..."
-  rm -r "$PIALERT_HOME/back"    2>/dev/null || :
-  rm -r "$PIALERT_HOME/doc"     2>/dev/null || :
-  rm -r "$PIALERT_HOME/docs"    2>/dev/null || :
-  rm -r "$PIALERT_HOME/front"   2>/dev/null || :
-  rm -r "$PIALERT_HOME/install" 2>/dev/null || :
-  rm -r "$PIALERT_HOME/"*.txt   2>/dev/null || :
-  rm -r "$PIALERT_HOME/"*.md    2>/dev/null || :
+  rm -rf "$PIALERT_HOME/back"    2>/dev/null || :
+  rm -rf "$PIALERT_HOME/doc"     2>/dev/null || :
+  rm -rf "$PIALERT_HOME/docs"    2>/dev/null || :
+  rm -rf "$PIALERT_HOME/front"   2>/dev/null || :
+  rm -rf "$PIALERT_HOME/install" 2>/dev/null || :
+  rm -rf "$PIALERT_HOME/"*.txt   2>/dev/null || :
+  rm -rf "$PIALERT_HOME/"*.md    2>/dev/null || :
 }
 
 # ------------------------------------------------------------------------------
