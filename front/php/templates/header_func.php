@@ -141,7 +141,7 @@ function toggle_webservices_menu($section) {
 	global $pia_lang;
 	if (($_SESSION['Scan_WebServices'] == True) && ($section == "Main")) {
 		echo '<li class="';
-		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('services.php'))) {echo 'active';}
+		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('services.php', 'serviceDetails.php'))) {echo 'active';}
 		echo '">
                 <a href="services.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Services'] . '</span></a>
               </li>';

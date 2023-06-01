@@ -260,7 +260,7 @@ format_temperature($celsius, $temperaturelimit);
           <a href="devices.php"><i class="fa fa-laptop"></i> <span><?php echo $pia_lang['Navigation_Devices']; ?></span></a>
         </li>
 
-        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('network.php'))) {echo 'active';}?>">
+        <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('network.php', 'networkSettings.php'))) {echo 'active';}?>">
           <a href="network.php"><i class="fa fa-server"></i> <span><?php echo $pia_lang['Navigation_Network']; ?></span></a>
         </li>
 
