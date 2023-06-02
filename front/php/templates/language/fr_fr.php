@@ -293,6 +293,7 @@ $pia_lang['WebServices_Stats_Time_max'] = 'Slowest';
 $pia_lang['WebServices_Stats_Location'] = 'Emplacement';
 $pia_lang['WebServices_Stats_IP'] = 'IP actuelle';
 $pia_lang['WebServices_Stats_IPLocation'] = 'Mapping des pays';
+$pia_lang['WebServices_Stats_comment_a'] = '(Calculé à partir de toutes les analyses de ce service)';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page - Backend
@@ -488,9 +489,6 @@ $pia_lang['BackDevices_Report_Delete'] = ' La/les notification(s) a/ont été su
 
 $pia_lang['Network_Title'] = 'Aperçu du réseau';
 $pia_lang['Network_ManageDevices'] = 'Gérer les éléments du réseau';
-// $pia_lang['Network_ManageAdd'] = 'Ajouter un élément';
-// $pia_lang['Network_ManageEdit'] = 'Modifier un élément';
-// $pia_lang['Network_ManageDel'] = 'Supprimer un élément';
 $pia_lang['Network_ManageAdd_Name'] = 'Nom de l&apos;appareil';
 $pia_lang['Network_ManageAdd_Name_text'] = 'Nom sans caractères spéciaux';
 $pia_lang['Network_ManageAdd_Type'] = 'Type d&apos;appareil';
@@ -879,14 +877,19 @@ $pia_lang['Reports_Rogue_hint'] = 'Un nouveau message concernant un serveur DHCP
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Maintenance_Tools_Updatecheck'] = 'Vérifier les mises à jour';
-$pia_lang['Maintenance_Github_package_a'] = 'La dernière version est celle du';
-$pia_lang['Maintenance_Github_package_b'] = 'h.';
-$pia_lang['Updatecheck_Title'] = 'Update Check';
-$pia_lang['Updatecheck_cur'] = 'Version actuellement utilisée';
-$pia_lang['Updatecheck_new'] = 'Dernière version sur Github';
-$pia_lang['GeoLiteDB_new'] = 'GeoLite2 Update';
-$pia_lang['Updatecheck_RN'] = 'Notes de mise à jour';
+$pia_lang['Maintenance_Github_package_a'] = 'Dernière version : ';
+$pia_lang['Maintenance_Github_package_b'] = 'heure';
+$pia_lang['Updatecheck_Title'] = 'Vérification des mises à jour';
+$pia_lang['Updatecheck_cur'] = 'Version actuellement utilisée de Pi.Alert';
+$pia_lang['Updatecheck_new'] = 'Dernière version de Pi.Alert sur Github';
+$pia_lang['GeoLiteDB_Title'] = 'Remarques sur la base de données GeoLite2';
+$pia_lang['GeoLiteDB_cur'] = 'Base de données GeoLite2 chargée le';
+$pia_lang['GeoLiteDB_new'] = 'Dernière base de données GeoLite2 sur Github';
+$pia_lang['Updatecheck_RN'] = 'Notes de mise à jour de Pi.Alert';
 $pia_lang['Updatecheck_U2D'] = 'Vous utilisez déjà la dernière version';
+$pia_lang['GeoLiteDB_button_del'] = 'Supprimer la base de données GeoLite2';
+$pia_lang['GeoLiteDB_button_ins'] = 'Installer la base de données GeoLite2';
+$pia_lang['GeoLiteDB_credits'] = 'La base de données est téléchargée depuis <a href="https://github.com/P3TERX/GeoLite.mmdb">github.com/P3TERX/GeoLite.mmdb</a>. La base de données GeoLite2 est un produit de <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">MaxMind</a>.';
 
 //////////////////////////////////////////////////////////////////
 // System Info Page

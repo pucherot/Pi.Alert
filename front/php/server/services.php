@@ -49,6 +49,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'downloadGeoDB':downloadGeoDB();
 		break;
+	case 'deleteGeoDB':deleteGeoDB();
+		break;
 	}
 }
 
@@ -316,5 +318,19 @@ function downloadGeoDB() {
 
 // Return the saved file path
 	echo json_encode(['filePath' => $savePath]);
+}
+
+//------------------------------------------------------------------------------
+//  Delete GeoDB
+//------------------------------------------------------------------------------
+function deleteGeoDB() {
+	// $fileUrl = 'https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb';
+
+// Path to save the downloaded file
+	$deletePath = '../../../db/GeoLite2-Country.mmdb';
+	if (file_exists($deletePath)) {
+		unlink($deletePath);
+	}
+
 }
 ?>

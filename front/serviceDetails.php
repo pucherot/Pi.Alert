@@ -466,8 +466,10 @@ get_service_events_table($service_details_title, $http_filter);
                   pia_draw_graph_services_history(pia_js_online_history_time, pia_js_online_history_down, pia_js_online_history_2xx, pia_js_online_history_3xx, pia_js_online_history_4xx, pia_js_online_history_5xx);
                 </script>
 
+                <div class="col-md-12 bottom-border-aqua" style="margin-top: 30px; opacity: 0.7"></div>
+
                 <div class="col-md-12">
-                  <div class="row" style="margin-top: 30px;">
+                  <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Code']; ?>:</div>
                     <div class="col-sm-2"><i class="fa fa-w fa-circle text-green"></i> HTTP-Code 2xx (<?php echo $http2xx; ?>)</div>
                     <div class="col-sm-2"><i class="fa fa-w fa-circle text-yellow"></i> HTTP-Code 3xx (<?php echo $http3xx; ?>)</div>
@@ -477,19 +479,26 @@ get_service_events_table($service_details_title, $http_filter);
                   </div>
                 </div>
 
+                <div class="col-md-12 bottom-border-aqua" style="margin-top: 10px; opacity: 0.7"></div>
+
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Time']; ?>:</div>
                     <div class="col-sm-2">&Oslash; <?php echo $latency_average; ?> ms</div>
                     <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_min']; ?> <?php echo $latency_min; ?> ms</div>
                     <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_max']; ?> <?php echo $latency_max; ?> ms</div>
-                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4"><span style="opacity: 0.6"><?php echo $pia_lang['WebServices_Stats_comment_a']; ?></span></div>
                   </div>
+
+                </div>
+
+                <div class="col-md-12 bottom-border-aqua" style="margin-top: 10px; opacity: 0.7"></div>
+
 <?php
-$output = init_location_array($current_service_IP);
+$output = init_location_array($servicedetails['mon_TargetIP']);
 if ($output[0] != "######") {
 	$locations = parse_location_array($output);
-	echo '
+	echo '<div class="col-md-12">
           <div class="row" style="margin-top: 10px;">
             <div class="col-sm-12" style="font-weight: 600;">' . $pia_lang['WebServices_Stats_Location'] . ': </div>
           </div>
@@ -500,12 +509,14 @@ if ($output[0] != "######") {
             <div class="col-sm-12" style="padding-left: 40px;"><div style="display: inline-block; width: 130px;">' . $pia_lang['WebServices_Stats_IPLocation'] . ':</div> ' . $locations[1] . ' (' . $locations[0] . ')</div>
           </div>
           <div class="row">
-            <div class="col-sm-12" style="">
-              <p style="margin-top: 40px;">Die Datenbank wird von <a href="https://github.com/P3TERX/GeoLite.mmdb">github.com/P3TERX/GeoLite.mmdb</a> heruntergeladen. Die GeoLite2 Datenbank ist ein Produkt von <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">MaxMind</a></p>
+            <div class="col-sm-12" style="margin-top: 30px;">
+              <button class="btn btn-default" id="deleteDB-button">' . $pia_lang['GeoLiteDB_button_del'] . '</button>
+              <p style="margin-top: 20px;">' . $pia_lang['GeoLiteDB_credits'] . '</p>
             </div>
-          </div>';
+          </div>
+        </div>';
 } else {
-	echo '
+	echo '<div class="col-md-12">
           <div class="row" style="margin-top: 30px;">
             <style>
                 .downloader {
@@ -526,15 +537,15 @@ if ($output[0] != "######") {
             <div class="col-sm-12" style="">
               <div style="height: 60px;">
                 <div class="downloader" id="downloader" style="display: none;"></div>
-                <button class="btn btn-default" id="download-button">Installiere Datenbank</button>
+                <button class="btn btn-default" id="downloadDB-button">' . $pia_lang['GeoLiteDB_button_ins'] . '</button>
               </div>
-              <p style="margin-top: 20px;">Die Datenbank wird von <a href="https://github.com/P3TERX/GeoLite.mmdb">github.com/P3TERX/GeoLite.mmdb</a> heruntergeladen. Die GeoLite2 Datenbank ist ein Produkt von <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">MaxMind</a></p>
+              <p style="margin-top: 20px;">' . $pia_lang['GeoLiteDB_credits'] . '</p>
             </div>
-          </div>';
+          </div>
+        </div>';
 }
 ?>
                 <!-- Closing  <div class="col-md-12">   -->
-                </div>
 
               </div>
 
@@ -600,7 +611,6 @@ if ($ENABLED_DARKMODE === True) {
 
   // Read parameters & Initialize components
   main();
-
 
 // -----------------------------------------------------------------------------
 
@@ -787,6 +797,7 @@ function setTextValue (textElement, textValue) {
   $('#'+textElement).val (textValue);
 }
 
+// Get Cookie (Tab state)
 function getCookie(cookieName) {
   var name = cookieName + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -807,7 +818,8 @@ function getCookie(cookieName) {
   return "";
 }
 
-// Funktion zum Setzen eines Cookies
+// -----------------------------------------------------------------------------
+// Set Cookie (Tab state)
 function setCookie(cookieName, cookieValue, expirationDays) {
   var date = new Date();
   date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
@@ -815,7 +827,9 @@ function setCookie(cookieName, cookieValue, expirationDays) {
   document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
 }
 
-$('#download-button').on('click', function() {
+// -----------------------------------------------------------------------------
+// Download GeoIP DB
+$('#downloadDB-button').on('click', function() {
     var loader = $("#downloader");
     var downloadButton = $(this);
 
@@ -834,9 +848,33 @@ $('#download-button').on('click', function() {
             //loader.hide();
             console.log('Download complete!');
         },
-        error: function() {
-            console.error('Download error!');
+        // error: function() {
+        //     console.error('Download error!');
+        // },
+        complete: function() {
+            // Show the download button again
+            setTimeout(function () {
+              location.reload(true);
+            }, 1000);
+        }
+    });
+});
+
+// -----------------------------------------------------------------------------
+// Delete GeoIP DB
+$('#deleteDB-button').on('click', function() {
+    // Send an AJAX request to initiate the file download
+    $.ajax({
+        url: './php/server/services.php?action=deleteGeoDB',
+        method: 'GET',
+        success: function(response) {
+            // Hide the loading animation
+            //loader.hide();
+            console.log('Delete complete!');
         },
+        // error: function() {
+        //     console.error('Delete error!');
+        // },
         complete: function() {
             // Show the download button again
             setTimeout(function () {
