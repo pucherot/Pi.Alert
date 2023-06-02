@@ -53,13 +53,13 @@ main() {
 
 update_warning() {
   clear
-  print_msg "############################################################"
-  print_msg "# You are planning to update Pi.Alert. Please make sure    #"
-  print_msg "# that no scan takes place during the update to avoid      #"
-  print_msg "# possible database errors afterwards!!! This can be done  #"
-  print_msg "# by pausing the Arp scan via the settings page. However,  #"
-  print_msg "# scans that are already running will not be terminated.   #"
-  print_msg "############################################################"
+  print_msg "############################################################################"
+  print_msg "# You are planning to update Pi.Alert. Please make sure that no scan takes #"
+  print_msg "# place during the update to avoid possible database errors afterwards!!!  #"
+  print_msg "#                                                                          #"
+  print_msg "# This can be done by pausing the Arp scan via the settings page. However, #"
+  print_msg "# scans that are already running will not be terminated.                   #"
+  print_msg "############################################################################"
   print_msg ""
   print_msg ""
   printf "%s " "Press enter to continue"
