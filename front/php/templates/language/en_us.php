@@ -898,7 +898,7 @@ $pia_lang['Updatecheck_RN'] = 'Pi.Alert Update Notes';
 $pia_lang['Updatecheck_U2D'] = 'You are already using the latest version';
 $pia_lang['GeoLiteDB_button_del'] = 'Delete GeoLite2 Database';
 $pia_lang['GeoLiteDB_button_ins'] = 'Install GeoLite2 Database';
-$pia_lang['GeoLiteDB_credits'] = 'The database is downloaded from <a href="https://github.com/P3TERX/GeoLite.mmdb">github.com/P3TERX/GeoLite.mmdb</a>. The GeoLite2 database is a product of <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data">MaxMind</a>.';
+$pia_lang['GeoLiteDB_credits'] = 'The database is downloaded from <a href="https://github.com/P3TERX/GeoLite.mmdb" target="_blank">github.com/P3TERX/GeoLite.mmdb</a>. The GeoLite2 database is a product of <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" target="_blank">MaxMind</a>.';
 
 //////////////////////////////////////////////////////////////////
 // System Info Page
