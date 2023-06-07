@@ -161,7 +161,7 @@ insert_back_button();
 $PIALERTLOGO_LINK = set_iconcolur_for_skin($pia_skin_selected);
 ?>
 
-      <a id="navbar-reload-button" href="" role="button" onclick="location.reload()" style="">
+      <a id="navbar-reload-button" href="" role="button" onclick="window.location.href=window.location.href" style="">
         <i class="fa fa-repeat"></i>
       </a>
       <script>
