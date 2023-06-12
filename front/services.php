@@ -191,8 +191,9 @@ function list_standalone_services() {
 			echo '<div class="servicelist_entry">
                     <div class="' . $code_icon_color . ' servicebox_httpstat_hover" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
                         <div class="servicebox_box">
-                            <span class="servicebox_box_prot">' . strtoupper($url_array[0]) . '</span><br>
-                            <span class="servicebox_box_code">' . $row['mon_LastStatus'] . '</span>
+                            <div style="display: block; margin-top:5px;"><span class="servicebox_box_prot">' . strtoupper($url_array[0]) . '</span></div>
+                            <div style="display: block;"><span class="servicebox_box_code">' . $row['mon_LastStatus'] . '</span></div>
+                            <i class="fa fa-globe" style="position: relative; top: -58px; left: 0px; font-size: 58px; opacity: 0.2;"></i>
                         </div>
                     </div>
                     <div class="servicebox_text">
@@ -273,8 +274,9 @@ function get_service_from_unique_device($func_unique_device) {
 			echo '<div class="servicelist_entry">
                     <div class="' . $code_icon_color . ' servicebox_httpstat_hover" data-toggle="tooltip" data-placement="top" title="' . $status_description . '">
                         <div class="servicebox_box">
-                            <span class="servicebox_box_prot">' . strtoupper($url_array[0]) . '</span><br>
-                            <span class="servicebox_box_code">' . $row['mon_LastStatus'] . '</span>
+                            <div style="display: block; margin-top:5px;"><span class="servicebox_box_prot">' . strtoupper($url_array[0]) . '</span></div>
+                            <div style="display: block;"><span class="servicebox_box_code">' . $row['mon_LastStatus'] . '</span></div>
+                            <i class="fa fa-globe" style="position: relative; top: -58px; left: 0px; font-size: 58px; opacity: 0.2;"></i>
                         </div>
                     </div>
                     <div class="servicebox_text">

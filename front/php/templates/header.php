@@ -67,7 +67,7 @@ get_webservices_config();
   <!-- Bootstrap Icons v1.10.3 -->
   <link href="lib/AdminLTE/bower_components/bootstrap-icons/font/bootstrap-icons.css" media="all" rel="stylesheet" type="text/css" />
 
-  <!-- Font Awesome -->
+  <!-- Font Awesome 6.40 -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
 
   <!-- Ionicons -->

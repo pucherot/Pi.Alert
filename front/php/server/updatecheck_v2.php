@@ -54,9 +54,12 @@ $updatenotes_array = array_filter($updatenotes_array);
 // DEBUG
 //$pialert_cur_version = '2023-05-28';
 $pialert_new_version = substr($updatenotes_array[0], -10);
+// prepare dates for comparison
+$temp_geolite_cur_version = str_replace(".", "-", $geolite_cur_version);
+$temp_geolite_new_version = str_replace(".", "-", $geolite_new_version);
 
 // Print Update Box for GeoIP -----------------------------------------------------------
-if ($geolite_cur_version != $geolite_new_version) {
+if (($geolite_cur_version != $geolite_new_version) && ($temp_geolite_new_version > $temp_geolite_cur_version)) {
 	echo '<div class="box">
     		<div class="box-body">
 				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['GeoLiteDB_Title'] . '</h4>

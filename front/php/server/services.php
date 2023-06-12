@@ -4,10 +4,8 @@ session_start();
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector
 //
-//  devices.php - Front module. Server side. Manage Devices
+//  services.php - Front module. Server side. Manage Devices
 //------------------------------------------------------------------------------
-//  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
-//  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
 //  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
 

@@ -696,7 +696,12 @@ function initializeDatatable () {
       // Device Name
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
+        	if (rowData[11] == "Internet") {
+        		$(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[11] +'" class="text-danger">'+ cellData +'</a></b>');
+        	} else {
             $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[11] +'" class="">'+ cellData +'</a></b>');
+        	}
+
       } },
 
       // Favorite

@@ -569,6 +569,9 @@ if ($_REQUEST['mac'] == 'Internet') {
 <?php
 }
 ?>
+<?php
+if ($_REQUEST['mac'] != 'Internet') {
+	?>
                 <h4 class="">Wake-on-LAN</h4>
                 <div style="width:100%; text-align: center;">
                   <script>
@@ -578,6 +581,10 @@ if ($_REQUEST['mac'] == 'Internet') {
                   </script>
                   <button type="button" id="wakeonlan" class="btn btn-primary pa-btn" style="margin-bottom: 20px; margin-left: 10px; margin-right: 10px;" onclick="askwakeonlan()">Loading...</button>
                 </div>
+
+<?php
+}
+?>
 
                 <h4 class="">Nmap Scans</h4>
                 <div style="width:100%; text-align: center;">
