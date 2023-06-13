@@ -37,7 +37,7 @@ $geolite_new_version = $geolite_update['name'];
 $geoliteDB_file = '../../../db/GeoLite2-Country.mmdb';
 if (file_exists($geoliteDB_file)) {
 	$geolite_cur_version = date("Y.m.d", filemtime($geoliteDB_file));
-} else { $geolite_cur_version = "DB nicht installiert";}
+} else { $geolite_cur_version = "###";}
 
 // Get Pi.Alert Version fro Github timestamp --------------------------------------------
 $utc_ts = strtotime($pialert_update['0']['commit']['author']['date']);
@@ -60,6 +60,7 @@ $temp_geolite_new_version = str_replace(".", "-", $geolite_new_version);
 
 // Print Update Box for GeoIP -----------------------------------------------------------
 if (($geolite_cur_version != $geolite_new_version) && ($temp_geolite_new_version > $temp_geolite_cur_version)) {
+// DB present and github is newer as local
 	echo '<div class="box">
     		<div class="box-body">
 				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['GeoLiteDB_Title'] . '</h4>
@@ -69,10 +70,28 @@ if (($geolite_cur_version != $geolite_new_version) && ($temp_geolite_new_version
 				</p>
 			</div>
 		  </div>';
+} elseif ($geolite_cur_version == "###") {
+// No DB present
+	echo '<div class="box">
+    		<div class="box-body">
+				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['GeoLiteDB_Title'] . '</h4>
+				<p class="text-yellow" style="font-size: 16px; font-weight: bold;">' . $pia_lang['GeoLiteDB_absent'] . '</p>
+				<p>' . $pia_lang['GeoLiteDB_Installnotes'] . '</p>
+			</div>
+		  </div>';
+} else {
+// DB prensent an newer as github version
+	echo '<div class="box">
+    		<div class="box-body">
+				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['GeoLiteDB_Title'] . '</h4>
+				<p class="text-green" style="font-size: 16px; font-weight: bold;">' . $pia_lang['Updatecheck_U2D'] . '</p>
+			</div>
+		  </div>';
 }
 
 // Print Update Box for Pi.Alert --------------------------------------------------------
 if ($pialert_cur_version != $pialert_new_version) {
+// github version is not equal to local version (only a local dev version could be newer than github version)
 	echo '<div class="box">
     		<div class="box-body">
 				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Maintenance_Github_package_a'] . ' ' . $local_time . ' ' . $pia_lang['Maintenance_Github_package_b'] . '</h4>
@@ -109,14 +128,13 @@ if ($pialert_cur_version != $pialert_new_version) {
 			echo '<div style="display: list-item; margin-left : 2em;">' . str_replace('* ', '', $row) . '</div>';
 		}
 	}
-
 	echo '<br><br></div>
     <div class="box-footer">
         <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
     </div>
 </div>';
-
 } else {
+// github version is equal to local version
 	echo '<div class="box">
     		<div class="box-body">
 				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Updatecheck_RN'] . '</h4>
@@ -127,7 +145,6 @@ if ($pialert_cur_version != $pialert_new_version) {
 echo '</div>';
 echo '</div>';
 
-//echo $temp_updatenotes;
 ?>
 
 

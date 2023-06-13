@@ -815,12 +815,11 @@ $pia_lang['HelpFAQ_Cat_Network_600_text'] = 'Diese Seite soll dir die Möglichke
         									 sie ggf. mit einer Portanzahl versehen und bereits erkannte Geräte diesen zuordnen. Diese Zuordnung erfolgt in der Detailansicht, des zuzuordnenden Gerätes. So ist es dir möglich, schnell festzustellen
         									 an welchem Port ein Host angeschlossen und ob er online ist. Es ist möglich ein Gerät mehreren Ports (bei Portbündelung), als auch mehrere Geräte einem Port (virtuelle Maschinen), zuzuordnen.';
 $pia_lang['HelpFAQ_Cat_Network_601_head'] = 'Wie funktioniert die Netzwerk Seite?';
-$pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Die Seite besteht aus 2 Komponenten: Der Darstellunsseite in der Sektion "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Section_A'] . '</span>"
-											 und der Verwaltungsseite in der Sektion "<span class="text-maroon help_faq_code">' . $pia_lang['Navigation_Section_C'] . '</span>". Jegliche Bearbeitung auf der
+$pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Die Seite besteht aus 2 Komponenten: Der Darstellunsseite und der Verwaltungsseite, zu der man über das "+" Zeichen neben der Überschrift gelangt. Jegliche Bearbeitung auf der
 											 Verwaltungsseite hat auschließlich Auswirkungen auf die Darstellungsseite, jedoch nicht auf die Geräte Liste selbst. <br>
 											 <br>
-											 Auf der Verwaltungsseite wird z.B. ein Switch erstellt. Bereits erkannte Geräte werden in der Auswahlliste angezeigt. Du gibt\'s weiterhin den Typ und die Portanzahl an.<br><br>
- 											 Auf der Detailansicht aller erkannten Geräte, hast du nun die Möglichkeit, diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
+											 Auf der Verwaltungsseite wird z.B. ein Switch erstellt. Bereits erkannte Geräte werden in der Auswahlliste angezeigt. Du gibt\'s zusätzlich den Typ und die Portanzahl an.<br><br>
+ 											 In der Detailansicht eines jeden erkannten Gerätes, hast du nun die Möglichkeit, diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
  											 Jetzt zeigt dir die Netzwerk Darstellunsseite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit,
 											 mehrere Ports an einem Switch, die du mit einem Komma trennst, zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server
 											 mit mehreren virtuellen Maschinen).<br>
@@ -830,7 +829,6 @@ $pia_lang['HelpFAQ_Cat_Network_601_text'] = 'Die Seite besteht aus 2 Komponenten
 											 rufst du die Verwaltungsseite auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast (falls das automatische Ausfüllen nicht
 											 funktioniert), hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach
 											 den Port des Routers an dem Switch ein und speichere. Auch hier ist es möglich mehrere MAC-Adressen und Ports anzugeben. Wichtig ist die Einhaltung des Syntax "MAC1,PortA;MAC2,PortB;MAC3,PortC"';
-
 $pia_lang['HelpFAQ_Cat_Network_602_head'] = 'Ein Switch oder Router wird mir ohne Ports angezeigt.';
 $pia_lang['HelpFAQ_Cat_Network_602_text'] = 'Möglicherweise wurde beim Anlegen des Gerätes auf der Netzwerkseite versäumt, die Portanzahl einzugeben. Auch bei der Bearbeitung des Gerätes auf der Netzwerkseite, ist es notwendig, eine bereits eingegebene Portanzahl, erneut einzugeben, falls das automatische Ausfüllen nicht funktioniert.<br>
 											 Sollte also bei einem bereits angelegten Gerät die Portanzzahl fehlen, wird eine Bearbeitung des Gerätes unter Angabe der <span class="text-maroon help_faq_code">Ports</span>, des <span class="text-maroon help_faq_code">Types</span> und ggf. der <span class="text-maroon help_faq_code">manuelle Port-Konfiguration</span> das Problem beseitigen.';
@@ -879,12 +877,12 @@ $pia_lang['Reports_Rogue_hint'] = 'Eine erneute Meldung über einen unbekannten 
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['Maintenance_Tools_Updatecheck'] = 'Prüfe auf Updates';
-$pia_lang['Maintenance_Github_package_a'] = 'Neuesten Version: ';
+$pia_lang['Maintenance_Github_package_a'] = 'Neueste Version: ';
 $pia_lang['Maintenance_Github_package_b'] = 'Uhr';
 $pia_lang['Updatecheck_Title'] = 'Update Check';
 $pia_lang['Updatecheck_cur'] = 'Derzeit genutzte Pi.Alert Version';
 $pia_lang['Updatecheck_new'] = 'Neueste Pi.Alert Version auf Github';
-$pia_lang['GeoLiteDB_Title'] = 'GeoLite2 DB Hinweise';
+$pia_lang['GeoLiteDB_Title'] = 'GeoLite2 DB Prüfung';
 $pia_lang['GeoLiteDB_cur'] = 'GeoLite2 DB geladen am';
 $pia_lang['GeoLiteDB_new'] = 'Neueste GeoLite2 DB auf Github';
 $pia_lang['Updatecheck_RN'] = 'Pi.Alert Update Hinweise';
@@ -892,6 +890,8 @@ $pia_lang['Updatecheck_U2D'] = 'Du nutzt bereits die aktuellest Version';
 $pia_lang['GeoLiteDB_button_del'] = 'GeoLite2-Datenbank löschen';
 $pia_lang['GeoLiteDB_button_ins'] = 'GeoLite2-Datenbank installieren';
 $pia_lang['GeoLiteDB_credits'] = 'Die Datenbank wird von <a href="https://github.com/P3TERX/GeoLite.mmdb" target="_blank">github.com/P3TERX/GeoLite.mmdb</a> heruntergeladen. Die GeoLite2 Datenbank ist ein Produkt von <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" target="_blank">MaxMind</a>';
+$pia_lang['GeoLiteDB_Installnotes'] = 'Du kannst die Datenbank über den Reiter ' . $pia_lang['WebServices_Tab_Graph'] . ' auf der Detailansicht eines beliebigen Web Service installieren.';
+$pia_lang['GeoLiteDB_absent'] = 'DB nicht installiert';
 
 //////////////////////////////////////////////////////////////////
 // System Info Page
