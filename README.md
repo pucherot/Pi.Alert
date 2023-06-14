@@ -8,7 +8,7 @@
   * [API](#api)
 * [Installation](#installation)
 * [Update](#update)
-* Additional Informations
+* Additional information
   * [Uninstall Pi.Alert](docs/UNINSTALL.md)
   * [Device Management](docs/DEVICE_MANAGEMENT.md)
   * [Network Relationship](docs/NETWORK_RELATIONSHIP.md)
@@ -63,7 +63,7 @@ Multiple scanning methods are used:
   - Report the changes detected by e-mail and/or other services ([Pushsafer](https://www.pushsafer.com/), [Pushover](https://pushover.net/), NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
   - DB cleanup tasks via cron
   - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
-  - Additional Informations
+  - Additional information
     - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
     - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
 

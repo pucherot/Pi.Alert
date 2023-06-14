@@ -13,6 +13,8 @@
   | ----------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------- |
   | ![Screen 4][screen4]                            | ![Webservices screen dark][webservices_dark] | ![Webservices Details screen dark][webservices_details_dark]   |
 
+several screenshots will follow
+
 [Back](https://github.com/leiweibau/Pi.Alert)
 
 [report1]: ./img/4_report_1.jpg          "Report sample 1"
