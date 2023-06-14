@@ -13,7 +13,7 @@
   * [Device Management](docs/DEVICE_MANAGEMENT.md)
   * [Network Relationship](docs/NETWORK_RELATIONSHIP.md)
   * [Web service monitoring](docs/WEBSERVICES.md)
-  * [Screenshots](docs/Screeshots.md)
+  * [Screenshots](docs/SCREENSHOTS.md)
 
 
 # Pi.Alert
@@ -66,9 +66,6 @@ Multiple scanning methods are used:
     - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
     - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
 
-  | ![Report 1][report1] | ![Report 2][report2] |
-  | -------------------- | -------------------- |
-
 ### Front
 
 There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
@@ -91,10 +88,6 @@ There is a configurable login to prevent unauthorized use. The default password 
   - Help/FAQ section
   - Wake-on-LAN (must be supported by the target device)
   - Notification page with download options
-
-  | ![Screen 1][screen1]                            | ![Screen 2][screen2]                         | ![Screen 3][screen3]                                           | 
-  | ----------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------- |
-  | ![Screen 4][screen4]                            | ![Webservices screen dark][webservices_dark] | ![Webservices Details screen dark][webservices_details_dark]   |
 
 Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
@@ -176,22 +169,4 @@ There are no updates as release package, because the update function is done by 
 
 <!--- --------------------------------------------------------------------- --->
 [main]:    ./docs/img/1_devices_new.jpg           "Main screen"
-[screen1]: ./docs/img/2_1_device_details.jpg  "Screen 1"
-[screen2]: ./docs/img/2_2_device_sessions.jpg "Screen 2"
-[screen3]: ./docs/img/2_3_device_presence.jpg "Screen 3"
-[screen4]: ./docs/img/3_presence.jpg          "Screen 4"
-[report1]: ./docs/img/4_report_1.jpg          "Report sample 1"
-[report2]: ./docs/img/4_report_2.jpg          "Report sample 2"
-[webservices_dark]: ./docs/img/7_webservices.jpg                   "Webservices screen dark"
-[webservices_details_dark]: ./docs/img/8_webservices_details.jpg   "Webservices Details screen dark"
-[glass_black_white]: /favicons/glass_black_white.png       "glass_black_white.png"
-[glass_blue_white]: /favicons/glass_blue_white.png       "glass_blue_white.png"
-[glass_green_white]: /favicons/glass_green_white.png       "glass_green_white.png"
-[glass_red_white]: /favicons/glass_red_white.png       "glass_red_white.png"
-[glass_purple_white]: /favicons/glass_purple_white.png       "glass_purple_white.png"
-[glass_yellow_white]: /favicons/glass_yellow_white.png       "glass_yellow_white.png"
-[glass_blue_black]: /favicons/glass_blue_black.png       "glass_blue_black.png"
-[glass_green_black]: /favicons/glass_green_black.png       "glass_green_black.png"
-[glass_red_black]: /favicons/glass_red_black.png       "glass_red_black.png"
-[glass_purple_black]: /favicons/glass_purple_black.png       "glass_purple_black.png"
-[glass_yellow_black]: /favicons/glass_yellow_black.png       "glass_yellow_black.png"
+
