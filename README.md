@@ -1,3 +1,21 @@
+# Table of Contents
+
+* [Introduction](#pialert)
+* [Scan Methodes](#scan-methods)
+* [Components](#components)
+  * [Back](#back)
+  * [Front](#front)
+  * [API](#api)
+* [Installation](#installation)
+* [Update](#update)
+* [Uninstall](#uninstall-process)
+* Additional Informations
+  * [Device Management](docs/DEVICE_MANAGEMENT.md)
+  * [Network Relationship](docs/NETWORK_RELATIONSHIP.md)
+  * [Web service monitoring](docs/WEBSERVICES.md)
+  * [Screenshots](docs/Screeshots.md)
+
+
 # Pi.Alert
 <!--- --------------------------------------------------------------------- --->
 
@@ -35,28 +53,25 @@ Multiple scanning methods are used:
         requests into the network to detect unknown (rogue) DHCP servers.
 
 ## Components
-The system consists of three parts:
 
 ### Back
-In charge of:
-  - Scan the network searching connected devices using the scanning methods
-    described
+
+  - Scan the network searching connected devices using the scanning methods described earlier
+  - Checks the reachability of web services
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services ([Pushsafer](https://www.pushsafer.com/), [Pushover](https://pushover.net/), NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
   - DB cleanup tasks via cron
   - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
-
-[pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
-
-[shoutrrr - Implementation notes](docs/SHOUTRRR.md)
+  - Additional Informations
+    - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
+    - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
 
   | ![Report 1][report1] | ![Report 2][report2] |
   | -------------------- | -------------------- |
 
 ### Front
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
 
-A web frontend that allows:
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
   - Manage the devices inventory and the characteristics (individually or with a [bulk editor](docs/BULKEDITOR.md))
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
   - Manual Nmap scans for regular devices and speedtest for the device "Internet" in the details view
@@ -90,6 +105,7 @@ Instead of 'glass_black_white.png' you can use one of the following files.
 [List of Favicons/Homescreen icons](docs/ICONS.md)
 
 ### API
+
 A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 4 things:
   - System status *(Scan on or off, Counts all, online, offline, archived and new devices)*
   - All online devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
