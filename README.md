@@ -131,7 +131,7 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
   
 There are no updates as release package, because the update function is done by the "curl" command anyway. From the settings page of Pi.Alert, I provide a function to view the latest update. After clicking on the (i) next to the update notification I provide a link to the update archive on my homepage in case an older version is needed.
 
-## Closing words
+# Closing words
 <!--- --------------------------------------------------------------------- --->
 
 ### Versions History
@@ -143,18 +143,14 @@ There are no updates as release package, because the update function is done by 
   GPL 3.0
   [Read more here](LICENSE.txt)
 
-  Source of the animated GIF (Loading Animation)
-  https://commons.wikimedia.org/wiki/File:Loading_Animation.gif
-  
-  Source of the selfhosted Fonts
-  https://github.com/adobe-fonts/source-sans
-  
-  Source of the Bootstrap Icons
-  https://github.com/twbs/icons
+### Additionally used components
+  - Animated GIF (Loading Animation) https://commons.wikimedia.org/wiki/File:Loading_Animation.gif
+  - Selfhosted Fonts https://github.com/adobe-fonts/source-sans
+  - Bootstrap Icons https://github.com/twbs/icons
 
 ### Special thanks 🥇
 
-  This code is a collaborative body of work, with special thanks to: 
+  This code is a collaborative body of work, with special thanks to:
 
 [Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert) and many more
 
