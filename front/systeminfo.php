@@ -41,20 +41,19 @@ if ($stat['cpu_model'] == '') {
 	$stat['cpu_model'] = strstr($cpu_result, "\n", true);
 	$stat['cpu_model'] = str_replace(":", "", trim(str_replace("model name", "", $stat['cpu_model'])));
 }
-if (file_exists('/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_frequ')) {
+if (file_exists('/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq')) {
 	// RaspbianOS
 	$stat['cpu_frequ'] = exec('cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq') / 1000;
 } elseif (is_numeric(str_replace(',', '.', exec('lscpu | grep "MHz" | awk \'{print $3}\'')))) {
-	// Ubuntu Server event. others
-	$stat['cpu_frequ'] = round(exec('lscpu | grep "MHz" | awk \'{print $3}\''), 1);
+	// Ubuntu Server, DietPi event. others
+	$stat['cpu_frequ'] = round(exec('lscpu | grep "MHz" | awk \'{print $3}\''), 0);
 } elseif (is_numeric(str_replace(',', '.', exec('lscpu | grep "max MHz" | awk \'{print $4}\'')))) {
 	// RaspbianOS and event. others
-	$stat['cpu_frequ'] = round(str_replace(',', '.', exec('lscpu | grep "max MHz" | awk \'{print $4}\'')), 1);
+	$stat['cpu_frequ'] = round(str_replace(',', '.', exec('lscpu | grep "max MHz" | awk \'{print $4}\'')), 0);
 } else {
 	// Fallback
 	$stat['cpu_frequ'] = "unknown";
 }
-
 //memory stat
 $mem_result = shell_exec("cat /proc/meminfo | grep MemTotal");
 $stat['mem_total'] = round(preg_replace("#[^0-9]+(?:\.[0-9]*)?#", "", $mem_result) / 1024 / 1024, 3);
