@@ -8,12 +8,13 @@
   * [API](#api)
 * [Installation](#installation)
 * [Update](#update)
-* [Uninstall](#uninstall-process)
 * Additional Informations
+  * [Uninstall Pi.Alert](docs/UNINSTALL.md)
   * [Device Management](docs/DEVICE_MANAGEMENT.md)
   * [Network Relationship](docs/NETWORK_RELATIONSHIP.md)
   * [Web service monitoring](docs/WEBSERVICES.md)
   * [Screenshots](docs/SCREENSHOTS.md)
+* [Closing words](#closing-words)
 
 
 # Pi.Alert
@@ -130,17 +131,7 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
   
 There are no updates as release package, because the update function is done by the "curl" command anyway. From the settings page of Pi.Alert, I provide a function to view the latest update. After clicking on the (i) next to the update notification I provide a link to the update archive on my homepage in case an older version is needed.
 
-# Uninstall process
-<!--- --------------------------------------------------------------------- --->
-  - [Unistall process](docs/UNINSTALL.md)
-
-
-# Device Management
-<!--- --------------------------------------------------------------------- --->
-  - [Device Management instructions](docs/DEVICE_MANAGEMENT.md)
-
-
-## Other useful info
+## Closing words
 <!--- --------------------------------------------------------------------- --->
 
 ### Versions History
