@@ -6,25 +6,81 @@
   | ![Report 1][report1] | ![Report 2][report2] |
   | -------------------- | -------------------- |
 
+### Frontend Light and Dark
+
+  | ![Screen Main 01][Screen_Main_01]   | ![Screen Main 02][Screen_Main_02] |
+  | ----------------------------------- | --------------------------------- |
 
 ### Frontend - Devices
 
-  | ![Screen 1][screen1]                            | ![Screen 2][screen2]                         | ![Screen 3][screen3]                                           | 
-  | ----------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------- |
-  | ![Screen 4][screen4]                            | ![Webservices screen dark][webservices_dark] | ![Webservices Details screen dark][webservices_details_dark]   |
+  | ![Screen Devices 01][Screen_Dev_01]   | ![Screen Devices 02][Screen_Dev_02] | ![Screen Devices 03][Screen_Dev_03]  | 
+  | ------------------------------------- | ----------------------------------- | ------------------------------------ |
+  | ![Screen Devices 04][Screen_Dev_04]   | ![Screen Devices 05][Screen_Dev_05] | ![Screen Devices 06][Screen_Dev_06]  |
 
-several screenshots will follow
+### Frontend - Network
+
+  | ![Screen Network 01][Screen_Net_01]   | ![Screen Network 02][Screen_Net_02] | ![Screen Network 03][Screen_Net_03]  | 
+  | ------------------------------------- | ----------------------------------- | ------------------------------------ |
+  | ![Screen Network 04][Screen_Net_04]   |                                     |                                      |
+
+### Frontend - Web Service Monitoring
+
+  | ![Screen WebServ 01][Screen_WebServ_01]   | ![Screen WebServ 02][Screen_WebServ_02] | ![Screen WebServ 03][Screen_WebServ_03]  | 
+  | ----------------------------------------- | --------------------------------------- | ---------------------------------------- |
+  | ![Screen WebServ 04][Screen_WebServ_04]   | ![Screen WebServ 05][Screen_WebServ_05] | ![Screen WebServ 06][Screen_WebServ_06]  |
+  | ![Screen WebServ 07][Screen_WebServ_07]   |                                         |                                          |
+
+### Frontend - Events and Presence
+
+  | ![Screen Events and Pres. 01][Screen_Ev_and_Pres_01]   | ![Screen Events and Pres. 02][Screen_Ev_and_Pres_02] | ![Screen Events and Pres. 03][Screen_Ev_and_Pres_03]  | 
+  | ------------------------------------------------------ | ---------------------------------------------------- | ----------------------------------------------------- |
+
+### Frontend - Settings
+
+  | ![Screen Settings 01][Screen_Settings_01]   | ![Screen Settings 02][Screen_Settings_02] | ![Screen Settings 03][Screen_Settings_03]  | 
+  | ------------------------------------------- | ----------------------------------------- | ------------------------------------------ |
+  | ![Screen Settings 04][Screen_Settings_04]   | ![Screen Settings 05][Screen_Settings_05] |                                            |
 
 [Back](https://github.com/leiweibau/Pi.Alert)
 
+[Screen_Main_01]: ./img/screen_main.png       "Screen Main 01"
+[Screen_Main_02]: ./img/screen_main_dark.png  "Screen Main 02"
 
 [report1]: ./img/report_01.jpg               "Report sample 1"
 [report2]: ./img/report_02.jpg               "Report sample 2"
 
-[screen1]: ./img/2_1_device_details.jpg       "Screen 1"
-[screen2]: ./img/2_2_device_sessions.jpg      "Screen 2"
-[screen3]: ./img/2_3_device_presence.jpg      "Screen 3"
-[screen4]: ./img/3_presence.jpg               "Screen 4"
+[Screen_Dev_01]: ./img/screen_dev_01.png            "Screen Devices 01"
+[Screen_Dev_02]: ./img/screen_dev_02.png            "Screen Devices 02"
+[Screen_Dev_03]: ./img/screen_dev_03.png            "Screen Devices 03"
+[Screen_Dev_04]: ./img/screen_dev_internet_01.png   "Screen Devices 04"
+[Screen_Dev_05]: ./img/screen_dev_internet_02.png   "Screen Devices 05"
+[Screen_Dev_06]: ./img/screen_dev_bulk.png          "Screen Devices 06"
 
-[webservices_dark]: ./img/7_webservices.jpg                   "Webservices screen dark"
-[webservices_details_dark]: ./img/8_webservices_details.jpg   "Webservices Details screen dark"
+[Screen_Net_01]: ./img/screen_net_01.png "Screen Network 01"
+[Screen_Net_02]: ./img/screen_net_02.png "Screen Network 02"
+[Screen_Net_03]: ./img/screen_net_03.png "Screen Network 03"
+[Screen_Net_04]: ./img/screen_net_04.png "Screen Network 04"
+
+[Screen_WebServ_01]: ./img/screen_web_01.png "Screen WebServ 01"
+[Screen_WebServ_02]: ./img/screen_web_02.png "Screen WebServ 02"
+[Screen_WebServ_03]: ./img/screen_web_03.png "Screen WebServ 03"
+[Screen_WebServ_04]: ./img/screen_web_04.png "Screen WebServ 04"
+[Screen_WebServ_05]: ./img/screen_web_05.png "Screen WebServ 05"
+[Screen_WebServ_06]: ./img/screen_web_06.png "Screen WebServ 06"
+[Screen_WebServ_07]: ./img/screen_web_07.png "Screen WebServ 07"
+
+[Screen_Ev_and_Pres_01]: ./img/screen_devevents.png     "Screen Events and Pres. 01"
+[Screen_Ev_and_Pres_02]: ./img/screen_devpresence.png   "Screen Events and Pres. 02"
+[Screen_Ev_and_Pres_03]: ./img/screen_webevents.png     "Screen Events and Pres. 03"
+
+[Screen_Settings_01]: ./img/screen_settings_01.png "Screen Settings 01"
+[Screen_Settings_02]: ./img/screen_settings_02.png "Screen Settings 02"
+[Screen_Settings_03]: ./img/screen_settings_03.png "Screen Settings 03"
+[Screen_Settings_04]: ./img/screen_settings_04.png "Screen Settings 04"
+[Screen_Settings_05]: ./img/screen_settings_05.png "Screen Settings 05"
+
+screen_sysinfo.png
+screen_updatecheck_01.png
+screen_notify.png
+screen_help.png
+screen_main.png
