@@ -59,7 +59,8 @@ $temp_geolite_cur_version = str_replace(".", "-", $geolite_cur_version);
 $temp_geolite_new_version = str_replace(".", "-", $geolite_new_version);
 
 // Print Update Box for GeoIP -----------------------------------------------------------
-if (($geolite_cur_version != $geolite_new_version) && ($temp_geolite_new_version > $temp_geolite_cur_version)) {
+//if (($geolite_cur_version != $geolite_new_version) && ($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_version != "###")) {
+if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_version != "###")) {
 // DB present and github is newer as local
 	echo '<div class="box">
     		<div class="box-body">

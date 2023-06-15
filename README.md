@@ -123,13 +123,16 @@ An also active developed Docker version of Pi.Alert can be found here: [jokob-sk
 
 # Update
 <!--- --------------------------------------------------------------------- --->
+You can always check for a new release using the "Update Check" button in the sidebar. This check will show you if the GeoLite2 DB is 
+installed or up to date and which new features, fixes or changes are available in the new Pi.Alert release, if you are not already using the latest version.
+
+There are no updates as release package, because the update function is done by the "curl" command anyway.
+
 This update script is only recommended for an already existing installation of this fork. If you are using another fork, 
 I recommend uninstalling it first. If you backup the database, it may be possible to continue using it with my fork after a patch.
 
 - One-step Automated Update:
   #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh | bash`
-  
-There are no updates as release package, because the update function is done by the "curl" command anyway. From the settings page of Pi.Alert, I provide a function to view the latest update. After clicking on the (i) next to the update notification I provide a link to the update archive on my homepage in case an older version is needed.
 
 # Closing words
 <!--- --------------------------------------------------------------------- --->
@@ -155,5 +158,5 @@ There are no updates as release package, because the update function is done by 
 [Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert) and many more
 
 <!--- --------------------------------------------------------------------- --->
-[main]:    ./docs/img/1_devices_new.jpg           "Main screen"
+[main]:    ./docs/img/screen_main.png          "Main screen"
 
