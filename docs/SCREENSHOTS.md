@@ -41,6 +41,12 @@
   | ------------------------------------------- | ----------------------------------------- | ------------------------------------------ |
   | ![Screen Settings 04][Screen_Settings_04]   | ![Screen Settings 05][Screen_Settings_05] |                                            |
 
+### Frontend - Miscellaneous
+
+  | ![Screen Misc 01][Screen_Misc_01]   | ![Screen Misc 02][Screen_Misc_02] | ![Screen Misc 03][Screen_Misc_03]  | 
+  | ----------------------------------- | --------------------------------- | ---------------------------------- |
+  | ![Screen Misc 04][Screen_Misc_04]   |                                   |                                    |
+
 [Back](https://github.com/leiweibau/Pi.Alert)
 
 [Screen_Main_01]: ./img/screen_main.png       "Screen Main 01"
@@ -79,8 +85,7 @@
 [Screen_Settings_04]: ./img/screen_settings_04.png "Screen Settings 04"
 [Screen_Settings_05]: ./img/screen_settings_05.png "Screen Settings 05"
 
-screen_sysinfo.png
-screen_updatecheck_01.png
-screen_notify.png
-screen_help.png
-screen_main.png
+[Screen_Misc_01]: ./img/screen_sysinfo.png         "Screen Misc 01"
+[Screen_Misc_02]: ./img/screen_updatecheck_01.png  "Screen Misc 02"
+[Screen_Misc_03]: ./img/screen_notify.png          "Screen Misc 03"
+[Screen_Misc_04]: ./img/screen_help.png            "Screen Misc 04"
