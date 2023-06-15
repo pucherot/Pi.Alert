@@ -112,8 +112,8 @@ With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Ho
 
 # Installation
 <!--- --------------------------------------------------------------------- --->
-Initially designed to run on a Raspberry Pi, probably it can run on many other
-Linux distributions. With minor adjustments (FAQ page) I tested Pi.Alert on Dietpi and Ubuntu Server. 
+Initially designed to run on a Raspberry Pi, probably it can run on some other
+Linux distributions which use the "apt" package manager. With minor adjustments (FAQ page) I tested Pi.Alert on Dietpi and Ubuntu Server. 
 An also active developed Docker version of Pi.Alert can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
 
 - One-step Automated Install:
