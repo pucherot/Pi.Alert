@@ -32,7 +32,7 @@ a notification can be sent.
 [Compare this fork with the main project](docs/VERSIONCOMPARE.md)
 
 ## Scan Methods
-Multiple scanning methods are used:
+
   - **Method 1: arp-scan**. The arp-scan system utility is used to search
         for devices on the network using arp frames.
   - **Method 2: Pi-hole**. This method is optional and complementary to
