@@ -39,10 +39,6 @@ If you hover over the box with the status code, you will get a short explanation
 
 By clicking on the blue URL, you will get to the details page of the service, where you can change the tag, the assigned device and the desired alert. You also have the option to delete the service or view more details. Information about the colors used and a list of the different HTTP status codes can be found on the Help/FAQ page in Pi.Alert.
 
-### GeoLocation
-
-To use the geolocation on the details page of the service, the "GeoLite2-Country" database from MaxMind (https://maxmind.com/) must be stored in the directory "~/pialert/front/lib/geolite2/". More information and a download link can be found in the "Readme.txt" in the mentioned directory.
-
 [Back](https://github.com/leiweibau/Pi.Alert#front)
 
 
