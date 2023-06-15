@@ -56,7 +56,7 @@ function process_arp_notifications($class_name, $event_time, $filename, $directo
               <h3 class="box-title" style="color: #D81B60"><i class="fa fa-laptop"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
+                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
@@ -71,7 +71,7 @@ function process_internet_notifications($class_name, $event_time, $filename, $di
               <h3 class="box-title" style="color: #30bbbb"><i class="fa fa-laptop"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
+                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
@@ -86,7 +86,7 @@ function process_webmon_notifications($class_name, $event_time, $filename, $dire
               <h3 class="box-title" style="color: #00c0ef"><i class="fa fa-globe"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
+                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
@@ -101,7 +101,7 @@ function process_test_notifications($class_name, $event_time, $filename, $direct
               <h3 class="box-title" style="color: #00a65a"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;' . $event_time . ' - System Message</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash-o"></i></a>
+                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
@@ -117,7 +117,7 @@ function process_rogueDHCP_notifications($class_name, $event_time, $filename, $d
               <h3 class="box-title"><i class="fa fa-warning"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger" style=" border: solid 1px #ddd;"><i class="fa fa-fw fa-trash-o"></i></a>
+                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger" style=" border: solid 1px #ddd;"><i class="fa fa-fw fa-trash"></i></a>
                 </div>
             </div>
             <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre>
