@@ -351,5 +351,3 @@ block is not necessary
   GPL 3.0
   [Read more here](../LICENSE.txt)
 
-### Contact
-  pi.alert.application@gmail.com
