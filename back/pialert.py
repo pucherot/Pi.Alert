@@ -356,16 +356,16 @@ def cleanup_database ():
         strdaystokeepEV = str(200) # 200 days
 
     # Cleanup WebServices Events
-    print ('\nCleanup Services_Events, up to the lastest '+strdaystokeepOH+' days...')
+    print ('    Services_Events, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
     # Cleanup Online History
-    print ('\nCleanup Online_History, up to the lastest '+strdaystokeepOH+' days...')
+    print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
     # Cleanup Events
-    print ('\nCleanup Events, up to the lastest '+strdaystokeepEV+' days...')
+    print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
     sql.execute ("DELETE FROM Events WHERE eve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
     # Shrink DB
-    print ('\nShrink Database...')
+    print ('    Shrink Database...')
     sql.execute ("VACUUM;")
 
     closeDB()
@@ -2241,6 +2241,8 @@ def send_pushover (_Text):
 
     # Remove one linebrake between "Server" and the headline of the event type
     _pushover_Text = _Text.replace('\n\n\n', '\n\n')
+    # Text-layout tweak
+    _pushover_Text = _pushover_Text.replace('IP: \t\t', 'IP: \t\t\t')
     # extract event type headline to use it in the notification headline
     findsubheadline = _pushover_Text.split('\n')
     subheadline = findsubheadline[3]
