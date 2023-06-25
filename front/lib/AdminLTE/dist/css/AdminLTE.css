@@ -1550,7 +1550,7 @@ a:focus {
   top: -10px;
   right: 10px;
   z-index: 0;
-  font-size: 90px;
+  font-size: 60px;
   color: rgba(0, 0, 0, 0.15);
 }
 .small-box:hover {
@@ -1558,7 +1558,7 @@ a:focus {
   color: #f9f9f9;
 }
 .small-box:hover .icon {
-  font-size: 95px;
+  font-size: 65px;
 }
 @media (max-width: 767px) {
   .small-box {
