@@ -146,12 +146,12 @@ if ($ENABLED_DARKMODE === True) {
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/pialert/index.php">Pi.<b>Alert</b></a>
+    <a href="./index.php">Pi.<b>Alert</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg"><?php echo $pia_lang['Login_Box'];?></p>
-      <form action="/pialert/index.php" method="post">
+      <form action="./index.php" method="post">
       <div class="form-group has-feedback">
         <input type="password" class="form-control" placeholder="<?php echo $pia_lang['Login_Psw-box'];?>" name="loginpassword">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
