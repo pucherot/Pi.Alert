@@ -650,6 +650,9 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+											        <td class="help_table_gen_b">
+											            <span class="text-maroon help_faq_code">[&lsquo;MAC-Address 1&rsquo;, &lsquo;MAC-Address 2&rsquo;]</span><br>
+											            </td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
 											        <td class="help_table_gen_b">
 											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
@@ -886,6 +889,7 @@ $pia_lang['GeoLiteDB_Title'] = 'Remarques sur la base de données GeoLite2';
 $pia_lang['GeoLiteDB_cur'] = 'Base de données GeoLite2 chargée le';
 $pia_lang['GeoLiteDB_new'] = 'Dernière base de données GeoLite2 sur Github';
 $pia_lang['Updatecheck_RN'] = 'Notes de mise à jour de Pi.Alert';
+$pia_lang['Updatecheck_RN2'] = 'Pi.Alert Update Check';
 $pia_lang['Updatecheck_U2D'] = 'Vous utilisez déjà la dernière version';
 $pia_lang['GeoLiteDB_button_del'] = 'Supprimer la base de données GeoLite2';
 $pia_lang['GeoLiteDB_button_ins'] = 'Installer la base de données GeoLite2';

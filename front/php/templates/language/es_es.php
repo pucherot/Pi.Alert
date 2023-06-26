@@ -654,6 +654,9 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+											        <td class="help_table_gen_b">
+											            <span class="text-maroon help_faq_code">[&lsquo;MAC-Address 1&rsquo;, &lsquo;MAC-Address 2&rsquo;]</span><br>
+											            </td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
 												    <td class="help_table_gen_b">
 												        &lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
@@ -891,6 +894,7 @@ $pia_lang['GeoLiteDB_cur'] = 'Base de datos GeoLite2 cargada el';
 $pia_lang['GeoLiteDB_new'] = 'Última base de datos GeoLite2 en Github';
 $pia_lang['Updatecheck_RN'] = 'Notas de actualización de Pi.Alert';
 $pia_lang['Updatecheck_U2D'] = 'Ya estás utilizando la última versión';
+$pia_lang['Updatecheck_RN2'] = 'Pi.Alert Update Check';
 $pia_lang['GeoLiteDB_button_del'] = 'Eliminar base de datos GeoLite2';
 $pia_lang['GeoLiteDB_button_ins'] = 'Instalar base de datos GeoLite2';
 $pia_lang['GeoLiteDB_credits'] = 'La base de datos se descarga desde <a href="https://github.com/P3TERX/GeoLite.mmdb" target="_blank">github.com/P3TERX/GeoLite.mmdb</a>. La base de datos GeoLite2 es un producto de <a href="https://dev.maxmind.com/geoip/geolite2-free-geolocation-data" target="_blank">MaxMind</a>.';

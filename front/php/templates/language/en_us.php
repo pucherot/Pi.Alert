@@ -655,6 +655,10 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+											    <tr><td class="help_table_gen_a">MAC_IGNORE_LIST</td>
+											        <td class="help_table_gen_b">
+											            <span class="text-maroon help_faq_code">[&lsquo;MAC-Address 1&rsquo;, &lsquo;MAC-Address 2&rsquo;]</span><br>
+											            </td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
 											        <td class="help_table_gen_b">
 											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
@@ -891,10 +895,11 @@ $pia_lang['Maintenance_Github_package_b'] = 'o\'clock';
 $pia_lang['Updatecheck_Title'] = 'Update Check';
 $pia_lang['Updatecheck_cur'] = 'Currently used Pi.Alert Version';
 $pia_lang['Updatecheck_new'] = 'Latest Pi.Alert Version on Github';
-$pia_lang['GeoLiteDB_Title'] = 'GeoLite2 DB Notes';
+$pia_lang['GeoLiteDB_Title'] = 'GeoLite2 DB Check';
 $pia_lang['GeoLiteDB_cur'] = 'GeoLite2 DB loaded on';
 $pia_lang['GeoLiteDB_new'] = 'Latest GeoLite2 DB on Github';
 $pia_lang['Updatecheck_RN'] = 'Pi.Alert Update Notes';
+$pia_lang['Updatecheck_RN2'] = 'Pi.Alert Update Check';
 $pia_lang['Updatecheck_U2D'] = 'You are already using the latest version';
 $pia_lang['GeoLiteDB_button_del'] = 'Delete GeoLite2 Database';
 $pia_lang['GeoLiteDB_button_ins'] = 'Install GeoLite2 Database';
