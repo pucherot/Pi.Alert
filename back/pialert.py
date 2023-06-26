@@ -519,8 +519,14 @@ def scan_network ():
     print_log ('Fritzbox copy starts...')
     read_fritzbox_active_hosts()
 
-    # Load current scan data
+    # Load current scan data 1/2
     print ('\nProcessing scan results...')
+
+    # Process Ignore list
+    print ('    Processing ignore list...')
+    remove_entries_from_table()
+
+    # Load current scan data 2/2
     print_log ('Save scanned devices')
     save_scanned_devices (arpscan_devices, cycle_interval)
     
@@ -829,6 +835,24 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
     if sql.fetchone()[0] == 0 :
         sql.execute ("INSERT INTO CurrentScan (cur_ScanCycle, cur_MAC, cur_IP, cur_Vendor, cur_ScanMethod) "+
                      "VALUES ( ?, ?, ?, Null, 'local_MAC') ", (cycle, local_mac, local_ip) )
+
+#-------------------------------------------------------------------------------
+def remove_entries_from_table():
+    try:
+        MAC_IGNORE_LIST
+        print ('        Delete ' + str(len(MAC_IGNORE_LIST)) + ' ignored devices from scan')
+
+        mac_addresses = ','.join(['"{}"'.format(mac) for mac in MAC_IGNORE_LIST])
+        query = 'DELETE FROM CurrentScan WHERE cur_MAC IN ({})'.format(mac_addresses)
+        sql.execute(query)
+        query = 'DELETE FROM PiHole_Network WHERE PH_MAC IN ({})'.format(mac_addresses)
+        sql.execute(query)
+        query = 'DELETE FROM DHCP_Leases WHERE DHCP_MAC IN ({})'.format(mac_addresses)
+        sql.execute(query)
+        query = 'DELETE FROM Fritzbox_Network WHERE FB_MAC IN ({})'.format(mac_addresses)
+        sql.execute(query)
+    except NameError:
+        print("        No ignore list defined")
 
 #-------------------------------------------------------------------------------
 def print_scan_stats ():

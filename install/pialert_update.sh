@@ -280,6 +280,13 @@ FRITZBOX_PASS     = 'password'
 EOF
 fi
 
+if ! grep -q "MAC_IGNORE_LIST" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# MAC_IGNORE_LIST = ['11:22:33:aa:bb:cc']
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------

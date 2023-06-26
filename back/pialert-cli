@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.93'
+SCRIPTVERSION='v0.94'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -311,6 +311,7 @@ case $1 in
     REWRITE_DAYS_TO_KEEP_ONLINEHISTORY=$(grep "^DAYS_TO_KEEP_ONLINEHISTORY" $input_file)
     REWRITE_DAYS_TO_KEEP_EVENTS=$(grep "^DAYS_TO_KEEP_EVENTS" $input_file)
     # Arp-scan Options & Samples
+    REWRITE_MAC_IGNORE_LIST=$(grep "^MAC_IGNORE_LIST" $input_file)
     REWRITE_SCAN_SUBNETS=$(grep "^SCAN_SUBNETS" $input_file)
 
     # Set defaults if empty
@@ -399,6 +400,11 @@ case $1 in
     if [ -z "$REWRITE_FRITZBOX_PASS" ]
     then
         REWRITE_FRITZBOX_PASS="FRITZBOX_PASS     = 'password'"
+    fi
+
+    if [ -z "$REWRITE_MAC_IGNORE_LIST" ]
+    then
+        REWRITE_MAC_IGNORE_LIST="#MAC_IGNORE_LIST = ['11:22:33:aa:bb:cc']"
     fi
 
     # Write clean Config
@@ -510,14 +516,10 @@ ${REWRITE_DAYS_TO_KEEP_EVENTS}
 
 # Arp-scan Options & Samples
 # ----------------------
+${REWRITE_MAC_IGNORE_LIST}
 ${REWRITE_SCAN_SUBNETS}
-# Scan local network (default)
 # SCAN_SUBNETS    = '--localnet'
-#
-# Scan using interface eth0
 # SCAN_SUBNETS    = '--localnet --interface=eth0'
-#
-# Scan multiple interfaces (eth1 and eth0):
 # SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth0', '192.168.2.0/24 --interface=eth1' ]
 
 EOL
