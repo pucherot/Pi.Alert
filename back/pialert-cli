@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.94'
+SCRIPTVERSION='v0.95'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
