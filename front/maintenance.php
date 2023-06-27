@@ -47,6 +47,14 @@ if ($CONFIG_FILE_KEY_VALUE != False) {
 	$APIKEY = trim($APIKEY_LINE[1]);
 } else { $APIKEY = $pia_lang['Maintenance_Tool_setapikey_false'];}
 
+// Get Ignore List ------------------------------------------------------------------
+
+$CONFIG_FILE_KEY_VALUE = array_values(preg_grep('/^MAC_IGNORE_LIST\s.*/', $CONFIG_FILE_KEY_LINE));
+if ($CONFIG_FILE_KEY_VALUE != False) {
+	$MAC_IGNORE_LIST_LINE = substr($CONFIG_FILE_KEY_VALUE[0], (strpos($CONFIG_FILE_KEY_VALUE[0], "=") + 1));
+	$MAC_IGNORE_LIST = str_replace("[", "", str_replace("]", "", str_replace("'", "", trim($MAC_IGNORE_LIST_LINE))));
+} else { $MAC_IGNORE_LIST = $pia_lang['Maintenance_Tool_ignorelist_false'];}
+
 // Get Notification Settings ------------------------------------------------------------------
 
 $CONFIG_FILE_FILTER_VALUE_ARP = array_values(preg_grep("/(REPORT_MAIL |REPORT_NTFY |REPORT_WEBGUI |REPORT_PUSHSAFER |REPORT_PUSHOVER |REPORT_TELEGRAM )/i", $CONFIG_FILE_KEY_LINE));
@@ -315,6 +323,12 @@ read_arpscan_timer(); ?></div>
                     <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_notification_config_webmon']; ?></div>
                     <div class="db_info_table_cell">
                         <?php echo format_notifications($CONFIG_FILE_FILTER_VALUE_WEB); ?>
+                    </div>
+                </div>
+                <div class="db_info_table_row">
+                    <div class="db_info_table_cell">Ignore List</div>
+                    <div class="db_info_table_cell">
+                        <?php echo $MAC_IGNORE_LIST; ?>
                     </div>
                 </div>
             </div>
