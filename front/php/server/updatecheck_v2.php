@@ -134,15 +134,18 @@ if ($pialert_cur_version != $pialert_new_version) {
         <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
     </div>
 </div>';
-} else {
+}
+
+if ($pialert_cur_version == $pialert_new_version) {
 // github version is equal to local version
 	echo '<div class="box">
     		<div class="box-body">
-				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Updatecheck_RN'] . '</h4>
+				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Updatecheck_RN2'] . '</h4>
 				<p class="text-green" style="font-size: 16px; font-weight: bold;">' . $pia_lang['Updatecheck_U2D'] . '</p>
 			</div>
 		  </div>';
 }
+
 echo '</div>';
 echo '</div>';
 
