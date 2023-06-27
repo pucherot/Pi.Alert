@@ -658,7 +658,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											    <tr><td class="help_table_gen_a">MAC_IGNORE_LIST</td>
 											        <td class="help_table_gen_b">
 											            <span class="text-maroon help_faq_code">[&lsquo;MAC-Address 1&rsquo;, &lsquo;MAC-Address 2&rsquo;]</span><br>
-											            </td></tr>
+											            This MAC address(es) (save with small letters) will be filtered out from the scan results.</td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
 											        <td class="help_table_gen_b">
 											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>

@@ -652,7 +652,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon
 											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
 											        <td class="help_table_gen_b">
 											            <span class="text-maroon help_faq_code">[&lsquo;MAC-Address 1&rsquo;, &lsquo;MAC-Address 2&rsquo;]</span><br>
-											            </td></tr>
+											            Cette (ces) adresse(s) MAC (à mémoriser avec des petites lettres) sera(ont) filtrée(s) à partir des résultats du scan.</td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
 											        <td class="help_table_gen_b">
 											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
