@@ -326,7 +326,7 @@ read_arpscan_timer(); ?></div>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell">Ignore List</div>
+                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_Tool_ignorelist']; ?></div>
                     <div class="db_info_table_cell">
                         <?php echo $MAC_IGNORE_LIST; ?>
                     </div>
