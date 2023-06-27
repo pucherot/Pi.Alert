@@ -232,6 +232,23 @@ case $1 in
     # network_dumb_dev
     echo -e "\nInsert new table 'network_dumb_dev' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_dumb_dev' ('dev_Name' TEXT, 'dev_MAC' TEXT, 'dev_Infrastructure' INTEGER, 'dev_Infrastructure_port' INTEGER, 'dev_PresentLastScan' TEXT, 'dev_LastIP' TEXT, 'id' INTEGER, PRIMARY KEY('id' AUTOINCREMENT));"
+    # Services_Events
+    echo -e "\nInsert new table 'Services_Events' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services_Events' ('moneve_URL' TEXT NOT NULL, 'moneve_DateTime' TEXT NOT NULL, 'moneve_StatusCode' NUMERIC NOT NULL, 'moneve_Latency' TEXT NOT NULL, 'moneve_TargetIP' TEXT NOT NULL);"
+    # Services_CurrentScan
+    echo -e "\nInsert new table 'Services_CurrentScan' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services_CurrentScan' ('cur_URL' TEXT NOT NULL, 'cur_DateTime' TEXT NOT NULL, 'cur_StatusCode' NUMERIC NOT NULL, 'cur_Latency' TEXT NOT NULL, 'cur_AlertEvents' INTEGER DEFAULT 0, 'cur_AlertDown' INTEGER DEFAULT 0, 'cur_StatusChanged' INTEGER DEFAULT 0, 'cur_LatencyChanged' INTEGER DEFAULT 0, 'cur_TargetIP' TEXT NOT NULL, 'cur_StatusCode_prev' NUMERIC, 'cur_TargetIP_prev' TEXT);"
+    # Services
+    echo -e "\nInsert new table 'Services' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services' ('mon_URL' TEXT NOT NULL, 'mon_MAC' TEXT, 'mon_LastStatus' NUMERIC NOT NULL, 'mon_LastLatency' TEXT NOT NULL, 'mon_LastScan' TEXT NOT NULL, 'mon_Tags' TEXT, 'mon_AlertEvents' INTEGER DEFAULT 0, 'mon_AlertDown' INTEGER DEFAULT 0, 'mon_TargetIP' TEXT NOT NULL, PRIMARY KEY('mon_URL'));"
+    # Services.mon_Notes
+    echo -e "\nInsert new column 'mon_Notes' to table 'Services' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_Notes")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services' ADD COLUMN 'mon_Notes' TEXT;"
+    else
+      echo "Column 'mon_Notes' already exists in the 'Services' table."
+    fi
 
     ;;
 
