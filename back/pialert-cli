@@ -194,61 +194,75 @@ case $1 in
 
   update_db)
     ## update database
+    echo "################################################################################"
+    echo "# You are planning to update the Pi.Alert DB. Please make sure that no scan    #"
+    echo "# takes place during the update to avoid possible database errors afterwards!  #"
+    echo "#                                                                              #"
+    echo "# This can be done by pausing the Arp scan via the settings page. However,     #"
+    echo "# scans that are already running will not be terminated. (STRG+C to Abort)     #"
+    echo "################################################################################"
+    echo ""
+    echo ""
+    printf "%s " "Press enter to continue"
+    read ans
+    echo ""
     echo "Update DB $PIA_DB_FILE"
     echo -e "\nPurge old db backup"
     rm ${PIA_DB_FILE_PATH}/pialert.db.bak
-    echo -e "\nCreate backup before insert new table"
+    echo -e "...Create backup before insert new table"
     cp $PIA_DB_FILE ${PIA_DB_FILE_PATH}/pialert.db.bak
     # Online_History
-    echo -e "\nInsert new table 'Online_History' to DB"
+    echo -e "...Insert new table 'Online_History' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Online_History' ('Index' INTEGER, 'Scan_Date' TEXT, 'Online_Devices' INTEGER, 'Down_Devices' INTEGER, 'All_Devices' INTEGER, 'Archived_Devices' INTEGER, PRIMARY KEY('Index' AUTOINCREMENT));"
     # network_infrastructure
-    echo -e "\nInsert new table 'network_infrastructure' to DB"
+    echo -e "...Insert new table 'network_infrastructure' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_infrastructure' ('device_id' INTEGER, 'net_device_name' TEXT NOT NULL, 'net_device_typ' TEXT NOT NULL, 'net_device_port' INTEGER, 'net_downstream_devices' TEXT, PRIMARY KEY('device_id' AUTOINCREMENT));"
     # Devices.dev_Infrastructure
-    echo -e "\nInsert new column 'dev_Infrastructure' to table 'Devices' to DB"
+    echo -e "...Insert new column 'dev_Infrastructure' to table 'Devices' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Infrastructure")
     if [ $existing -eq 0 ]; then
       sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD COLUMN 'dev_Infrastructure' INTEGER;"
     else
-      echo "Column 'dev_Infrastructure' already exists in the 'Devices' table."
+      echo "        Column 'dev_Infrastructure' already exists in the 'Devices' table."
     fi
     # Devices.dev_Infrastructure_port
-    echo -e "\nInsert new column 'dev_Infrastructure_port' to table 'Devices' to DB"
+    echo -e "...Insert new column 'dev_Infrastructure_port' to table 'Devices' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Infrastructure_port")
     if [ $existing -eq 0 ]; then
       sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD COLUMN 'dev_Infrastructure_port' INTEGER;"
     else
-      echo "Column 'dev_Infrastructure_port' already exists in the 'Devices' table."
+      echo "        Column 'dev_Infrastructure_port' already exists in the 'Devices' table."
     fi
     # network_infrastructure.net_downstream_devices
-    echo -e "\nInsert new column 'net_downstream_devices' to table 'network_infrastructure' to DB"
+    echo -e "...Insert new column 'net_downstream_devices' to table 'network_infrastructure' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Infrastructure_port")
     if [ $existing -eq 0 ]; then
       sqlite3 $PIA_DB_FILE "ALTER TABLE 'network_infrastructure' ADD COLUMN 'net_downstream_devices' TEXT;"
     else
-      echo "Column 'net_downstream_devices' already exists in the 'network_infrastructure' table."
+      echo "        Column 'net_downstream_devices' already exists in the 'network_infrastructure' table."
     fi
     # network_dumb_dev
-    echo -e "\nInsert new table 'network_dumb_dev' to DB"
+    echo -e "...Insert new table 'network_dumb_dev' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_dumb_dev' ('dev_Name' TEXT, 'dev_MAC' TEXT, 'dev_Infrastructure' INTEGER, 'dev_Infrastructure_port' INTEGER, 'dev_PresentLastScan' TEXT, 'dev_LastIP' TEXT, 'id' INTEGER, PRIMARY KEY('id' AUTOINCREMENT));"
     # Services_Events
-    echo -e "\nInsert new table 'Services_Events' to DB"
+    echo -e "...Insert new table 'Services_Events' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services_Events' ('moneve_URL' TEXT NOT NULL, 'moneve_DateTime' TEXT NOT NULL, 'moneve_StatusCode' NUMERIC NOT NULL, 'moneve_Latency' TEXT NOT NULL, 'moneve_TargetIP' TEXT NOT NULL);"
     # Services_CurrentScan
-    echo -e "\nInsert new table 'Services_CurrentScan' to DB"
+    echo -e "...Insert new table 'Services_CurrentScan' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services_CurrentScan' ('cur_URL' TEXT NOT NULL, 'cur_DateTime' TEXT NOT NULL, 'cur_StatusCode' NUMERIC NOT NULL, 'cur_Latency' TEXT NOT NULL, 'cur_AlertEvents' INTEGER DEFAULT 0, 'cur_AlertDown' INTEGER DEFAULT 0, 'cur_StatusChanged' INTEGER DEFAULT 0, 'cur_LatencyChanged' INTEGER DEFAULT 0, 'cur_TargetIP' TEXT NOT NULL, 'cur_StatusCode_prev' NUMERIC, 'cur_TargetIP_prev' TEXT);"
     # Services
-    echo -e "\nInsert new table 'Services' to DB"
+    echo -e "...Insert new table 'Services' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services' ('mon_URL' TEXT NOT NULL, 'mon_MAC' TEXT, 'mon_LastStatus' NUMERIC NOT NULL, 'mon_LastLatency' TEXT NOT NULL, 'mon_LastScan' TEXT NOT NULL, 'mon_Tags' TEXT, 'mon_AlertEvents' INTEGER DEFAULT 0, 'mon_AlertDown' INTEGER DEFAULT 0, 'mon_TargetIP' TEXT NOT NULL, PRIMARY KEY('mon_URL'));"
     # Services.mon_Notes
-    echo -e "\nInsert new column 'mon_Notes' to table 'Services' to DB"
+    echo -e "...Insert new column 'mon_Notes' to table 'Services' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_Notes")
     if [ $existing -eq 0 ]; then
       sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services' ADD COLUMN 'mon_Notes' TEXT;"
     else
-      echo "Column 'mon_Notes' already exists in the 'Services' table."
+      echo "        Column 'mon_Notes' already exists in the 'Services' table."
     fi
+
+    echo -e "\nUpdate finished!\n"
 
     ;;
 
