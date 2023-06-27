@@ -547,7 +547,8 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Vérifie dans le répertoire Pi.Ale
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
-              								 Si la base de données est toujours en lecture seule, essaie de la réinstaller ou de restaurer une sauvegarde de la base de données via la page de maintenance.';
+              								 Si la base de données est toujours en lecture seule, essaie de la réinstaller ou de restaurer une sauvegarde de la base de données via la page de maintenance.
+              								 <br><span class="text-maroon help_faq_code">Ici, il faut également vérifier les droits par la suite et, si nécessaire, les corriger.</span>';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La page de connexion n&apos;apparaît pas, même après la modification du mot de passe.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Outre le mot de passe, le paramètre <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION = True</span> doit également être défini dans le fichier de configuration <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes sur la migration de pucherot vers ce fork.';

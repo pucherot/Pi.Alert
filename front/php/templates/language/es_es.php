@@ -549,7 +549,8 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Compruebe en el directorio Pi.Alert
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
-              								 Si la base de datos sigue siendo de sólo lectura, intente reinstalar o restaurar una copia de seguridad de la base de datos desde la página de mantenimiento.';
+              								 Si la base de datos sigue siendo de sólo lectura, intente reinstalar o restaurar una copia de seguridad de la base de datos desde la página de mantenimiento.
+              								 <br><span class="text-maroon help_faq_code">Aquí también se deben verificar los derechos posteriormente y, si es necesario, corregirlos.</span>';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La página de inicio de sesión no aparece, incluso después de cambiar la contraseña.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Además de la contraseña, el archivo de configuración debe contener <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 además el parámetro <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> debe ajustarse a <span class="text-maroon help_faq_code">True</span>.';

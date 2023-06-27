@@ -549,7 +549,8 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if 
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
-              								 If the database is still read-only, try reinstalling or restoring a database backup from the maintenance page.';
+              								 If the database is still read-only, try reinstalling or restoring a database backup from the maintenance page.
+              								 <br><span class="text-maroon help_faq_code">Here, the rights should also be checked afterwards and, if necessary, corrected.</span>';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'The login page does not appear, even after changing the password.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'In addition to the password, the configuration file must contain <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 also the parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> must set to <span class="text-maroon help_faq_code">True</span>.';

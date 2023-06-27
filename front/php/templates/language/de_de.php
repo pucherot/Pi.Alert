@@ -552,7 +552,7 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob d
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
               								 </span><br>
-              								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.';
+              								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.<br><span class="text-maroon help_faq_code">Hier gilt es dann ebenfall die Rechte im Anschluss zu prüfen und ggf. zur korrigieren</span>';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
