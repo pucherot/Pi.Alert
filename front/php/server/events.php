@@ -73,14 +73,14 @@ function getEventsTotals() {
 
 	// Sessions
 	$result = $db->query($SQL2 . ' WHERE (  ses_DateTimeConnection >= ' . $periodDate . '
-                                      OR ses_DateTimeDisconnection >= ' . $periodDate . '
-                                      OR ses_StillConnected = 1 ) ');
+                                 OR ses_DateTimeDisconnection >= ' . $periodDate . '
+                                 OR ses_StillConnected = 1 ) ');
 	$row = $result->fetchArray(SQLITE3_NUM);
 	$eventsSessions = $row[0];
 
 	// Missing
 	$result = $db->query($SQL2 . ' WHERE    (ses_DateTimeConnection IS NULL    AND ses_DateTimeDisconnection >= ' . $periodDate . ' )
-                                      OR (ses_DateTimeDisconnection IS NULL AND ses_StillConnected = 0 AND ses_DateTimeConnection >= ' . $periodDate . ' )');
+                                 OR (ses_DateTimeDisconnection IS NULL AND ses_StillConnected = 0 AND ses_DateTimeConnection >= ' . $periodDate . ' )');
 	$row = $result->fetchArray(SQLITE3_NUM);
 	$eventsMissing = $row[0];
 
