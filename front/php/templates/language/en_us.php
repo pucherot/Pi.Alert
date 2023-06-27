@@ -812,7 +812,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and
          									delete the DHCP lease if necessary. Then, also in Pi-hole, look under Tools -> Network to see if you can find the recurring hosts there.
-         									If yes, delete them there as well. Now you can start Pi.Alert again. Now the device(s) should not show up anymore. Restarting the <span class="text-maroon help_faq_code">pihole-FTL</span> service may also fix the problem.';
+         									If yes, delete them there as well. Now you can start Pi.Alert again. Now the device(s) should not show up anymore. Restarting the <span class="text-maroon help_faq_code">pihole-FTL</span> service may also fix the problem.
+         									If such a device continues to appear repeatedly, the MAC address can be added to the ignore list <span class="text-maroon help_faq_code">MAC_IGNORE_LIST</span> in the <span class="text-maroon help_faq_code">pialert.conf</span>.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = 'What means ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'means a network device created from the network page.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'designates the port number where the currently edited device is connected to this network device.';

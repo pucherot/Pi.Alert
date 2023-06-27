@@ -793,7 +793,9 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und
          									lösche ggf. die betreffende DHCP-Lease. Anschließend schaue, ebenfalls in Pi-hole, unter Tools -> Network, ob sich dort die immer wiederkehrenden Hosts finden lassen.
-         									Wenn ja, lösche diese dort ebenfalls. Sollten diese Geräte auch nach dem Löschen in Pi-hole immer wieder auftauchen, starte den Dienst <span class="text-maroon help_faq_code">pihole-FTL</span> neu. Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen. Im Zweifel kann auch ein Neustart nicht schaden.';
+         									Wenn ja, lösche diese dort ebenfalls. Sollten diese Geräte auch nach dem Löschen in Pi-hole immer wieder auftauchen, starte den Dienst <span class="text-maroon help_faq_code">pihole-FTL</span> neu.
+         									Nun kannst du Pi.Alert wieder starten. Jetzt sollte das Gerät/die Geräte nicht mehr auftauchen. Im Zweifel kann auch ein Neustart nicht schaden.
+         									Wenn ein solches Gerät auch weiterhin immer wieder auftaucht, kann die MAC-Adresse einer Ignorierliste <span class="text-maroon help_faq_code">MAC_IGNORE_LIST</span> in der <span class="text-maroon help_faq_code">pialert.conf</span> hinzugefügt werden.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = 'Was bedeutet ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'meint ein Netzwerkgerät, welches über die Netzwerk-Seite erstellt wurde.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'bezeichnet die Anschlussnummer/Portnummer, an der das gerade bearbeitete Gerät mit diesem Netzwerkgerät verbunden ist.';

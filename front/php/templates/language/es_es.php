@@ -806,7 +806,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Tengo dispositivos en mi lista que no conozco. Después de borrarlos, siempre vuelven a aparecer.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Si utiliza Pi-hole, tenga en cuenta que Pi.Alert recupera información de Pi-hole. Ponga en pausa Pi.Alert, vaya a la página de configuración de Pi-hole y
 											elimine la concesión DHCP si es necesario. Luego, también en Pi-hole, revise en Herramientas -> Red para ver si puede encontrar los hosts recurrentes allí.
-											Si es así, elimínelos también allí. Ahora puede volver a iniciar Pi.Alert. Ahora el dispositivo(s) no debería aparecer más.';
+											Si es así, elimínelos también allí. Ahora puede volver a iniciar Pi.Alert. Ahora el dispositivo(s) no debería aparecer más.
+											Si dicho dispositivo sigue apareciendo repetidamente, se puede agregar la dirección MAC a la lista de ignorados <span class="text-maroon help_faq_code">MAC_IGNORE_LIST</span> en el archivo <span class="text-maroon help_faq_code">pialert.conf</span>.';
 $pia_lang['HelpFAQ_Cat_Detail_300_head'] = '¿Qué significa? ';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_a'] = 'significa un dispositivo de red creado a partir de la página de red.';
 $pia_lang['HelpFAQ_Cat_Detail_300_text_b'] = 'designa el número de puerto en el que el dispositivo editado actualmente está conectado a este dispositivo de red.';
