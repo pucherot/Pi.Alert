@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.95'
+SCRIPTVERSION='v0.96'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -10,53 +10,68 @@ PIA_DB_FILE_PATH=${SCRIPTPATH}'/../db'
 case $1 in
 
   help)
+
+    bold=$(tput bold)
+    normal=$(tput sgr0)
+
     echo "pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)"
     echo "Usage: pialert-cli <command>"
     echo ""
     echo "The is a list of supported commands:"
     echo ""
-    echo " set_login                - Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE"
-    echo "                          - If the parameter is not present, it will be created. Additionally the"
-    echo "                            default password '123456' is set."
+    echo " ${bold}disable_scan <MIN>${normal}"
+    echo "    Stops all active scans and prevents new scans from starting. You can set a"
+    echo "    Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with"
+    echo "    the next scan after 10min."
     echo ""
-    echo " unset_login              - Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE"
-    echo "                          - If the parameter is not present, it will be created. Additionally the"
-    echo "                            default password '123456' is set."
+    echo " ${bold}disable_service_mon${normal}"
+    echo "    Allows the start of new scans again. If the SCAN_WEBSERVICES parameter"
+    echo "    does not exist yet, it will be created and set to FALSE."
     echo ""
-    echo " set_password <password>  - Sets the new password as a hashed value."
-    echo "                          - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be"
-    echo "                            created and set to TRUE (login enabled)."
+    echo " ${bold}enable_scan${normal}"
+    echo "    Allows the start of new scans again."
     echo ""
-    echo " set_autopassword         - Sets a new random password as a hashed value and show it plaintext in"
-    echo "                            the console."
-    echo "                          - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be"
-    echo "                            created and set to TRUE (login enabled)."
+    echo " ${bold}enable_service_mon${normal}"
+    echo "    Enable Web Service Monitoring. If the SCAN_WEBSERVICES parameter does not"
+    echo "    exist yet, it will be created and set to TRUE."
     echo ""
-    echo " disable_scan <MIN>       - Stops all active scans"
-    echo "                          - Prevents new scans from starting."
-    echo "                          - You can set a Timeout in minutes. If no timeout is set, Pi.Alert"
-    echo "                            restarts itself with the next scan after 10min."
+    echo " ${bold}reporting_test${normal}"
+    echo "    Test reporting for all activated services."
     echo ""
-    echo " enable_scan              - Allows the start of new scans again."
+    echo " ${bold}rewrite_config${normal}"
+    echo "    A new decluttered config file (pialert-rewritten.conf) will be created."
     echo ""
-    echo " enable_service_mon       - Enable Web Service Monitoring."
-    echo "                          - If the SCAN_WEBSERVICES parameter does not exist yet, it will be"
-    echo "                            created and set to TRUE."
+    echo " ${bold}set_apikey${normal}"
+    echo "    With the API key it is possible to make queries to the database without"
+    echo "    using the web page. If an API key already exists, it will be replaced."
     echo ""
-    echo " disable_service_mon      - Allows the start of new scans again."
-    echo "                          - If the SCAN_WEBSERVICES parameter does not exist yet, it will be"
-    echo "                            created and set to FALSE."
+    echo " ${bold}set_autopassword${normal}"
+    echo "    Sets a new random password as a hashed value and show it plaintext in the"
+    echo "    console. If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will"
+    echo "    be created and set to TRUE (login enabled)."
     echo ""
-    echo " update_db                - The script tries to make the database compatible for this fork."
+    echo " ${bold}set_login${normal}"
+    echo "    Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE. If the"
+    echo "    parameter is not present, it will be created. Additionally the default"
+    echo "    password '123456' is set."
     echo ""
-    echo " set_apikey               - With the API key it is possible to make queries to the database"
-    echo "                            without using the web page. If an API key already exists, it will be"
-    echo "                            replaced."
+    echo " ${bold}set_password <password>${normal}"
+    echo "    Sets the new password as a hashed value. If the PIALERT_WEB_PROTECTION"
+    echo "    parameter does not exist yet, it will be created and set to TRUE (login"
+    echo "    enabled)."
     echo ""
-    echo " reporting_test           - Test reporting for all activated services."
+    echo " ${bold}set_permissions${normal}"
+    echo "    Repair file permissions"
     echo ""
-    echo " rewrite_config           - A new decluttered config file (pialert-rewritten.conf) will be created."
+    echo " ${bold}unset_login${normal}"
+    echo "    Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE. If"
+    echo "    the parameter is not present, it will be created. Additionally the default"
+    echo "    password '123456' is set."
     echo ""
+    echo " ${bold}update_db${normal}"
+    echo "    The script tries to make the database compatible for this fork."
+    echo ""
+
     ;;
 
   set_login)
@@ -281,6 +296,15 @@ case $1 in
         sed -i "/PIALERT_APIKEY/c\PIALERT_APIKEY = '$PIA_APIKEY_RAND'" $PIA_CONF_FILE
     fi
     echo "API-Key set"
+    ;;
+
+  set_permissions)
+    ## Set file permissions
+    # get username from install directory
+    PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
+    echo "Pi.Alert User: $PIA_USER"
+    sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
+    sudo chmod -R 770 $PIA_DB_FILE
     ;;
 
   reporting_test)

@@ -608,6 +608,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td class="help_table_gen_b">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
+											    	<td class="help_table_gen_a">set_permissions</td>
+    												<td class="help_table_gen_b">- Fixes the file permissions of the database.</td>
+    											</tr>
+											    <tr>
 											        <td class="help_table_gen_a">reporting_test</td>
 											        <td class="help_table_gen_b">- Test reporting for all activated services.<br>&nbsp;</td>
 											    </tr>

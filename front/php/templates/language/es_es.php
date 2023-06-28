@@ -607,6 +607,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 												    <td class="help_table_gen_b">- Con la clave API es posible hacer consultas a la base de datos sin utilizar la página web. Si ya existe una clave API, se reemplazará.</td>
 												</tr>
 												<tr>
+												    <td class="help_table_gen_a">set_permissions</td>
+												    <td class="help_table_gen_b">- Corrige los permisos de archivo de la base de datos.</td>
+												</tr>
+												<tr>
 												    <td class="help_table_gen_a">reporting_test</td>
 												    <td class="help_table_gen_b">- Prueba de informes para todos los servicios activados.</td>
 												</tr>

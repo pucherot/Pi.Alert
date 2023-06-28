@@ -332,6 +332,8 @@ update_permissions() {
   ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"
   ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"
 
+  $PIALERT_HOME/back/pialert-cli update_db
+
 }
 
 # ------------------------------------------------------------------------------
