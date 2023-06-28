@@ -17,7 +17,7 @@ case $1 in
     echo "pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)"
     echo "Usage: pialert-cli <command>"
     echo ""
-    echo "The is a list of supported commands:"
+    echo "This is the list of supported commands"
     echo ""
     echo " ${bold}disable_scan <MIN>${normal}"
     echo "    Stops all active scans and prevents new scans from starting. You can set a"
