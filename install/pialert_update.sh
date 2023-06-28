@@ -175,8 +175,6 @@ update_config() {
   cp "$PIALERT_HOME/config/pialert.conf" "$PIALERT_HOME/config/pialert.conf.back"  2>&1 >> "$LOG"
 
   print_msg "- Updating config file..."
-#  sed -i '/VERSION/d' "$PIALERT_HOME/config/pialert.conf"                          2>&1 >> "$LOG"
-#  sed -i 's/PA_FRONT_URL/REPORT_DEVICE_URL/g' "$PIALERT_HOME/config/pialert.conf"  2>&1 >> "$LOG"
 
 if ! grep -Fq "# Shoutrrr" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
@@ -216,7 +214,6 @@ SCAN_SUBNETS    = '--localnet'
 # SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth1', '192.168.1.0/24 --interface=eth0' ]
 EOF
 fi
-
 
 if ! grep -Fq "# WebGUI Reporting" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
@@ -266,7 +263,6 @@ PUSHOVER_TOKEN          = '<Token>'
 PUSHOVER_USER           = '<APP-API>'
 EOF
 fi
-
 
 if ! grep -Fq "# Fritzbox Configuration" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
@@ -318,20 +314,21 @@ update_permissions() {
   chmod +x "$PIALERT_HOME/back/pialert.py"                          2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/update_vendors.sh"                   2>&1 >> "$LOG"
   sudo chmod -R 775 "$PIALERT_HOME/config/"                         2>&1 >> "$LOG"
-  sudo chgrp -R www-data "$PIALERT_HOME/config/pialert.conf"
-  sudo chmod -R 775 "$PIALERT_HOME/front/reports"
-  sudo chgrp -R www-data "$PIALERT_HOME/front/reports"
+  sudo chgrp -R www-data "$PIALERT_HOME/config/pialert.conf"        2>&1 >> "$LOG"
+  sudo chmod -R 775 "$PIALERT_HOME/front/reports"                   2>&1 >> "$LOG"
+  sudo chgrp -R www-data "$PIALERT_HOME/front/reports"              2>&1 >> "$LOG"
   print_msg "- Create Logfile Symlinks..."
-  touch "$PIALERT_HOME/log/pialert.vendors.log"
-  touch "$PIALERT_HOME/log/pialert.1.log"
-  touch "$PIALERT_HOME/log/pialert.cleanup.log"
-  touch "$PIALERT_HOME/log/pialert.webservices.log"
-  ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"
-  ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"
-  ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"
-  ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"
-  ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"
+  touch "$PIALERT_HOME/log/pialert.vendors.log"                     2>&1 >> "$LOG"
+  touch "$PIALERT_HOME/log/pialert.1.log"                           2>&1 >> "$LOG"
+  touch "$PIALERT_HOME/log/pialert.cleanup.log"                     2>&1 >> "$LOG"
+  touch "$PIALERT_HOME/log/pialert.webservices.log"                 2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"          2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"                    2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"                      2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"          2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"  2>&1 >> "$LOG"
 
+  echo ""
   $PIALERT_HOME/back/pialert-cli update_db
 
 }
