@@ -329,7 +329,7 @@ update_permissions() {
   ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"  2>&1 >> "$LOG"
 
   echo ""
-  $PIALERT_HOME/back/pialert-cli update_db
+  # $PIALERT_HOME/back/pialert-cli update_db
 
 }
 
