@@ -130,7 +130,7 @@ There are no updates as Github release package, because the update function is d
 a new archive is created, which is used as the source for the update.
 
 This update script is only recommended for an already existing installation of this fork. If you are using another fork, 
-I recommend uninstalling it first. If you backup the database, it may be possible to continue using it with my fork after a patch.
+I recommend uninstalling it first. If you backup the database, it may be possible to continue using it with my fork after a patch ([pialert-cli](docs/PIALERTCLI.md)).
 
 - One-step Automated Update:
   #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh | bash`
