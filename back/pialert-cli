@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v0.96'
+SCRIPTVERSION='v1.0'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -63,10 +63,16 @@ case $1 in
     echo " ${bold}set_permissions${normal}"
     echo "    Repair file permissions"
     echo ""
+    echo " ${bold}set_sudoers${normal}"
+    echo "    Create sudoer file for www-data and Pi.Alert user"
+    echo ""
     echo " ${bold}unset_login${normal}"
     echo "    Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE. If"
     echo "    the parameter is not present, it will be created. Additionally the default"
     echo "    password '123456' is set."
+    echo ""
+    echo " ${bold}unset_sudoers${normal}"
+    echo "    Delete sudoer file for www-data and Pi.Alert user"
     echo ""
     echo " ${bold}update_db${normal}"
     echo "    The script tries to make the database compatible for this fork."
@@ -307,6 +313,28 @@ case $1 in
     sudo chmod -R 770 $PIA_DB_FILE
     ;;
 
+  set_sudoers)
+    ## Set file permissions
+    # get username from install directory
+    PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
+    echo "Pi.Alert User: $PIA_USER"
+    echo -e "\nFrontend sudoer"
+    echo "www-data ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/pialert-cli" | sudo tee /etc/sudoers.d/pialert-frontend
+    echo -e "\nBackend sudoer"
+    echo "${PIA_USER} ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/pialert-cli" | sudo tee /etc/sudoers.d/pialert-backend
+    echo "${PIA_USER} ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan" | sudo tee /etc/sudoers.d/pialert-backend
+    echo "${PIA_USER} ALL=(ALL) NOPASSWD: /usr/bin/nmap" | sudo tee /etc/sudoers.d/pialert-backend
+    ;;
+
+  unset_sudoers)
+    ## Set file permissions
+    # get username from install directory
+    PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
+    echo "Removing sudoers"
+    sudo rm /etc/sudoers.d/pialert-frontend
+    sudo rm /etc/sudoers.d/pialert-backend
+    ;;
+
   reporting_test)
     ## test reporting
     /bin/python3 ${SCRIPTPATH}/pialert.py reporting_test
@@ -416,7 +444,6 @@ case $1 in
         REWRITE_SCAN_WEBSERVICES="SCAN_WEBSERVICES       = True"
     fi
 
-
     # Special Protocol Scanning
     if [ -z "$REWRITE_SCAN_ROGUE_DHCP" ]
     then
@@ -427,7 +454,6 @@ case $1 in
         REWRITE_DHCP_SERVER_ADDRESS="DHCP_SERVER_ADDRESS    = '0.0.0.0'"
     fi
 
-
     # WebGUI Reporting
     if [ -z "$REWRITE_REPORT_WEBGUI" ]
     then
@@ -437,7 +463,6 @@ case $1 in
     then
         REWRITE_REPORT_WEBGUI_WEBMON="REPORT_WEBGUI_WEBMON  = True"
     fi
-
 
     # ntfy
     if [ -z "$REWRITE_REPORT_NTFY" ]
@@ -468,7 +493,6 @@ case $1 in
     then
         REWRITE_NTFY_PRIORITY="NTFY_PRIORITY        = 'default'"
     fi
-
 
     # Fritzbox Configuration
     if [ -z "$REWRITE_FRITZBOX_ACTIVE" ]
