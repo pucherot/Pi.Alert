@@ -6,77 +6,82 @@ PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
 PIA_CONF_FILE_PATH=${SCRIPTPATH}'/../config'
 PIA_DB_FILE=${SCRIPTPATH}'/../db/pialert.db'
 PIA_DB_FILE_PATH=${SCRIPTPATH}'/../db'
+#Textformating
+bold=$(tput bold)
+normal=$(tput sgr0)
 
 case $1 in
 
   help)
 
-    bold=$(tput bold)
-    normal=$(tput sgr0)
+read -r -d '' CLI_MANUAL << EOM
+pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)
+Command line tool of Pi.Alert, which is used to support the front and back end.
+Usage: ${bold}pialert-cli <command>${normal}
 
-    echo "pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)"
-    echo "Usage: pialert-cli <command>"
-    echo ""
-    echo "This is the list of supported commands"
-    echo ""
-    echo " ${bold}disable_scan <MIN>${normal}"
-    echo "    Stops all active scans and prevents new scans from starting. You can set a"
-    echo "    Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with"
-    echo "    the next scan after 10min."
-    echo ""
-    echo " ${bold}disable_service_mon${normal}"
-    echo "    Allows the start of new scans again. If the SCAN_WEBSERVICES parameter"
-    echo "    does not exist yet, it will be created and set to FALSE."
-    echo ""
-    echo " ${bold}enable_scan${normal}"
-    echo "    Allows the start of new scans again."
-    echo ""
-    echo " ${bold}enable_service_mon${normal}"
-    echo "    Enable Web Service Monitoring. If the SCAN_WEBSERVICES parameter does not"
-    echo "    exist yet, it will be created and set to TRUE."
-    echo ""
-    echo " ${bold}reporting_test${normal}"
-    echo "    Test reporting for all activated services."
-    echo ""
-    echo " ${bold}rewrite_config${normal}"
-    echo "    A new decluttered config file (pialert-rewritten.conf) will be created."
-    echo ""
-    echo " ${bold}set_apikey${normal}"
-    echo "    With the API key it is possible to make queries to the database without"
-    echo "    using the web page. If an API key already exists, it will be replaced."
-    echo ""
-    echo " ${bold}set_autopassword${normal}"
-    echo "    Sets a new random password as a hashed value and show it plaintext in the"
-    echo "    console. If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will"
-    echo "    be created and set to TRUE (login enabled)."
-    echo ""
-    echo " ${bold}set_login${normal}"
-    echo "    Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE. If the"
-    echo "    parameter is not present, it will be created. Additionally the default"
-    echo "    password '123456' is set."
-    echo ""
-    echo " ${bold}set_password <password>${normal}"
-    echo "    Sets the new password as a hashed value. If the PIALERT_WEB_PROTECTION"
-    echo "    parameter does not exist yet, it will be created and set to TRUE (login"
-    echo "    enabled)."
-    echo ""
-    echo " ${bold}set_permissions${normal}"
-    echo "    Repair file permissions"
-    echo ""
-    echo " ${bold}set_sudoers${normal}"
-    echo "    Create sudoer file for www-data and Pi.Alert user"
-    echo ""
-    echo " ${bold}unset_login${normal}"
-    echo "    Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE. If"
-    echo "    the parameter is not present, it will be created. Additionally the default"
-    echo "    password '123456' is set."
-    echo ""
-    echo " ${bold}unset_sudoers${normal}"
-    echo "    Delete sudoer file for www-data and Pi.Alert user"
-    echo ""
-    echo " ${bold}update_db${normal}"
-    echo "    The script tries to make the database compatible for this fork."
-    echo ""
+This is the list of supported commands
+
+ ${bold}disable_scan <MIN>${normal}
+    Stops all active scans and prevents new scans from starting. You can set a
+    Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with
+    the next scan after 10min.
+
+ ${bold}disable_service_mon${normal}
+    Allows the start of new scans again. If the SCAN_WEBSERVICES parameter
+    does not exist yet, it will be created and set to FALSE.
+
+ ${bold}enable_scan${normal}
+    Allows the start of new scans again.
+
+ ${bold}enable_service_mon${normal}"
+    Enable Web Service Monitoring. If the SCAN_WEBSERVICES parameter does not
+    exist yet, it will be created and set to TRUE.
+
+ ${bold}reporting_test${normal}
+    Test reporting for all activated services.
+
+ ${bold}rewrite_config${normal}
+    A new decluttered config file (pialert-rewritten.conf) will be created.
+
+ ${bold}set_apikey${normal}
+    With the API key it is possible to make queries to the database without
+    using the web page. If an API key already exists, it will be replaced.
+
+ ${bold}set_autopassword${normal}
+    Sets a new random password as a hashed value and show it plaintext in the
+    console. If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will
+    be created and set to TRUE (login enabled).
+
+ ${bold}set_login${normal}
+    Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE. If the
+    parameter is not present, it will be created. Additionally the default
+    password '123456' is set.
+
+ ${bold}set_password <password>${normal}
+    Sets the new password as a hashed value. If the PIALERT_WEB_PROTECTION
+    parameter does not exist yet, it will be created and set to TRUE (login
+    enabled).
+
+ ${bold}set_permissions${normal}
+    Repair file permissions
+
+ ${bold}set_sudoers${normal}
+    Create sudoer file for www-data and Pi.Alert user
+
+ ${bold}unset_login${normal}
+    Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE. If
+    the parameter is not present, it will be created. Additionally the default
+    password '123456' is set.
+
+ ${bold}unset_sudoers${normal}
+    Delete sudoer file for www-data and Pi.Alert user
+
+ ${bold}update_db${normal}
+    The script tries to make the database compatible for this fork.
+
+2023 leiweibau (https://github.com/leiweibau/Pi.Alert) (https://leiweibau.net)
+EOM
+    echo -e "$CLI_MANUAL" | more
 
     ;;
 
@@ -311,6 +316,7 @@ case $1 in
     echo "Pi.Alert User: $PIA_USER"
     sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
     sudo chmod -R 770 $PIA_DB_FILE
+    echo "Permissions set"
     ;;
 
   set_sudoers)
@@ -342,8 +348,6 @@ case $1 in
     ;;
 
   rewrite_config)
-    ## Check if PIALERT_WEB_PROTECTION exists
-
     # Input file
     input_file=$PIA_CONF_FILE
     echo "    The existing configuration will not be replaced."
@@ -633,12 +637,14 @@ ${REWRITE_SCAN_SUBNETS}
 # SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth0', '192.168.2.0/24 --interface=eth1' ]
 
 EOL
+    ;;
 
-    
+    arg_list)
+      echo disable_scan disable_service_mon enable_scan enable_service_mon reporting_test rewrite_config set_apikey set_autopassword set_login set_password set_permissions set_sudoers unset_login unset_sudoers update_db
     ;;
 
   *)
     echo "pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)"
-    echo "Use \"pialert-cli help\" for a list of supported commands."
+    echo "Use \"${bold}pialert-cli help${normal}\" for a list of supported commands."
 esac
 
