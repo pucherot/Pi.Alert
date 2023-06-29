@@ -1,6 +1,6 @@
 _script()
 {
-  _script_commands=$(/home/pi/pialert/back/pialert-cli arg_list)
+  _script_commands=$(<YOUR_PIALERT_PATH>/back/pialert-cli arg_list)
 
   local cur
   COMPREPLY=()
