@@ -547,12 +547,14 @@ $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Ich bekomme die Meldung, dass die D
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
               								 <span class="text-maroon help_faq_code">drwxrwx---  2 (dein Username) www-data</span><br>
               								 Sollte die Berechtigung nicht stimmen, kannst du sie mit folgenden Befehlen im Terminal oder der Konsole wieder setzen:<br>
-              								 <span class="text-maroon help_faq_code">
+              								 <div class="help_faq_code" style="padding-left: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
-              								 </span><br>
-              								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.<br><span class="text-maroon help_faq_code">Hier gilt es dann ebenfall die Rechte im Anschluss zu prüfen und ggf. zur korrigieren</span>';
+              								 </div><br>
+              								 Du kannst diese Schritte auch über <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> erledigen.
+              								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.<br>
+              								 <span class="text-maroon help_faq_code">Hier gilt es dann ebenfall die Rechte im Anschluss zu prüfen und ggf. zur korrigieren</span>';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
@@ -594,6 +596,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											        <td class="help_table_gen_b">- Testet alle aktiven Benachrichtigungsdienste</td></tr>
 											    <tr><td class="help_table_gen_a">rewrite_config</td>
 											        <td class="help_table_gen_b">- Eine neue, aufgeräumte Konfigurationsdatei (pialert-rewritten.conf) wird erstellt</td></tr>
+											    <tr><td class="help_table_gen_a">set_sudoers</td>
+											        <td class="help_table_gen_b">- Erstellt sudoers Dateien für den User www-data und den User, unter dem Pi.Alert installiert ist</td></tr>
+											    <tr><td class="help_table_gen_a">unset_sudoers</td>
+											        <td class="help_table_gen_b">- Löscht die sudoers Dateien für den User www-data und den User, unter dem Pi.Alert installiert ist</td></tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan benötigt sudo-Berechtigungen</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'Wenn ein Nicht-Standard-Benutzer verwendet wird, z. B. piadmin, schlägt der arp-scan im Cronjob fehl.<br>

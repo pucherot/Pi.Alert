@@ -618,6 +618,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 												    <td class="help_table_gen_a">rewrite_config</td>
 												    <td class="help_table_gen_b">- Se crea un nuevo archivo de configuración desordenado (pialert-rewritten.conf).</td>
 												</tr>
+											    <tr>
+											    	<td class="help_table_gen_a">set_sudoers</td>
+											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td>
+											    </tr>
+											    <tr>
+													<td class="help_table_gen_a">unset_sudoers</td>
+											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td>
+											    </tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan needs sudo privledges</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'When a non-standard user is used, e.g. piadmin then the arp-scan fails in the cronjob.<br>
