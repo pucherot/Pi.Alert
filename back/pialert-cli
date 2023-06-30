@@ -14,7 +14,7 @@ case $1 in
 
   help)
 
-read -r -d '' CLI_MANUAL << EOM
+read -r -d '' PIALERTCLI_MANUAL << EOM
 pialert-cli $SCRIPTVERSION (https://github.com/leiweibau/Pi.Alert)
 Command line tool of Pi.Alert, which is used to support the front and back end.
 Usage: ${bold}pialert-cli <command>${normal}
@@ -49,12 +49,12 @@ This is the list of supported commands
 
  ${bold}set_autopassword${normal}
     Sets a new random password as a hashed value and show it plaintext in the
-    console. If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will
-    be created and set to TRUE (login enabled).
+    console. If the PIALERT_WEB_PROTECTION parameter does not exist yet, it 
+    will be created and set to TRUE (login enabled).
 
  ${bold}set_login${normal}
-    Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE. If the
-    parameter is not present, it will be created. Additionally the default
+    Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE. If 
+    the parameter is not present, it will be created. Additionally the default
     password '123456' is set.
 
  ${bold}set_password <password>${normal}
@@ -81,8 +81,8 @@ This is the list of supported commands
 
 2023 leiweibau (https://github.com/leiweibau/Pi.Alert) (https://leiweibau.net)
 EOM
-    echo -e "$CLI_MANUAL" | more
 
+    echo -e "$PIALERTCLI_MANUAL" | more
     ;;
 
   set_login)

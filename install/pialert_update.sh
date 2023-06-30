@@ -163,6 +163,16 @@ download_pialert() {
 
   print_msg "- Deleting downloaded tar file..."
   rm -r "$INSTALL_DIR/pialert_latest.tar"
+
+  print_msg "- Generate and copy autocomplete file..."
+  PIALERT_CLI_PATH=$(dirname $PIALERT_HOME)
+  sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH|" $PIALERT_HOME/install/pialert-cli.autocomplete
+  if [ -d "/etc/bash_completion.d" ] ; then
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /etc/bash_completion.d/pialert-cli
+  elif [ -d "/usr/share/bash-completion/completions" ] ; then
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /usr/share/bash-completion/completions/pialert-cli
+  fi
+
 }
 
 # ------------------------------------------------------------------------------
@@ -329,7 +339,7 @@ update_permissions() {
   ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"  2>&1 >> "$LOG"
 
   echo ""
-  # $PIALERT_HOME/back/pialert-cli update_db
+  #$PIALERT_HOME/back/pialert-cli update_db
 
 }
 
@@ -373,8 +383,8 @@ check_python_version() {
   if [ -f /usr/bin/python3 ] ; then
     PYTHON_BIN="python3"
     print_msg "Python 3 is installed on your system"
-    sudo pip3 install mac-vendor-lookup
-    sudo pip3 install fritzconnection
+    sudo pip3 -q install mac-vendor-lookup
+    sudo pip3 -q install fritzconnection
   else
     process_error "Python 3 NOT installed"
   fi

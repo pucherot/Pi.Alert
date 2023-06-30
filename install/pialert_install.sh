@@ -467,6 +467,16 @@ download_pialert() {
 
   print_msg "- Deleting downloaded tar file..."
   rm -r "$INSTALL_DIR/pialert_latest.tar"
+
+  print_msg "- Generate and copy autocomplete file..."
+  PIALERT_CLI_PATH=$(dirname $PIALERT_HOME)
+  sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH|" $PIALERT_HOME/install/pialert-cli.autocomplete
+  if [ -d "/etc/bash_completion.d" ] ; then
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /etc/bash_completion.d/pialert-cli
+  elif [ -d "/usr/share/bash-completion/completions" ] ; then
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /usr/share/bash-completion/completions/pialert-cli
+  fi
+
 }
 
 
