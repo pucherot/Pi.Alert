@@ -32,6 +32,7 @@ main() {
   check_pialert_home
   check_python_version
 
+  stop_pialert
   reset_permissions
   create_backup
   move_files
@@ -42,6 +43,7 @@ main() {
   update_config
   update_db
   update_permissions
+  start_pialert
 
   test_pialert
   
@@ -64,6 +66,16 @@ update_warning() {
   print_msg ""
   printf "%s " "Press enter to continue"
   read ans
+}
+
+stop_pialert() {
+  print_msg "- Stopping Pi.Alert..."
+  $PIALERT_HOME/back/pialert-cli disable_scan
+}
+
+start_pialert() {
+  print_msg "- Starting Pi.Alert..."
+  $PIALERT_HOME/back/pialert-cli enable_scan
 }
 
 # ------------------------------------------------------------------------------
@@ -164,9 +176,15 @@ download_pialert() {
   print_msg "- Deleting downloaded tar file..."
   rm -r "$INSTALL_DIR/pialert_latest.tar"
 
-  print_msg "- Generate and copy autocomplete file..."
+  print_msg "- Generate autocomplete file..."
   PIALERT_CLI_PATH=$(dirname $PIALERT_HOME)
-  sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH|" $PIALERT_HOME/install/pialert-cli.autocomplete
+  if [ $PIALERT_CLI_PATH == "/root" ] ; then
+      sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH/pialert|" $PIALERT_HOME/install/pialert-cli.autocomplete
+  else
+      sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH|" $PIALERT_HOME/install/pialert-cli.autocomplete
+  fi
+
+  print_msg "- Copy autocomplete file..."
   if [ -d "/etc/bash_completion.d" ] ; then
       sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /etc/bash_completion.d/pialert-cli
   elif [ -d "/usr/share/bash-completion/completions" ] ; then
