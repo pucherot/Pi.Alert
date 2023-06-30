@@ -16,7 +16,9 @@ The current commands are:
 | set_login | <ul><li>Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE</li><li>If the parameter is not present, it will be created. Additionally the default password '123456' is set.</li></ul> |
 | set_password &lt;password&gt; | <ul><li>Sets the new password as a hashed value.</li><li>If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to TRUE (login enabled).</li></ul> |
 | set_permissions | <ul><li>Repair file permissions.</li></ul> |
+| set_sudoers | <ul><li>Create sudoer file for www-data and Pi.Alert user.</li></ul> |
 | unset_login | <ul><li>Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE</li><li>If the parameter is not present, it will be created. Additionally the default password '123456' is set.</li></ul> |
+| unset_sudoers | <ul><li>Delete sudoer file for www-data and Pi.Alert user.</li></ul> |
 | update_db | <ul><li>The script tries to make the database compatible for this fork.</li></ul> |
 
 [Back](https://github.com/leiweibau/Pi.Alert#back)
