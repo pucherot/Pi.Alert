@@ -542,13 +542,12 @@ $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Je reçois un message indiquant que
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Vérifie dans le répertoire Pi.Alert si le dossier de la base de données (db) s&apos;est vu attribuer les bons droits :<br>
               								 <span class="text-maroon help_faq_code">drwxrwx---  2 (nombre de usuario) www-data</span><br>
               								 Si l&apos;autorisation n&apos;est pas correcte, tu peux la rétablir avec les commandes suivantes dans le terminal ou la console :<br>
-              								 <span class="text-maroon help_faq_code">
+              								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
-              								 </span><br>
-              								 Si la base de données est toujours en lecture seule, essaie de la réinstaller ou de restaurer une sauvegarde de la base de données via la page de maintenance.
-              								 <br><span class="text-maroon help_faq_code">Ici, il faut également vérifier les droits par la suite et, si nécessaire, les corriger.</span>';
+              								 </div>
+              								 Vous pouvez également effectuer ces étapes en utilisant <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> dans le répertoire <span class="text-maroon help_faq_code">~/pialert/back</span>. Si la base de données reste en lecture seule après cela, essayez de réinstaller ou de restaurer une sauvegarde de la base de données via la page de maintenance. Veuillez vous assurer de vérifier et d&apos;ajuster les autorisations correspondantes.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La page de connexion n&apos;apparaît pas, même après la modification du mot de passe.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Outre le mot de passe, le paramètre <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION = True</span> doit également être défini dans le fichier de configuration <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>.';
 $pia_lang['HelpFAQ_Cat_General_104_head'] = 'Notes sur la migration de pucherot vers ce fork.';

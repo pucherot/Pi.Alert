@@ -544,13 +544,13 @@ $pia_lang['HelpFAQ_Cat_General_102_head'] = 'I get the message that the database
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if the database folder (db) has been assigned the correct permissions:<br>
               								 <span class="text-maroon help_faq_code">drwxrwx---  2 (your username) www-data</span><br>
               								 If the permission is not correct, you can set it again with the following commands in the terminal or the console:<br>
-              								 <span class="text-maroon help_faq_code">
+              								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
-              								 </span><br>
-              								 If the database is still read-only, try reinstalling or restoring a database backup from the maintenance page.
-              								 <br><span class="text-maroon help_faq_code">Here, the rights should also be checked afterwards and, if necessary, corrected.</span>';
+              								 </div>
+              								 You can also perform these steps using <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> in the directory <span class="text-maroon help_faq_code">~/pialert/back</span>.
+              								 If the database remains read-only afterwards, try reinstalling or restoring a database backup through the maintenance page. Please make sure to check and adjust the permissions accordingly.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'The login page does not appear, even after changing the password.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'In addition to the password, the configuration file must contain <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 also the parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> must set to <span class="text-maroon help_faq_code">True</span>.';

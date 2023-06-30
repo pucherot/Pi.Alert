@@ -544,13 +544,13 @@ $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Me aparece el mensaje de que la bas
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Compruebe en el directorio Pi.Alert si la carpeta de la base de datos (db) tiene asignados los permisos correctos:<br>
               								 <span class="text-maroon help_faq_code">drwxrwx---  2 (nombre de usuario) www-data</span><br>
               								 Si el permiso no es correcto, puede establecerlo de nuevo con los siguientes comandos en la terminal o la consola:<br>
-              								 <span class="text-maroon help_faq_code">
+              								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
-              								 </span><br>
-              								 Si la base de datos sigue siendo de sólo lectura, intente reinstalar o restaurar una copia de seguridad de la base de datos desde la página de mantenimiento.
-              								 <br><span class="text-maroon help_faq_code">Aquí también se deben verificar los derechos posteriormente y, si es necesario, corregirlos.</span>';
+              								 </div>
+              								 También puedes realizar estos pasos utilizando <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> en el directorio <span class="text-maroon help_faq_code">~/pialert/back</span>. Si la base de datos sigue estando en modo de solo lectura después de esto,
+              								 intenta reinstalar o restaurar una copia de seguridad de la base de datos a través de la página de mantenimiento. Por favor, asegúrate de verificar y ajustar los permisos correspondientes.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La página de inicio de sesión no aparece, incluso después de cambiar la contraseña.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Además de la contraseña, el archivo de configuración debe contener <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 además el parámetro <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> debe ajustarse a <span class="text-maroon help_faq_code">True</span>.';

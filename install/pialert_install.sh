@@ -461,11 +461,7 @@ download_pialert() {
 
   print_msg "- Generate autocomplete file..."
   PIALERT_CLI_PATH=$(dirname $PIALERT_HOME)
-  if [ $PIALERT_CLI_PATH == "/root" ] ; then
-      sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH/pialert|" $PIALERT_HOME/install/pialert-cli.autocomplete
-  else
-      sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH|" $PIALERT_HOME/install/pialert-cli.autocomplete
-  fi
+  sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH/pialert|" $PIALERT_HOME/install/pialert-cli.autocomplete
 
   print_msg "- Copy autocomplete file..."
   if [ -d "/etc/bash_completion.d" ] ; then

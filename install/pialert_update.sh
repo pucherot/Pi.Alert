@@ -160,7 +160,6 @@ check_packages() {
   sudo apt-get install mmdb-bin -y                                2>&1 >> "$LOG"
 }
 
-
 # ------------------------------------------------------------------------------
 # Download and uncompress Pi.Alert
 # ------------------------------------------------------------------------------
@@ -187,11 +186,7 @@ download_pialert() {
 
   print_msg "- Generate autocomplete file..."
   PIALERT_CLI_PATH=$(dirname $PIALERT_HOME)
-  if [ $PIALERT_CLI_PATH == "/root" ] ; then
-      sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH/pialert|" $PIALERT_HOME/install/pialert-cli.autocomplete
-  else
-      sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH|" $PIALERT_HOME/install/pialert-cli.autocomplete
-  fi
+  sed -i "s|<YOUR_PIALERT_PATH>|$PIALERT_CLI_PATH/pialert|" $PIALERT_HOME/install/pialert-cli.autocomplete
 
   print_msg "- Copy autocomplete file..."
   if [ -d "/etc/bash_completion.d" ] ; then
@@ -199,7 +194,6 @@ download_pialert() {
   elif [ -d "/usr/share/bash-completion/completions" ] ; then
       sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /usr/share/bash-completion/completions/pialert-cli
   fi
-
 }
 
 # ------------------------------------------------------------------------------
@@ -335,9 +329,8 @@ update_db() {
 
 }
 
-
 # ------------------------------------------------------------------------------
-#  
+# Update permissions
 # ------------------------------------------------------------------------------
 update_permissions() {
   print_msg "- Set Permissions..."
@@ -365,8 +358,9 @@ update_permissions() {
   ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"          2>&1 >> "$LOG"
   ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"  2>&1 >> "$LOG"
 
+  # Patch DB
   echo ""
-  #$PIALERT_HOME/back/pialert-cli update_db
+  $PIALERT_HOME/back/pialert-cli update_db
 
 }
 

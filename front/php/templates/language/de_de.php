@@ -547,14 +547,14 @@ $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Ich bekomme die Meldung, dass die D
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
               								 <span class="text-maroon help_faq_code">drwxrwx---  2 (dein Username) www-data</span><br>
               								 Sollte die Berechtigung nicht stimmen, kannst du sie mit folgenden Befehlen im Terminal oder der Konsole wieder setzen:<br>
-              								 <div class="help_faq_code" style="padding-left: 10px;">
+              								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
                 							 chmod -R 770 ~/pialert/db
-              								 </div><br>
-              								 Du kannst diese Schritte auch über <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> erledigen.
-              								 Wenn die Datenbank danach noch immer schreibgeschützt ist, versuche eine erneute Installation, oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.<br>
-              								 <span class="text-maroon help_faq_code">Hier gilt es dann ebenfall die Rechte im Anschluss zu prüfen und ggf. zur korrigieren</span>';
+              								 </div>
+              								 Du hast auch die Möglichkeit, diese Schritte im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> mit dem Befehl <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> auszuführen.
+											 Falls die Datenbank danach weiterhin schreibgeschützt ist, empfiehlt sich eine erneute Installation oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.
+											 Beachte dabei, dass es wichtig ist, die Rechte im Anschluss zu überprüfen und gegebenenfalls zu korrigieren.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';

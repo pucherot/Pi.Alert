@@ -151,8 +151,8 @@ def set_pia_file_permissions():
 
 def set_pia_reports_permissions():
 
-    os.system("chown -R " + get_username() + ":www-data " + REPORTPATH_WEBGUI)
-    os.system("chmod -R 775 " + REPORTPATH_WEBGUI)
+    os.system("sudo chown -R " + get_username() + ":www-data " + REPORTPATH_WEBGUI)
+    os.system("sudo chmod -R 775 " + REPORTPATH_WEBGUI)
 
 #===============================================================================
 # Countdown
@@ -1934,7 +1934,7 @@ def service_monitoring():
     global VERSION
     global VERSION_DATE
 
-    prepare_service_monitoring_env()
+    # prepare_service_monitoring_env()
 
     # Empty Log and write new header
     print("\nStart Services Monitoring...")
