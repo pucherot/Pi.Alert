@@ -239,7 +239,6 @@ def get_internet_IP ():
 
     # dig_args = ['dig', '+short', '-4', 'myip.opendns.com', '@resolver1.opendns.com']
     # cmd_output = subprocess.check_output (dig_args, universal_newlines=True)
-
     curl_args = ['curl', '-s', QUERY_MYIP_SERVER]
     cmd_output = subprocess.check_output (curl_args, universal_newlines=True)
 
@@ -455,84 +454,66 @@ def scan_network ():
     # ScanCycle data        
     cycle_interval  = scanCycle_data['cic_EveryXmin']
     arpscan_retries = scanCycle_data['cic_arpscanCycles']
-    
     # arp-scan command
     print ('\nScanning...')
     print ('    arp-scan Method...')
     print_log ('arp-scan starts...')
     arpscan_devices = execute_arpscan ()
     print_log ('arp-scan ends')
-
     # Pi-hole method
     print ('    Pi-hole Method...')
     openDB()
     print_log ('Pi-hole copy starts...')
     copy_pihole_network()
-
     # DHCP Leases method
     print ('    DHCP Leases Method...')
     read_DHCP_leases ()
-
     # Fritzbox method
     print ('    Fritzbox Method...')
     openDB()
     print_log ('Fritzbox copy starts...')
     read_fritzbox_active_hosts()
-
     # Load current scan data 1/2
     print ('\nProcessing scan results...')
-
     # Process Ignore list
     print ('    Processing ignore list...')
     remove_entries_from_table()
-
     # Load current scan data 2/2
     print_log ('Save scanned devices')
     save_scanned_devices (arpscan_devices, cycle_interval)
-    
-    # Print stats
+        # Print stats
     print_log ('Print Stats')
     print_scan_stats()
     print_log ('Stats end')
-
     # Create Events
     print ('\nUpdating DB Info...')
     print ('    Sessions Events (connect / discconnect) ...')
     insert_events()
-
     # Create New Devices
     # after create events -> avoid 'connection' event
     print ('    Creating new devices...')
     create_new_devices ()
-
     # Update devices info
     print ('    Updating Devices Info...')
     update_devices_data_from_scan ()
-
     # Resolve devices names
     print_log ('   Resolve devices names...')
     update_devices_names()
-
     # Void false connection - disconnections
     print ('    Voiding false (ghost) disconnections...')
     void_ghost_disconnections ()
-  
     # Pair session events (Connection / Disconnection)
     print ('    Pairing session events (connection / disconnection) ...')
-    pair_sessions_events()  
-  
+    pair_sessions_events()
     # Sessions snapshot
     print ('    Creating sessions snapshot...')
     create_sessions_snapshot ()
-  
     # Skip repeated notifications
     print ('    Skipping repeated notifications...')
     skip_repeated_notifications ()
-  
     # Calc Activity History
     print ('    Calculate Activity History...')
     calculate_activity_history ()
-
     # Web Service Monitoring
     try:
         enable_services_monitoring = SCAN_WEBSERVICES
@@ -541,7 +522,6 @@ def scan_network ():
     if enable_services_monitoring == True:
         if str(startTime)[15] == "0":
             service_monitoring()
-
     # Check Rogue DHCP
     try:
         enable_rogue_dhcp_detection = SCAN_ROGUE_DHCP
@@ -617,7 +597,6 @@ def execute_arpscan_on_interface (SCAN_SUBNETS):
     subnets = SCAN_SUBNETS.strip().split()
     # Retry is 3 to avoid false offline devices
     arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--bandwidth=256k', '--retry=6'] + subnets
-    # arpscan_args = ['sudo', 'arp-scan', '--ignoredups', '--retry=6'] + subnets
 
     # Execute command
     try:
@@ -796,25 +775,21 @@ def print_scan_stats ():
                     WHERE cur_ScanCycle = ? """,
                     (cycle,))
     print ('    Devices Detected.......:', str (sql.fetchone()[0]) )
-
     # Devices arp-scan
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='arp-scan' AND cur_ScanCycle = ? """,
                     (cycle,))
     print ('        arp-scan Method....:', str (sql.fetchone()[0]) )
-
     # Devices Pi-hole
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Pi-hole' AND cur_ScanCycle = ? """,
                     (cycle,))
     print ('        Pi-hole Method.....: +' + str (sql.fetchone()[0]) )
-
     # Devices Pi-hole
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Fritzbox' AND cur_ScanCycle = ? """,
                     (cycle,))
     print ('        Fritzbox Method....: +' + str (sql.fetchone()[0]) )
-
     # New Devices
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanCycle = ? 
@@ -822,7 +797,6 @@ def print_scan_stats ():
                                       WHERE dev_MAC = cur_MAC) """,
                     (cycle,))
     print ('        New Devices........: ' + str (sql.fetchone()[0]) )
-
     # Devices in this ScanCycle
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
@@ -830,7 +804,6 @@ def print_scan_stats ():
                     (cycle,))
     print ('')
     print ('    Devices in this cycle..: ' + str (sql.fetchone()[0]) )
-
     # Down Alerts
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_AlertDeviceDown = 1
@@ -840,7 +813,6 @@ def print_scan_stats ():
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
     print ('        Down Alerts........: ' + str (sql.fetchone()[0]) )
-
     # New Down Alerts
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_AlertDeviceDown = 1
@@ -851,7 +823,6 @@ def print_scan_stats ():
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
     print ('        New Down Alerts....: ' + str (sql.fetchone()[0]) )
-
     # New Connections
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
@@ -859,7 +830,6 @@ def print_scan_stats ():
                       AND dev_ScanCycle = ? """,
                     (cycle,))
     print ('        New Connections....: ' + str ( sql.fetchone()[0]) )
-
     # Disconnections
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_PresentLastScan = 1
@@ -869,7 +839,6 @@ def print_scan_stats ():
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
     print ('        Disconnections.....: ' + str ( sql.fetchone()[0]) )
-
     # IP Changes
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
@@ -1491,54 +1460,6 @@ def process_nmap_scan(_nmap_result):
 #===============================================================================
 # Services Monitoring
 #===============================================================================
-def prepare_service_monitoring_env ():
-    # Deprecated
-    sql_create_table = """ CREATE TABLE IF NOT EXISTS Services_Events(
-                                moneve_URL TEXT NOT NULL,
-                                moneve_DateTime TEXT NOT NULL,
-                                moneve_StatusCode NUMERIC NOT NULL,
-                                moneve_Latency TEXT NOT NULL,
-                                moneve_TargetIP TEXT NOT NULL
-                            ); """
-    sql.execute(sql_create_table)
-
-    sql_create_table = """ CREATE TABLE IF NOT EXISTS Services_CurrentScan(
-                                cur_URL TEXT NOT NULL,
-                                cur_DateTime TEXT NOT NULL,
-                                cur_StatusCode NUMERIC NOT NULL,
-                                cur_Latency TEXT NOT NULL,
-                                cur_AlertEvents INTEGER DEFAULT 0,
-                                cur_AlertDown INTEGER DEFAULT 0,
-                                cur_StatusChanged INTEGER DEFAULT 0,
-                                cur_LatencyChanged INTEGER DEFAULT 0,
-                                cur_TargetIP TEXT NOT NULL,
-                                cur_StatusCode_prev NUMERIC,
-                                cur_TargetIP_prev TEXT
-                            ); """
-    sql.execute(sql_create_table)
-
-    sql_create_table = """  CREATE TABLE IF NOT EXISTS Services(
-                                mon_URL TEXT NOT NULL,
-                                mon_MAC TEXT,
-                                mon_LastStatus NUMERIC NOT NULL,
-                                mon_LastLatency TEXT NOT NULL,
-                                mon_LastScan TEXT NOT NULL,
-                                mon_Tags TEXT,
-                                mon_AlertEvents INTEGER DEFAULT 0,
-                                mon_AlertDown INTEGER DEFAULT 0,
-                                mon_TargetIP TEXT NOT NULL,
-                                PRIMARY KEY(mon_URL)
-                            ); """
-    sql.execute(sql_create_table)
-    
-    # Try to add new column to Services table
-    try:
-        sql_alter_table = """ ALTER TABLE Services ADD COLUMN mon_Notes TEXT; """
-        sql.execute(sql_alter_table)
-    except:
-        dbstate = "Column allready exists"
-
-# -----------------------------------------------------------------------------
 def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect):
 
     if _mon_Redirect != 200 and _mon_lastStatus == 200:
@@ -1830,8 +1751,6 @@ def service_monitoring():
     global VERSION
     global VERSION_DATE
 
-    # prepare_service_monitoring_env()
-
     # Empty Log and write new header
     print("\nStart Services Monitoring...")
     print("    Prepare Logfile...")
@@ -1889,7 +1808,6 @@ def service_monitoring():
 
             # Update Service with lastLatence, lastScan and lastStatus after compare with services_current_scan
             set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
-
         break
 
     else:
@@ -2123,7 +2041,6 @@ def email_reporting ():
 
 #-------------------------------------------------------------------------------
 def send_pushsafer (_Text):
-    
     try:
         notification_target = PUSHSAFER_DEVICE
     except NameError:
@@ -2151,7 +2068,6 @@ def send_pushsafer (_Text):
 
 #-------------------------------------------------------------------------------
 def send_pushover (_Text):
-
     # Remove one linebrake between "Server" and the headline of the event type
     _pushover_Text = _Text.replace('\n\n\n', '\n\n')
     # Text-layout tweak
@@ -2170,7 +2086,6 @@ def send_pushover (_Text):
 
 #-------------------------------------------------------------------------------
 def send_ntfy (_Text):
-
     # Prepare header
     headers = {
         "Title": "Pi.Alert Notification",
@@ -2193,7 +2108,6 @@ def send_ntfy (_Text):
 
 #-------------------------------------------------------------------------------
 def send_telegram (_Text):
-
     # Remove one linebrake between "Server" and the headline of the event type
     _telegram_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
@@ -2204,7 +2118,6 @@ def send_telegram (_Text):
 
 #-------------------------------------------------------------------------------
 def send_webgui (_Text):
-
     # Remove one linebrake between "Server" and the headline of the event type
     _webgui_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
@@ -2221,7 +2134,6 @@ def send_webgui (_Text):
 # Test REPORTING
 #===============================================================================
 def email_reporting_test (_Mode):
-
     if _Mode == 'Test' :
         notiMessage = "Test-Notification"
     elif _Mode == 'noti_Timerstart' :
@@ -2294,7 +2206,6 @@ def send_ntfy_test (_notiMessage):
 
 #-------------------------------------------------------------------------------
 def send_pushsafer_test (_notiMessage):
-
     try:
         notification_target = PUSHSAFER_DEVICE
     except NameError:
@@ -2317,7 +2228,6 @@ def send_pushsafer_test (_notiMessage):
 
 #-------------------------------------------------------------------------------
 def send_pushover_test (_notiMessage):
-
     url = 'https://api.pushover.net/1/messages.json'
     post_fields = {
         "token": PUSHOVER_TOKEN,
