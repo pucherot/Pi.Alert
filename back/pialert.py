@@ -21,12 +21,10 @@ from fritzconnection.lib.fritzhosts import FritzHosts
 from mac_vendor_lookup import MacLookup
 from time import sleep, time, strftime
 from base64 import b64encode
-# from urllib.parse import urlparse
 try:
   from urlparse import urlparse
 except ImportError:
   from urllib.parse import urlparse
-
 import sys
 import subprocess
 import os
@@ -73,7 +71,6 @@ def main ():
     # Header
     print ('\nPi.Alert ' + VERSION +' ('+ VERSION_DATE +')')
     print ('---------------------------------------------------------')
-
     print("Current User: %s \n" % get_username())
     
     # If user is a sudoer, you can uncomment the line below to set the correct db permission every scan
@@ -138,19 +135,14 @@ def main ():
 # Set Env (Userpermissions DB-file)
 #===============================================================================
 def get_username():
-
     return pwd.getpwuid(os.getuid())[0]
 
 # ------------------------------------------------------------------------------
-
 def set_pia_file_permissions():
-
     os.system("sudo chown " + get_username() + ":www-data " + PIALERT_DB_FILE)
 
 # ------------------------------------------------------------------------------
-
 def set_pia_reports_permissions():
-
     os.system("sudo chown -R " + get_username() + ":www-data " + REPORTPATH_WEBGUI)
     os.system("sudo chmod -R 775 " + REPORTPATH_WEBGUI)
 
@@ -167,20 +159,14 @@ def start_arpscan_countdown ():
 
         # date of file creation
         FILETIME = int(os.path.getctime(STOPARPSCAN))
-        # print ("Filetime: %s" % FILETIME)
 
         # output start and end
         print("Timer Start: %s" % time.ctime(FILETIME))
         STOPTIME = FILETIME+data*60
         print("Timer Ende : %s" % time.ctime(STOPTIME))
-
         print ("----------------------------------------")
 
         ACTUALTIME = int(time.time())
-        # print (STOPTIME)
-        # print (ACTUALTIME)
-
-        # print ("----------------------------------------")
 
         if ( ACTUALTIME > STOPTIME ):
            print ("File will be deleted")
@@ -197,8 +183,6 @@ def check_internet_IP ():
     # Header
     print ('Check Internet IP')
     print ('    Timestamp:', startTime )
-
-    # Get Internet IP
     print ('\nRetrieving Internet IP...')
     internet_IP = get_internet_IP()
     # TESTING - Force IP
@@ -248,7 +232,6 @@ def check_internet_IP ():
     else :
         print ('\nSkipping Dynamic DNS update...')
 
-    # OK
     return 0
 
 #-------------------------------------------------------------------------------
@@ -266,11 +249,10 @@ def get_internet_IP ():
 
 #-------------------------------------------------------------------------------
 def get_dynamic_DNS_IP ():
-    # Using OpenDNS server
-        # dig_args = ['dig', '+short', DDNS_DOMAIN, '@resolver1.opendns.com']
 
-    # Using default DNS server
+    # Using default or OpenDNS DNS server
     dig_args = ['dig', '+short', DDNS_DOMAIN]
+    # dig_args = ['dig', '+short', DDNS_DOMAIN, '@resolver1.opendns.com']
     dig_output = subprocess.check_output (dig_args, universal_newlines=True)
 
     # Check result is an IP
@@ -293,8 +275,6 @@ def get_previous_internet_IP ():
     # get previos internet IP stored in DB
     sql.execute ("SELECT dev_LastIP FROM Devices WHERE dev_MAC = 'Internet' ")
     previous_IP = sql.fetchone()[0]
-
-    # return previous IP
     return previous_IP
 
 #-------------------------------------------------------------------------------
@@ -330,7 +310,6 @@ def check_IP_format (pIP):
     if IP is None :
         return ""
 
-    # Return IP
     return IP.group(0)
 
 #===============================================================================
@@ -370,7 +349,6 @@ def cleanup_database ():
 
     closeDB()
     
-    # OK
     return 0
 
 #===============================================================================
@@ -385,9 +363,6 @@ def update_devices_MAC_vendors (pArg = ''):
     print ('\nUpdating vendors DB (iab & oui)...')
     update_args = ['sh', PIALERT_BACK_PATH + '/update_vendors.sh', pArg]
     update_output = subprocess.check_output (update_args)
-    # DEBUG
-        # update_args = ['./vendors_db_update.sh']
-        # subprocess.call (update_args, shell=True)
 
     # Initialize variables
     recordsToUpdate = []
@@ -398,7 +373,6 @@ def update_devices_MAC_vendors (pArg = ''):
     print ('\nSearching devices vendor', end='')
     openDB()
     # Only the devices for which no vendor has yet been entered are attempted to be updated.
-    # for device in sql.execute ("SELECT * FROM Devices") :
     for device in sql.execute ("SELECT * FROM Devices WHERE dev_Vendor = ''") :
         # Search vendor in HW Vendors DB
         vendor = query_MAC_vendor (device['dev_MAC'])
@@ -417,8 +391,6 @@ def update_devices_MAC_vendors (pArg = ''):
     print ("    Devices Ignored:  ", ignored)
     print ("    Vendors Not Found:", notFound)
     print ("    Vendors updated:  ", len(recordsToUpdate) )
-    # DEBUG - print list of record to update
-        # print (recordsToUpdate)
 
     # mac-vendor-lookup update
     try:
@@ -432,23 +404,16 @@ def update_devices_MAC_vendors (pArg = ''):
         p = subprocess.call(["cp ~/.cache/mac-vendors.txt ~/.cache/mac-vendors.bak"], shell=True)
         print ('    Create mac-vendors.txt for mac-vendor-lookup')
         p = subprocess.call(["/usr/bin/sed -e 's/\t/:/g' -e 's/Ã¼/ü/g' -e 's/Ã¶/ö/g' -e 's/Ã¤/ä/g' -e 's/Ã³/ó/g' -e 's/Ã©/é/g' -e 's/â/–/g' -e 's/Â//g' -e '/^#/d' /usr/share/arp-scan/ieee-oui.txt > ~/.cache/mac-vendors.txt"], shell=True)
-    
-    # mac = MacLookup()
-    # mac.update_vendors()
 
     # update devices
     sql.executemany ("UPDATE Devices SET dev_Vendor = ? WHERE dev_MAC = ? ",
         recordsToUpdate )
-
-    # DEBUG - print number of rows updated
-        # print (sql.rowcount)
 
     closeDB()
 
 #-------------------------------------------------------------------------------
 def query_MAC_vendor (pMAC):
     try :
-        # BUGFIX #6 - Fix pMAC parameter as numbers
         pMACstr = str(pMAC)
         
         # Check MAC parameter
@@ -476,7 +441,6 @@ def query_MAC_vendor (pMAC):
 def scan_network ():
     # Header
     print ('Scan Devices')
-    # print ('    ScanCycle:', cycle)
     print ('    Timestamp:', startTime )
 
     # Query ScanCycle properties
@@ -491,8 +455,6 @@ def scan_network ():
     # ScanCycle data        
     cycle_interval  = scanCycle_data['cic_EveryXmin']
     arpscan_retries = scanCycle_data['cic_arpscanCycles']
-    # TESTING - Fast scan
-        # arpscan_retries = 1
     
     # arp-scan command
     print ('\nScanning...')
@@ -500,8 +462,6 @@ def scan_network ():
     print_log ('arp-scan starts...')
     arpscan_devices = execute_arpscan ()
     print_log ('arp-scan ends')
-    # DEBUG - print number of rows updated
-        # print (arpscan_devices)
 
     # Pi-hole method
     print ('    Pi-hole Method...')
@@ -578,7 +538,6 @@ def scan_network ():
         enable_services_monitoring = SCAN_WEBSERVICES
     except NameError:
         enable_services_monitoring = False
-
     if enable_services_monitoring == True:
         if str(startTime)[15] == "0":
             service_monitoring()
@@ -588,7 +547,6 @@ def scan_network ():
         enable_rogue_dhcp_detection = SCAN_ROGUE_DHCP
     except NameError:
         enable_rogue_dhcp_detection = False
-
     if enable_rogue_dhcp_detection == True:
         print ('\nLooking for Rogue DHCP Servers...')
         rogue_dhcp_detection ()
@@ -597,7 +555,6 @@ def scan_network ():
     sql_connection.commit()
     closeDB()
 
-    # OK
     return 0
 
 #-------------------------------------------------------------------------------
@@ -616,12 +573,10 @@ def query_ScanCycle_Data (pOpenCloseDB = False):
     if pOpenCloseDB :
         closeDB()
 
-    # Return Row
     return sqlRow
 
 #-------------------------------------------------------------------------------
 def execute_arpscan ():
-
     # output of possible multiple interfaces
     arpscan_output = ""
 
@@ -654,12 +609,10 @@ def execute_arpscan ():
             unique_mac.append(device['mac'])
             unique_devices.append(device)
 
-    # return list
     return unique_devices
 
 #-------------------------------------------------------------------------------
 def execute_arpscan_on_interface (SCAN_SUBNETS):
-    # #101 - arp-scan subnet configuration
     # Prepare command arguments
     subnets = SCAN_SUBNETS.strip().split()
     # Retry is 3 to avoid false offline devices
@@ -702,8 +655,6 @@ def copy_pihole_network ():
                       AND hwaddr <> '00:00:00:00:00:00' """)
     sql.execute ("""UPDATE PiHole_Network SET PH_Name = '(unknown)'
                     WHERE PH_Name IS NULL OR PH_Name = '' """)
-    # DEBUG
-        # print (sql.rowcount)
 
     # Close Pi-hole DB
     sql.execute ("DETACH PH")
@@ -741,8 +692,6 @@ def read_fritzbox_active_hosts ():
             except:
                 vendor = "Prefix is not registered"
             
-            # DEBUG
-            # print(f'{ip:<16} {hostname:<28} {mac:<20} {vendor}')
             sql.execute ("INSERT INTO Fritzbox_Network (FB_MAC, FB_IP, FB_Name, FB_Vendor) "+
                          "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
 
@@ -753,17 +702,12 @@ def read_DHCP_leases ():
         return
             
     # Read DHCP Leases
-    # Bugfix #1 - dhcp.leases: lines with different number of columns (5 col)
     data = []
     with open(DHCP_LEASES, 'r') as f:
         for line in f:
             row = line.rstrip().split()
             if len(row) == 5 :
                 data.append (row)
-    # with open(DHCP_LEASES) as f:
-    #    reader = csv.reader(f, delimiter=' ')
-    #    data = [(col1, col2, col3, col4, col5)
-    #            for col1, col2, col3, col4, col5 in reader]
 
     # Insert into PiAlert table
     sql.execute ("DELETE FROM DHCP_Leases")
@@ -771,8 +715,6 @@ def read_DHCP_leases ():
                             DHCP_IP, DHCP_Name, DHCP_MAC2)
                         VALUES (?, ?, ?, ?, ?)
                      """, data)
-    # DEBUG
-        # print (sql.rowcount)
 
 #-------------------------------------------------------------------------------
 def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
@@ -816,15 +758,8 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
         sql.execute ("""INSERT INTO CurrentScan (cur_ScanCycle, cur_MAC, cur_IP, cur_Vendor, cur_ScanMethod)
                         VALUES (?, 'Internet', ?, Null, 'queryDNS') """, (cycle, internet_IP) )
 
-    # #76 Add Local MAC of default local interface
-      # BUGFIX #106 - Device that pialert is running
-        # local_mac_cmd = ["bash -lc ifconfig `ip route list default | awk {'print $5'}` | grep ether | awk '{print $2}'"]
-          # local_mac_cmd = ["/sbin/ifconfig `ip route list default | sort -nk11 | head -1 | awk {'print $5'}` | grep ether | awk '{print $2}'"]
     local_mac_cmd = ["/sbin/ifconfig `ip -o route get 1 | sed 's/^.*dev \\([^ ]*\\).*$/\\1/;q'` | grep ether | awk '{print $2}'"]
     local_mac = subprocess.Popen (local_mac_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].decode().strip()
-
-    # local_dev_cmd = ["ip -o route get 1 | sed 's/^.*dev \\([^ ]*\\).*$/\\1/;q'"]
-    # local_dev = subprocess.Popen (local_dev_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).communicate()[0].decode().strip()
     
     # local_ip_cmd = ["ip route list default | awk {'print $7'}"]
     local_ip_cmd = ["ip -o route get 1 | sed 's/^.*src \\([^ ]*\\).*$/\\1/;q'"]
@@ -988,8 +923,6 @@ def create_new_devices ():
                     (startTime, startTime, cycle) ) 
 
     # Pi-hole - Insert events for new devices
-    # NOT STRICYLY NECESARY (Devices can be created through Current_Scan)
-    # Bugfix #2 - Pi-hole devices w/o IP
     print_log ('New devices - 3 Pi-hole Events')
     sql.execute ("""INSERT INTO Events (eve_MAC, eve_IP, eve_DateTime,
                         eve_EventType, eve_AdditionalInfo,
@@ -1002,7 +935,6 @@ def create_new_devices ():
                     (startTime, ) ) 
 
     # Pi-hole - Create New Devices
-    # Bugfix #2 - Pi-hole devices w/o IP
     print_log ('New devices - 4 Pi-hole Create devices')
     sql.execute ("""INSERT INTO Devices (dev_MAC, dev_name, dev_Vendor,
                         dev_LastIP, dev_FirstConnection, dev_LastConnection,
@@ -1028,12 +960,6 @@ def create_new_devices ():
 
     # DHCP Leases - Create New Devices
     print_log ('New devices - 6 DHCP Leases Create devices')
-    # BUGFIX #23 - Duplicated MAC in DHCP.Leases
-    # TEST - Force Duplicated MAC
-        # sql.execute ("""INSERT INTO DHCP_Leases VALUES
-        #                 (1610700000, 'TEST1', '10.10.10.1', 'Test 1', '*')""")
-        # sql.execute ("""INSERT INTO DHCP_Leases VALUES
-        #                 (1610700000, 'TEST2', '10.10.10.2', 'Test 2', '*')""")
     sql.execute ("""INSERT INTO Devices (dev_MAC, dev_name, dev_LastIP, 
                         dev_Vendor, dev_FirstConnection, dev_LastConnection,
                         dev_ScanCycle, dev_AlertEvents, dev_AlertDeviceDown,
@@ -1185,8 +1111,6 @@ def update_devices_data_from_scan ():
         if vendor != -1 and vendor != -2 :
             recordsToUpdate.append ([vendor, device['dev_MAC']])
 
-    # DEBUG - print list of record to update
-        # print (recordsToUpdate)
     sql.executemany ("UPDATE Devices SET dev_Vendor = ? WHERE dev_MAC = ? ",
         recordsToUpdate )
 
@@ -1200,7 +1124,6 @@ def update_devices_data_from_scan ():
     print_log ('Update devices end')
 
 #-------------------------------------------------------------------------------
-# Feature #43 - Resoltion name for unknown devices
 def update_devices_names ():
     # Initialize variables
     recordsToUpdate = []
@@ -1209,7 +1132,6 @@ def update_devices_names ():
 
     # Devices without name
     print ('        Trying to resolve devices without name...', end='')
-    # BUGFIX #97 - Updating name of Devices w/o IP
     for device in sql.execute ("SELECT * FROM Devices WHERE dev_Name IN ('(unknown)','') AND dev_LastIP <> '-'") :
         # Resolve device name
         newName = resolve_device_name (device['dev_MAC'], device['dev_LastIP'])
@@ -1227,14 +1149,9 @@ def update_devices_names ():
     # Print log
     print ('')
     print ("        Names updated:  ", len(recordsToUpdate) )
-    # DEBUG - print list of record to update
-        # print (recordsToUpdate)
 
     # update devices
     sql.executemany ("UPDATE Devices SET dev_Name = ? WHERE dev_MAC = ? ", recordsToUpdate )
-
-    # DEBUG - print number of rows updated
-        # print (sql.rowcount)
 
 #-------------------------------------------------------------------------------
 def resolve_device_name (pMAC, pIP):
@@ -1245,9 +1162,6 @@ def resolve_device_name (pMAC, pIP):
         mac = pMACstr.replace (':','')
         if len(pMACstr) != 17 or len(mac) != 12 :
             return -2
-
-        # DEBUG
-        # print (pMAC, pIP)
 
         # Resolve name with DIG
         dig_args = ['dig', '+short', '-x', pIP]
@@ -1338,13 +1252,6 @@ def void_ghost_disconnections ():
 
 #-------------------------------------------------------------------------------
 def pair_sessions_events ():
-    # NOT NECESSARY FOR INCREMENTAL UPDATE
-    # print_log ('Pair session - 1 Clean')
-    # sql.execute ("""UPDATE Events
-    #                 SET eve_PairEventRowid = NULL
-    #                 WHERE eve_EventType IN ('New Device', 'Connected')
-    #              """ )
-
     # Pair Connection / New Device events
     print_log ('Pair session - 1 Connections / New Devices')
     sql.execute ("""UPDATE Events
@@ -1382,7 +1289,6 @@ def create_sessions_snapshot ():
     print_log ('Sessions Snapshot - 2 Insert')
     sql.execute ("""INSERT INTO Sessions
                     SELECT * FROM Convert_Events_to_Sessions""" )
-
     print_log ('Sessions end')
 
 #-------------------------------------------------------------------------------
@@ -1415,7 +1321,6 @@ def validate_dhcp_address(ip_string):
 
 # -----------------------------------------------------------------------------------
 def rogue_dhcp_detection ():
-
     print_log ('Looking for Rogue DHCP Servers')
     # Create Table is not exist
     sql_create_table = """ CREATE TABLE IF NOT EXISTS Nmap_DHCP_Server(
@@ -1453,7 +1358,6 @@ def rogue_dhcp_detection ():
 
 # -----------------------------------------------------------------------------------
 def rogue_dhcp_notification ():
-
     sql.execute("SELECT DISTINCT dhcp_server FROM Nmap_DHCP_Server")
     rows = sql.fetchall()
 
@@ -1483,7 +1387,6 @@ def rogue_dhcp_notification ():
                     rogue_dhcp_server_list.append(rows[i][0])
             else:
                 print ('    Detection Error')
-
 
     rogue_dhcp_reports = glob.glob(REPORTPATH_WEBGUI + "*Rogue DHCP Server*.txt")    
 
@@ -1518,7 +1421,6 @@ def rogue_dhcp_notification ():
 
 #===============================================================================
 # nmap Scan of a single device (inactive)
-#
 # Maybe outsource to an extra script because of longer runtime
 #===============================================================================
 def prepare_nmap_env ():
@@ -1590,7 +1492,7 @@ def process_nmap_scan(_nmap_result):
 # Services Monitoring
 #===============================================================================
 def prepare_service_monitoring_env ():
-
+    # Deprecated
     sql_create_table = """ CREATE TABLE IF NOT EXISTS Services_Events(
                                 moneve_URL TEXT NOT NULL,
                                 moneve_DateTime TEXT NOT NULL,
@@ -1643,9 +1545,6 @@ def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatenc
         _mon_Redirect_Text = "Redirected by " + str(_mon_Redirect)
     else:
         _mon_Redirect_Text = ""
-
-    #DEBUG    
-    #print(_mon_URL + " - " + str(_mon_lastScan) + " - " + str(_mon_lastStatus) + " - " + str(_mon_lastLatence) + " - " + str(_mon_TargetIP) + " - " + str(_mon_Redirect) + " - " + str(_mon_Redirect_Text))
 
     sqlite_insert = """UPDATE Services SET mon_LastScan=?, mon_LastStatus=?, mon_LastLatency=?, mon_TargetIP=?, mon_Notes=? WHERE mon_URL=?;"""
 
@@ -1716,7 +1615,6 @@ def service_monitoring_log(site, status, latency):
 def check_services_health(site):
     # Enable self signed SSL
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-    """Send GET request to input site and return status code"""
     try:
         resp = requests.get(site, verify=False, timeout=10)
         latency = resp.elapsed
@@ -1738,7 +1636,6 @@ def check_services_health(site):
 def check_services_redirect(site):
     # Enable self signed SSL
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-    """Send GET request to input site and return status code"""
     try:
         resp = requests.get(site, verify=False, timeout=10, allow_redirects=False)
         return resp.status_code
@@ -1791,7 +1688,6 @@ def print_service_monitoring_changes():
 
 # -----------------------------------------------------------------------------
 def service_monitoring_notification():
-
     global mail_text_webservice
     global mail_html_webservice
     
@@ -1926,7 +1822,7 @@ def service_monitoring_notification():
     else :
         print ('    No changes to report...')
 
-    # # Commit changes
+    # Commit changes
     sql_connection.commit()
 
 # -----------------------------------------------------------------------------
@@ -2159,11 +2055,6 @@ def email_reporting ():
     format_report_section (mail_section_events, 'SECTION_EVENTS',
         'TABLE_EVENTS', mail_text_events, mail_html_events)
 
-    # DEBUG - Write output emails for testing
-    # if True :
-    #     write_file (LOG_PATH + '/report_output.txt', mail_text) 
-    #     write_file (LOG_PATH + '/report_output.html', mail_html)
-
     # Send Mail
     if mail_section_Internet == True or mail_section_new_devices == True \
     or mail_section_devices_down == True or mail_section_events == True :
@@ -2214,7 +2105,6 @@ def email_reporting ():
     sql.execute ("""UPDATE Events SET eve_PendingAlertEmail = 0
                     WHERE eve_PendingAlertEmail = 1""")
 
-    # DEBUG - print number of rows updated
     print ('    Notifications:', sql.rowcount)
 
     # Commit changes
@@ -2257,7 +2147,6 @@ def send_pushsafer (_Text):
         "ut" : 'Open Pi.Alert',
         "k" : PUSHSAFER_TOKEN,
         }
-    
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
@@ -2277,7 +2166,6 @@ def send_pushover (_Text):
         "title" : 'Pi.Alert Message - '+subheadline,
         "message" : _pushover_Text,
         }
-    
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
@@ -2318,7 +2206,6 @@ def send_telegram (_Text):
 def send_webgui (_Text):
 
     # Remove one linebrake between "Server" and the headline of the event type
-    #_webgui_Text = _Text
     _webgui_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
     findsubheadline = _webgui_Text.split('\n')
@@ -2426,7 +2313,6 @@ def send_pushsafer_test (_notiMessage):
         "ut" : 'Open Pi.Alert',
         "k" : PUSHSAFER_TOKEN,
         }
-
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
@@ -2439,7 +2325,6 @@ def send_pushover_test (_notiMessage):
         "title" : 'Pi.Alert Message',
         "message" : _notiMessage,
         }
-    
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
@@ -2544,9 +2429,6 @@ def send_email (pText, pHTML):
     # Send mail
     smtp_connection = smtplib.SMTP (SMTP_SERVER, SMTP_PORT)
     smtp_connection.ehlo()
-#    smtp_connection.starttls()
-#    smtp_connection.ehlo()
-#    smtp_connection.login (SMTP_USER, SMTP_PASS)
     if not SafeParseGlobalBool("SMTP_SKIP_TLS"):
         smtp_connection.starttls()
         smtp_connection.ehlo()
