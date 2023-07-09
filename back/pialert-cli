@@ -179,14 +179,14 @@ EOM
     fi
     sudo killall arp-scan
     echo $STOPTIMER > ${SCRIPTPATH}/../db/setting_stoparpscan
-    /bin/python3 ${SCRIPTPATH}/pialert.py reporting_starttimer
+    /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_starttimer
     echo "The arp-scan is disabled"
     ;;
 
   enable_scan)
     ## stop active scans
     rm ${SCRIPTPATH}/../db/setting_stoparpscan
-    /bin/python3 ${SCRIPTPATH}/pialert.py reporting_stoptimer
+    /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_stoptimer
     echo "The arp-scan is enabled"
     ;;
 
@@ -343,7 +343,7 @@ EOM
 
   reporting_test)
     ## test reporting
-    /bin/python3 ${SCRIPTPATH}/pialert.py reporting_test
+    /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_test
     echo "Test executed"
     ;;
 
