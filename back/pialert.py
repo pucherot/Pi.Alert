@@ -475,12 +475,12 @@ def scan_network ():
     read_fritzbox_active_hosts()
     # Load current scan data 1/2
     print ('\nProcessing scan results...')
-    # Process Ignore list
-    print ('    Processing ignore list...')
-    remove_entries_from_table()
     # Load current scan data 2/2
     print_log ('Save scanned devices')
     save_scanned_devices (arpscan_devices, cycle_interval)
+    # Process Ignore list
+    print ('    Processing ignore list...')
+    remove_entries_from_table()
         # Print stats
     print_log ('Print Stats')
     print_scan_stats()
