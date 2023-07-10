@@ -754,7 +754,7 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
 def remove_entries_from_table():
     try:
         MAC_IGNORE_LIST
-        print ('        Delete ' + str(len(MAC_IGNORE_LIST)) + ' ignored devices from scan')
+        print ('        Delete ' + str(len(MAC_IGNORE_LIST)) + ' ignored devices from scan on appearance')
 
         mac_addresses = ','.join(['"{}"'.format(mac) for mac in MAC_IGNORE_LIST])
         query = 'DELETE FROM CurrentScan WHERE cur_MAC IN ({})'.format(mac_addresses)
