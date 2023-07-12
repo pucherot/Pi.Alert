@@ -92,7 +92,7 @@ $pia_lang['Device_Tablelenght_all'] = 'Alle';
 $pia_lang['Device_Table_info'] = 'Zeige _START_ bis _END_ von _TOTAL_ Einträgen';
 $pia_lang['Device_Table_nav_next'] = 'Nächste';
 $pia_lang['Device_Table_nav_prev'] = 'Zurück';
-$pia_lang['Device_bulkEditor_mode'] = 'Massen-Editor';
+$pia_lang['Device_bulkEditor_mode'] = 'Multi-Editor';
 $pia_lang['Device_bulkEditor_mode_quit'] = 'Editor beenden';
 $pia_lang['Device_bulkEditor_selectall'] = 'Alle auswählen';
 $pia_lang['Device_bulkEditor_selectnone'] = 'Alle abwählen';
@@ -102,6 +102,12 @@ $pia_lang['Device_bulkEditor_savebox_mod_devices'] = 'Geänderte Geräte';
 $pia_lang['Device_bulkEditor_savebox_mod_fields'] = 'Geänderte Werte';
 $pia_lang['Device_bulkEditor_hostbox_title'] = 'Wähle die zu bearbeitenden Geräte aus';
 $pia_lang['Device_bulkEditor_inputbox_title'] = 'Felder bearbeiten';
+$pia_lang['Device_bulkDel_button'] = 'GERÄTE LÖSCHEN';
+$pia_lang['Device_bulkDel_info_head'] = 'Mehrere Geräte löschen';
+$pia_lang['Device_bulkDel_info_text'] = 'Mit dieser Funktion löschst du eines oder mehrere Geräte aus der Datenbank. Wenn sich die Geräte noch im Netzwerk befinden, werden diese, unter Umständen, wieder in die Datenbank aufgenommen, jedoch ohne die individuellen Einstellungen.';
+$pia_lang['Device_bulkDel_back_before'] = 'Geräteanzahl vorher';
+$pia_lang['Device_bulkDel_back_after'] = 'Geräteanzahl aktuell';
+$pia_lang['Device_bulkDel_back_hosts'] = 'Zu löschende MAC-Adressen';
 
 //////////////////////////////////////////////////////////////////
 // Presence Page

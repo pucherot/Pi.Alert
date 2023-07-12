@@ -67,7 +67,11 @@ $Pia_Graph_Device_Arch = $graph_arrays[4];
   <div class="content-wrapper">
 
 <?php
+// #############################################################################
+// Start Bulk-Editor
+// #############################################################################
 if ($_REQUEST['mod'] == 'bulkedit') {
+	require 'php/templates/notification.php';
 
 	echo '<section class="content-header">
           <h1 id="pageTitle">' . $pia_lang['Device_Title'] . ' - ' . $pia_lang['Device_bulkEditor_mode'] . '</h1>
@@ -164,6 +168,8 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 
 		}
 
+		echo '<a href="./devices.php?mod=bulkedit" class="btn btn-default pull-right" role="button" style="margin-bottom: 10px;">' . $pia_lang['Gen_Close'] . '</a>';
+
 		print_box_bottom_element();
 	}
 
@@ -173,12 +179,19 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 
 	print_box_top_element($pia_lang['Device_bulkEditor_hostbox_title']);
 
-	$sql = 'SELECT dev_Name, dev_MAC FROM Devices ORDER BY dev_Name COLLATE NOCASE ASC';
+	$sql = 'SELECT dev_Name, dev_MAC, dev_PresentLastScan, dev_Archived, dev_NewDevice, dev_AlertEvents, dev_AlertDeviceDown FROM Devices ORDER BY dev_Name COLLATE NOCASE ASC';
 	$results = $db->query($sql);
 	while ($row = $results->fetchArray()) {
-		echo '<div class="table_settings_col_box" style="margin-left: 5px; margin-right: 5px;">
-             <input class="icheckbox_flat-blue hostselection" id="' . $row[1] . '" name="' . $row[1] . '" type="checkbox" style="position: relative; margin-top:-3px; margin-right: 3px;">
-             <label class="control-label" for="' . $row[1] . '" style="margin-left: 3px;">' . $row[0] . '</label>
+		//if ($row[2] == 1) {$status_border = 'border: 2px solid #00A000;';} else { $status_border = 'border: 2px solid #888;';}
+		if ($row[2] == 1) {$status_border = 'box-shadow: 0px 0px 5px 1px #00A000; border: none;';} else { $status_border = 'box-shadow: 0px 0px 5px 1px #888; border: none;';}
+		if ($row[3] == 1) {$status_box = 'background-color: #aaa;';} elseif ($row[4] == 1) {$status_box = 'background-color: #b1720c;';} else { $status_box = 'background-color: transparent;';}
+		if ($row[5] == 1 && $row[6] == 1) {$status_text_color = 'bulked_checkbox_label_alldown';} elseif ($row[5] == 1) {$status_text_color = 'bulked_checkbox_label_all';} elseif ($row[6] == 1) {$status_text_color = 'bulked_checkbox_label_down';} else { $status_text_color = '';}
+		//if ($row[4] == 1) {$status_box = 'background-color: #b1720c;';} else { $status_box = 'background-color: transparent;';}
+		echo '<div class="table_settings_col_box" style="padding-left: 0px; padding-top: 0px; ' . $status_border . '">
+             <div style="display: inline-block; ' . $status_box . ' height: 32px; width: 36px; margin-right: 3px; padding-left: 8px; padding-top: 6px;">
+             		<input class="icheckbox_flat-blue hostselection" id="' . $row[1] . '" name="' . $row[1] . '" type="checkbox" style="position: relative; margin-top:-3px; margin-right: 3px;">
+             </div>
+             <label class="control-label ' . $status_text_color . '" for="' . $row[1] . '" style="">' . $row[0] . '</label>
           </div>';
 	}
 
@@ -325,6 +338,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           </tr>
 
         </table>
+        <button type="button" class="btn btn-danger" id="btnBulkDeletion" onclick="askBulkDeletion()" style="min-width: 180px;">' . $pia_lang['Device_bulkDel_button'] . '</button>
         <input class="btn btn-danger pull-right" type="submit" value="' . $pia_lang['Gen_Save'] . '" style="margin-bottom: 10px; min-width: 180px;">';
 
 	// JS to enable/disable inputs. Inputs are delete, when disabled
@@ -397,6 +411,24 @@ if ($_REQUEST['mod'] == 'bulkedit') {
             function setTextValue (textElement, textValue) {
               $("#"+textElement).val (textValue);
             }
+
+						function askBulkDeletion() {
+						  // Ask
+						  showModalWarning(\'' . $pia_lang['Device_bulkDel_info_head'] . '\', \'' . $pia_lang['Device_bulkDel_info_text'] . '\',
+						    \'' . $pia_lang['Gen_Cancel'] . '\', \'' . $pia_lang['Gen_Delete'] . '\', \'BulkDeletion\');
+						}
+						function BulkDeletion()
+						{
+							const checkboxes = document.querySelectorAll(\'.icheckbox_flat-blue.hostselection:checked\');
+							const checkedIds = Array.from(checkboxes).map((checkbox) => checkbox.id);
+							const queryParams = new URLSearchParams();
+							checkedIds.forEach((id) => queryParams.append(\'hosts[]\', id));
+						  // Execute
+						  $.get(\'php/server/devices.php?action=BulkDeletion&\' + queryParams.toString(), function(msg) {
+						    showMessage (msg);
+						  });
+						}
+
         </script>';
 
 	print_box_bottom_element();
@@ -409,9 +441,13 @@ if ($_REQUEST['mod'] == 'bulkedit') {
   <!-- /.content-wrapper -->';
 
 	require 'php/templates/footer.php';
-
+// #############################################################################
+// End Bulk-Editor
+// #############################################################################
 } else {
-// whole datatable and js
+// #############################################################################
+// Start Device List
+// #############################################################################
 	?>
 
 <!-- Content header--------------------------------------------------------- -->
@@ -834,4 +870,7 @@ function getDevicesList (status) {
 
 <?php
 }
+// #############################################################################
+// End Device List
+// #############################################################################
 ?>

@@ -102,6 +102,12 @@ $pia_lang['Device_bulkEditor_savebox_mod_devices'] = 'Modified devices';
 $pia_lang['Device_bulkEditor_savebox_mod_fields'] = 'Changed values';
 $pia_lang['Device_bulkEditor_hostbox_title'] = 'Select the devices to be edited';
 $pia_lang['Device_bulkEditor_inputbox_title'] = 'Edit fields';
+$pia_lang['Device_bulkDel_button'] = 'BORRAR DISPOSITIVOS';
+$pia_lang['Device_bulkDel_info_head'] = 'Borrar varios dispositivos';
+$pia_lang['Device_bulkDel_info_text'] = 'Con esta función se borran uno o varios aparatos de la base de datos. Si los aparatos siguen en la red, pueden volver a añadirse a la base de datos, pero sin los ajustes individuales.';
+$pia_lang['Device_bulkDel_back_before'] = 'Número de unidades antes';
+$pia_lang['Device_bulkDel_back_after'] = 'Número actual de unidades';
+$pia_lang['Device_bulkDel_back_hosts'] = 'Direcciones MAC a eliminar';
 
 //////////////////////////////////////////////////////////////////
 // Presence Page - Update by @TeroRERO 25jul2022

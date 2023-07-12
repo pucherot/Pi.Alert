@@ -102,6 +102,12 @@ $pia_lang['Device_bulkEditor_savebox_mod_devices'] = 'Modified devices';
 $pia_lang['Device_bulkEditor_savebox_mod_fields'] = 'Changed values';
 $pia_lang['Device_bulkEditor_hostbox_title'] = 'Select the devices to be edited';
 $pia_lang['Device_bulkEditor_inputbox_title'] = 'Edit fields';
+$pia_lang['Device_bulkDel_button'] = 'DELETE DEVICES';
+$pia_lang['Device_bulkDel_info_head'] = 'Delete multiple devices';
+$pia_lang['Device_bulkDel_info_text'] = 'With this function, you delete one or more devices from the database. If the devices are still in the network, they may be added back to the database, but without the individual settings.';
+$pia_lang['Device_bulkDel_back_before'] = 'Number of devices before';
+$pia_lang['Device_bulkDel_back_after'] = 'Current number of devices';
+$pia_lang['Device_bulkDel_back_hosts'] = 'MAC addresses to be deleted';
 
 //////////////////////////////////////////////////////////////////
 // Presence Page

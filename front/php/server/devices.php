@@ -99,6 +99,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'wakeonlan':wakeonlan();
 		break;
+	case 'BulkDeletion':BulkDeletion();
+		break;
 
 	case 'getDevicesTotals':getDevicesTotals();
 		break;
@@ -983,7 +985,6 @@ function setPiAlertLanguage() {
 			}
 		} else {echo $pia_lang['BackDevices_Language_invalid'];}
 	}
-
 }
 
 //------------------------------------------------------------------------------
@@ -1169,6 +1170,35 @@ function wakeonlan() {
 
 }
 
+//------------------------------------------------------------------------------
+//  Bulk Deletion
+//------------------------------------------------------------------------------
+function BulkDeletion() {
+	global $db;
+	global $pia_lang;
+
+	$hosts = '"' . implode('","', $_REQUEST['hosts']) . '"';
+	echo $pia_lang['Device_bulkDel_back_hosts'] . ': ' . str_replace(",", ", ", $hosts) . '<br><br>';
+
+	$sql = "SELECT COUNT(*) AS row_count FROM Devices";
+	$result = $db->query($sql);
+
+	$row = $result->fetchArray();
+	$rowCount_before = $row['row_count'];
+
+	$sql = "DELETE FROM Devices WHERE dev_MAC IN ($hosts)";
+	$result = $db->query($sql);
+
+	$sql = "SELECT COUNT(*) AS row_count FROM Devices";
+	$result = $db->query($sql);
+
+	$row = $result->fetchArray();
+	$rowCount_after = $row['row_count'];
+
+	echo $pia_lang['Device_bulkDel_back_before'] . ': ' . $rowCount_before . '<br>' . $pia_lang['Device_bulkDel_back_after'] . ': ' . $rowCount_after;
+	echo ("<meta http-equiv='refresh' content='2; URL=./devices.php?mod=bulkedit'>");
+
+}
 //------------------------------------------------------------------------------
 //  End
 //------------------------------------------------------------------------------
