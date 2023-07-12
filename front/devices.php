@@ -182,8 +182,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 	$sql = 'SELECT dev_Name, dev_MAC, dev_PresentLastScan, dev_Archived, dev_NewDevice, dev_AlertEvents, dev_AlertDeviceDown FROM Devices ORDER BY dev_Name COLLATE NOCASE ASC';
 	$results = $db->query($sql);
 	while ($row = $results->fetchArray()) {
-		//if ($row[2] == 1) {$status_border = 'border: 2px solid #00A000;';} else { $status_border = 'border: 2px solid #888;';}
-		if ($row[2] == 1) {$status_border = 'box-shadow: 0px 0px 5px 1px #00A000; border: none;';} else { $status_border = 'box-shadow: 0px 0px 5px 1px #888; border: none;';}
+		if ($row[2] == 1) {$status_border = 'border: 1px solid #00A000; box-shadow: inset 0px 0px 5px 0px #00A000;';} else { $status_border = 'border: 1px solid #888;';}
 		if ($row[3] == 1) {$status_box = 'background-color: #aaa;';} elseif ($row[4] == 1) {$status_box = 'background-color: #b1720c;';} else { $status_box = 'background-color: transparent;';}
 		if ($row[5] == 1 && $row[6] == 1) {$status_text_color = 'bulked_checkbox_label_alldown';} elseif ($row[5] == 1) {$status_text_color = 'bulked_checkbox_label_all';} elseif ($row[6] == 1) {$status_text_color = 'bulked_checkbox_label_down';} else { $status_text_color = '';}
 		//if ($row[4] == 1) {$status_box = 'background-color: #b1720c;';} else { $status_box = 'background-color: transparent;';}
