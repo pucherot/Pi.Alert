@@ -11,6 +11,7 @@
 * Additional information
   * [Uninstall Pi.Alert](docs/UNINSTALL.md)
   * [Device Management](docs/DEVICE_MANAGEMENT.md)
+  * [Bulk Editor](docs/BULKEDITOR.md)
   * [Network Relationship](docs/NETWORK_RELATIONSHIP.md)
   * [Web service monitoring](docs/WEBSERVICES.md)
   * [Screenshots](docs/SCREENSHOTS.md)
