@@ -116,12 +116,12 @@ foreach ($files as $result) {
 }
 $ARCHIVE_DISKUSAGE = number_format(($ARCHIVE_DISKUSAGE / 1000000), 2, ",", ".") . ' MB';
 
-// Find latest Backup for restore -----------------------------------------------
+// Find latest DB Backup for restore and download -----------------------------------
 
 $LATEST_FILES = glob($ARCHIVE_PATH . "pialertdb_*.zip");
 if (sizeof($LATEST_FILES) == 0) {
 	$LATEST_BACKUP_DATE = $pia_lang['Maintenance_Tool_restore_blocked'];
-	$block_restore_button = true;
+	$block_restore_button_db = true;
 } else {
 	natsort($LATEST_FILES);
 	$LATEST_FILES = array_reverse($LATEST_FILES, False);
@@ -686,21 +686,14 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
 <?php
-if (!$block_restore_button) {
+if (!$block_restore_button_db) {
 	echo '<button type="button" class="btn btn-default dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">' . $pia_lang['Maintenance_Tool_restore'] . '<br>' . $LATEST_BACKUP_DATE . '</button>';
 } else {
 	echo '<button type="button" class="btn btn-default dbtools-button disabled" id="btnPiaRestoreDBfromArchive">' . $pia_lang['Maintenance_Tool_restore'] . '<br>' . $LATEST_BACKUP_DATE . '</button>';
 }
 ?>
                     </div>
-
- <?php
-if (!$block_restore_button) {
-	echo '<div class="db_tools_table_cell_b">' . $pia_lang['Maintenance_Tool_restore_text'] . ' (<a href="./download/database.php">' . $pia_lang['Maintenance_Tool_latestdb_download'] . '</a>)</div>';
-} else {
-	echo '<div class="db_tools_table_cell_b">' . $pia_lang['Maintenance_Tool_restore_text'] . '</div>';
-}
-?>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_restore_text']; ?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
@@ -708,8 +701,22 @@ if (!$block_restore_button) {
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_purgebackup_text']; ?></div>
                 </div>
-
             </div>
+
+ <?php
+echo '<div class="row">';
+if (!$block_restore_button_db) {
+	echo '<div class="col-sm-6" style="text-align: center;">
+			<a class="btn btn-default" href="./download/database.php" role="button" style="margin-top: 20px; margin-bottom: 20px;">' . $pia_lang['Maintenance_Tool_latestdb_download'] . '</a>
+			</div>';}
+echo '<div class="col-sm-6" style="text-align: center;">
+			<a class="btn btn-default" href="./download/config.php" role="button" style="margin-top: 20px; margin-bottom: 20px;">' . $pia_lang['Maintenance_Tool_latestconf_download'] . '</a>
+			</div>';
+echo '</div>';
+?>
+
+
+
         </div>
     </div>
 </div>
