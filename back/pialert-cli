@@ -236,7 +236,7 @@ EOM
     echo -e "\nPurge old db backup"
     rm ${PIA_DB_FILE_PATH}/pialert.db.bak
     echo -e "...Create backup before insert new table"
-    cp $PIA_DB_FILE ${PIA_DB_FILE_PATH}/pialert.db.bak
+    sqlite3 "$PIA_DB_FILE" ".backup '${PIA_DB_FILE_PATH}/pialert.db.bak'"
     # Online_History
     echo -e "...Insert new table 'Online_History' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Online_History' ('Index' INTEGER, 'Scan_Date' TEXT, 'Online_Devices' INTEGER, 'Down_Devices' INTEGER, 'All_Devices' INTEGER, 'Archived_Devices' INTEGER, PRIMARY KEY('Index' AUTOINCREMENT));"
