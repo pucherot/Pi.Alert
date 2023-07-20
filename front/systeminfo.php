@@ -66,17 +66,17 @@ $net_interfaces_rx = explode("\n", trim($network_result));
 $network_result = shell_exec("cat /proc/net/dev | tail -n +3 | awk '{print $10}'");
 $net_interfaces_tx = explode("\n", trim($network_result));
 //hdd stat
-$hdd_result = shell_exec("df | tail | awk '{print $1}'");
+$hdd_result = shell_exec("df | awk '{print $1}'");
 $hdd_devices = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | tail | awk '{print $2}'");
+$hdd_result = shell_exec("df | awk '{print $2}'");
 $hdd_devices_total = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | tail | awk '{print $3}'");
+$hdd_result = shell_exec("df | awk '{print $3}'");
 $hdd_devices_used = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | tail | awk '{print $4}'");
+$hdd_result = shell_exec("df | awk '{print $4}'");
 $hdd_devices_free = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | tail | awk '{print $5}'");
+$hdd_result = shell_exec("df | awk '{print $5}'");
 $hdd_devices_percent = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | tail | awk '{print $6}'");
+$hdd_result = shell_exec("df | awk '{print $6}'");
 $hdd_devices_mount = explode("\n", trim($hdd_result));
 //usb devices
 $usb_result = shell_exec("lsusb");
@@ -199,11 +199,14 @@ echo '<div class="box box-solid">
             <div class="box-body">';
 for ($x = 0; $x < sizeof($hdd_devices); $x++) {
 	if (stristr($hdd_devices[$x], '/dev/')) {
+		if ($hdd_devices_total[$x] == 0) {$temp_total = 0;} else { $temp_total = number_format(round(($hdd_devices_total[$x] / 1024 / 1024), 2), 2, ',', '.');}
+		if ($hdd_devices_used[$x] == 0) {$temp_used = 0;} else { $temp_used = number_format(round(($hdd_devices_used[$x] / 1024 / 1024), 2), 2, ',', '.');}
+		if ($hdd_devices_free[$x] == 0) {$temp_free = 0;} else { $temp_free = number_format(round(($hdd_devices_free[$x] / 1024 / 1024), 2), 2, ',', '.');}
 		echo '<div class="row">';
 		echo '<div class="col-sm-4 sysinfo_gerneral_a">Mount point "' . $hdd_devices_mount[$x] . '"</div>';
-		echo '<div class="col-sm-2 sysinfo_gerneral_b">Total: ' . number_format(round(($hdd_devices_total[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB</div>';
-		echo '<div class="col-sm-3 sysinfo_gerneral_b">Used: ' . number_format(round(($hdd_devices_used[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB (' . number_format($hdd_devices_percent[$x], 1, ',', '.') . '%)</div>';
-		echo '<div class="col-sm-2 sysinfo_gerneral_b">Free: ' . number_format(round(($hdd_devices_free[$x] / 1024 / 1024), 2), 2, ',', '.') . ' GB</div>';
+		echo '<div class="col-sm-2 sysinfo_gerneral_b">Total: ' . $temp_total . ' GB</div>';
+		echo '<div class="col-sm-3 sysinfo_gerneral_b">Used: ' . $temp_used . ' GB (' . number_format($hdd_devices_percent[$x], 1, ',', '.') . '%)</div>';
+		echo '<div class="col-sm-2 sysinfo_gerneral_b">Free: ' . $temp_free . ' GB</div>';
 		echo '</div>';
 	}
 }
@@ -225,11 +228,13 @@ for ($x = 0; $x < sizeof($net_interfaces); $x++) {
 
 	if (!isset($interface_ip_arr[1])) {$interface_ip_arr[1] = '--';}
 
+	if ($net_interfaces_rx[$x] == 0) {$temp_rx = 0;} else { $temp_rx = number_format(round(($net_interfaces_rx[$x] / 1024 / 1024), 2), 2, ',', '.');}
+	if ($net_interfaces_tx[$x] == 0) {$temp_tx = 0;} else { $temp_tx = number_format(round(($net_interfaces_tx[$x] / 1024 / 1024), 2), 2, ',', '.');}
 	echo '<div class="row">';
 	echo '<div class="col-sm-2 sysinfo_network_a">' . $interface_name . '</div>';
 	echo '<div class="col-sm-2 sysinfo_network_b">' . $interface_ip_arr[1] . '</div>';
-	echo '<div class="col-sm-3 sysinfo_network_b">RX: <div class="sysinfo_network_value">' . number_format(round(($net_interfaces_rx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
-	echo '<div class="col-sm-3 sysinfo_network_b">TX: <div class="sysinfo_network_value">' . number_format(round(($net_interfaces_tx[$x] / 1024 / 1024), 2), 2, ',', '.') . ' MB</div></div>';
+	echo '<div class="col-sm-3 sysinfo_network_b">RX: <div class="sysinfo_network_value">' . $temp_rx . ' MB</div></div>';
+	echo '<div class="col-sm-3 sysinfo_network_b">TX: <div class="sysinfo_network_value">' . $temp_tx . ' MB</div></div>';
 	echo '</div>';
 
 }
