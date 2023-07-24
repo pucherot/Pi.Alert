@@ -127,8 +127,8 @@ $pia_lang['Presence_CallHead_Devices'] = 'Geräte';
 $pia_lang['Presence_CalHead_lang'] = 'de';
 $pia_lang['Presence_CalHead_year'] = 'Jahr';
 $pia_lang['Presence_CalHead_quarter'] = 'Quartal';
-$pia_lang['Presence_CalHead_month'] = 'Monat';
-$pia_lang['Presence_CalHead_week'] = 'Woche';
+$pia_lang['Presence_CalHead_month'] = 'Mon.';
+$pia_lang['Presence_CalHead_week'] = 'Wo.';
 $pia_lang['Presence_CalHead_day'] = 'Tag';
 
 //////////////////////////////////////////////////////////////////

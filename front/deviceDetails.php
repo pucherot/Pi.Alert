@@ -1074,7 +1074,7 @@ function initializeCalendar () {
     header: {
       left            : 'prev,next today',
       center          : 'title',
-      right           : 'agendaYear,agendaMonth,agendaWeek'
+      right           : 'agendaYear,agendaMonth,agendaWeek,agendaDay'
     },
 
     views: {
@@ -1090,7 +1090,18 @@ function initializeCalendar () {
         duration           : { month: 1 },
         buttonText         : '<?php echo $pia_lang['Presence_CalHead_month']; ?>',
         columnHeaderFormat : 'D'
+      },
+      agendaWeek: {
+        buttonText         : '<?php echo $pia_lang['Presence_CalHead_week']; ?>',
+      },
+      agendaDay: {
+        type              : 'agenda',
+        duration          : { day: 1 },
+        buttonText        : '<?php echo $pia_lang['Presence_CalHead_day']; ?>',
+        slotLabelFormat   : 'H',
+        slotDuration      : '01:00:00'
       }
+
     },
 
     viewRender: function(view) {
@@ -1136,7 +1147,7 @@ function initializeCalendar () {
     },
 
     eventRender: function (event, element) {
-      $(element).tooltip({container: 'body', placement: 'right',
+      $(element).tooltip({container: 'body', placement: 'bottom',
                           title: event.tooltip});
       // element.attr ('title', event.tooltip);  // Alternative tooltip
     },

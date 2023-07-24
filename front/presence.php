@@ -350,7 +350,7 @@ function initializeCalendar () {
     },
 
     eventRender: function (event, element, view) {
-      $(element).tooltip({container: 'body', placement: 'right', title: event.tooltip});
+      $(element).tooltip({container: 'body', placement: 'bottom', title: event.tooltip});
       // element.attr ('title', event.tooltip);  // Alternative tooltip
     },
 
