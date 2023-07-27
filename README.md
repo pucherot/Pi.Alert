@@ -120,6 +120,12 @@ An also active developed Docker version of Pi.Alert can be found here: [jokob-sk
 - One-step Automated Install:
   #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh | bash`
 
+
+- Debian 12 and newer:
+
+  If you are using Debian 12 or a related distribution, the script throws an error when installing packages with pip3. To counter this, I have provided a script for testing that uses the pip3 parameter "--break-system-packages".
+  #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install_debian12_test.sh | bash`
+
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
 # Update
