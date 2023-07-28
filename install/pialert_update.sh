@@ -404,8 +404,9 @@ check_python_version() {
   if [ -f /usr/bin/python3 ] ; then
     PYTHON_BIN="python3"
     print_msg "Python 3 is installed on your system"
-    sudo pip3 -q install mac-vendor-lookup
-    sudo pip3 -q install fritzconnection
+    # sudo should not be necessary
+    pip3 -q install mac-vendor-lookup
+    pip3 -q install fritzconnection
   else
     process_error "Python 3 NOT installed"
   fi
