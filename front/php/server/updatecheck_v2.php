@@ -1,4 +1,9 @@
 <?php
+require 'db.php';
+require 'journal.php';
+
+OpenDB();
+
 foreach (glob("../../../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
 }
@@ -71,6 +76,8 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 				</p>
 			</div>
 		  </div>';
+	// Logging
+	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0063', '', '');
 } elseif ($geolite_cur_version == "###") {
 // No DB present
 	echo '<div class="box">
@@ -80,6 +87,8 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 				<p>' . $pia_lang['GeoLiteDB_Installnotes'] . '</p>
 			</div>
 		  </div>';
+	// Logging
+	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0065', '', '');
 } else {
 // DB prensent an newer as github version
 	echo '<div class="box">
@@ -88,6 +97,8 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 				<p class="text-green" style="font-size: 16px; font-weight: bold;">' . $pia_lang['Updatecheck_U2D'] . '</p>
 			</div>
 		  </div>';
+	// Logging
+	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0064', '', '');
 }
 
 // Print Update Box for Pi.Alert --------------------------------------------------------
@@ -134,6 +145,10 @@ if ($pialert_cur_version != $pialert_new_version) {
         <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
     </div>
 </div>';
+
+// Logging
+	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0061', '', '');
+
 }
 
 if ($pialert_cur_version == $pialert_new_version) {
@@ -144,6 +159,8 @@ if ($pialert_cur_version == $pialert_new_version) {
 				<p class="text-green" style="font-size: 16px; font-weight: bold;">' . $pia_lang['Updatecheck_U2D'] . '</p>
 			</div>
 		  </div>';
+// Logging
+	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0062', '', '');
 }
 
 echo '</div>';

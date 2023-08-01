@@ -26,6 +26,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 // External files
 require 'db.php';
 require 'util.php';
+require 'journal.php';
 require '../templates/language/' . $pia_lang_selected . '.php';
 
 //------------------------------------------------------------------------------
@@ -427,6 +428,8 @@ function PiaBackupDBtoArchive() {
 		// File does not exists
 		echo $pia_lang['BackDevices_Backup_CopError'];exit;
 	}
+	// Logging
+	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0011', '', '');
 }
 
 //------------------------------------------------------------------------------
@@ -495,6 +498,9 @@ function PiaPurgeDBBackups() {
 			unlink($Pia_Backupfiles_Purge[$i]);
 		}
 	}
+	// Logging
+	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0013', '', '');
+
 	echo $pia_lang['BackDevices_DBTools_Purge'];
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
 }
@@ -1051,6 +1057,9 @@ function BackupConfigFile() {
 	}
 	// copy files as a fast Backup
 	copy($file, $laststate);
+
+	// Logging
+	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_0011', '1', '');
 }
 
 //------------------------------------------------------------------------------

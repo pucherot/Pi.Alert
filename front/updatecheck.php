@@ -19,6 +19,7 @@ if ($_SESSION["login"] != 1) {
 }
 
 require 'php/templates/header.php';
+require 'php/server/journal.php';
 
 ?>
 

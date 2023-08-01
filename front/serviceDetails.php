@@ -30,6 +30,7 @@ if (filter_var($_REQUEST['url'], FILTER_VALIDATE_URL)) {
 require 'php/templates/header.php';
 //require 'php/server/db.php';
 require 'php/server/graph.php';
+require 'php/server/journal.php';
 
 # Init DB Connection
 $db_file = '../db/pialert.db';
@@ -717,7 +718,7 @@ function initializeDatatable () {
       //Device Name
       {targets: [0],
        "createdCell": function (td, cellData, rowData, row, col) {
-         $(td).html ('<b>'+ cellData +'</a></b>');
+         $(td).html ('<b>'+ cellData +'</b>');
       } },
 
     ],

@@ -287,6 +287,33 @@ EOM
     else
       echo "        Column 'mon_Notes' already exists in the 'Services' table."
     fi
+    # Pi.Alert Journal
+    echo -e "...Insert new table 'pialert_journal' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'pialert_journal' ('Index' INTEGER, 'Journal_DateTime' TEXT NOT NULL, 'LogClass' NUMERIC NOT NULL, 'Trigger' TEXT NOT NULL, 'LogString' TEXT NOT NULL, 'Hash' TEXT, 'Additional_Info' TEXT, PRIMARY KEY('Index' AUTOINCREMENT));"
+    # Devices.dev_Model
+    echo -e "...Insert new column 'dev_Model' to table 'Devices' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Model")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD COLUMN 'dev_Model' STRING(250);"
+    else
+      echo "        Column 'dev_Model' already exists in the 'Devices' table."
+    fi
+    # Devices.dev_Serialnumber
+    echo -e "...Insert new column 'dev_Serialnumber' to table 'Devices' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Serialnumber")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD COLUMN 'dev_Serialnumber' STRING(100);"
+    else
+      echo "        Column 'dev_Serialnumber' already exists in the 'Devices' table."
+    fi
+    # Devices.dev_ConnectionType
+    echo -e "...Insert new column 'dev_ConnectionType' to table 'Devices' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_ConnectionType")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Devices' ADD COLUMN 'dev_ConnectionType' STRING(30);"
+    else
+      echo "        Column 'dev_ConnectionType' already exists in the 'Devices' table."
+    fi
 
     echo -e "\nUpdate finished!\n"
 

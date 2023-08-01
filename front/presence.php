@@ -18,6 +18,7 @@ if ($_SESSION["login"] != 1) {
 require 'php/server/db.php';
 require 'php/templates/header.php';
 require 'php/server/graph.php';
+require 'php/server/journal.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();

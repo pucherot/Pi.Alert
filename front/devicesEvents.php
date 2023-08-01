@@ -16,6 +16,8 @@ if ($_SESSION["login"] != 1) {
 	exit;
 }
 require 'php/templates/header.php';
+require 'php/server/journal.php';
+
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->

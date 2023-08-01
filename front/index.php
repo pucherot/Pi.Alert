@@ -9,6 +9,8 @@
 
 <?php
 session_start();
+// Logging
+require 'php/server/journal.php';
 
 // Save Config File
 if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {

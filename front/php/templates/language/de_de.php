@@ -47,6 +47,7 @@ $pia_lang['Navigation_Devices'] = 'Geräte';
 $pia_lang['Navigation_Services'] = 'Web Services';
 $pia_lang['Navigation_Presence'] = 'Anwesenheit';
 $pia_lang['Navigation_Events'] = 'Ereignisse';
+$pia_lang['Navigation_Journal'] = 'Pi.Alert Journal';
 $pia_lang['Navigation_Events_Dev'] = 'Geräte';
 $pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Einstellungen';
@@ -922,5 +923,31 @@ $pia_lang['GeoLiteDB_absent'] = 'DB nicht installiert';
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung nicht für alle oben gelisteten Laufwerke ermittelt werden kann. Dies ist abhängig davon, unter welchem Benutzer die Laufwerke gemoutet sind.';
+
+// =============================================================================================================
+
+$pia_journ_lang['Title'] = 'Anwendungsjournal';
+$pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
+$pia_journ_lang['a_000'] = 'Config File';
+$pia_journ_lang['a_005'] = 'GUI Config';
+$pia_journ_lang['a_010'] = 'DB Maintenance';
+$pia_journ_lang['a_020'] = 'Devices';
+$pia_journ_lang['a_030'] = 'Webservices';
+$pia_journ_lang['a_040'] = 'Network View';
+$pia_journ_lang['a_050'] = 'Reports';
+$pia_journ_lang['a_060'] = 'UpdateCheck';
+
+$pia_journ_lang['LogStr_0001'] = 'Eintrag hinzugefügt';
+$pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
+$pia_journ_lang['LogStr_0002'] = 'Eintrag gelöscht';
+$pia_journ_lang['LogStr_0011'] = 'Sicherung erstellt';
+$pia_journ_lang['LogStr_0012'] = 'Sicherung wiederhergestellt';
+$pia_journ_lang['LogStr_0013'] = 'Sicherungen aufgeräumt (Konfigurationsdatei und Datenbank)';
+
+$pia_journ_lang['LogStr_0061'] = 'Pi.Alert Update verfügbar';
+$pia_journ_lang['LogStr_0062'] = 'Kein Pi.Alert Update verfügbar';
+$pia_journ_lang['LogStr_0063'] = 'GeoLite2 DB Update verfügbar';
+$pia_journ_lang['LogStr_0064'] = 'Kein GeoLite2 DB Update verfügbar';
+$pia_journ_lang['LogStr_0065'] = 'GeoLite2 DB nicht installiert';
 
 ?>

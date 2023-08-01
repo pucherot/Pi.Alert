@@ -16,6 +16,7 @@ if ($_SESSION["login"] != 1) {
 	exit;
 }
 require 'php/templates/header.php';
+require 'php/server/journal.php';
 
 function get_notification_class($filename) {
 	$headtitle = explode("-", $filename);

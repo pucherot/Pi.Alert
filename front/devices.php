@@ -18,19 +18,10 @@ if ($_SESSION["login"] != 1) {
 require 'php/server/db.php';
 require 'php/templates/header.php';
 require 'php/server/graph.php';
+require 'php/server/journal.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
-
-// #####################################
-// ## update db dependencies
-// #####################################
-$sql = 'ALTER TABLE "Devices" ADD "dev_Model" STRING(250)';
-$result = $db->query($sql);
-$sql = 'ALTER TABLE "Devices" ADD "dev_Serialnumber" STRING(100)';
-$result = $db->query($sql);
-$sql = 'ALTER TABLE "Devices" ADD "dev_ConnectionType" STRING(30)';
-$result = $db->query($sql);
 
 function print_box_top_element($title) {
 	echo '<div class="row">
@@ -338,7 +329,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 
         </table>
         <button type="button" class="btn btn-danger" id="btnBulkDeletion" onclick="askBulkDeletion()" style="min-width: 180px;">' . $pia_lang['Device_bulkDel_button'] . '</button>
-        <input class="btn btn-danger pull-right" type="submit" value="' . $pia_lang['Gen_Save'] . '" style="margin-bottom: 10px; min-width: 180px;">';
+        <input class="btn btn-warning pull-right" type="submit" value="' . $pia_lang['Gen_Save'] . '" style="margin-bottom: 10px; min-width: 180px;">';
 
 	// JS to enable/disable inputs. Inputs are delete, when disabled
 	echo '<script>

@@ -20,40 +20,10 @@ if ($_SESSION["login"] != 1) {
 
 require 'php/templates/header.php';
 require 'php/server/db.php';
+require 'php/server/journal.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
-// #####################################
-// ## update db dependencies
-// #####################################
-$sql = 'CREATE TABLE IF NOT EXISTS "network_infrastructure" (
-	"device_id"	INTEGER,
-	"net_device_name"	TEXT NOT NULL,
-	"net_device_typ"	TEXT NOT NULL,
-  "net_device_port"  INTEGER,
-  "net_downstream_devices" TEXT,
-	PRIMARY KEY("device_id" AUTOINCREMENT)
-)';
-$result = $db->query($sql);
-
-$sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure" INTEGER';
-$result = $db->query($sql);
-$sql = 'ALTER TABLE "Devices" ADD "dev_Infrastructure_port" INTEGER';
-$result = $db->query($sql);
-$sql = 'ALTER TABLE "network_infrastructure" ADD "net_downstream_devices" TEXT';
-$result = $db->query($sql);
-
-$sql = 'CREATE TABLE IF NOT EXISTS "network_dumb_dev" (
-  "dev_Name"  TEXT,
-  "dev_MAC" TEXT,
-  "dev_Infrastructure"  INTEGER,
-  "dev_Infrastructure_port" INTEGER,
-  "dev_PresentLastScan" TEXT,
-  "dev_LastIP"  TEXT,
-  "id"  INTEGER,
-  PRIMARY KEY("id" AUTOINCREMENT)
-)';
-$result = $db->query($sql);
 
 // Add New Network Devices
 // #####################################
