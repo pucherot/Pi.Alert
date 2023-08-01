@@ -9,8 +9,12 @@
 
 <?php
 session_start();
-// Logging
+
+require 'php/server/db.php';
 require 'php/server/journal.php';
+
+$DBFILE = '../db/pialert.db';
+OpenDB();
 
 // Save Config File
 if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {
@@ -20,6 +24,9 @@ if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {
 	$newconfig = fopen($configfile, 'w');
 	fwrite($newconfig, $_REQUEST['txtConfigFileEditor']);
 	fclose($newconfig);
+
+	// Logging
+	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_9999', '1', '');
 }
 
 // Processing Logout

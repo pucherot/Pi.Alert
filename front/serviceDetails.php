@@ -697,13 +697,13 @@ function initializeDatatable () {
   $('#tableEvents').DataTable({
     'paging'       : true,
     'lengthChange' : true,
-    //'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
-    'bLengthChange': false,
+    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
+    //'bLengthChange': false,
     'searching'    : true,
     'ordering'     : true,
     'info'         : true,
     'autoWidth'    : false,
-    'pageLength'   : 25,
+    'pageLength'   : 10,
     'order'        : [[1, 'desc']],
     'columns': [
         { "data": 0 },

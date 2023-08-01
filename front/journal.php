@@ -32,17 +32,6 @@ $db->exec('PRAGMA journal_mode = wal;');
       <h1 id="pageTitle">
          <?php echo $pia_journ_lang['Title'] ?>
       </h1>
-
-      <!-- period selector -->
-      <span class="breadcrumb" style="top: 0px;">
-        <select class="form-control" id="period" onchange="javascript: periodChanged();">
-          <option value="1 day"><?php echo $pia_lang['Events_Periodselect_today']; ?></option>
-          <option value="7 days"><?php echo $pia_lang['Events_Periodselect_LastWeek']; ?></option>
-          <option value="1 month" selected><?php echo $pia_lang['Events_Periodselect_LastMonth']; ?></option>
-          <option value="1 year"><?php echo $pia_lang['Events_Periodselect_LastYear']; ?></option>
-          <option value="100 years"><?php echo $pia_lang['Events_Periodselect_All']; ?></option>
-        </select>
-      </span>
     </section>
 
 <!-- Main content ---------------------------------------------------------- -->
@@ -108,14 +97,14 @@ function get_pialert_journal() {
 	while ($row = $pia_journal->fetchArray()) {
 
 		if ($row['LogClass'] == "a_000") {$full_additional_info = $pia_journ_lang[$row['LogString']] . '<br>' . $pia_journ_lang['File_hash'] . ': <span class="text-danger">' . $row['Hash'] . '</span>';} else { $full_additional_info = $pia_journ_lang[$row['LogString']];}
-		$full_additional_info = $full_additional_info . $row['Additional_Info'];
+		$full_additional_info = $full_additional_info . '<br>' . $row['Additional_Info'];
 
 		echo '<tr>
-                  <td>' . $row['Journal_DateTime'] . '</td>
+                  <td style="white-space: nowrap;">' . $row['Journal_DateTime'] . '</td>
                   <td>' . $row['LogClass'] . '</td>
                   <td>' . $row['LogString'] . '</td>
                   <td>' . str_replace('LogStr', $row['LogClass'], $row['LogString']) . '</td>
-                  <td>' . $pia_journ_lang[$row['LogClass']] . '</td>
+                  <td style="white-space: nowrap;">' . $pia_journ_lang[$row['LogClass']] . '</td>
                   <td>' . $row['Trigger'] . '</td>
                   <td>' . $row['Hash'] . '</td>
                   <td>' . $full_additional_info . '</td>
@@ -149,8 +138,8 @@ function initializeDatatable () {
   $('#tableEvents').DataTable({
     'paging'       : true,
     'lengthChange' : true,
-    //'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
-    'bLengthChange': false,
+    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
+    //'bLengthChange': false,
     'searching'    : true,
     'ordering'     : true,
     'info'         : true,
@@ -183,12 +172,12 @@ function initializeDatatable () {
           visible: false
       },
 
-      {targets: [7],
-        'createdCell': function (td, cellData, rowData, row, col) {
-          // if (rowData[1] == "a_000") {
-          //   $(td).html (cellData + '<br>Hash: <span class="text-danger">' + rowData[6] + '</span>');
-          // }
-      } },
+      // {targets: [7],
+      //   'createdCell': function (td, cellData, rowData, row, col) {
+      //     if (rowData[1] == "a_000") {
+      //       $(td).html (cellData + '<br>Hash: <span class="text-danger">' + rowData[6] + '</span>');
+      //     }
+      // } },
 
     ],
 

@@ -15,8 +15,12 @@ if ($_SESSION["login"] != 1) {
 	header('Location: ./index.php');
 	exit;
 }
-require 'php/templates/header.php';
+
+require 'php/server/db.php';
+$DBFILE = '../db/pialert.db';
+OpenDB();
 require 'php/server/journal.php';
+require 'php/templates/header.php';
 
 function get_notification_class($filename) {
 	$headtitle = explode("-", $filename);

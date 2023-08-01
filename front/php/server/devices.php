@@ -118,8 +118,6 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	case 'getLocations':getLocations();
 		break;
 
-	case 'saveNewConfigFile':saveNewConfigFile();
-		break;
 	case 'RestoreConfigFile':RestoreConfigFile();
 		break;
 	case 'BackupConfigFile':BackupConfigFile();
@@ -1132,6 +1130,10 @@ function deleteAllNotifications() {
 			unlink($reports_path . $item);
 		}
 	}
+
+	// Logging
+	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0054', '', '');
+
 	echo $count_all_reports . ' ' . $pia_lang['BackDevices_Report_Delete'];
 	echo ("<meta http-equiv='refresh' content='2; URL=./reports.php'>");
 }

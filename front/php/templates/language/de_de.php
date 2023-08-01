@@ -937,12 +937,17 @@ $pia_journ_lang['a_040'] = 'Network View';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'UpdateCheck';
 
+$pia_journ_lang['LogStr_9999'] = 'Konfigurationsdatei bearbeitet';
+
 $pia_journ_lang['LogStr_0001'] = 'Eintrag hinzugefügt';
 $pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
-$pia_journ_lang['LogStr_0002'] = 'Eintrag gelöscht';
+$pia_journ_lang['LogStr_0003'] = 'Eintrag gelöscht';
 $pia_journ_lang['LogStr_0011'] = 'Sicherung erstellt';
 $pia_journ_lang['LogStr_0012'] = 'Sicherung wiederhergestellt';
 $pia_journ_lang['LogStr_0013'] = 'Sicherungen aufgeräumt (Konfigurationsdatei und Datenbank)';
+
+$pia_journ_lang['LogStr_0053'] = 'Report gelöscht';
+$pia_journ_lang['LogStr_0054'] = 'Alle Reports gelöscht';
 
 $pia_journ_lang['LogStr_0061'] = 'Pi.Alert Update verfügbar';
 $pia_journ_lang['LogStr_0062'] = 'Kein Pi.Alert Update verfügbar';

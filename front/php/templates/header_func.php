@@ -1,4 +1,6 @@
 <?php
+//require 'php/server/journal.php';
+//require 'php/server/db.php';
 
 // Delete WebGUI Reports ---------------------------------------------------------------
 
@@ -8,6 +10,8 @@ function useRegex($input) {
 }
 
 function count_webgui_reports() {
+	global $db;
+
 	if (isset($_REQUEST['remove_report'])) {
 		$prep_remove_report = str_replace(array('\'', '"', ',', ';', '<', '>', '.', '/', '&'), "", $_REQUEST['remove_report']) . '.txt';
 		if (useRegex($prep_remove_report) == TRUE) {
@@ -15,6 +19,8 @@ function count_webgui_reports() {
 				unlink('./reports/' . $prep_remove_report);
 			}
 		}
+		// Logging
+		pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0053', '', $prep_remove_report);
 	}
 
 	$files = array_diff(scandir('./reports'), array('..', '.', 'download_report.php'));

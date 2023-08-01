@@ -13,15 +13,18 @@ function calc_configfile_hash() {
 	$Configfile = '../../../config/pialert.conf';
 	return hash_file('md5', $Configfile);
 }
-
-# Logging
-# Journal_DateTime 	| LogClass 				| Trigger 			| LogString 										| Hash 				| Additional_Info
-# 2023-07-31 19:45	| predefined Classes	| IP or pialert-cli	| predefined or custom (Entry removed or Wol log)	| configfile hash 	| Additional_Info
+function calc_configfile_hash_top() {
+	$Configfile = '../config/pialert.conf';
+	return hash_file('md5', $Configfile);
+}
 
 function pialert_logging($LogClass, $Trigger, $LogString, $Hash, $Additional_Info) {
 	global $db;
 
-	if ($Hash == 1) {$filehash = calc_configfile_hash();} else { $filehash = '';}
+	if ($Hash == 1) {
+		$filehash = calc_configfile_hash();
+		if ($filehash == "") {$filehash = calc_configfile_hash_top();}
+	} else { $filehash = '';}
 
 	$Journal_DateTime = date('Y-m-d H:i:s');
 
