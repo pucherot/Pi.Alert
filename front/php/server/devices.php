@@ -1084,6 +1084,8 @@ function setDeviceListCol() {
 	fwrite($DevListCol_new, json_encode($config_array));
 	fclose($DevListCol_new);
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+	// Logging
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0051', '', '');
 }
 
 //------------------------------------------------------------------------------
@@ -1110,8 +1112,12 @@ function DeleteInactiveHosts() {
 	//check result
 	if ($result_dev == TRUE && $result_evt == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelInactHosts'];
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0015', '', '');
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelInactHostsError'] . '<br>' . "\n\n$sql_loop \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0014', '', '');
 	}
 }
 
@@ -1130,12 +1136,10 @@ function deleteAllNotifications() {
 			unlink($reports_path . $item);
 		}
 	}
-
-	// Logging
-	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0054', '', '');
-
 	echo $count_all_reports . ' ' . $pia_lang['BackDevices_Report_Delete'];
 	echo ("<meta http-equiv='refresh' content='2; URL=./reports.php'>");
+	// Logging
+	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0054', '', '');
 }
 
 //------------------------------------------------------------------------------
@@ -1151,6 +1155,7 @@ function crosscheckMAC($query_mac) {
 
 function wakeonlan() {
 	global $pia_lang;
+	global $db;
 
 	$WOL_HOST_IP = $_REQUEST['ip'];
 	$WOL_HOST_MAC = $_REQUEST['mac'];
@@ -1162,23 +1167,12 @@ function wakeonlan() {
 	} elseif (crosscheckMAC($WOL_HOST_MAC) == "") {
 		echo "Unknown MAC! " . $pia_lang['BackDevDetail_Tools_WOL_error'];exit;
 	}
-
 	exec('wakeonlan ' . $WOL_HOST_MAC, $output);
-
 	echo $pia_lang['BackDevDetail_Tools_WOL_okay'];
-
-	// Prepare short term memory
-	$PIA_TIME = date('Y-m-d H:i:s');
-
-	unset($_SESSION['ScanShortMem_WOL']);
-	$_SESSION['ScanShortMem_WOL'] = 'Last Wake-on-LAN Command<br><br><span style="display:inline-block; width: 100px;">IP:</span> ' . $WOL_HOST_IP . '<br><span style="display:inline-block; width: 100px;">MAC:</span> ' . $WOL_HOST_MAC . '<br><span style="display:inline-block; width: 100px;">Scan Time:</span> ' . $PIA_TIME . '<br><br>Output:<br>';
-
-	foreach ($output as $line) {
-		//echo $line . "\n";
-		// Safe last Scan result in Session (Short term memory)
-		$_SESSION['ScanShortMem_WOL'] = $_SESSION['ScanShortMem_WOL'] . $line . '<br>';
-	}
-
+	$wol_output = implode('<br>', $output);
+	$wol_output = $wol_output . ' (' . $WOL_HOST_IP . ')';
+	// Logging
+	pialert_logging('a_025', $_SERVER['REMOTE_ADDR'], 'LogStr_0251', '', $wol_output);
 }
 
 //------------------------------------------------------------------------------
@@ -1189,6 +1183,7 @@ function BulkDeletion() {
 	global $pia_lang;
 
 	$hosts = '"' . implode('","', $_REQUEST['hosts']) . '"';
+	$journal_hosts = implode(',', $_REQUEST['hosts']);
 	echo $pia_lang['Device_bulkDel_back_hosts'] . ': ' . str_replace(",", ", ", $hosts) . '<br><br>';
 
 	$sql = "SELECT COUNT(*) AS row_count FROM Devices";
@@ -1208,6 +1203,9 @@ function BulkDeletion() {
 
 	echo $pia_lang['Device_bulkDel_back_before'] . ': ' . $rowCount_before . '<br>' . $pia_lang['Device_bulkDel_back_after'] . ': ' . $rowCount_after;
 	echo ("<meta http-equiv='refresh' content='2; URL=./devices.php?mod=bulkedit'>");
+
+	// Logging
+	pialert_logging('a_021', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $journal_hosts);
 
 }
 //------------------------------------------------------------------------------

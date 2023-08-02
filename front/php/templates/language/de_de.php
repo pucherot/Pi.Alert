@@ -929,15 +929,24 @@ $pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung 
 $pia_journ_lang['Title'] = 'Anwendungsjournal';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
 $pia_journ_lang['a_000'] = 'Config File';
+$pia_journ_lang['a_001'] = 'GUI Zugriff';
 $pia_journ_lang['a_005'] = 'GUI Config';
 $pia_journ_lang['a_010'] = 'DB Maintenance';
 $pia_journ_lang['a_020'] = 'Devices';
+$pia_journ_lang['a_021'] = 'Bulk-Editor';
+$pia_journ_lang['a_025'] = 'Tools';
 $pia_journ_lang['a_030'] = 'Webservices';
 $pia_journ_lang['a_040'] = 'Network View';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'UpdateCheck';
 
 $pia_journ_lang['LogStr_9999'] = 'Konfigurationsdatei bearbeitet';
+$pia_journ_lang['LogStr_9001'] = 'Zugriff auf die Web-Oberfläche gestartet';
+$pia_journ_lang['LogStr_9002'] = 'Logout durchgeführt';
+$pia_journ_lang['LogStr_9003'] = 'Fehler bei der Anmeldung (Passwort falsch!)';
+$pia_journ_lang['LogStr_9004'] = 'Zugriff auf die Web-Oberfläche gestartet (mit Cookie)';
+
+$pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';
 
 $pia_journ_lang['LogStr_0001'] = 'Eintrag hinzugefügt';
 $pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
@@ -945,6 +954,10 @@ $pia_journ_lang['LogStr_0003'] = 'Eintrag gelöscht';
 $pia_journ_lang['LogStr_0011'] = 'Sicherung erstellt';
 $pia_journ_lang['LogStr_0012'] = 'Sicherung wiederhergestellt';
 $pia_journ_lang['LogStr_0013'] = 'Sicherungen aufgeräumt (Konfigurationsdatei und Datenbank)';
+$pia_journ_lang['LogStr_0014'] = 'Inaktive Hosts löschen (mit Fehler)';
+$pia_journ_lang['LogStr_0015'] = 'Inaktive Hosts löschen (ohne Fehler)';
+
+$pia_journ_lang['LogStr_0051'] = 'Spaltenkonfiguration der Geräte-Liste geändert';
 
 $pia_journ_lang['LogStr_0053'] = 'Report gelöscht';
 $pia_journ_lang['LogStr_0054'] = 'Alle Reports gelöscht';

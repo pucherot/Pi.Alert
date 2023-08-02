@@ -361,7 +361,7 @@ read_arpscan_timer(); ?></div>
             <button type="button" id="tzhrsreawefw" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-vendor"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor']; ?></button>
             <button type="button" id="arzuozhrsfga" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-cleanup"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup']; ?></button>
             <button type="button" id="ufiienfflgze" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-nmap"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap']; ?></button>
-            <button type="button" id="lgnsisnuhzgd" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-wol"><?php echo $pia_lang['Maintenance_Tools_Logviewer_WOL']; ?></button>
+
 <?php
 if ($_SESSION['Scan_WebServices'] == True) {
 	echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-webservices">' . $pia_lang['Maintenance_Tools_Logviewer_WebServices'] . '</button>';
@@ -412,13 +412,6 @@ if ($_SESSION['Scan_WebServices'] == True) {
 	read_logfile('pialert.webservices.log', $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']);
 	print_logviewer_modal_foot();
 }
-?>
-
-<!-- Log Viewer - Modals Wake-on-LAN ----------------------------------------------------------------- -->
-<?php
-print_logviewer_modal_head('wol', 'last Wake-on-LAN (Memory)');
-if (!isset($_SESSION['ScanShortMem_WOL'])) {echo $pia_lang['Maintenance_Tools_Logviewer_WOL_empty'];} else {echo $_SESSION['ScanShortMem_WOL'];}
-print_logviewer_modal_foot();
 ?>
 
 <!-- Tabs ----------------------------------------------------------------- -->

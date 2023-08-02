@@ -31,6 +31,9 @@ if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {
 
 // Processing Logout
 if ($_REQUEST['action'] == 'logout') {
+	// Logging
+	pialert_logging('a_001', $_SERVER['REMOTE_ADDR'], 'LogStr_9002', '', '');
+
 	session_destroy();
 	setcookie("PiAlert_SaveLogin", "", time() - 3600);
 	header('Location: ./index.php');
@@ -70,10 +73,15 @@ if ($Pia_Password == hash('sha256', $_POST["loginpassword"])) {
 	$_SESSION["login"] = 1;
 	$_SESSION['WebProtection'] = $Pia_WebProtection;
 	if (isset($_POST['PWRemember'])) {setcookie("PiAlert_SaveLogin", hash('sha256', $_POST["loginpassword"]), time() + 604800);}
+	// Logging
+	pialert_logging('a_001', $_SERVER['REMOTE_ADDR'], 'LogStr_9001', '', '');
 }
 
 // active Session or valid cookie (cookie not extends)
 if (($_SESSION["login"] == 1) || ($Pia_Password == $_COOKIE["PiAlert_SaveLogin"])) {
+	if ($_SESSION["login"] != 1) {
+		pialert_logging('a_001', $_SERVER['REMOTE_ADDR'], 'LogStr_9004', '', '');
+	}
 	header('Location: ./devices.php');
 	$_SESSION["login"] = 1;
 	$_SESSION['WebProtection'] = $Pia_WebProtection;
@@ -81,6 +89,10 @@ if (($_SESSION["login"] == 1) || ($Pia_Password == $_COOKIE["PiAlert_SaveLogin"]
 
 // no active session, cookie not checked
 if ($_SESSION["login"] != 1) {
+	if ($_SESSION["login"] != 1 && isset($_POST["loginpassword"])) {
+		// Logging
+		pialert_logging('a_001', $_SERVER['REMOTE_ADDR'], 'LogStr_9003', '', '');
+	}
 	if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;}
 	if ($Pia_Password == '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92') {
 		$login_info = 'Defaultpassword "123456" is still active';

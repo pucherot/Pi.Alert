@@ -171,14 +171,6 @@ function initializeDatatable () {
       {targets: [1,2,6],
           visible: false
       },
-
-      // {targets: [7],
-      //   'createdCell': function (td, cellData, rowData, row, col) {
-      //     if (rowData[1] == "a_000") {
-      //       $(td).html (cellData + '<br>Hash: <span class="text-danger">' + rowData[6] + '</span>');
-      //     }
-      // } },
-
     ],
 
     // Processing
