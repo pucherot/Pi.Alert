@@ -47,6 +47,7 @@ $pia_lang['Navigation_Devices'] = 'Devices';
 $pia_lang['Navigation_Services'] = 'Web Services';
 $pia_lang['Navigation_Presence'] = 'Presence';
 $pia_lang['Navigation_Events'] = 'Events';
+$pia_lang['Navigation_Journal'] = 'Pi.Alert Journal';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';
 $pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Settings';
@@ -935,5 +936,51 @@ $pia_lang['GeoLiteDB_absent'] = 'DB not installed';
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['SysInfo_storage_note'] = 'It is possible that the memory usage cannot be determined for all drives listed above. This depends on the user under which the drives are mounted.';
+
+// =============================================================================================================
+
+$pia_journ_lang['Title'] = 'Application Journal';
+$pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
+$pia_journ_lang['a_000'] = 'Config File';
+$pia_journ_lang['a_001'] = 'GUI Access';
+$pia_journ_lang['a_005'] = 'GUI Config';
+$pia_journ_lang['a_010'] = 'DB Maintenance';
+$pia_journ_lang['a_020'] = 'Devices';
+$pia_journ_lang['a_021'] = 'Bulk-Editor';
+$pia_journ_lang['a_025'] = 'Tools';
+$pia_journ_lang['a_030'] = 'Webservices';
+$pia_journ_lang['a_040'] = 'Network View';
+$pia_journ_lang['a_050'] = 'Reports';
+$pia_journ_lang['a_060'] = 'UpdateCheck';
+$pia_journ_lang['b_010'] = 'DB Maintenance';
+
+$pia_journ_lang['LogStr_9999'] = 'Configuration file edited';
+$pia_journ_lang['LogStr_9001'] = 'Access to the web interface started';
+$pia_journ_lang['LogStr_9002'] = 'Logout performed';
+$pia_journ_lang['LogStr_9003'] = 'Login error (incorrect password!)';
+$pia_journ_lang['LogStr_9004'] = 'Access to the web interface started (using a cookie)';
+
+$pia_journ_lang['LogStr_0251'] = 'Wake-on-lan executed';
+
+$pia_journ_lang['LogStr_0001'] = 'Entry added';
+$pia_journ_lang['LogStr_0002'] = 'Entry edited';
+$pia_journ_lang['LogStr_0003'] = 'Entry deleted';
+$pia_journ_lang['LogStr_0010'] = 'Database updated';
+$pia_journ_lang['LogStr_0011'] = 'Database backup created';
+$pia_journ_lang['LogStr_0012'] = 'Database backup restored';
+$pia_journ_lang['LogStr_0013'] = 'Cleaned up backups (configuration file and database)';
+$pia_journ_lang['LogStr_0014'] = 'Delete inactive hosts (with error)';
+$pia_journ_lang['LogStr_0015'] = 'Delete inactive hosts (without error)';
+
+$pia_journ_lang['LogStr_0051'] = 'Column configuration of the device list changed';
+
+$pia_journ_lang['LogStr_0053'] = 'Report deleted';
+$pia_journ_lang['LogStr_0054'] = 'All reports deleted';
+
+$pia_journ_lang['LogStr_0061'] = 'Pi.Alert update available';
+$pia_journ_lang['LogStr_0062'] = 'No Pi.Alert update available';
+$pia_journ_lang['LogStr_0063'] = 'GeoLite2 DB update available';
+$pia_journ_lang['LogStr_0064'] = 'No GeoLite2 DB update available';
+$pia_journ_lang['LogStr_0065'] = 'GeoLite2 DB not installed';
 
 ?>

@@ -227,8 +227,12 @@ function setDeviceData() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_UpdDev'];
+		// Logging
+		pialert_logging('a_020', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $_REQUEST['mac']);
 	} else {
 		echo $pia_lang['BackDevices_DBTools_UpdDevError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_020', $_SERVER['REMOTE_ADDR'], 'LogStr_0004', '', $_REQUEST['mac']);
 	}
 }
 
@@ -246,8 +250,12 @@ function deleteDevice() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelDev_a'];
+		// Logging
+		pialert_logging('a_020', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $_REQUEST['mac']);
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelDevError_a'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_020', $_SERVER['REMOTE_ADDR'], 'LogStr_0005', '', $_REQUEST['mac']);
 	}
 }
 
@@ -265,8 +273,12 @@ function deleteAllWithEmptyMACs() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelDev_b'];
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0016', '', '');
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelDevError_b'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0017', '', '');
 	}
 }
 
@@ -284,8 +296,12 @@ function deleteUnknownDevices() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelDev_b'];
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0018', '', '');
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelDevError_b'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0019', '', '');
 	}
 }
 
@@ -303,8 +319,12 @@ function deleteDeviceEvents() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelEvents'];
+		// Logging
+		pialert_logging('a_020', $_SERVER['REMOTE_ADDR'], 'LogStr_0020', '', $_REQUEST['mac']);
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelEventsError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_020', $_SERVER['REMOTE_ADDR'], 'LogStr_0021', '', $_REQUEST['mac']);
 	}
 }
 
@@ -322,8 +342,12 @@ function deleteAllDevices() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelDev_b'];
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0022', '', '');
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelDevError_b'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0023', '', '');
 	}
 }
 
@@ -341,8 +365,12 @@ function deleteEvents() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelEvents'];
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0024', '', '');
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelEventsError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0025', '', '');
 	}
 }
 
@@ -360,8 +388,12 @@ function deleteActHistory() {
 	// check result
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelActHistory'];
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0026', '', '');
 	} else {
 		echo $pia_lang['BackDevices_DBTools_DelActHistoryError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		// Logging
+		pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0027', '', '');
 	}
 }
 
@@ -513,10 +545,15 @@ function PiaEnableDarkmode() {
 	if (file_exists($file)) {
 		echo $pia_lang['BackDevices_darkmode_disabled'];
 		unlink($file);
+		// Logging
+		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0055', '', '');
+
 		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 	} else {
 		echo $pia_lang['BackDevices_darkmode_enabled'];
 		$darkmode = fopen($file, 'w');
+		// Logging
+		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0056', '', '');
 		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 	}
 }
@@ -530,10 +567,14 @@ function EnableWebServiceMon() {
 	if ($_SESSION['Scan_WebServices'] == True) {
 		exec('../../../back/pialert-cli disable_service_mon', $output);
 		echo $pia_lang['BackDevices_webservicemon_disabled'];
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0302', '', '');
 		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 	} else {
 		exec('../../../back/pialert-cli enable_service_mon', $output);
 		echo $pia_lang['BackDevices_webservicemon_enabled'];
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0301', '', '');
 		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 	}
 }
@@ -548,10 +589,15 @@ function PiaEnableOnlineHistoryGraph() {
 	if (file_exists($file)) {
 		echo $pia_lang['BackDevices_onlinehistorygraph_enabled'];
 		unlink($file);
+		// Logging
+		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0058', '', '');
 		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 	} else {
 		echo $pia_lang['BackDevices_onlinehistorygraph_disabled'];
-		$darkmode = fopen($file, 'w');
+		$history = fopen($file, 'w');
+		fclose($history);
+		// Logging
+		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0057', '', '');
 		echo ("<meta http-equiv='refresh'content='2; URL=./maintenance.php?tab=1'>");
 	}
 }
@@ -564,6 +610,8 @@ function PiaSetAPIKey() {
 	global $pia_lang;
 
 	exec('../../../back/pialert-cli set_apikey', $output);
+	// Logging
+	pialert_logging('a_070', $_SERVER['REMOTE_ADDR'], 'LogStr_0700', '', '');
 	echo $pia_lang['BackDevices_setapikey'];
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 }
@@ -576,6 +624,8 @@ function TestNotificationSystem() {
 	global $pia_lang;
 
 	exec('../../../back/pialert-cli reporting_test', $output);
+	// Logging
+	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0500', '', '');
 	echo $pia_lang['BackDevices_test_notification'];
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 }
@@ -588,6 +638,8 @@ function PiaLoginEnable() {
 
 	session_destroy();
 	exec('../../../back/pialert-cli set_login', $output);
+	// Logging
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0050', '', '');
 	echo $pia_lang['BackDevices_Login_enabled'];
 	echo ("<meta http-equiv='refresh' content='1; ./index.php?action=logout'>");
 }
@@ -597,6 +649,9 @@ function PiaLoginEnable() {
 //------------------------------------------------------------------------------
 function PiaLoginDisable() {
 	global $pia_lang;
+
+	// Logging
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0051', '', '');
 
 	session_destroy();
 	setcookie("PiAlert_SaveLogin", "", time() - 3600);
@@ -736,35 +791,30 @@ function getDeviceTypes() {
           FROM Devices
           WHERE dev_DeviceType NOT IN ("",
                  "Smartphone", "Tablet",
-                 "Laptop", "Mini PC", "PC", "Printer", "Server", "Singleboard Computer (SBC)",
-                 "Game Console", "SmartTV", "TV Decoder", "Virtual Assistance",
-                 "Clock", "House Appliance", "Phone", "Radio",
-                 "AP", "NAS", "PLC", "Router")
+                 "Laptop", "PC", "Printer", "Server", "Singleboard Computer (SBC)",
+                 "Game Console", "SmartTV", "Virtual Assistance",
+                 "House Appliance", "Phone", "Radio",
+                 "AP", "NAS", "Router")
 
           UNION SELECT 1 as dev_Order, "Smartphone"
           UNION SELECT 1 as dev_Order, "Tablet"
 
           UNION SELECT 2 as dev_Order, "Laptop"
-          UNION SELECT 2 as dev_Order, "Mini PC"
           UNION SELECT 2 as dev_Order, "PC"
           UNION SELECT 2 as dev_Order, "Printer"
           UNION SELECT 2 as dev_Order, "Server"
           UNION SELECT 2 as dev_Order, "Singleboard Computer (SBC)"
 
-          UNION SELECT 3 as dev_Order, "Domotic"
           UNION SELECT 3 as dev_Order, "Game Console"
           UNION SELECT 3 as dev_Order, "SmartTV"
-          UNION SELECT 3 as dev_Order, "TV Decoder"
           UNION SELECT 3 as dev_Order, "Virtual Assistance"
 
-          UNION SELECT 4 as dev_Order, "Clock"
           UNION SELECT 4 as dev_Order, "House Appliance"
           UNION SELECT 4 as dev_Order, "Phone"
           UNION SELECT 4 as dev_Order, "Radio"
 
           UNION SELECT 5 as dev_Order, "AP"
           UNION SELECT 5 as dev_Order, "NAS"
-          UNION SELECT 5 as dev_Order, "PLC"
           UNION SELECT 5 as dev_Order, "Router"
           UNION SELECT 5 as dev_Order, "USB LAN Adapter"
           UNION SELECT 5 as dev_Order, "USB WIFI Adapter"
@@ -951,6 +1001,8 @@ function setPiAlertTheme() {
 			}
 		} else {echo $pia_lang['BackDevices_Theme_invalid'];}
 	}
+	// Logging
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0053', '', $pia_skin_selector);
 }
 
 //------------------------------------------------------------------------------
@@ -989,6 +1041,9 @@ function setPiAlertLanguage() {
 			}
 		} else {echo $pia_lang['BackDevices_Language_invalid'];}
 	}
+
+	// Logging
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0054', '', $pia_lang_selector);
 }
 
 //------------------------------------------------------------------------------
@@ -1002,12 +1057,18 @@ function setPiAlertArpTimer() {
 		$file = '../../../db/setting_stoparpscan';
 		if (file_exists($file)) {
 			echo $pia_lang['BackDevices_Arpscan_enabled'];
+			// Logging
+			pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0510', '', '');
 			exec('../../../back/pialert-cli enable_scan', $output);
 			echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 		} else {
 			if (is_numeric($_REQUEST['PiaArpTimer'])) {
+				// Logging
+				pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0511', '', $_REQUEST['PiaArpTimer'] . ' min');
 				exec('../../../back/pialert-cli disable_scan ' . $_REQUEST['PiaArpTimer'], $output);
 			} else {
+				// Logging
+				pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0512', '', '');
 				exec('../../../back/pialert-cli disable_scan', $output);
 			}
 			echo $pia_lang['BackDevices_Arpscan_disabled'];
@@ -1085,7 +1146,7 @@ function setDeviceListCol() {
 	fclose($DevListCol_new);
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 	// Logging
-	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0051', '', '');
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0052', '', '');
 }
 
 //------------------------------------------------------------------------------
@@ -1139,7 +1200,7 @@ function deleteAllNotifications() {
 	echo $count_all_reports . ' ' . $pia_lang['BackDevices_Report_Delete'];
 	echo ("<meta http-equiv='refresh' content='2; URL=./reports.php'>");
 	// Logging
-	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0054', '', '');
+	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0504', '', '');
 }
 
 //------------------------------------------------------------------------------

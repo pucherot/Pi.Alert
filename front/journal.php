@@ -52,14 +52,13 @@ $db->exec('PRAGMA journal_mode = wal;');
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
                 <tr>
-                  <th>Date / Time</th>
+                  <th style="min-width: 120px;">Date / Time</th>
                   <th>LogClass</th>
-                  <th>LogString</th>
-                  <th>LogCode</th>
-                  <th>Class</th>
-                  <th>Trigger</th>
+                  <th style="min-width: 80px;">LogCode</th>
+                  <th style="min-width: 90px;">Class</th>
+                  <th style="min-width: 100px;">Quelle</th>
                   <th>Hash</th>
-                  <th>Additional_Info</th>
+                  <th style="min-width: 500px;">Additional Info</th>
                 </tr>
                 </thead>
                   <tbody>
@@ -100,15 +99,14 @@ function get_pialert_journal() {
 		$full_additional_info = $full_additional_info . '<br>' . $row['Additional_Info'];
 
 		echo '<tr>
-                  <td style="white-space: nowrap;">' . $row['Journal_DateTime'] . '</td>
-                  <td>' . $row['LogClass'] . '</td>
-                  <td>' . $row['LogString'] . '</td>
-                  <td>' . str_replace('LogStr', $row['LogClass'], $row['LogString']) . '</td>
-                  <td style="white-space: nowrap;">' . $pia_journ_lang[$row['LogClass']] . '</td>
-                  <td>' . $row['Trigger'] . '</td>
-                  <td>' . $row['Hash'] . '</td>
-                  <td>' . $full_additional_info . '</td>
-              </tr>';
+              <td style="">' . $row['Journal_DateTime'] . '</td>
+              <td>' . $row['LogClass'] . '</td>
+              <td>' . str_replace('LogStr', $row['LogClass'], $row['LogString']) . '</td>
+              <td style="white-space: nowrap;">' . $pia_journ_lang[$row['LogClass']] . '</td>
+              <td>' . $row['Trigger'] . '</td>
+              <td>' . $row['Hash'] . '</td>
+              <td>' . $full_additional_info . '</td>
+          </tr>';
 	}
 }
 
@@ -153,22 +151,33 @@ function initializeDatatable () {
         { "data": 3 },
         { "data": 4 },
         { "data": 5 },
-        { "data": 6 },
-        { "data": 7 }
+        { "data": 6 }
       ],
 
     'columnDefs'  : [
-      //{className: 'text-center', targets: [1,2] },
+      {className: 'text-center', targets: [1,2] },
       { "width": "120px", "targets": [0] },
-      { "width": "90px", "targets": [3] },
+      { "width": "90px", "targets": [2] },
 
-      //Device Name
       {targets: [0],
-       "createdCell": function (td, cellData, rowData, row, col) {
-         $(td).html ('<b>'+ cellData +'</b>');
-      } },
+        "createdCell": function (td, cellData, rowData, row, col) {
+            var createdAtValue = new Date(cellData);
+            var today = new Date();
+            var currentTime = new Date();
+            var oneHourAgo = new Date(currentTime.getTime() - (60 * 60 * 1000)); // Subtract 1 hour in milliseconds
 
-      {targets: [1,2,6],
+            today.setHours(0, 0, 0, 0);
+
+            if (createdAtValue.getTime() >= today.getTime() && oneHourAgo > createdAtValue) {
+                $(td).html('<b style="color:#3468ff;">' + cellData.replace(/ /g, '&nbsp;&nbsp;&nbsp;&nbsp;') + '</b>');
+            } else if (createdAtValue >= oneHourAgo) {
+                $(td).html('<b style="color:#ff644d;">' + cellData.replace(/ /g, '&nbsp;&nbsp;&nbsp;&nbsp;') + '</b>');
+            } else {
+                $(td).html('<b>' + cellData.replace(/ /g, '&nbsp;&nbsp;&nbsp;&nbsp;') + '</b>');
+            }
+        }
+      },
+      {targets: [1,5],
           visible: false
       },
     ],

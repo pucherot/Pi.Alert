@@ -935,10 +935,12 @@ $pia_journ_lang['a_010'] = 'DB Maintenance';
 $pia_journ_lang['a_020'] = 'Devices';
 $pia_journ_lang['a_021'] = 'Bulk-Editor';
 $pia_journ_lang['a_025'] = 'Tools';
-$pia_journ_lang['a_030'] = 'Webservices';
+$pia_journ_lang['a_030'] = 'Web Services';
 $pia_journ_lang['a_040'] = 'Network View';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'UpdateCheck';
+$pia_journ_lang['a_070'] = 'API';
+$pia_journ_lang['b_010'] = 'DB Maintenance';
 
 $pia_journ_lang['LogStr_9999'] = 'Konfigurationsdatei bearbeitet';
 $pia_journ_lang['LogStr_9001'] = 'Zugriff auf die Web-Oberfläche gestartet';
@@ -946,21 +948,53 @@ $pia_journ_lang['LogStr_9002'] = 'Logout durchgeführt';
 $pia_journ_lang['LogStr_9003'] = 'Fehler bei der Anmeldung (Passwort falsch!)';
 $pia_journ_lang['LogStr_9004'] = 'Zugriff auf die Web-Oberfläche gestartet (mit Cookie)';
 
+$pia_journ_lang['LogStr_0500'] = 'Testbenachrichtigung(en) gesendet';
+$pia_journ_lang['LogStr_0503'] = 'Report gelöscht';
+$pia_journ_lang['LogStr_0504'] = 'Alle Reports gelöscht';
+$pia_journ_lang['LogStr_0510'] = 'Pi.Alert wieder aktiviert';
+$pia_journ_lang['LogStr_0511'] = 'Pi.Alert deaktiviert (mit Zeitangabe)';
+$pia_journ_lang['LogStr_0512'] = 'Pi.Alert deaktiviert (für 10 min)';
+
+$pia_journ_lang['LogStr_0700'] = 'API-Key gesetzt';
+
 $pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';
+
+$pia_journ_lang['LogStr_0301'] = $pia_lang['BackDevices_webservicemon_enabled'];
+$pia_journ_lang['LogStr_0302'] = $pia_lang['BackDevices_webservicemon_disabled'];
 
 $pia_journ_lang['LogStr_0001'] = 'Eintrag hinzugefügt';
 $pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
 $pia_journ_lang['LogStr_0003'] = 'Eintrag gelöscht';
-$pia_journ_lang['LogStr_0011'] = 'Sicherung erstellt';
-$pia_journ_lang['LogStr_0012'] = 'Sicherung wiederhergestellt';
+$pia_journ_lang['LogStr_0004'] = 'Eintrag bearbeitet (mit Fehler)';
+$pia_journ_lang['LogStr_0005'] = 'Eintrag gelöscht (mit Fehler)';
+$pia_journ_lang['LogStr_0010'] = 'Datenbank aktualisiert';
+$pia_journ_lang['LogStr_0011'] = 'Datenbank-Sicherung erstellt';
+$pia_journ_lang['LogStr_0012'] = 'Datenbank-Sicherung wiederhergestellt';
 $pia_journ_lang['LogStr_0013'] = 'Sicherungen aufgeräumt (Konfigurationsdatei und Datenbank)';
 $pia_journ_lang['LogStr_0014'] = 'Inaktive Hosts löschen (mit Fehler)';
-$pia_journ_lang['LogStr_0015'] = 'Inaktive Hosts löschen (ohne Fehler)';
+$pia_journ_lang['LogStr_0015'] = 'Inaktive Hosts löschen';
+$pia_journ_lang['LogStr_0016'] = 'Alle Hosts ohne MAC-Addresse löschen';
+$pia_journ_lang['LogStr_0017'] = 'Alle Hosts ohne MAC-Addresse löschen (mit Fehler)';
+$pia_journ_lang['LogStr_0018'] = 'Alle (unknown)-Hosts löschen';
+$pia_journ_lang['LogStr_0019'] = 'Alle (unknown)-Hosts löschen (mit Fehler)';
+$pia_journ_lang['LogStr_0020'] = 'Alle Event eines Gerätes löschen';
+$pia_journ_lang['LogStr_0021'] = 'Alle Event eines Gerätes löschen (mit Fehler)';
+$pia_journ_lang['LogStr_0022'] = 'Alle Hosts aus der Geräte-Liste löschen';
+$pia_journ_lang['LogStr_0023'] = 'Alle Hosts aus der Geräte-Liste löschen (mit Fehler)';
+$pia_journ_lang['LogStr_0024'] = 'Alle Events löschen';
+$pia_journ_lang['LogStr_0025'] = 'Alle Events löschen (mit Fehler)';
+$pia_journ_lang['LogStr_0026'] = 'Netzwerkaktivität zurücksetzen';
+$pia_journ_lang['LogStr_0027'] = 'Netzwerkaktivität zurücksetzen (mit Fehler)';
 
-$pia_journ_lang['LogStr_0051'] = 'Spaltenkonfiguration der Geräte-Liste geändert';
-
-$pia_journ_lang['LogStr_0053'] = 'Report gelöscht';
-$pia_journ_lang['LogStr_0054'] = 'Alle Reports gelöscht';
+$pia_journ_lang['LogStr_0050'] = 'Passwortschutz von Pi.Alert aktiviert';
+$pia_journ_lang['LogStr_0051'] = 'Passwortschutz von Pi.Alert deaktiviert';
+$pia_journ_lang['LogStr_0052'] = 'Spaltenkonfiguration der Geräte-Liste geändert';
+$pia_journ_lang['LogStr_0053'] = 'Theme geändert';
+$pia_journ_lang['LogStr_0054'] = 'Sprache geändert';
+$pia_journ_lang['LogStr_0055'] = $pia_lang['BackDevices_darkmode_disabled'];
+$pia_journ_lang['LogStr_0056'] = $pia_lang['BackDevices_darkmode_enabled'];
+$pia_journ_lang['LogStr_0057'] = $pia_lang['BackDevices_onlinehistorygraph_disabled'];
+$pia_journ_lang['LogStr_0058'] = $pia_lang['BackDevices_onlinehistorygraph_enabled'];
 
 $pia_journ_lang['LogStr_0061'] = 'Pi.Alert Update verfügbar';
 $pia_journ_lang['LogStr_0062'] = 'Kein Pi.Alert Update verfügbar';

@@ -20,7 +20,7 @@ function count_webgui_reports() {
 			}
 		}
 		// Logging
-		pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0053', '', $prep_remove_report);
+		pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0503', '', $prep_remove_report);
 	}
 
 	$files = array_diff(scandir('./reports'), array('..', '.', 'download_report.php'));
@@ -193,7 +193,7 @@ function insert_back_button() {
 }
 
 // Adjust Logo Color ---------------------------------------------------------------
-function set_iconcolur_for_skin($skinname) {
+function set_iconcolor_for_skin($skinname) {
 	//echo $skinname;
 	//$PIALERTLOGO_LINK = 'pialertLogoWhite';
 	if ($skinname == 'skin-black-light' || $skinname == 'skin-black') {

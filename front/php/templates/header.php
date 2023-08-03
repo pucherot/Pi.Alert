@@ -158,7 +158,7 @@ if (window.navigator.standalone || document.referrer.includes("android-app://") 
 
 <?php
 insert_back_button();
-$PIALERTLOGO_LINK = set_iconcolur_for_skin($pia_skin_selected);
+$PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
 ?>
 
       <a id="navbar-reload-button" href="" role="button" onclick="window.location.href=window.location.href" style="">
