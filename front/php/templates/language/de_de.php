@@ -930,16 +930,19 @@ $pia_journ_lang['Title'] = 'Anwendungsjournal';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
 $pia_journ_lang['a_000'] = 'Config File';
 $pia_journ_lang['a_001'] = 'GUI Zugriff';
+$pia_journ_lang['a_002'] = 'Pi.Alert Scans';
 $pia_journ_lang['a_005'] = 'GUI Config';
 $pia_journ_lang['a_010'] = 'DB Maintenance';
 $pia_journ_lang['a_020'] = 'Devices';
 $pia_journ_lang['a_021'] = 'Bulk-Editor';
 $pia_journ_lang['a_025'] = 'Tools';
-$pia_journ_lang['a_030'] = 'Web Services';
+$pia_journ_lang['a_030'] = 'Web Service Monitoring';
 $pia_journ_lang['a_040'] = 'Network View';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'UpdateCheck';
 $pia_journ_lang['a_070'] = 'API';
+
+$pia_journ_lang['b_002'] = 'Pi.Alert Scans';
 $pia_journ_lang['b_010'] = 'DB Maintenance';
 
 $pia_journ_lang['LogStr_9999'] = 'Konfigurationsdatei bearbeitet';
@@ -957,7 +960,9 @@ $pia_journ_lang['LogStr_0512'] = 'Pi.Alert deaktiviert (für 10 min)';
 
 $pia_journ_lang['LogStr_0700'] = 'API-Key gesetzt';
 
+$pia_journ_lang['LogStr_0210'] = 'Individuellen nmap Scan durchgeführt';
 $pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';
+$pia_journ_lang['LogStr_0255'] = 'Online Speedtest ausgeführt';
 
 $pia_journ_lang['LogStr_0301'] = $pia_lang['BackDevices_webservicemon_enabled'];
 $pia_journ_lang['LogStr_0302'] = $pia_lang['BackDevices_webservicemon_disabled'];
@@ -967,6 +972,9 @@ $pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
 $pia_journ_lang['LogStr_0003'] = 'Eintrag gelöscht';
 $pia_journ_lang['LogStr_0004'] = 'Eintrag bearbeitet (mit Fehler)';
 $pia_journ_lang['LogStr_0005'] = 'Eintrag gelöscht (mit Fehler)';
+
+$pia_journ_lang['LogStr_0006'] = 'Letzte Änderung der Konfigurationsdatei zurückgesetzt';
+
 $pia_journ_lang['LogStr_0010'] = 'Datenbank aktualisiert';
 $pia_journ_lang['LogStr_0011'] = 'Datenbank-Sicherung erstellt';
 $pia_journ_lang['LogStr_0012'] = 'Datenbank-Sicherung wiederhergestellt';

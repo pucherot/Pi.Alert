@@ -1058,17 +1058,17 @@ function setPiAlertArpTimer() {
 		if (file_exists($file)) {
 			echo $pia_lang['BackDevices_Arpscan_enabled'];
 			// Logging
-			pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0510', '', '');
+			pialert_logging('b_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0510', '', '');
 			exec('../../../back/pialert-cli enable_scan', $output);
 			echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 		} else {
 			if (is_numeric($_REQUEST['PiaArpTimer'])) {
 				// Logging
-				pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0511', '', $_REQUEST['PiaArpTimer'] . ' min');
+				pialert_logging('b_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0511', '', $_REQUEST['PiaArpTimer'] . ' min');
 				exec('../../../back/pialert-cli disable_scan ' . $_REQUEST['PiaArpTimer'], $output);
 			} else {
 				// Logging
-				pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0512', '', '');
+				pialert_logging('b_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0512', '', '');
 				exec('../../../back/pialert-cli disable_scan', $output);
 			}
 			echo $pia_lang['BackDevices_Arpscan_disabled'];
@@ -1096,6 +1096,8 @@ function RestoreConfigFile() {
 		echo $pia_lang['BackDevices_ConfEditor_RestoreOkay'];
 	}
 	copy($file, $laststate);
+	// Logging
+	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_0006', '1', '');
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 }
 
