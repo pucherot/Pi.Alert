@@ -291,7 +291,7 @@ EOM
     fi
     # Pi.Alert Journal
     echo -e "...Insert new table 'pialert_journal' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'pialert_journal' ('Index' INTEGER, 'Journal_DateTime' TEXT NOT NULL, 'LogClass' NUMERIC NOT NULL, 'Trigger' TEXT NOT NULL, 'LogString' TEXT NOT NULL, 'Hash' TEXT, 'Additional_Info' TEXT, PRIMARY KEY('Index' AUTOINCREMENT));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'pialert_journal' ('journal_id' INTEGER, 'Journal_DateTime' TEXT NOT NULL, 'LogClass' NUMERIC NOT NULL, 'Trigger' TEXT NOT NULL, 'LogString' TEXT NOT NULL, 'Hash' TEXT, 'Additional_Info' TEXT, PRIMARY KEY('journal_id' AUTOINCREMENT));"
     # Devices.dev_Model
     echo -e "...Insert new column 'dev_Model' to table 'Devices' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Model")

@@ -343,6 +343,9 @@ def cleanup_database ():
     print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
     sql.execute ("DELETE FROM Events WHERE eve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
     # Shrink DB
+    print ('    Trim Journal to the lastest 1000 entries')
+    sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
+    # Shrink DB
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
 

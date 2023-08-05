@@ -928,53 +928,32 @@ $pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung 
 
 $pia_journ_lang['Title'] = 'Anwendungsjournal';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
-$pia_journ_lang['a_000'] = 'Config File';
+// Frontend
+$pia_journ_lang['a_000'] = 'Konfigurationsdatei';
 $pia_journ_lang['a_001'] = 'GUI Zugriff';
 $pia_journ_lang['a_002'] = 'Pi.Alert Scans';
 $pia_journ_lang['a_005'] = 'GUI Config';
-$pia_journ_lang['a_010'] = 'DB Maintenance';
-$pia_journ_lang['a_020'] = 'Devices';
-$pia_journ_lang['a_021'] = 'Bulk-Editor';
+$pia_journ_lang['a_010'] = 'DB Wartung';
+$pia_journ_lang['a_020'] = 'Geräte';
+$pia_journ_lang['a_021'] = 'Multi-Editor';
 $pia_journ_lang['a_025'] = 'Tools';
 $pia_journ_lang['a_030'] = 'Web Service Monitoring';
 $pia_journ_lang['a_040'] = 'Network View';
 $pia_journ_lang['a_050'] = 'Reports';
-$pia_journ_lang['a_060'] = 'UpdateCheck';
+$pia_journ_lang['a_060'] = 'Update Check';
 $pia_journ_lang['a_070'] = 'API';
-
+// pialert-cli
 $pia_journ_lang['b_002'] = 'Pi.Alert Scans';
-$pia_journ_lang['b_010'] = 'DB Maintenance';
-
-$pia_journ_lang['LogStr_9999'] = 'Konfigurationsdatei bearbeitet';
-$pia_journ_lang['LogStr_9001'] = 'Zugriff auf die Web-Oberfläche gestartet';
-$pia_journ_lang['LogStr_9002'] = 'Logout durchgeführt';
-$pia_journ_lang['LogStr_9003'] = 'Fehler bei der Anmeldung (Passwort falsch!)';
-$pia_journ_lang['LogStr_9004'] = 'Zugriff auf die Web-Oberfläche gestartet (mit Cookie)';
-
-$pia_journ_lang['LogStr_0500'] = 'Testbenachrichtigung(en) gesendet';
-$pia_journ_lang['LogStr_0503'] = 'Report gelöscht';
-$pia_journ_lang['LogStr_0504'] = 'Alle Reports gelöscht';
-$pia_journ_lang['LogStr_0510'] = 'Pi.Alert wieder aktiviert';
-$pia_journ_lang['LogStr_0511'] = 'Pi.Alert deaktiviert (mit Zeitangabe)';
-$pia_journ_lang['LogStr_0512'] = 'Pi.Alert deaktiviert (für 10 min)';
-
-$pia_journ_lang['LogStr_0700'] = 'API-Key gesetzt';
-
-$pia_journ_lang['LogStr_0210'] = 'Individuellen nmap Scan durchgeführt';
-$pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';
-$pia_journ_lang['LogStr_0255'] = 'Online Speedtest ausgeführt';
-
-$pia_journ_lang['LogStr_0301'] = $pia_lang['BackDevices_webservicemon_enabled'];
-$pia_journ_lang['LogStr_0302'] = $pia_lang['BackDevices_webservicemon_disabled'];
-
+$pia_journ_lang['b_010'] = 'DB Wartung';
+//LogStrings
 $pia_journ_lang['LogStr_0001'] = 'Eintrag hinzugefügt';
 $pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
 $pia_journ_lang['LogStr_0003'] = 'Eintrag gelöscht';
 $pia_journ_lang['LogStr_0004'] = 'Eintrag bearbeitet (mit Fehler)';
 $pia_journ_lang['LogStr_0005'] = 'Eintrag gelöscht (mit Fehler)';
-
 $pia_journ_lang['LogStr_0006'] = 'Letzte Änderung der Konfigurationsdatei zurückgesetzt';
-
+$pia_journ_lang['LogStr_0008'] = 'GeoLite2-Datenbank installiert';
+$pia_journ_lang['LogStr_0009'] = 'GeoLite2-Datenbank gelöscht';
 $pia_journ_lang['LogStr_0010'] = 'Datenbank aktualisiert';
 $pia_journ_lang['LogStr_0011'] = 'Datenbank-Sicherung erstellt';
 $pia_journ_lang['LogStr_0012'] = 'Datenbank-Sicherung wiederhergestellt';
@@ -993,7 +972,6 @@ $pia_journ_lang['LogStr_0024'] = 'Alle Events löschen';
 $pia_journ_lang['LogStr_0025'] = 'Alle Events löschen (mit Fehler)';
 $pia_journ_lang['LogStr_0026'] = 'Netzwerkaktivität zurücksetzen';
 $pia_journ_lang['LogStr_0027'] = 'Netzwerkaktivität zurücksetzen (mit Fehler)';
-
 $pia_journ_lang['LogStr_0050'] = 'Passwortschutz von Pi.Alert aktiviert';
 $pia_journ_lang['LogStr_0051'] = 'Passwortschutz von Pi.Alert deaktiviert';
 $pia_journ_lang['LogStr_0052'] = 'Spaltenkonfiguration der Geräte-Liste geändert';
@@ -1003,11 +981,27 @@ $pia_journ_lang['LogStr_0055'] = $pia_lang['BackDevices_darkmode_disabled'];
 $pia_journ_lang['LogStr_0056'] = $pia_lang['BackDevices_darkmode_enabled'];
 $pia_journ_lang['LogStr_0057'] = $pia_lang['BackDevices_onlinehistorygraph_disabled'];
 $pia_journ_lang['LogStr_0058'] = $pia_lang['BackDevices_onlinehistorygraph_enabled'];
-
 $pia_journ_lang['LogStr_0061'] = 'Pi.Alert Update verfügbar';
 $pia_journ_lang['LogStr_0062'] = 'Kein Pi.Alert Update verfügbar';
 $pia_journ_lang['LogStr_0063'] = 'GeoLite2 DB Update verfügbar';
 $pia_journ_lang['LogStr_0064'] = 'Kein GeoLite2 DB Update verfügbar';
 $pia_journ_lang['LogStr_0065'] = 'GeoLite2 DB nicht installiert';
+$pia_journ_lang['LogStr_0210'] = 'Individuellen nmap Scan durchgeführt';
+$pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';
+$pia_journ_lang['LogStr_0255'] = 'Online Speedtest ausgeführt';
+$pia_journ_lang['LogStr_0301'] = $pia_lang['BackDevices_webservicemon_enabled'];
+$pia_journ_lang['LogStr_0302'] = $pia_lang['BackDevices_webservicemon_disabled'];
+$pia_journ_lang['LogStr_0500'] = 'Testbenachrichtigung(en) gesendet';
+$pia_journ_lang['LogStr_0503'] = 'Report gelöscht';
+$pia_journ_lang['LogStr_0504'] = 'Alle Reports gelöscht';
+$pia_journ_lang['LogStr_0510'] = 'Pi.Alert wieder aktiviert';
+$pia_journ_lang['LogStr_0511'] = 'Pi.Alert deaktiviert (mit Zeitangabe)';
+$pia_journ_lang['LogStr_0512'] = 'Pi.Alert deaktiviert (für 10 min)';
+$pia_journ_lang['LogStr_0700'] = 'API-Key gesetzt';
+$pia_journ_lang['LogStr_9001'] = 'Zugriff auf die Web-Oberfläche gestartet';
+$pia_journ_lang['LogStr_9002'] = 'Logout durchgeführt';
+$pia_journ_lang['LogStr_9003'] = 'Fehler bei der Anmeldung (Passwort falsch!)';
+$pia_journ_lang['LogStr_9004'] = 'Zugriff auf die Web-Oberfläche gestartet (mit Cookie)';
+$pia_journ_lang['LogStr_9999'] = 'Konfigurationsdatei bearbeitet';
 
 ?>

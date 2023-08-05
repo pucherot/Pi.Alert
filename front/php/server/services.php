@@ -24,6 +24,7 @@ if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 // External files
 require 'db.php';
 require 'util.php';
+require 'journal.php';
 require '../templates/language/' . $pia_lang_selected . '.php';
 
 //------------------------------------------------------------------------------
@@ -228,8 +229,12 @@ function setServiceData() {
 	$result = $db->query($sql);
 	// check result
 	if ($result == TRUE) {
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $_REQUEST['url']);
 		echo $pia_lang['BackWebServices_UpdServ'];
 	} else {
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0004', '', $_REQUEST['url']);
 		echo $pia_lang['BackWebServices_UpdServError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
 		//echo $_REQUEST['tags'];
 	}
@@ -242,6 +247,11 @@ function deleteService() {
 	global $db;
 	global $pia_lang;
 
+	$url = $_REQUEST['url'];
+	if (!$url || !is_string($url) || !preg_match('/^http(s)?:\/\/[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $url)) {
+		return false;
+	}
+
 	// sql
 	$sql = 'DELETE FROM Services WHERE mon_URL="' . $_REQUEST['url'] . '"';
 	// execute sql
@@ -252,15 +262,19 @@ function deleteService() {
 	$result = $db->query($sql);
 	// check result
 	if ($result == TRUE) {
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $url);
 		echo $pia_lang['BackWebServices_DelServ'];
 		echo ("<meta http-equiv='refresh' content='2; URL=./services.php'>");
 	} else {
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0005', '', $url);
 		echo $pia_lang['BackWebServices_DelServError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
 	}
 }
 
 //------------------------------------------------------------------------------
-//  Delete Service
+//  Insert Service
 //------------------------------------------------------------------------------
 function insertNewService() {
 	global $db;
@@ -295,9 +309,13 @@ function insertNewService() {
 	$result = $db->query($sql);
 	// check result
 	if ($result == TRUE) {
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0001', '', $url);
 		echo $pia_lang['BackWebServices_InsServ'];
 		echo ("<meta http-equiv='refresh' content='2; URL=./services.php'>");
 	} else {
+		// Logging
+		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0001', '', $url);
 		echo $pia_lang['BackWebServices_InsServError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
 	}
 
@@ -322,6 +340,9 @@ function downloadGeoDB() {
 
 // Return the saved file path
 	echo json_encode(['filePath' => $savePath]);
+
+// Logging
+	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0008', '', '');
 }
 
 //------------------------------------------------------------------------------
@@ -335,6 +356,8 @@ function deleteGeoDB() {
 	if (file_exists($deletePath)) {
 		unlink($deletePath);
 	}
+	// Logging
+	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0009', '', '');
 
 }
 ?>

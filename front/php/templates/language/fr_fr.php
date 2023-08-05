@@ -47,6 +47,7 @@ $pia_lang['Navigation_Devices'] = 'Dispositifs';
 $pia_lang['Navigation_Services'] = 'Web Services';
 $pia_lang['Navigation_Presence'] = 'Présence';
 $pia_lang['Navigation_Events'] = 'Événements';
+$pia_lang['Navigation_Journal'] = 'Pi.Alert Journal';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';
 $pia_lang['Navigation_Events_Serv'] = 'Web Services';
 $pia_lang['Navigation_Maintenance'] = 'Paramètres';
@@ -924,5 +925,85 @@ $pia_lang['GeoLiteDB_absent'] = 'DB not installed';
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['SysInfo_storage_note'] = 'Il est possible que l&apos;utilisation de la mémoire ne puisse pas être déterminée pour tous les lecteurs énumérés ci-dessus. Cela dépend de l&apos;utilisateur sous lequel les lecteurs sont montés.';
+
+// =============================================================================================================
+
+$pia_journ_lang['Title'] = 'Journal d&apos;application';
+$pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
+// Frontend
+$pia_journ_lang['a_000'] = 'Fichier de configuration';
+$pia_journ_lang['a_001'] = 'Accès GUI';
+$pia_journ_lang['a_002'] = 'Scans Pi.Alert';
+$pia_journ_lang['a_005'] = 'Configuration GUI';
+$pia_journ_lang['a_010'] = 'Maintenance de la DB';
+$pia_journ_lang['a_020'] = 'Appareils';
+$pia_journ_lang['a_021'] = 'Éditeur multiple';
+$pia_journ_lang['a_025'] = 'Outils';
+$pia_journ_lang['a_030'] = 'Surveillance des services Web';
+$pia_journ_lang['a_040'] = 'Vue du réseau';
+$pia_journ_lang['a_050'] = 'Rapports';
+$pia_journ_lang['a_060'] = 'Vérification des mises à jour';
+$pia_journ_lang['a_070'] = 'API';
+// pialert-cli
+$pia_journ_lang['b_002'] = 'Scans Pi.Alert';
+$pia_journ_lang['b_010'] = 'Maintenance de la DB';
+//LogStrings
+$pia_journ_lang['LogStr_0001'] = 'Entrée ajoutée';
+$pia_journ_lang['LogStr_0002'] = 'Entrée modifiée';
+$pia_journ_lang['LogStr_0003'] = 'Entrée supprimée';
+$pia_journ_lang['LogStr_0004'] = 'Entrée modifiée (avec erreur)';
+$pia_journ_lang['LogStr_0005'] = 'Entrée supprimée (avec erreur)';
+$pia_journ_lang['LogStr_0006'] = 'Réinitialisation du dernier changement du fichier de configuration';
+$pia_journ_lang['LogStr_0008'] = 'Base de données GeoLite2 installée';
+$pia_journ_lang['LogStr_0009'] = 'Base de données GeoLite2 supprimée';
+$pia_journ_lang['LogStr_0010'] = 'Mise à jour de la base de données';
+$pia_journ_lang['LogStr_0011'] = 'Sauvegarde de la base de données créée';
+$pia_journ_lang['LogStr_0012'] = 'Restauration de la sauvegarde de la base de données';
+$pia_journ_lang['LogStr_0013'] = 'Nettoyage des sauvegardes (fichier de configuration et base de données)';
+$pia_journ_lang['LogStr_0014'] = 'Suppression des hôtes inactifs (avec erreur)';
+$pia_journ_lang['LogStr_0015'] = 'Suppression des hôtes inactifs';
+$pia_journ_lang['LogStr_0016'] = 'Suppression de tous les hôtes sans adresse MAC';
+$pia_journ_lang['LogStr_0017'] = 'Suppression de tous les hôtes sans adresse MAC (avec erreur)';
+$pia_journ_lang['LogStr_0018'] = 'Suppression de tous les hôtes (inconnus)';
+$pia_journ_lang['LogStr_0019'] = 'Suppression de tous les hôtes (inconnus) (avec erreur)';
+$pia_journ_lang['LogStr_0020'] = 'Suppression de tous les événements d&apos;un appareil';
+$pia_journ_lang['LogStr_0021'] = 'Suppression de tous les événements d&apos;un appareil (avec erreur)';
+$pia_journ_lang['LogStr_0022'] = 'Suppression de tous les hôtes de la liste des appareils';
+$pia_journ_lang['LogStr_0023'] = 'Suppression de tous les hôtes de la liste des appareils (avec erreur)';
+$pia_journ_lang['LogStr_0024'] = 'Suppression de tous les événements';
+$pia_journ_lang['LogStr_0025'] = 'Suppression de tous les événements (avec erreur)';
+$pia_journ_lang['LogStr_0026'] = 'Réinitialisation de l&apos;activité réseau';
+$pia_journ_lang['LogStr_0027'] = 'Réinitialisation de l&apos;activité réseau (avec erreur)';
+$pia_journ_lang['LogStr_0050'] = 'Protection par mot de passe de Pi.Alert activée';
+$pia_journ_lang['LogStr_0051'] = 'Protection par mot de passe de Pi.Alert désactivée';
+$pia_journ_lang['LogStr_0052'] = 'Modification de la configuration des colonnes de la liste des appareils';
+$pia_journ_lang['LogStr_0053'] = 'Thème modifié';
+$pia_journ_lang['LogStr_0054'] = 'Langue modifiée';
+$pia_journ_lang['LogStr_0055'] = $pia_lang['BackDevices_darkmode_disabled'];
+$pia_journ_lang['LogStr_0056'] = $pia_lang['BackDevices_darkmode_enabled'];
+$pia_journ_lang['LogStr_0057'] = $pia_lang['BackDevices_onlinehistorygraph_disabled'];
+$pia_journ_lang['LogStr_0058'] = $pia_lang['BackDevices_onlinehistorygraph_enabled'];
+$pia_journ_lang['LogStr_0061'] = 'Mise à jour de Pi.Alert disponible';
+$pia_journ_lang['LogStr_0062'] = 'Aucune mise à jour de Pi.Alert disponible';
+$pia_journ_lang['LogStr_0063'] = 'Mise à jour de la base de données GeoLite2 disponible';
+$pia_journ_lang['LogStr_0064'] = 'Aucune mise à jour de la base de données GeoLite2 disponible';
+$pia_journ_lang['LogStr_0065'] = 'Base de données GeoLite2 non installée';
+$pia_journ_lang['LogStr_0210'] = 'Scan individuel nmap effectué';
+$pia_journ_lang['LogStr_0251'] = 'Wake-on-lan exécuté';
+$pia_journ_lang['LogStr_0255'] = 'Speedtest en ligne exécuté';
+$pia_journ_lang['LogStr_0301'] = $pia_lang['BackDevices_webservicemon_enabled'];
+$pia_journ_lang['LogStr_0302'] = $pia_lang['BackDevices_webservicemon_disabled'];
+$pia_journ_lang['LogStr_0500'] = 'Notification(s) de test envoyée(s)';
+$pia_journ_lang['LogStr_0503'] = 'Rapport supprimé';
+$pia_journ_lang['LogStr_0504'] = 'Supprimer tous les rapports';
+$pia_journ_lang['LogStr_0510'] = 'Pi.Alert réactivé';
+$pia_journ_lang['LogStr_0511'] = 'Pi.Alert désactivé (avec heure spécifiée)';
+$pia_journ_lang['LogStr_0512'] = 'Pi.Alert désactivé (pendant 10 minutes)';
+$pia_journ_lang['LogStr_0700'] = 'Clé API définie';
+$pia_journ_lang['LogStr_9001'] = 'Accès à l&apos;interface Web démarré';
+$pia_journ_lang['LogStr_9002'] = 'Déconnexion effectuée';
+$pia_journ_lang['LogStr_9003'] = 'Erreur lors de la connexion (mot de passe incorrect !)';
+$pia_journ_lang['LogStr_9004'] = 'Accès à l&apos;interface Web démarré (avec cookie)';
+$pia_journ_lang['LogStr_9999'] = 'Fichier de configuration modifié';
 
 ?>
