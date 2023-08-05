@@ -148,7 +148,7 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 ### Versions History
   [Versions History](docs/VERSIONS_HISTORY.md)
   
-  An archive of older versions can be found at https://leiweibau.net/archive/pialert/
+  An archive of older versions can be found at [https://leiweibau.net/archive/pialert](https://leiweibau.net/archive/pialert/). This archive contains all release notes of my fork.
 
 ### License
   GPL 3.0
