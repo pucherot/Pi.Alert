@@ -939,6 +939,9 @@ $pia_lang['SysInfo_storage_note'] = 'It is possible that the memory usage cannot
 
 // =============================================================================================================
 
+$pia_journ_lang['Journal_TableHead_Class'] = 'Class';
+$pia_journ_lang['Journal_TableHead_Trigger'] = 'Trigger';
+
 $pia_journ_lang['Title'] = 'Application Journal';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
 // Frontend

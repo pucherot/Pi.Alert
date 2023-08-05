@@ -926,6 +926,9 @@ $pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung 
 
 // =============================================================================================================
 
+$pia_journ_lang['Journal_TableHead_Class'] = 'Methode';
+$pia_journ_lang['Journal_TableHead_Trigger'] = 'Auslöser';
+
 $pia_journ_lang['Title'] = 'Anwendungsjournal';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
 // Frontend

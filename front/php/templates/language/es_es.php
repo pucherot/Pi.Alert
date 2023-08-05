@@ -933,6 +933,9 @@ $pia_lang['SysInfo_storage_note'] = 'Es posible que no se pueda determinar el us
 
 // =============================================================================================================
 
+$pia_journ_lang['Journal_TableHead_Class'] = 'Class';
+$pia_journ_lang['Journal_TableHead_Trigger'] = 'Trigger';
+
 $pia_journ_lang['Title'] = 'Registro de Aplicación';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
 // Frontend

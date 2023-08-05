@@ -52,13 +52,13 @@ $db->exec('PRAGMA journal_mode = wal;');
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
                 <tr>
-                  <th style="min-width: 120px;">Date / Time</th>
+                  <th style="min-width: 120px;"><?php echo $pia_lang['Events_TableHead_Date']; ?></th>
                   <th>LogClass</th>
                   <th style="min-width: 80px;">LogCode</th>
-                  <th style="min-width: 90px;">Class</th>
-                  <th style="min-width: 100px;">Quelle</th>
+                  <th style="min-width: 90px;"><?php echo $pia_journ_lang['Journal_TableHead_Class']; ?></th>
+                  <th style="min-width: 100px;"><?php echo $pia_journ_lang['Journal_TableHead_Trigger']; ?></th>
                   <th>Hash</th>
-                  <th style="min-width: 500px;">Additional Info</th>
+                  <th style="min-width: 500px;"><?php echo $pia_lang['Events_TableHead_AdditionalInfo']; ?></th>
                 </tr>
                 </thead>
                   <tbody>

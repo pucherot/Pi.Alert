@@ -928,6 +928,9 @@ $pia_lang['SysInfo_storage_note'] = 'Il est possible que l&apos;utilisation de l
 
 // =============================================================================================================
 
+$pia_journ_lang['Journal_TableHead_Class'] = 'Class';
+$pia_journ_lang['Journal_TableHead_Trigger'] = 'Trigger';
+
 $pia_journ_lang['Title'] = 'Journal d&apos;application';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
 // Frontend
