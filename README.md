@@ -159,11 +159,15 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
   - Selfhosted Fonts https://github.com/adobe-fonts/source-sans
   - Bootstrap Icons https://github.com/twbs/icons
 
-### Special thanks 🥇
+### Special thanks
 
   This code is a collaborative body of work, with special thanks to:
 
 [Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert) and many more
+
+### Contact
+
+  leiweibau@gmail.com
 
 <!--- --------------------------------------------------------------------- --->
 [main]:    ./docs/img/screen_main.png          "Main screen"
