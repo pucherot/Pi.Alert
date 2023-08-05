@@ -939,35 +939,35 @@ $pia_lang['SysInfo_storage_note'] = 'It is possible that the memory usage cannot
 
 // =============================================================================================================
 
-$pia_journ_lang['Journal_TableHead_Class'] = 'Class';
+$pia_journ_lang['Journal_TableHead_Class'] = 'Method';
 $pia_journ_lang['Journal_TableHead_Trigger'] = 'Trigger';
 
 $pia_journ_lang['Title'] = 'Application Journal';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hash';
 // Frontend
-$pia_journ_lang['a_000'] = 'Configuration file';
+$pia_journ_lang['a_000'] = 'Configuration File';
 $pia_journ_lang['a_001'] = 'GUI Access';
 $pia_journ_lang['a_002'] = 'Pi.Alert Scans';
-$pia_journ_lang['a_005'] = 'GUI Config';
+$pia_journ_lang['a_005'] = 'GUI Configuration';
 $pia_journ_lang['a_010'] = 'DB Maintenance';
 $pia_journ_lang['a_020'] = 'Devices';
-$pia_journ_lang['a_021'] = 'Bulk-Editor';
+$pia_journ_lang['a_021'] = 'Multi-Editor';
 $pia_journ_lang['a_025'] = 'Tools';
 $pia_journ_lang['a_030'] = 'Web Service Monitoring';
-$pia_journ_lang['a_040'] = 'Network View';
+$pia_journ_lang['a_040'] = 'Network Overview';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'Update Check';
 $pia_journ_lang['a_070'] = 'API';
 // pialert-cli
 $pia_journ_lang['b_002'] = 'Pi.Alert Scans';
 $pia_journ_lang['b_010'] = 'DB Maintenance';
-//LogStrings
+// Log Strings
 $pia_journ_lang['LogStr_0001'] = 'Entry added';
 $pia_journ_lang['LogStr_0002'] = 'Entry edited';
 $pia_journ_lang['LogStr_0003'] = 'Entry deleted';
 $pia_journ_lang['LogStr_0004'] = 'Entry edited (with error)';
 $pia_journ_lang['LogStr_0005'] = 'Entry deleted (with error)';
-$pia_journ_lang['LogStr_0006'] = 'Last configuration file change reset';
+$pia_journ_lang['LogStr_0006'] = 'Last configuration file change reverted';
 $pia_journ_lang['LogStr_0008'] = 'GeoLite2 database installed';
 $pia_journ_lang['LogStr_0009'] = 'GeoLite2 database deleted';
 $pia_journ_lang['LogStr_0010'] = 'Database updated';
@@ -982,17 +982,23 @@ $pia_journ_lang['LogStr_0018'] = 'Delete all (unknown) hosts';
 $pia_journ_lang['LogStr_0019'] = 'Delete all (unknown) hosts (with error)';
 $pia_journ_lang['LogStr_0020'] = 'Delete all events of a device';
 $pia_journ_lang['LogStr_0021'] = 'Delete all events of a device (with error)';
-$pia_journ_lang['LogStr_0022'] = 'Delete all hosts from the devices list';
-$pia_journ_lang['LogStr_0023'] = 'Delete all hosts from the devices list (with error)';
+$pia_journ_lang['LogStr_0022'] = 'Delete all hosts from the device list';
+$pia_journ_lang['LogStr_0023'] = 'Delete all hosts from the device list (with error)';
 $pia_journ_lang['LogStr_0024'] = 'Delete all events';
 $pia_journ_lang['LogStr_0025'] = 'Delete all events (with error)';
 $pia_journ_lang['LogStr_0026'] = 'Reset network activity';
 $pia_journ_lang['LogStr_0027'] = 'Reset network activity (with error)';
-$pia_journ_lang['LogStr_0050'] = 'Pi.Alert password protection enabled';
-$pia_journ_lang['LogStr_0051'] = 'Pi.Alert password protection disabled';
-$pia_journ_lang['LogStr_0052'] = 'Device list column configuration changed';
-$pia_journ_lang['LogStr_0053'] = 'Theme changed';
-$pia_journ_lang['LogStr_0054'] = 'Language changed';
+$pia_journ_lang['LogStr_0030'] = 'Added active network component (Switch, Router, etc.)';
+$pia_journ_lang['LogStr_0031'] = 'Edited active network component (Switch, Router, etc.)';
+$pia_journ_lang['LogStr_0032'] = 'Deleted active network component (Switch, Router, etc.)';
+$pia_journ_lang['LogStr_0033'] = 'Added non-scannable device (Hubs, PoE devices, Docker, etc.)';
+$pia_journ_lang['LogStr_0034'] = 'Edited non-scannable device (Hubs, PoE devices, Docker, etc.)';
+$pia_journ_lang['LogStr_0035'] = 'Deleted non-scannable device (Hubs, PoE devices, Docker, etc.)';
+$pia_journ_lang['LogStr_0050'] = 'Enabled Pi.Alert password protection';
+$pia_journ_lang['LogStr_0051'] = 'Disabled Pi.Alert password protection';
+$pia_journ_lang['LogStr_0052'] = 'Changed device list column configuration';
+$pia_journ_lang['LogStr_0053'] = 'Changed theme';
+$pia_journ_lang['LogStr_0054'] = 'Changed language';
 $pia_journ_lang['LogStr_0055'] = $pia_lang['BackDevices_darkmode_disabled'];
 $pia_journ_lang['LogStr_0056'] = $pia_lang['BackDevices_darkmode_enabled'];
 $pia_journ_lang['LogStr_0057'] = $pia_lang['BackDevices_onlinehistorygraph_disabled'];
@@ -1010,14 +1016,14 @@ $pia_journ_lang['LogStr_0302'] = $pia_lang['BackDevices_webservicemon_disabled']
 $pia_journ_lang['LogStr_0500'] = 'Test notification(s) sent';
 $pia_journ_lang['LogStr_0503'] = 'Report deleted';
 $pia_journ_lang['LogStr_0504'] = 'Delete all reports';
-$pia_journ_lang['LogStr_0510'] = 'Pi.Alert re-enabled';
-$pia_journ_lang['LogStr_0511'] = 'Pi.Alert disabled (with time specified)';
-$pia_journ_lang['LogStr_0512'] = 'Pi.Alert disabled (for 10 minutes)';
-$pia_journ_lang['LogStr_0700'] = 'API key set';
-$pia_journ_lang['LogStr_9001'] = 'Access to web interface started';
+$pia_journ_lang['LogStr_0510'] = 'Pi.Alert reactivated';
+$pia_journ_lang['LogStr_0511'] = 'Pi.Alert deactivated (with time specification)';
+$pia_journ_lang['LogStr_0512'] = 'Pi.Alert deactivated (for 10 minutes)';
+$pia_journ_lang['LogStr_0700'] = 'Set API key';
+$pia_journ_lang['LogStr_9001'] = 'Access to the web interface started';
 $pia_journ_lang['LogStr_9002'] = 'Logout performed';
-$pia_journ_lang['LogStr_9003'] = 'Error during login (incorrect password!)';
-$pia_journ_lang['LogStr_9004'] = 'Access to web interface started (with cookie)';
+$pia_journ_lang['LogStr_9003'] = 'Login error (incorrect password!)';
+$pia_journ_lang['LogStr_9004'] = 'Access to the web interface started (with cookie)';
 $pia_journ_lang['LogStr_9999'] = 'Configuration file edited';
 
 ?>
