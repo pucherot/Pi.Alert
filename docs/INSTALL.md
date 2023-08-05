@@ -209,8 +209,8 @@ block is not necessary
 
 4.6 - Install additional packages
   ```
-  sudo pip3 install mac-vendor-lookup
-  sudo pip3 install fritzconnection
+  pip3 install mac-vendor-lookup
+  pip3 install fritzconnection
   ```
 
 ### Pi.Alert
