@@ -279,7 +279,7 @@ format_temperature($celsius, $temperaturelimit);
         <?php toggle_webservices_menu('Event');?>
 
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('journal.php'))) {echo 'active';}?>">
-          <a href="journal.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Journal']; ?></span></a>
+          <a href="journal.php"><i class="fa fa-list"></i> <span><?php echo $pia_lang['Navigation_Journal']; ?></span></a>
         </li>
 
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_C']; ?></li>

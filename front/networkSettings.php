@@ -31,6 +31,8 @@ if ($_REQUEST['Networkinsert'] == "yes") {
 	if (isset($_REQUEST['NetworkDeviceName']) && isset($_REQUEST['NetworkDeviceTyp'])) {
 		$sql = 'INSERT INTO "network_infrastructure" ("net_device_name", "net_device_typ", "net_device_port") VALUES("' . $_REQUEST['NetworkDeviceName'] . '", "' . $_REQUEST['NetworkDeviceTyp'] . '", "' . $_REQUEST['NetworkDevicePort'] . '")';
 		$result = $db->query($sql);
+		// Logging
+		pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0030', '', '');
 	}
 }
 // Edit  Network Devices
@@ -45,6 +47,8 @@ if ($_REQUEST['Networkedit'] == "yes") {
 		$sql = 'UPDATE "network_infrastructure" SET "net_device_typ" = "' . $_REQUEST['NewNetworkDeviceTyp'] . '", "net_device_port" = "' . $_REQUEST['NewNetworkDevicePort'] . '", "net_downstream_devices" = "' . $_REQUEST['NetworkDeviceDownlink'] . '" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
 		$result = $db->query($sql);
 	}
+	// Logging
+	pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0031', '', '');
 
 }
 // remove Network Devices
@@ -54,6 +58,8 @@ if ($_REQUEST['Networkdelete'] == "yes") {
 		$sql = 'DELETE FROM "network_infrastructure" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
 		$result = $db->query($sql);
 	}
+	// Logging
+	pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0032', '', '');
 }
 
 // Add New unmanaged Device
@@ -64,6 +70,8 @@ if ($_REQUEST['NetworkUnmanagedDevinsert'] == "yes") {
 		$dumbvar = 'dumb';
 		$sql = 'INSERT INTO "network_dumb_dev" ("dev_Name", "dev_MAC", "dev_Infrastructure", "dev_Infrastructure_port", "dev_PresentLastScan", "dev_LastIP") VALUES("' . $_REQUEST['NetworkUnmanagedDevName'] . '", "' . $dumbvar . '", "' . $_REQUEST['NetworkUnmanagedDevConnect'] . '", "' . $_REQUEST['NetworkUnmanagedDevPort'] . '", "' . $dumbvar . '", "' . $ip . '")';
 		$result = $db->query($sql);
+		// Logging
+		pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0033', '', '');
 	}
 }
 // Edit  unmanaged Device
@@ -78,6 +86,8 @@ if ($_REQUEST['NetworkUnmanagedDevedit'] == "yes") {
 		$sql = 'UPDATE "network_dumb_dev" SET "dev_Infrastructure" = "' . $_REQUEST['NewNetworkUnmanagedDevConnect'] . '", "dev_Infrastructure_port" = "' . $_REQUEST['NewNetworkUnmanagedDevPort'] . '" WHERE "id"="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
 		$result = $db->query($sql);
 	}
+	// Logging
+	pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0034', '', '');
 }
 // remove unmanaged Device
 // #####################################
@@ -85,6 +95,8 @@ if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
 	if (isset($_REQUEST['NetworkUnmanagedDevID'])) {
 		$sql = 'DELETE FROM "network_dumb_dev" WHERE "id"="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
 		$result = $db->query($sql);
+		// Logging
+		pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0035', '', '');
 	}
 }
 

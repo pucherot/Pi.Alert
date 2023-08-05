@@ -2,7 +2,7 @@
 #  Pi.Alert
 #  Open Source Network Guard / WIFI & LAN intrusion detector
 #
-#  systeminfo.php - Front module. network relationship
+#  systeminfo.php - Front module. SystemInfo page
 #-------------------------------------------------------------------------------
 #  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
