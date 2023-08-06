@@ -968,6 +968,7 @@ $pia_journ_lang['LogStr_0003'] = 'Entry deleted';
 $pia_journ_lang['LogStr_0004'] = 'Entry edited (with error)';
 $pia_journ_lang['LogStr_0005'] = 'Entry deleted (with error)';
 $pia_journ_lang['LogStr_0006'] = 'Last configuration file change reverted';
+$pia_journ_lang['LogStr_0007'] = 'Configuration backup created';
 $pia_journ_lang['LogStr_0008'] = 'GeoLite2 database installed';
 $pia_journ_lang['LogStr_0009'] = 'GeoLite2 database deleted';
 $pia_journ_lang['LogStr_0010'] = 'Database updated';

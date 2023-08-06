@@ -962,6 +962,7 @@ $pia_journ_lang['LogStr_0003'] = 'Entrada eliminada';
 $pia_journ_lang['LogStr_0004'] = 'Entrada editada (con error)';
 $pia_journ_lang['LogStr_0005'] = 'Entrada eliminada (con error)';
 $pia_journ_lang['LogStr_0006'] = 'Último cambio de archivo de configuración revertido';
+$pia_journ_lang['LogStr_0007'] = 'Copia de seguridad de la configuración creada';
 $pia_journ_lang['LogStr_0008'] = 'Base de datos GeoLite2 instalada';
 $pia_journ_lang['LogStr_0009'] = 'Base de datos GeoLite2 eliminada';
 $pia_journ_lang['LogStr_0010'] = 'Base de datos actualizada';
