@@ -90,6 +90,7 @@ There is a configurable login to prevent unauthorized use. The default password 
   - Help/FAQ section
   - Wake-on-LAN (must be supported by the target device)
   - Notification page with download options
+  - Journal that tracks operations via the frontend
 
 Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
