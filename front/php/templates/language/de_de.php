@@ -955,6 +955,7 @@ $pia_journ_lang['LogStr_0003'] = 'Eintrag gelöscht';
 $pia_journ_lang['LogStr_0004'] = 'Eintrag bearbeitet (mit Fehler)';
 $pia_journ_lang['LogStr_0005'] = 'Eintrag gelöscht (mit Fehler)';
 $pia_journ_lang['LogStr_0006'] = 'Letzte Änderung der Konfigurationsdatei zurückgesetzt';
+$pia_journ_lang['LogStr_0007'] = 'Sicherung der Konfiguration erstellt';
 $pia_journ_lang['LogStr_0008'] = 'GeoLite2-Datenbank installiert';
 $pia_journ_lang['LogStr_0009'] = 'GeoLite2-Datenbank gelöscht';
 $pia_journ_lang['LogStr_0010'] = 'Datenbank aktualisiert';

@@ -1120,7 +1120,7 @@ function BackupConfigFile() {
 	copy($file, $laststate);
 
 	// Logging
-	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_0011', '1', '');
+	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_0007', '1', '');
 }
 
 //------------------------------------------------------------------------------
