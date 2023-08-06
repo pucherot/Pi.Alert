@@ -1377,6 +1377,11 @@ def rogue_dhcp_notification ():
             send_pushsafer (rogue_dhcp_server_string)
         else :
             print ('    Skip PUSHSAFER...')
+        if REPORT_PUSHOVER or REPORT_PUSHOVER_WEBMON:
+            print ('    Sending report by PUSHOVER...')
+            send_pushover (rogue_dhcp_server_string)
+        else :
+            print ('    Skip PUSHOVER...')
         if REPORT_NTFY or REPORT_NTFY_WEBMON:
             print ('    Sending report by NTFY...')
             send_ntfy (rogue_dhcp_server_string)
