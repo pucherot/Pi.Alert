@@ -54,7 +54,7 @@
 
 [report1]: ./img/report_01.jpg               "Report sample 1"
 [report2]: ./img/report_02.jpg               "Report sample 2"
-[report3]: ./img/report_03.jpg               "Report sample 3"
+[report3]: ./img/report_gui_03.jpg               "Report sample 3"
 
 [Screen_Dev_01]: ./img/screen_dev_01.png            "Screen Devices 01"
 [Screen_Dev_02]: ./img/screen_dev_02.png            "Screen Devices 02"
