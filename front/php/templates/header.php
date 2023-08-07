@@ -132,7 +132,7 @@ if (window.navigator.standalone || document.referrer.includes("android-app://") 
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed Yellow -->
-<body class="hold-transition fixed <?php echo $pia_skin_selected; ?> sidebar-mini" <?php echo $BACKGROUND_IMAGE_PATCH; ?> onLoad="show_pia_servertime();" >
+<body class="hold-transition <?php echo $pia_skin_selected; ?> sidebar-mini" <?php echo $BACKGROUND_IMAGE_PATCH; ?> onLoad="show_pia_servertime();" >
 <!-- Site wrapper -->
 <div class="wrapper">
 
