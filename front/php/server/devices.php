@@ -1230,10 +1230,12 @@ function wakeonlan() {
 	} elseif (crosscheckMAC($WOL_HOST_MAC) == "") {
 		echo "Unknown MAC! " . $pia_lang['BackDevDetail_Tools_WOL_error'];exit;
 	}
-	exec('wakeonlan ' . $WOL_HOST_MAC, $output);
+	exec('wakeonlan ' . $WOL_HOST_MAC, $output_a);
+	exec('wakeonlan ' . $WOL_HOST_MAC, $output_b);
+	exec('wakeonlan ' . $WOL_HOST_MAC, $output_c);
 	echo $pia_lang['BackDevDetail_Tools_WOL_okay'];
-	$wol_output = implode('<br>', $output);
-	$wol_output = $wol_output . ' (' . $WOL_HOST_IP . ')';
+	$wol_output = implode('<br>', $output_a) . '<br>' . implode('<br>', $output_b) . '<br>' . implode('<br>', $output_c);
+	$wol_output = $wol_output . '<br>IP: ' . $WOL_HOST_IP;
 	// Logging
 	pialert_logging('a_025', $_SERVER['REMOTE_ADDR'], 'LogStr_0251', '', $wol_output);
 }
