@@ -1053,21 +1053,22 @@ function setPiAlertArpTimer() {
 
 	if (isset($_REQUEST['PiaArpTimer'])) {
 		$pia_lang_set_dir = '../../../db/';
-		$file = '../../../db/setting_stoparpscan';
+		#$file = '../../../db/setting_stoparpscan';
+		$file = '../../../db/setting_stoppialert';
 		if (file_exists($file)) {
 			echo $pia_lang['BackDevices_Arpscan_enabled'];
 			// Logging
-			pialert_logging('b_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0510', '', '');
+			pialert_logging('a_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0510', '', '');
 			exec('../../../back/pialert-cli enable_scan', $output);
 			echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 		} else {
 			if (is_numeric($_REQUEST['PiaArpTimer'])) {
 				// Logging
-				pialert_logging('b_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0511', '', $_REQUEST['PiaArpTimer'] . ' min');
+				pialert_logging('a_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0511', '', $_REQUEST['PiaArpTimer'] . ' min');
 				exec('../../../back/pialert-cli disable_scan ' . $_REQUEST['PiaArpTimer'], $output);
 			} else {
 				// Logging
-				pialert_logging('b_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0512', '', '');
+				pialert_logging('a_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0512', '', '');
 				exec('../../../back/pialert-cli disable_scan', $output);
 			}
 			echo $pia_lang['BackDevices_Arpscan_disabled'];

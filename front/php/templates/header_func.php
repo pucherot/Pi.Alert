@@ -33,7 +33,8 @@ function count_webgui_reports() {
 
 function arpscanstatus() {
 	global $pia_lang;
-	if (!file_exists('../db/setting_stoparpscan')) {
+	#if (!file_exists('../db/setting_stoparpscan')) {
+	if (!file_exists('../db/setting_stoppialert')) {
 		$execstring = 'ps aux | grep "~/pialert/back/pialert.py 1" 2>&1';
 		$pia_arpscans = "";
 		exec($execstring, $pia_arpscans);
@@ -42,7 +43,8 @@ function arpscanstatus() {
 		$_SESSION['arpscan_sidebarstate'] = 'Active';
 		$_SESSION['arpscan_sidebarstate_light'] = 'green-light fa-gradient-green';
 	} else {
-		$_SESSION['arpscan_timerstart'] = date("H:i:s", filectime('../db/setting_stoparpscan'));
+		#$_SESSION['arpscan_timerstart'] = date("H:i:s", filectime('../db/setting_stoparpscan'));
+		$_SESSION['arpscan_timerstart'] = date("H:i:s", filectime('../db/setting_stoppialert'));
 		$_SESSION['arpscan_result'] = '<span style="color:red;">arp-Scan ' . $pia_lang['Maintenance_arp_status_off'] . '</span>';
 		$_SESSION['arpscan_sidebarstate'] = 'Disabled&nbsp;&nbsp;&nbsp;(' . $_SESSION['arpscan_timerstart'] . ')';
 		$_SESSION['arpscan_sidebarstate_light'] = 'red fa-gradient-red';

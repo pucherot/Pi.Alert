@@ -47,7 +47,8 @@ import ipaddress
 PIALERT_BACK_PATH = os.path.dirname(os.path.abspath(__file__))
 PIALERT_PATH = PIALERT_BACK_PATH + "/.."
 PIALERT_WEBSERVICES_LOG = PIALERT_PATH + "/log/pialert.webservices.log"
-STOPARPSCAN = PIALERT_PATH + "/db/setting_stoparpscan"
+#STOPARPSCAN = PIALERT_PATH + "/db/setting_stop#arpscan"
+STOPPIALERT = PIALERT_PATH + "/db/setting_stoppialert"
 PIALERT_DB_FILE = PIALERT_PATH + "/db/pialert.db"
 REPORTPATH_WEBGUI = PIALERT_PATH + "/front/reports/"
 
@@ -108,9 +109,9 @@ def main ():
         res = update_devices_MAC_vendors()
     elif cycle == 'update_vendors_silent':
         res = update_devices_MAC_vendors('-s')
-    elif os.path.exists(STOPARPSCAN) == True :
+    elif os.path.exists(STOPPIALERT) == True :
         res = start_arpscan_countdown ()
-    elif os.path.exists(STOPARPSCAN) == False :
+    elif os.path.exists(STOPPIALERT) == False :
         res = scan_network()
     else:
         res = 0
@@ -151,14 +152,14 @@ def set_pia_reports_permissions():
 #===============================================================================
 def start_arpscan_countdown ():
 
-    if os.path.exists(STOPARPSCAN):
+    if os.path.exists(STOPPIALERT):
         # get timer from file
-        with open(STOPARPSCAN, 'r') as file:
+        with open(STOPPIALERT, 'r') as file:
             data = int(file.read().rstrip())
             # print("Timer in min: %s" % data)
 
         # date of file creation
-        FILETIME = int(os.path.getctime(STOPARPSCAN))
+        FILETIME = int(os.path.getctime(STOPPIALERT))
 
         # output start and end
         print("Timer Start: %s" % time.ctime(FILETIME))
@@ -170,7 +171,7 @@ def start_arpscan_countdown ():
 
         if ( ACTUALTIME > STOPTIME ):
            print ("File will be deleted")
-           os.remove(STOPARPSCAN)
+           os.remove(STOPPIALERT)
            email_reporting_test("noti_Timerstop")
            scan_network()
         else:
