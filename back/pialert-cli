@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.03'
+SCRIPTVERSION='v1.04'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -470,6 +470,7 @@ EOM
     REWRITE_DAYS_TO_KEEP_ONLINEHISTORY=$(grep "^DAYS_TO_KEEP_ONLINEHISTORY" $input_file)
     REWRITE_DAYS_TO_KEEP_EVENTS=$(grep "^DAYS_TO_KEEP_EVENTS" $input_file)
     # Arp-scan Options & Samples
+    REWRITE_ARPSCAN_ACTIVE=$(grep "^ARPSCAN_ACTIVE" $input_file)
     REWRITE_MAC_IGNORE_LIST=$(grep "^MAC_IGNORE_LIST" $input_file)
     REWRITE_SCAN_SUBNETS=$(grep "^SCAN_SUBNETS" $input_file)
 
@@ -560,6 +561,10 @@ EOM
     if [ -z "$REWRITE_MAC_IGNORE_LIST" ]
     then
         REWRITE_MAC_IGNORE_LIST="#MAC_IGNORE_LIST = ['11:22:33:aa:bb:cc']"
+    fi
+    if [ -z "$REWRITE_ARPSCAN_ACTIVE" ]
+    then
+        REWRITE_ARPSCAN_ACTIVE="ARPSCAN_ACTIVE = True"
     fi
 
     # Write clean Config
@@ -671,6 +676,7 @@ ${REWRITE_DAYS_TO_KEEP_EVENTS}
 
 # Arp-scan Options & Samples
 # ----------------------
+${REWRITE_ARPSCAN_ACTIVE}
 ${REWRITE_MAC_IGNORE_LIST}
 ${REWRITE_SCAN_SUBNETS}
 # SCAN_SUBNETS    = '--localnet'

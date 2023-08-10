@@ -561,6 +561,12 @@ def query_ScanCycle_Data (pOpenCloseDB = False):
 
 #-------------------------------------------------------------------------------
 def execute_arpscan ():
+
+    # check if arp-scan is active
+    if not ARPSCAN_ACTIVE :
+        unique_devices = [] 
+        return unique_devices
+
     # output of possible multiple interfaces
     arpscan_output = ""
 
