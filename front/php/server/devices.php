@@ -468,25 +468,25 @@ function PiaBackupDBtoArchive() {
 function PiaRestoreDBfromArchive() {
 	// prepare fast Backup
 	$file = '../../../db/pialert.db';
-	$oldfile = '../../../db/pialert.db.prerestore';
+	//$oldfile = '../../../db/pialert.db.prerestore';
 	global $pia_lang;
 
 	// copy files as a fast Backup
-	if (!copy($file, $oldfile)) {
-		echo $pia_lang['BackDevices_Restore_CopError'];
+	// if (!copy($file, $oldfile)) {
+	// 	echo $pia_lang['BackDevices_Restore_CopError'];
+	// } else {
+	// extract latest archive and overwrite the actual pialert.db
+	$Pia_Archive_Path = '../../../db/';
+	exec('/bin/ls -Art ' . $Pia_Archive_Path . '*.zip | /bin/tail -n 1 | /usr/bin/xargs -n1 /bin/unzip -o -d ../../../db/', $output);
+	// check if the pialert.db exists
+	if (file_exists($file)) {
+		echo $pia_lang['BackDevices_Restore_okay'];
+		// unlink($oldfile);
+		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
 	} else {
-		// extract latest archive and overwrite the actual pialert.db
-		$Pia_Archive_Path = '../../../db/';
-		exec('/bin/ls -Art ' . $Pia_Archive_Path . '*.zip | /bin/tail -n 1 | /usr/bin/xargs -n1 /bin/unzip -o -d ../../../db/', $output);
-		// check if the pialert.db exists
-		if (file_exists($file)) {
-			echo $pia_lang['BackDevices_Restore_okay'];
-			unlink($oldfile);
-			echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
-		} else {
-			echo $pia_lang['BackDevices_Restore_Failed'];
-		}
+		echo $pia_lang['BackDevices_Restore_Failed'];
 	}
+	// }
 }
 
 //------------------------------------------------------------------------------
@@ -1041,7 +1041,6 @@ function setPiAlertLanguage() {
 			}
 		} else {echo $pia_lang['BackDevices_Language_invalid'];}
 	}
-
 	// Logging
 	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0054', '', $pia_lang_selector);
 }
@@ -1082,12 +1081,8 @@ function setPiAlertArpTimer() {
 //------------------------------------------------------------------------------
 function RestoreConfigFile() {
 	global $pia_lang;
-	// prepare fast Backup
-	//$file = '../../../config/pialert.conf';
-	// start temp var
+
 	$file = '../../../config/pialert.conf';
-	// end temp var
-	//$newfile = '../../../config/pialert-'.date("Ymd_His").'.bak';
 	$laststate = '../../../config/pialert-prev.bak';
 	// Restore fast Backup
 	if (!copy($laststate, $file)) {
@@ -1158,18 +1153,12 @@ function DeleteInactiveHosts() {
 	global $pia_lang;
 	global $db;
 
-	// sql
 	$sql = 'SELECT * FROM Devices WHERE dev_PresentLastScan = 0 AND dev_LastConnection <= date("now", "-30 day")';
-	// execute sql
 	$result = $db->query($sql);
 	while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
-		// sql
 		$sql_dev = 'DELETE FROM Devices WHERE dev_MAC="' . $res['dev_MAC'] . '"';
-		// execute sql
 		$result_dev = $db->query($sql_dev);
-		// sql
 		$sql_evt = 'DELETE FROM Events WHERE eve_MAC="' . $res['dev_MAC'] . '"';
-		// execute sql
 		$result_evt = $db->query($sql_evt);
 	}
 	//check result
