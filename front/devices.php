@@ -131,18 +131,16 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 			$results = $db->query($sql);
 			while ($row = $results->fetchArray()) {
 				if (isset($_REQUEST[$row['dev_MAC']])) {
-					// List modifified devices (name)
-					echo $row['dev_Name'] . '; ';
-
+					// List modified devices (name)
+					$modified_hosts = $modified_hosts . $row['dev_Name'] . '; ';
 					// Build sql query and update
 					$sql_queue_str = implode(', ', $sql_queue);
 					$sql_update = 'UPDATE Devices SET ' . $sql_queue_str . ' WHERE dev_MAC="' . $row['dev_MAC'] . '"';
 					$results_update = $db->query($sql_update);
-
-					//echo $sql;
-					//echo '<br>';
 				}
 			}
+			// output modified hosts
+			echo $modified_hosts;
 			// List modifications
 			echo '<h4>' . $pia_lang['Device_bulkEditor_savebox_mod_fields'] . ':</h4>';
 			if (isset($set_bulk_owner)) {echo $pia_lang['DevDetail_MainInfo_Owner'] . ': ' . $set_bulk_owner . '<br>';}
@@ -156,6 +154,9 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 			if (isset($set_bulk_NewDevice)) {echo $pia_lang['DevDetail_EveandAl_NewDevice'] . ': ' . $set_bulk_NewDevice . '<br>';}
 			if (isset($set_bulk_Archived)) {echo $pia_lang['DevDetail_EveandAl_Archived'] . ': ' . $set_bulk_Archived . '<br>';}
 			// Update Segment stop
+
+			// Logging
+			pialert_logging('a_021', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $modified_hosts);
 
 		}
 
