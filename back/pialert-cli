@@ -21,25 +21,25 @@ Usage: ${bold}pialert-cli <command>${normal}
 
 This is the list of supported commands
 
+ ${bold}disable_icmp_mon${normal}
+    Allows the start of new scans again. If the ICMPSCAN_ACTIVE parameter
+    does not exist yet, it will be created and set to FALSE.
+
  ${bold}disable_scan <MIN>${normal}
     Stops all active scans and prevents new scans from starting. You can set a
     Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with
     the next scan after 10min.
 
- ${bold}disable_icmp_mon${normal}
-    Allows the start of new scans again. If the ICMPSCAN_ACTIVE parameter
-    does not exist yet, it will be created and set to FALSE.
-
  ${bold}disable_service_mon${normal}
     Allows the start of new scans again. If the SCAN_WEBSERVICES parameter
     does not exist yet, it will be created and set to FALSE.
 
- ${bold}enable_scan${normal}
-    Allows the start of new scans again.
-
  ${bold}enable_icmp_mon${normal}
     Enable ICMP Monitoring. If the ICMPSCAN_ACTIVE parameter does not
     exist yet, it will be created and set to TRUE.
+
+ ${bold}enable_scan${normal}
+    Allows the start of new scans again.
 
  ${bold}enable_service_mon${normal}"
     Enable Web Service Monitoring. If the SCAN_WEBSERVICES parameter does not
@@ -187,7 +187,6 @@ EOM
        STOPTIMER=10
     fi
     sudo killall arp-scan
-    # echo $STOPTIMER > ${SCRIPTPATH}/../db/setting_stoparpscan
     echo $STOPTIMER > ${SCRIPTPATH}/../db/setting_stoppialert
     /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_starttimer
     echo "The arp-scan is disabled"
@@ -200,7 +199,6 @@ EOM
   enable_scan)
     current_user=$(whoami)
     ## stop active scans
-    #rm ${SCRIPTPATH}/../db/setting_stoparpscan
     rm ${SCRIPTPATH}/../db/setting_stoppialert
     /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_stoptimer
     echo "The arp-scan is enabled"
