@@ -562,12 +562,11 @@ def query_ScanCycle_Data (pOpenCloseDB = False):
 #-------------------------------------------------------------------------------
 def execute_arpscan ():
 
+    # check if arp-scan is active
     try:
         module_arpscan_status = ARPSCAN_ACTIVE
     except NameError:
         module_arpscan_status = True
-
-    # check if arp-scan is active
     if not module_arpscan_status :
         unique_devices = [] 
         return unique_devices
