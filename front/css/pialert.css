@@ -694,3 +694,12 @@ body.modal-open {
 .bulked_checkbox_label_down {
  color: #dd7768;
 }
+
+.fixed_container {
+overflow:visible visible;
+}
+
+/* -----------------------------------------------------------------------------
+   Services
+----------------------------------------------------------------------------- */
+.icmplist_add_ip {display: inline-block; margin-top: -5px; margin-left: 15px;}

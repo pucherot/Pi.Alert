@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.04'
+SCRIPTVERSION='v1.05'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -26,12 +26,20 @@ This is the list of supported commands
     Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with
     the next scan after 10min.
 
+ ${bold}disable_icmp_mon${normal}
+    Allows the start of new scans again. If the ICMPSCAN_ACTIVE parameter
+    does not exist yet, it will be created and set to FALSE.
+
  ${bold}disable_service_mon${normal}
     Allows the start of new scans again. If the SCAN_WEBSERVICES parameter
     does not exist yet, it will be created and set to FALSE.
 
  ${bold}enable_scan${normal}
     Allows the start of new scans again.
+
+ ${bold}enable_icmp_mon${normal}
+    Enable ICMP Monitoring. If the ICMPSCAN_ACTIVE parameter does not
+    exist yet, it will be created and set to TRUE.
 
  ${bold}enable_service_mon${normal}"
     Enable Web Service Monitoring. If the SCAN_WEBSERVICES parameter does not
@@ -229,6 +237,34 @@ EOM
     echo "Web Service Monitoring is now disabled"
     ;;
 
+  enable_icmp_mon)
+    ## Check if ICMPSCAN_ACTIVE exists
+    CHECK_PROT=$(grep "ICMPSCAN_ACTIVE" $PIA_CONF_FILE | wc -l)
+    if [ $CHECK_PROT -eq 0 ]
+    then
+        ## Create ICMPSCAN_ACTIVE and enable it
+        sed -i "/^VENDORS_DB.*/a ICMPSCAN_ACTIVE = True" $PIA_CONF_FILE
+    else
+        ## Switch ICMPSCAN_ACTIVE to enable
+        sed -i "/ICMPSCAN_ACTIVE/c\ICMPSCAN_ACTIVE = True" $PIA_CONF_FILE
+    fi
+    echo "ICMP Monitoring is now enabled"
+    ;;
+
+  disable_icmp_mon)
+    ## Check if ICMPSCAN_ACTIVE exists
+    CHECK_PROT=$(grep "ICMPSCAN_ACTIVE" $PIA_CONF_FILE | wc -l)
+    if [ $CHECK_PROT -eq 0 ]
+    then
+        ## Create ICMPSCAN_ACTIVE and disable it
+        sed -i "/^VENDORS_DB.*/a ICMPSCAN_ACTIVE = False" $PIA_CONF_FILE
+    else
+        ## Switch ICMPSCAN_ACTIVE to disable
+        sed -i "/ICMPSCAN_ACTIVE/c\ICMPSCAN_ACTIVE = False" $PIA_CONF_FILE
+    fi
+    echo "ICMP Monitoring is now disabled"
+    ;;
+
   update_db)
     ## update database
     echo "################################################################################"
@@ -404,7 +440,9 @@ EOM
     REWRITE_VENDORS_DB=$(grep "^VENDORS_DB" $input_file)
     REWRITE_PIALERT_WEB_PROTECTION=$(grep "^PIALERT_WEB_PROTECTION" $input_file)
     REWRITE_PIALERT_WEB_PASSWORD=$(grep "^PIALERT_WEB_PASSWORD" $input_file)
+    # Other Modules
     REWRITE_SCAN_WEBSERVICES=$(grep "^SCAN_WEBSERVICES" $input_file)
+    REWRITE_ICMPSCAN_ACTIVE=$(grep "^ICMPSCAN_ACTIVE" $input_file)
     # Special Protocol Scanning
     REWRITE_SCAN_ROGUE_DHCP=$(grep "^SCAN_ROGUE_DHCP" $input_file)
     REWRITE_DHCP_SERVER_ADDRESS=$(grep "^DHCP_SERVER_ADDRESS" $input_file)
@@ -485,9 +523,15 @@ EOM
     then
         REWRITE_PIALERT_WEB_PASSWORD="PIALERT_WEB_PASSWORD   = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'"
     fi
+
+    # Other Modules
     if [ -z "$REWRITE_SCAN_WEBSERVICES" ]
     then
         REWRITE_SCAN_WEBSERVICES="SCAN_WEBSERVICES       = True"
+    fi
+    if [ -z "$REWRITE_ICMPSCAN_ACTIVE" ]
+    then
+        REWRITE_ICMPSCAN_ACTIVE="ICMPSCAN_ACTIVE       = True"
     fi
 
     # Special Protocol Scanning
@@ -579,6 +623,9 @@ ${REWRITE_PRINT_LOG}
 ${REWRITE_VENDORS_DB}
 ${REWRITE_PIALERT_WEB_PROTECTION}
 ${REWRITE_PIALERT_WEB_PASSWORD}
+
+# Other Modules
+# ----------------------
 ${REWRITE_SCAN_WEBSERVICES}
 
 # Special Protocol Scanning
@@ -687,7 +734,7 @@ EOL
     ;;
 
     arg_list)
-      echo disable_scan disable_service_mon enable_scan enable_service_mon reporting_test rewrite_config set_apikey set_autopassword set_login set_password set_permissions set_sudoers unset_login unset_sudoers update_db
+      echo disable_scan disable_icmp_mon disable_service_mon enable_scan enable_icmp_mon enable_service_mon reporting_test rewrite_config set_apikey set_autopassword set_login set_password set_permissions set_sudoers unset_login unset_sudoers update_db
     ;;
 
   *)

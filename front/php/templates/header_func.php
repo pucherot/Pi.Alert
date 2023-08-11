@@ -153,7 +153,6 @@ function toggle_webservices_menu($section) {
 		echo '">
                 <a href="services.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Services'] . '</span></a>
               </li>';
-		echo '<li class="header text-uppercase" style="font-size: 0; padding: 1px;">EVENTS</li>';
 	}
 
 	if (($_SESSION['Scan_WebServices'] == True) && ($section == "Event")) {
@@ -173,6 +172,29 @@ function get_webservices_config() {
 	if (strtolower(trim($scan_services_line[1])) == "true") {
 		$_SESSION['Scan_WebServices'] = True;
 	} else { $_SESSION['Scan_WebServices'] = False;}
+}
+
+// ICPMScan Config ---------------------------------------------------------------
+function get_icmpscan_config() {
+	$config_file = "../config/pialert.conf";
+	$config_file_lines = file($config_file);
+	$config_file_lines_bypass = array_values(preg_grep('/^ICMPSCAN_ACTIVE\s.*/', $config_file_lines));
+	$scan_services_line = explode("=", $config_file_lines_bypass[0]);
+	if (strtolower(trim($scan_services_line[1])) == "true") {
+		$_SESSION['ICMPScan'] = True;
+	} else { $_SESSION['ICMPScan'] = False;}
+}
+
+// ICPMScan Menu Items ---------------------------------------------------------------
+function toggle_icmpscan_menu($section) {
+	global $pia_lang;
+	if (($_SESSION['ICMPScan'] == True) && ($section == "Main")) {
+		echo '<li class="';
+		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('icmpmonitor.php'))) {echo 'active';}
+		echo '">
+                <a href="icmpmonitor.php"><i class="fa fa-magnifying-glass"></i> <span>' . $pia_lang['Navigation_ICMPScan'] . '</span></a>
+              </li>';
+	}
 }
 
 // Back button for details pages ---------------------------------------------------------------

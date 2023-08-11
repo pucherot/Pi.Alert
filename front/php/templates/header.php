@@ -37,8 +37,10 @@ require 'php/templates/language/' . $pia_lang_selected . '.php';
 require 'header_func.php';
 
 // Web Services Config ---------------------------------------------------------------
-
 get_webservices_config();
+
+// ICMP Monitor Config ---------------------------------------------------------------
+get_icmpscan_config();
 
 // ###################################
 // ## GUI settings processing end
@@ -125,7 +127,6 @@ if (window.navigator.standalone || document.referrer.includes("android-app://") 
     }
   });
 }
-
 </script>
 
 </head>
@@ -250,7 +251,6 @@ format_temperature($celsius, $temperaturelimit);
           </div>
         </a>
       </div>
-
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
 
@@ -265,6 +265,8 @@ format_temperature($celsius, $temperaturelimit);
         </li>
 
         <?php toggle_webservices_menu('Main');?>
+
+        <?php toggle_icmpscan_menu('Main');?>
 
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?php echo $pia_lang['Navigation_Section_B']; ?></li>
 
@@ -301,7 +303,6 @@ format_temperature($celsius, $temperaturelimit);
         </li>
 
       </ul>
-
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

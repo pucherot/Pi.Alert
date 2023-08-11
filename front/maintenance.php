@@ -500,6 +500,12 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                     <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?php echo $pia_lang['Maintenance_Tool_webservicemon']; ?></button>
                                 </div>
                             </div>
+<!-- Toggle ICMP Monitoring ----------------------------------------------------------------- -->
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableICMPMon" onclick="askPiaEnableICMPMon()"><?php echo $pia_lang['Maintenance_Tool_icmpmon']; ?></button>
+                                </div>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -947,6 +953,20 @@ function PiaEnableWebServiceMon()
 {
   // Execute
   $.get('php/server/devices.php?action=EnableWebServiceMon', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Switch ICMP Monitor
+function askPiaEnableICMPMon() {
+  // Ask
+  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_icmpmon_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_icmpmon_noti_text']; ?>',
+    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableICMPMon');
+}
+function PiaEnableICMPMon()
+{
+  // Execute
+  $.get('php/server/icmpmonitor.php?action=EnableICMPMon', function(msg) {
     showMessage (msg);
   });
 }

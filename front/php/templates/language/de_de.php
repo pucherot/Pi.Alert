@@ -50,6 +50,7 @@ $pia_lang['Navigation_Events'] = 'Ereignisse';
 $pia_lang['Navigation_Journal'] = 'Pi.Alert Journal';
 $pia_lang['Navigation_Events_Dev'] = 'Geräte';
 $pia_lang['Navigation_Events_Serv'] = 'Web Services';
+$pia_lang['Navigation_ICMPScan'] = 'ICMP Monitoring';
 $pia_lang['Navigation_Maintenance'] = 'Einstellungen';
 $pia_lang['Navigation_Network'] = 'Netzwerk';
 $pia_lang['Navigation_HelpFAQ'] = 'Hilfe / FAQ';
@@ -314,6 +315,17 @@ $pia_lang['BackWebServices_DelServ'] = 'Der Web Service wurde aus der Datenbank 
 $pia_lang['BackWebServices_DelServError'] = 'Der Web Service konnte nicht, oder nicht vollständig gelöscht werden';
 
 //////////////////////////////////////////////////////////////////
+// ICMP Monitoring Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['ICMPMonitor_Title'] = 'ICMP Monitor';
+$pia_lang['ICMPMonitor_headline_IP'] = 'Neue IP-Adresse überwachen';
+$pia_lang['ICMPMonitor_label_IP'] = 'Host IP';
+$pia_lang['ICMPMonitor_label_Tags'] = 'Tag';
+$pia_lang['BackICMP_mon_disabled'] = 'ICMP Monitoring ist deaktiviert';
+$pia_lang['BackICMP_mon_enabled'] = 'ICMP Monitoring ist aktiviert';
+
+//////////////////////////////////////////////////////////////////
 // Maintenance Page
 //////////////////////////////////////////////////////////////////
 
@@ -370,6 +382,11 @@ $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'De-/Aktiviert den 
 $pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Überwachg. (an/aus)';
 $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Überwachung';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Aktiviert oder deaktiviert die Web Service Überwachung für Pi.Alert. Mit der Aktivierung, werden zusätzliche Elemente in der Oberfläche angezeigt. Mit der Deaktivierung, verschwinden diese wieder.';
+
+$pia_lang['Maintenance_Tool_icmpmon'] = 'ICMP Monitoring (an/aus)';
+$pia_lang['Maintenance_Tool_icmpmon_noti'] = 'ICMP Monitoring';
+$pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Aktiviert oder deaktiviert das ICMP Monitoring für Pi.Alert. Mit der Aktivierung, werden zusätzliche Elemente in der Oberfläche angezeigt. Mit der Deaktivierung, verschwinden diese wieder.';
+
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Geräteübersicht konfigurieren';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Möchten Sie die von Ihnen gemachten Änderungen speichern? Diese Änderung wirkt sich auf alle Geräte aus, mit denen Sie auf diese Seite zugreifen.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'Kein API-Key gesetzt';
@@ -939,6 +956,7 @@ $pia_journ_lang['a_020'] = 'Geräte';
 $pia_journ_lang['a_021'] = 'Multi-Editor';
 $pia_journ_lang['a_025'] = 'Tools';
 $pia_journ_lang['a_030'] = 'Web Service Monitoring';
+$pia_journ_lang['a_031'] = 'ICMP Monitoring';
 $pia_journ_lang['a_040'] = 'Netzwerk Übersicht';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'Update Check';
@@ -999,6 +1017,8 @@ $pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';
 $pia_journ_lang['LogStr_0255'] = 'Online Speedtest ausgeführt';
 $pia_journ_lang['LogStr_0301'] = $pia_lang['BackDevices_webservicemon_enabled'];
 $pia_journ_lang['LogStr_0302'] = $pia_lang['BackDevices_webservicemon_disabled'];
+$pia_journ_lang['LogStr_0303'] = $pia_lang['BackICMP_mon_enabled'];
+$pia_journ_lang['LogStr_0304'] = $pia_lang['BackICMP_mon_disabled'];
 $pia_journ_lang['LogStr_0500'] = 'Testbenachrichtigung(en) gesendet';
 $pia_journ_lang['LogStr_0503'] = 'Report gelöscht';
 $pia_journ_lang['LogStr_0504'] = 'Alle Reports gelöscht';
