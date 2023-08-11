@@ -17,12 +17,9 @@ $conf_data = parse_ini_file($conf_file);
 // ###################################
 // ## GUI settings processing start
 // ###################################
-if (file_exists('../db/setting_darkmode')) {
-	$ENABLED_DARKMODE = True;
-}
-if (file_exists('../db/setting_noonlinehistorygraph')) {
-	$ENABLED_HISTOY_GRAPH = False;
-}
+if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;}
+if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;}
+
 foreach (glob("../db/setting_skin*") as $filename) {
 	$pia_skin_selected = str_replace('setting_', '', basename($filename));
 }
@@ -36,10 +33,10 @@ require 'php/templates/language/' . $pia_lang_selected . '.php';
 
 require 'header_func.php';
 
-// Web Services Config ---------------------------------------------------------------
+// Web Services Config
 get_webservices_config();
 
-// ICMP Monitor Config ---------------------------------------------------------------
+// ICMP Monitor Config
 get_icmpscan_config();
 
 // ###################################
@@ -59,37 +56,26 @@ get_icmpscan_config();
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <link rel="manifest" href="img/manifest.json">
   <title>Pi.Alert - <?php echo gethostname(); ?></title>
-
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
   <!-- Bootstrap 3.4.1 -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
-
   <!-- Bootstrap Icons v1.10.3 -->
   <link href="lib/AdminLTE/bower_components/bootstrap-icons/font/bootstrap-icons.css" media="all" rel="stylesheet" type="text/css" />
-
   <!-- Font Awesome 6.40 -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
-
   <!-- Ionicons -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
-
   <!-- Theme style -->
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/AdminLTE.min.css">
-
   <!-- AdminLTE Skins. -->
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?php echo $pia_skin_selected; ?>.min.css">
-
   <!-- Pi.Alert CSS -->
   <link rel="stylesheet" href="css/pialert.css?<?php echo $conf_data['VERSION_DATE']; ?>">
-
   <!-- Offline Font -->
   <link rel="stylesheet" href="css/offline-font.css">
-
   <!-- Fav / Homescreen Icon -->
   <link rel="icon" type="image/x-icon" href="img/favicons/flat_blue_white.png">
-
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
 
@@ -102,36 +88,35 @@ if ($ENABLED_DARKMODE === True) {
 	$BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/background.png\');"';
 }
 ?>
-<!-- Servertime to the right of the hostname -->
-<script>
-var pia_servertime = new Date(<?php echo date("Y, n, j, G, i, s") ?>);
+  <!-- Servertime to the right of the hostname -->
+  <script>
+    var pia_servertime = new Date(<?php echo date("Y, n, j, G, i, s") ?>);
 
-function show_pia_servertime() {
-    if (!document.getElementById) {
-        return;
+    function show_pia_servertime() {
+        if (!document.getElementById) {
+            return;
+        }
+        var pia_hour = pia_servertime.getHours();
+        var pia_minute = pia_servertime.getMinutes();
+        var pia_second = pia_servertime.getSeconds();
+        pia_servertime.setSeconds(pia_second + 1);
+        if (pia_hour <= 9) { pia_hour = "0" + pia_hour; }
+        if (pia_minute <= 9) { pia_minute = "0" + pia_minute; }
+        if (pia_second <= 9) { pia_second = "0" + pia_second; } realtime_pia_servertime = "(" + pia_hour + ":" + pia_minute + ":" + pia_second + ")";
+        if (document.getElementById) { document.getElementById("PIA_Servertime_place").innerHTML = realtime_pia_servertime; } setTimeout("show_pia_servertime()", 1000);
     }
-    var pia_hour = pia_servertime.getHours();
-    var pia_minute = pia_servertime.getMinutes();
-    var pia_second = pia_servertime.getSeconds();
-    pia_servertime.setSeconds(pia_second + 1);
-    if (pia_hour <= 9) { pia_hour = "0" + pia_hour; }
-    if (pia_minute <= 9) { pia_minute = "0" + pia_minute; }
-    if (pia_second <= 9) { pia_second = "0" + pia_second; } realtime_pia_servertime = "(" + pia_hour + ":" + pia_minute + ":" + pia_second + ")";
-    if (document.getElementById) { document.getElementById("PIA_Servertime_place").innerHTML = realtime_pia_servertime; } setTimeout("show_pia_servertime()", 1000);
-}
 
-if (window.navigator.standalone || document.referrer.includes("android-app://") ||  window.matchMedia("(display-mode: standalone)").matches) {
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-      window.location.href = window.location.href.split('#')[0];
+    if (window.navigator.standalone || document.referrer.includes("android-app://") ||  window.matchMedia("(display-mode: standalone)").matches) {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          window.location.href = window.location.href.split('#')[0];
+        }
+      });
     }
-  });
-}
-</script>
+  </script>
 
 </head>
 
-<!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed Yellow -->
 <body class="hold-transition <?php echo $pia_skin_selected; ?> sidebar-mini" <?php echo $BACKGROUND_IMAGE_PATCH; ?> onLoad="show_pia_servertime();" >
 <!-- Site wrapper -->
@@ -139,8 +124,6 @@ if (window.navigator.standalone || document.referrer.includes("android-app://") 
 
   <!-- Main Header -->
   <header class="main-header">
-
-<!-- ----------------------------------------------------------------------- -->
     <!-- Logo -->
     <a href="." class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -149,7 +132,6 @@ if (window.navigator.standalone || document.referrer.includes("android-app://") 
       <span class="logo-lg">Pi<b>.Alert</b></span>
     </a>
 
-<!-- ----------------------------------------------------------------------- -->
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
@@ -192,14 +174,12 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
               <li class="user-header" style=" height: 100px;">
                 <img src="img/pialertLogoWhite.png" class="img-circle" alt="Pi.Alert Logo" style="border-color:transparent; height: 50px; width: 50px; margin-top:15px;">
                 <p style="float: right; width: 200px">
-                <?php
-echo $pia_lang['About_Title']; ?>
+                <?php echo $pia_lang['About_Title']; ?>
                   <small><?php echo $pia_lang['About_Design']; ?> Raspberry Pi</small>
                 </p>
               </li>
 
               <!-- Menu Body -->
-
               <li class="user-footer">
                 <div class="pull-left">
                   <a href="./reports.php" id="custom-menu-report-button" class="btn btn-warning"><?php echo $pia_lang['About_Reports']; ?></a>
@@ -215,7 +195,6 @@ echo $pia_lang['About_Title']; ?>
     </nav>
   </header>
 
-<!-- ----------------------------------------------------------------------- -->
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
@@ -233,9 +212,7 @@ echo $pia_lang['About_Title']; ?>
 <?php
 arpscanstatus();
 
-echo '<span id="status">
-                <i class="fa fa-w fa-circle text-' . $_SESSION['arpscan_sidebarstate_light'] . '"></i> ' . $_SESSION['arpscan_sidebarstate'] . '&nbsp;&nbsp;
-              </span><br>';
+echo '<span id="status"><i class="fa fa-w fa-circle text-' . $_SESSION['arpscan_sidebarstate_light'] . '"></i> ' . $_SESSION['arpscan_sidebarstate'] . '&nbsp;&nbsp;</span><br>';
 
 format_sysloadavg(sys_getloadavg());
 
@@ -278,7 +255,7 @@ format_temperature($celsius, $temperaturelimit);
           <a href="presence.php"><i class="fa fa-calendar"></i> <span><?php echo $pia_lang['Navigation_Presence']; ?></span></a>
         </li>
 
-        <?php toggle_webservices_menu('Event');?>
+        <!-- <?php toggle_webservices_menu('Event');?> -->
 
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('journal.php'))) {echo 'active';}?>">
           <a href="journal.php"><i class="fa fa-list"></i> <span><?php echo $pia_lang['Navigation_Journal']; ?></span></a>
@@ -289,10 +266,6 @@ format_temperature($celsius, $temperaturelimit);
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('maintenance.php'))) {echo 'active';}?>">
           <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Maintenance']; ?></span></a>
         </li>
-
-<!--         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('networkSettings.php'))) {echo 'active';}?>">
-          <a href="networkSettings.php"><i class="fa fa-cog"></i> <span><?php echo $pia_lang['Navigation_Network']; ?></span></a>
-        </li> -->
 
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('help_faq.php'))) {echo 'active';}?>">
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?php echo $pia_lang['Navigation_HelpFAQ']; ?></span></a>

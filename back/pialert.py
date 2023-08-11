@@ -526,6 +526,13 @@ def scan_network ():
     if enable_services_monitoring == True:
         if str(startTime)[15] == "0":
             service_monitoring()
+    # ICMP Monitoring
+    try:
+        enable_icmp_monitoring = ICMPSCAN_ACTIVE
+    except NameError:
+        enable_icmp_monitoring = False
+    if enable_icmp_monitoring == True:
+        icmp_monitoring()
     # Check Rogue DHCP
     try:
         enable_rogue_dhcp_detection = SCAN_ROGUE_DHCP
@@ -1837,6 +1844,40 @@ def service_monitoring():
 
     # Print to log file
     print_service_monitoring_changes()
+
+# -----------------------------------------------------------------------------
+def icmp_monitoring():
+    global VERSION
+    global VERSION_DATE
+
+    # Empty Log and write new header
+    print("\nStart ICMP Monitoring...")
+
+    print("    Get Host/Domain List...")
+    #sites = get_icmphost_list()
+
+    print("    Flush previous scan results...")
+    #flush_services_current_scan()
+
+    print("    Check Services...")
+
+# -----------------------------------------------------------------------------
+# def get_icmphost_list():
+
+#     sql.execute("SELECT mon_URL FROM Services")
+#     rows = sql.fetchall()
+
+#     sites = []
+#     for row in rows:
+#         sites.append(row[0])
+
+#     return icmphost
+
+# -----------------------------------------------------------------------------
+# def flush_icmphost_current_scan():
+
+#     sql.execute("DELETE FROM Services_CurrentScan")
+#     sql_connection.commit()
 
 #===============================================================================
 # REPORTING

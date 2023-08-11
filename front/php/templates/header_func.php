@@ -159,8 +159,8 @@ function toggle_webservices_menu($section) {
 		echo '<li class="';
 		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php'))) {echo 'active';}
 		echo '">
-              <a href="servicesEvents.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Events_Serv'] . '</span></a>
-            </li>';
+	          <a href="servicesEvents.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Events_Serv'] . '</span></a>
+	        </li>';
 	}
 }
 // Web Services Config ---------------------------------------------------------------
