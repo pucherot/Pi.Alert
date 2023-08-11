@@ -388,20 +388,16 @@ $pia_lang['Maintenance_Tool_test_notification'] = 'Test Notifications';
 $pia_lang['Maintenance_Tool_test_notification_text'] = 'Test reporting for all activated services.';
 $pia_lang['Maintenance_Tool_test_notification_noti'] = '';
 $pia_lang['Maintenance_Tool_test_notification_noti_text'] = '';
-$pia_lang['Maintenance_Tool_del_empty_macs'] = 'Eliminar dispositivos con MACs vacíos';
-$pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Todos los dispositivos sin Mac se eliminarán de la base de datos.';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Eliminar dispositivos';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = '¿Estás seguro de que quieres eliminar todos los dispositivos con direcciones MAC vacías? <br> (tal vez prefiera archivarlo)';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Eliminar todos los dispositivos';
-$pia_lang['Maintenance_Tool_del_alldev_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Todos los dispositivos se eliminarán de la base de datos.';
+$pia_lang['Maintenance_Tool_del_alldev_text'] = 'Todos los dispositivos se eliminarán de la base de datos.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Eliminar dispositivos';
 $pia_lang['Maintenance_Tool_del_alldev_noti_text'] = '¿Estás seguro de que quieres eliminar todos los dispositivos?';
 $pia_lang['Maintenance_Tool_del_unknowndev'] = 'Eliminar dispositivos (desconocidos)';
-$pia_lang['Maintenance_Tool_del_unknowndev_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Todos los dispositivos nombrados (desconocidos) se eliminarán de la base de datos.';
+$pia_lang['Maintenance_Tool_del_unknowndev_text'] = 'Todos los dispositivos nombrados (desconocidos) se eliminarán de la base de datos.';
 $pia_lang['Maintenance_Tool_del_unknowndev_noti'] = 'Eliminar dispositivos (desconocidos)';
 $pia_lang['Maintenance_Tool_del_unknowndev_noti_text'] = '¿Estás seguro de que quieres eliminar todos los dispositivos (desconocidos)?';
 $pia_lang['Maintenance_Tool_del_allevents'] = 'Eliminar todo (Restablecer historial)';
-$pia_lang['Maintenance_Tool_del_allevents_text'] = 'Antes de usar esta función, haga una copia de seguridad. La eliminación no se puede deshacer. Se eliminarán todos los eventos en la base de datos. En ese momento se restablecerá la presencia de todos los dispositivos. Esto puede conducir a sesiones no válidas. Esto significa que los dispositivos se muestran como "presentes", aunque están fuera de línea. Un escaneo mientras el dispositivo en cuestión está en línea resuelve el problema.';
+$pia_lang['Maintenance_Tool_del_allevents_text'] = 'Se eliminarán todos los eventos en la base de datos. En ese momento se restablecerá la presencia de todos los dispositivos. Esto puede conducir a sesiones no válidas. Esto significa que los dispositivos se muestran como "presentes", aunque están fuera de línea. Un escaneo mientras el dispositivo en cuestión está en línea resuelve el problema.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Eliminar eventos';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = '¿Estás seguro de que quieres eliminar todos los eventos? Esto restablece la presencia de todos los dispositivos.';
 $pia_lang['Maintenance_Tool_del_Inactive_Hosts'] = 'Eliminar dispositivos inactivos';
@@ -442,6 +438,8 @@ $pia_lang['Maintenance_ConfEditor_Restore_noti_text'] = 'Se restaura la última 
 $pia_lang['Maintenance_ConfEditor_Backup_info'] = 'Además del archivo "pialert-prev.bak", se crea otra copia de seguridad con la fecha y hora actuales. Esta copia de seguridad debe restaurarse manualmente si es necesario (cambiar el nombre a "pialert.conf"). Un archivo "pialert-prev.bak" existente siempre se sobrescribe.';
 $pia_lang['Maintenance_ConfEditor_Restore_info'] = 'Esta función restaura el archivo de configuración desde el archivo "pialert-prev.bak". El archivo "pialert-prev.bak" se crea al guardar y crear una copia de seguridad.';
 $pia_lang['Maintenance_ConfEditor_Save_info'] = 'El contenido del campo de texto con cualquier cambio se guarda en el archivo "pialert.conf". La configuración anterior se guarda como "pialert-prev.bak". Con cada guardado, el archivo "pialert-prev.bak" se sobrescribe una y otra vez con el archivo de configuración anterior.';
+$pia_lang['Maintenance_Tool_ConfBackup'] = 'Crear Copia de Seguridad de la Configuración';
+$pia_lang['Maintenance_Tool_ConfBackup_text'] = 'Además del archivo "pialert-prev.bak", se crea otra copia de seguridad con la fecha y hora actual. Esta copia de seguridad debe restaurarse manualmente si es necesario (renombrarla como "pialert.conf").';
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page - Update by @TeroRERO 25jul2022 and leiweibau 29ago2022

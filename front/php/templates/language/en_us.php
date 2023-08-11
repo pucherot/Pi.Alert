@@ -388,20 +388,16 @@ $pia_lang['Maintenance_Tool_test_notification'] = 'Test Notifications';
 $pia_lang['Maintenance_Tool_test_notification_text'] = 'Test reporting for all activated services.';
 $pia_lang['Maintenance_Tool_test_notification_noti'] = 'Notifications test';
 $pia_lang['Maintenance_Tool_test_notification_noti_text'] = 'Should a test notification be performed across all configured and enabled notification services?';
-$pia_lang['Maintenance_Tool_del_empty_macs'] = 'Delete Devices with empty MACs';
-$pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All devices without MAC will be deleted from the database.';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Delete Devices';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Are you sure you want to delete all devices with empty MAC addresses?<br>(maybe you prefer to archive it)';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Delete all Devices';
-$pia_lang['Maintenance_Tool_del_alldev_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All devices will be deleted from the database.';
+$pia_lang['Maintenance_Tool_del_alldev_text'] = 'All devices will be deleted from the database.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Delete Devices';
 $pia_lang['Maintenance_Tool_del_alldev_noti_text'] = 'Are you sure you want to delete all devices?';
 $pia_lang['Maintenance_Tool_del_unknowndev'] = 'Delete (unknown) Devices';
-$pia_lang['Maintenance_Tool_del_unknowndev_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All devices named (unknown) will be deleted from the database.';
+$pia_lang['Maintenance_Tool_del_unknowndev_text'] = 'All devices named (unknown) will be deleted from the database.';
 $pia_lang['Maintenance_Tool_del_unknowndev_noti'] = 'Delete (unknown) Devices';
 $pia_lang['Maintenance_Tool_del_unknowndev_noti_text'] = 'Are you sure you want to delete all (unknown) devices?';
 $pia_lang['Maintenance_Tool_del_allevents'] = 'Delete Events (Reset Presence)';
-$pia_lang['Maintenance_Tool_del_allevents_text'] = 'Before using this function, please make a backup. The deletion cannot be undone. All events in the database will be deleted. At that moment the presence of all devices will be reset. This can lead to invalid sessions. This means that devices are displayed as "present" although they are offline. A scan while the device in question is online solves the problem.';
+$pia_lang['Maintenance_Tool_del_allevents_text'] = 'All events in the database will be deleted. At that moment the presence of all devices will be reset. This can lead to invalid sessions. This means that devices are displayed as "present" although they are offline. A scan while the device in question is online solves the problem.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Delete Events';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = 'Are you sure you want to delete all Events? This resets Presence of all Devices.';
 $pia_lang['Maintenance_Tool_del_Inactive_Hosts'] = 'Delete inactive devices';
@@ -442,6 +438,8 @@ $pia_lang['Maintenance_ConfEditor_Restore_noti_text'] = 'The last version of the
 $pia_lang['Maintenance_ConfEditor_Backup_info'] = 'In addition to the "pialert-prev.bak" file, another backup is created with the current date incl. time. This backup must be restored manually if necessary (rename to "pialert.conf"). An existing "pialert-prev.bak" file is always overwritten.';
 $pia_lang['Maintenance_ConfEditor_Restore_info'] = 'This function restores the configuration file from the "pialert-prev.bak" file. The file "pialert-prev.bak" is created when saving and creating a backup.';
 $pia_lang['Maintenance_ConfEditor_Save_info'] = 'The content of the text field with any changes is saved to the "pialert.conf" file. The previous configuration is saved as "pialert-prev.bak". With each save the file "pialert-prev.bak" is overwritten again and again with the previous configuration file.';
+$pia_lang['Maintenance_Tool_ConfBackup'] = 'Create Config Backup';
+$pia_lang['Maintenance_Tool_ConfBackup_text'] = 'In addition to the file "pialert-prev.bak," another backup is created with the current date and time. This backup must be manually restored if needed (rename it to "pialert.conf").';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)

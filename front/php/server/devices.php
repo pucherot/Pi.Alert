@@ -1117,6 +1117,9 @@ function BackupConfigFile() {
 
 	// Logging
 	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_0007', '1', '');
+	if ($_REQUEST['reload'] == 'yes') {
+		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
+	}
 }
 
 //------------------------------------------------------------------------------

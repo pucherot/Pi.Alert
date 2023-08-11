@@ -632,12 +632,12 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
         </div>
         <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
             <div class="db_info_table">
-                <div class="db_info_table_row">
+<!--                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
                         <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs']; ?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs_text']; ?></div>
-                </div>
+                </div> -->
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
                         <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?php echo $pia_lang['Maintenance_Tool_del_alldev']; ?></button>
@@ -672,6 +672,12 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
         </div>
         <div class="tab-pane <?php echo $pia_tab_backup; ?>" id="tab_BackupRestore">
             <div class="db_info_table">
+				<div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('yes')"><?php echo $pia_lang['Maintenance_Tool_ConfBackup']; ?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_ConfBackup_text']; ?></div>
+                </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
                         <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?php echo $pia_lang['Maintenance_Tool_backup']; ?></button>
@@ -768,7 +774,7 @@ echo '</div>';
                 </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?php echo $pia_lang['Maintenance_ConfEditor_Restore']; ?></button>
-                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" data-dismiss="modal" style="margin: 5px" onclick="BackupConfigFile()"><?php echo $pia_lang['Maintenance_ConfEditor_Backup']; ?></button>
+                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('no')"><?php echo $pia_lang['Maintenance_ConfEditor_Backup']; ?></button>
                     <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig" style="margin: 5px"><?php echo $pia_lang['Gen_Save']; ?></button>
                     <button type="button" class="btn btn-default" id="btnPiaEditorClose" data-dismiss="modal" style="margin: 5px"><?php echo $pia_lang['Gen_Close']; ?></button>
                   </div>
@@ -1036,11 +1042,17 @@ function setPiAlertArpTimer() {
 }
 
 // Backup Configfile
-function BackupConfigFile()  {
+function BackupConfigFile(reload)  {
   // Execute
-  $.get('php/server/devices.php?action=BackupConfigFile', function(msg) {
-    showMessage (msg);
-  });
+	if (reload == 'yes') {
+		$.get('php/server/devices.php?action=BackupConfigFile&reload=yes', function(msg) {
+		    showMessage (msg);
+		  });
+	} else {
+		$.get('php/server/devices.php?action=BackupConfigFile&reload=no', function(msg) {
+		    showMessage (msg);
+		  });
+	}
 }
 
 // Restore Configfile

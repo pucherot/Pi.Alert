@@ -388,24 +388,20 @@ $pia_lang['Maintenance_Tool_test_notification'] = 'Benachrichtigung testen';
 $pia_lang['Maintenance_Tool_test_notification_text'] = 'Sendet eine Probe&shy;be&shy;nach&shy;rich&shy;tigung, um die korrekte Kon&shy;figu&shy;ra&shy;tion der Dienste zu testen.';
 $pia_lang['Maintenance_Tool_test_notification_noti'] = 'Testbenachrichtigung';
 $pia_lang['Maintenance_Tool_test_notification_noti_text'] = 'Soll eine Testbenachrichtigung über alle konfigurierten und aktivierten Benachrichtigungsdienste durchgeführt werden?';
-$pia_lang['Maintenance_Tool_del_empty_macs'] = 'Alle Geräte ohne MAC löschen';
-$pia_lang['Maintenance_Tool_del_empty_macs_text'] = 'Vorheriges Backup emp&shy;foh&shy;len. Eine Wie&shy;der&shy;her&shy;stellung ohne Backup ist nicht möglich. Alle Ge&shy;räte ohne MAC-Adresse wer&shy;den aus der Daten&shy;bank ge&shy;löscht.';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti'] = 'Geräte löschen';
-$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'] = 'Sind Sie sicher, dass Sie alle Geräte ohne MAC-Adresse löschen wollen?<br>(Vielleicht bevorzugen Sie eine Archivierung.)';
 $pia_lang['Maintenance_Tool_del_alldev'] = 'Alle Geräte löschen';
-$pia_lang['Maintenance_Tool_del_alldev_text'] = 'Vorheriges Backup emp&shy;foh&shy;len. Eine Wie&shy;der&shy;her&shy;stellung ohne Backup ist nicht möglich. Alle Ge&shy;räte wer&shy;den in der Datenbank ge&shy;löscht.';
+$pia_lang['Maintenance_Tool_del_alldev_text'] = 'Alle Ge&shy;räte wer&shy;den aus der Datenbank entfernt. Die Funktion betrifft keine Geräte, welche in der Netzwerk Übersicht erstellt wurden.';
 $pia_lang['Maintenance_Tool_del_alldev_noti'] = 'Alle Geräte löschen';
 $pia_lang['Maintenance_Tool_del_alldev_noti_text'] = 'Sind Sie sich sicher, dass Sie alle Geräte löschen wollen?';
 $pia_lang['Maintenance_Tool_del_unknowndev'] = 'Löschen der (unknown) Geräte';
-$pia_lang['Maintenance_Tool_del_unknowndev_text'] = 'Vorheriges Backup emp&shy;foh&shy;len. Der Vor&shy;gang kann ohne Back&shy;up nicht rück&shy;gängig gemacht werden. Alle Geräte mit dem Namen (unknown) werden aus der Daten&shy;bank ge&shy;löscht.';
+$pia_lang['Maintenance_Tool_del_unknowndev_text'] = 'Alle Geräte mit dem Namen (unknown) werden aus der Daten&shy;bank ge&shy;löscht.';
 $pia_lang['Maintenance_Tool_del_unknowndev_noti'] = 'Lösche (unknown) Geräte';
 $pia_lang['Maintenance_Tool_del_unknowndev_noti_text'] = 'Sind Sie sicher, dass Sie alle (unknown) Geräte aus der Datenbank löschen wollen?';
 $pia_lang['Maintenance_Tool_del_allevents'] = 'Alle Ereignisse löschen';
-$pia_lang['Maintenance_Tool_del_allevents_text'] = 'Vorheriges Backup emp&shy;foh&shy;len. Eine Wie&shy;der&shy;her&shy;stellung ohne Backup ist nicht möglich. Alle Er&shy;eignisse werden aus der Daten&shy;bank ge&shy;löscht. Dies setzt auch die An&shy;wesen&shy;heit zu&shy;rück. Es kann ab dem Moment zu un&shy;gül&shy;tigen Sitzungen kom&shy;men. Ein Scan, während das be&shy;treffen&shy;de Gerät "online" ist, sollte das Problem lösen.';
+$pia_lang['Maintenance_Tool_del_allevents_text'] = 'Alle Er&shy;eignisse werden aus der Daten&shy;bank ge&shy;löscht. Dies setzt auch die An&shy;wesen&shy;heit zu&shy;rück. Es kann ab dem Moment zu un&shy;gül&shy;tigen Sitzungen kom&shy;men. Ein Scan, während das be&shy;treffen&shy;de Gerät "online" ist, sollte das Problem lösen.';
 $pia_lang['Maintenance_Tool_del_allevents_noti'] = 'Alle Ereignisse löschen';
 $pia_lang['Maintenance_Tool_del_allevents_noti_text'] = 'Sind Sie sicher, dass Sie alle Ereignisse aus der Datenbank löschen wollen. Dies setzt die Anwesenheit aller Geräte zurück.';
 $pia_lang['Maintenance_Tool_del_Inactive_Hosts'] = 'Lösche inaktive Geräte';
-$pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'] = 'Vorheriges Backup emp&shy;foh&shy;len. Es werden alle Geräte gelöscht, die seit 30 Tagen inaktiv sind. Ebenfalls werden auch die Events dieser Geräte aus der Datenbank ent&shy;fernt.';
+$pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'] = 'Es werden alle Geräte gelöscht, die seit 30 Tagen inaktiv sind. Ebenfalls werden auch die Events dieser Geräte aus der Datenbank ent&shy;fernt.';
 $pia_lang['Maintenance_Tool_backup'] = 'DB Sicherung';
 $pia_lang['Maintenance_Tool_backup_text'] = 'Die Datenbank-Sicher&shy;ungen befinden sich im Datenbank-Ver&shy;zeich&shy;nis, gepackt als zip-Archive, benannt mit dem Er&shy;stell&shy;ungs&shy;datum. Es gibt keine maximale Anzahl von Backups.';
 $pia_lang['Maintenance_Tool_backup_noti'] = 'DB Sicherung';
@@ -442,6 +438,8 @@ $pia_lang['Maintenance_ConfEditor_Restore_noti_text'] = 'Es wird die letzte Vers
 $pia_lang['Maintenance_ConfEditor_Backup_info'] = 'Neben der Datei "pialert-prev.bak" wird eine weitere Sich&shy;erung mit dem aktuellen Datum inkl. Uhrzeit angelegt. Diese Sicherung muss im Bedarfsfall manuell wieder&shy;her&shy;gestellt werden (umbenennen in "pialert.conf"). Eine vorhandene "pialert-prev.bak"-Datei wird im&shy;mer wieder überschrieben.';
 $pia_lang['Maintenance_ConfEditor_Restore_info'] = 'Diese Funktion stellt die Kon&shy;fi&shy;gura&shy;tionsdatei aus der Datei "pialert-prev.bak" wieder her. Die Datei "pialert-prev.bak" wird beim Speichern und bei der Erstellung einer Sicherung er&shy;zeugt.';
 $pia_lang['Maintenance_ConfEditor_Save_info'] = 'Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" ge&shy;spei&shy;chert. Die vorherige Kon&shy;figu&shy;ration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" wieder mit der vorherigen Version der Kon&shy;figu&shy;rationsdatei überschrieben.';
+$pia_lang['Maintenance_Tool_ConfBackup'] = 'Config-Backup anlegen';
+$pia_lang['Maintenance_Tool_ConfBackup_text'] = 'Neben der Datei "pialert-prev.bak" wird eine weitere Sicherung mit dem aktuellen Datum inkl. Uhrzeit angelegt. Diese Sicherung muss im Bedarfsfall manuell wiederhergestellt werden (umbenennen in "pialert.conf").';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)
