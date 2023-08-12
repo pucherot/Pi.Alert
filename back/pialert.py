@@ -1847,36 +1847,85 @@ def service_monitoring():
 
 # -----------------------------------------------------------------------------
 def icmp_monitoring():
-    global VERSION
-    global VERSION_DATE
 
-    # Empty Log and write new header
     print("\nStart ICMP Monitoring...")
 
     print("    Get Host/Domain List...")
-    #sites = get_icmphost_list()
+    icmphosts = get_icmphost_list()
 
-    print("    Flush previous scan results...")
-    #flush_services_current_scan()
+    # DEBUG
+    print(icmphosts[0:len(icmphosts)])
 
-    print("    Check Services...")
+    print("    Flush previous ping results...")
+    #flush_icmphost_current_scan()
+
+    print("    Ping Hosts...")
+
+    while icmphosts:
+        for host_ip in icmphosts:
+            print(ping(host_ip))
+            icmp_status = ping(host_ip)
+            print(ping_avg(host_ip))
+            icmp_rtt = ping_avg(host_ip)
+
+            scantime = strftime("%Y-%m-%d %H:%M:%S")
+
+    #         # Insert Services_Events with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
+    #         set_services_events(site, scantime, status, latency, domain_ip)
+    #         # Insert Services_CurrentScan with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
+    #         set_services_current_scan(site, scantime, status, latency, domain_ip)
+
+            sys.stdout.flush()
+
+    #         # Update Service with lastLatence, lastScan and lastStatus after compare with services_current_scan
+    #         set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
+
+        break
+
+    else:
+        print("    No Hosts(s) to monitor!")
 
 # -----------------------------------------------------------------------------
-# def get_icmphost_list():
+def get_icmphost_list():
 
-#     sql.execute("SELECT mon_URL FROM Services")
-#     rows = sql.fetchall()
+    sql.execute("SELECT icmp_ip FROM ICMP_Mon")
+    rows = sql.fetchall()
 
-#     sites = []
-#     for row in rows:
-#         sites.append(row[0])
+    icmphost = []
+    for row in rows:
+        icmphost.append(row[0])
 
-#     return icmphost
+    return icmphost
+
+# -----------------------------------------------------------------------------
+def ping(host):
+
+    command = ['ping', '-c', '1', host]
+
+    result = subprocess.run(command, stdout=subprocess.PIPE)
+    output = result.stdout.decode('utf8')
+    if "Request timed out." in output or "100% packet loss" in output:
+        return "NOT CONNECTED"
+    return "CONNECTED"
+
+# -----------------------------------------------------------------------------
+def ping_avg(host):
+
+    command = ['ping', '-c', '2', host]
+
+    ping_process = subprocess.Popen(command, stdout=subprocess.PIPE)
+    tail_process = subprocess.Popen(['tail', '-1'], stdin=ping_process.stdout, stdout=subprocess.PIPE)
+    awk_process = subprocess.Popen(['awk', '-F/', '{print $5}'], stdin=tail_process.stdout, stdout=subprocess.PIPE)
+
+    output, error = awk_process.communicate()
+    output_string = output.decode('utf-8').strip()
+
+    return output_string
 
 # -----------------------------------------------------------------------------
 # def flush_icmphost_current_scan():
 
-#     sql.execute("DELETE FROM Services_CurrentScan")
+#     sql.execute("DELETE FROM ICMP_Mon_CurrentScan")
 #     sql_connection.commit()
 
 #===============================================================================

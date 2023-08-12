@@ -179,7 +179,6 @@ EOM
 
   disable_scan)
     current_user=$(whoami)
-    ## stop active scans
     STOPTIMER=$2
     re='^[0-9]+$'
     if ! [[ $STOPTIMER =~ $re ]] ; then
@@ -198,7 +197,6 @@ EOM
 
   enable_scan)
     current_user=$(whoami)
-    ## stop active scans
     rm ${SCRIPTPATH}/../db/setting_stoppialert
     /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_stoptimer
     echo "The arp-scan is enabled"
@@ -625,6 +623,7 @@ ${REWRITE_PIALERT_WEB_PASSWORD}
 # Other Modules
 # ----------------------
 ${REWRITE_SCAN_WEBSERVICES}
+${REWRITE_ICMPSCAN_ACTIVE}
 
 # Special Protocol Scanning
 # ----------------------
