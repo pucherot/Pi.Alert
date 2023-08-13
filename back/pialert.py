@@ -47,7 +47,6 @@ import ipaddress
 PIALERT_BACK_PATH = os.path.dirname(os.path.abspath(__file__))
 PIALERT_PATH = PIALERT_BACK_PATH + "/.."
 PIALERT_WEBSERVICES_LOG = PIALERT_PATH + "/log/pialert.webservices.log"
-#STOPARPSCAN = PIALERT_PATH + "/db/setting_stop#arpscan"
 STOPPIALERT = PIALERT_PATH + "/db/setting_stoppialert"
 PIALERT_DB_FILE = PIALERT_PATH + "/db/pialert.db"
 REPORTPATH_WEBGUI = PIALERT_PATH + "/front/reports/"
@@ -1825,14 +1824,12 @@ def service_monitoring():
                 redirect_state = ""
             # Write Logfile
             service_monitoring_log(site + ' ' + site_retry, status, latency)
-            # Insert Services_Events with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
+
             set_services_events(site, scantime, status, latency, domain_ip)
-            # Insert Services_CurrentScan with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
             set_services_current_scan(site, scantime, status, latency, domain_ip)
 
             sys.stdout.flush()
 
-            # Update Service with lastLatence, lastScan and lastStatus after compare with services_current_scan
             set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
         break
 
@@ -1849,36 +1846,31 @@ def service_monitoring():
 def icmp_monitoring():
 
     print("\nStart ICMP Monitoring...")
-
     print("    Get Host/Domain List...")
     icmphosts = get_icmphost_list()
-
-    # DEBUG
-    print(icmphosts[0:len(icmphosts)])
-
     print("    Flush previous ping results...")
-    #flush_icmphost_current_scan()
-
+    flush_icmphost_current_scan()
     print("    Ping Hosts...")
 
     while icmphosts:
         for host_ip in icmphosts:
-            print(ping(host_ip))
+            #print(ping(host_ip))
             icmp_status = ping(host_ip)
-            print(ping_avg(host_ip))
-            icmp_rtt = ping_avg(host_ip)
+
+            if icmp_status == "1":
+                #print(ping_avg(host_ip))
+                icmp_rtt = ping_avg(host_ip)
+            else:
+                icmp_rtt = "99999"
 
             scantime = strftime("%Y-%m-%d %H:%M:%S")
 
-    #         # Insert Services_Events with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
-    #         set_services_events(site, scantime, status, latency, domain_ip)
-    #         # Insert Services_CurrentScan with moneve_URL, moneve_DateTime, moneve_StatusCode and moneve_Latency
-    #         set_services_current_scan(site, scantime, status, latency, domain_ip)
+            set_icmphost_events(host_ip, scantime, icmp_status, icmp_rtt)
+    #        set_icmphost_current_scan(host_ip, scantime, icmp_status, icmp_rtt)
 
             sys.stdout.flush()
 
-    #         # Update Service with lastLatence, lastScan and lastStatus after compare with services_current_scan
-    #         set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
+    #        set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
 
         break
 
@@ -1901,32 +1893,75 @@ def get_icmphost_list():
 def ping(host):
 
     command = ['ping', '-c', '1', host]
-
     result = subprocess.run(command, stdout=subprocess.PIPE)
     output = result.stdout.decode('utf8')
     if "Request timed out." in output or "100% packet loss" in output:
-        return "NOT CONNECTED"
-    return "CONNECTED"
+        return "0"
+    return "1"
 
 # -----------------------------------------------------------------------------
 def ping_avg(host):
 
     command = ['ping', '-c', '2', host]
-
     ping_process = subprocess.Popen(command, stdout=subprocess.PIPE)
     tail_process = subprocess.Popen(['tail', '-1'], stdin=ping_process.stdout, stdout=subprocess.PIPE)
     awk_process = subprocess.Popen(['awk', '-F/', '{print $5}'], stdin=tail_process.stdout, stdout=subprocess.PIPE)
-
     output, error = awk_process.communicate()
     output_string = output.decode('utf-8').strip()
-
     return output_string
 
 # -----------------------------------------------------------------------------
-# def flush_icmphost_current_scan():
+def set_icmphost_events(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt):
 
-#     sql.execute("DELETE FROM ICMP_Mon_CurrentScan")
+    print(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt)
+    sqlite_insert = """INSERT INTO ICMP_Mon_Events
+                     (icmpeve_ip, icmpeve_DateTime, icmpeve_Present, icmpeve_avgrtt) 
+                     VALUES (?, ?, ?, ?);"""
+
+    table_data = (_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt)
+    sql.execute(sqlite_insert, table_data)
+    sql_connection.commit()
+
+# -----------------------------------------------------------------------------
+# def set_icmphost_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP):
+
+#     sql.execute("SELECT * FROM Services WHERE mon_URL = ?", [_cur_URL])
+#     rows = sql.fetchall()
+#     for row in rows:
+#         _mon_AlertEvents = row[6]
+#         _mon_AlertDown = row[7]
+#         _mon_StatusCode = row[2]
+#         _mon_Latency = row[3]
+#         _mon_TargetIP = row[8]
+
+#     if _mon_TargetIP != _cur_TargetIP:
+#         _cur_StatusChanged = 1
+#     elif _mon_StatusCode != _cur_StatusCode:
+#         _cur_StatusChanged = 1
+#     else:
+#         _cur_StatusChanged = 0
+
+#     if _mon_Latency == "99999999" and _mon_Latency != _cur_Latency:
+#         _cur_LatencyChanged = 0
+#         _cur_StatusChanged = 1
+#     elif _cur_Latency == "99999999" and _mon_Latency != _cur_Latency:
+#         _cur_LatencyChanged = 1
+#     else:
+#         _cur_LatencyChanged = 0 
+
+#     sqlite_insert = """INSERT INTO Services_CurrentScan
+#                      (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev) 
+#                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
+
+#     table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP, _mon_StatusCode, _mon_TargetIP)
+#     sql.execute(sqlite_insert, table_data)
 #     sql_connection.commit()
+
+# -----------------------------------------------------------------------------
+def flush_icmphost_current_scan():
+
+    sql.execute("DELETE FROM ICMP_Mon_CurrentScan")
+    sql_connection.commit()
 
 #===============================================================================
 # REPORTING
