@@ -1797,6 +1797,8 @@ def service_monitoring():
         monitor_logfile.write("\nStart Services Monitoring\n\n Timestamp          | StatusCode | ResponseTime | URL \n-----------------------------------------------------------------\n") 
         monitor_logfile.close()
 
+    scantime = strftime("%Y-%m-%d %H:%M:%S")
+
     while sites:
         for site in sites:
             status,latency = check_services_health(site)
@@ -1809,8 +1811,6 @@ def service_monitoring():
                     # 3rd Retry if the second attempt fails
                     status,latency = check_services_health(site)
                     site_retry = '**'
-
-            scantime = strftime("%Y-%m-%d %H:%M:%S")
 
             #Get IP from Domain
             if latency != "99999999":
@@ -1842,7 +1842,9 @@ def service_monitoring():
     # Print to log file
     print_service_monitoring_changes()
 
-# -----------------------------------------------------------------------------
+#===============================================================================
+# ICMP Monitoring
+#===============================================================================
 def icmp_monitoring():
 
     print("\nStart ICMP Monitoring...")
@@ -1852,25 +1854,23 @@ def icmp_monitoring():
     flush_icmphost_current_scan()
     print("    Ping Hosts...")
 
+    scantime = strftime("%Y-%m-%d %H:%M:%S")
+
     while icmphosts:
         for host_ip in icmphosts:
-            #print(ping(host_ip))
             icmp_status = ping(host_ip)
 
             if icmp_status == "1":
-                #print(ping_avg(host_ip))
                 icmp_rtt = ping_avg(host_ip)
             else:
                 icmp_rtt = "99999"
 
-            scantime = strftime("%Y-%m-%d %H:%M:%S")
-
             set_icmphost_events(host_ip, scantime, icmp_status, icmp_rtt)
-    #        set_icmphost_current_scan(host_ip, scantime, icmp_status, icmp_rtt)
+            set_icmphost_current_scan(host_ip, scantime, icmp_status, icmp_rtt)
 
             sys.stdout.flush()
 
-    #        set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
+            set_icmphost_update(host_ip, scantime, icmp_status, icmp_rtt)
 
         break
 
@@ -1923,39 +1923,36 @@ def set_icmphost_events(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpe
     sql_connection.commit()
 
 # -----------------------------------------------------------------------------
-# def set_icmphost_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP):
+def set_icmphost_current_scan(_cur_ip, _cur_DateTime, _cur_Present, _cur_avgrrt):
 
-#     sql.execute("SELECT * FROM Services WHERE mon_URL = ?", [_cur_URL])
-#     rows = sql.fetchall()
-#     for row in rows:
-#         _mon_AlertEvents = row[6]
-#         _mon_AlertDown = row[7]
-#         _mon_StatusCode = row[2]
-#         _mon_Latency = row[3]
-#         _mon_TargetIP = row[8]
+    sql.execute("SELECT * FROM ICMP_Mon WHERE icmp_ip = ?", [_cur_ip])
+    rows = sql.fetchall()
+    for row in rows:
+        _icmp_PresentLastScan = row[3]
+        _icmp_AlertEvents = row[5]
+        _icmp_AlertDown = row[6]
 
-#     if _mon_TargetIP != _cur_TargetIP:
-#         _cur_StatusChanged = 1
-#     elif _mon_StatusCode != _cur_StatusCode:
-#         _cur_StatusChanged = 1
-#     else:
-#         _cur_StatusChanged = 0
+    if _icmp_PresentLastScan != _cur_Present:
+        _cur_PresentChanged = 1
+    else:
+        _cur_PresentChanged = 0 
 
-#     if _mon_Latency == "99999999" and _mon_Latency != _cur_Latency:
-#         _cur_LatencyChanged = 0
-#         _cur_StatusChanged = 1
-#     elif _cur_Latency == "99999999" and _mon_Latency != _cur_Latency:
-#         _cur_LatencyChanged = 1
-#     else:
-#         _cur_LatencyChanged = 0 
+    sqlite_insert = """INSERT INTO ICMP_Mon_CurrentScan
+                     (cur_ip, cur_LastScan, cur_Present, cur_PresentChanged, cur_avgrrt, cur_AlertEvents, cur_AlertDown) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?);"""
 
-#     sqlite_insert = """INSERT INTO Services_CurrentScan
-#                      (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev) 
-#                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
+    table_data = (_cur_ip, _cur_DateTime, _cur_Present, _cur_PresentChanged, _cur_avgrrt, _icmp_AlertEvents, _icmp_AlertDown)
+    sql.execute(sqlite_insert, table_data)
+    sql_connection.commit()
 
-#     table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP, _mon_StatusCode, _mon_TargetIP)
-#     sql.execute(sqlite_insert, table_data)
-#     sql_connection.commit()
+# -----------------------------------------------------------------------------
+def set_icmphost_update(_icmp_ip, _icmp_LastScan, _icmp_PresentLastScan, _icmp_avgrtt):
+
+    sqlite_insert = """UPDATE ICMP_Mon SET icmp_LastScan=?, icmp_PresentLastScan=?, icmp_avgrtt=? WHERE icmp_ip=?;"""
+
+    table_data = (_icmp_LastScan, _icmp_PresentLastScan, _icmp_avgrtt, _icmp_ip)
+    sql.execute(sqlite_insert, table_data)
+    sql_connection.commit()
 
 # -----------------------------------------------------------------------------
 def flush_icmphost_current_scan():
