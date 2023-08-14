@@ -32,8 +32,6 @@ OpenDB();
 
 <!-- Page ------------------------------------------------------------------ -->
 
-<link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-
 <div class="content-wrapper">
 
 <!-- Content header--------------------------------------------------------- -->
@@ -97,7 +95,36 @@ OpenDB();
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="tableDevicesBox" class="box">
 
+            <!-- box-header -->
+            <div class="box-header">
+              <h3 id="tableDevicesTitle" class="box-title text-gray">Devices</h3>
+            </div>
+
+            <div class="box-body table-responsive">
+              <table id="tableDevices" class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                  <th>Hostname</th>
+                  <th>IP</th>
+                  <th>LastScan</th>
+                  <th>avg RTT</th>
+                  <th>Present</th>
+                </tr>
+                </thead>
+              </table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
 
     <div style="width: 100%; height: 20px;"></div>
     <!-- ----------------------------------------------------------------------- -->
@@ -116,10 +143,20 @@ require 'php/templates/footer.php';
 
 <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <script>
-initializeiCheck();
+//  var deviceStatus    = 'all';
+  var parTableRows    = 'Front_Devices_Rows';
+  var parTableOrder   = 'Front_Devices_Order';
+  var tableRows       = 10;
+  var tableOrder      = [[3,'desc'], [0,'asc']];
+//initializeiCheck();
+main();
 
+// -----------------------------------------------------------------------------
 function initializeiCheck () {
    // Blue
    $('input[type="checkbox"].blue').iCheck({
@@ -143,4 +180,124 @@ function initializeiCheck () {
   });
 }
 
+// -----------------------------------------------------------------------------
+function main () {
+  // get parameter value
+  $.get('php/server/parameters.php?action=get&parameter='+ parTableRows, function(data) {
+    var result = JSON.parse(data);
+    if (Number.isInteger (result) ) {
+        tableRows = result;
+    }
+    // get parameter value
+    $.get('php/server/parameters.php?action=get&parameter='+ parTableOrder, function(data) {
+      var result = JSON.parse(data);
+      result = JSON.parse(result);
+      if (Array.isArray (result) ) {
+        tableOrder = result;
+      }
+      initializeiCheck();
+      // Initialize components with parameters
+      initializeDatatable();
+      // query data
+      //getDevicesTotals();
+      getDevicesList();
+     });
+   });
+}
+
+// -----------------------------------------------------------------------------
+function initializeDatatable () {
+  var table=
+  $('#tableDevices').DataTable({
+    'paging'       : true,
+    'lengthChange' : true,
+    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, '<?php echo $pia_lang['Device_Tablelenght_all']; ?>']],
+    'searching'    : true,
+
+    'ordering'     : true,
+    'info'         : true,
+    'autoWidth'    : false,
+
+    // Parameters
+    'pageLength'   : tableRows,
+    'order'        : tableOrder,
+    //'order'       : [[0,'asc']],
+    'columns': [
+        { "data": 1 },
+        { "data": 0 },
+        { "data": 2 },
+        { "data": 3 },
+        { "data": 4 }
+      ],
+
+    'columnDefs'   : [
+      //{visible:   false,         targets: [] },
+      {className: 'text-center', targets: [1,2,3,4] },
+      {className: 'text-left',   targets: [0] },
+      {width:     '150px',       targets: [2] },
+      {width:     '80px',        targets: [3,4] },
+      //{width:     '0px',         targets: [3] },
+      //{orderData: [0],          targets: [0] },
+
+      // Device Name
+      {targets: [0],
+        'createdCell': function (td, cellData, rowData, row, col) {
+            $(td).html ('<b><a href="icmpmonitorDetails.php?mac='+ rowData[0] +'" class="">'+ cellData +'</a></b>');
+      } },
+
+      // Status color
+      {targets: [4],
+        'createdCell': function (td, cellData, rowData, row, col) {
+          if (cellData == 1){
+            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[0] +'" class="badge bg-green">Online</a>');
+          } else {
+            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[0] +'" class="badge bg-red">Down</a>');
+          }
+      } },
+
+    ],
+
+    // Processing
+    'processing'  : true,
+    'language'    : {
+      processing: '<table> <td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td> </table>',
+      emptyTable: 'No data',
+      "lengthMenu": "<?php echo $pia_lang['Device_Tablelenght']; ?>",
+      "search":     "<?php echo $pia_lang['Device_Searchbox']; ?>: ",
+      "paginate": {
+          "next":       "<?php echo $pia_lang['Device_Table_nav_next']; ?>",
+          "previous":   "<?php echo $pia_lang['Device_Table_nav_prev']; ?>"
+      },
+      "info":           "<?php echo $pia_lang['Device_Table_info']; ?>",
+    }
+  });
+
+  // Save cookie Rows displayed, and Parameters rows & order
+  $('#tableDevices').on( 'length.dt', function ( e, settings, len ) {
+    setParameter (parTableRows, len);
+  } );
+
+  $('#tableDevices').on( 'order.dt', function () {
+    setParameter (parTableOrder, JSON.stringify (table.order()) );
+    setCookie ('devicesList',JSON.stringify (table.column(4, { 'search': 'applied' }).data().toArray()) );
+  } );
+
+  $('#tableDevices').on( 'search.dt', function () {
+    setCookie ('devicesList', JSON.stringify (table.column(4, { 'search': 'applied' }).data().toArray()) );
+  } );
+
+};
+
+// -----------------------------------------------------------------------------
+function getDevicesList () {
+
+  // Set title and color
+  //$('#tableDevicesTitle')[0].className = 'box-title text-aqua';
+  //$('#tableDevicesBox')[0].className = 'box box-aqua';
+  // $('#tableDevicesTitle').html(tableTitle);
+
+  // Define new datasource URL and reload
+  $('#tableDevices').DataTable().ajax.url(
+    'php/server/icmpmonitor.php?action=getDevicesList').load();
+};
 </script>

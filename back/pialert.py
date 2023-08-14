@@ -99,11 +99,11 @@ def main ():
     elif cycle == 'cleanup':
         res = cleanup_database()
     elif cycle == 'reporting_test':
-        res = email_reporting_test('Test')
+        res = sending_notifications_test('Test')
     elif cycle == 'reporting_starttimer':
-        res = email_reporting_test('noti_Timerstart')
+        res = sending_notifications_test('noti_Timerstart')
     elif cycle == 'reporting_stoptimer':
-        res = email_reporting_test('noti_Timerstop')
+        res = sending_notifications_test('noti_Timerstop')
     elif cycle == 'update_vendors':
         res = update_devices_MAC_vendors()
     elif cycle == 'update_vendors_silent':
@@ -171,7 +171,7 @@ def start_arpscan_countdown ():
         if ( ACTUALTIME > STOPTIME ):
            print ("File will be deleted")
            os.remove(STOPPIALERT)
-           email_reporting_test("noti_Timerstop")
+           sending_notifications_test("noti_Timerstop")
            scan_network()
         else:
            print ("Timer still running")
@@ -295,7 +295,6 @@ def save_new_internet_IP (pNewIP):
                     WHERE dev_MAC = 'Internet' """,
                     (pNewIP,) )
 
-    # commit changes
     sql_connection.commit()
     
 #-------------------------------------------------------------------------------
@@ -541,7 +540,6 @@ def scan_network ():
         print ('\nLooking for Rogue DHCP Servers...')
         rogue_dhcp_detection ()
 
-    # Commit changes
     sql_connection.commit()
     closeDB()
 
@@ -1384,34 +1382,7 @@ def rogue_dhcp_notification ():
         rogue_dhcp_server_string += ', '.join(rogue_dhcp_server_list)
 
         # Send Mail
-        if REPORT_MAIL or REPORT_MAIL_WEBMON:
-            print ('    Sending report by email...')
-            send_email (rogue_dhcp_server_string, rogue_dhcp_server_string)
-        else :
-            print ('    Skip mail...')
-        if REPORT_PUSHSAFER or REPORT_PUSHSAFER_WEBMON:
-            print ('    Sending report by PUSHSAFER...')
-            send_pushsafer (rogue_dhcp_server_string)
-        else :
-            print ('    Skip PUSHSAFER...')
-        if REPORT_PUSHOVER or REPORT_PUSHOVER_WEBMON:
-            print ('    Sending report by PUSHOVER...')
-            send_pushover (rogue_dhcp_server_string)
-        else :
-            print ('    Skip PUSHOVER...')
-        if REPORT_NTFY or REPORT_NTFY_WEBMON:
-            print ('    Sending report by NTFY...')
-            send_ntfy (rogue_dhcp_server_string)
-        else :
-            print ('    Skip NTFY...')
-        if REPORT_TELEGRAM or REPORT_TELEGRAM_WEBMON:
-            print ('    Sending report by Telegram...')
-            send_telegram (rogue_dhcp_server_string)
-        if REPORT_WEBGUI or REPORT_WEBGUI_WEBMON:
-            print ('    Save report to file...')
-            send_webgui (rogue_dhcp_server_string)
-        else :
-            print ('    Skip Telegram...')
+        sending_notifications ('rogue_dhcp', rogue_dhcp_server_string, rogue_dhcp_server_string)
 
 #===============================================================================
 # nmap Scan of a single device (inactive)
@@ -1735,40 +1706,10 @@ def service_monitoring_notification():
 
     # # Send Mail
     if mail_section_services_down == True or mail_section_events == True :
-        if REPORT_MAIL_WEBMON :
-            print ('    Sending report by email...')
-            send_email (mail_text_webservice, mail_html_webservice)
-        else :
-            print ('    Skip mail...')
-        if REPORT_PUSHSAFER_WEBMON :
-            print ('    Sending report by PUSHSAFER...')
-            send_pushsafer (mail_text_webservice)
-        else :
-            print ('    Skip PUSHSAFER...')
-        if REPORT_PUSHOVER :
-            print ('    Sending report by PUSHOVER...')
-            send_pushover (mail_text_webservice)
-        else :
-            print ('    Skip PUSHOVER...')
-        if REPORT_TELEGRAM_WEBMON :
-            print ('    Sending report by Telegram...')
-            send_telegram (mail_text_webservice)
-        else :
-            print ('    Skip Telegram...')
-        if REPORT_NTFY_WEBMON :
-            print ('    Sending report by NTFY...')
-            send_ntfy (mail_text_webservice)
-        else :
-            print ('    Skip NTFY...')
-        if REPORT_WEBGUI_WEBMON :
-            print ('    Save report to file...')
-            send_webgui (mail_text_webservice)
-        else :
-            print ('    Skip WebUI...')
+        sending_notifications ('webservice', mail_html_webservice, mail_text_webservice)
     else :
         print ('    No changes to report...')
 
-    # Commit changes
     sql_connection.commit()
 
 # -----------------------------------------------------------------------------
@@ -1822,14 +1763,11 @@ def service_monitoring():
             else:
                 domain_ip = ""
                 redirect_state = ""
-            # Write Logfile
-            service_monitoring_log(site + ' ' + site_retry, status, latency)
 
+            service_monitoring_log(site + ' ' + site_retry, status, latency)
             set_services_events(site, scantime, status, latency, domain_ip)
             set_services_current_scan(site, scantime, status, latency, domain_ip)
-
             sys.stdout.flush()
-
             set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
         break
 
@@ -1854,11 +1792,10 @@ def icmp_monitoring():
     flush_icmphost_current_scan()
     print("    Ping Hosts...")
 
-    scantime = strftime("%Y-%m-%d %H:%M:%S")
-
     while icmphosts:
         for host_ip in icmphosts:
             icmp_status = ping(host_ip)
+            scantime = strftime("%Y-%m-%d %H:%M:%S")
 
             if icmp_status == "1":
                 icmp_rtt = ping_avg(host_ip)
@@ -1867,11 +1804,8 @@ def icmp_monitoring():
 
             set_icmphost_events(host_ip, scantime, icmp_status, icmp_rtt)
             set_icmphost_current_scan(host_ip, scantime, icmp_status, icmp_rtt)
-
             sys.stdout.flush()
-
             set_icmphost_update(host_ip, scantime, icmp_status, icmp_rtt)
-
         break
 
     else:
@@ -1913,7 +1847,7 @@ def ping_avg(host):
 # -----------------------------------------------------------------------------
 def set_icmphost_events(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt):
 
-    print(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt)
+    #print(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt)
     sqlite_insert = """INSERT INTO ICMP_Mon_Events
                      (icmpeve_ip, icmpeve_DateTime, icmpeve_Present, icmpeve_avgrtt) 
                      VALUES (?, ?, ?, ?);"""
@@ -1932,7 +1866,7 @@ def set_icmphost_current_scan(_cur_ip, _cur_DateTime, _cur_Present, _cur_avgrrt)
         _icmp_AlertEvents = row[5]
         _icmp_AlertDown = row[6]
 
-    if _icmp_PresentLastScan != _cur_Present:
+    if str(_icmp_PresentLastScan) != str(_cur_Present):
         _cur_PresentChanged = 1
     else:
         _cur_PresentChanged = 0 
@@ -1949,7 +1883,6 @@ def set_icmphost_current_scan(_cur_ip, _cur_DateTime, _cur_Present, _cur_avgrrt)
 def set_icmphost_update(_icmp_ip, _icmp_LastScan, _icmp_PresentLastScan, _icmp_avgrtt):
 
     sqlite_insert = """UPDATE ICMP_Mon SET icmp_LastScan=?, icmp_PresentLastScan=?, icmp_avgrtt=? WHERE icmp_ip=?;"""
-
     table_data = (_icmp_LastScan, _icmp_PresentLastScan, _icmp_avgrtt, _icmp_ip)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
@@ -1958,6 +1891,99 @@ def set_icmphost_update(_icmp_ip, _icmp_LastScan, _icmp_PresentLastScan, _icmp_a
 def flush_icmphost_current_scan():
 
     sql.execute("DELETE FROM ICMP_Mon_CurrentScan")
+    sql_connection.commit()
+
+# -----------------------------------------------------------------------------
+def icmphost_monitoring_notification():
+    global mail_text_icmphost
+    global mail_html_icmphost
+    
+    # Reporting section
+    print ('\nReporting (ICMP Monitoring) ...')
+
+    # Open text Template
+    template_file = open(PIALERT_BACK_PATH + '/report_template_icmpmon.txt', 'r') 
+    mail_text_icmphost = template_file.read() 
+    template_file.close() 
+
+    # Open html Template
+    template_file = open(PIALERT_BACK_PATH + '/report_template_icmpmon.html', 'r') 
+    mail_html_icmphost = template_file.read() 
+    template_file.close() 
+
+    # Report Header & footer
+    timeFormated = startTime.strftime ('%Y-%m-%d %H:%M')
+    mail_text_icmphost = mail_text_icmphost.replace ('<REPORT_DATE>', timeFormated)
+    mail_html_icmphost = mail_html_icmphost.replace ('<REPORT_DATE>', timeFormated)
+
+    mail_text_icmphost = mail_text_icmphost.replace ('<SERVER_NAME>', socket.gethostname() )
+    mail_html_icmphost = mail_html_icmphost.replace ('<SERVER_NAME>', socket.gethostname() )
+
+    # Compose Devices Down Section
+    mail_section_icmphost_down = False
+    mail_text_icmphost_down = ''
+    mail_html_icmphost_down = ''
+    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    html_line_template     = '<tr>\n'+ \
+        '  <td> {} </td>\n  <td> {} </td>\n'+ \
+        '  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
+
+    sql.execute ("""SELECT * FROM ICMP_Mon_CurrentScan
+                    WHERE cur_AlertDown = 1 AND cur_PresentChanged = 1
+                    ORDER BY cur_LastScan""")
+
+    for eventAlert in sql :
+
+        mail_section_icmphost_down = True
+        mail_text_icmphost_down += text_line_template.format (
+            'IP: ', eventAlert['cur_URL'], 
+            'Time: ', eventAlert['cur_DateTime'], 
+            'Destination IP: ', _func_cur_TargetIP,
+            'prev. Destination IP: ', _func_cur_TargetIP_prev)
+        mail_html_icmphost_down += html_line_template.format (
+            eventAlert['cur_URL'], eventAlert['cur_DateTime'], _func_cur_TargetIP, _func_cur_TargetIP_prev)
+
+    format_report_section_services (mail_section_icmphost_down, 'SECTION_DEVICES_DOWN',
+        'TABLE_DEVICES_DOWN', mail_text_icmphost_down, mail_html_icmphost_down)
+
+    # Compose Events Section (includes Down as an Event)
+    mail_section_events = False
+    mail_text_events   = ''
+    mail_html_events   = ''
+    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}{}\n\n'
+    html_line_template = '<tr>\n  <td>'+ \
+            '  {} </td>\n  <td> {} </td>\n'+ \
+            '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
+            '  <td> {} </td>\n</tr>\n'
+
+    sql.execute ("""SELECT * FROM ICMP_Mon_CurrentScan
+                    WHERE cur_AlertEvents = 1 AND cur_PresentChanged = 1
+                    ORDER BY cur_LastScan""")
+
+    for eventAlert in sql :
+
+        mail_section_events = True
+        mail_text_events += text_line_template.format (
+            'Service: ', eventAlert['cur_URL'], 
+            'Time: ', eventAlert['cur_DateTime'], 
+            'Destination IP: ', _func_cur_TargetIP,
+            'prev. Destination IP: ', _func_cur_TargetIP_prev, 
+            'HTTP Status Code: ', eventAlert['cur_StatusCode'], 
+            'prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
+        mail_html_events += html_line_template.format (
+            eventAlert['cur_URL'], eventAlert['cur_Latency'], _func_cur_TargetIP,
+            _func_cur_TargetIP_prev, eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
+            eventAlert['cur_StatusCode_prev'])
+
+    format_report_section_services (mail_section_events, 'SECTION_EVENTS',
+        'TABLE_EVENTS', mail_text_events, mail_html_events)
+
+    # # Send Mail
+    if mail_section_services_down == True or mail_section_events == True :
+        sending_notifications ('icmp_mon', mail_html_webservice, mail_text_webservice)
+    else :
+        print ('    No changes to report...')
+
     sql_connection.commit()
 
 #===============================================================================
@@ -2118,41 +2144,7 @@ def email_reporting ():
     if mail_section_Internet == True or mail_section_new_devices == True \
     or mail_section_devices_down == True or mail_section_events == True :
         # Send Mail
-        if REPORT_MAIL :
-            print ('    Sending report by email...')
-            send_email (mail_text, mail_html)
-        else :
-            print ('    Skip mail...')
-        # Send Pushsafer
-        if REPORT_PUSHSAFER :
-            print ('    Sending report by PUSHSAFER...')
-            send_pushsafer (mail_text)
-        else :
-            print ('    Skip PUSHSAFER...')
-        # Send Pushover
-        if REPORT_PUSHOVER :
-            print ('    Sending report by PUSHOVER...')
-            send_pushover (mail_text)
-        else :
-            print ('    Skip PUSHOVER...')
-        # Send Telegram
-        if REPORT_TELEGRAM :
-            print ('    Sending report by Telegram...')
-            send_telegram (mail_text)
-        else :
-            print ('    Skip Telegram...')
-        # Send NTFY
-        if REPORT_NTFY :
-            print ('    Sending report by NTFY...')
-            send_ntfy (mail_text)
-        else :
-            print ('    Skip NTFY...')
-        # Send WebGUI
-        if REPORT_WEBGUI :
-            print ('    Save report to file...')
-            send_webgui (mail_text)
-        else :
-            print ('    Skip WebGUI...')
+        sending_notifications ('pialert', mail_html, mail_text)
     else :
         print ('    No changes to report...')
 
@@ -2166,17 +2158,22 @@ def email_reporting ():
 
     print ('    Notifications:', sql.rowcount)
 
-    # Commit changes
     sql_connection.commit()
 
     try:
         enable_services_monitoring = SCAN_WEBSERVICES
     except NameError:
         enable_services_monitoring = False
-
     if enable_services_monitoring == True:
         if str(startTime)[15] == "0":
             service_monitoring_notification()
+
+    try:
+        enable_icmp_monitoring = ICMPSCAN_ACTIVE
+    except NameError:
+        enable_icmp_monitoring = False
+    # if enable_icmp_monitoring == True:
+    #         icmphost_monitoring_notification()
 
     closeDB()
 
@@ -2272,9 +2269,75 @@ def send_webgui (_Text):
     set_pia_reports_permissions()
 
 #===============================================================================
-# Test REPORTING
+# Sending Notofications
 #===============================================================================
-def email_reporting_test (_Mode):
+def sending_notifications (_type, _html_text, _txt_text):
+
+    if _type == 'webservice' or _type == 'rogue_dhcp' :
+        if REPORT_MAIL_WEBMON :
+            print ('    Sending report by email...')
+            send_email (_txt_text, _html_text)
+        else :
+            print ('    Skip mail...')
+        if REPORT_PUSHSAFER_WEBMON :
+            print ('    Sending report by PUSHSAFER...')
+            send_pushsafer (_txt_text)
+        else :
+            print ('    Skip PUSHSAFER...')
+        if REPORT_PUSHOVER_WEBMON :
+            print ('    Sending report by PUSHOVER...')
+            send_pushover (_txt_text)
+        else :
+            print ('    Skip PUSHOVER...')
+        if REPORT_TELEGRAM_WEBMON :
+            print ('    Sending report by Telegram...')
+            send_telegram (_txt_text)
+        else :
+            print ('    Skip Telegram...')
+        if REPORT_NTFY_WEBMON :
+            print ('    Sending report by NTFY...')
+            send_ntfy (_txt_text)
+        else :
+            print ('    Skip NTFY...')
+        if REPORT_WEBGUI_WEBMON :
+            print ('    Save report to file...')
+            send_webgui (_txt_text)
+        else :
+            print ('    Skip WebUI...')
+    elif _type == 'pialert' or _type == 'rogue_dhcp' :
+        if REPORT_MAIL :
+            print ('    Sending report by email...')
+            send_email (_txt_text, _html_text)
+        else :
+            print ('    Skip mail...')
+        if REPORT_PUSHSAFER :
+            print ('    Sending report by PUSHSAFER...')
+            send_pushsafer (_txt_text)
+        else :
+            print ('    Skip PUSHSAFER...')
+        if REPORT_PUSHOVER :
+            print ('    Sending report by PUSHOVER...')
+            send_pushover (_txt_text)
+        else :
+            print ('    Skip PUSHOVER...')
+        if REPORT_TELEGRAM :
+            print ('    Sending report by Telegram...')
+            send_telegram (_txt_text)
+        else :
+            print ('    Skip Telegram...')
+        if REPORT_NTFY :
+            print ('    Sending report by NTFY...')
+            send_ntfy (_txt_text)
+        else :
+            print ('    Skip NTFY...')
+        if REPORT_WEBGUI :
+            print ('    Save report to file...')
+            send_webgui (_txt_text)
+        else :
+            print ('    Skip WebUI...')
+
+#-------------------------------------------------------------------------------
+def sending_notifications_test (_Mode):
     if _Mode == 'Test' :
         notiMessage = "Test-Notification"
     elif _Mode == 'noti_Timerstart' :
@@ -2282,41 +2345,32 @@ def email_reporting_test (_Mode):
     elif _Mode == 'noti_Timerstop' :
         notiMessage = "Pi.Alert reactivated"
 
-    # Reporting section
     print ('\nTest Reporting...')
-    # Open text Template
-
-    # Send Mail
     if REPORT_MAIL or REPORT_MAIL_WEBMON:
         print ('    Sending report by email...')
         send_email (notiMessage, notiMessage)
     else :
         print ('    Skip mail...')
-    # Send Pushsafer
     if REPORT_PUSHSAFER or REPORT_PUSHSAFER_WEBMON:
         print ('    Sending report by PUSHSAFER...')
         send_pushsafer_test (notiMessage)
     else :
         print ('    Skip PUSHSAFER...')
-    # Send Pushover
     if REPORT_PUSHOVER or REPORT_PUSHOVER_WEBMON:
         print ('    Sending report by PUSHOVER...')
         send_pushover_test (notiMessage)
     else :
         print ('    Skip PUSHOVER...')
-    # Send Telegram
     if REPORT_TELEGRAM or REPORT_TELEGRAM_WEBMON:
         print ('    Sending report by Telegram...')
         send_telegram_test (notiMessage)
     else :
         print ('    Skip Telegram...')
-    # Send NTFY
     if REPORT_NTFY or REPORT_NTFY_WEBMON:
         print ('    Sending report by NTFY...')
         send_ntfy_test (notiMessage)
     else :
         print ('    Skip NTFY...')
-    # Send WebGUI
     if REPORT_WEBGUI or REPORT_WEBGUI_WEBMON:
         print ('    Save report to file...')
         send_webgui_test (notiMessage)
