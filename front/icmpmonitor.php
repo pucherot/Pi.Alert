@@ -227,11 +227,12 @@ function initializeDatatable () {
         { "data": 0 },
         { "data": 2 },
         { "data": 3 },
-        { "data": 4 }
+        { "data": 4 },
+        { "data": 5 }  //AlertDown
       ],
 
     'columnDefs'   : [
-      //{visible:   false,         targets: [] },
+      {visible:   false,         targets: [5] },
       {className: 'text-center', targets: [1,2,3,4] },
       {className: 'text-left',   targets: [0] },
       {width:     '150px',       targets: [2] },
@@ -245,13 +246,20 @@ function initializeDatatable () {
             $(td).html ('<b><a href="icmpmonitorDetails.php?mac='+ rowData[0] +'" class="">'+ cellData +'</a></b>');
       } },
 
+      {targets: [3],
+        'createdCell': function (td, cellData, rowData, row, col) {
+            $(td).html (cellData +' ms');
+      } },
+
       // Status color
       {targets: [4],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
-            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[0] +'" class="badge bg-green">Online</a>');
+            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[5] +'" class="badge bg-green">Online</a>');
+          } else if (cellData == 0 && rowData[5] == 1) {
+            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[5] +'" class="badge bg-red">Down</a>');
           } else {
-            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[0] +'" class="badge bg-red">Down</a>');
+            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[5] +'" class="badge bg-gray text-white">Offline</a>');
           }
       } },
 
@@ -279,11 +287,11 @@ function initializeDatatable () {
 
   $('#tableDevices').on( 'order.dt', function () {
     setParameter (parTableOrder, JSON.stringify (table.order()) );
-    setCookie ('devicesList',JSON.stringify (table.column(4, { 'search': 'applied' }).data().toArray()) );
+    setCookie ('devicesList',JSON.stringify (table.column(5, { 'search': 'applied' }).data().toArray()) );
   } );
 
   $('#tableDevices').on( 'search.dt', function () {
-    setCookie ('devicesList', JSON.stringify (table.column(4, { 'search': 'applied' }).data().toArray()) );
+    setCookie ('devicesList', JSON.stringify (table.column(5, { 'search': 'applied' }).data().toArray()) );
   } );
 
 };

@@ -42,10 +42,6 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	switch ($action) {
 	case 'getEventsTotals':getEventsTotals();
 		break;
-	case 'getEvents':getEvents();
-		break;
-	case 'getEventsTotalsforService':getEventsTotalsforService();
-		break;
 	case 'setServiceData':setServiceData();
 		break;
 	case 'deleteService':deleteService();
@@ -54,7 +50,37 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'EnableICMPMon':EnableICMPMon();
 		break;
+	case 'getDevicesList':getDevicesList();
+		break;
 	}
+}
+
+function getDevicesList() {
+	global $db;
+
+	// SQL
+	//$condition = getDeviceCondition($_REQUEST['status']);
+	$sql = 'SELECT * FROM ICMP_Mon';
+	$result = $db->query($sql);
+	// arrays of rows
+	$tableData = array();
+	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+		$tableData['data'][] = array(
+			$row['icmp_ip'],
+			$row['icmp_hostname'],
+			$row['icmp_LastScan'],
+			$row['icmp_avgrtt'],
+			$row['icmp_PresentLastScan'],
+			$row['icmp_AlertDown'],
+			//$row['rowid'], // Rowid (hidden)
+		);
+	}
+	// Control no rows
+	if (empty($tableData['data'])) {
+		$tableData['data'] = '';
+	}
+	// Return json
+	echo (json_encode($tableData));
 }
 
 //------------------------------------------------------------------------------
