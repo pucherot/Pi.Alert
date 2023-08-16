@@ -58,14 +58,20 @@ OpenDB();
                             <div class="form-group col-xs-12">
                               <label class="col-xs-3 control-label"><?php echo $pia_lang['ICMPMonitor_label_IP']; ?></label>
                               <div class="col-xs-9">
-                                <input type="text" class="form-control" id="serviceURL" placeholder="Host IP">
+                                <input type="text" class="form-control" id="icmphost_ip" placeholder="Host IP">
                               </div>
                             </div>
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['ICMPMonitor_label_Tags']; ?></label>
+                              <label class="col-xs-3 control-label"><?php echo $pia_lang['ICMPMonitor_label_Hostname']; ?></label>
                               <div class="col-xs-9">
-                                <input type="text" class="form-control" id="serviceTag" placeholder="Tag">
+                                <input type="text" class="form-control" id="icmphost_name" placeholder="Hostname">
                               </div>
+                            </div>
+                            <div class="form-group col-xs-12">
+                                <label class="col-xs-3 control-label"><?php echo $pia_lang['Device_TableHead_Favorite']; ?></label>
+                                <div class="col-xs-9" style="margin-top: 0px;">
+                                  <input class="checkbox orange" id="insFavorite" type="checkbox">
+                                </div>
                             </div>
                             <div class="form-group col-xs-12">
                                 <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents']; ?></label>
@@ -83,7 +89,7 @@ OpenDB();
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php echo $pia_lang['Gen_Close']; ?></button>
-                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewService()" ><?php echo $pia_lang['Gen_Save']; ?></button>
+                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewICMPHost()" ><?php echo $pia_lang['Gen_Save']; ?></button>
                         </div>
                     </div>
                 </div>
@@ -94,6 +100,53 @@ OpenDB();
 
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
+
+
+
+
+
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-aqua">
+            <div class="inner"><h3 id="devicesAll"> -- </h3>
+                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_AllDevices']; ?></p>
+            </div>
+            <div class="icon"><i class="fa fa-laptop text-aqua-40"></i></div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-green">
+            <div class="inner"><h3 id="devicesConnected"> -- </h3>
+                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Connected']; ?></p>
+            </div>
+            <div class="icon"><i class="fa fa-plug text-green-40"></i></div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-yellow">
+            <div class="inner"><h3 id="devicesFavorites"> -- </h3>
+                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Favorites']; ?></p>
+            </div>
+            <div class="icon"><i class="fa fa-star text-yellow-40"></i></div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner"><h3 id="devicesDown"> -- </h3>
+                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_DownAlerts']; ?></p>
+            </div>
+            <div class="icon"><i class="fa fa-warning text-red-40"></i></div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
 
       <div class="row">
         <div class="col-xs-12">
@@ -201,6 +254,7 @@ function main () {
       // query data
       //getDevicesTotals();
       getDevicesList();
+      getICMPHostTotals();
      });
    });
 }
@@ -308,4 +362,44 @@ function getDevicesList () {
   $('#tableDevices').DataTable().ajax.url(
     'php/server/icmpmonitor.php?action=getDevicesList').load();
 };
+
+// -----------------------------------------------------------------------------
+function getICMPHostTotals () {
+
+  $.get('php/server/icmpmonitor.php?action=getICMPHostTotals', function(data) {
+    var totalsDevices = JSON.parse(data);
+
+    $('#devicesAll').html        (totalsDevices[0].toLocaleString());
+    $('#devicesConnected').html  (totalsDevices[2].toLocaleString());
+    $('#devicesFavorites').html  (totalsDevices[3].toLocaleString());
+    $('#devicesDown').html       (totalsDevices[1].toLocaleString());
+} );
+};
+
+// -----------------------------------------------------------------------------
+function insertNewICMPHost(refreshCallback='') {
+  // Check URL
+  if ($('#icmp_ip').val() == '') {
+    return;
+  }
+
+  // update data to server
+  $.get('php/server/icmpmonitor.php?action=insertNewICMPHost'
+    + '&icmp_ip='         + $('#icmphost_ip').val()
+    + '&icmp_hostname='   + $('#icmphost_name').val()
+    + '&icmp_fav='        + ($('#insFavorite')[0].checked * 1)
+    + '&alertdown='       + ($('#insAlertEvents')[0].checked * 1)
+    + '&alertevents='     + ($('#insAlertDown')[0].checked * 1)
+    , function(msg) {
+
+    // deactivate button
+    // deactivateSaveRestoreData ();
+    showMessage (msg);
+    // Callback fuction
+    if (typeof refreshCallback == 'function') {
+      refreshCallback();
+    }
+  });
+}
+
 </script>

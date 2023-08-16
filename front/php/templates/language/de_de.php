@@ -321,9 +321,11 @@ $pia_lang['BackWebServices_DelServError'] = 'Der Web Service konnte nicht, oder 
 $pia_lang['ICMPMonitor_Title'] = 'ICMP Monitor';
 $pia_lang['ICMPMonitor_headline_IP'] = 'Neue IP-Adresse überwachen';
 $pia_lang['ICMPMonitor_label_IP'] = 'Host IP';
-$pia_lang['ICMPMonitor_label_Tags'] = 'Tag';
+$pia_lang['ICMPMonitor_label_Hostname'] = 'Hostname';
 $pia_lang['BackICMP_mon_disabled'] = 'ICMP Monitoring ist deaktiviert';
 $pia_lang['BackICMP_mon_enabled'] = 'ICMP Monitoring ist aktiviert';
+$pia_lang['BackICMP_mon_InsICMP'] = 'Der ICMP Host wurde gespeichert';
+$pia_lang['BackICMP_mon_InsICMPError'] = 'Der ICMP Host wurde nicht gespeichert';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page
@@ -379,7 +381,7 @@ $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Wechselt zwischen der hellen
 $pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Aktivitätsverlauf<br>(an/aus)';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Aktivitätsverlauf';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'De-/Aktiviert den Aktivitätsverlauf auf der Geräte- und der Anwesenheitsseite.';
-$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Überwachg. (an/aus)';
+$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (an/aus)';
 $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Überwachung';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Aktiviert oder deaktiviert die Web Service Überwachung für Pi.Alert. Mit der Aktivierung, werden zusätzliche Elemente in der Oberfläche angezeigt. Mit der Deaktivierung, verschwinden diese wieder.';
 
