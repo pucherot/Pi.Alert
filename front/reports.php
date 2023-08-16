@@ -41,6 +41,11 @@ function get_notification_class($filename) {
 		$temp_class[2] = substr($headtitle[0], 6, 2) . '.' . substr($headtitle[0], 4, 2) . '.' . substr($headtitle[0], 2, 2) . '/' . substr($headtitle[1], 0, 2) . ':' . substr($headtitle[1], 2, 2);
 		return $temp_class;
 	}
+	if ($temp_class[0] == "Host Down (ICMP Monitoring)" || $temp_class[0] == "Host Events (ICMP Monitoring)") {
+		$temp_class[1] = 'icmpmon';
+		$temp_class[2] = substr($headtitle[0], 6, 2) . '.' . substr($headtitle[0], 4, 2) . '.' . substr($headtitle[0], 2, 2) . '/' . substr($headtitle[1], 0, 2) . ':' . substr($headtitle[1], 2, 2);
+		return $temp_class;
+	}
 	if ($temp_class[0] == "Test") {
 		$temp_class[1] = 'test';
 		$temp_class[2] = substr($headtitle[0], 6, 2) . '.' . substr($headtitle[0], 4, 2) . '.' . substr($headtitle[0], 2, 2) . '/' . substr($headtitle[1], 0, 2) . ':' . substr($headtitle[1], 2, 2);
@@ -98,6 +103,21 @@ function process_webmon_notifications($class_name, $event_time, $filename, $dire
             </div>';
 }
 
+function process_icmpmon_notifications($class_name, $event_time, $filename, $directory) {
+	$webgui_report = file_get_contents($directory . $filename);
+	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
+	return '<div class="box box-solid">
+            <div class="box-header">
+              <h3 class="box-title" style="color: #ffffff"><i class="fa fa-globe"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
+                <div class="pull-right">
+                  <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
+                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
+                </div>
+            </div>
+            <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
+            </div>';
+}
+
 function process_test_notifications($class_name, $event_time, $filename, $directory) {
 	$webgui_report = file_get_contents($directory . $filename);
 	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
@@ -146,6 +166,8 @@ foreach ($scanned_directory as $file) {
 			array_push($standard_notification, process_internet_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "webmon") {
 			array_push($standard_notification, process_webmon_notifications($notification_class[0], $notification_class[2], $file, $directory));
+		} elseif ($notification_class[1] == "icmpmon") {
+			array_push($standard_notification, process_icmpmon_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "test") {
 			array_push($standard_notification, process_test_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "rogueDHCP") {

@@ -105,4 +105,30 @@ function prepare_graph_arrays_webservice($service_url) {
 	return array($Pia_Graph_Service_Time, $Pia_Graph_Service_Down, $Pia_Graph_Service_2xx, $Pia_Graph_Service_3xx, $Pia_Graph_Service_4xx, $Pia_Graph_Service_5xx, $httpdown, $http2xx, $http3xx, $http4xx, $http5xx);
 }
 
+// History Graph Online/Offline ICMP
+function prepare_graph_arrays_ICMPHost($icmp_ip) {
+	global $db;
+
+	$Pia_Graph_ICMPHost_Time = array();
+	$Pia_Graph_ICMPHost_Up = array();
+	$Pia_Graph_ICMPHost_Down = array();
+	$results = $db->query('SELECT * FROM ICMP_Mon_Events WHERE icmpeve_ip="' . $icmp_ip . '" ORDER BY icmpeve_DateTime DESC LIMIT 144');
+	$online = 0;
+	$offline = 0;
+	while ($row = $results->fetchArray()) {
+		$time_raw = explode(' ', $row['icmpeve_DateTime']);
+		$time = explode(':', $time_raw[1]);
+		if ($time[1] < 10) {$time[1] = "00";} else { $time[1] = round($time[1], -1);}
+		if ($row['icmpeve_Present'] == 1) {
+			array_push($Pia_Graph_ICMPHost_Up, "1");
+			array_push($Pia_Graph_ICMPHost_Down, "0");
+		}
+		if ($row['icmpeve_Present'] == 0) {
+			array_push($Pia_Graph_ICMPHost_Up, "0");
+			array_push($Pia_Graph_ICMPHost_Down, "1");
+		}
+		array_push($Pia_Graph_ICMPHost_Time, $time[0] . ':' . $time[1]);
+	}
+	return array($Pia_Graph_ICMPHost_Time, $Pia_Graph_ICMPHost_Up, $Pia_Graph_ICMPHost_Down);
+}
 ?>

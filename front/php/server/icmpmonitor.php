@@ -40,7 +40,7 @@ OpenDB();
 if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	$action = $_REQUEST['action'];
 	switch ($action) {
-	case 'setServiceData':setServiceData();
+	case 'setICMPHostData':setICMPHostData();
 		break;
 	case 'deleteICMPHost':deleteICMPHost();
 		break;
@@ -52,9 +52,14 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'getICMPHostTotals':getICMPHostTotals();
 		break;
+	case 'getEventsTotalsforICMP':getEventsTotalsforICMP();
+		break;
 	}
 }
 
+//------------------------------------------------------------------------------
+//  Get List Totals
+//------------------------------------------------------------------------------
 function getICMPHostTotals() {
 	global $db;
 
@@ -71,6 +76,9 @@ function getICMPHostTotals() {
 	echo (json_encode($totals));
 }
 
+//------------------------------------------------------------------------------
+//  Get List
+//------------------------------------------------------------------------------
 function getDevicesList() {
 	global $db;
 
@@ -81,6 +89,7 @@ function getDevicesList() {
 	// arrays of rows
 	$tableData = array();
 	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+		if ($row['icmp_hostname'] == '') {$row['icmp_hostname'] = $row['icmp_ip'];}
 		$tableData['data'][] = array(
 			$row['icmp_ip'],
 			$row['icmp_hostname'],
@@ -100,32 +109,43 @@ function getDevicesList() {
 }
 
 //------------------------------------------------------------------------------
-//  Set Services Data
+//  Set ICMP Host Data
 //------------------------------------------------------------------------------
-// function setServiceData() {
-// 	global $db;
-// 	global $pia_lang;
-// 	// sql
-// 	$sql = 'UPDATE Services SET
-//                  mon_Tags           = "' . quotes($_REQUEST['tags']) . '",
-//                  mon_MAC            = "' . quotes($_REQUEST['mac']) . '",
-//                  mon_AlertDown      = "' . quotes($_REQUEST['alertdown']) . '",
-//                  mon_AlertEvents    = "' . quotes($_REQUEST['alertevents']) . '"
-//           WHERE mon_URL="' . $_REQUEST['url'] . '"';
-// 	// update Data
-// 	$result = $db->query($sql);
-// 	// check result
-// 	if ($result == TRUE) {
-// 		// Logging
-// 		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $_REQUEST['url']);
-// 		echo $pia_lang['BackWebServices_UpdServ'];
-// 	} else {
-// 		// Logging
-// 		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0004', '', $_REQUEST['url']);
-// 		echo $pia_lang['BackWebServices_UpdServError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
-// 		//echo $_REQUEST['tags'];
-// 	}
-// }
+function setICMPHostData() {
+	global $db;
+	global $pia_lang;
+
+	if ($_REQUEST['icmp_group'] == '--') {unset($_REQUEST['icmp_group']);}
+	if ($_REQUEST['icmp_type'] == '--') {unset($_REQUEST['icmp_type']);}
+	if ($_REQUEST['icmp_location'] == '--') {unset($_REQUEST['icmp_location']);}
+
+	// sql
+	$sql = 'UPDATE ICMP_Mon SET
+				icmp_hostname    = "' . quotes($_REQUEST['icmp_hostname']) . '",
+                icmp_type        = "' . quotes($_REQUEST['icmp_type']) . '",
+                icmp_group       = "' . quotes($_REQUEST['icmp_group']) . '",
+                icmp_location    = "' . quotes($_REQUEST['icmp_location']) . '",
+                icmp_owner       = "' . quotes($_REQUEST['icmp_owner']) . '",
+                icmp_notes       = "' . quotes($_REQUEST['icmp_notes']) . '",
+                icmp_AlertEvents = "' . quotes($_REQUEST['alertevents']) . '",
+                icmp_AlertDown   = "' . quotes($_REQUEST['alertdown']) . '",
+                icmp_Favorite    = "' . quotes($_REQUEST['favorit']) . '"
+          WHERE icmp_ip="' . $_REQUEST['icmp_ip'] . '"';
+	// update Data
+
+	$result = $db->query($sql);
+	// check result
+	if ($result == TRUE) {
+		// Logging
+		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $_REQUEST['icmp_ip']);
+		echo $pia_lang['BackICMP_mon_UpdICMP'];
+	} else {
+		// Logging
+		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0004', '', $_REQUEST['icmp_ip']);
+		echo $pia_lang['BackICMP_mon_UpdICMPError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+		//echo $_REQUEST['tags'];
+	}
+}
 
 //------------------------------------------------------------------------------
 //  Delete Host
@@ -169,6 +189,7 @@ function insertNewICMPHost() {
 	global $pia_lang;
 
 	$hostip = $_REQUEST['icmp_ip'];
+	if ($_REQUEST['icmp_hostname'] == "") {$_REQUEST['icmp_hostname'] = $_REQUEST['icmp_ip'];}
 	$check_timestamp = date("Y-m-d H:i:s");
 
 	if (!filter_var($hostip, FILTER_FLAG_IPV4) && !filter_var($hostip, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
@@ -214,4 +235,36 @@ function EnableICMPMon() {
 	}
 }
 
+//------------------------------------------------------------------------------
+//  Details
+//------------------------------------------------------------------------------
+function getEventsTotalsforICMP() {
+	global $db;
+
+	// Request Parameters
+	$hostip = $_REQUEST['hostip'];
+
+	// SQL
+	$SQL1 = 'SELECT Count(*)
+           FROM ICMP_Mon_Events
+           WHERE icmpeve_ip = "' . $hostip . '"';
+
+	// All
+	$result = $db->query($SQL1);
+	$row = $result->fetchArray(SQLITE3_NUM);
+	$eventsAll = $row[0];
+
+	// Online
+	$result = $db->query($SQL1 . ' AND icmpeve_Present = "1" ');
+	$row = $result->fetchArray(SQLITE3_NUM);
+	$eventsonline = $row[0];
+
+	// Offline
+	$result = $db->query($SQL1 . ' AND icmpeve_Present = "0" ');
+	$row = $result->fetchArray(SQLITE3_NUM);
+	$eventsoffline = $row[0];
+
+	// Return json
+	echo (json_encode(array($eventsAll, $eventsonline, $eventsoffline)));
+}
 ?>
