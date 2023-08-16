@@ -209,6 +209,10 @@ function insert_back_button() {
 		$backto = 'devices.php';
 	}
 
+	if ($pagename == 'icmpmonitorDetails.php') {
+		$backto = 'icmpmonitor.php';
+	}
+
 	if (isset($backto)) {
 		echo '<a id="navbar-back-button" href="./' . $backto . '" role="button" style="">
         <i class="fa fa-chevron-left"></i>

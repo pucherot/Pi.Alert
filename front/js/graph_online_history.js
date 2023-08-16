@@ -134,3 +134,58 @@ function pia_draw_graph_services_history(pia_js_online_history_time, pia_js_onli
           }
         });
 };
+
+function pia_draw_graph_icmphost_history(pia_js_online_history_time, pia_js_online_history_down, pia_js_online_history_online) {
+        var xValues = pia_js_online_history_time;
+        new Chart("ServiceChart", {
+          type: "bar",
+          data: {
+            labels: xValues,
+            datasets: [{
+              label: 'Online',
+              data: pia_js_online_history_online,
+              borderColor: "rgba(0, 166, 89)",
+              fill: true,
+              backgroundColor: "rgba(0, 166, 89, .6)",
+              pointStyle: 'circle',
+              pointRadius: 3,
+              pointHoverRadius: 3
+            }, {
+              label: 'Down/Offline',
+              data: pia_js_online_history_down,
+              borderColor: "rgba(189, 43, 26)",
+              fill: true,
+              backgroundColor: "rgba(189, 43, 26, .7)",
+            }]
+          },
+          options: {
+            maintainAspectRatio: false,
+            legend: {
+                display: true,
+                labels: {
+                    fontColor: "#A0A0A0",
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        display: false
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: '#A0A0A0',
+                    },
+                    gridLines: {
+                        color: "rgba(0, 0, 0, 0)",
+                    },
+                    stacked: true,
+                }],
+            },
+          }
+        });
+};

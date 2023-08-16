@@ -42,7 +42,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	switch ($action) {
 	case 'setServiceData':setServiceData();
 		break;
-	case 'deleteService':deleteService();
+	case 'deleteICMPHost':deleteICMPHost();
 		break;
 	case 'insertNewICMPHost':insertNewICMPHost();
 		break;
@@ -128,37 +128,38 @@ function getDevicesList() {
 // }
 
 //------------------------------------------------------------------------------
-//  Delete Service
+//  Delete Host
 //------------------------------------------------------------------------------
-// function deleteService() {
-// 	global $db;
-// 	global $pia_lang;
+function deleteICMPHost() {
+	global $db;
+	global $pia_lang;
 
-// 	$url = $_REQUEST['url'];
-// 	if (!$url || !is_string($url) || !preg_match('/^http(s)?:\/\/[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $url)) {
-// 		return false;
-// 	}
+	$hostip = $_REQUEST['icmp_ip'];
+	if (!filter_var($hostip, FILTER_FLAG_IPV4) && !filter_var($hostip, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
+		echo $pia_lang['BackICMP_mon_DelICMPError'];
+		return false;
+	}
 
-// 	// sql
-// 	$sql = 'DELETE FROM Services WHERE mon_URL="' . $_REQUEST['url'] . '"';
-// 	// execute sql
-// 	$result = $db->query($sql);
-// 	// Remove Events too
-// 	$sql = 'DELETE FROM Services_Events WHERE moneve_URL="' . $_REQUEST['url'] . '"';
-// 	// execute sql
-// 	$result = $db->query($sql);
-// 	// check result
-// 	if ($result == TRUE) {
-// 		// Logging
-// 		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $url);
-// 		echo $pia_lang['BackWebServices_DelServ'];
-// 		echo ("<meta http-equiv='refresh' content='2; URL=./services.php'>");
-// 	} else {
-// 		// Logging
-// 		pialert_logging('a_030', $_SERVER['REMOTE_ADDR'], 'LogStr_0005', '', $url);
-// 		echo $pia_lang['BackWebServices_DelServError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
-// 	}
-// }
+	// sql
+	$sql = 'DELETE FROM ICMP_Mon WHERE icmp_ip="' . $hostip . '"';
+	// execute sql
+	$result = $db->query($sql);
+	// Remove Events too
+	$sql = 'DELETE FROM ICMP_Mon_Events WHERE icmpeve_ip="' . $hostip . '"';
+	// execute sql
+	$result = $db->query($sql);
+	// check result
+	if ($result == TRUE) {
+		// Logging
+		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $url);
+		echo $pia_lang['BackICMP_mon_DelICMP'];
+		echo ("<meta http-equiv='refresh' content='2; URL=./icmpmonitor.php'>");
+	} else {
+		// Logging
+		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0005', '', $url);
+		echo $pia_lang['BackICMP_mon_DelICMPError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
+	}
+}
 
 //------------------------------------------------------------------------------
 //  Insert Service
@@ -167,22 +168,16 @@ function insertNewICMPHost() {
 	global $db;
 	global $pia_lang;
 
-	//echo 'Enter Function';
-
 	$hostip = $_REQUEST['icmp_ip'];
+	$check_timestamp = date("Y-m-d H:i:s");
 
 	if (!filter_var($hostip, FILTER_FLAG_IPV4) && !filter_var($hostip, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
 		echo $pia_lang['BackICMP_mon_InsICMPError'];
 		return false;
 	}
 
-	$check_timestamp = date("Y-m-d H:i:s");
-
-	// sql
 	$sql = 'INSERT INTO ICMP_Mon ("icmp_ip", "icmp_hostname", "icmp_LastScan", "icmp_PresentLastScan", "icmp_avgrtt", "icmp_AlertEvents", "icmp_AlertDown", "icmp_Favorite")
                          VALUES("' . $hostip . '", "' . $_REQUEST['icmp_hostname'] . '", "' . $check_timestamp . '", "0", "99999", "' . $_REQUEST['alertevents'] . '", "' . $_REQUEST['alertdown'] . '", "' . $_REQUEST['icmp_fav'] . '")';
-
-	// execute sql
 	$result = $db->query($sql);
 	// check result
 	if ($result == TRUE) {

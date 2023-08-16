@@ -322,10 +322,17 @@ $pia_lang['ICMPMonitor_Title'] = 'ICMP Monitor';
 $pia_lang['ICMPMonitor_headline_IP'] = 'Neue IP-Adresse überwachen';
 $pia_lang['ICMPMonitor_label_IP'] = 'Host IP';
 $pia_lang['ICMPMonitor_label_Hostname'] = 'Hostname';
+$pia_lang['ICMPMonitor_label_RTT'] = 'avg. RTT';
 $pia_lang['BackICMP_mon_disabled'] = 'ICMP Monitoring ist deaktiviert';
 $pia_lang['BackICMP_mon_enabled'] = 'ICMP Monitoring ist aktiviert';
 $pia_lang['BackICMP_mon_InsICMP'] = 'Der ICMP Host wurde gespeichert';
 $pia_lang['BackICMP_mon_InsICMPError'] = 'Der ICMP Host wurde nicht gespeichert';
+$pia_lang['BackICMP_mon_DelICMP'] = 'Der ICMP Host wurde aus der Datenbank gelöscht';
+$pia_lang['BackICMP_mon_DelICMPError'] = 'Der ICMP Host konnte nicht, oder nicht vollständig gelöscht werden';
+$pia_lang['BackICMP_mon_UpdICMP'] = 'Der ICMP Host wurde aktualisiert';
+$pia_lang['BackICMP_mon_UpdICMPError'] = 'Der ICMP Host konnte nicht aktualisiert werden';
+$pia_lang['ICMPMonitor_Shortcut_Online'] = 'Online';
+$pia_lang['ICMPMonitor_Shortcut_Offline'] = 'Offline/Down';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page

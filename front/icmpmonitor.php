@@ -297,7 +297,7 @@ function initializeDatatable () {
       // Device Name
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html ('<b><a href="icmpmonitorDetails.php?mac='+ rowData[0] +'" class="">'+ cellData +'</a></b>');
+            $(td).html ('<b><a href="icmpmonitorDetails.php?hostip='+ rowData[0] +'" class="">'+ cellData +'</a></b>');
       } },
 
       {targets: [3],
@@ -309,11 +309,11 @@ function initializeDatatable () {
       {targets: [4],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
-            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[5] +'" class="badge bg-green">Online</a>');
+            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[5] +'" class="badge bg-green">Online</a>');
           } else if (cellData == 0 && rowData[5] == 1) {
-            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[5] +'" class="badge bg-red">Down</a>');
+            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[5] +'" class="badge bg-red">Down</a>');
           } else {
-            $(td).html ('<a href="icmpmonitorDetails.php?mac='+ rowData[5] +'" class="badge bg-gray text-white">Offline</a>');
+            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[5] +'" class="badge bg-gray text-white">Offline</a>');
           }
       } },
 
