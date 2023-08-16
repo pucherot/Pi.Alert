@@ -101,10 +101,6 @@ OpenDB();
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
-
-
-
-
       <div class="row">
         <div class="col-lg-3 col-xs-6">
           <div class="small-box bg-aqua">
@@ -144,17 +140,13 @@ OpenDB();
 
       </div>
 
-
-
-
-
       <div class="row">
         <div class="col-xs-12">
           <div id="tableDevicesBox" class="box">
 
             <!-- box-header -->
             <div class="box-header">
-              <h3 id="tableDevicesTitle" class="box-title text-gray">Devices</h3>
+              <h3 id="tableDevicesTitle" class="box-title text-gray"><?php echo $pia_lang['Device_Title']; ?></h3>
             </div>
 
             <div class="box-body table-responsive">
@@ -163,9 +155,12 @@ OpenDB();
                 <tr>
                   <th>Hostname</th>
                   <th>IP</th>
-                  <th>LastScan</th>
+                  <th>Favorite</th>
                   <th>avg RTT</th>
+                  <th>LastScan</th>
+                  <th>Status</th>
                   <th>Present</th>
+                  <th>RowID</th>
                 </tr>
                 </thead>
               </table>
@@ -276,28 +271,30 @@ function initializeDatatable () {
     'pageLength'   : tableRows,
     'order'        : tableOrder,
     //'order'       : [[0,'asc']],
-    'columns': [
-        { "data": 1 },
-        { "data": 0 },
-        { "data": 2 },
-        { "data": 3 },
-        { "data": 4 },
-        { "data": 5 }  //AlertDown
-      ],
+
 
     'columnDefs'   : [
-      {visible:   false,         targets: [5] },
-      {className: 'text-center', targets: [1,2,3,4] },
+      {visible:   false,         targets: [6,7] },
+      {className: 'text-center', targets: [1,2,3,4,5] },
       {className: 'text-left',   targets: [0] },
-      {width:     '150px',       targets: [2] },
-      {width:     '80px',        targets: [3,4] },
+      {width:     '150px',       targets: [4] },
+      {width:     '80px',        targets: [2,3,5] },
       //{width:     '0px',         targets: [3] },
       //{orderData: [0],          targets: [0] },
 
       // Device Name
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html ('<b><a href="icmpmonitorDetails.php?hostip='+ rowData[0] +'" class="">'+ cellData +'</a></b>');
+            $(td).html ('<b><a href="icmpmonitorDetails.php?hostip='+ rowData[1] +'" class="">'+ cellData +'</a></b>');
+      } },
+
+      {targets: [2],
+        'createdCell': function (td, cellData, rowData, row, col) {
+          if (cellData == 1){
+            $(td).html ('<i class="fa fa-star text-yellow" style="font-size:16px"></i>');
+          } else {
+            $(td).html ('');
+          }
       } },
 
       {targets: [3],
@@ -305,15 +302,15 @@ function initializeDatatable () {
             $(td).html (cellData +' ms');
       } },
 
-      // Status color
-      {targets: [4],
+      //Status color
+      {targets: [5],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
-            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[5] +'" class="badge bg-green">Online</a>');
-          } else if (cellData == 0 && rowData[5] == 1) {
-            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[5] +'" class="badge bg-red">Down</a>');
+            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[1] +'" class="badge bg-green">Online</a>');
+          } else if (cellData == 0 && rowData[6] == 1) {
+            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[1] +'" class="badge bg-red">Down</a>');
           } else {
-            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[5] +'" class="badge bg-gray text-white">Offline</a>');
+            $(td).html ('<a href="icmpmonitorDetails.php?hostip='+ rowData[1] +'" class="badge bg-gray text-white">Offline</a>');
           }
       } },
 
@@ -341,11 +338,11 @@ function initializeDatatable () {
 
   $('#tableDevices').on( 'order.dt', function () {
     setParameter (parTableOrder, JSON.stringify (table.order()) );
-    setCookie ('devicesList',JSON.stringify (table.column(5, { 'search': 'applied' }).data().toArray()) );
+    setCookie ('devicesList',JSON.stringify (table.column(7, { 'search': 'applied' }).data().toArray()) );
   } );
 
   $('#tableDevices').on( 'search.dt', function () {
-    setCookie ('devicesList', JSON.stringify (table.column(5, { 'search': 'applied' }).data().toArray()) );
+    setCookie ('devicesList', JSON.stringify (table.column(7, { 'search': 'applied' }).data().toArray()) );
   } );
 
 };

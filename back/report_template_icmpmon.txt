@@ -1,0 +1,11 @@
+Report Date: <REPORT_DATE>
+Server:      <SERVER_NAME>
+
+<SECTION_DEVICES_DOWN>
+Host Down (ICMP Monitoring)
+------------------------------
+<TABLE_DEVICES_DOWN>
+</SECTION_DEVICES_DOWN><SECTION_EVENTS>Host Events (ICMP Monitoring)
+------------------------------
+<TABLE_EVENTS>
+</SECTION_EVENTS>

@@ -565,7 +565,7 @@ body.modal-open {
 }
 
 .table_settings_col_box {
-    padding-top:6px; display: inline-block; margin: 5px 10px; padding-left: 10px; padding-right: 10px; border: 1px solid #aaa;
+    padding-top:6px; display: inline-block; margin: 5px 10px; padding-left: 10px; padding-right: 10px; border: 1px solid #aaa; padding-bottom: 2px;
 }
 
 .table_settings_col_box_check {

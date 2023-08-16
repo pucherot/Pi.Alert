@@ -108,7 +108,7 @@ function process_icmpmon_notifications($class_name, $event_time, $filename, $dir
 	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
 	return '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title" style="color: #ffffff"><i class="fa fa-globe"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
+              <h3 class="box-title" style="color: #831CFF"><i class="fa fa-globe"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>

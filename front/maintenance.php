@@ -512,72 +512,55 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_b']; ?></h4></td></tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
-
-                        <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-                        <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
-
                         <?php $col_checkbox = set_column_checkboxes(read_DevListCol());?>
-
                         <div class="form-group">
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkConnectionType" type="checkbox" <?php echo $col_checkbox['ConnectionType']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_ConnectionType']; ?></label>
+                              <input class="checkbox blue" id="chkConnectionType" type="checkbox" <?php echo $col_checkbox['ConnectionType']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_ConnectionType']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkOwner" type="checkbox" <?php echo $col_checkbox['Owner']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Owner']; ?></label>
+                              <input class="checkbox blue" id="chkOwner" type="checkbox" <?php echo $col_checkbox['Owner']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Owner']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkType" type="checkbox" <?php echo $col_checkbox['Type']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Type']; ?></label>
+                              <input class="checkbox blue" id="chkType" type="checkbox" <?php echo $col_checkbox['Type']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Type']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkFavorite" type="checkbox" <?php echo $col_checkbox['Favorites']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Favorite']; ?></label>
+                              <input class="checkbox blue" id="chkFavorite" type="checkbox" <?php echo $col_checkbox['Favorites']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Favorite']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkGroup" type="checkbox" <?php echo $col_checkbox['Group']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Group']; ?></label>
+                              <input class="checkbox blue" id="chkGroup" type="checkbox" <?php echo $col_checkbox['Group']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Group']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkLocation" type="checkbox" <?php echo $col_checkbox['Location']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_Location']; ?></label>
+                              <input class="checkbox blue" id="chkLocation" type="checkbox" <?php echo $col_checkbox['Location']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Location']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkfirstSess" type="checkbox" <?php echo $col_checkbox['FirstSession']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_FirstSession']; ?></label>
+                              <input class="checkbox blue" id="chkfirstSess" type="checkbox" <?php echo $col_checkbox['FirstSession']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_FirstSession']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chklastSess" type="checkbox" <?php echo $col_checkbox['LastSession']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastSession']; ?></label>
+                              <input class="checkbox blue" id="chklastSess" type="checkbox" <?php echo $col_checkbox['LastSession']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_LastSession']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chklastIP" type="checkbox" <?php echo $col_checkbox['LastIP']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_LastIP']; ?></label>
+                              <input class="checkbox blue" id="chklastIP" type="checkbox" <?php echo $col_checkbox['LastIP']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_LastIP']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkMACtype" type="checkbox" <?php echo $col_checkbox['MACType']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_MAC']; ?></label>
+                              <input class="checkbox blue" id="chkMACtype" type="checkbox" <?php echo $col_checkbox['MACType']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_MAC']; ?></label>
                             </div>
-
                             <div class="table_settings_col_box" style="">
-                              <input class="icheckbox_minimal-blue" id="chkMACaddress" type="checkbox" <?php echo $col_checkbox['MACAddress']; ?> style="position: relative; margin-top:-3px; margin-right: 5px;">
-                              <label class="control-label"><?php echo $pia_lang['Device_TableHead_MAC']; ?>-Address</label>
+                              <input class="checkbox blue" id="chkMACaddress" type="checkbox" <?php echo $col_checkbox['MACAddress']; ?>>
+                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_MAC']; ?>-Address</label>
                             </div>
-
                             <br>
                             <button type="button" class="btn btn-default" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?php echo $pia_lang['Gen_Save']; ?></button>
                         </div>
-
                     </td>
                 </tr>
                 <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_c']; ?></h4></td></tr>
@@ -802,7 +785,11 @@ echo '</div>';
 require 'php/templates/footer.php';
 ?>
 
+<link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+<script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+
 <script>
+initializeiCheck();
 // delete devices with emty macs
 function askDeleteDevicesWithEmptyMACs () {
   // Ask
@@ -1151,6 +1138,16 @@ function update_tabURL(url, tab) {
     url = url.replace('#','');
     window.history.pushState(stateObj,
              "Tab"+tab, url + "?tab=" + tab);
+}
+
+function initializeiCheck () {
+   // Blue
+   $('input[type="checkbox"].blue').iCheck({
+     checkboxClass: 'icheckbox_flat-blue',
+     radioClass:    'iradio_flat-blue',
+     increaseArea:  '20%'
+   });
+
 }
 </script>
 

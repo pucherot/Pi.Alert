@@ -84,20 +84,21 @@ function getDevicesList() {
 
 	// SQL
 	//$condition = getDeviceCondition($_REQUEST['status']);
-	$sql = 'SELECT * FROM ICMP_Mon';
+	$sql = 'SELECT rowid,* FROM ICMP_Mon';
 	$result = $db->query($sql);
 	// arrays of rows
 	$tableData = array();
 	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 		if ($row['icmp_hostname'] == '') {$row['icmp_hostname'] = $row['icmp_ip'];}
 		$tableData['data'][] = array(
-			$row['icmp_ip'],
 			$row['icmp_hostname'],
-			$row['icmp_LastScan'],
+			$row['icmp_ip'],
+			$row['icmp_Favorite'],
 			$row['icmp_avgrtt'],
+			$row['icmp_LastScan'],
 			$row['icmp_PresentLastScan'],
 			$row['icmp_AlertDown'],
-			//$row['rowid'], // Rowid (hidden)
+			$row['rowid'], // Rowid (hidden)
 		);
 	}
 	// Control no rows

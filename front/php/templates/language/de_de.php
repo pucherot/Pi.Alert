@@ -391,23 +391,21 @@ $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'De-/Aktiviert den 
 $pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (an/aus)';
 $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Überwachung';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Aktiviert oder deaktiviert die Web Service Überwachung für Pi.Alert. Mit der Aktivierung, werden zusätzliche Elemente in der Oberfläche angezeigt. Mit der Deaktivierung, verschwinden diese wieder.';
-
 $pia_lang['Maintenance_Tool_icmpmon'] = 'ICMP Monitoring (an/aus)';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'ICMP Monitoring';
 $pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Aktiviert oder deaktiviert das ICMP Monitoring für Pi.Alert. Mit der Aktivierung, werden zusätzliche Elemente in der Oberfläche angezeigt. Mit der Deaktivierung, verschwinden diese wieder.';
-
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Geräteübersicht konfigurieren';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Möchten Sie die von Ihnen gemachten Änderungen speichern? Diese Änderung wirkt sich auf alle Geräte aus, mit denen Sie auf diese Seite zugreifen.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'Kein API-Key gesetzt';
 $pia_lang['Maintenance_Tool_setapikey'] = 'Setze API-Key';
-$pia_lang['Maintenance_Tool_setapikey_text'] = 'Mit dem API-Key ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Web&shy;seite ver&shy;wenden zu müssen. Dies kann der Fall sein, wenn ein anderer Service oder Webseite auf die Daten dieser Daten&shy;bank zu&shy;grei&shy;fen soll. Existiert be&shy;reits ein API-Key, wird dieser ersetzt.';
+$pia_lang['Maintenance_Tool_setapikey_text'] = 'Mit dem API-Key ist es möglich, Ab&shy;fra&shy;gen an die Daten&shy;bank zu stellen, ohne die Web&shy;seite ver&shy;wenden zu müssen. Dies kann der Fall sein, wenn ein anderer Service oder Webseite auf die Daten dieser Daten&shy;bank zu&shy;grei&shy;fen soll. Existiert be&shy;reits ein API-Key, wird dieser ersetzt.';
 $pia_lang['Maintenance_Tool_setapikey_noti'] = 'Setze API-Key';
 $pia_lang['Maintenance_Tool_setapikey_noti_text'] = 'Möchtest du einen eventuell bestehenden API-Key durch einen neuen Key ersetzen? Bestehende Keys sind dann nicht mehr verwendbar.';
 $pia_lang['Maintenance_Tool_ignorelist'] = 'Ignorierliste';
 $pia_lang['Maintenance_Tool_ignorelist_false'] = 'Keine Ignorierliste konfiguriert';
 $pia_lang['Maintenance_arpscantimer_empty'] = 'Timer setzen';
 $pia_lang['Maintenance_Tool_arpscansw'] = 'Scans stoppen/starten';
-$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet alle Scans von Pi.Alert an oder aus. Wenn bei der Aktivierung des Timers kein Zeitraum festgelegt wurde, schal&shy;tet sich Pi.Alert nach einer Pause von 10min mit dem nächsten an&shy;ste&shy;henden Scan wieder ein. Bereits laufende Scans werden dabei nicht beendet.';
+$pia_lang['Maintenance_Tool_arpscansw_text'] = 'Schaltet alle Scans von Pi.Alert an oder aus. Wenn bei der Aktivierung des Timers kein Zeit&shy;raum festgelegt wur&shy;de, schal&shy;tet sich Pi.Alert nach einer Pause von 10min mit dem nächsten an&shy;ste&shy;henden Scan wieder ein. Bereits laufende Scans wer&shy;den dabei nicht beendet.';
 $pia_lang['Maintenance_Tool_arpscansw_noti'] = 'arp-Scan stoppen/starten';
 $pia_lang['Maintenance_Tool_arpscansw_noti_text'] = 'Wenn der Scan aus ist, bleibt er so lange aus bis er wieder aktiviert wird.';
 $pia_lang['Maintenance_Tool_test_notification'] = 'Benachrichtigung testen';

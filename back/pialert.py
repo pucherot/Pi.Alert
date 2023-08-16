@@ -332,15 +332,18 @@ def cleanup_database ():
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(200) # 200 days
 
-    # Cleanup WebServices Events
-    print ('    Services_Events, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
     # Cleanup Online History
     print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
     # Cleanup Events
     print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
     sql.execute ("DELETE FROM Events WHERE eve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
+    # Cleanup WebServices Events
+    print ('    Services_Events, up to the lastest '+strdaystokeepOH+' days...')
+    sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
+    # Cleanup ICMP Events
+    print ('    ICMP_Mon_Events, up to the lastest '+strdaystokeepEV+' days...')
+    sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
     # Shrink DB
     print ('    Trim Journal to the lastest 1000 entries')
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
@@ -1923,64 +1926,62 @@ def icmphost_monitoring_notification():
     mail_section_icmphost_down = False
     mail_text_icmphost_down = ''
     mail_html_icmphost_down = ''
-    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\n'
+    text_line_template = '{}{}\n\t{}\t\t{}\n\t{}\t{}\n\n'
     html_line_template     = '<tr>\n'+ \
         '  <td> {} </td>\n  <td> {} </td>\n'+ \
-        '  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
+        '  <td> {} </td>\n</tr>\n'
 
     sql.execute ("""SELECT * FROM ICMP_Mon_CurrentScan
-                    WHERE cur_AlertDown = 1 AND cur_PresentChanged = 1
+                    WHERE cur_AlertDown = 1 AND cur_Present = 0 AND cur_PresentChanged = 1
                     ORDER BY cur_LastScan""")
 
     for eventAlert in sql :
-
         mail_section_icmphost_down = True
         mail_text_icmphost_down += text_line_template.format (
-            'IP: ', eventAlert['cur_URL'], 
-            'Time: ', eventAlert['cur_DateTime'], 
-            'Destination IP: ', _func_cur_TargetIP,
-            'prev. Destination IP: ', _func_cur_TargetIP_prev)
+            'IP: ', eventAlert['cur_ip'],
+            'Time: ', eventAlert['cur_LastScan'], 
+            'Status: ', 'Down')
         mail_html_icmphost_down += html_line_template.format (
-            eventAlert['cur_URL'], eventAlert['cur_DateTime'], _func_cur_TargetIP, _func_cur_TargetIP_prev)
+            eventAlert['cur_ip'], eventAlert['cur_LastScan'], 'Down')
 
-    format_report_section_services (mail_section_icmphost_down, 'SECTION_DEVICES_DOWN',
+    format_report_section_icmp (mail_section_icmphost_down, 'SECTION_DEVICES_DOWN',
         'TABLE_DEVICES_DOWN', mail_text_icmphost_down, mail_html_icmphost_down)
 
     # Compose Events Section (includes Down as an Event)
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}{}\n\n'
+    text_line_template = '{}{}\n\t{}\t\t{}\n\t{}\t\t{} ms\n\t{}\t{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
             '  {} </td>\n  <td> {} </td>\n'+ \
-            '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
-            '  <td> {} </td>\n</tr>\n'
+            '  <td> {} </td>\n <td> {} </td>\n'+ \
+            '  </tr>\n'
 
     sql.execute ("""SELECT * FROM ICMP_Mon_CurrentScan
-                    WHERE cur_AlertEvents = 1 AND cur_PresentChanged = 1
+                    WHERE cur_AlertEvents = 1 AND cur_AlertDown = 0 AND cur_PresentChanged = 1
                     ORDER BY cur_LastScan""")
 
     for eventAlert in sql :
-
         mail_section_events = True
-        mail_text_events += text_line_template.format (
-            'Service: ', eventAlert['cur_URL'], 
-            'Time: ', eventAlert['cur_DateTime'], 
-            'Destination IP: ', _func_cur_TargetIP,
-            'prev. Destination IP: ', _func_cur_TargetIP_prev, 
-            'HTTP Status Code: ', eventAlert['cur_StatusCode'], 
-            'prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
-        mail_html_events += html_line_template.format (
-            eventAlert['cur_URL'], eventAlert['cur_Latency'], _func_cur_TargetIP,
-            _func_cur_TargetIP_prev, eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
-            eventAlert['cur_StatusCode_prev'])
+        if eventAlert['cur_Present'] == 1 :
+            icmp_online_status = 'Up'
+        else :
+            icmp_online_status = 'Down'
 
-    format_report_section_services (mail_section_events, 'SECTION_EVENTS',
+        mail_text_events += text_line_template.format (
+            'IP: ', eventAlert['cur_ip'], 
+            'Time: ', eventAlert['cur_LastScan'], 
+            'RTT: ', eventAlert['cur_avgrrt'], 
+            'Status: ', icmp_online_status)
+        mail_html_events += html_line_template.format (
+            eventAlert['cur_ip'], eventAlert['cur_avgrrt'], eventAlert['cur_LastScan'], icmp_online_status)
+
+    format_report_section_icmp (mail_section_events, 'SECTION_EVENTS',
         'TABLE_EVENTS', mail_text_events, mail_html_events)
 
     # # Send Mail
-    if mail_section_services_down == True or mail_section_events == True :
-        sending_notifications ('icmp_mon', mail_html_webservice, mail_text_webservice)
+    if mail_section_icmphost_down == True or mail_section_events == True :
+        sending_notifications ('icmp_mon', mail_html_icmphost, mail_text_icmphost)
     else :
         print ('    No changes to report...')
 
@@ -2172,8 +2173,8 @@ def email_reporting ():
         enable_icmp_monitoring = ICMPSCAN_ACTIVE
     except NameError:
         enable_icmp_monitoring = False
-    # if enable_icmp_monitoring == True:
-    #         icmphost_monitoring_notification()
+    if enable_icmp_monitoring == True:
+        icmphost_monitoring_notification()
 
     closeDB()
 
@@ -2304,7 +2305,7 @@ def sending_notifications (_type, _html_text, _txt_text):
             send_webgui (_txt_text)
         else :
             print ('    Skip WebUI...')
-    elif _type == 'pialert' or _type == 'rogue_dhcp' :
+    elif _type == 'pialert' or _type == 'rogue_dhcp' or _type == 'icmp_mon' :
         if REPORT_MAIL :
             print ('    Sending report by email...')
             send_email (_txt_text, _html_text)
@@ -2479,6 +2480,22 @@ def format_report_section_services (pActive, pSection, pTable, pText, pHTML):
     else:
         mail_text_webservice = remove_section (mail_text_webservice, pSection)
         mail_html_webservice = remove_section (mail_html_webservice, pSection)
+
+#-------------------------------------------------------------------------------
+def format_report_section_icmp (pActive, pSection, pTable, pText, pHTML):
+    global mail_html_icmphost
+    global mail_text_icmphost
+
+    # Replace section text
+    if pActive :
+        mail_text_icmphost = mail_text_icmphost.replace ('<'+ pTable +'>', pText)
+        mail_html_icmphost = mail_html_icmphost.replace ('<'+ pTable +'>', pHTML)       
+
+        mail_text_icmphost = remove_tag (mail_text_icmphost, pSection)       
+        mail_html_icmphost = remove_tag (mail_html_icmphost, pSection)
+    else:
+        mail_text_icmphost = remove_section (mail_text_icmphost, pSection)
+        mail_html_icmphost = remove_section (mail_html_icmphost, pSection)
 
 #-------------------------------------------------------------------------------
 def remove_section (pText, pSection):
