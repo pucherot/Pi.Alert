@@ -160,14 +160,9 @@ function deleteICMPHost() {
 		echo $pia_lang['BackICMP_mon_DelICMPError'];
 		return false;
 	}
-
-	// sql
 	$sql = 'DELETE FROM ICMP_Mon WHERE icmp_ip="' . $hostip . '"';
-	// execute sql
 	$result = $db->query($sql);
-	// Remove Events too
 	$sql = 'DELETE FROM ICMP_Mon_Events WHERE icmpeve_ip="' . $hostip . '"';
-	// execute sql
 	$result = $db->query($sql);
 	// check result
 	if ($result == TRUE) {
@@ -212,7 +207,6 @@ function insertNewICMPHost() {
 		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0001', '', $hostip);
 		echo $pia_lang['BackICMP_mon_InsICMPError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
 	}
-
 }
 
 //------------------------------------------------------------------------------
@@ -244,27 +238,22 @@ function getEventsTotalsforICMP() {
 
 	// Request Parameters
 	$hostip = $_REQUEST['hostip'];
-
 	// SQL
 	$SQL1 = 'SELECT Count(*)
            FROM ICMP_Mon_Events
            WHERE icmpeve_ip = "' . $hostip . '"';
-
 	// All
 	$result = $db->query($SQL1);
 	$row = $result->fetchArray(SQLITE3_NUM);
 	$eventsAll = $row[0];
-
 	// Online
 	$result = $db->query($SQL1 . ' AND icmpeve_Present = "1" ');
 	$row = $result->fetchArray(SQLITE3_NUM);
 	$eventsonline = $row[0];
-
 	// Offline
 	$result = $db->query($SQL1 . ' AND icmpeve_Present = "0" ');
 	$row = $result->fetchArray(SQLITE3_NUM);
 	$eventsoffline = $row[0];
-
 	// Return json
 	echo (json_encode(array($eventsAll, $eventsonline, $eventsoffline)));
 }

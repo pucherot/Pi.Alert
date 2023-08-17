@@ -50,6 +50,7 @@ $pia_lang['Navigation_Events'] = 'Events';
 $pia_lang['Navigation_Journal'] = 'Pi.Alert Journal';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';
 $pia_lang['Navigation_Events_Serv'] = 'Web Services';
+$pia_lang['Navigation_ICMPScan'] = 'ICMP Monitoring';
 $pia_lang['Navigation_Maintenance'] = 'Settings';
 $pia_lang['Navigation_Network'] = 'Network';
 $pia_lang['Navigation_HelpFAQ'] = 'Help / FAQ';
@@ -312,6 +313,26 @@ $pia_lang['BackWebServices_InsServ'] = 'The web service was saved';
 $pia_lang['BackWebServices_InsServError'] = 'The web service was not saved';
 $pia_lang['BackWebServices_DelServ'] = 'The web service was deleted from the database';
 $pia_lang['BackWebServices_DelServError'] = 'The web service could not be deleted, or could not be deleted completely';
+
+//////////////////////////////////////////////////////////////////
+// ICMP Monitoring Page
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['ICMPMonitor_Title'] = 'ICMP Monitor';
+$pia_lang['ICMPMonitor_headline_IP'] = 'Monitor New IP Address';
+$pia_lang['ICMPMonitor_label_IP'] = 'Host IP';
+$pia_lang['ICMPMonitor_label_Hostname'] = 'Hostname';
+$pia_lang['ICMPMonitor_label_RTT'] = 'avg. RTT';
+$pia_lang['BackICMP_mon_disabled'] = 'ICMP monitoring is disabled';
+$pia_lang['BackICMP_mon_enabled'] = 'ICMP monitoring is enabled';
+$pia_lang['BackICMP_mon_InsICMP'] = 'The ICMP host has been saved';
+$pia_lang['BackICMP_mon_InsICMPError'] = 'The ICMP host was not saved';
+$pia_lang['BackICMP_mon_DelICMP'] = 'The ICMP host has been deleted from the database';
+$pia_lang['BackICMP_mon_DelICMPError'] = 'The ICMP host could not be deleted, or not fully deleted';
+$pia_lang['BackICMP_mon_UpdICMP'] = 'The ICMP host has been updated';
+$pia_lang['BackICMP_mon_UpdICMPError'] = 'The ICMP host could not be updated';
+$pia_lang['ICMPMonitor_Shortcut_Online'] = 'Online';
+$pia_lang['ICMPMonitor_Shortcut_Offline'] = 'Offline/Down';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page

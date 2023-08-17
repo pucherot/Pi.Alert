@@ -60,7 +60,7 @@ function get_icmphost_events_table($icmp_ip, $icmpfilter) {
 	} elseif ($icmpfilter == 'Offline') {
 		$filter_sql = 'AND icmpeve_Present=0';
 	}
-	$icmp_res = $db->query('SELECT * FROM ICMP_Mon WHERE icmp_ip="' . $icmp_ip . '"');
+	$icmp_res = $db->query('SELECT rowid,* FROM ICMP_Mon WHERE icmp_ip="' . $icmp_ip . '"');
 	while ($rowa = $icmp_res->fetchArray(SQLITE3_ASSOC)) {
 		$icmp_hostname = $rowa['icmp_hostname'];
 	}
@@ -92,6 +92,13 @@ function set_table_headline($icmpfilter) {
 
 $icmpmonitorDetails = get_hostip_details($hostip);
 
+if ($icmpmonitorDetails['icmp_PresentLastScan'] == 1) {
+	$headstatus = 'Online';
+	$headstatus_icon = 'fa fa-check text-green';
+	$headstatus_color = 'text-green';} else {
+	$headstatus = 'Offline';
+	$headstatus_icon = 'fa fa-close text-gray';
+	$headstatus_color = '';}
 // -----------------------------------------------------------------------------------
 // Get Online Graph Arrays
 $graph_arrays = array();
@@ -121,7 +128,18 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
 <!-- top small box --------------------------------------------------------- -->
       <div class="row">
 
-        <div class="col-lg-4 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-sm-4 col-xs-6">
+          <a href="#">
+            <div class="small-box bg-aqua">
+              <div class="inner"> <h3 id="deviceStatus" class="<?=$headstatus_color?>" style="margin-left: 0em"><?=$headstatus?></h3>
+                <p class="infobox_label"><?php echo $pia_lang['DevDetail_Shortcut_CurrentStatus']; ?></p>
+              </div>
+              <div class="icon"> <i id="deviceStatusIcon" class="<?=$headstatus_icon?>"></i></div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-sm-4 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=all">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
@@ -133,7 +151,7 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
-        <div class="col-lg-4 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-sm-4 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Online">
             <div class="small-box bg-green">
               <div class="inner"> <h3 id="eventsOnline"> -- </h3>
@@ -145,7 +163,7 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
-        <div class="col-lg-4 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-sm-4 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Offline">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsOffline"> -- </h3>
@@ -169,6 +187,16 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
               <li class=""> <a id="tabDetails" href="#panDetails" data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?></a></li>
               <li class=""> <a id="tabEvents" href="#panEvents" data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?></a></li>
               <li class=""> <a id="tabGraph" href="#panGraph" data-toggle="tab"> <?php echo $pia_lang['WebServices_Tab_Graph']; ?></a></li>
+              <div class="btn-group pull-right">
+                <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px;"
+                  id="btnPrevious"> <i class="fa fa-chevron-left"></i> </button>
+
+                <div class="btn pa-btn-records" style="padding: 10px; min-width: 30px; margin-left: 1px;"
+                  id="txtRecord"     > 0 / 0 </div>
+
+                <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
+                  id="btnNext"> <i class="fa fa-chevron-right"></i> </button>
+              </div>
             </ul>
 
             <div class="tab-content" style="min-height: 430px;">
@@ -204,7 +232,7 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
                       <!-- Owner -->
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Owner']; ?></label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                           <div class="input-group">
                             <input class="form-control" id="txtOwner" type="text" value="<?php echo $icmpmonitorDetails['icmp_owner'] ?>">
                             <div class="input-group-btn">
@@ -220,7 +248,7 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
                       <!-- Type -->
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Type']; ?></label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                           <div class="input-group">
                             <input class="form-control" id="txtDeviceType" type="text" value="<?php echo $icmpmonitorDetails['icmp_type'] ?>">
                             <div class="input-group-btn">
@@ -240,7 +268,7 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
                       <!-- Group -->
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Group']; ?></label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                           <div class="input-group">
                             <input class="form-control" id="txtGroup" type="text" value="<?php echo $icmpmonitorDetails['icmp_group'] ?>">
                             <div class="input-group-btn">
@@ -261,7 +289,7 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
                       <!-- Location -->
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Location']; ?></label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-7">
                           <div class="input-group">
                             <input class="form-control" id="txtLocation" type="text" value="<?php echo $icmpmonitorDetails['icmp_location'] ?>">
                             <div class="input-group-btn">
@@ -590,7 +618,7 @@ function initializeDatatable () {
           if (cellData == 99999){
             $(td).html ('TimeOut');
           } else {
-            $(td).html (cellData);
+            $(td).html (cellData + ' ms');
           }
       } },
       {targets: [3],
@@ -765,4 +793,5 @@ function initializeCombo (HTMLelement, queryAction, txtDataField) {
     });
   });
 }
+
 </script>

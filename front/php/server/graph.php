@@ -118,7 +118,7 @@ function prepare_graph_arrays_ICMPHost($icmp_ip) {
 	while ($row = $results->fetchArray()) {
 		$time_raw = explode(' ', $row['icmpeve_DateTime']);
 		$time = explode(':', $time_raw[1]);
-		if ($time[1] < 10) {$time[1] = "00";} else { $time[1] = round($time[1], -1);}
+		//if ($time[1] < 10) {$time[1] = "00";} else { $time[1] = round($time[1], -1);}
 		if ($row['icmpeve_Present'] == 1) {
 			array_push($Pia_Graph_ICMPHost_Up, "1");
 			array_push($Pia_Graph_ICMPHost_Down, "0");

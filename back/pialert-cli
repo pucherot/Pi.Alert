@@ -358,6 +358,17 @@ EOM
       echo "        Column 'dev_ConnectionType' already exists in the 'Devices' table."
     fi
 
+
+# ICMP_Mon
+    echo -e "...Insert new table 'ICMP_Mon' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon' ('icmp_ip' NUMERIC NOT NULL, 'icmp_hostname' TEXT, 'icmp_LastScan' TEXT NOT NULL, 'icmp_PresentLastScan' INTEGER DEFAULT 0, 'icmp_avgrtt' NUMERIC, 'icmp_AlertEvents' INTEGER DEFAULT 0, 'icmp_AlertDown' INTEGER DEFAULT 0, 'icmp_Favorite' INTEGER DEFAULT 0, 'icmp_Notes' INTEGER, 'icmp_type' TEXT, 'icmp_group' TEXT, 'icmp_location' TEXT, 'icmp_owner' TEXT, PRIMARY KEY('icmp_ip'));"
+# ICMP_Mon_CurrentScan
+    echo -e "...Insert new table 'ICMP_Mon_CurrentScan' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon_CurrentScan' ('cur_ip' NUMERIC NOT NULL, 'cur_LastScan' TEXT NOT NULL, 'cur_Present' INTEGER, 'cur_PresentChanged' INTEGER, 'cur_avgrrt' NUMERIC, 'cur_AlertEvents' INTEGER NOT NULL DEFAULT 0, 'cur_AlertDown' INTEGER NOT NULL DEFAULT 0, PRIMARY KEY('cur_ip'));"
+# ICMP_Mon_Events
+    echo -e "...Insert new table 'ICMP_Mon_Events' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon_Events' ( 'icmpeve_ip' NUMERIC NOT NULL, 'icmpeve_DateTime' TEXT NOT NULL, 'icmpeve_Present' INTEGER, 'icmpeve_avgrtt' NUMERIC);"
+
     echo -e "\nUpdate finished!\n"
 
     # Enter to Journal

@@ -50,6 +50,7 @@ $pia_lang['Navigation_Events'] = 'Eventos';
 $pia_lang['Navigation_Journal'] = 'Pi.Alert Journal';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';
 $pia_lang['Navigation_Events_Serv'] = 'Web Services';
+$pia_lang['Navigation_ICMPScan'] = 'ICMP Monitoring';
 $pia_lang['Navigation_Maintenance'] = 'Mantenimiento';
 $pia_lang['Navigation_Network'] = 'Red';
 $pia_lang['Navigation_HelpFAQ'] = 'Ayuda / FAQ';
@@ -312,6 +313,26 @@ $pia_lang['BackWebServices_InsServ'] = 'The web service was saved';
 $pia_lang['BackWebServices_InsServError'] = 'The web service was not saved';
 $pia_lang['BackWebServices_DelServ'] = 'The web service was deleted from the database';
 $pia_lang['BackWebServices_DelServError'] = 'The web service could not be deleted, or could not be deleted completely';
+
+//////////////////////////////////////////////////////////////////
+// Página de Monitoreo ICMP
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['ICMPMonitor_Title'] = 'Monitor ICMP';
+$pia_lang['ICMPMonitor_headline_IP'] = 'Monitorear nueva dirección IP';
+$pia_lang['ICMPMonitor_label_IP'] = 'IP del Host';
+$pia_lang['ICMPMonitor_label_Hostname'] = 'Nombre de Host';
+$pia_lang['ICMPMonitor_label_RTT'] = 'RTT promedio';
+$pia_lang['BackICMP_mon_disabled'] = 'El monitoreo ICMP está desactivado';
+$pia_lang['BackICMP_mon_enabled'] = 'El monitoreo ICMP está activado';
+$pia_lang['BackICMP_mon_InsICMP'] = 'El host ICMP ha sido guardado';
+$pia_lang['BackICMP_mon_InsICMPError'] = 'El host ICMP no fue guardado';
+$pia_lang['BackICMP_mon_DelICMP'] = 'El host ICMP ha sido eliminado de la base de datos';
+$pia_lang['BackICMP_mon_DelICMPError'] = 'No se pudo eliminar el host ICMP, o no se eliminó completamente';
+$pia_lang['BackICMP_mon_UpdICMP'] = 'El host ICMP ha sido actualizado';
+$pia_lang['BackICMP_mon_UpdICMPError'] = 'No se pudo actualizar el host ICMP';
+$pia_lang['ICMPMonitor_Shortcut_Online'] = 'En línea';
+$pia_lang['ICMPMonitor_Shortcut_Offline'] = 'Fuera de línea/No disponible';
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page - Update by @TeroRERO 07ago2022 and leiweibau 29ago2022

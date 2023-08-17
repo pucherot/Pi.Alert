@@ -153,12 +153,12 @@ OpenDB();
               <table id="tableDevices" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                  <th>Hostname</th>
+                  <th><?=$pia_lang['Device_TableHead_Name']?></th>
                   <th>IP</th>
-                  <th>Favorite</th>
-                  <th>avg RTT</th>
-                  <th>LastScan</th>
-                  <th>Status</th>
+                  <th><?=$pia_lang['Device_TableHead_Favorite']?></th>
+                  <th><?=$pia_lang['WebServices_Events_TableHead_ResponsTime']?></th>
+                  <th style="white-space: nowrap;"><?=$pia_lang['WebServices_tablehead_ScanTime']?></th>
+                  <th><?=$pia_lang['Device_TableHead_Status']?></th>
                   <th>Present</th>
                   <th>RowID</th>
                 </tr>
@@ -278,7 +278,8 @@ function initializeDatatable () {
       {className: 'text-center', targets: [1,2,3,4,5] },
       {className: 'text-left',   targets: [0] },
       {width:     '150px',       targets: [4] },
-      {width:     '80px',        targets: [2,3,5] },
+      {width:     '80px',        targets: [2,5] },
+      {width:     '110px',       targets: [3] },
       //{width:     '0px',         targets: [3] },
       //{orderData: [0],          targets: [0] },
 
@@ -299,8 +300,13 @@ function initializeDatatable () {
 
       {targets: [3],
         'createdCell': function (td, cellData, rowData, row, col) {
-            $(td).html (cellData +' ms');
+          if (cellData == 99999){
+            $(td).html ('TimeOut');
+          } else {
+            $(td).html (cellData + ' ms');
+          }
       } },
+
 
       //Status color
       {targets: [5],

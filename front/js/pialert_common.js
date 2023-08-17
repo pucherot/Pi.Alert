@@ -247,3 +247,14 @@ function initCPUtemp() {
 if (window.matchMedia("(max-width: 767px)").matches) {
    $("#sidebar_systeminfobox").addClass("collapse");
 }
+
+// var scroll_pos = 0;
+// $(document).scroll(function() {
+//     scroll_pos = $(this).scrollTop();
+//     if(scroll_pos > 200) {
+//         $(".container").css('background-color', 'blue');
+//     } else {
+//         $(".container").css('background-color', 'transparent');
+//     }
+// });
+

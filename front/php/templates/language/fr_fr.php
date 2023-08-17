@@ -50,6 +50,7 @@ $pia_lang['Navigation_Events'] = 'Événements';
 $pia_lang['Navigation_Journal'] = 'Pi.Alert Journal';
 $pia_lang['Navigation_Events_Dev'] = 'Devices';
 $pia_lang['Navigation_Events_Serv'] = 'Web Services';
+$pia_lang['Navigation_ICMPScan'] = 'ICMP Monitoring';
 $pia_lang['Navigation_Maintenance'] = 'Paramètres';
 $pia_lang['Navigation_Network'] = 'Réseau';
 $pia_lang['Navigation_HelpFAQ'] = 'Aide / FAQ';
@@ -312,6 +313,26 @@ $pia_lang['BackWebServices_InsServ'] = 'The web service was saved';
 $pia_lang['BackWebServices_InsServError'] = 'The web service was not saved';
 $pia_lang['BackWebServices_DelServ'] = 'The web service was deleted from the database';
 $pia_lang['BackWebServices_DelServError'] = 'The web service could not be deleted, or could not be deleted completely';
+
+//////////////////////////////////////////////////////////////////
+// Page de Surveillance ICMP
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['ICMPMonitor_Title'] = 'Surveillance ICMP';
+$pia_lang['ICMPMonitor_headline_IP'] = 'Surveiller une nouvelle adresse IP';
+$pia_lang['ICMPMonitor_label_IP'] = 'IP de l\'hôte';
+$pia_lang['ICMPMonitor_label_Hostname'] = 'Nom d\'hôte';
+$pia_lang['ICMPMonitor_label_RTT'] = 'RTT moyen';
+$pia_lang['BackICMP_mon_disabled'] = 'La surveillance ICMP est désactivée';
+$pia_lang['BackICMP_mon_enabled'] = 'La surveillance ICMP est activée';
+$pia_lang['BackICMP_mon_InsICMP'] = 'L\'hôte ICMP a été enregistré';
+$pia_lang['BackICMP_mon_InsICMPError'] = 'L\'hôte ICMP n\'a pas été enregistré';
+$pia_lang['BackICMP_mon_DelICMP'] = 'L\'hôte ICMP a été supprimé de la base de données';
+$pia_lang['BackICMP_mon_DelICMPError'] = 'L\'hôte ICMP n\'a pas pu être supprimé, ou n\'a pas été complètement supprimé';
+$pia_lang['BackICMP_mon_UpdICMP'] = 'L\'hôte ICMP a été mis à jour';
+$pia_lang['BackICMP_mon_UpdICMPError'] = 'L\'hôte ICMP n\'a pas pu être mis à jour';
+$pia_lang['ICMPMonitor_Shortcut_Online'] = 'En ligne';
+$pia_lang['ICMPMonitor_Shortcut_Offline'] = 'Hors ligne/Indisponible';
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page - ready
