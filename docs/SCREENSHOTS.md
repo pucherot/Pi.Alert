@@ -30,6 +30,12 @@
   | ![Screen WebServ 04][Screen_WebServ_04]   | ![Screen WebServ 05][Screen_WebServ_05] | ![Screen WebServ 06][Screen_WebServ_06]  |
   | ![Screen WebServ 07][Screen_WebServ_07]   |                                         |                                          |
 
+### Frontend - ICMP Monitoring
+
+  | ![Screen ICMPHost 01][Screen_ICMPHost_01]   | ![Screen ICMPHost 02][Screen_ICMPHost_02] | 
+  | ------------------------------------------- | ----------------------------------------- |
+
+
 ### Frontend - Events and Presence
 
   | ![Screen Events and Pres. 01][Screen_Ev_and_Pres_01]   | ![Screen Events and Pres. 02][Screen_Ev_and_Pres_02] | ![Screen Events and Pres. 03][Screen_Ev_and_Pres_03]  | 
@@ -75,6 +81,9 @@
 [Screen_WebServ_05]: ./img/screen_web_05.png "Screen WebServ 05"
 [Screen_WebServ_06]: ./img/screen_web_06.png "Screen WebServ 06"
 [Screen_WebServ_07]: ./img/screen_web_07.png "Screen WebServ 07"
+
+[Screen_ICMPHost_01]: ./img/screen_icmp_01.png "Screen ICMPHost 01"
+[Screen_ICMPHost_02]: ./img/screen_icmp_02.png "Screen ICMPHost 02"
 
 [Screen_Ev_and_Pres_01]: ./img/screen_devevents.png     "Screen Events and Pres. 01"
 [Screen_Ev_and_Pres_02]: ./img/screen_devpresence.png   "Screen Events and Pres. 02"

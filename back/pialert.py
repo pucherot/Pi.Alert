@@ -1741,7 +1741,7 @@ def service_monitoring():
         monitor_logfile.write("\nStart Services Monitoring\n\n Timestamp          | StatusCode | ResponseTime | URL \n-----------------------------------------------------------------\n") 
         monitor_logfile.close()
 
-    scantime = strftime("%Y-%m-%d %H:%M:%S")
+    scantime = startTime.strftime("%Y-%m-%d %H:%M")
 
     while sites:
         for site in sites:
@@ -1795,10 +1795,11 @@ def icmp_monitoring():
     flush_icmphost_current_scan()
     print("    Ping Hosts...")
 
+    scantime = startTime.strftime("%Y-%m-%d %H:%M")
+
     while icmphosts:
         for host_ip in icmphosts:
             icmp_status = ping(host_ip)
-            scantime = strftime("%Y-%m-%d %H:%M:%S")
 
             if icmp_status == "1":
                 icmp_rtt = ping_avg(host_ip)
@@ -1897,6 +1898,19 @@ def flush_icmphost_current_scan():
     sql_connection.commit()
 
 # -----------------------------------------------------------------------------
+def get_icmphost_name(_icmp_ip):
+    query = "SELECT icmp_hostname FROM ICMP_Mon WHERE icmp_ip = ?"
+    sql.execute(query, (_icmp_ip,))
+    result_hostname = sql.fetchone()
+
+    if result_hostname:
+        hostname = result_hostname[0]
+    else:
+        hostname = 'No Hostname set'
+
+    return hostname
+
+# -----------------------------------------------------------------------------
 def icmphost_monitoring_notification():
     global mail_text_icmphost
     global mail_html_icmphost
@@ -1926,9 +1940,9 @@ def icmphost_monitoring_notification():
     mail_section_icmphost_down = False
     mail_text_icmphost_down = ''
     mail_html_icmphost_down = ''
-    text_line_template = '{}{}\n\t{}\t\t{}\n\t{}\t{}\n\n'
+    text_line_template = '{}{}\n\t{}\t{}\n\t{}\t\t{}\n\t{}\t{}\n\n'
     html_line_template     = '<tr>\n'+ \
-        '  <td> {} </td>\n  <td> {} </td>\n'+ \
+        '  <td> {} </td>\n  <td> {} </td> <td> {} </td>\n'+ \
         '  <td> {} </td>\n</tr>\n'
 
     sql.execute ("""SELECT * FROM ICMP_Mon_CurrentScan
@@ -1936,13 +1950,18 @@ def icmphost_monitoring_notification():
                     ORDER BY cur_LastScan""")
 
     for eventAlert in sql :
+
+        hostname = get_icmphost_name(eventAlert['cur_ip'])
+        print(hostname)
+        
         mail_section_icmphost_down = True
         mail_text_icmphost_down += text_line_template.format (
             'IP: ', eventAlert['cur_ip'],
+            'Hostname:', hostname,
             'Time: ', eventAlert['cur_LastScan'], 
             'Status: ', 'Down')
         mail_html_icmphost_down += html_line_template.format (
-            eventAlert['cur_ip'], eventAlert['cur_LastScan'], 'Down')
+            eventAlert['cur_ip'], hostname, eventAlert['cur_LastScan'], 'Down')
 
     format_report_section_icmp (mail_section_icmphost_down, 'SECTION_DEVICES_DOWN',
         'TABLE_DEVICES_DOWN', mail_text_icmphost_down, mail_html_icmphost_down)
@@ -1951,30 +1970,35 @@ def icmphost_monitoring_notification():
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}{}\n\t{}\t\t{}\n\t{}\t\t{} ms\n\t{}\t{}\n\n'
+    text_line_template = '{}{}\n\t{}\t{}\n\t{}\t\t{}\n\t{}\t\t{} ms\n\t{}\t{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
-            '  {} </td>\n  <td> {} </td>\n'+ \
+            '  {} </td>\n  <td> {} </td> <td> {} </td>\n'+ \
             '  <td> {} </td>\n <td> {} </td>\n'+ \
             '  </tr>\n'
 
     sql.execute ("""SELECT * FROM ICMP_Mon_CurrentScan
-                    WHERE cur_AlertEvents = 1 AND cur_AlertDown = 0 AND cur_PresentChanged = 1
+                    WHERE cur_AlertEvents = 1 AND cur_PresentChanged = 1
                     ORDER BY cur_LastScan""")
 
     for eventAlert in sql :
         mail_section_events = True
+
+        hostname = get_icmphost_name(eventAlert['cur_ip'])
+        print(hostname)
+
         if eventAlert['cur_Present'] == 1 :
             icmp_online_status = 'Up'
         else :
             icmp_online_status = 'Down'
 
         mail_text_events += text_line_template.format (
-            'IP: ', eventAlert['cur_ip'], 
+            'IP: ', eventAlert['cur_ip'],
+            'Hostname:', hostname,
             'Time: ', eventAlert['cur_LastScan'], 
             'RTT: ', eventAlert['cur_avgrrt'], 
             'Status: ', icmp_online_status)
         mail_html_events += html_line_template.format (
-            eventAlert['cur_ip'], eventAlert['cur_avgrrt'], eventAlert['cur_LastScan'], icmp_online_status)
+            eventAlert['cur_ip'], hostname, eventAlert['cur_LastScan'], eventAlert['cur_avgrrt'], icmp_online_status)
 
     format_report_section_icmp (mail_section_events, 'SECTION_EVENTS',
         'TABLE_EVENTS', mail_text_events, mail_html_events)
