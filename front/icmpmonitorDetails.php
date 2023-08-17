@@ -51,7 +51,6 @@ if (!isset($icmpfilter)) {$icmpfilter = 'all';}
 
 function get_icmphost_events_table($icmp_ip, $icmpfilter) {
 	global $db;
-	//global $current_service_IP;
 
 	if ($icmpfilter == 'all') {
 		$filter_sql = "";
@@ -99,14 +98,42 @@ if ($icmpmonitorDetails['icmp_PresentLastScan'] == 1) {
 	$headstatus = 'Offline';
 	$headstatus_icon = 'fa fa-close text-gray';
 	$headstatus_color = '';}
-// -----------------------------------------------------------------------------------
+
 // Get Online Graph Arrays
+// -----------------------------------------------------------------------------------
 $graph_arrays = array();
 $graph_arrays = prepare_graph_arrays_ICMPHost($hostip);
-//print_r($graph_arrays);
 $Pia_Graph_ICMPHost_Time = $graph_arrays[0];
 $Pia_Graph_ICMPHost_Up = $graph_arrays[1];
 $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
+
+// get some stats
+// -----------------------------------------------------------------------------------
+function get_host_statistic($hostip) {
+	global $db;
+	$statistic = array();
+	$query = "SELECT AVG(icmpeve_avgrtt) AS average_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+	$result = $db->querySingle($query);
+	$statistic['avg_rtt'] = round($result, 3);
+	$query_max = "SELECT MAX(icmpeve_avgrtt) AS max_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+	$query_min = "SELECT MIN(icmpeve_avgrtt) AS min_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+	$result_max = $db->querySingle($query_max);
+	$statistic['rtt_max'] = round($result_max, 3);
+	$result_min = $db->querySingle($query_min);
+	$statistic['rtt_min'] = round($result_min, 3);
+	$query = "SELECT COUNT(*) AS row_count FROM ICMP_Mon_Events WHERE icmpeve_Present = 0 AND icmpeve_ip=\"$hostip\"";
+	$result = $db->querySingle($query);
+	$statistic['offline'] = $result;
+	$query = "SELECT COUNT(*) AS row_count FROM ICMP_Mon_Events WHERE icmpeve_Present = 1 AND icmpeve_ip=\"$hostip\"";
+	$result = $db->querySingle($query);
+	$statistic['online'] = $result;
+	$temp100 = $statistic['online'] + $statistic['offline'];
+	if ($temp100 > 0 && $statistic['online'] > 0) {
+		$statistic['online_percent'] = round($statistic['online'] * 100 / $temp100) . '%';
+	}
+	$statistic['offline_percent'] = (100 - $statistic['online_percent']) . '%';
+	return $statistic;
+}
 
 ?>
 
@@ -423,12 +450,17 @@ get_icmphost_events_table($hostip, $icmpfilter);
                 </script>
 
                 <div class="col-md-12 bottom-border-aqua" style="margin-top: 30px; opacity: 0.7"></div>
-
+<?php
+# Get Statistic
+$statistic = get_host_statistic($hostip);
+?>
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Code']; ?>:</div>
-                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-green"></i> Online (<?php echo $http2xx; ?>)</div>
-                    <div class="col-sm-2"><i class="fa fa-w fa-circle text-red"></i> <?php echo $pia_lang['WebServices_Page_down']; ?> (<?php echo $httpdown; ?>)</div>
+                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Time']; ?>:</div>
+                    <div class="col-sm-2">&Oslash; <?php echo $statistic['avg_rtt']; ?> ms</div>
+                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_min']; ?> <?php echo $statistic['rtt_min']; ?> ms</div>
+                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_max']; ?> <?php echo $statistic['rtt_max']; ?> ms</div>
+                    <div class="col-sm-4"><span style="opacity: 0.6"><?php echo $pia_lang['WebServices_Stats_comment_a']; ?></span></div>
                   </div>
                 </div>
 
@@ -436,15 +468,12 @@ get_icmphost_events_table($hostip, $icmpfilter);
 
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Time']; ?>:</div>
-                    <div class="col-sm-2">&Oslash; <?php echo $latency_average; ?> ms</div>
-                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_min']; ?> <?php echo $latency_min; ?> ms</div>
-                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_max']; ?> <?php echo $latency_max; ?> ms</div>
-                    <div class="col-sm-4"><span style="opacity: 0.6"><?php echo $pia_lang['WebServices_Stats_comment_a']; ?></span></div>
+                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['ICMPMonitor_Availability']; ?>:</div>
+                    <div class="col-sm-2"><?php echo $pia_lang['ICMPMonitor_Shortcut_Online']; ?> <?php echo $statistic['online_percent']; ?></div>
+                    <div class="col-sm-2"><?php echo $pia_lang['ICMPMonitor_Shortcut_Offline']; ?> <?php echo $statistic['offline_percent']; ?></div>
+                    <div class="col-sm-6"><span style="opacity: 0.6"><?php echo $pia_lang['WebServices_Stats_comment_a']; ?></span></div>
                   </div>
-
                 </div>
-
 
                 <!-- Closing  <div class="col-md-12">   -->
 

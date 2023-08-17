@@ -333,6 +333,7 @@ $pia_lang['BackICMP_mon_UpdICMP'] = 'The ICMP host has been updated';
 $pia_lang['BackICMP_mon_UpdICMPError'] = 'The ICMP host could not be updated';
 $pia_lang['ICMPMonitor_Shortcut_Online'] = 'Online';
 $pia_lang['ICMPMonitor_Shortcut_Offline'] = 'Offline/Down';
+$pia_lang['ICMPMonitor_Availability'] = 'Availability';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page
