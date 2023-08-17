@@ -32,8 +32,8 @@
 
 ### Frontend - ICMP Monitoring
 
-  | ![Screen ICMPHost 01][Screen_ICMPHost_01]   | ![Screen ICMPHost 02][Screen_ICMPHost_02] | 
-  | ------------------------------------------- | ----------------------------------------- |
+  | ![Screen ICMPHost 01][Screen_ICMPHost_01]   | ![Screen ICMPHost 02][Screen_ICMPHost_02] | ![Screen ICMPHost 03][Screen_ICMPHost_03] | 
+  | ------------------------------------------- | ----------------------------------------- | ----------------------------------------- |
 
 
 ### Frontend - Events and Presence
@@ -84,6 +84,7 @@
 
 [Screen_ICMPHost_01]: ./img/screen_icmp_01.png "Screen ICMPHost 01"
 [Screen_ICMPHost_02]: ./img/screen_icmp_02.png "Screen ICMPHost 02"
+[Screen_ICMPHost_03]: ./img/screen_icmp_03.png "Screen ICMPHost 03"
 
 [Screen_Ev_and_Pres_01]: ./img/screen_devevents.png     "Screen Events and Pres. 01"
 [Screen_Ev_and_Pres_02]: ./img/screen_devpresence.png   "Screen Events and Pres. 02"

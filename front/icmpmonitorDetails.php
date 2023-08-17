@@ -218,16 +218,6 @@ function get_host_statistic($hostip) {
               <li class=""> <a id="tabDetails" href="#panDetails" data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?></a></li>
               <li class=""> <a id="tabEvents" href="#panEvents" data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?></a></li>
               <li class=""> <a id="tabGraph" href="#panGraph" data-toggle="tab"> <?php echo $pia_lang['WebServices_Tab_Graph']; ?></a></li>
-              <div class="btn-group pull-right">
-                <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px;"
-                  id="btnPrevious"> <i class="fa fa-chevron-left"></i> </button>
-
-                <div class="btn pa-btn-records" style="padding: 10px; min-width: 30px; margin-left: 1px;"
-                  id="txtRecord"     > 0 / 0 </div>
-
-                <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
-                  id="btnNext"> <i class="fa fa-chevron-right"></i> </button>
-              </div>
             </ul>
 
             <div class="tab-content" style="min-height: 430px;">
@@ -344,7 +334,7 @@ function get_host_statistic($hostip) {
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_Notes']; ?></label>
                         <div class="col-sm-9">
-                          <input class="form-control" id="txtNotes" type="text" readonly value="<?php echo $icmpmonitorDetails['icmp_Notes'] ?>">
+                          <input class="form-control" id="txtNotes" type="text" value="<?php echo $icmpmonitorDetails['icmp_Notes'] ?>">
                         </div>
                       </div>
 

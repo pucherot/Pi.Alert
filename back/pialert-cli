@@ -710,6 +710,15 @@ ${REWRITE_DDNS_USER}
 ${REWRITE_DDNS_PASSWORD}
 ${REWRITE_DDNS_UPDATE_URL}
 
+# Arp-scan Options & Samples
+# ----------------------
+${REWRITE_ARPSCAN_ACTIVE}
+${REWRITE_MAC_IGNORE_LIST}
+${REWRITE_SCAN_SUBNETS}
+# SCAN_SUBNETS    = '--localnet'
+# SCAN_SUBNETS    = '--localnet --interface=eth0'
+# SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth0', '192.168.2.0/24 --interface=eth1' ]
+
 # Pi-hole Configuration
 # ----------------------
 ${REWRITE_PIHOLE_ACTIVE}
@@ -728,15 +737,6 @@ ${REWRITE_FRITZBOX_PASS}
 # ----------------------
 ${REWRITE_DAYS_TO_KEEP_ONLINEHISTORY}
 ${REWRITE_DAYS_TO_KEEP_EVENTS}
-
-# Arp-scan Options & Samples
-# ----------------------
-${REWRITE_ARPSCAN_ACTIVE}
-${REWRITE_MAC_IGNORE_LIST}
-${REWRITE_SCAN_SUBNETS}
-# SCAN_SUBNETS    = '--localnet'
-# SCAN_SUBNETS    = '--localnet --interface=eth0'
-# SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth0', '192.168.2.0/24 --interface=eth1' ]
 
 EOL
     ;;
