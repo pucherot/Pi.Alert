@@ -236,6 +236,16 @@ ARPSCAN_ACTIVE = True
 EOF
 fi
 
+# 2023-08-18
+if ! grep -q "ICMPSCAN_ACTIVE" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# Other Modules
+# ----------------------
+ICMPSCAN_ACTIVE = True
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------

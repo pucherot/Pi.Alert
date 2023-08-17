@@ -129,9 +129,13 @@ function get_host_statistic($hostip) {
 	$statistic['online'] = $result;
 	$temp100 = $statistic['online'] + $statistic['offline'];
 	if ($temp100 > 0 && $statistic['online'] > 0) {
-		$statistic['online_percent'] = round($statistic['online'] * 100 / $temp100) . '%';
+		$statistic['online_percent'] = round($statistic['online'] * 100 / $temp100);
+	} else {
+		$statistic['online_percent'] = 0;
 	}
-	$statistic['offline_percent'] = (100 - $statistic['online_percent']) . '%';
+	$statistic['offline_percent'] = 100 - $statistic['online_percent'];
+	$statistic['online_percent'] = $statistic['online_percent'] . ' %';
+	$statistic['offline_percent'] = $statistic['offline_percent'] . ' %';
 	return $statistic;
 }
 
