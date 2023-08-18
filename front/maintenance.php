@@ -40,7 +40,6 @@ require 'php/server/journal.php';
 
 <?php
 // Get API-Key ------------------------------------------------------------------
-
 $CONFIG_FILE_SOURCE = "../config/pialert.conf";
 $CONFIG_FILE_KEY_LINE = file($CONFIG_FILE_SOURCE);
 $CONFIG_FILE_KEY_VALUE = array_values(preg_grep('/^PIALERT_APIKEY\s.*/', $CONFIG_FILE_KEY_LINE));
@@ -50,7 +49,6 @@ if ($CONFIG_FILE_KEY_VALUE != False) {
 } else { $APIKEY = $pia_lang['Maintenance_Tool_setapikey_false'];}
 
 // Get Ignore List ------------------------------------------------------------------
-
 $CONFIG_FILE_KEY_VALUE = array_values(preg_grep('/^MAC_IGNORE_LIST\s.*/', $CONFIG_FILE_KEY_LINE));
 if ($CONFIG_FILE_KEY_VALUE != False) {
 	$MAC_IGNORE_LIST_LINE = substr($CONFIG_FILE_KEY_VALUE[0], (strpos($CONFIG_FILE_KEY_VALUE[0], "=") + 1));
@@ -58,7 +56,6 @@ if ($CONFIG_FILE_KEY_VALUE != False) {
 } else { $MAC_IGNORE_LIST = $pia_lang['Maintenance_Tool_ignorelist_false'];}
 
 // Get Notification Settings ------------------------------------------------------------------
-
 $CONFIG_FILE_FILTER_VALUE_ARP = array_values(preg_grep("/(REPORT_MAIL |REPORT_NTFY |REPORT_WEBGUI |REPORT_PUSHSAFER |REPORT_PUSHOVER |REPORT_TELEGRAM )/i", $CONFIG_FILE_KEY_LINE));
 $CONFIG_FILE_FILTER_VALUE_WEB = array_values(preg_grep("/(REPORT_MAIL_WEBMON|REPORT_NTFY_WEBMON|REPORT_WEBGUI_WEBMON|REPORT_PUSHSAFER_WEBMON|REPORT_PUSHOVER_WEBMON |REPORT_TELEGRAM_WEBMON)/i", $CONFIG_FILE_KEY_LINE));
 
@@ -91,13 +88,11 @@ function format_notifications($source_array) {
 }
 
 // Size and last mod of DB ------------------------------------------------------
-
 $DB_SOURCE = str_replace('front', 'db', getcwd()) . '/pialert.db';
 $DB_SIZE_DATA = number_format((filesize($DB_SOURCE) / 1000000), 2, ",", ".") . ' MB';
 $DB_MOD_DATA = date("d.m.Y, H:i:s", filemtime($DB_SOURCE)) . ' Uhr';
 
 // Count Config Backups -------------------------s------------------------------
-
 $CONFIG_FILE_DIR = str_replace('front', 'config', getcwd()) . '/';
 $files = glob($CONFIG_FILE_DIR . "pialert-20*.bak");
 if ($files) {
@@ -105,7 +100,6 @@ if ($files) {
 } else { $CONFIG_FILE_COUNT = 0;}
 
 // Count and Calc DB Backups -------------------------------------------------------
-
 $ARCHIVE_PATH = str_replace('front', 'db', getcwd()) . '/';
 $ARCHIVE_COUNT = 0;
 $ARCHIVE_DISKUSAGE = 0;
@@ -119,7 +113,6 @@ foreach ($files as $result) {
 $ARCHIVE_DISKUSAGE = number_format(($ARCHIVE_DISKUSAGE / 1000000), 2, ",", ".") . ' MB';
 
 // Find latest DB Backup for restore and download -----------------------------------
-
 $LATEST_FILES = glob($ARCHIVE_PATH . "pialertdb_*.zip");
 if (sizeof($LATEST_FILES) == 0) {
 	$LATEST_BACKUP_DATE = $pia_lang['Maintenance_Tool_restore_blocked'];
@@ -132,9 +125,7 @@ if (sizeof($LATEST_FILES) == 0) {
 }
 
 // Aprscan read Timer -----------------------------------------------------------------
-
 function read_arpscan_timer() {
-	//$pia_lang_set_dir = '../db/';
 	$file = '../db/setting_stoparpscan';
 	if (file_exists($file)) {
 		$timer_arpscan = file_get_contents($file, true);
@@ -154,9 +145,7 @@ function read_arpscan_timer() {
 }
 
 // Get Device List Columns -----------------------------------------------------------------
-
 function read_DevListCol() {
-	//$pia_lang_set_dir = '../db/';
 	$file = '../db/setting_devicelist';
 	if (file_exists($file)) {
 		$get = file_get_contents($file, true);
@@ -168,7 +157,6 @@ function read_DevListCol() {
 }
 
 // Set preset checkboxes for Columnconfig -----------------------------------------------------------------
-
 function set_column_checkboxes($table_config) {
 	if ($table_config['ConnectionType'] == 1) {$col_checkbox['ConnectionType'] = "checked";}
 	if ($table_config['Favorites'] == 1) {$col_checkbox['Favorites'] = "checked";}
@@ -185,7 +173,6 @@ function set_column_checkboxes($table_config) {
 }
 
 // Read logfiles -----------------------------------------------------------------
-
 function read_logfile($logfile, $logmessage) {
 	$file = file_get_contents('./php/server/' . $logfile, true);
 	if ($file == "") {echo $logmessage;}
@@ -196,6 +183,7 @@ function read_logfile($logfile, $logmessage) {
 	echo str_replace("\n", '<br>', str_replace("    ", '&nbsp;&nbsp;&nbsp;&nbsp;', str_replace("        ", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $file)));
 }
 
+// Read Vendor logfiles -----------------------------------------------------------------
 function read_logfile_vendor() {
 	global $pia_lang;
 
@@ -217,6 +205,7 @@ function read_logfile_vendor() {
 	}
 }
 
+// Top Modal Block -----------------------------------------------------------------
 function print_logviewer_modal_head($id, $title) {
 	echo '<div class="modal fade" id="modal-logviewer-' . $id . '">
         <div class="modal-dialog modal-dialog-centered">
@@ -230,6 +219,7 @@ function print_logviewer_modal_head($id, $title) {
                     <div class="main_logviwer_log">';
 }
 
+// Bottom Modal Block -----------------------------------------------------------------
 function print_logviewer_modal_foot() {
 	global $pia_lang;
 	echo '                <br></div>
@@ -241,8 +231,8 @@ function print_logviewer_modal_foot() {
         </div>
     </div>';
 }
-// Set Tab ----------------------------------------------------------------------------
 
+// Set Tab ----------------------------------------------------------------------------
 if ($_REQUEST['tab'] == '1') {
 	$pia_tab_setting = 'active';
 	$pia_tab_tool = '';
@@ -266,7 +256,6 @@ if ($_REQUEST['tab'] == '1') {
       <div class="col-md-12">
 
 <!-- Status Box ----------------------------------------------------------------- -->
-
     <div class="box" id="Maintain-Status">
         <div class="box-header with-border">
             <h3 class="box-title">Status</h3>
@@ -340,14 +329,6 @@ read_arpscan_timer(); ?></div>
 
       </div>
     </div>
-
-<!-- Update Check ----------------------------------------------------------------- -->
-
-<!--     <div class="box">
-        <div class="box-body" id="updatecheck">
-            <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?php echo $pia_lang['Maintenance_Tools_Updatecheck']; ?></button>
-      </div>
-    </div> -->
 
 <!-- Log Viewer ----------------------------------------------------------------- -->
 
@@ -606,7 +587,6 @@ if ($_SESSION['Scan_WebServices'] == True) {
                     <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_arpscansw_text']; ?></td>
                 </tr>
                 <tr class="table_settings_row">
-
 <?php
 if (strtolower($_SESSION['WebProtection']) != 'true') {
 	echo '          <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">' . $pia_lang['Maintenance_Tool_loginenable'] . '</button></td>
@@ -614,19 +594,12 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
 	echo '      <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-danger dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">' . $pia_lang['Maintenance_Tool_logindisable'] . '</button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b">' . $pia_lang['Maintenance_Tool_logindisable_text'] . '</td>';}
 ?>
-
                 </tr>
             </table>
 
         </div>
         <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
             <div class="db_info_table">
-<!--                 <div class="db_info_table_row">
-                    <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteDevicesWithEmptyMACs()"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs']; ?></button>
-                    </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_empty_macs_text']; ?></div>
-                </div> -->
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
                         <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?php echo $pia_lang['Maintenance_Tool_del_alldev']; ?></button>
@@ -692,7 +665,6 @@ if (!$block_restore_button_db) {
                     <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_purgebackup_text']; ?></div>
                 </div>
             </div>
-
  <?php
 echo '<div class="row">';
 if (!$block_restore_button_db) {
@@ -704,15 +676,11 @@ echo '<div class="col-sm-6" style="text-align: center;">
 			</div>';
 echo '</div>';
 ?>
-
-
-
         </div>
     </div>
 </div>
 
 <!-- Config Editor ----------------------------------------------------------------- -->
-
  <div class="box">
         <div class="box-body" id="configeditor">
            <button type="button" id="oisggfjergfeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor"><?php echo $pia_lang['Maintenance_ConfEditor_Start']; ?></button>
@@ -748,7 +716,6 @@ echo '</div>';
 </div>
 
 <!-- Config Editor - Modals ----------------------------------------------------------------- -->
-
     <div class="modal fade" id="modal-config-editor">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -787,18 +754,15 @@ require 'php/templates/footer.php';
 
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
 <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
-
 <script>
 initializeiCheck();
 // delete devices with emty macs
 function askDeleteDevicesWithEmptyMACs () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_empty_macs_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_empty_macs_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteDevicesWithEmptyMACs');
 }
 function deleteDevicesWithEmptyMACs()
 {
-  // Delete device
   $.get('php/server/devices.php?action=deleteAllWithEmptyMACs', function(msg) {
     showMessage (msg);
   });
@@ -806,13 +770,11 @@ function deleteDevicesWithEmptyMACs()
 
 // Test Notifications
 function askTestNotificationSystem () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_test_notification_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_test_notification_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Run']; ?>', 'TestNotificationSystem');
 }
 function TestNotificationSystem()
 {
-  // Delete device
   $.get('php/server/devices.php?action=TestNotificationSystem', function(msg) {
     showMessage (msg);
   });
@@ -820,13 +782,11 @@ function TestNotificationSystem()
 
 // delete all devices
 function askDeleteAllDevices () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_alldev_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_alldev_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteAllDevices');
 }
 function deleteAllDevices()
 {
-  // Delete device
   $.get('php/server/devices.php?action=deleteAllDevices', function(msg) {
     showMessage (msg);
   });
@@ -834,13 +794,11 @@ function deleteAllDevices()
 
 // delete all (unknown) devices
 function askDeleteUnknown () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_unknowndev_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_unknowndev_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteUnknownDevices');
 }
 function deleteUnknownDevices()
 {
-  // Execute
   $.get('php/server/devices.php?action=deleteUnknownDevices', function(msg) {
     showMessage (msg);
   });
@@ -848,13 +806,11 @@ function deleteUnknownDevices()
 
 // delete all Events
 function askDeleteEvents () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_allevents_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_allevents_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteEvents');
 }
 function deleteEvents()
 {
-  // Execute
   $.get('php/server/devices.php?action=deleteEvents', function(msg) {
     showMessage (msg);
   });
@@ -862,13 +818,11 @@ function deleteEvents()
 
 // delete Hostory
 function askDeleteActHistory () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_ActHistory_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_ActHistory_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteActHistory');
 }
 function deleteActHistory()
 {
-  // Execute
   $.get('php/server/devices.php?action=deleteActHistory', function(msg) {
     showMessage (msg);
   });
@@ -876,13 +830,11 @@ function deleteActHistory()
 
 // Backup DB to Archive
 function askPiaBackupDBtoArchive () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_backup_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_backup_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Backup']; ?>', 'PiaBackupDBtoArchive');
 }
 function PiaBackupDBtoArchive()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaBackupDBtoArchive', function(msg) {
     showMessage (msg);
   });
@@ -890,13 +842,11 @@ function PiaBackupDBtoArchive()
 
 // Restore DB from Archive
 function askPiaRestoreDBfromArchive () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_restore_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_restore_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Restore']; ?>', 'PiaRestoreDBfromArchive');
 }
 function PiaRestoreDBfromArchive()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaRestoreDBfromArchive', function(msg) {
     showMessage (msg);
   });
@@ -904,13 +854,11 @@ function PiaRestoreDBfromArchive()
 
 // Purge Backups
 function askPiaPurgeDBBackups() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_purgebackup_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_purgebackup_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Purge']; ?>', 'PiaPurgeDBBackups');
 }
 function PiaPurgeDBBackups()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaPurgeDBBackups', function(msg) {
     showMessage (msg);
   });
@@ -918,13 +866,11 @@ function PiaPurgeDBBackups()
 
 // Switch Darkmode
 function askPiaEnableDarkmode() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_darkmode_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_darkmode_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableDarkmode');
 }
 function PiaEnableDarkmode()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaEnableDarkmode', function(msg) {
     showMessage (msg);
   });
@@ -932,13 +878,11 @@ function PiaEnableDarkmode()
 
 // Switch Web Service Monitor
 function askPiaEnableWebServiceMon() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_webservicemon_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_webservicemon_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableWebServiceMon');
 }
 function PiaEnableWebServiceMon()
 {
-  // Execute
   $.get('php/server/devices.php?action=EnableWebServiceMon', function(msg) {
     showMessage (msg);
   });
@@ -946,13 +890,11 @@ function PiaEnableWebServiceMon()
 
 // Switch ICMP Monitor
 function askPiaEnableICMPMon() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_icmpmon_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_icmpmon_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableICMPMon');
 }
 function PiaEnableICMPMon()
 {
-  // Execute
   $.get('php/server/icmpmonitor.php?action=EnableICMPMon', function(msg) {
     showMessage (msg);
   });
@@ -960,13 +902,11 @@ function PiaEnableICMPMon()
 
 // Toggle Graph
 function askPiaEnableOnlineHistoryGraph() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableOnlineHistoryGraph');
 }
 function PiaEnableOnlineHistoryGraph()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaEnableOnlineHistoryGraph', function(msg) {
     showMessage (msg);
   });
@@ -974,13 +914,11 @@ function PiaEnableOnlineHistoryGraph()
 
 // Set API-Key
 function askPiaSetAPIKey() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_setapikey_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_setapikey_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Okay']; ?>', 'PiaSetAPIKey');
 }
 function PiaSetAPIKey()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaSetAPIKey', function(msg) {
     showMessage (msg);
   });
@@ -988,13 +926,11 @@ function PiaSetAPIKey()
 
 // Enable Login
 function askPiaLoginEnable() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_loginenable_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_loginenable_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaLoginEnable');
 }
 function PiaLoginEnable()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaLoginEnable', function(msg) {
     showMessage (msg);
   });
@@ -1002,13 +938,11 @@ function PiaLoginEnable()
 
 // Disable Login
 function askPiaLoginDisable() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_logindisable_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_logindisable_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaLoginDisable');
 }
 function PiaLoginDisable()
 {
-  // Execute
   $.get('php/server/devices.php?action=PiaLoginDisable', function(msg) {
     showMessage (msg);
   });
@@ -1020,7 +954,6 @@ function setTextValue (textElement, textValue) {
 
 // Set Theme
 function setPiAlertTheme () {
-  // update data to server
   $.get('php/server/devices.php?action=setPiAlertTheme&PiaSkinSelection='+ $('#txtSkinSelection').val(), function(msg) {
     showMessage (msg);
   });
@@ -1028,7 +961,6 @@ function setPiAlertTheme () {
 
 // Set Language
 function setPiAlertLanguage() {
-  // update data to server
   $.get('php/server/devices.php?action=setPiAlertLanguage&PiaLangSelection='+ $('#txtLangSelection').val(), function(msg) {
     showMessage (msg);
   });
@@ -1050,7 +982,6 @@ function setPiAlertArpTimer() {
 
 // Backup Configfile
 function BackupConfigFile(reload)  {
-  // Execute
 	if (reload == 'yes') {
 		$.get('php/server/devices.php?action=BackupConfigFile&reload=yes', function(msg) {
 		    showMessage (msg);
@@ -1064,12 +995,10 @@ function BackupConfigFile(reload)  {
 
 // Restore Configfile
 function askRestoreConfigFile() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_ConfEditor_Restore_noti']; ?>', '<?php echo $pia_lang['Maintenance_ConfEditor_Restore_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Run']; ?>', 'RestoreConfigFile');
 }
 function RestoreConfigFile() {
-  // Execute
   $.get('php/server/devices.php?action=RestoreConfigFile', function(msg) {
     showMessage (msg);
   });
@@ -1077,12 +1006,10 @@ function RestoreConfigFile() {
 
 // Set Device List Column
 function askDeviceListCol() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Save']; ?>', 'setDeviceListCol');
 }
 function setDeviceListCol() {
-  // Execute
     $.get('php/server/devices.php?action=setDeviceListCol&'
     + '&connectiontype=' + ($('#chkConnectionType')[0].checked * 1)
     + '&favorite='       + ($('#chkFavorite')[0].checked * 1)
@@ -1102,12 +1029,10 @@ function setDeviceListCol() {
 
 // Delete Inactive Hosts
 function askDeleteInactiveHosts() {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'DeleteInactiveHosts');
 }
 function DeleteInactiveHosts() {
-  // Execute
   $.get('php/server/devices.php?action=DeleteInactiveHosts', function(msg) {
     showMessage (msg);
   });
