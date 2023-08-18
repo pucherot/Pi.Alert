@@ -102,7 +102,7 @@ OpenDB();
     <section class="content">
 
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-aqua">
             <div class="inner"><h3 id="devicesAll"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_AllDevices']; ?></p>
@@ -111,7 +111,7 @@ OpenDB();
           </div>
         </div>
 
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-green">
             <div class="inner"><h3 id="devicesConnected"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Connected']; ?></p>
@@ -120,7 +120,7 @@ OpenDB();
           </div>
         </div>
 
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-yellow">
             <div class="inner"><h3 id="devicesFavorites"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Favorites']; ?></p>
@@ -129,7 +129,7 @@ OpenDB();
           </div>
         </div>
 
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-red">
             <div class="inner"><h3 id="devicesDown"> -- </h3>
                 <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_DownAlerts']; ?></p>

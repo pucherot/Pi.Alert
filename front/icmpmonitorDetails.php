@@ -159,7 +159,7 @@ function get_host_statistic($hostip) {
 <!-- top small box --------------------------------------------------------- -->
       <div class="row">
 
-        <div class="col-lg-3 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="#">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="deviceStatus" class="<?=$headstatus_color?>" style="margin-left: 0em"><?=$headstatus?></h3>
@@ -170,7 +170,7 @@ function get_host_statistic($hostip) {
           </a>
         </div>
 
-        <div class="col-lg-3 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=all">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
@@ -182,7 +182,7 @@ function get_host_statistic($hostip) {
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
-        <div class="col-lg-3 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Online">
             <div class="small-box bg-green">
               <div class="inner"> <h3 id="eventsOnline"> -- </h3>
@@ -194,7 +194,7 @@ function get_host_statistic($hostip) {
         </div>
 
 <!-- top small box --------------------------------------------------------- -->
-        <div class="col-lg-3 col-sm-4 col-xs-6">
+        <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Offline">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsOffline"> -- </h3>
