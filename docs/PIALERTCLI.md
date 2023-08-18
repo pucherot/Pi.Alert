@@ -5,9 +5,11 @@ The current commands are:
 
 | command | explanation |
 | ------- | ----------- |
-| disable_scan &lt;MIN&gt; | <ul><li>Stops all active scans</li><li>Prevents new scans from starting.</li><li>You can set a Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with the next scan after 10min.</li></ul> |
+| disable_icmp_mon | <ul><li>Disable ICMP Monitoring.</li><li>If the ICMPSCAN_ACTIVE parameter does not exist yet, it will be created and set to FALSE.</li></ul> |
+| disable_scan &lt;MIN&gt; | <ul><li>Configured Pi.Alert scans are disabled</li><li>Prevents new scans from starting.</li><li>You can set a Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with the next scan after 10min.</li></ul> |
 | disable_service_mon | <ul><li>Disable Web Service Monitoring.</li><li>If the SCAN_WEBSERVICES parameter does not exist yet, it will be created and set to FALSE.</li></ul> |
-| enable_scan | <ul><li>Allows the start of new scans again.</li></ul> |
+| enable_icmp_mon | <ul><li>Enable ICMP Monitoring.</li><li>If the ICMPSCAN_ACTIVE parameter does not exist yet, it will be created and set to TRUE.</li></ul> |
+| enable_scan | <ul><li>Configured Pi.Alert scans are enabled</li></ul> |
 | enable_service_mon | <ul><li>Enable Web Service Monitoring.</li><li>If the SCAN_WEBSERVICES parameter does not exist yet, it will be created and set to TRUE.</li></ul> |
 | reporting_test | <ul><li>Test reporting for all activated services.</li></ul> |
 | rewrite_config | <ul><li>A new decluttered configuration file (pialert-rewritten.conf) will be created.</li></ul> |

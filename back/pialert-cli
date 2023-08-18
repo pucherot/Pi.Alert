@@ -188,7 +188,7 @@ EOM
     sudo killall arp-scan
     echo $STOPTIMER > ${SCRIPTPATH}/../db/setting_stoppialert
     /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_starttimer
-    echo "The arp-scan is disabled"
+    echo "Configured Pi.Alert scans are disabled"
     if [ "$current_user" != "www-data" ]; then
         sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_002', 'pialert-cli', 'LogStr_0511', '', '${STOPTIMER} min');"
     fi
@@ -199,7 +199,7 @@ EOM
     current_user=$(whoami)
     rm ${SCRIPTPATH}/../db/setting_stoppialert
     /usr/bin/python3 ${SCRIPTPATH}/pialert.py reporting_stoptimer
-    echo "The arp-scan is enabled"
+    echo "Configured Pi.Alert scans are enabled"
     if [ "$current_user" != "www-data" ]; then
         sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_002', 'pialert-cli', 'LogStr_0510', '', '');"
     fi

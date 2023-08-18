@@ -625,6 +625,14 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td class="help_table_gen_b">- Désactive la surveillance des services Web.<br>&nbsp;</td>
 											    </tr>
 											    <tr>
+											        <td class="help_table_gen_a">enable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Enable ICMP Monitoring (ping)<br>&nbsp;</td>
+											    </tr>
+											    <tr>
+											        <td class="help_table_gen_a">disable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Disable ICMP Monitoring (ping)<br>&nbsp;</td>
+											    </tr>
+											    <tr>
 											        <td class="help_table_gen_a">update_db</td>
 											        <td class="help_table_gen_b">- Le script tente de rendre la base de données compatible avec cette version.<br>&nbsp;</td>
 											    </tr>
