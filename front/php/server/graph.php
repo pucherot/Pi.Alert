@@ -112,7 +112,7 @@ function prepare_graph_arrays_ICMPHost($icmp_ip) {
 	$Pia_Graph_ICMPHost_Time = array();
 	$Pia_Graph_ICMPHost_Up = array();
 	$Pia_Graph_ICMPHost_Down = array();
-	$results = $db->query('SELECT * FROM ICMP_Mon_Events WHERE icmpeve_ip="' . $icmp_ip . '" ORDER BY icmpeve_DateTime DESC LIMIT 144');
+	$results = $db->query('SELECT * FROM ICMP_Mon_Events WHERE icmpeve_ip="' . $icmp_ip . '" ORDER BY icmpeve_DateTime DESC LIMIT 288');
 	$online = 0;
 	$offline = 0;
 	while ($row = $results->fetchArray()) {

@@ -140,6 +140,7 @@ function setICMPHostData() {
 		// Logging
 		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $_REQUEST['icmp_ip']);
 		echo $pia_lang['BackICMP_mon_UpdICMP'];
+		echo ("<meta http-equiv='refresh' content='2; URL=./icmpmonitor.php'>");
 	} else {
 		// Logging
 		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0004', '', $_REQUEST['icmp_ip']);
