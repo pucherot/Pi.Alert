@@ -979,6 +979,7 @@ $pia_journ_lang['a_020'] = 'Dispositivos';
 $pia_journ_lang['a_021'] = 'Editor Múltiple';
 $pia_journ_lang['a_025'] = 'Herramientas';
 $pia_journ_lang['a_030'] = 'Monitoreo del Servicio Web';
+$pia_journ_lang['a_031'] = 'ICMP Monitoring';
 $pia_journ_lang['a_040'] = 'Descripción de la Red';
 $pia_journ_lang['a_050'] = 'Informes';
 $pia_journ_lang['a_060'] = 'Verificación de Actualizaciones';

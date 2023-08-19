@@ -985,6 +985,7 @@ $pia_journ_lang['a_020'] = 'Devices';
 $pia_journ_lang['a_021'] = 'Multi-Editor';
 $pia_journ_lang['a_025'] = 'Tools';
 $pia_journ_lang['a_030'] = 'Web Service Monitoring';
+$pia_journ_lang['a_031'] = 'ICMP Monitoring';
 $pia_journ_lang['a_040'] = 'Network Overview';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'Update Check';

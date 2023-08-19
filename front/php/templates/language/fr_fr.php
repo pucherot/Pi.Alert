@@ -974,6 +974,7 @@ $pia_journ_lang['a_020'] = 'Dispositifs';
 $pia_journ_lang['a_021'] = 'Éditeur Multiple';
 $pia_journ_lang['a_025'] = 'Outils';
 $pia_journ_lang['a_030'] = 'Surveillance du service Web';
+$pia_journ_lang['a_031'] = 'ICMP Monitoring';
 $pia_journ_lang['a_040'] = 'Aperçu du réseau';
 $pia_journ_lang['a_050'] = 'Rapports';
 $pia_journ_lang['a_060'] = 'Vérification des mises à jour';
