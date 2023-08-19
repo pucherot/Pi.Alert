@@ -991,8 +991,10 @@ $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'Update Check';
 $pia_journ_lang['a_070'] = 'API';
 // pialert-cli
-$pia_journ_lang['b_002'] = 'Pi.Alert Scans';
+$pia_journ_lang['b_002'] = $pia_journ_lang['a_002'];
 $pia_journ_lang['b_010'] = 'DB Maintenance';
+// cronjob
+$pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
 // Log Strings
 $pia_journ_lang['LogStr_0001'] = 'Entry added';
 $pia_journ_lang['LogStr_0002'] = 'Entry edited';

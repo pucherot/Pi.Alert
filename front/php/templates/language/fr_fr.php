@@ -980,8 +980,10 @@ $pia_journ_lang['a_050'] = 'Rapports';
 $pia_journ_lang['a_060'] = 'Vérification des mises à jour';
 $pia_journ_lang['a_070'] = 'API';
 // pialert-cli
-$pia_journ_lang['b_002'] = 'Scans Pi.Alert';
+$pia_journ_lang['b_002'] = $pia_journ_lang['a_002'];
 $pia_journ_lang['b_010'] = 'Maintenance BD';
+// cronjob
+$pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
 // LogStrings
 $pia_journ_lang['LogStr_0001'] = 'Entrée ajoutée';
 $pia_journ_lang['LogStr_0002'] = 'Entrée modifiée';

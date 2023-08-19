@@ -31,12 +31,10 @@ import datetime
 import socket
 import io
 import smtplib
-import csv
 import requests
 import time
 import pwd
 import glob
-import ipaddress
 
 #===============================================================================
 # CONFIG CONSTANTS

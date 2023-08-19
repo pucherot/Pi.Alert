@@ -89,7 +89,6 @@ def main ():
 
     # Check parameters
     if len(sys.argv) != 2 :
-        # print ('usage pialert [scan_cycle] | internet_IP | update_vendors | cleanup | reporting_test' )
         print ('usage pialert [scan_cycle] | internet_IP | update_vendors | cleanup' )
         return
     cycle = str(sys.argv[1])
@@ -99,12 +98,6 @@ def main ():
         res = check_internet_IP()
     elif cycle == 'cleanup':
         res = cleanup_database()
-    # elif cycle == 'reporting_test':
-    #     res = sending_notifications_test('Test')
-    elif cycle == 'reporting_starttimer':
-        res = sending_notifications_test('noti_Timerstart')
-    elif cycle == 'reporting_stoptimer':
-        res = sending_notifications_test('noti_Timerstop')
     elif cycle == 'update_vendors':
         res = update_devices_MAC_vendors()
     elif cycle == 'update_vendors_silent':
@@ -122,8 +115,7 @@ def main ():
         return res
     
     # Reporting
-    # if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_test' and cycle != 'reporting_starttimer' and cycle != 'reporting_stoptimer':
-    if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_starttimer' and cycle != 'reporting_stoptimer':
+    if cycle != 'internet_IP' and cycle != 'cleanup':
         email_reporting()
 
     # Close SQL
@@ -153,16 +145,15 @@ def set_pia_reports_permissions():
 #===============================================================================
 def start_arpscan_countdown ():
 
+    openDB()
     if os.path.exists(STOPPIALERT):
         # get timer from file
         with open(STOPPIALERT, 'r') as file:
             data = int(file.read().rstrip())
             # print("Timer in min: %s" % data)
 
-        # date of file creation
         FILETIME = int(os.path.getctime(STOPPIALERT))
 
-        # output start and end
         print("Timer Start: %s" % time.ctime(FILETIME))
         STOPTIME = FILETIME+data*60
         print("Timer Ende : %s" % time.ctime(STOPTIME))
@@ -173,10 +164,17 @@ def start_arpscan_countdown ():
         if ( ACTUALTIME > STOPTIME ):
            print ("File will be deleted")
            os.remove(STOPPIALERT)
-           sending_notifications_test("noti_Timerstop")
+           os.system('/usr/bin/python3 ' + PIALERT_BACK_PATH + '/pialert_reporting_test.py reporting_stoptimer')
+
+           sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
+                           VALUES (?, 'c_002', 'cronjob', 'LogStr_0513', '', '') """, (startTime,))
+
+           sql_connection.commit()
            scan_network()
         else:
            print ("Timer still running")
+
+    closeDB()
 
 #===============================================================================
 # INTERNET IP CHANGE
@@ -238,7 +236,6 @@ def check_internet_IP ():
 
 #-------------------------------------------------------------------------------
 def get_internet_IP ():
-
     # dig_args = ['dig', '+short', '-4', 'myip.opendns.com', '@resolver1.opendns.com']
     # cmd_output = subprocess.check_output (dig_args, universal_newlines=True)
     curl_args = ['curl', '-s', QUERY_MYIP_SERVER]
@@ -250,7 +247,6 @@ def get_internet_IP ():
 
 #-------------------------------------------------------------------------------
 def get_dynamic_DNS_IP ():
-
     # Using default or OpenDNS DNS server
     dig_args = ['dig', '+short', DDNS_DOMAIN]
     # dig_args = ['dig', '+short', DDNS_DOMAIN, '@resolver1.opendns.com']
@@ -322,34 +318,25 @@ def cleanup_database ():
 
     openDB()
 
-    # keep 60 days if not specified how many days to keep
     try:
         strdaystokeepOH = str(DAYS_TO_KEEP_ONLINEHISTORY)
     except NameError: # variable not defined, use a default
         strdaystokeepOH = str(60) # 2 months
-
-    # keep 200 days if not specified how many days to keep
     try:
         strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(200) # 200 days
 
-    # Cleanup Online History
     print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
-    # Cleanup Events
     print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
     sql.execute ("DELETE FROM Events WHERE eve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
-    # Cleanup WebServices Events
     print ('    Services_Events, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
-    # Cleanup ICMP Events
     print ('    ICMP_Mon_Events, up to the lastest '+strdaystokeepEV+' days...')
     sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
-    # Shrink DB
     print ('    Trim Journal to the lastest 1000 entries')
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
-    # Shrink DB
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
 
@@ -2364,118 +2351,6 @@ def sending_notifications (_type, _html_text, _txt_text):
             send_webgui (_txt_text)
         else :
             print ('    Skip WebUI...')
-
-#-------------------------------------------------------------------------------
-def sending_notifications_test (_Mode):
-    if _Mode == 'Test' :
-        notiMessage = "Test-Notification"
-    elif _Mode == 'noti_Timerstart' :
-        notiMessage = "Pi.Alert is paused"
-    elif _Mode == 'noti_Timerstop' :
-        notiMessage = "Pi.Alert reactivated"
-
-    print ('\nTest Reporting...')
-    if REPORT_MAIL or REPORT_MAIL_WEBMON:
-        print ('    Sending report by email...')
-        send_email (notiMessage, notiMessage)
-    else :
-        print ('    Skip mail...')
-    if REPORT_PUSHSAFER or REPORT_PUSHSAFER_WEBMON:
-        print ('    Sending report by PUSHSAFER...')
-        send_pushsafer_test (notiMessage)
-    else :
-        print ('    Skip PUSHSAFER...')
-    if REPORT_PUSHOVER or REPORT_PUSHOVER_WEBMON:
-        print ('    Sending report by PUSHOVER...')
-        send_pushover_test (notiMessage)
-    else :
-        print ('    Skip PUSHOVER...')
-    if REPORT_TELEGRAM or REPORT_TELEGRAM_WEBMON:
-        print ('    Sending report by Telegram...')
-        send_telegram_test (notiMessage)
-    else :
-        print ('    Skip Telegram...')
-    if REPORT_NTFY or REPORT_NTFY_WEBMON:
-        print ('    Sending report by NTFY...')
-        send_ntfy_test (notiMessage)
-    else :
-        print ('    Skip NTFY...')
-    if REPORT_WEBGUI or REPORT_WEBGUI_WEBMON:
-        print ('    Save report to file...')
-        send_webgui_test (notiMessage)
-    else :
-        print ('    Skip WebGUI...')        
-    return 0
-
-#-------------------------------------------------------------------------------
-def send_ntfy_test (_notiMessage):
-    headers = {
-        "Title": "Pi.Alert Notification",
-        "Click": REPORT_DASHBOARD_URL,
-        "Priority": NTFY_PRIORITY,
-        "Tags": "warning"
-    }
-    # if username and password are set generate hash and update header
-    if NTFY_USER != "" and NTFY_PASSWORD != "":
-    # Generate hash for basic auth
-        usernamepassword = "{}:{}".format(NTFY_USER,NTFY_PASSWORD)
-        basichash = b64encode(bytes(NTFY_USER + ':' + NTFY_PASSWORD, "utf-8")).decode("ascii")
-
-    # add authorization header with hash
-        headers["Authorization"] = "Basic {}".format(basichash)
-
-    requests.post("{}/{}".format( NTFY_HOST, NTFY_TOPIC),
-    data=_notiMessage,
-    headers=headers)
-
-#-------------------------------------------------------------------------------
-def send_pushsafer_test (_notiMessage):
-    try:
-        notification_target = PUSHSAFER_DEVICE
-    except NameError:
-        notification_target = "a"
-
-    url = 'https://www.pushsafer.com/api'
-    post_fields = {
-        "t" : 'Pi.Alert Message',
-        "m" : _notiMessage,
-        "s" : 22,
-        "v" : 3,
-        "i" : 148,
-        "c" : '#ef7f7f',
-        "d" : notification_target,
-        "u" : REPORT_DASHBOARD_URL,
-        "ut" : 'Open Pi.Alert',
-        "k" : PUSHSAFER_TOKEN,
-        }
-    requests.post(url, data=post_fields)
-
-#-------------------------------------------------------------------------------
-def send_pushover_test (_notiMessage):
-    url = 'https://api.pushover.net/1/messages.json'
-    post_fields = {
-        "token": PUSHOVER_TOKEN,
-        "user": PUSHOVER_USER,
-        "title" : 'Pi.Alert Message',
-        "message" : _notiMessage,
-        }
-    requests.post(url, data=post_fields)
-
-#-------------------------------------------------------------------------------
-def send_telegram_test (_notiMessage):
-    runningpath = os.path.abspath(os.path.dirname(__file__))
-    stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_notiMessage+'" --title "Pi.Alert"')
-
-#-------------------------------------------------------------------------------
-def send_webgui_test (_notiMessage):
-    # Remove one linebrake between "Server" and the headline of the event type
-    # extract event type headline to use it in the notification headline
-    _webgui_filename = time.strftime("%Y%m%d-%H%M%S") + "_Test.txt"
-    if (os.path.exists(REPORTPATH_WEBGUI + _webgui_filename) == False):
-        f = open(REPORTPATH_WEBGUI + _webgui_filename, "w")
-        f.write(_notiMessage)
-        f.close()
-    set_pia_reports_permissions()
 
 #-------------------------------------------------------------------------------
 def format_report_section (pActive, pSection, pTable, pText, pHTML):

@@ -974,8 +974,10 @@ $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'Update Check';
 $pia_journ_lang['a_070'] = 'API';
 // pialert-cli
-$pia_journ_lang['b_002'] = 'Pi.Alert Scans';
+$pia_journ_lang['b_002'] = $pia_journ_lang['a_002'];
 $pia_journ_lang['b_010'] = 'DB Wartung';
+// cronjob
+$pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
 //LogStrings
 $pia_journ_lang['LogStr_0001'] = 'Eintrag hinzugefügt';
 $pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
@@ -1037,6 +1039,7 @@ $pia_journ_lang['LogStr_0504'] = 'Alle Reports gelöscht';
 $pia_journ_lang['LogStr_0510'] = 'Pi.Alert wieder aktiviert';
 $pia_journ_lang['LogStr_0511'] = 'Pi.Alert deaktiviert (mit Zeitangabe)';
 $pia_journ_lang['LogStr_0512'] = 'Pi.Alert deaktiviert (für 10 min)';
+$pia_journ_lang['LogStr_0513'] = 'Pi.Alert automatisch reaktiviert';
 $pia_journ_lang['LogStr_0700'] = 'API-Key gesetzt';
 $pia_journ_lang['LogStr_9001'] = 'Zugriff auf die Web-Oberfläche gestartet';
 $pia_journ_lang['LogStr_9002'] = 'Logout durchgeführt';
