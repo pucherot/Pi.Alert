@@ -1791,6 +1791,8 @@ def icmp_monitoring():
     print("\nStart ICMP Monitoring...")
     print("    Get Host/Domain List...")
     icmphosts = get_icmphost_list()
+    icmphostscount = len(icmphosts)
+    print("        List contains " + str(icmphostscount) + " entries")
     print("    Flush previous ping results...")
     flush_icmphost_current_scan()
     print("    Ping Hosts...")
