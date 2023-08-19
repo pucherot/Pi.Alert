@@ -118,17 +118,12 @@ if ($_SESSION["login"] != 1) {
   <meta http-equiv="Expires" content="0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Pi-Alert | Log in</title>
-  <!-- Tell the browser to be responsive to screen width -->
+
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
   <link rel="stylesheet" href="lib/AdminLTE/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/AdminLTE.min.css">
-  <!-- iCheck -->
   <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/square/blue.css">
 
   <!-- Dark-Mode Patch -->
@@ -180,8 +175,6 @@ if ($ENABLED_DARKMODE === True) {
   </div>
   <!-- /.login-box-body -->
 
-
-
   <div id="myDIV" class="box-body" style="margin-top: 50px; <?php echo $login_display_mode; ?>">
       <div class="alert alert-<?php echo $login_mode; ?> alert-dismissible">
           <h4><i class="icon fa <?php echo $login_icon; ?>"></i><?php echo $login_headline; ?></h4>
@@ -190,16 +183,11 @@ if ($ENABLED_DARKMODE === True) {
       </div>
   </div>
 
-
 </div>
 <!-- /.login-box -->
 
-
-<!-- jQuery 3 -->
 <script src="lib/AdminLTE/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="lib/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
 <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 <script>
   $(function () {

@@ -7,7 +7,6 @@
 #  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
 
-
 <?php
 session_start();
 
@@ -17,7 +16,6 @@ if ($_SESSION["login"] != 1) {
 }
 
 # Validate URL
-
 if (filter_var($_REQUEST['hostip'], FILTER_FLAG_IPV4) || filter_var($_REQUEST['hostip'], FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME)) {
 	$hostip = $_REQUEST['hostip'];
 } else {
@@ -26,7 +24,6 @@ if (filter_var($_REQUEST['hostip'], FILTER_FLAG_IPV4) || filter_var($_REQUEST['h
 }
 
 require 'php/templates/header.php';
-//require 'php/server/db.php';
 require 'php/server/graph.php';
 require 'php/server/journal.php';
 
@@ -144,7 +141,6 @@ function get_host_statistic($hostip) {
 <!-- Page ------------------------------------------------------------------ -->
   <div class="content-wrapper">
 
-<!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
       <?php require 'php/templates/notification.php';?>
 
@@ -153,7 +149,6 @@ function get_host_statistic($hostip) {
       </h1>
     </section>
 
-<!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
 <!-- top small box --------------------------------------------------------- -->
@@ -181,7 +176,6 @@ function get_host_statistic($hostip) {
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Online">
             <div class="small-box bg-green">
@@ -193,7 +187,6 @@ function get_host_statistic($hostip) {
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Offline">
             <div  class="small-box bg-red">
@@ -211,8 +204,6 @@ function get_host_statistic($hostip) {
 <!-- tab control------------------------------------------------------------ -->
       <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12">
-        <!-- <div class="box-transparent"> -->
-
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
               <li class=""> <a id="tabDetails" href="#panDetails" data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?></a></li>
@@ -223,9 +214,7 @@ function get_host_statistic($hostip) {
             <div class="tab-content" style="min-height: 430px;">
 
 <!-- tab page 1 ------------------------------------------------------------ -->
-<!--
-              <div class="tab-pane fade in active" id="panDetails">
--->
+
               <div class="tab-pane" id="panDetails">
 
                 <div class="row">
@@ -469,8 +458,6 @@ $statistic = get_host_statistic($hostip);
                   </div>
                 </div>
 
-                <!-- Closing  <div class="col-md-12">   -->
-
               </div>
 
             </div>
@@ -482,36 +469,31 @@ $statistic = get_host_statistic($hostip);
         </div>
         <!-- /.col -->
       </div>
-      <!-- /.row -->
 
     </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
+  </div>
 
 <!-- ----------------------------------------------------------------------- -->
 <?php
 require 'php/templates/footer.php';
 ?>
 
-
-<!-- ----------------------------------------------------------------------- -->
 <!-- iCkeck -->
-  <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-  <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+<script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 
 <!-- Datatable -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <!-- fullCalendar -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.css">
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
-  <script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
-  <script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/fullcalendar/dist/locale-all.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.css">
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+<script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
+<script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="lib/AdminLTE/bower_components/fullcalendar/dist/locale-all.js"></script>
 
 <!-- Dark-Mode Patch -->
 <?php
@@ -537,7 +519,6 @@ if ($ENABLED_DARKMODE === True) {
   main();
 
 // -----------------------------------------------------------------------------
-
 function main () {
   hostip = '<?php echo $hostip; ?>'
   initializeTabs();
@@ -553,11 +534,10 @@ if (isset($_REQUEST['icmpfilter'])) {
 ?>
 
 }
-
+// -----------------------------------------------------------------------------
 function initializeTabs () {
   // Activate panel
   var activeTab = getCookie("icmpTab");
-
   // If there is an active tab in the cookie, activate it
   if (activeTab != "") {
     $('.nav-tabs a[href="' + activeTab + '"]').tab('show');
@@ -573,7 +553,7 @@ function initializeTabs () {
   });
   //$('.nav-tabs a[id='+ tab +']').tab('show');
 }
-
+// -----------------------------------------------------------------------------
 function initializeiCheck () {
    // Blue
    $('input[type="checkbox"].blue').iCheck({
@@ -581,23 +561,20 @@ function initializeiCheck () {
      radioClass:    'iradio_flat-blue',
      increaseArea:  '20%'
    });
-
   // Orange
   $('input[type="checkbox"].orange').iCheck({
     checkboxClass: 'icheckbox_flat-orange',
     radioClass:    'iradio_flat-orange',
     increaseArea:  '20%'
   });
-
   // Red
   $('input[type="checkbox"].red').iCheck({
     checkboxClass: 'icheckbox_flat-red',
     radioClass:    'iradio_flat-red',
     increaseArea:  '20%'
   });
-
 }
-
+// -----------------------------------------------------------------------------
 function getEventsTotalsforICMPHost() {
   // stop timer
   // stopTimerRefreshData();
@@ -613,8 +590,7 @@ function getEventsTotalsforICMPHost() {
     // Timer for refresh data
     //newTimerRefreshData(getEventsTotals);
 }
-
-
+// -----------------------------------------------------------------------------
 function initializeDatatable () {
   $('#tableEvents').DataTable({
     'paging'       : true,

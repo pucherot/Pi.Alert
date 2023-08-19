@@ -28,7 +28,6 @@ if (filter_var($_REQUEST['url'], FILTER_VALIDATE_URL)) {
 }
 
 require 'php/templates/header.php';
-//require 'php/server/db.php';
 require 'php/server/graph.php';
 require 'php/server/journal.php';
 
@@ -270,25 +269,17 @@ $latency_min = round($result_min, 4);
 <!-- tab control------------------------------------------------------------ -->
       <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12">
-        <!-- <div class="box-transparent"> -->
-
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
               <li class=""> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
               <li class=""> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?>   </a></li>
               <li class=""> <a id="tabGraph"   href="#panGraph"   data-toggle="tab"> <?php echo $pia_lang['WebServices_Tab_Graph']; ?>   </a></li>
-
-
             </ul>
-
             <div class="tab-content" style="min-height: 430px;">
 
 <!-- tab page 1 ------------------------------------------------------------ -->
-<!--
-              <div class="tab-pane fade in active" id="panDetails">
--->
-              <div class="tab-pane" id="panDetails">
 
+              <div class="tab-pane" id="panDetails">
                 <div class="row">
     <!-- column 1 -->
                   <div class="col-sm-6 col-xs-12">
@@ -572,23 +563,21 @@ if ($output[0] != "######") {
 require 'php/templates/footer.php';
 ?>
 
-
-<!-- ----------------------------------------------------------------------- -->
 <!-- iCkeck -->
-  <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-  <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+<script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 
 <!-- Datatable -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <!-- fullCalendar -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.css">
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
-  <script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
-  <script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/fullcalendar/dist/locale-all.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.css">
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+<script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
+<script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="lib/AdminLTE/bower_components/fullcalendar/dist/locale-all.js"></script>
 
 <!-- Dark-Mode Patch -->
 <?php
@@ -614,7 +603,6 @@ if ($ENABLED_DARKMODE === True) {
   main();
 
 // -----------------------------------------------------------------------------
-
 function main () {
   url = '<?php echo $service_details_title; ?>'
   initializeTabs();
@@ -630,6 +618,7 @@ if (isset($_REQUEST['filter'])) {
 
 }
 
+// -----------------------------------------------------------------------------
 function initializeTabs () {
   // Activate panel
   var activeTab = getCookie("serviceTab");
@@ -650,6 +639,7 @@ function initializeTabs () {
   //$('.nav-tabs a[id='+ tab +']').tab('show');
 }
 
+// -----------------------------------------------------------------------------
 function initializeiCheck () {
    // Blue
    $('input[type="checkbox"].blue').iCheck({
@@ -674,6 +664,7 @@ function initializeiCheck () {
 
 }
 
+// -----------------------------------------------------------------------------
 function getEventsTotalsforService() {
   // stop timer
   // stopTimerRefreshData();
@@ -693,6 +684,7 @@ function getEventsTotalsforService() {
     //newTimerRefreshData(getEventsTotals);
 }
 
+// -----------------------------------------------------------------------------
 function initializeDatatable () {
   $('#tableEvents').DataTable({
     'paging'       : true,
@@ -779,16 +771,12 @@ function askDeleteService () {
 
 // -----------------------------------------------------------------------------
 function deleteService () {
-  // Check MAC
   if (url == '') {
     return;
   }
-
-  // Delete device
   $.get('php/server/services.php?action=deleteService&url='+ url, function(msg) {
     showMessage (msg);
   });
-
   // Deactivate controls
   $('#panDetails :input').attr('disabled', true);
 }
@@ -833,20 +821,15 @@ function setCookie(cookieName, cookieValue, expirationDays) {
 $('#downloadDB-button').on('click', function() {
     var loader = $("#downloader");
     var downloadButton = $(this);
-
     // Hide the download button
     downloadButton.hide();
-
     // Display the loading animation
     loader.show();
-
     // Send an AJAX request to initiate the file download
     $.ajax({
         url: './php/server/services.php?action=downloadGeoDB',
         method: 'GET',
         success: function(response) {
-            // Hide the loading animation
-            //loader.hide();
             console.log('Download complete!');
         },
         // error: function() {
@@ -869,8 +852,6 @@ $('#deleteDB-button').on('click', function() {
         url: './php/server/services.php?action=deleteGeoDB',
         method: 'GET',
         success: function(response) {
-            // Hide the loading animation
-            //loader.hide();
             console.log('Delete complete!');
         },
         // error: function() {

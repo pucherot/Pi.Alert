@@ -89,7 +89,8 @@ def main ():
 
     # Check parameters
     if len(sys.argv) != 2 :
-        print ('usage pialert [scan_cycle] | internet_IP | update_vendors | cleanup | reporting_test' )
+        # print ('usage pialert [scan_cycle] | internet_IP | update_vendors | cleanup | reporting_test' )
+        print ('usage pialert [scan_cycle] | internet_IP | update_vendors | cleanup' )
         return
     cycle = str(sys.argv[1])
 
@@ -98,8 +99,8 @@ def main ():
         res = check_internet_IP()
     elif cycle == 'cleanup':
         res = cleanup_database()
-    elif cycle == 'reporting_test':
-        res = sending_notifications_test('Test')
+    # elif cycle == 'reporting_test':
+    #     res = sending_notifications_test('Test')
     elif cycle == 'reporting_starttimer':
         res = sending_notifications_test('noti_Timerstart')
     elif cycle == 'reporting_stoptimer':
@@ -121,7 +122,8 @@ def main ():
         return res
     
     # Reporting
-    if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_test' and cycle != 'reporting_starttimer' and cycle != 'reporting_stoptimer':
+    # if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_test' and cycle != 'reporting_starttimer' and cycle != 'reporting_stoptimer':
+    if cycle != 'internet_IP' and cycle != 'cleanup' and cycle != 'reporting_starttimer' and cycle != 'reporting_stoptimer':
         email_reporting()
 
     # Close SQL

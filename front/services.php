@@ -1,16 +1,14 @@
+<!-- ---------------------------------------------------------------------------
+#  Pi.Alert
+#  Open Source Network Guard / WIFI & LAN intrusion detector
+#
+#  services.php - Front module. Server side. Manage Devices
+#-------------------------------------------------------------------------------
+#  leiweibau 2023                                          GNU GPLv3
+#--------------------------------------------------------------------------- -->
+
 <?php
-//------------------------------------------------------------------------------
-//  Pi.Alert
-//  Open Source Network Guard / WIFI & LAN intrusion detector
-//
-//  services.php - Front module. Server side. Manage Devices
-//------------------------------------------------------------------------------
-//  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
-//------------------------------------------------------------------------------
-
 session_start();
-
-// Turn off php errors
 error_reporting(0);
 
 if ($_SESSION["login"] != 1) {
@@ -22,23 +20,18 @@ require 'php/templates/header.php';
 require 'php/server/db.php';
 require 'php/server/journal.php';
 
-// ===============================================================================
-// Start prepare data
-// ===============================================================================
-
+// -----------------------------------------------------------------------------
 $DBFILE = '../db/pialert.db';
 OpenDB();
 
-// ===============================================================================
-// End prepare data
-// ===============================================================================
+// -----------------------------------------------------------------------------
 function open_http_status_code_json() {
 	$jsonfile = file_get_contents("./lib/http-status-code/index.json");
 	$array = json_decode($jsonfile, true);
 	return $array;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 function getDeviceMacs() {
 	global $db;
 	$dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
@@ -48,7 +41,7 @@ function getDeviceMacs() {
 	}
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_latency_from_url($service_URL) {
 	global $db;
@@ -66,7 +59,7 @@ function get_latest_latency_from_url($service_URL) {
 	return $code_array;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_statuscodes_from_url($service_URL) {
 	global $db;
@@ -84,7 +77,7 @@ function get_latest_statuscodes_from_url($service_URL) {
 	return $code_array;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Get the latest 15 StatusCodes from a specific URL in order latest -> older
 function get_latest_scans_from_url($service_URL) {
 	global $db;
@@ -102,7 +95,7 @@ function get_latest_scans_from_url($service_URL) {
 	return $code_array;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Get Name from Devices
 function get_device_name($service_MAC) {
 	global $db;
@@ -114,7 +107,7 @@ function get_device_name($service_MAC) {
 	}
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Print a list of all monitored URLs
 function list_all_services() {
 	global $db;
@@ -124,7 +117,7 @@ function list_all_services() {
 	}
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // get Count of all standalone services
 function get_count_standalone_services() {
 	global $db;
@@ -136,16 +129,15 @@ function get_count_standalone_services() {
 	return $func_count;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // get String with the selected notifications
 function get_notifications($alertDown, $alertEvent) {
 	global $pia_lang;
-
 	if ($alertEvent == "1" && $alertDown == "1") {$notification_type = '<i class="fa fa-fw fa-bell-o"></i> ' . $pia_lang['WebServices_Events_all'] . ", " . $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "0" && $alertDown == "1") {$notification_type = '<i class="fa fa-fw fa-bell-o"></i> ' . $pia_lang['WebServices_Events_down'];} elseif ($alertEvent == "1" && $alertDown == "0") {$notification_type = '<i class="fa fa-fw fa-bell-o"></i> ' . $pia_lang['WebServices_Events_all'];} else { $notification_type = '<i class="fa fa-fw fa-bell-slash-o"></i>';}
 	return $notification_type;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // get color from status code
 function get_icon_color($statuscode) {
 	if (substr($statuscode, 0, 1) == "2") {$code_icon_color = "bg-green";}
@@ -156,7 +148,7 @@ function get_icon_color($statuscode) {
 	return $code_icon_color;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Print a list of all monitored URLs without a MAC Adresse
 function list_standalone_services() {
 	global $pia_lang;
@@ -178,9 +170,7 @@ function list_standalone_services() {
 			if (substr($row['mon_LastStatus'], 0, 1) == "2") {$code_icon_color = "bg-green";}
 
 			$notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
-
 			$code_icon_color = get_icon_color($row['mon_LastStatus']);
-
 			$url_array = explode('://', $row['mon_URL']);
 
 			if ($http_status_code[$row['mon_LastStatus']] != "") {
@@ -234,7 +224,7 @@ function list_standalone_services() {
           </div>';
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Get a array of unique devices with monitored URLs
 function get_devices_from_services() {
 	global $db;
@@ -247,7 +237,7 @@ function get_devices_from_services() {
 	return $func_unique_devices;
 }
 
-// -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // Print a list of all monitored URLs of an unique device
 function get_service_from_unique_device($func_unique_device) {
 	global $pia_lang;
@@ -261,9 +251,7 @@ function get_service_from_unique_device($func_unique_device) {
 			unset($func_httpcodes);
 
 			$notification_type = get_notifications($row['mon_AlertDown'], $row['mon_AlertEvents']);
-
 			$code_icon_color = get_icon_color($row['mon_LastStatus']);
-
 			$url_array = explode('://', $row['mon_URL']);
 
 			if ($http_status_code[$row['mon_LastStatus']] != "") {
@@ -318,7 +306,6 @@ function get_service_from_unique_device($func_unique_device) {
 <!-- Page ------------------------------------------------------------------ -->
 
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-
 <div class="content-wrapper">
 
 <!-- Content header--------------------------------------------------------- -->
@@ -330,7 +317,6 @@ function get_service_from_unique_device($func_unique_device) {
       </h1>
 
 <!-- Modals New URL ----------------------------------------------------------------- -->
-
         <form role="form">
             <div class="modal fade" id="modal-add-monitoringURL">
                 <div class="modal-dialog modal-dialog-centered">
@@ -405,12 +391,11 @@ function get_service_from_unique_device($func_unique_device) {
 
 // Load http status code in array
 $http_status_code = open_http_status_code_json();
-
 // Get a array of device with monitored URLs
 $unique_devices = get_devices_from_services();
 
 // #######################################################
-// ###### Main Function (Unique Devices)
+// Main Function (Unique Devices)
 // #######################################################
 // Print a Box for every unique Device (MAC Address)
 $i = 0;
@@ -435,7 +420,7 @@ while ($i < count($unique_devices)) {
 }
 
 // #######################################################
-// ###### Main Function (Standalone)
+// Main Function (Standalone)
 // #######################################################
 
 // Get counter of standalone services
@@ -467,7 +452,6 @@ require 'php/templates/footer.php';
 
 <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-
 <script>
 
 $(function () {
@@ -476,6 +460,7 @@ $(function () {
 
 initializeiCheck();
 
+// -----------------------------------------------------------------------------
 function initializeiCheck () {
    // Blue
    $('input[type="checkbox"].blue').iCheck({
@@ -483,14 +468,12 @@ function initializeiCheck () {
      radioClass:    'iradio_flat-blue',
      increaseArea:  '20%'
    });
-
   // Orange
   $('input[type="checkbox"].orange').iCheck({
     checkboxClass: 'icheckbox_flat-orange',
     radioClass:    'iradio_flat-orange',
     increaseArea:  '20%'
   });
-
   // Red
   $('input[type="checkbox"].red').iCheck({
     checkboxClass: 'icheckbox_flat-red',
@@ -514,9 +497,6 @@ function insertNewService(refreshCallback='') {
     + '&alertdown='       + ($('#insAlertEvents')[0].checked * 1)
     + '&alertevents='     + ($('#insAlertDown')[0].checked * 1)
     , function(msg) {
-
-    // deactivate button
-    // deactivateSaveRestoreData ();
     showMessage (msg);
     // Callback fuction
     if (typeof refreshCallback == 'function') {
@@ -525,6 +505,7 @@ function insertNewService(refreshCallback='') {
   });
 }
 
+// -----------------------------------------------------------------------------
 function setTextValue (textElement, textValue) {
   $('#'+textElement).val (textValue);
 }

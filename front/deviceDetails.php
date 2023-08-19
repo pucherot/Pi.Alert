@@ -22,15 +22,6 @@ require 'php/server/journal.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
-// #####################################
-// ## update db dependencies
-// #####################################
-$sql = 'ALTER TABLE "Devices" ADD "dev_Model" STRING(250)';
-$result = $db->query($sql);
-$sql = 'ALTER TABLE "Devices" ADD "dev_Serialnumber" STRING(100)';
-$result = $db->query($sql);
-$sql = 'ALTER TABLE "Devices" ADD "dev_ConnectionType" STRING(30)';
-$result = $db->query($sql);
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -59,7 +50,7 @@ $result = $db->query($sql);
 <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
-<!-- top small box 1 ------------------------------------------------------- -->
+<!-- top small box  ------------------------------------------------------- -->
       <div class="row">
 
         <div class="col-lg-3 col-sm-6 col-xs-6">
@@ -73,7 +64,6 @@ $result = $db->query($sql);
           </a>
         </div>
 
-<!-- top small box 2 ------------------------------------------------------- -->
         <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="#" onclick="javascript: $('#tabSessions').trigger('click');">
             <div class="small-box bg-green">
@@ -85,7 +75,6 @@ $result = $db->query($sql);
           </a>
         </div>
 
-<!-- top small box 3 ------------------------------------------------------- -->
         <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="#" onclick="javascript: $('#tabPresence').trigger('click')">
             <div  class="small-box bg-yellow">
@@ -97,7 +86,6 @@ $result = $db->query($sql);
           </a>
         </div>
 
-<!--  top small box 4 ------------------------------------------------------ -->
         <div class="col-lg-3 col-sm-6 col-xs-6">
           <a href="#" onclick="javascript: $('#tabEvents').trigger('click');">
             <div  class="small-box bg-red">
@@ -117,7 +105,6 @@ $result = $db->query($sql);
         <div class="col-lg-12 col-sm-12 col-xs-12">
         <!-- <div class="box-transparent"> -->
 
-
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
               <li> <a id="tabDetails"  href="#panDetails"  data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?>  </a></li>
@@ -132,23 +119,17 @@ if ($_REQUEST['mac'] == 'Internet') {$DevDetail_Tap_temp = "Tools";} else { $Dev
               <div class="btn-group pull-right">
                 <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px;"
                   id="btnPrevious" onclick="previousRecord()"> <i class="fa fa-chevron-left"></i> </button>
-
                 <div class="btn pa-btn-records"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
                   id="txtRecord"     > 0 / 0 </div>
-
                 <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
                   id="btnNext"     onclick="nextRecord()"> <i class="fa fa-chevron-right"></i> </button>
               </div>
             </ul>
 
-
-
             <div class="tab-content" style="min-height: 430px;">
 
 <!-- tab page 1 ------------------------------------------------------------ -->
-<!--
-              <div class="tab-pane fade in active" id="panDetails">
--->
+
               <div class="tab-pane fade" id="panDetails">
 
                 <div class="row">
@@ -492,16 +473,12 @@ if ($_REQUEST['mac'] == 'Internet') {$DevDetail_Tap_temp = "Tools";} else { $Dev
                   <!-- Buttons -->
                   <div class="col-xs-12">
                     <div class="pull-right">
-                        <!-- <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;" -->
                         <button type="button" class="btn btn-warning"  style="margin-left:6px; margin-top:6px;"
                           id="btnDeleteEvents"   onclick="askDeleteDeviceEvents()">   <?php echo $pia_lang['DevDetail_button_DeleteEvents']; ?> </button>
-                        <!-- <button type="button" class="btn btn-default pa-btn pa-btn-delete"  style="margin-left:0px;" -->
                         <button type="button" class="btn btn-danger"  style="margin-left:6px; margin-top:6px;"
                           id="btnDelete"   onclick="askDeleteDevice()">   <?php echo $pia_lang['DevDetail_button_Delete']; ?> </button>
-                        <!-- <button type="button" class="btn btn-default pa-btn" style="margin-left:6px;"  -->
                         <button type="button" class="btn btn-default" style="margin-left:6px; margin-top:6px;"
                           id="btnRestore"  onclick="getDeviceData(true)"> <?php echo $pia_lang['DevDetail_button_Reset']; ?> </button>
-                        <!-- <button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px;"  -->
                         <button type="button" disabled class="btn btn-primary" style="margin-left:6px; margin-top:6px;"
                           id="btnSave"     onclick="setDeviceData()" >     <?php echo $pia_lang['DevDetail_button_Save']; ?> </button>
                     </div>
@@ -513,10 +490,8 @@ if ($_REQUEST['mac'] == 'Internet') {$DevDetail_Tap_temp = "Tools";} else { $Dev
                       <div class="btn-group pull-right" style="position: relative; right: 0px;">
                         <button type="button" class="btn btn-default" style="padding: 10px; min-width: 30px;"
                           id="btnPrevious_down" onclick="previousRecord()"> <i class="fa fa-chevron-left"></i> </button>
-
                         <div class="btn pa-btn-records"  style="padding: 10px; min-width: 30px; margin-left: 1px;"
                           id="txtRecord_down"> 0 / 0 </div>
-
                         <button type="button" class="btn btn-default" style="padding: 10px; min-width: 30px; margin-left: 1px;"
                           id="btnNext_down" onclick="nextRecord()"> <i class="fa fa-chevron-right"></i> </button>
                       </div>
@@ -586,7 +561,6 @@ if ($_REQUEST['mac'] != 'Internet') {
 <?php
 }
 ?>
-
                 <h4 class="">Nmap Scans</h4>
                 <div style="width:100%; text-align: center;">
                   <script>
@@ -692,22 +666,21 @@ if ($_REQUEST['mac'] != 'Internet') {
 require 'php/templates/footer.php';
 ?>
 
-<!-- ----------------------------------------------------------------------- -->
 <!-- iCkeck -->
-  <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
-  <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
+<script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
 
 <!-- Datatable -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <!-- fullCalendar -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.css">
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
-  <script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
-  <script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/fullcalendar/dist/locale-all.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.css">
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
+<script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
+<script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="lib/AdminLTE/bower_components/fullcalendar/dist/locale-all.js"></script>
 
 <!-- Dark-Mode Patch -->
 <?php

@@ -9,7 +9,6 @@
 
 <?php
 session_start();
-// Turn off php errors
 error_reporting(0);
 if ($_SESSION["login"] != 1) {
 	header('Location: ./index.php');
@@ -58,57 +57,12 @@ function get_notification_class($filename) {
 	}
 }
 
-function process_arp_notifications($class_name, $event_time, $filename, $directory) {
+function process_standard_notifications($class_name, $event_time, $filename, $directory, $color) {
 	$webgui_report = file_get_contents($directory . $filename);
 	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
 	return '<div class="box box-solid">
             <div class="box-header">
-              <h3 class="box-title" style="color: #D81B60"><i class="fa fa-laptop"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
-                <div class="pull-right">
-                  <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
-                </div>
-            </div>
-            <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
-            </div>';
-}
-
-function process_internet_notifications($class_name, $event_time, $filename, $directory) {
-	$webgui_report = file_get_contents($directory . $filename);
-	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
-	return '<div class="box box-solid">
-            <div class="box-header">
-              <h3 class="box-title" style="color: #30bbbb"><i class="fa fa-laptop"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
-                <div class="pull-right">
-                  <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
-                </div>
-            </div>
-            <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
-            </div>';
-}
-
-function process_webmon_notifications($class_name, $event_time, $filename, $directory) {
-	$webgui_report = file_get_contents($directory . $filename);
-	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
-	return '<div class="box box-solid">
-            <div class="box-header">
-              <h3 class="box-title" style="color: #00c0ef"><i class="fa fa-globe"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
-                <div class="pull-right">
-                  <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
-                  <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
-                </div>
-            </div>
-            <div class="box-body"><pre style="background-color: transparent; border: none;">' . $webgui_report . '</pre></div>
-            </div>';
-}
-
-function process_icmpmon_notifications($class_name, $event_time, $filename, $directory) {
-	$webgui_report = file_get_contents($directory . $filename);
-	$webgui_report = str_replace("\n\n\n", "", $webgui_report);
-	return '<div class="box box-solid">
-            <div class="box-header">
-              <h3 class="box-title" style="color: #831CFF"><i class="fa fa-globe"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
+              <h3 class="box-title" style="color: ' . $color . '"><i class="fa fa-laptop"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
                 <div class="pull-right">
                   <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
                   <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
@@ -161,13 +115,13 @@ foreach ($scanned_directory as $file) {
 	if (substr($file, -4) == '.txt') {
 		$notification_class = get_notification_class($file);
 		if ($notification_class[1] == "arp") {
-			array_push($standard_notification, process_arp_notifications($notification_class[0], $notification_class[2], $file, $directory));
+			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#D81B60'));
 		} elseif ($notification_class[1] == "internet") {
-			array_push($standard_notification, process_internet_notifications($notification_class[0], $notification_class[2], $file, $directory));
+			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#30bbbb'));
 		} elseif ($notification_class[1] == "webmon") {
-			array_push($standard_notification, process_webmon_notifications($notification_class[0], $notification_class[2], $file, $directory));
+			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#00c0ef'));
 		} elseif ($notification_class[1] == "icmpmon") {
-			array_push($standard_notification, process_icmpmon_notifications($notification_class[0], $notification_class[2], $file, $directory));
+			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#831CFF'));
 		} elseif ($notification_class[1] == "test") {
 			array_push($standard_notification, process_test_notifications($notification_class[0], $notification_class[2], $file, $directory));
 		} elseif ($notification_class[1] == "rogueDHCP") {
@@ -175,7 +129,6 @@ foreach ($scanned_directory as $file) {
 		}
 	}
 }
-
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -189,7 +142,7 @@ foreach ($scanned_directory as $file) {
       </h1>
     </section>
 
-    <!-- Main content ---------------------------------------------------------- -->
+<!-- Main content ---------------------------------------------------------- -->
     <section class="content">
       <div class="box">
           <div class="box-body" id="RemoveAllNotifications" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
@@ -198,21 +151,16 @@ foreach ($scanned_directory as $file) {
       </div>
 
 <?php
-
 for ($x = 0; $x < sizeof($special_notification); $x++) {
 	echo $special_notification[$x];
 }
-
 for ($x = 0; $x < sizeof($standard_notification); $x++) {
 	echo $standard_notification[$x];
 }
-
 ?>
     <div style="width: 100%; height: 20px;"></div>
     </section>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
 
 <!-- ----------------------------------------------------------------------- -->
 <?php
@@ -221,13 +169,11 @@ require 'php/templates/footer.php';
 
 <script>
 function askdeleteAllNotifications () {
-  // Ask
   showModalWarning('<?php echo $pia_lang['Reports_delete_all_noti']; ?>', '<?php echo $pia_lang['Reports_delete_all_noti_text']; ?>',
     '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteAllNotifications');
 }
 function deleteAllNotifications()
 {
-  // Delete
   $.get('php/server/devices.php?action=deleteAllNotifications', function(msg) {
     showMessage (msg);
   });

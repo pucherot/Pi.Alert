@@ -7,7 +7,6 @@
 #  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
 
-
 <?php
 session_start();
 
@@ -18,7 +17,6 @@ if ($_SESSION["login"] != 1) {
 
 require 'php/templates/header.php';
 require 'php/server/journal.php';
-
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -58,7 +56,6 @@ require 'php/server/journal.php';
             </div>
           </a>
         </div>
-
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('2');">
@@ -70,7 +67,6 @@ require 'php/server/journal.php';
             </div>
           </a>
         </div>
-
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('3');">
@@ -82,7 +78,6 @@ require 'php/server/journal.php';
             </div>
           </a>
         </div>
-
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('4');">
@@ -94,7 +89,6 @@ require 'php/server/journal.php';
             </div>
           </a>
         </div>
-
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('5');">
@@ -106,7 +100,6 @@ require 'php/server/journal.php';
             </div>
           </a>
         </div>
-
 <!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('99999999');">
@@ -126,34 +119,25 @@ require 'php/server/journal.php';
       <div class="row">
         <div class="col-xs-12">
           <div id="tableEventsBox" class="box">
-
-            <!-- box-header -->
             <div class="box-header">
               <h3 id="tableEventsTitle" class="box-title text-gray">Events</h3>
             </div>
-
-            <!-- table -->
             <div class="box-body table-responsive">
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
-                <tr>
-                  <th><?php echo $pia_lang['WebServices_Events_TableHead_URL']; ?></th>
-                  <th><?php echo $pia_lang['WebServices_Events_TableHead_TargetIP']; ?></th>
-                  <th><?php echo $pia_lang['WebServices_Events_TableHead_ScanTime']; ?></th>
-                  <th><?php echo $pia_lang['WebServices_Events_TableHead_StatusCode']; ?></th>
-                  <th><?php echo $pia_lang['WebServices_Events_TableHead_ResponsTime']; ?></th>
-                </tr>
+                  <tr>
+                    <th><?php echo $pia_lang['WebServices_Events_TableHead_URL']; ?></th>
+                    <th><?php echo $pia_lang['WebServices_Events_TableHead_TargetIP']; ?></th>
+                    <th><?php echo $pia_lang['WebServices_Events_TableHead_ScanTime']; ?></th>
+                    <th><?php echo $pia_lang['WebServices_Events_TableHead_StatusCode']; ?></th>
+                    <th><?php echo $pia_lang['WebServices_Events_TableHead_ResponsTime']; ?></th>
+                  </tr>
                 </thead>
               </table>
             </div>
-            <!-- /.box-body -->
-
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
 
 <!-- ----------------------------------------------------------------------- -->
     </section>
@@ -166,11 +150,10 @@ require 'php/server/journal.php';
 require 'php/templates/footer.php';
 ?>
 
-<!-- ----------------------------------------------------------------------- -->
 <!-- Datatable -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <!-- page script ----------------------------------------------------------- -->
 <script>
@@ -231,7 +214,6 @@ function initializeDatatable () {
 
     // Parameters
     'pageLength'   : tableRows,
-
     'columnDefs'  : [
       {className: 'text-center', targets: [1,3] },
       {className: 'text-right',  targets: [] },
@@ -239,7 +221,6 @@ function initializeDatatable () {
       {width:     '120px',       targets: [1] },
       {width:     '80px',        targets: [3] },
 
-      //Device Name
       {targets: [0],
        "createdCell": function (td, cellData, rowData, row, col) {
          $(td).html ('<b><a href="serviceDetails.php?url='+ rowData[0] +'" class="">'+ cellData +'</a></b>');

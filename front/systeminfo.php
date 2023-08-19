@@ -170,12 +170,8 @@ for ($x = 0; $x < sizeof($storage_lsblk_line); $x++) {
 	$temp = explode("#", $storage_lsblk_line[$x]);
 	$storage_lsblk_line[$x] = $temp;
 }
-// echo '<pre>';
-// print_r($storage_lsblk_line);
-// echo '</pre>';
 
 for ($x = 0; $x < sizeof($storage_lsblk_line); $x++) {
-	//if (stristr($hdd_devices[$x], '/dev/')) {
 	echo '<div class="row">';
 	if (preg_match('~[0-9]+~', $storage_lsblk_line[$x][0])) {
 		echo '<div class="col-sm-4 sysinfo_gerneral_a">Mount point "' . $storage_lsblk_line[$x][3] . '"</div>';
@@ -186,7 +182,6 @@ for ($x = 0; $x < sizeof($storage_lsblk_line); $x++) {
 	echo '<div class="col-sm-2 sysinfo_gerneral_b">Size: ' . $storage_lsblk_line[$x][1] . '</div>';
 	echo '<div class="col-sm-2 sysinfo_gerneral_b">Type: ' . $storage_lsblk_line[$x][2] . '</div>';
 	echo '</div>';
-	//}
 }
 echo '      </div>
       </div>';

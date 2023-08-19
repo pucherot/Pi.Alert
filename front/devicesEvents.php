@@ -20,10 +20,8 @@ require 'php/server/journal.php';
 
 ?>
 
-<!-- Page ------------------------------------------------------------------ -->
   <div class="content-wrapper">
 
-<!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
       <h1 id="pageTitle">
          <?php echo $pia_lang['Events_Title']; ?>
@@ -41,7 +39,6 @@ require 'php/server/journal.php';
       </span>
     </section>
 
-<!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
 <!-- top small box --------------------------------------------------------- -->
@@ -58,7 +55,6 @@ require 'php/server/journal.php';
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('sessions');">
             <div class="small-box bg-green">
@@ -70,7 +66,6 @@ require 'php/server/journal.php';
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('missing');">
             <div  class="small-box bg-yellow">
@@ -82,7 +77,6 @@ require 'php/server/journal.php';
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('voided');">
             <div  class="small-box bg-yellow">
@@ -94,7 +88,6 @@ require 'php/server/journal.php';
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('new');">
             <div  class="small-box bg-yellow">
@@ -106,7 +99,6 @@ require 'php/server/journal.php';
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getEvents('down');">
             <div  class="small-box bg-red">
@@ -172,11 +164,10 @@ require 'php/server/journal.php';
 require 'php/templates/footer.php';
 ?>
 
-<!-- ----------------------------------------------------------------------- -->
 <!-- Datatable -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <!-- page script ----------------------------------------------------------- -->
 <script>

@@ -9,8 +9,6 @@
 
 <?php
 session_start();
-
-// Turn off php errors
 error_reporting(0);
 
 if ($_SESSION["login"] != 1) {
@@ -27,10 +25,8 @@ OpenDB();
 
 ?>
 
-<!-- Page ------------------------------------------------------------------ -->
 <div class="content-wrapper">
 
-<!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
@@ -39,13 +35,9 @@ OpenDB();
       </h1>
     </section>
 
-    <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
 <?php
-// #####################################
-// ## Start Function Setup
-// #####################################
 
 function unassigned_devices() {
 	global $db;
@@ -275,9 +267,6 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
             </div>';
 	echo '</div> ';
 }
-// #####################################
-// ## End Function Setup
-// #####################################
 
 // #####################################
 // ## Create Tabs

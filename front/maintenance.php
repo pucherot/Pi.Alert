@@ -1,18 +1,17 @@
+<!-- ---------------------------------------------------------------------------
+#  Pi.Alert
+#  Open Source Network Guard / WIFI & LAN intrusion detector
+#
+#  maintenance.php - Front module. Server side. Manage Devices
+#-------------------------------------------------------------------------------
+#  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
+#  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
+#  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
+#--------------------------------------------------------------------------- -->
+
+
 <?php
-//------------------------------------------------------------------------------
-//  Pi.Alert
-//  Open Source Network Guard / WIFI & LAN intrusion detector
-//
-//  maintenance.php - Front module. Server side. Manage Devices
-//------------------------------------------------------------------------------
-//  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
-//  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
-//  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
-//------------------------------------------------------------------------------
-
 session_start();
-
-// Turn off php errors
 error_reporting(0);
 
 if ($_SESSION["login"] != 1) {

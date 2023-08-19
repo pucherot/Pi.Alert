@@ -9,8 +9,6 @@
 
 <?php
 session_start();
-
-// Turn off php errors
 error_reporting(0);
 
 if ($_SESSION["login"] != 1) {
@@ -20,13 +18,10 @@ if ($_SESSION["login"] != 1) {
 
 require 'php/templates/header.php';
 require 'php/server/journal.php';
-
 ?>
 
-<!-- Page ------------------------------------------------------------------ -->
 <div class="content-wrapper">
 
-<!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
@@ -34,28 +29,20 @@ require 'php/server/journal.php';
       </h1>
     </section>
 
-    <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
+        <div class="box">
+            <div class="box-body" id="updatecheck">
+                <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?php echo $pia_lang['Maintenance_Tools_Updatecheck']; ?></button>
+          	</div>
+        </div>
 
-    <div class="box">
-        <div class="box-body" id="updatecheck">
-            <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?php echo $pia_lang['Maintenance_Tools_Updatecheck']; ?></button>
-      	</div>
-    </div>
-
-    <div id="updatecheck_result">
-
-    </div>
-	<div style="width: 100%; height: 20px;"></div>
+        <div id="updatecheck_result"></div>
+    	<div style="width: 100%; height: 20px;"></div>
     </section>
 
-    <!-- /.content -->
 </div>
-  <!-- /.content-wrapper -->
 
 <script>
-
-// Update Check
 function check_github_for_updates() {
     $("#updatecheck_result").empty();
     $("#rewwejwejpjo").hide();
@@ -75,7 +62,6 @@ function check_github_for_updates() {
 
 </script>
 
-<!-- ----------------------------------------------------------------------- -->
 <?php
 require 'php/templates/footer.php';
 ?>

@@ -102,10 +102,8 @@ if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
 
 ?>
 
-<!-- Page ------------------------------------------------------------------ -->
 <div class="content-wrapper">
 
-<!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
@@ -114,7 +112,6 @@ if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
       </h1>
     </section>
 
-    <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
     <!-- Manage Devices ---------------------------------------------------------- -->
@@ -473,7 +470,6 @@ function network_device_downlink_mac() {
 		echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkDeviceDownlinkMac\',\'' . $func_res['dev_MAC'] . ',\')">' . $func_res['dev_Name'] . '</a></li>';
 	}
 }
-
 // #####################################
 // ## End Function Setup
 // #####################################

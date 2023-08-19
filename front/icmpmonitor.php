@@ -9,8 +9,6 @@
 //------------------------------------------------------------------------------
 
 session_start();
-
-// Turn off php errors
 error_reporting(0);
 
 if ($_SESSION["login"] != 1) {
@@ -21,10 +19,6 @@ if ($_SESSION["login"] != 1) {
 require 'php/templates/header.php';
 require 'php/server/db.php';
 require 'php/server/journal.php';
-
-// ===============================================================================
-// Start prepare data
-// ===============================================================================
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
@@ -179,7 +173,6 @@ OpenDB();
 
     </section>
 
-    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
@@ -201,7 +194,7 @@ require 'php/templates/footer.php';
   var parTableOrder   = 'Front_Devices_Order';
   var tableRows       = 10;
   var tableOrder      = [[3,'desc'], [0,'asc']];
-//initializeiCheck();
+
 main();
 
 // -----------------------------------------------------------------------------
@@ -212,14 +205,12 @@ function initializeiCheck () {
      radioClass:    'iradio_flat-blue',
      increaseArea:  '20%'
    });
-
   // Orange
   $('input[type="checkbox"].orange').iCheck({
     checkboxClass: 'icheckbox_flat-orange',
     radioClass:    'iradio_flat-orange',
     increaseArea:  '20%'
   });
-
   // Red
   $('input[type="checkbox"].red').iCheck({
     checkboxClass: 'icheckbox_flat-red',
@@ -262,7 +253,6 @@ function initializeDatatable () {
     'lengthChange' : true,
     'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, '<?php echo $pia_lang['Device_Tablelenght_all']; ?>']],
     'searching'    : true,
-
     'ordering'     : true,
     'info'         : true,
     'autoWidth'    : false,
@@ -280,15 +270,11 @@ function initializeDatatable () {
       {width:     '150px',       targets: [4] },
       {width:     '80px',        targets: [2,5] },
       {width:     '110px',       targets: [3] },
-      //{width:     '0px',         targets: [3] },
-      //{orderData: [0],          targets: [0] },
 
-      // Device Name
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
             $(td).html ('<b><a href="icmpmonitorDetails.php?hostip='+ rowData[1] +'" class="">'+ cellData +'</a></b>');
       } },
-
       {targets: [2],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
@@ -297,7 +283,6 @@ function initializeDatatable () {
             $(td).html ('');
           }
       } },
-
       {targets: [3],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 99999){
@@ -306,9 +291,6 @@ function initializeDatatable () {
             $(td).html (cellData + ' ms');
           }
       } },
-
-
-      //Status color
       {targets: [5],
         'createdCell': function (td, cellData, rowData, row, col) {
           if (cellData == 1){
@@ -355,12 +337,6 @@ function initializeDatatable () {
 
 // -----------------------------------------------------------------------------
 function getDevicesList () {
-
-  // Set title and color
-  //$('#tableDevicesTitle')[0].className = 'box-title text-aqua';
-  //$('#tableDevicesBox')[0].className = 'box box-aqua';
-  // $('#tableDevicesTitle').html(tableTitle);
-
   // Define new datasource URL and reload
   $('#tableDevices').DataTable().ajax.url(
     'php/server/icmpmonitor.php?action=getDevicesList').load();
@@ -368,7 +344,6 @@ function getDevicesList () {
 
 // -----------------------------------------------------------------------------
 function getICMPHostTotals () {
-
   $.get('php/server/icmpmonitor.php?action=getICMPHostTotals', function(data) {
     var totalsDevices = JSON.parse(data);
 
