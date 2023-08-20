@@ -1,4 +1,11 @@
 <?php
+session_start();
+error_reporting(0);
+
+if ($_SESSION["login"] != 1) {
+	header('Location: ./index.php');
+	exit;
+}
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector
@@ -7,14 +14,6 @@
 //------------------------------------------------------------------------------
 //  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
-
-session_start();
-error_reporting(0);
-
-if ($_SESSION["login"] != 1) {
-	header('Location: ./index.php');
-	exit;
-}
 
 require 'php/templates/header.php';
 require 'php/server/db.php';
@@ -260,7 +259,7 @@ function initializeDatatable () {
     // Parameters
     'pageLength'   : tableRows,
     'order'        : tableOrder,
-    //'order'       : [[0,'asc']],
+    'order'       : [[0,'asc']],
 
 
     'columnDefs'   : [

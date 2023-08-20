@@ -42,12 +42,10 @@ $db->exec('PRAGMA journal_mode = wal;');
         <div class="col-xs-12">
           <div id="tableEventsBox" class="box">
 
-            <!-- box-header -->
             <div class="box-header">
               <h3 id="tableEventsTitle" class="box-title text-aqua">Journal</h3>
             </div>
 
-            <!-- table -->
             <div class="box-body table-responsive">
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
@@ -62,28 +60,20 @@ $db->exec('PRAGMA journal_mode = wal;');
                 </tr>
                 </thead>
                   <tbody>
-        <?php
-# Create Journal table
+<?php
 get_pialert_journal();
 ?>
                   </tbody>
               </table>
             </div>
-            <!-- /.box-body -->
 
           </div>
-          <!-- /.box -->
         </div>
-        <!-- /.col -->
       </div>
-      <!-- /.row -->
-
 <!-- ----------------------------------------------------------------------- -->
     </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
+  </div>
 <!-- ----------------------------------------------------------------------- -->
 <?php
 require 'php/templates/footer.php';
@@ -94,7 +84,6 @@ function get_pialert_journal() {
 
 	$pia_journal = $db->query('SELECT * FROM pialert_journal ORDER BY Journal_DateTime DESC Limit 1000');
 	while ($row = $pia_journal->fetchArray()) {
-
 		if ($row['LogClass'] == "a_000") {$full_additional_info = $pia_journ_lang[$row['LogString']] . '<br>' . $pia_journ_lang['File_hash'] . ': <span class="text-danger">' . $row['Hash'] . '</span>';} else { $full_additional_info = $pia_journ_lang[$row['LogString']];}
 		$full_additional_info = $full_additional_info . '<br>' . $row['Additional_Info'];
 
@@ -109,14 +98,11 @@ function get_pialert_journal() {
           </tr>';
 	}
 }
-
 ?>
 
-<!-- ----------------------------------------------------------------------- -->
-<!-- Datatable -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <!-- page script ----------------------------------------------------------- -->
 <script>
@@ -197,5 +183,4 @@ function initializeDatatable () {
     },
   });
 };
-
 </script>
