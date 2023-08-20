@@ -34,23 +34,22 @@ a notification can be sent.
 
 ## Scan Methods
 
-  - **Method 1: arp-scan**. The arp-scan system utility is used to search
+  - **arp-scan**. The arp-scan system utility is used to search
         for devices on the network using arp frames.
-  - **Method 2: Pi-hole**. This method is optional and complementary to
-        method 1. If the Pi-hole DNS server is active, Pi.Alert examines its
+  - **Pi-hole**. This method is optional. If the Pi-hole DNS server is active, Pi.Alert examines its
         activity looking for active devices using DNS that have not been
         detected by method 1.
-  - **Method 3: dnsmasq**. This method is optional and complementary to the
-        previous methods. If the DHCP server dnsmasq is active, Pi.Alert
+  - **dnsmasq**. This method is optional. If the DHCP server dnsmasq is active, Pi.Alert
         examines the DHCP leases (addresses assigned) to find active devices
         that were not discovered by the other methods.
-  - **Method 4: Fritzbox**. This method is optional and complementary to the
-        previous methods. If you use a Fritzbox (a router from the company "AVM"), 
+  - **Fritzbox**. This method is optional. If you use a Fritzbox (a router from the company "AVM"), 
         it is possible to perform a query of the active hosts. This also 
         includes hosts of the guest WLAN and Powerline devices from "AVM".
   - **Web service monitoring**. This method is optional. An HTTP request is 
-        sent and the web server's response is evaluated. If self signed 
+        sent and the web server's response is processed. If self signed 
         certificates are used, no validation of the certificate is performed.
+  - **ICMP monitoring**. This method is optional. A "ping" is sent to a manually specified
+        IP/hostname/domain name and the response is evaluated
   - **DHCP Server Scan**. This method is optional. Nmap is used to send DHCP 
         requests into the network to detect unknown (rogue) DHCP servers.
 
