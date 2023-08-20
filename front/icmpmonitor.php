@@ -188,12 +188,6 @@ require 'php/templates/footer.php';
 <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <script>
-//  var deviceStatus    = 'all';
-  var parTableRows    = 'Front_Devices_Rows';
-  var parTableOrder   = 'Front_Devices_Order';
-  var tableRows       = 10;
-  var tableOrder      = [[3,'desc'], [0,'asc']];
-
 main();
 
 // -----------------------------------------------------------------------------
@@ -220,28 +214,10 @@ function initializeiCheck () {
 
 // -----------------------------------------------------------------------------
 function main () {
-  // get parameter value
-  $.get('php/server/parameters.php?action=get&parameter='+ parTableRows, function(data) {
-    var result = JSON.parse(data);
-    if (Number.isInteger (result) ) {
-        tableRows = result;
-    }
-    // get parameter value
-    $.get('php/server/parameters.php?action=get&parameter='+ parTableOrder, function(data) {
-      var result = JSON.parse(data);
-      result = JSON.parse(result);
-      if (Array.isArray (result) ) {
-        tableOrder = result;
-      }
-      initializeiCheck();
-      // Initialize components with parameters
-      initializeDatatable();
-      // query data
-      //getDevicesTotals();
-      getDevicesList();
-      getICMPHostTotals();
-     });
-   });
+    initializeiCheck();
+    initializeDatatable();
+    getDevicesList();
+    getICMPHostTotals();
 }
 
 // -----------------------------------------------------------------------------
@@ -255,10 +231,6 @@ function initializeDatatable () {
     'ordering'     : true,
     'info'         : true,
     'autoWidth'    : false,
-
-    // Parameters
-    'pageLength'   : tableRows,
-    'order'        : tableOrder,
     'order'       : [[0,'asc']],
 
 
@@ -317,21 +289,6 @@ function initializeDatatable () {
       "info":           "<?php echo $pia_lang['Device_Table_info']; ?>",
     }
   });
-
-  // Save cookie Rows displayed, and Parameters rows & order
-  $('#tableDevices').on( 'length.dt', function ( e, settings, len ) {
-    setParameter (parTableRows, len);
-  } );
-
-  $('#tableDevices').on( 'order.dt', function () {
-    setParameter (parTableOrder, JSON.stringify (table.order()) );
-    setCookie ('devicesList',JSON.stringify (table.column(7, { 'search': 'applied' }).data().toArray()) );
-  } );
-
-  $('#tableDevices').on( 'search.dt', function () {
-    setCookie ('devicesList', JSON.stringify (table.column(7, { 'search': 'applied' }).data().toArray()) );
-  } );
-
 };
 
 // -----------------------------------------------------------------------------
