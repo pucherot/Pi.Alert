@@ -10,28 +10,11 @@
 <?php
 error_reporting(0);
 
-// Get Version from version.conf
 $conf_file = '../config/version.conf';
 $conf_data = parse_ini_file($conf_file);
 
-// ###################################
-// ## GUI settings processing start
-// ###################################
-if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;}
-if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;}
-
-foreach (glob("../db/setting_skin*") as $filename) {
-	$pia_skin_selected = str_replace('setting_', '', basename($filename));
-}
-if (strlen($pia_skin_selected) == 0) {$pia_skin_selected = 'skin-blue';}
-
-foreach (glob("../db/setting_language*") as $filename) {
-	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
-}
-if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
-require 'php/templates/language/' . $pia_lang_selected . '.php';
-
 require 'header_func.php';
+require 'php/templates/language/' . $pia_lang_selected . '.php';
 
 // Web Services Config
 get_webservices_config();
@@ -39,9 +22,6 @@ get_webservices_config();
 // ICMP Monitor Config
 get_icmpscan_config();
 
-// ###################################
-// ## GUI settings processing end
-// ###################################
 ?>
 
 <!DOCTYPE html>
@@ -217,7 +197,6 @@ echo '<span id="status"><i class="fa fa-w fa-circle text-' . $_SESSION['arpscan_
 format_sysloadavg(sys_getloadavg());
 
 echo '<br/>';
-
 format_MemUsage(getMemUsage());
 
 echo '<br/>';

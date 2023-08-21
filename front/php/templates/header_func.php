@@ -1,9 +1,5 @@
 <?php
-//require 'php/server/journal.php';
-//require 'php/server/db.php';
-
 // Delete WebGUI Reports ---------------------------------------------------------------
-
 function useRegex($input) {
 	$regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
 	return preg_match($regex, $input);
@@ -28,12 +24,9 @@ function count_webgui_reports() {
 	if ($report_counter == 0) {unset($report_counter);}
 	return $report_counter;
 }
-
 // Pause Arp Scan Section ---------------------------------------------------------------
-
 function arpscanstatus() {
 	global $pia_lang;
-	#if (!file_exists('../db/setting_stoparpscan')) {
 	if (!file_exists('../db/setting_stoppialert')) {
 		$execstring = 'ps aux | grep "~/pialert/back/pialert.py 1" 2>&1';
 		$pia_arpscans = "";
@@ -43,14 +36,12 @@ function arpscanstatus() {
 		$_SESSION['arpscan_sidebarstate'] = 'Active';
 		$_SESSION['arpscan_sidebarstate_light'] = 'green-light fa-gradient-green';
 	} else {
-		#$_SESSION['arpscan_timerstart'] = date("H:i:s", filectime('../db/setting_stoparpscan'));
 		$_SESSION['arpscan_timerstart'] = date("H:i:s", filectime('../db/setting_stoppialert'));
 		$_SESSION['arpscan_result'] = '<span style="color:red;">arp-Scan ' . $pia_lang['Maintenance_arp_status_off'] . '</span>';
 		$_SESSION['arpscan_sidebarstate'] = 'Disabled&nbsp;&nbsp;&nbsp;(' . $_SESSION['arpscan_timerstart'] . ')';
 		$_SESSION['arpscan_sidebarstate_light'] = 'red fa-gradient-red';
 	}
 }
-
 // Systeminfo in Sidebar ---------------------------------------------------------------
 function getTemperature() {
 	if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
@@ -173,7 +164,6 @@ function get_webservices_config() {
 		$_SESSION['Scan_WebServices'] = True;
 	} else { $_SESSION['Scan_WebServices'] = False;}
 }
-
 // ICPMScan Config ---------------------------------------------------------------
 function get_icmpscan_config() {
 	$config_file = "../config/pialert.conf";
@@ -184,7 +174,6 @@ function get_icmpscan_config() {
 		$_SESSION['ICMPScan'] = True;
 	} else { $_SESSION['ICMPScan'] = False;}
 }
-
 // ICPMScan Menu Items ---------------------------------------------------------------
 function toggle_icmpscan_menu($section) {
 	global $pia_lang;
@@ -196,37 +185,44 @@ function toggle_icmpscan_menu($section) {
               </li>';
 	}
 }
-
 // Back button for details pages ---------------------------------------------------------------
 function insert_back_button() {
 	$pagename = basename($_SERVER['PHP_SELF']);
-
 	if ($pagename == 'serviceDetails.php') {
 		$backto = 'services.php';
 	}
-
 	if ($pagename == 'deviceDetails.php') {
 		$backto = 'devices.php';
 	}
-
 	if ($pagename == 'icmpmonitorDetails.php') {
 		$backto = 'icmpmonitor.php';
 	}
-
 	if (isset($backto)) {
 		echo '<a id="navbar-back-button" href="./' . $backto . '" role="button" style="">
         <i class="fa fa-chevron-left"></i>
       </a>';
 	}
 }
-
 // Adjust Logo Color ---------------------------------------------------------------
 function set_iconcolor_for_skin($skinname) {
-	//echo $skinname;
-	//$PIALERTLOGO_LINK = 'pialertLogoWhite';
 	if ($skinname == 'skin-black-light' || $skinname == 'skin-black') {
 		return 'pialertLogoBlack';
 	} else {return 'pialertLogoWhite';}
 
 }
+// Darkmode ---------------------------------------------------------------
+if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;}
+// Arp Histroy Graph ---------------------------------------------------------------
+if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;}
+// Theme ---------------------------------------------------------------
+foreach (glob("../db/setting_skin*") as $filename) {
+	$pia_skin_selected = str_replace('setting_', '', basename($filename));
+}
+if (strlen($pia_skin_selected) == 0) {$pia_skin_selected = 'skin-blue';}
+// Language ---------------------------------------------------------------
+foreach (glob("../db/setting_language*") as $filename) {
+	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
+}
+if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
+
 ?>
