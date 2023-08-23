@@ -25,7 +25,7 @@ Fetching bot info...
 
 6. Fetching Chat ID
 ```
-Okay! @Pi_AlertBot will listen for any messages in PMs and group chats it is invited to.
+Okay! @<Bot_NAME> will listen for any messages in PMs and group chats it is invited to.
 Waiting for messages to arrive...
 Got Message '<The message you just sent to the bot>' from @ in private chat THE_CHAT_ID
 Added new chat @!
