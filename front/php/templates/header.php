@@ -16,12 +16,6 @@ $conf_data = parse_ini_file($conf_file);
 require 'header_func.php';
 require 'php/templates/language/' . $pia_lang_selected . '.php';
 
-// Web Services Config
-get_webservices_config();
-
-// ICMP Monitor Config
-get_icmpscan_config();
-
 ?>
 
 <!DOCTYPE html>

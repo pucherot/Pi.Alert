@@ -154,26 +154,6 @@ function toggle_webservices_menu($section) {
 	        </li>';
 	}
 }
-// Web Services Config ---------------------------------------------------------------
-function get_webservices_config() {
-	$config_file = "../config/pialert.conf";
-	$config_file_lines = file($config_file);
-	$config_file_lines_bypass = array_values(preg_grep('/^SCAN_WEBSERVICES\s.*/', $config_file_lines));
-	$scan_services_line = explode("=", $config_file_lines_bypass[0]);
-	if (strtolower(trim($scan_services_line[1])) == "true") {
-		$_SESSION['Scan_WebServices'] = True;
-	} else { $_SESSION['Scan_WebServices'] = False;}
-}
-// ICPMScan Config ---------------------------------------------------------------
-function get_icmpscan_config() {
-	$config_file = "../config/pialert.conf";
-	$config_file_lines = file($config_file);
-	$config_file_lines_bypass = array_values(preg_grep('/^ICMPSCAN_ACTIVE\s.*/', $config_file_lines));
-	$scan_services_line = explode("=", $config_file_lines_bypass[0]);
-	if (strtolower(trim($scan_services_line[1])) == "true") {
-		$_SESSION['ICMPScan'] = True;
-	} else { $_SESSION['ICMPScan'] = False;}
-}
 // ICPMScan Menu Items ---------------------------------------------------------------
 function toggle_icmpscan_menu($section) {
 	global $pia_lang;
@@ -185,6 +165,17 @@ function toggle_icmpscan_menu($section) {
               </li>';
 	}
 }
+// Parse Config file
+function get_config_parmeter($config_param) {
+	$configContent = file_get_contents('../config/pialert.conf');
+	$configContent = preg_replace('/^\s*#.*$/m', '', $configContent);
+	$configArray = parse_ini_string($configContent);
+	if (isset($configArray[$config_param])) {return $configArray[$config_param];} else {return false;}
+}
+// Set Session Vars
+if (get_config_parmeter('ICMPSCAN_ACTIVE') == 1) {$_SESSION['ICMPScan'] = True;} else { $_SESSION['ICMPScan'] = False;}
+if (get_config_parmeter('SCAN_WEBSERVICES') == 1) {$_SESSION['Scan_WebServices'] = True;} else { $_SESSION['Scan_WebServices'] = False;}
+
 // Back button for details pages ---------------------------------------------------------------
 function insert_back_button() {
 	$pagename = basename($_SERVER['PHP_SELF']);

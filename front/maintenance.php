@@ -39,22 +39,18 @@ require 'php/server/journal.php';
 
 <?php
 // Get API-Key ------------------------------------------------------------------
-$CONFIG_FILE_SOURCE = "../config/pialert.conf";
-$CONFIG_FILE_KEY_LINE = file($CONFIG_FILE_SOURCE);
-$CONFIG_FILE_KEY_VALUE = array_values(preg_grep('/^PIALERT_APIKEY\s.*/', $CONFIG_FILE_KEY_LINE));
-if ($CONFIG_FILE_KEY_VALUE != False) {
-	$APIKEY_LINE = explode("'", $CONFIG_FILE_KEY_VALUE[0]);
-	$APIKEY = trim($APIKEY_LINE[1]);
-} else { $APIKEY = $pia_lang['Maintenance_Tool_setapikey_false'];}
+$APIKEY = get_config_parmeter('PIALERT_APIKEY');
+if ($APIKEY == "") {$APIKEY = $pia_lang['Maintenance_Tool_setapikey_false'];}
 
 // Get Ignore List ------------------------------------------------------------------
-$CONFIG_FILE_KEY_VALUE = array_values(preg_grep('/^MAC_IGNORE_LIST\s.*/', $CONFIG_FILE_KEY_LINE));
-if ($CONFIG_FILE_KEY_VALUE != False) {
-	$MAC_IGNORE_LIST_LINE = substr($CONFIG_FILE_KEY_VALUE[0], (strpos($CONFIG_FILE_KEY_VALUE[0], "=") + 1));
+$MAC_IGNORE_LIST_LINE = get_config_parmeter('MAC_IGNORE_LIST');
+if ($MAC_IGNORE_LIST_LINE == "") {$MAC_IGNORE_LIST = $pia_lang['Maintenance_Tool_ignorelist_false'];} else {
 	$MAC_IGNORE_LIST = str_replace("[", "", str_replace("]", "", str_replace("'", "", trim($MAC_IGNORE_LIST_LINE))));
-} else { $MAC_IGNORE_LIST = $pia_lang['Maintenance_Tool_ignorelist_false'];}
+}
 
 // Get Notification Settings ------------------------------------------------------------------
+$CONFIG_FILE_SOURCE = "../config/pialert.conf";
+$CONFIG_FILE_KEY_LINE = file($CONFIG_FILE_SOURCE);
 $CONFIG_FILE_FILTER_VALUE_ARP = array_values(preg_grep("/(REPORT_MAIL |REPORT_NTFY |REPORT_WEBGUI |REPORT_PUSHSAFER |REPORT_PUSHOVER |REPORT_TELEGRAM )/i", $CONFIG_FILE_KEY_LINE));
 $CONFIG_FILE_FILTER_VALUE_WEB = array_values(preg_grep("/(REPORT_MAIL_WEBMON|REPORT_NTFY_WEBMON|REPORT_WEBGUI_WEBMON|REPORT_PUSHSAFER_WEBMON|REPORT_PUSHOVER_WEBMON |REPORT_TELEGRAM_WEBMON)/i", $CONFIG_FILE_KEY_LINE));
 
@@ -125,7 +121,7 @@ if (sizeof($LATEST_FILES) == 0) {
 
 // Aprscan read Timer -----------------------------------------------------------------
 function read_arpscan_timer() {
-	$file = '../db/setting_stoparpscan';
+	$file = '../db/setting_stoppialert';
 	if (file_exists($file)) {
 		$timer_arpscan = file_get_contents($file, true);
 		if ($timer_arpscan == 10 || $timer_arpscan == 15 || $timer_arpscan == 30) {
