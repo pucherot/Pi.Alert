@@ -6,14 +6,25 @@ In this description, I assume that devices have already been detected in the Dev
 
 ### First start
 
-When you open the "Network" page for the first time, it is almost empty. There are two boxes that you can expand. The "Manage Devices" box allows you to create, 
-edit and remove network components. Editing the components on this page does not affect already detected devices in the devices list.
+When you open the "Network" page for the first time, it is almost empty. When you open the page for the 1st time it is almost empty. Under a narrow empty box there 
+is another one, which has the title "Unassigned devices" and can be expanded. This box lists all devices that are not yet assigned to a network component.
+
+![Manage unassigned Devices][Manage_unassigned_Devices]
+
+On the top left, next to the page heading "Network Overview", there is a green "+" button with which you can switch to edit mode. Editing the components on this page 
+does not affect already detected devices in the devices list. **We now switch to the edit mode.**
+
+### Editing mode
+
+The edit mode also consists of 2 large areas, which in turn are divided into 3 sub-areas each. For differentiation, these sub-areas are highlighted in different colors.
+
+#### Manage Devices
 
 ![Manage Net Devices][Manage_Net_Devices]
 
-The box "Unassigned devices" lists all devices that are not yet assigned to a network component.
+#### Manage Non-Scannable Devices
 
-![Manage unassigned Devices][Manage_unassigned_Devices]
+![Manage Non Scanable Net Devices][Manage_NonScanable_Net_Devices]
 
 ### Manage Devices
 
@@ -94,7 +105,7 @@ You can also assign multiple devices in manual. The syntax for this is then "MAC
 Mac address can be selected from the drop-down list. Further MAC addresses must be entered manually.
 
 ***Attention:***<br>
-***Switches which do not appear in the devices list (unmanaged switches) cannot be assigned to any other network component, not even via the "manual port configuration".***
+***Switches (e. g. unmanaged switches) or Routers which do not appear in the devices list cannot be assigned to any other network component, not even via the "manual port configuration".***
 
 
 #### <ins>Create a device WLAN:</ins>
@@ -132,7 +143,8 @@ there are, for example, servers that are configured with link aggregation, which
 
 [Back](https://github.com/leiweibau/Pi.Alert#front)
 
-[Manage_Net_Devices]:                 ./img/netrel_management_1.jpg                "Manage Net Devices"
+[Manage_Net_Devices]:                 ./img/netrel_management_1.png                "Manage Net Devices"
+[Manage_NonScanable_Net_Devices]:     ./img/netrel_management_2.png                "Manage Non Scanable Net Devices"
 [Manage_Net_Devices_add_1]:           ./img/netrel_management_add_1.jpg            "Manage Net Devices - add 1"
 [Manage_Net_Devices_add_2]:           ./img/netrel_management_add_2.jpg            "Manage Net Devices - add 2"
 [Manage_Net_Devices_add_3]:           ./img/netrel_management_add_3.jpg            "Manage Net Devices - add 3"
