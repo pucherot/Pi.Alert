@@ -636,16 +636,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Löscht die sudoers Dateien für den User www-data und den User, unter dem Pi.Alert installiert ist</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan benötigt sudo-Berechtigungen</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Wenn ein Nicht-Standard-Benutzer verwendet wird, z. B. piadmin, schlägt der arp-scan im Cronjob fehl.<br>
-											 Dazu wird die folgende Datei erstellt: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-arpscan</span><br>
-											 Diese Datei wird geöffnet und mit folgendem Inhalt abgespeichert ("piadmin" ist durch den entsprechenden Usernamen zu ersetzen):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan</span>';
-
-$pia_lang['HelpFAQ_Cat_General_108_head'] = '<span class="text-maroon help_faq_code">"SCAN_ROGUE_DHCP" benötigt sudo-Berechtigungen</span>';
-$pia_lang['HelpFAQ_Cat_General_108_text'] = 'Wenn ein Nicht-Standard-Benutzer verwendet wird, z. B. piadmin, schlägt der Scan nach unbekannten DHCP-Servern im Cronjob fehl.<br>
-											 Dazu wird die folgende Datei erstellt: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-nmapscan</span><br>
-											 Diese Datei wird geöffnet und mit folgendem Inhalt abgespeichert ("piadmin" ist durch den entsprechenden Usernamen zu ersetzen):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/bin/nmap</span>';
-
+$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Einige Pi.Alert Komponenten benötigen "sudo" Berechtigung</span>';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Bestimmte Funktionen von Pi.Alert, wie das Versenden von Testnachrichten, das Erkennen von fremden DHCP Servern oder die Erkennung von Geräten mittels arp-scan,
+											 benötigen "sudo" Berechtigungen. Hier ist eine Konfigurationsanpassung notwendig. Führe dazu im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span>
+											 den Befehl <span class="text-maroon help_faq_code">./pialert-cli set_sudoers</span> aus.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon help_faq_code">pialert.conf</span> befindet sich im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 In dieser Konfigurationsdatei können viele Funktionen von Pi.Alert ensprechend der persönlichen Wünsche eingestellt werden.
@@ -668,8 +662,13 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											        <td class="help_table_gen_b">Aktiviert bzw. deaktiviert den Passwortschutz der Weboberfläche von Pi.Alert</td></tr>
 											    <tr><td class="help_table_gen_a">PIALERT_WEB_PASSWORD</td>
 											        <td class="help_table_gen_b">Dieses Feld beinhaltet das "gehashte" Passwort für die Weboberfläche. Das Passwort kann nicht im Klartext hier eingetragen, sondern muss mit <span class="text-maroon help_faq_code">pialert-cli</span> gesetzt werden</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Other Modules</td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_WEBSERVICES</td>
 											        <td class="help_table_gen_b">Hier kann die Funktion zur Überwachung von Webservices an- (<span class="text-maroon help_faq_code">True</span>) bzw. ausgeschaltet (<span class="text-maroon help_faq_code">False</span>) werden</td></tr>
+											    <tr><td class="help_table_gen_a">ICMPSCAN_ACTIVE</td>
+											        <td class="help_table_gen_b">Aktivierung oder Deaktivierung des ICMP Monitoring</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Special Protocol Scanning</td></tr>

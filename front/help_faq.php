@@ -131,16 +131,6 @@ $trip_div_close = '
               <?php echo $pia_lang['HelpFAQ_Cat_General_106_text']; ?>
         <?php echo $trip_div_close; ?>
 
-        <?php echo $help_faq_toptemp; ?>
-              <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse108">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_108_head']; ?></a>
-            </h4>
-          </div>
-          <div id="collapse108" class="panel-collapse collapse" style="font-size: 16px;">
-            <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_108_text']; ?>
-        <?php echo $trip_div_close; ?>
-
       </div>
 
 <!-- Devices -->

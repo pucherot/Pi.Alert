@@ -667,14 +667,9 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td>
 											    </tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">arp-scan needs sudo privledges</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'When a non-standard user is used, e.g. piadmin then the arp-scan fails in the cronjob.<br>
-											 A file needs to be created: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-arpscan</span><br>
-											 This file is opened and saved with the following content ("piadmin" is to be replaced by the corresponding user name):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan</span>';
-$pia_lang['HelpFAQ_Cat_General_108_head'] = '<span class="text-maroon help_faq_code">"SCAN_ROGUE_DHCP" needs sudo privledges</span>';
-$pia_lang['HelpFAQ_Cat_General_108_text'] = 'When a non-standard user is used, e.g. piadmin then the scan for unknown dhcp servers fails in the cronjob.<br>
-											 A file needs to be created: <span class="text-maroon help_faq_code">/etc/sudoers.d/pialert-nmapscan</span><br>
-											 This file is opened and saved with the following content ("piadmin" is to be replaced by the corresponding user name):<br><span class="text-maroon help_faq_code">piadmin ALL=(ALL) NOPASSWD: /usr/bin/nmap</span>';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Some Pi.Alert components need "sudo" permission</span>';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certain functions of Pi.Alert, like sending test messages, detecting foreign DHCP servers or detecting devices using arp-scan, require "sudo" permissions. Here a configuration adjustment is necessary.
+											 Execute the command <span class="text-maroon help_faq_code">./pialert-cli set_sudoers</span> in the directory <span class="text-maroon help_faq_code">~/pialert/back</span>.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon help_faq_code">pialert.conf</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 In this configuration file many functions of Pi.Alert can be set according to the personal wishes. Since the possibilities are various, I would like to give a
@@ -697,8 +692,13 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											        <td class="help_table_gen_b">Enables or disables the password protection of the Pi.Alert web interface.</td></tr>
 											    <tr><td class="help_table_gen_a">PIALERT_WEB_PASSWORD</td>
 											        <td class="help_table_gen_b">This field contains the hashed password for the web interface. The password cannot be entered here in plain text, but must be set with <span class="text-maroon help_faq_code">pialert-cli</span></td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Other Modules</td></tr>
 											    <tr><td class="help_table_gen_a">SCAN_WEBSERVICES</td>
 											        <td class="help_table_gen_b">Here the function for monitoring web services can be switched on (<span class="text-maroon help_faq_code">True</span>) or off (<span class="text-maroon help_faq_code">False</span>)</td></tr>
+											    <tr><td class="help_table_gen_a">ICMPSCAN_ACTIVE</td>
+											        <td class="help_table_gen_b">ICMP Monitoring on/off</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Special Protocol Scanning</td></tr>
