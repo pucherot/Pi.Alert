@@ -66,17 +66,17 @@ $net_interfaces_rx = explode("\n", trim($network_result));
 $network_result = shell_exec("cat /proc/net/dev | tail -n +3 | awk '{print $10}'");
 $net_interfaces_tx = explode("\n", trim($network_result));
 //hdd stat
-$hdd_result = shell_exec("df | awk '{print $1}'");
+$hdd_result = shell_exec("sudo df | awk '{print $1}'");
 $hdd_devices = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | awk '{print $2}'");
+$hdd_result = shell_exec("sudo df | awk '{print $2}'");
 $hdd_devices_total = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | awk '{print $3}'");
+$hdd_result = shell_exec("sudo df | awk '{print $3}'");
 $hdd_devices_used = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | awk '{print $4}'");
+$hdd_result = shell_exec("sudo df | awk '{print $4}'");
 $hdd_devices_free = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | awk '{print $5}'");
+$hdd_result = shell_exec("sudo df | awk '{print $5}'");
 $hdd_devices_percent = explode("\n", trim($hdd_result));
-$hdd_result = shell_exec("df | awk '{print $6}'");
+$hdd_result = shell_exec("sudo df | awk '{print $6}'");
 $hdd_devices_mount = explode("\n", trim($hdd_result));
 //usb devices
 $usb_result = shell_exec("lsusb");
@@ -205,7 +205,7 @@ for ($x = 0; $x < sizeof($hdd_devices); $x++) {
 		echo '</div>';
 	}
 }
-echo '<br>' . $pia_lang['SysInfo_storage_note'];
+//echo '<br>' . $pia_lang['SysInfo_storage_note'];
 echo '      </div>
       </div>';
 
