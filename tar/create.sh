@@ -19,7 +19,7 @@ tar tvf pialert/tar/pialert_latest.tar | wc -l
 rm pialert/tar/pialert_*.tar
 
 # ------------------------------------------------------------------------------
-tar cvf pialert/tar/pialert_latest.tar --no-xattrs --exclude="pialert/tar" --exclude="pialert/.git" --exclude="pialert/.github" --exclude="pialert/.gitignore" --exclude=".DS_Store" pialert | wc -l
+tar cvf pialert/tar/pialert_latest.tar --no-mac-metadata --no-xattrs --exclude="pialert/tar" --exclude="pialert/.git" --exclude="pialert/.github" --exclude="pialert/.gitignore" --exclude=".DS_Store" pialert | wc -l
 
 #ln -s pialert_$PIALERT_VERSION.tar pialert/package/pialert_latest.tar
 #ls -l pialert/package/pialert*.tar

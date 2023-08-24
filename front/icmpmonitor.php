@@ -1,11 +1,4 @@
 <?php
-session_start();
-error_reporting(0);
-
-if ($_SESSION["login"] != 1) {
-	header('Location: ./index.php');
-	exit;
-}
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector
@@ -14,6 +7,13 @@ if ($_SESSION["login"] != 1) {
 //------------------------------------------------------------------------------
 //  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
+session_start();
+error_reporting(0);
+
+if ($_SESSION["login"] != 1) {
+	header('Location: ./index.php');
+	exit;
+}
 
 require 'php/templates/header.php';
 require 'php/server/db.php';
@@ -139,7 +139,7 @@ OpenDB();
 
             <!-- box-header -->
             <div class="box-header">
-              <h3 id="tableDevicesTitle" class="box-title text-gray"><?php echo $pia_lang['Device_Title']; ?></h3>
+              <h3 id="tableDevicesTitle" class="box-title text-aqua"><?php echo $pia_lang['Device_Title']; ?></h3>
             </div>
 
             <div class="box-body table-responsive">
@@ -232,7 +232,6 @@ function initializeDatatable () {
     'info'         : true,
     'autoWidth'    : false,
     'order'       : [[0,'asc']],
-
 
     'columnDefs'   : [
       {visible:   false,         targets: [6,7] },

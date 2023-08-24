@@ -128,6 +128,9 @@ An also active developed Docker version of Pi.Alert can be found here: [jokob-sk
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
+If after installation you find that no devices are detected, or python errors appear in the scanlog, it may be that your user in use does not have certain "sudo" permissions. The command sudo `./pialert-cli set_sudoers` in 
+the directory `~/pialert/back` can be used to perform this user configuration.
+
 # Update
 <!--- --------------------------------------------------------------------- --->
 You can always check for a new release using the "Update Check" button in the sidebar. This check will show you if the GeoLite2 DB is 

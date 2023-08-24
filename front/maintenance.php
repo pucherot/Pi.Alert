@@ -9,7 +9,6 @@
 #  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 #--------------------------------------------------------------------------- -->
 
-
 <?php
 session_start();
 error_reporting(0);
@@ -51,7 +50,7 @@ if ($MAC_IGNORE_LIST_LINE == "") {$MAC_IGNORE_LIST = $pia_lang['Maintenance_Tool
 // Get Notification Settings ------------------------------------------------------------------
 $CONFIG_FILE_SOURCE = "../config/pialert.conf";
 $CONFIG_FILE_KEY_LINE = file($CONFIG_FILE_SOURCE);
-$CONFIG_FILE_FILTER_VALUE_ARP = array_values(preg_grep("/(REPORT_MAIL |REPORT_NTFY |REPORT_WEBGUI |REPORT_PUSHSAFER |REPORT_PUSHOVER |REPORT_TELEGRAM )/i", $CONFIG_FILE_KEY_LINE));
+$CONFIG_FILE_FILTER_VALUE_ARP = array_values(preg_grep("/(REPORT_MAIL|REPORT_NTFY|REPORT_WEBGUI|REPORT_PUSHSAFER|REPORT_PUSHOVER|REPORT_TELEGRAM)(?!_)/i", $CONFIG_FILE_KEY_LINE));
 $CONFIG_FILE_FILTER_VALUE_WEB = array_values(preg_grep("/(REPORT_MAIL_WEBMON|REPORT_NTFY_WEBMON|REPORT_WEBGUI_WEBMON|REPORT_PUSHSAFER_WEBMON|REPORT_PUSHOVER_WEBMON |REPORT_TELEGRAM_WEBMON)/i", $CONFIG_FILE_KEY_LINE));
 
 function format_notifications($source_array) {

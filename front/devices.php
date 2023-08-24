@@ -58,9 +58,7 @@ $Pia_Graph_Device_Arch = $graph_arrays[4];
   <div class="content-wrapper">
 
 <?php
-// #############################################################################
-// Start Bulk-Editor
-// #############################################################################
+// ################### Start Bulk-Editor #######################################
 if ($_REQUEST['mod'] == 'bulkedit') {
 	require 'php/templates/notification.php';
 
@@ -432,13 +430,9 @@ if ($_REQUEST['mod'] == 'bulkedit') {
   <!-- /.content-wrapper -->';
 
 	require 'php/templates/footer.php';
-// #############################################################################
-// End Bulk-Editor
-// #############################################################################
+// ################### End Bulk-Editor #########################################
 } else {
-// #############################################################################
-// Start Device List
-// #############################################################################
+// ################### Start Device List #######################################
 	?>
 
 <!-- Content header--------------------------------------------------------- -->
@@ -451,7 +445,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
-<!-- top small box 1 ------------------------------------------------------- -->
+<!-- top small boxes ------------------------------------------------------- -->
       <div class="row">
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getDevicesList('all');">
@@ -464,7 +458,6 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           </a>
         </div>
 
-<!-- top small box 2 ------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getDevicesList('connected');">
           <div class="small-box bg-green">
@@ -476,7 +469,6 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           </a>
         </div>
 
-<!-- top small box 3 ------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getDevicesList('favorites');">
           <div class="small-box bg-yellow">
@@ -488,7 +480,6 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           </a>
         </div>
 
-<!-- top small box 4 ------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getDevicesList('new');">
           <div class="small-box bg-yellow">
@@ -500,7 +491,6 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           </a>
         </div>
 
-<!-- top small box 5 ------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getDevicesList('down');">
           <div class="small-box bg-red">
@@ -512,7 +502,6 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           </a>
         </div>
 
-<!-- top small box 6 ------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="#" onclick="javascript: getDevicesList('archived');">
           <div class="small-box bg-gray top_small_box_gray_text">
@@ -549,11 +538,11 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
       </div>
       <script src="js/graph_online_history.js"></script>
       <script>
-        var pia_js_online_history_time = [<?php pia_graph_devices_data($Pia_Graph_Device_Time);?>];
-        var pia_js_online_history_ondev = [<?php pia_graph_devices_data($Pia_Graph_Device_Online);?>];
-        var pia_js_online_history_dodev = [<?php pia_graph_devices_data($Pia_Graph_Device_Down);?>];
-        var pia_js_online_history_ardev = [<?php pia_graph_devices_data($Pia_Graph_Device_Arch);?>];
-        pia_draw_graph_online_history(pia_js_online_history_time, pia_js_online_history_ondev, pia_js_online_history_dodev, pia_js_online_history_ardev);
+        var online_history_time = [<?php pia_graph_devices_data($Pia_Graph_Device_Time);?>];
+        var online_history_ondev = [<?php pia_graph_devices_data($Pia_Graph_Device_Online);?>];
+        var online_history_dodev = [<?php pia_graph_devices_data($Pia_Graph_Device_Down);?>];
+        var online_history_ardev = [<?php pia_graph_devices_data($Pia_Graph_Device_Arch);?>];
+        pia_draw_graph_online_history(online_history_time, online_history_ondev, online_history_dodev, online_history_ardev);
       </script>
 
 <?php
@@ -641,18 +630,14 @@ $file = '../db/setting_devicelist';
   </div>
   <!-- /.content-wrapper -->
 
-
-<!-- ----------------------------------------------------------------------- -->
 <?php
 require 'php/templates/footer.php';
 	?>
 
-
-<!-- ----------------------------------------------------------------------- -->
 <!-- Datatable -->
-  <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-  <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 
 <!-- page script ----------------------------------------------------------- -->
@@ -665,7 +650,6 @@ require 'php/templates/footer.php';
 
   // Read parameters & Initialize components
   main();
-
 
 // -----------------------------------------------------------------------------
 function main () {
@@ -831,7 +815,6 @@ function getDevicesTotals () {
   } );
 }
 
-
 // -----------------------------------------------------------------------------
 function getDevicesList (status) {
   // Save status selected
@@ -861,7 +844,5 @@ function getDevicesList (status) {
 
 <?php
 }
-// #############################################################################
-// End Device List
-// #############################################################################
+// ################### End Device List #########################################
 ?>

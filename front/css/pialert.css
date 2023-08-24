@@ -5,111 +5,38 @@
 #  pialert.css - Front module. CSS styles
 #-------------------------------------------------------------------------------
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 ----------------------------------------------------------------------------- */
 
-/* -----------------------------------------------------------------------------
-   Global Variables
------------------------------------------------------------------------------ */
+/* -----------------  Global Variables -------------------------------------- */
 :root {
     --color-aqua: #00c0ef;
     --color-green: #00a65a;
     --color-yellow: #f39c12;
     --color-red: #dd4b39;
 }
-
-/* -----------------------------------------------------------------------------
-   Text Classes
------------------------------------------------------------------------------ */
-.text-center {
-    text-align: center;
-}
-
-.text-right {
-    text-align: right;
-}
-
-.text-white {
-    color: white;
-}
-
-.text-gray50 {
-    color: #808080;
-}
-
-.text-gray-20 {
-    color: rgba(192, 192, 192, 20%);
-}
-
-.text-aqua-20 {
-    color: rgba(0, 192, 239, 20%);
-}
-
-.text-green-20 {
-    color: rgba(0, 166, 90, 20%);
-}
-
-.text-yellow-20 {
-    color: rgba(243, 156, 18, 20%);
-}
-
-.text-red-20 {
-    color: rgba(221, 75, 57, 20%);
-}
-
-.no-border {
-    border: none;
-}
-
-/* -----------------------------------------------------------------------------
-   Main Sections
------------------------------------------------------------------------------ */
-.content-header {
-    padding-top: 5px;
-}
-
-.content-header>.breadcrumb {
-    background: transparent;
-}
-
-.content {
-    padding-bottom: 0px;
-}
-
-.box-body {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-
-.main-footer {
-    padding: 5px;
-    color: gray;
-}
-
-/* -----------------------------------------------------------------------------
-   Customized Main Menu
------------------------------------------------------------------------------ */
-.main-header .logo {
-    /* width: 150px; */
-    width: 170px;
-}
-
-.main-header>.navbar {
-    /* margin-left: 150px; */
-    margin-left: 170px;
-}
-
-.main-sidebar,
-.left-side {
-    /* width: 150px; */
-    width: 170px;
-}
-
-.content-wrapper,
-.right-side,
-.main-footer {
-    /* margin-left: 150px; */
-    margin-left: 170px;
-}
+/* -----------------  Text Classes ------------------------------------------ */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-white { color: white; }
+.text-gray50 { color: #808080;m}
+.text-gray-20 { color: rgba(192, 192, 192, 20%);}
+.text-aqua-20 { color: rgba(0, 192, 239, 20%);}
+.text-green-20 { color: rgba(0, 166, 90, 20%);}
+.text-yellow-20 { color: rgba(243, 156, 18, 20%);}
+.text-red-20 { color: rgba(221, 75, 57, 20%);}
+.no-border { border: none;}
+/* -----------------  Main Sections ----------------------------------------- */
+.content-header { padding-top: 5px; }
+.content-header>.breadcrumb { background: transparent; }
+.content { padding-bottom: 0px; }
+.box-body { padding-top: 0px; padding-bottom: 0px; }
+.main-footer { padding: 5px; color: gray; }
+/* -----------------  Customized Main Menu ---------------------------------- */
+.main-header .logo { width: 170px; }
+.main-header>.navbar { margin-left: 170px; }
+.main-sidebar, .left-side { width: 170px; }
+.content-wrapper, .right-side, .main-footer { margin-left: 170px; }
 
 @media (max-width: 767px) {
     .main-header .logo {
@@ -141,134 +68,104 @@
     -o-transform: translate(170px, 0);
     transform: translate(170px, 0)
 }
-
 .skin-yellow-light .sidebar-menu>li>a:hover {
     background: #f0f0f0;
     border-left-color: rgb(243, 156, 18);
 }
-
 .skin-yellow-light .sidebar-menu>li.active>a {
     background: #e0e0e0;
     border-left-color: rgb(243, 156, 18);
 }
-
-/* -----------------------------------------------------------------------------
-   Customized Boxes
------------------------------------------------------------------------------ */
+/* ----------------- Customized Boxes --------------------------------------- */
 .box-transparent {
     position: relative;
     margin-bottom: 20px;
     width: 100%;
 }
-
 .pa-small-box-2 .inner h3 {
     margin-left: 0em;
     margin-bottom: 1.3em;
 }
-
 .pa-small-box-footer {
     color: white !important;
     font-size: 18px;
 }
-
 /* -------------------------------------------------------------------------- */
 .pa-small-box-aqua {
     /* border-top: 3px solid #00c0ef; */
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 }
-
 .pa-small-box-aqua .inner {
     color: #00c0ef;
     background-color: #FFFFFF;
 }
-
 .pa-small-box-aqua .inner h3 {
     margin-left: 0.5em;
 }
-
 .pa-small-box-aqua .icon {
     color: #00c0ef;
 }
-
 /* -------------------------------------------------------------------------- */
 .pa-small-box-green {
     /* border-top: 3px solid #00a65a; */
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 }
-
 .pa-small-box-green .inner {
     color: #00a65a;
     background-color: #FFFFFF;
 }
-
 .pa-small-box-green .inner h3 {
     margin-left: 0.5em;
 }
-
 .pa-small-box-green .icon {
     color: #00a65a;
 }
-
 /* -------------------------------------------------------------------------- */
 .pa-small-box-yellow {
     /* border-top: 3px solid #f39c12; */
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 }
-
 .pa-small-box-yellow .inner {
     color: #f39c12;
     background-color: #FFFFFF;
 }
-
 .pa-small-box-yellow .inner h3 {
     margin-left: 0.5em;
 }
-
 .pa-small-box-yellow .icon {
     color: #f39c12;
 }
-
 /* -------------------------------------------------------------------------- */
 .pa-small-box-red {
     /* border-top: 3px solid #dd4b39; */
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 }
-
 .pa-small-box-red .inner {
     color: #dd4b39;
     background-color: #FFFFFF;
 }
-
 .pa-small-box-red .inner h3 {
     margin-left: 0.5em;
 }
-
 .pa-small-box-red .icon {
     color: #dd4b39;
 }
-
 /* -------------------------------------------------------------------------- */
 .pa-small-box-gray {
     /* border-top: 3px solid #a0a0a0; */
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
 }
-
 .pa-small-box-gray .inner {
     color: #a0a0a0;
     background-color: #FFFFFF;
 }
-
 .pa-small-box-gray .inner h3 {
     margin-left: 0.5em;
 }
-
 .pa-small-box-gray .icon {
     color: #a0a0a0;
 }
-
-/* -----------------------------------------------------------------------------
-   Customized Box Borders
------------------------------------------------------------------------------ */
+/* ----------------- Customized Box Borders --------------------------------- */
 /* .box.box-aqua {
     border-top-color: #00c0ef;
 }
@@ -285,80 +182,59 @@
     border-top-color: #dd4b39;
 } */
 
-/* -----------------------------------------------------------------------------
-   Custom Border
------------------------------------------------------------------------------ */
+/* ----------------- Custom Border ------------------------------------------ */
 .bottom-border-aqua {
     border-bottom-color: #00c0ef;
     border-bottom-style: solid;
     border-bottom-width: 3px
 }
-
 .bottom-border-primary {
     border-bottom-color: #3c8dbc;
     border-bottom-style: solid;
     border-bottom-width: 3px
 }
-
-/* -----------------------------------------------------------------------------
-   Customized Tabs
------------------------------------------------------------------------------ */
+/* ----------------- Customized Tabs ---------------------------------------- */
 .nav-tabs-custom {
     background: transparent;
 }
-
 .nav>li>a {
     position: relative;
     display: block;
     padding: 10px 10px;
 }
-
-/* -----------------------------------------------------------------------------
-   Customized Menu dropdown
------------------------------------------------------------------------------ */
+/* ----------------- Customized Menu dropdown ------------------------------- */
 .dropdown-menu {
     max-height: 250px;
     overflow-x: hidden;
     box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
 }
-
-/* -----------------------------------------------------------------------------
-   Default Table config
------------------------------------------------------------------------------ */
+/* ----------------- Default Table config ----------------------------------- */
 .table>tbody>tr>td {
     padding: 4px;
 }
-
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
     background-color: #FFFFD0;
 }
-
 .dataTables_info,
 .dataTables_paginate,
 .dataTables_length,
 .dataTables_filter {
     color: #B0B0B0;
 }
-
-/* -----------------------------------------------------------------------------
-   Customized buttons
------------------------------------------------------------------------------ */
+/* ----------------- Customized buttons ------------------------------------- */
 .pa-btn {
     padding: 10px;
     min-width: 90px;
 }
-
 .pa-btn-delete {
     border-color: #ffb060;
     background-color: #ffd080;
 }
-
 .pa-btn-delete:hover {
     border-color: #ffb060;
     background-color: #ffb060;
 }
-
 .pa-btn-records,
 .pa-btn-records:hover,
 .pa-btn-records:focus,
@@ -367,50 +243,36 @@
     background-color: #f4f4f4;
     cursor: default;
 }
-
-/* -----------------------------------------------------------------------------
-   Customized Full Calendar
------------------------------------------------------------------------------ */
+/* ----------------- Customized Full Calendar ------------------------------- */
 .fc h2 {
     font-size: 20px;
 }
-
 .fc-weekend {
     background-color: #FFF0E0;
 }
-
 .fc-normaldays {
     background-color: #FF0000;
 }
-
 .fc-sat {
     background-color: #FFF0E0;
 }
-
 .fc-sun {
     background-color: #FFF0E0;
 }
-
 .fc-resized-row {
     height: 26px !important;
 }
-
 .fc-transparent-border {
     border-Color: transparent !important;
 }
-
 .tooltip-inner {
     background-color: #606060;
     color: White;
 }
-
 .tooltip.right .tooltip-arrow {
     border-right: 5px solid #606060;
 }
-
-/* -----------------------------------------------------------------------------
-   Spin
------------------------------------------------------------------------------ */
+/* ----------------- Spin --------------------------------------------------- */
 .pa_semitransparent-panel {
     position: absolute;
     width: 100%; //calc (100% -40px);
@@ -423,7 +285,6 @@
     background-color: #fff;
     z-index: 99;
 }
-
 .pa_spinner {
     position: absolute;
     left: 0;
@@ -437,10 +298,7 @@
     background-color: #fff;
     z-index: 100;
 }
-
-/* -----------------------------------------------------------------------------
-   Notification float banner
------------------------------------------------------------------------------ */
+/* ----------------- Notification float banner ------------------------------ */
 .pa_alert_notification {
     text-align: center;
     font-size: large;
@@ -479,27 +337,21 @@
     background-position: center;
     height: 50px;
 }
-
 .nav-tabs-custom .tab-content {
   background-color: white;
 }
-
 .top_small_box_gray_text {
   color: white !important;
 }
-
 .bg-gray {
     background-color: #b2b6be !important;
 }
-
 .infobox_label {
     font-size: 16px !important;
 }
-
 .help_faq_code {
     font-weight: bold; margin-top: 10px; margin-bottom: 1px;
 }
-
 body.modal-open {
     overflow: hidden;
     position:fixed;
@@ -601,19 +453,13 @@ body.modal-open {
     background-color: #d58512;
     color: #FFF;
 }
-
-/* -----------------------------------------------------------------------------
-   Header
------------------------------------------------------------------------------ */
+/* ----------------- Header ------------------------------------------------- */
 #custom-menu-logout-button {background-color: #d73925; color: #FFF;}
 #navbar-reload-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
 #navbar-reload-button:hover {background-color: rgba(0, 0, 0, 0.1);}
 #navbar-back-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
 #navbar-back-button:hover {background-color: rgba(0, 0, 0, 0.1);}
-
-/* -----------------------------------------------------------------------------
-   System Info
------------------------------------------------------------------------------ */
+/* ----------------- System Info -------------------------------------------- */
 .sysinfo_headline {color: #00c0ef;}
 .sysinfo_gerneral_a {font-weight: bold; padding-top: 2px; padding-bottom: 2px;}
 .sysinfo_gerneral_b {padding-left: 30px; padding-top: 2px; padding-bottom: 2px;}
@@ -624,10 +470,7 @@ body.modal-open {
 .sysinfo_network_value {display: inline-block; width: 120px; text-align: right;}
 .sysinfo_usbdev_a {font-weight: bold; white-space: nowrap; padding-top: 2px; padding-bottom: 2px;}
 .sysinfo_usbdev_b {padding-left: 30px;  padding-top: 2px; padding-bottom: 2px;}
-
-/* -----------------------------------------------------------------------------
-   Maintenance
------------------------------------------------------------------------------ */
+/* ----------------- Maintenance -------------------------------------------- */
 .dbtools-button { display: inline-block; width: 160px; height: 73px; white-space: normal; word-wrap: break-word; font-size: 16px; padding: 4px;}
 .db_info_table_cell:nth-child(1) { background: white }
 .db_info_table_cell:nth-child(2) { background: white }
@@ -647,10 +490,7 @@ body.modal-open {
 #updatecheck {text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;}
 #configeditor {text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;}
 .configeditor_help {text-align: left; margin-top: 10px;}
-
-/* -----------------------------------------------------------------------------
-   Services
------------------------------------------------------------------------------ */
+/* ----------------- Services ----------------------------------------------- */
 .servicelist_entry {display: flex; width: 100%; margin-bottom: 5px; margin-top: 5px;}
 .servicebox_httpstat_hover {display: flex; width: 70px; height: 70px;}
 .servicebox_box {width: 70px; height: 70px; text-align: center;}
@@ -669,37 +509,24 @@ body.modal-open {
 .single_scan:hover {background-color: #aaa !important;}
 .servicelist_add_serv {display: inline-block; margin-top: -5px; margin-left: 15px;}
 .servicedet_button_space {margin-left:6px; margin-top:6px;}
-
-/* -----------------------------------------------------------------------------
-   Help FAQ
------------------------------------------------------------------------------ */
+/* ----------------- Help FAQ ----------------------------------------------- */
 .httpstatus_table_code {font-weight: 600; text-align: center; vertical-align: top}
 .httpstatus_table_text {padding-left: 15px;}
 .help_table_gen { margin-top: 20px; width:100%; border: solid 1px #aaa; border-collapse: collapse;}
 .help_table_gen_section {font-weight: 600; text-align: center; border: solid 1px #aaa; text-transform: uppercase; padding-top: 3px; padding-bottom: 3px;}
 .help_table_gen_a {vertical-align: top; padding-left:5px; padding-right:5px; border: solid 1px #aaa; padding-top: 5px; padding-bottom: 5px;}
 .help_table_gen_b {padding-left:5px; border: solid 1px #aaa; padding-top: 5px; padding-bottom: 5px;}
-
-/* -----------------------------------------------------------------------------
-   Bulk Editor
------------------------------------------------------------------------------ */
+/* ----------------- Bulk Editor -------------------------------------------- */
 .bulked_checkbox_label_alldown {
  background-image:linear-gradient(90deg,#5196d5,#dd7768);
  -webkit-background-clip: text;
  -webkit-text-fill-color: transparent;
 }
-.bulked_checkbox_label_all {
- color: #5196d5;
-}
-.bulked_checkbox_label_down {
- color: #dd7768;
-}
-
-.fixed_container {
-overflow:visible visible;
-}
-
-/* -----------------------------------------------------------------------------
-   Services
------------------------------------------------------------------------------ */
+.bulked_checkbox_label_all { color: #5196d5; }
+.bulked_checkbox_label_down { color: #dd7768; }
+.fixed_container { overflow:visible visible; }
+/* ----------------- Services ----------------------------------------------- */
 .icmplist_add_ip {display: inline-block; margin-top: -5px; margin-left: 15px;}
+/* ----------------- Network ------------------------------------------------ */
+.network_tab_icon {font-size: 16px; position: relative;}
+

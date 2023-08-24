@@ -664,7 +664,7 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Certaines composantes de Pi.Alert nécessitent l\'autorisation "sudo"</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certaines fonctionnalités de Pi.Alert, telles que l\'envoi de messages de test, la détection de serveurs DHCP étrangers ou l\'identification de périphériques à l\'aide de arp-scan,
 											 nécessitent des autorisations "sudo". Un ajustement de configuration est nécessaire pour cela. Pour ce faire, dans le répertoire <span class="text-maroon help_faq_code">~/pialert/back</span>,
-											 exécutez la commande <span class="text-maroon help_faq_code">./pialert-cli set_sudoers</span>.';
+											 exécutez la commande <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span>.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon help_faq_code">pialert.conf</span> se trouve dans le répertoire <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 Dans ce fichier de configuration, de nombreuses fonctions de Pi.Alert peuvent être configurées selon les préférences personnelles. Comme les possibilités sont variées, je souhaiterais donner une
