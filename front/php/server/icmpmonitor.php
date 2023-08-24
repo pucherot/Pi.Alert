@@ -1,11 +1,4 @@
 <?php
-session_start();
-
-if ($_SESSION["login"] != 1) {
-	header('Location: ../../index.php');
-	exit;
-}
-
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector
@@ -15,21 +8,24 @@ if ($_SESSION["login"] != 1) {
 //  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
 
+session_start();
+
+if ($_SESSION["login"] != 1) {
+	header('Location: ../../index.php');
+	exit;
+}
+
 foreach (glob("../../../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
 }
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 
-//------------------------------------------------------------------------------
-// External files
 require 'db.php';
 require 'util.php';
 require 'journal.php';
 require '../templates/language/' . $pia_lang_selected . '.php';
 
-//------------------------------------------------------------------------------
-//  Action selector
-//------------------------------------------------------------------------------
+// Action selector
 // Set maximum execution time to 1 minute
 ini_set('max_execution_time', '60');
 
@@ -57,9 +53,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Get List Totals
-//------------------------------------------------------------------------------
 function getICMPHostTotals() {
 	global $db;
 
@@ -76,14 +70,10 @@ function getICMPHostTotals() {
 	echo (json_encode($totals));
 }
 
-//------------------------------------------------------------------------------
 //  Get List
-//------------------------------------------------------------------------------
 function getDevicesList() {
 	global $db;
 
-	// SQL
-	//$condition = getDeviceCondition($_REQUEST['status']);
 	$sql = 'SELECT rowid,* FROM ICMP_Mon';
 	$result = $db->query($sql);
 	// arrays of rows
@@ -109,9 +99,7 @@ function getDevicesList() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Set ICMP Host Data
-//------------------------------------------------------------------------------
 function setICMPHostData() {
 	global $db;
 	global $pia_lang;
@@ -120,7 +108,6 @@ function setICMPHostData() {
 	if ($_REQUEST['icmp_type'] == '--') {unset($_REQUEST['icmp_type']);}
 	if ($_REQUEST['icmp_location'] == '--') {unset($_REQUEST['icmp_location']);}
 
-	// sql
 	$sql = 'UPDATE ICMP_Mon SET
 				icmp_hostname    = "' . quotes($_REQUEST['icmp_hostname']) . '",
                 icmp_type        = "' . quotes($_REQUEST['icmp_type']) . '",
@@ -132,10 +119,9 @@ function setICMPHostData() {
                 icmp_AlertDown   = "' . quotes($_REQUEST['alertdown']) . '",
                 icmp_Favorite    = "' . quotes($_REQUEST['favorit']) . '"
           WHERE icmp_ip="' . $_REQUEST['icmp_ip'] . '"';
-	// update Data
 
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		// Logging
 		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $_REQUEST['icmp_ip']);
@@ -145,13 +131,10 @@ function setICMPHostData() {
 		// Logging
 		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0004', '', $_REQUEST['icmp_ip']);
 		echo $pia_lang['BackICMP_mon_UpdICMPError'] . "\n\n$sql \n\n" . $db->lastErrorMsg();
-		//echo $_REQUEST['tags'];
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete Host
-//------------------------------------------------------------------------------
 function deleteICMPHost() {
 	global $db;
 	global $pia_lang;
@@ -165,7 +148,7 @@ function deleteICMPHost() {
 	$result = $db->query($sql);
 	$sql = 'DELETE FROM ICMP_Mon_Events WHERE icmpeve_ip="' . $hostip . '"';
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		// Logging
 		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $url);
@@ -178,9 +161,7 @@ function deleteICMPHost() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Insert Service
-//------------------------------------------------------------------------------
 function insertNewICMPHost() {
 	global $db;
 	global $pia_lang;
@@ -197,7 +178,7 @@ function insertNewICMPHost() {
 	$sql = 'INSERT INTO ICMP_Mon ("icmp_ip", "icmp_hostname", "icmp_LastScan", "icmp_PresentLastScan", "icmp_avgrtt", "icmp_AlertEvents", "icmp_AlertDown", "icmp_Favorite")
                          VALUES("' . $hostip . '", "' . $_REQUEST['icmp_hostname'] . '", "' . $check_timestamp . '", "0", "99999", "' . $_REQUEST['alertevents'] . '", "' . $_REQUEST['alertdown'] . '", "' . $_REQUEST['icmp_fav'] . '")';
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		// Logging
 		pialert_logging('a_031', $_SERVER['REMOTE_ADDR'], 'LogStr_0001', '', $hostip);
@@ -210,9 +191,7 @@ function insertNewICMPHost() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Toggle Web Service Monitoring
-//------------------------------------------------------------------------------
 function EnableICMPMon() {
 	global $pia_lang;
 
@@ -231,9 +210,7 @@ function EnableICMPMon() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Details
-//------------------------------------------------------------------------------
 function getEventsTotalsforICMP() {
 	global $db;
 

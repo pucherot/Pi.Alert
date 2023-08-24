@@ -1,11 +1,4 @@
 <?php
-session_start();
-
-if ($_SESSION["login"] != 1) {
-	header('Location: ../../index.php');
-	exit;
-}
-
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector
@@ -17,21 +10,24 @@ if ($_SESSION["login"] != 1) {
 //  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
 
+session_start();
+
+if ($_SESSION["login"] != 1) {
+	header('Location: ../../index.php');
+	exit;
+}
+
 foreach (glob("../../../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
 }
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 
-//------------------------------------------------------------------------------
-// External files
 require 'db.php';
 require 'util.php';
 require 'journal.php';
 require '../templates/language/' . $pia_lang_selected . '.php';
 
-//------------------------------------------------------------------------------
-//  Action selector
-//------------------------------------------------------------------------------
+// Action selector
 // Set maximum execution time to 15 seconds
 ini_set('max_execution_time', '30');
 
@@ -102,7 +98,6 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'BulkDeletion':BulkDeletion();
 		break;
-
 	case 'getDevicesTotals':getDevicesTotals();
 		break;
 	case 'getDevicesList':getDevicesList();
@@ -117,20 +112,16 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'getLocations':getLocations();
 		break;
-
 	case 'RestoreConfigFile':RestoreConfigFile();
 		break;
 	case 'BackupConfigFile':BackupConfigFile();
 		break;
-
 	default:logServerConsole('Action: ' . $action);
 		break;
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Query Device Data
-//------------------------------------------------------------------------------
 function getDeviceData() {
 	global $db;
 
@@ -192,9 +183,7 @@ function getDeviceData() {
 	echo (json_encode($deviceData));
 }
 
-//------------------------------------------------------------------------------
 //  Update Device Data
-//------------------------------------------------------------------------------
 function setDeviceData() {
 	global $db;
 	global $pia_lang;
@@ -222,9 +211,8 @@ function setDeviceData() {
                  dev_NewDevice            = "' . quotes($_REQUEST['newdevice']) . '",
                  dev_Archived             = "' . quotes($_REQUEST['archived']) . '"
           WHERE dev_MAC="' . $_REQUEST['mac'] . '"';
-	// update Data
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_UpdDev'];
 		// Logging
@@ -236,9 +224,7 @@ function setDeviceData() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete Device
-//------------------------------------------------------------------------------
 function deleteDevice() {
 	global $db;
 	global $pia_lang;
@@ -259,18 +245,15 @@ function deleteDevice() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete all devices with empty MAC addresses
-//------------------------------------------------------------------------------
 function deleteAllWithEmptyMACs() {
 	global $db;
 	global $pia_lang;
 
 	// sql
 	$sql = 'DELETE FROM Devices WHERE dev_MAC=""';
-	// execute sql
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelDev_b'];
 		// Logging
@@ -282,18 +265,14 @@ function deleteAllWithEmptyMACs() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete all devices with empty MAC addresses
-//------------------------------------------------------------------------------
 function deleteUnknownDevices() {
 	global $db;
 	global $pia_lang;
 
-	// sql
 	$sql = 'DELETE FROM Devices WHERE dev_Name="(unknown)"';
-	// execute sql
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelDev_b'];
 		// Logging
@@ -305,18 +284,14 @@ function deleteUnknownDevices() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete Device Events
-//------------------------------------------------------------------------------
 function deleteDeviceEvents() {
 	global $db;
 	global $pia_lang;
 
-	// sql
 	$sql = 'DELETE FROM Events WHERE eve_MAC="' . $_REQUEST['mac'] . '"';
-	// execute sql
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelEvents'];
 		// Logging
@@ -328,18 +303,14 @@ function deleteDeviceEvents() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete all devices
-//------------------------------------------------------------------------------
 function deleteAllDevices() {
 	global $db;
 	global $pia_lang;
 
-	// sql
 	$sql = 'DELETE FROM Devices';
-	// execute sql
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelDev_b'];
 		// Logging
@@ -351,18 +322,14 @@ function deleteAllDevices() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete all Events
-//------------------------------------------------------------------------------
 function deleteEvents() {
 	global $db;
 	global $pia_lang;
 
-	// sql
 	$sql = 'DELETE FROM Events';
-	// execute sql
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelEvents'];
 		// Logging
@@ -374,18 +341,14 @@ function deleteEvents() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete History
-//------------------------------------------------------------------------------
 function deleteActHistory() {
 	global $db;
 	global $pia_lang;
 
-	// sql
 	$sql = 'DELETE FROM Online_History';
-	// execute sql
 	$result = $db->query($sql);
-	// check result
+
 	if ($result == TRUE) {
 		echo $pia_lang['BackDevices_DBTools_DelActHistory'];
 		// Logging
@@ -397,9 +360,7 @@ function deleteActHistory() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Backup DB to Archiv
-//------------------------------------------------------------------------------
 function PiaBackupDBtoArchive() {
 	// prepare fast Backup
 
@@ -462,9 +423,7 @@ function PiaBackupDBtoArchive() {
 	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0011', '', '');
 }
 
-//------------------------------------------------------------------------------
 //  Restore DB from Archiv
-//------------------------------------------------------------------------------
 function PiaRestoreDBfromArchive() {
 	// prepare fast Backup
 	$file = '../../../db/pialert.db';
@@ -489,9 +448,7 @@ function PiaRestoreDBfromArchive() {
 	// }
 }
 
-//------------------------------------------------------------------------------
 //  Purge Backups
-//------------------------------------------------------------------------------
 function PiaPurgeDBBackups() {
 	global $pia_lang;
 
@@ -535,9 +492,7 @@ function PiaPurgeDBBackups() {
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
 }
 
-//------------------------------------------------------------------------------
 //  Toggle Dark/Light Themes
-//------------------------------------------------------------------------------
 function PiaEnableDarkmode() {
 	$file = '../../../db/setting_darkmode';
 	global $pia_lang;
@@ -558,9 +513,7 @@ function PiaEnableDarkmode() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Toggle Web Service Monitoring
-//------------------------------------------------------------------------------
 function EnableWebServiceMon() {
 	global $pia_lang;
 
@@ -579,9 +532,7 @@ function EnableWebServiceMon() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Toggle History Graph Themes
-//------------------------------------------------------------------------------
 function PiaEnableOnlineHistoryGraph() {
 	$file = '../../../db/setting_noonlinehistorygraph';
 	global $pia_lang;
@@ -602,9 +553,7 @@ function PiaEnableOnlineHistoryGraph() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Set API-Key
-//------------------------------------------------------------------------------
 function PiaSetAPIKey() {
 	//$file = '../../../db/setting_noonlinehistorygraph';
 	global $pia_lang;
@@ -616,9 +565,7 @@ function PiaSetAPIKey() {
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 }
 
-//------------------------------------------------------------------------------
 //  Test Notification
-//------------------------------------------------------------------------------
 function TestNotificationSystem() {
 	//$file = '../../../db/setting_noonlinehistorygraph';
 	global $pia_lang;
@@ -630,9 +577,7 @@ function TestNotificationSystem() {
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
 }
 
-//------------------------------------------------------------------------------
 //  Enable Login
-//------------------------------------------------------------------------------
 function PiaLoginEnable() {
 	global $pia_lang;
 
@@ -644,9 +589,7 @@ function PiaLoginEnable() {
 	echo ("<meta http-equiv='refresh' content='1; ./index.php?action=logout'>");
 }
 
-//------------------------------------------------------------------------------
 //  Disable Login
-//------------------------------------------------------------------------------
 function PiaLoginDisable() {
 	global $pia_lang;
 
@@ -660,9 +603,7 @@ function PiaLoginDisable() {
 	echo ("<meta http-equiv='refresh' content='1; ./index.php?action=logout'>");
 }
 
-//------------------------------------------------------------------------------
 //  Query total numbers of Devices by status
-//------------------------------------------------------------------------------
 function getDevicesTotals() {
 	global $db;
 
@@ -680,13 +621,10 @@ function getDevicesTotals() {
 	echo (json_encode(array($row[0], $row[1], $row[2], $row[3], $row[4], $row[5])));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of devices in a determined Status
-//------------------------------------------------------------------------------
 function getDevicesList() {
 	global $db;
 
-	// SQL
 	$condition = getDeviceCondition($_REQUEST['status']);
 	$sql = 'SELECT rowid, *, CASE
             WHEN dev_AlertDeviceDown=1 AND dev_PresentLastScan=0 THEN "Down"
@@ -724,13 +662,10 @@ function getDevicesList() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of devices for calendar
-//------------------------------------------------------------------------------
 function getDevicesListCalendar() {
 	global $db;
 
-	// SQL
 	$condition = getDeviceCondition($_REQUEST['status']);
 	$result = $db->query('SELECT * FROM Devices ' . $condition);
 
@@ -749,13 +684,10 @@ function getDevicesListCalendar() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of Owners
-//------------------------------------------------------------------------------
 function getOwners() {
 	global $db;
 
-	// SQL
 	$sql = 'SELECT DISTINCT 1 as dev_Order, dev_Owner
           FROM Devices
           WHERE dev_Owner <> "(unknown)" AND dev_Owner <> ""
@@ -780,13 +712,10 @@ function getOwners() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of types
-//------------------------------------------------------------------------------
 function getDeviceTypes() {
 	global $db;
 
-	// SQL
 	$sql = 'SELECT DISTINCT 9 as dev_Order, dev_DeviceType
           FROM Devices
           WHERE dev_DeviceType NOT IN ("",
@@ -834,13 +763,10 @@ function getDeviceTypes() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of groups
-//------------------------------------------------------------------------------
 function getGroups() {
 	global $db;
 
-	// SQL
 	$sql = 'SELECT DISTINCT 1 as dev_Order, dev_Group
           FROM Devices
           WHERE dev_Group NOT IN ("(unknown)", "Others") AND dev_Group <> ""
@@ -862,13 +788,10 @@ function getGroups() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of locations
-//------------------------------------------------------------------------------
 function getLocations() {
 	global $db;
 
-	// SQL
 	$sql = 'SELECT DISTINCT 9 as dev_Order, dev_Location
           FROM Devices
           WHERE dev_Location <> ""
@@ -910,9 +833,7 @@ function getLocations() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query Device Data
-//------------------------------------------------------------------------------
 function getNetworkNodes() {
 	global $db;
 
@@ -934,9 +855,7 @@ function getNetworkNodes() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Status Where conditions
-//------------------------------------------------------------------------------
 function getDeviceCondition($deviceStatus) {
 	switch ($deviceStatus) {
 	case 'all':return 'WHERE dev_Archived=0';
@@ -956,9 +875,7 @@ function getDeviceCondition($deviceStatus) {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Set Theme
-//------------------------------------------------------------------------------
 function setPiAlertTheme() {
 	global $pia_lang;
 
@@ -1005,9 +922,7 @@ function setPiAlertTheme() {
 	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0053', '', $pia_skin_selector);
 }
 
-//------------------------------------------------------------------------------
 //  Set Language
-//------------------------------------------------------------------------------
 function setPiAlertLanguage() {
 	global $pia_lang;
 
@@ -1045,9 +960,7 @@ function setPiAlertLanguage() {
 	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0054', '', $pia_lang_selector);
 }
 
-//------------------------------------------------------------------------------
 //  Set Timer
-//------------------------------------------------------------------------------
 function setPiAlertArpTimer() {
 	global $pia_lang;
 
@@ -1077,9 +990,7 @@ function setPiAlertArpTimer() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Restore Config File
-//------------------------------------------------------------------------------
 function RestoreConfigFile() {
 	global $pia_lang;
 
@@ -1097,9 +1008,7 @@ function RestoreConfigFile() {
 	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
 }
 
-//------------------------------------------------------------------------------
 //  Save Config File
-//------------------------------------------------------------------------------
 function BackupConfigFile() {
 	global $pia_lang;
 
@@ -1122,9 +1031,7 @@ function BackupConfigFile() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Set Device List Columns
-//------------------------------------------------------------------------------
 function setDeviceListCol() {
 	global $pia_lang;
 
@@ -1150,9 +1057,7 @@ function setDeviceListCol() {
 	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0052', '', '');
 }
 
-//------------------------------------------------------------------------------
 //  Delete Inactive Hosts
-//------------------------------------------------------------------------------
 function DeleteInactiveHosts() {
 	global $pia_lang;
 	global $db;
@@ -1177,9 +1082,7 @@ function DeleteInactiveHosts() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete All Notification in WebGUI
-//------------------------------------------------------------------------------
 function deleteAllNotifications() {
 	global $pia_lang;
 
@@ -1198,9 +1101,7 @@ function deleteAllNotifications() {
 	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0504', '', '');
 }
 
-//------------------------------------------------------------------------------
-//  Wake-on-LAN
-//------------------------------------------------------------------------------
+//  Wake-on-LAN 1/2
 function crosscheckMAC($query_mac) {
 	global $db;
 	$sql = 'SELECT * FROM Devices WHERE dev_MAC="' . $query_mac . '"';
@@ -1209,6 +1110,7 @@ function crosscheckMAC($query_mac) {
 	return $row['dev_MAC'];
 }
 
+//  Wake-on-LAN 2/2
 function wakeonlan() {
 	global $pia_lang;
 	global $db;
@@ -1233,9 +1135,7 @@ function wakeonlan() {
 	pialert_logging('a_025', $_SERVER['REMOTE_ADDR'], 'LogStr_0251', '', $wol_output);
 }
 
-//------------------------------------------------------------------------------
 //  Bulk Deletion
-//------------------------------------------------------------------------------
 function BulkDeletion() {
 	global $db;
 	global $pia_lang;
@@ -1266,7 +1166,5 @@ function BulkDeletion() {
 	pialert_logging('a_021', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $journal_hosts);
 
 }
-//------------------------------------------------------------------------------
 //  End
-//------------------------------------------------------------------------------
 ?>

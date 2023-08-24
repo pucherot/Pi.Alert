@@ -1,5 +1,5 @@
 <?php
-// Delete WebGUI Reports ---------------------------------------------------------------
+// Delete WebGUI Reports
 function useRegex($input) {
 	$regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
 	return preg_match($regex, $input);
@@ -24,7 +24,7 @@ function count_webgui_reports() {
 	if ($report_counter == 0) {unset($report_counter);}
 	return $report_counter;
 }
-// Pause Arp Scan Section ---------------------------------------------------------------
+// Pause Arp Scan Section
 function arpscanstatus() {
 	global $pia_lang;
 	if (!file_exists('../db/setting_stoppialert')) {
@@ -42,7 +42,7 @@ function arpscanstatus() {
 		$_SESSION['arpscan_sidebarstate_light'] = 'red fa-gradient-red';
 	}
 }
-// Systeminfo in Sidebar ---------------------------------------------------------------
+// Systeminfo in Sidebar
 function getTemperature() {
 	if (file_exists('/sys/class/thermal/thermal_zone0/temp')) {
 		$output = rtrim(file_get_contents('/sys/class/thermal/thermal_zone0/temp'));
@@ -135,7 +135,7 @@ function format_temperature($celsius, $temperaturelimit) {
 		echo '<span id="tempdisplay"></span></span>';
 	}
 }
-// Web Services Menu Items ---------------------------------------------------------------
+// Web Services Menu Items
 function toggle_webservices_menu($section) {
 	global $pia_lang;
 	if (($_SESSION['Scan_WebServices'] == True) && ($section == "Main")) {
@@ -154,7 +154,7 @@ function toggle_webservices_menu($section) {
 	        </li>';
 	}
 }
-// ICPMScan Menu Items ---------------------------------------------------------------
+// ICPMScan Menu Items
 function toggle_icmpscan_menu($section) {
 	global $pia_lang;
 	if (($_SESSION['ICMPScan'] == True) && ($section == "Main")) {
@@ -176,7 +176,7 @@ function get_config_parmeter($config_param) {
 if (get_config_parmeter('ICMPSCAN_ACTIVE') == 1) {$_SESSION['ICMPScan'] = True;} else { $_SESSION['ICMPScan'] = False;}
 if (get_config_parmeter('SCAN_WEBSERVICES') == 1) {$_SESSION['Scan_WebServices'] = True;} else { $_SESSION['Scan_WebServices'] = False;}
 
-// Back button for details pages ---------------------------------------------------------------
+// Back button for details pages
 function insert_back_button() {
 	$pagename = basename($_SERVER['PHP_SELF']);
 	if ($pagename == 'serviceDetails.php') {
@@ -194,23 +194,23 @@ function insert_back_button() {
       </a>';
 	}
 }
-// Adjust Logo Color ---------------------------------------------------------------
+// Adjust Logo Color
 function set_iconcolor_for_skin($skinname) {
 	if ($skinname == 'skin-black-light' || $skinname == 'skin-black') {
 		return 'pialertLogoBlack';
 	} else {return 'pialertLogoWhite';}
 
 }
-// Darkmode ---------------------------------------------------------------
+// Darkmode
 if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;}
-// Arp Histroy Graph ---------------------------------------------------------------
+// Arp Histroy Graph
 if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;}
-// Theme ---------------------------------------------------------------
+// Theme
 foreach (glob("../db/setting_skin*") as $filename) {
 	$pia_skin_selected = str_replace('setting_', '', basename($filename));
 }
 if (strlen($pia_skin_selected) == 0) {$pia_skin_selected = 'skin-blue';}
-// Language ---------------------------------------------------------------
+// Language
 foreach (glob("../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
 }

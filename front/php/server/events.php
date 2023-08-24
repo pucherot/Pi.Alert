@@ -1,10 +1,4 @@
 <?php
-session_start();
-
-if ($_SESSION["login"] != 1) {
-	header('Location: ../../index.php');
-	exit;
-}
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector
@@ -14,14 +8,18 @@ if ($_SESSION["login"] != 1) {
 //  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
 //------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------
+session_start();
+
+if ($_SESSION["login"] != 1) {
+	header('Location: ../../index.php');
+	exit;
+}
+
 // External files
 require 'db.php';
 require 'util.php';
 
-//------------------------------------------------------------------------------
-//  Action selector
-//------------------------------------------------------------------------------
+// Action selector
 // Set maximum execution time to 1 minute
 ini_set('max_execution_time', '60');
 
@@ -49,9 +47,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Query total numbers of Events
-//------------------------------------------------------------------------------
 function getEventsTotals() {
 	global $db;
 
@@ -103,9 +99,7 @@ function getEventsTotals() {
 	echo (json_encode(array($eventsAll, $eventsSessions, $eventsMissing, $eventsVoided, $eventsNew, $eventsDown)));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of events
-//------------------------------------------------------------------------------
 function getEvents() {
 	global $db;
 
@@ -196,9 +190,7 @@ function getEvents() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query Device Sessions
-//------------------------------------------------------------------------------
 function getDeviceSessions() {
 	global $db;
 
@@ -265,9 +257,7 @@ function getDeviceSessions() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query Device Presence Calendar
-//------------------------------------------------------------------------------
 function getDevicePresence() {
 	global $db;
 
@@ -334,9 +324,7 @@ function getDevicePresence() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query Presence Calendar for all Devices
-//------------------------------------------------------------------------------
 function getEventsCalendar() {
 	global $db;
 
@@ -402,9 +390,7 @@ function getEventsCalendar() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Query Device events
-//------------------------------------------------------------------------------
 function getDeviceEvents() {
 	global $db;
 
