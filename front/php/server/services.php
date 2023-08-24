@@ -20,16 +20,13 @@ foreach (glob("../../../db/setting_language*") as $filename) {
 }
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 
-//------------------------------------------------------------------------------
 // External files
 require 'db.php';
 require 'util.php';
 require 'journal.php';
 require '../templates/language/' . $pia_lang_selected . '.php';
 
-//------------------------------------------------------------------------------
 //  Action selector
-//------------------------------------------------------------------------------
 // Set maximum execution time to 1 minute
 ini_set('max_execution_time', '60');
 
@@ -59,9 +56,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Query total numbers of Events from Device
-//------------------------------------------------------------------------------
 function getEventsTotalsforService() {
 	global $db;
 
@@ -107,16 +102,13 @@ function getEventsTotalsforService() {
 	echo (json_encode(array($eventsAll, $events2xx, $events3xx, $events4xx, $events5xx, $eventsDown)));
 }
 
-//------------------------------------------------------------------------------
 //  Query total numbers of Events
-//------------------------------------------------------------------------------
 function getEventsTotals() {
 	global $db;
 
 	// Request Parameters
 	$periodDate = getDateFromPeriod();
 
-	// SQL
 	$SQL1 = 'SELECT Count(*)
            FROM Services_Events
            WHERE moneve_DateTime >= ' . $periodDate;
@@ -155,9 +147,7 @@ function getEventsTotals() {
 	echo (json_encode(array($eventsAll, $events2xx, $events3xx, $events4xx, $events5xx, $eventsDown)));
 }
 
-//------------------------------------------------------------------------------
 //  Query the List of events
-//------------------------------------------------------------------------------
 function getEvents() {
 	global $db;
 
@@ -165,7 +155,6 @@ function getEvents() {
 	$type = $_REQUEST['type'];
 	$periodDate = getDateFromPeriod();
 
-	// SQL
 	$SQL1 = 'SELECT *
            FROM Services_Events
            WHERE moneve_DateTime >= ' . $periodDate;
@@ -212,13 +201,11 @@ function getEvents() {
 	echo (json_encode($tableData));
 }
 
-//------------------------------------------------------------------------------
 //  Set Services Data
-//------------------------------------------------------------------------------
 function setServiceData() {
 	global $db;
 	global $pia_lang;
-	// sql
+
 	$sql = 'UPDATE Services SET
                  mon_Tags           = "' . quotes($_REQUEST['tags']) . '",
                  mon_MAC            = "' . quotes($_REQUEST['mac']) . '",
@@ -240,9 +227,7 @@ function setServiceData() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Delete Service
-//------------------------------------------------------------------------------
 function deleteService() {
 	global $db;
 	global $pia_lang;
@@ -252,7 +237,6 @@ function deleteService() {
 		return false;
 	}
 
-	// sql
 	$sql = 'DELETE FROM Services WHERE mon_URL="' . $_REQUEST['url'] . '"';
 	// execute sql
 	$result = $db->query($sql);
@@ -273,14 +257,10 @@ function deleteService() {
 	}
 }
 
-//------------------------------------------------------------------------------
 //  Insert Service
-//------------------------------------------------------------------------------
 function insertNewService() {
 	global $db;
 	global $pia_lang;
-
-	//echo 'Enter Function';
 
 	$url = $_REQUEST['url'];
 
@@ -301,11 +281,8 @@ function insertNewService() {
 	$http_code = curl_getinfo($checkURL, CURLINFO_HTTP_CODE);
 	curl_close($checkURL);
 
-	// sql
 	$sql = 'INSERT INTO Services ("mon_URL", "mon_MAC", "mon_LastStatus", "mon_LastLatency", "mon_LastScan", "mon_Tags", "mon_AlertEvents", "mon_AlertDown", "mon_TargetIP")
                          VALUES("' . $url . '", "' . $_REQUEST['mac'] . '", "' . $http_code . '", "' . $httpstats['total_time'] . '", "' . $check_timestamp . '", "' . $_REQUEST['tags'] . '", "' . $_REQUEST['alertevents'] . '", "' . $_REQUEST['alertdown'] . '", "' . $httpstats['primary_ip'] . '")';
-
-	// execute sql
 	$result = $db->query($sql);
 	// check result
 	if ($result == TRUE) {
@@ -321,13 +298,9 @@ function insertNewService() {
 
 }
 
-//------------------------------------------------------------------------------
 //  Download GeoDB
-//------------------------------------------------------------------------------
 function downloadGeoDB() {
 	$fileUrl = 'https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb';
-
-// Path to save the downloaded file
 	$savePath = '../../../db/GeoLite2-Country.mmdb';
 
 // Disable caching
@@ -335,23 +308,16 @@ function downloadGeoDB() {
 	header('Cache-Control: post-check=0, pre-check=0', false);
 	header('Pragma: no-cache');
 
-// Download the file
 	file_put_contents($savePath, fopen($fileUrl, 'r'));
-
-// Return the saved file path
 	echo json_encode(['filePath' => $savePath]);
-
-// Logging
+	// Logging
 	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0008', '', '');
 }
 
-//------------------------------------------------------------------------------
 //  Delete GeoDB
-//------------------------------------------------------------------------------
 function deleteGeoDB() {
-	// $fileUrl = 'https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb';
+// $fileUrl = 'https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb';
 
-// Path to save the downloaded file
 	$deletePath = '../../../db/GeoLite2-Country.mmdb';
 	if (file_exists($deletePath)) {
 		unlink($deletePath);
