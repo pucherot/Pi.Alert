@@ -6,7 +6,7 @@ In this description, I assume that devices have already been detected in the Dev
 
 ### First start
 
-When you open the "Network" page for the first time, it is almost empty. When you open the page for the 1st time it is almost empty. Under a narrow empty box there 
+When you open the page for the 1st time it is almost empty. Under a narrow empty box there 
 is another one, which has the title "Unassigned devices" and can be expanded. This box lists all devices that are not yet assigned to a network component.
 
 ![Manage unassigned Devices][Manage_unassigned_Devices]
