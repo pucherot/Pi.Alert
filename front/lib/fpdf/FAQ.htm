@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>FAQ</title>
 <link type="text/css" rel="stylesheet" href="fpdf.css">
 <style type="text/css">
@@ -15,7 +15,7 @@ ul#answers li {margin-top:1.8em}
 <ul>
 <li><b>1.</b> <a href='#q1'>What's exactly the license of FPDF? Are there any usage restrictions?</a></li>
 <li><b>2.</b> <a href='#q2'>I get the following error when I try to generate a PDF: Some data has already been output, can't send PDF file</a></li>
-<li><b>3.</b> <a href='#q3'>Accented letters are replaced with some strange characters like é.</a></li>
+<li><b>3.</b> <a href='#q3'>Accented letters are replaced by some strange characters like Ã©.</a></li>
 <li><b>4.</b> <a href='#q4'>I try to display the Euro symbol but it doesn't work.</a></li>
 <li><b>5.</b> <a href='#q5'>I try to display a variable in the Header method but nothing prints.</a></li>
 <li><b>6.</b> <a href='#q6'>I have defined the Header and Footer methods in my PDF class but nothing shows.</a></li>
@@ -59,7 +59,7 @@ try adding this line at the very beginning of your script:
 </li>
 
 <li id='q3'>
-<p><b>3.</b> <span class='question'>Accented letters are replaced with some strange characters like é.</span></p>
+<p><b>3.</b> <span class='question'>Accented letters are replaced by some strange characters like Ã©.</span></p>
 Don't use UTF-8 with the standard fonts; they expect text encoded in windows-1252.
 You can perform a conversion with iconv:
 <div class="doc-source">
