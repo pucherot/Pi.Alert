@@ -25,17 +25,17 @@ require 'php/server/journal.php';
 <!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
       <h1 id="pageTitle">
-         <?php echo $pia_lang['WebServices_Events_Title']; ?>
+         <?=$pia_lang['WebServices_Events_Title'];?>
       </h1>
 
       <!-- period selector -->
       <span class="breadcrumb" style="top: 0px;">
         <select class="form-control" id="period" onchange="javascript: periodChanged();">
-          <option value="1 day"><?php echo $pia_lang['Events_Periodselect_today']; ?></option>
-          <option value="7 days"><?php echo $pia_lang['Events_Periodselect_LastWeek']; ?></option>
-          <option value="1 month" selected><?php echo $pia_lang['Events_Periodselect_LastMonth']; ?></option>
-          <option value="1 year"><?php echo $pia_lang['Events_Periodselect_LastYear']; ?></option>
-          <option value="100 years"><?php echo $pia_lang['Events_Periodselect_All']; ?></option>
+          <option value="1 day"><?=$pia_lang['Events_Periodselect_today'];?></option>
+          <option value="7 days"><?=$pia_lang['Events_Periodselect_LastWeek'];?></option>
+          <option value="1 month" selected><?=$pia_lang['Events_Periodselect_LastMonth'];?></option>
+          <option value="1 year"><?=$pia_lang['Events_Periodselect_LastYear'];?></option>
+          <option value="100 years"><?=$pia_lang['Events_Periodselect_All'];?></option>
         </select>
       </span>
     </section>
@@ -50,7 +50,7 @@ require 'php/server/journal.php';
           <a href="#" onclick="javascript: getEvents('all');">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_All']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['WebServices_Events_Shortcut_All'];?></p>
               </div>
               <div class="icon"> <i class="fa fa-bolt text-aqua-40"></i> </div>
             </div>
@@ -61,7 +61,7 @@ require 'php/server/journal.php';
           <a href="#" onclick="javascript: getEvents('2');">
             <div class="small-box bg-green">
               <div class="inner"> <h3 id="events2xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP2xx']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['WebServices_Events_Shortcut_HTTP2xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-check2-square text-green-40"></i> </div>
             </div>
@@ -72,7 +72,7 @@ require 'php/server/journal.php';
           <a href="#" onclick="javascript: getEvents('3');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events3xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP3xx']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['WebServices_Events_Shortcut_HTTP3xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-sign-turn-right text-yellow-40"></i> </div>
             </div>
@@ -83,7 +83,7 @@ require 'php/server/journal.php';
           <a href="#" onclick="javascript: getEvents('4');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events4xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP4xx']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['WebServices_Events_Shortcut_HTTP4xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-exclamation-square text-yellow-40"></i> </div>
             </div>
@@ -94,7 +94,7 @@ require 'php/server/journal.php';
           <a href="#" onclick="javascript: getEvents('5');">
             <div  class="small-box bg-yellow">
               <div class="inner"> <h3 id="events5xx"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_HTTP5xx']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['WebServices_Events_Shortcut_HTTP5xx'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-database-x text-yellow-40"></i> </div>
             </div>
@@ -105,7 +105,7 @@ require 'php/server/journal.php';
           <a href="#" onclick="javascript: getEvents('99999999');">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsDown"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_Down']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['WebServices_Events_Shortcut_Down'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-exclamation-diamond-fill text-red-40"></i> </div>
             </div>
@@ -126,11 +126,11 @@ require 'php/server/journal.php';
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
                   <tr>
-                    <th><?php echo $pia_lang['WebServices_Events_TableHead_URL']; ?></th>
-                    <th><?php echo $pia_lang['WebServices_Events_TableHead_TargetIP']; ?></th>
-                    <th><?php echo $pia_lang['WebServices_Events_TableHead_ScanTime']; ?></th>
-                    <th><?php echo $pia_lang['WebServices_Events_TableHead_StatusCode']; ?></th>
-                    <th><?php echo $pia_lang['WebServices_Events_TableHead_ResponsTime']; ?></th>
+                    <th><?=$pia_lang['WebServices_Events_TableHead_URL'];?></th>
+                    <th><?=$pia_lang['WebServices_Events_TableHead_TargetIP'];?></th>
+                    <th><?=$pia_lang['WebServices_Events_TableHead_ScanTime'];?></th>
+                    <th><?=$pia_lang['WebServices_Events_TableHead_StatusCode'];?></th>
+                    <th><?=$pia_lang['WebServices_Events_TableHead_ResponsTime'];?></th>
                   </tr>
                 </thead>
               </table>
@@ -232,13 +232,13 @@ function initializeDatatable () {
     'language'    : {
       processing: '<table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td></table>',
       emptyTable: 'No data',
-      "lengthMenu": "<?php echo $pia_lang['Events_Tablelenght']; ?>",
-      "search":     "<?php echo $pia_lang['Events_Searchbox']; ?>: ",
+      "lengthMenu": "<?=$pia_lang['Events_Tablelenght'];?>",
+      "search":     "<?=$pia_lang['Events_Searchbox'];?>: ",
       "paginate": {
-          "next":       "<?php echo $pia_lang['Events_Table_nav_next']; ?>",
-          "previous":   "<?php echo $pia_lang['Events_Table_nav_prev']; ?>"
+          "next":       "<?=$pia_lang['Events_Table_nav_next'];?>",
+          "previous":   "<?=$pia_lang['Events_Table_nav_prev'];?>"
       },
-      "info":           "<?php echo $pia_lang['Events_Table_info']; ?>",
+      "info":           "<?=$pia_lang['Events_Table_info'];?>",
     },
   });
 
@@ -287,13 +287,13 @@ function getEvents (p_eventsType) {
 
   // Define color & title for the status selected
   switch (eventsType) {
-    case 'all':       tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_All']; ?>';      color = 'aqua';    break;
-    case '2':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP2xx']; ?>';  color = 'green';   break;
-    case '3':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP3xx']; ?>';  color = 'yellow';  break;
-    case '4':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP4xx']; ?>';  color = 'yellow';  break;
-    case '5':         tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_HTTP5xx']; ?>';  color = 'yellow';  break;
-    case '99999999':  tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_Down']; ?>';     color = 'red';     break;
-    default:          tableTitle = '<?php echo $pia_lang['WebServices_Events_Shortcut_All']; ?>';      boxClass = '';     break;
+    case 'all':       tableTitle = '<?=$pia_lang['WebServices_Events_Shortcut_All'];?>';      color = 'aqua';    break;
+    case '2':         tableTitle = '<?=$pia_lang['WebServices_Events_Shortcut_HTTP2xx'];?>';  color = 'green';   break;
+    case '3':         tableTitle = '<?=$pia_lang['WebServices_Events_Shortcut_HTTP3xx'];?>';  color = 'yellow';  break;
+    case '4':         tableTitle = '<?=$pia_lang['WebServices_Events_Shortcut_HTTP4xx'];?>';  color = 'yellow';  break;
+    case '5':         tableTitle = '<?=$pia_lang['WebServices_Events_Shortcut_HTTP5xx'];?>';  color = 'yellow';  break;
+    case '99999999':  tableTitle = '<?=$pia_lang['WebServices_Events_Shortcut_Down'];?>';     color = 'red';     break;
+    default:          tableTitle = '<?=$pia_lang['WebServices_Events_Shortcut_All'];?>';      boxClass = '';     break;
   }
 
   // Set title and color

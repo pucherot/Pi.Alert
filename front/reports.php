@@ -138,7 +138,7 @@ foreach ($scanned_directory as $file) {
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['Reports_Title']; ?>
+         <?=$pia_lang['Reports_Title'];?>
       </h1>
     </section>
 
@@ -146,7 +146,7 @@ foreach ($scanned_directory as $file) {
     <section class="content">
       <div class="box">
           <div class="box-body" id="RemoveAllNotifications" style="text-align: center; padding-top: 5px; padding-bottom: 5px; height: 45px;">
-              <button type="button" id="rqwejwedewjpjo" class="btn btn-danger" onclick="askdeleteAllNotifications()"><?php echo $pia_lang['Reports_delete_all']; ?></button>
+              <button type="button" id="rqwejwedewjpjo" class="btn btn-danger" onclick="askdeleteAllNotifications()"><?=$pia_lang['Reports_delete_all'];?></button>
         </div>
       </div>
 
@@ -169,8 +169,8 @@ require 'php/templates/footer.php';
 
 <script>
 function askdeleteAllNotifications () {
-  showModalWarning('<?php echo $pia_lang['Reports_delete_all_noti']; ?>', '<?php echo $pia_lang['Reports_delete_all_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteAllNotifications');
+  showModalWarning('<?=$pia_lang['Reports_delete_all_noti'];?>', '<?=$pia_lang['Reports_delete_all_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteAllNotifications');
 }
 function deleteAllNotifications()
 {

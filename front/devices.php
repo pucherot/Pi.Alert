@@ -438,7 +438,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 <!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
       <h1 id="pageTitle">
-           <?php echo $pia_lang['Device_Title']; ?>
+           <?=$pia_lang['Device_Title'];?>
       </h1>
     </section>
 
@@ -451,7 +451,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           <a href="#" onclick="javascript: getDevicesList('all');">
           <div class="small-box bg-aqua">
             <div class="inner"><h3 id="devicesAll"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_AllDevices']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_AllDevices'];?></p>
             </div>
             <div class="icon"><i class="fa fa-laptop text-aqua-40"></i></div>
           </div>
@@ -462,7 +462,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           <a href="#" onclick="javascript: getDevicesList('connected');">
           <div class="small-box bg-green">
             <div class="inner"><h3 id="devicesConnected"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Connected']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_Connected'];?></p>
             </div>
             <div class="icon"><i class="fa fa-plug text-green-40"></i></div>
           </div>
@@ -473,7 +473,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           <a href="#" onclick="javascript: getDevicesList('favorites');">
           <div class="small-box bg-yellow">
             <div class="inner"><h3 id="devicesFavorites"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Favorites']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_Favorites'];?></p>
             </div>
             <div class="icon"><i class="fa fa-star text-yellow-40"></i></div>
           </div>
@@ -484,7 +484,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           <a href="#" onclick="javascript: getDevicesList('new');">
           <div class="small-box bg-yellow">
             <div class="inner"><h3 id="devicesNew"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_NewDevices']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_NewDevices'];?></p>
             </div>
             <div class="icon"><i class="ion ion-plus-round text-yellow-40"></i></div>
           </div>
@@ -495,7 +495,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           <a href="#" onclick="javascript: getDevicesList('down');">
           <div class="small-box bg-red">
             <div class="inner"><h3 id="devicesDown"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_DownAlerts']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_DownAlerts'];?></p>
             </div>
             <div class="icon"><i class="fa fa-warning text-red-40"></i></div>
           </div>
@@ -506,7 +506,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
           <a href="#" onclick="javascript: getDevicesList('archived');">
           <div class="small-box bg-gray top_small_box_gray_text">
             <div class="inner"><h3 id="devicesArchived"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Archived']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_Archived'];?></p>
             </div>
             <div class="icon"><i class="fa fa-eye-slash text-gray-40"></i></div>
           </div>
@@ -524,7 +524,7 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
           <div class="col-md-12">
           <div class="box" id="clients">
               <div class="box-header with-border">
-                <h3 class="box-title"><?php echo $pia_lang['Device_Shortcut_OnlineChart_a']; ?><span class="maxlogage-interval">12</span> <?php echo $pia_lang['Device_Shortcut_OnlineChart_b']; ?></h3>
+                <h3 class="box-title"><?=$pia_lang['Device_Shortcut_OnlineChart_a'];?><span class="maxlogage-interval">12</span> <?=$pia_lang['Device_Shortcut_OnlineChart_b'];?></h3>
               </div>
               <div class="box-body">
                 <div class="chart">
@@ -596,21 +596,21 @@ $file = '../db/setting_devicelist';
 	if ($table_config['MACType'] == 0) {$devlistcol_hide = $devlistcol_hide . '10, ';}
 	if ($table_config['MACAddress'] == 0) {$devlistcol_hide = $devlistcol_hide . '11, ';}
 	?>
-                  <th><?php echo $pia_lang['Device_TableHead_Name']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_ConnectionType']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Owner']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Type']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Favorite']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Group']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Location']; ?></th>
-                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_FirstSession']; ?></th>
-                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_LastSession']; ?></th>
-                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_LastIP']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_MAC']; ?></th>
-                  <th style="white-space: nowrap;"><?php echo $pia_lang['Device_TableHead_MACaddress']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Status']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_LastIPOrder']; ?></th>
-                  <th><?php echo $pia_lang['Device_TableHead_Rowid']; ?></th>
+                  <th><?=$pia_lang['Device_TableHead_Name'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_ConnectionType'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_Owner'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_Type'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_Favorite'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_Group'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_Location'];?></th>
+                  <th style="white-space: nowrap;"><?=$pia_lang['Device_TableHead_FirstSession'];?></th>
+                  <th style="white-space: nowrap;"><?=$pia_lang['Device_TableHead_LastSession'];?></th>
+                  <th style="white-space: nowrap;"><?=$pia_lang['Device_TableHead_LastIP'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_MAC'];?></th>
+                  <th style="white-space: nowrap;"><?=$pia_lang['Device_TableHead_MACaddress'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_Status'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_LastIPOrder'];?></th>
+                  <th><?=$pia_lang['Device_TableHead_Rowid'];?></th>
                 </tr>
                 </thead>
               </table>
@@ -684,7 +684,7 @@ function initializeDatatable () {
   $('#tableDevices').DataTable({
     'paging'       : true,
     'lengthChange' : true,
-    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, '<?php echo $pia_lang['Device_Tablelenght_all']; ?>']],
+    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, '<?=$pia_lang['Device_Tablelenght_all'];?>']],
     'searching'    : true,
 
     'ordering'     : true,
@@ -697,7 +697,7 @@ function initializeDatatable () {
     // 'order'       : [[3,'desc'], [0,'asc']],
 
     'columnDefs'   : [
-      {visible:   false,         targets: [<?php echo $devlistcol_hide; ?>13, 14] },
+      {visible:   false,         targets: [<?=$devlistcol_hide;?>13, 14] },
       {className: 'text-center', targets: [4, 9, 10, 11, 12] },
       {width:     '100px',       targets: [7, 8] },
       {width:     '30px',        targets: [10] },
@@ -768,13 +768,13 @@ function initializeDatatable () {
     'language'    : {
       processing: '<table> <td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td> </table>',
       emptyTable: 'No data',
-      "lengthMenu": "<?php echo $pia_lang['Device_Tablelenght']; ?>",
-      "search":     "<?php echo $pia_lang['Device_Searchbox']; ?>: ",
+      "lengthMenu": "<?=$pia_lang['Device_Tablelenght'];?>",
+      "search":     "<?=$pia_lang['Device_Searchbox'];?>: ",
       "paginate": {
-          "next":       "<?php echo $pia_lang['Device_Table_nav_next']; ?>",
-          "previous":   "<?php echo $pia_lang['Device_Table_nav_prev']; ?>"
+          "next":       "<?=$pia_lang['Device_Table_nav_next'];?>",
+          "previous":   "<?=$pia_lang['Device_Table_nav_prev'];?>"
       },
-      "info":           "<?php echo $pia_lang['Device_Table_info']; ?>",
+      "info":           "<?=$pia_lang['Device_Table_info'];?>",
     }
   });
 
@@ -822,13 +822,13 @@ function getDevicesList (status) {
 
   // Define color & title for the status selected
   switch (deviceStatus) {
-    case 'all':        tableTitle = '<?php echo $pia_lang['Device_Shortcut_AllDevices'] ?>';  color = 'aqua';    break;
-    case 'connected':  tableTitle = '<?php echo $pia_lang['Device_Shortcut_Connected'] ?>';   color = 'green';   break;
-    case 'favorites':  tableTitle = '<?php echo $pia_lang['Device_Shortcut_Favorites'] ?>';   color = 'yellow';  break;
-    case 'new':        tableTitle = '<?php echo $pia_lang['Device_Shortcut_NewDevices'] ?>';  color = 'yellow';  break;
-    case 'down':       tableTitle = '<?php echo $pia_lang['Device_Shortcut_DownAlerts'] ?>';  color = 'red';     break;
-    case 'archived':   tableTitle = '<?php echo $pia_lang['Device_Shortcut_Archived'] ?>';    color = 'gray';    break;
-    default:           tableTitle = '<?php echo $pia_lang['Device_Shortcut_Devices'] ?>';     color = 'gray';    break;
+    case 'all':        tableTitle = '<?=$pia_lang['Device_Shortcut_AllDevices']?>';  color = 'aqua';    break;
+    case 'connected':  tableTitle = '<?=$pia_lang['Device_Shortcut_Connected']?>';   color = 'green';   break;
+    case 'favorites':  tableTitle = '<?=$pia_lang['Device_Shortcut_Favorites']?>';   color = 'yellow';  break;
+    case 'new':        tableTitle = '<?=$pia_lang['Device_Shortcut_NewDevices']?>';  color = 'yellow';  break;
+    case 'down':       tableTitle = '<?=$pia_lang['Device_Shortcut_DownAlerts']?>';  color = 'red';     break;
+    case 'archived':   tableTitle = '<?=$pia_lang['Device_Shortcut_Archived']?>';    color = 'gray';    break;
+    default:           tableTitle = '<?=$pia_lang['Device_Shortcut_Devices']?>';     color = 'gray';    break;
   }
 
   // Set title and color

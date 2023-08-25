@@ -38,227 +38,227 @@ $trip_div_close = '
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['HelpFAQ_Title']; ?>
+         <?=$pia_lang['HelpFAQ_Title'];?>
       </h1>
     </section>
 
     <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
-      <h4><?php echo $pia_lang['HelpFAQ_Cat_General']; ?></h4>
+      <h4><?=$pia_lang['HelpFAQ_Cat_General'];?></h4>
         <div class="panel-group" id="accordion_gen">
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse100">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_100_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_100_head'];?></a>
             </h4>
           </div>
           <div id="collapse100" class="panel-collapse collapse" style="font-size: 16px;">
-            <div class="panel-body"><?php echo $pia_lang['HelpFAQ_Cat_General_100_text_a']; ?>
-              <span class="text-danger help_faq_code"><?php echo date_default_timezone_get(); ?></span><br>
-              <?php echo $pia_lang['HelpFAQ_Cat_General_100_text_b']; ?>
-              <span class="text-danger help_faq_code"><?php echo php_ini_loaded_file(); ?></span><br>
-              <?php echo $pia_lang['HelpFAQ_Cat_General_100_text_c']; ?></div>
+            <div class="panel-body"><?=$pia_lang['HelpFAQ_Cat_General_100_text_a'];?>
+              <span class="text-danger help_faq_code"><?=date_default_timezone_get();?></span><br>
+              <?=$pia_lang['HelpFAQ_Cat_General_100_text_b'];?>
+              <span class="text-danger help_faq_code"><?=php_ini_loaded_file();?></span><br>
+              <?=$pia_lang['HelpFAQ_Cat_General_100_text_c'];?></div>
           </div>
         </div>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse101">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_101_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_101_head'];?></a>
             </h4>
           </div>
           <div id="collapse101" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_101_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_General_101_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse102">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_102_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_102_head'];?></a>
             </h4>
           </div>
           <div id="collapse102" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_102_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_General_102_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse103">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_103_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_103_head'];?></a>
             </h4>
           </div>
           <div id="collapse103" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_103_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_General_103_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse104">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_104_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_104_head'];?></a>
             </h4>
           </div>
           <div id="collapse104" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_104_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_General_104_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse105">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_105_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_105_head'];?></a>
             </h4>
           </div>
           <div id="collapse105" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_105_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_General_105_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse107">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_107_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_107_head'];?></a>
             </h4>
           </div>
           <div id="collapse107" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_107_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_General_107_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse106">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_106_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_General_106_head'];?></a>
             </h4>
           </div>
           <div id="collapse106" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_General_106_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_General_106_text'];?>
+        <?=$trip_div_close;?>
 
       </div>
 
 <!-- Devices -->
 
-      <h4><?php echo $pia_lang['Navigation_Devices']; ?></h4>
+      <h4><?=$pia_lang['Navigation_Devices'];?></h4>
         <div class="panel-group" id="accordion_dev">
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_dev" href="#collapse200">
-              <?php echo $pia_lang['HelpFAQ_Cat_Device_200_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Device_200_head'];?></a>
             </h4>
           </div>
           <div id="collapse200" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-               <?php echo $pia_lang['HelpFAQ_Cat_Device_200_text']; ?>
-        <?php echo $trip_div_close; ?>
+               <?=$pia_lang['HelpFAQ_Cat_Device_200_text'];?>
+        <?=$trip_div_close;?>
 
         </div>
 
 <!-- Devices Details -->
 
-      <h4><?php echo $pia_lang['Navigation_Devices']; ?> - <?php echo $pia_lang['HelpFAQ_Cat_Detail']; ?></h4>
+      <h4><?=$pia_lang['Navigation_Devices'];?> - <?=$pia_lang['HelpFAQ_Cat_Detail'];?></h4>
         <div class="panel-group" id="accordion_det">
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse300">
-              <?php echo $pia_lang['HelpFAQ_Cat_Detail_300_head']; ?> "<?php echo $pia_lang['DevDetail_MainInfo_Network']; ?>" / "<?php echo $pia_lang['DevDetail_MainInfo_Network_Port']; ?>"?</a>
+              <?=$pia_lang['HelpFAQ_Cat_Detail_300_head'];?> "<?=$pia_lang['DevDetail_MainInfo_Network'];?>" / "<?=$pia_lang['DevDetail_MainInfo_Network_Port'];?>"?</a>
             </h4>
           </div>
           <div id="collapse300" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              "<?php echo $pia_lang['DevDetail_MainInfo_Network']; ?>" <?php echo $pia_lang['HelpFAQ_Cat_Detail_300_text_a']; ?><br>
-              "<?php echo $pia_lang['DevDetail_MainInfo_Network_Port']; ?>" <?php echo $pia_lang['HelpFAQ_Cat_Detail_300_text_b']; ?>
-        <?php echo $trip_div_close; ?>
+              "<?=$pia_lang['DevDetail_MainInfo_Network'];?>" <?=$pia_lang['HelpFAQ_Cat_Detail_300_text_a'];?><br>
+              "<?=$pia_lang['DevDetail_MainInfo_Network_Port'];?>" <?=$pia_lang['HelpFAQ_Cat_Detail_300_text_b'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse301">
-              <?php echo $pia_lang['HelpFAQ_Cat_Detail_301_head_a']; ?> "<?php echo $pia_lang['DevDetail_EveandAl_ScanCycle']; ?>" <?php echo $pia_lang['HelpFAQ_Cat_Detail_301_head_b']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Detail_301_head_a'];?> "<?=$pia_lang['DevDetail_EveandAl_ScanCycle'];?>" <?=$pia_lang['HelpFAQ_Cat_Detail_301_head_b'];?></a>
             </h4>
           </div>
           <div id="collapse301" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Detail_301_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Detail_301_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse302">
-              <?php echo $pia_lang['HelpFAQ_Cat_Detail_302_head_a']; ?> "<?php echo $pia_lang['DevDetail_EveandAl_RandomMAC']; ?>" <?php echo $pia_lang['HelpFAQ_Cat_Detail_302_head_b']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Detail_302_head_a'];?> "<?=$pia_lang['DevDetail_EveandAl_RandomMAC'];?>" <?=$pia_lang['HelpFAQ_Cat_Detail_302_head_b'];?></a>
             </h4>
           </div>
           <div id="collapse302" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Detail_302_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Detail_302_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_det" href="#collapse303">
-              <?php echo $pia_lang['HelpFAQ_Cat_Detail_303_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Detail_303_head'];?></a>
             </h4>
           </div>
           <div id="collapse303" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Detail_303_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Detail_303_text'];?>
+        <?=$trip_div_close;?>
 
         </div>
 
 <!-- Network -->
 
-      <h4><?php echo $pia_lang['Navigation_Network']; ?></h4>
+      <h4><?=$pia_lang['Navigation_Network'];?></h4>
         <div class="panel-group" id="accordion_net">
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse600">
-              <?php echo $pia_lang['HelpFAQ_Cat_Network_600_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Network_600_head'];?></a>
             </h4>
           </div>
           <div id="collapse600" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Network_600_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Network_600_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse601">
-              <?php echo $pia_lang['HelpFAQ_Cat_Network_601_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Network_601_head'];?></a>
             </h4>
           </div>
           <div id="collapse601" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Network_601_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Network_601_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_net" href="#collapse602">
-              <?php echo $pia_lang['HelpFAQ_Cat_Network_602_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Network_602_head'];?></a>
             </h4>
           </div>
           <div id="collapse602" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Network_602_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Network_602_text'];?>
+        <?=$trip_div_close;?>
 
         </div>
 
 <!-- Web Services -->
 
-      <h4><?php echo $pia_lang['Navigation_Services']; ?></h4>
+      <h4><?=$pia_lang['Navigation_Services'];?></h4>
         <div class="panel-group" id="accordion_pre">
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse703">
-              <?php echo $pia_lang['HelpFAQ_Cat_Service_703_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Service_703_head'];?></a>
             </h4>
           </div>
           <div id="collapse703" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Service_703_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Service_703_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse700">
-              <?php echo $pia_lang['HelpFAQ_Cat_Service_700_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Service_700_head'];?></a>
             </h4>
           </div>
           <div id="collapse700" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Service_700_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Service_700_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse701">
-              <?php echo $pia_lang['HelpFAQ_Cat_Service_701_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Service_701_head'];?></a>
             </h4>
           </div>
           <div id="collapse701" class="panel-collapse collapse" style="font-size: 16px;">
@@ -275,59 +275,59 @@ foreach ($code_array as $key => $jsons) {
 
 ;?>
             </table>
-        <?php echo $trip_div_close; ?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse702">
-              <?php echo $pia_lang['HelpFAQ_Cat_Service_702_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Service_702_head'];?></a>
             </h4>
           </div>
           <div id="collapse702" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Service_702_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Service_702_text'];?>
+        <?=$trip_div_close;?>
 
         </div>
 
 <!-- Web Services Details -->
 
-      <h4><?php echo $pia_lang['Navigation_Services']; ?> - <?php echo $pia_lang['HelpFAQ_Cat_Detail']; ?></h4>
+      <h4><?=$pia_lang['Navigation_Services'];?> - <?=$pia_lang['HelpFAQ_Cat_Detail'];?></h4>
         <div class="panel-group" id="accordion_pre">
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse750">
-              <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_750_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_ServiceDetails_750_head'];?></a>
             </h4>
           </div>
           <div id="collapse750" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_ServiceDetails_750_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_ServiceDetails_750_text'];?>
+        <?=$trip_div_close;?>
 
         </div>
 
 <!-- Presence -->
 
-      <h4><?php echo $pia_lang['Navigation_Presence']; ?></h4>
+      <h4><?=$pia_lang['Navigation_Presence'];?></h4>
         <div class="panel-group" id="accordion_pre">
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse400">
-              <?php echo $pia_lang['HelpFAQ_Cat_Presence_400_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Presence_400_head'];?></a>
             </h4>
           </div>
           <div id="collapse400" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Presence_400_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Presence_400_text'];?>
+        <?=$trip_div_close;?>
 
-        <?php echo $help_faq_toptemp; ?>
+        <?=$help_faq_toptemp;?>
               <a data-toggle="collapse" data-parent="#accordion_pre" href="#collapse401">
-              <?php echo $pia_lang['HelpFAQ_Cat_Presence_401_head']; ?></a>
+              <?=$pia_lang['HelpFAQ_Cat_Presence_401_head'];?></a>
             </h4>
           </div>
           <div id="collapse401" class="panel-collapse collapse" style="font-size: 16px;">
             <div class="panel-body">
-              <?php echo $pia_lang['HelpFAQ_Cat_Presence_401_text']; ?>
-        <?php echo $trip_div_close; ?>
+              <?=$pia_lang['HelpFAQ_Cat_Presence_401_text'];?>
+        <?=$trip_div_close;?>
 
         </div>
 

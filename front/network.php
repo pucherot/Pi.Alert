@@ -30,7 +30,7 @@ OpenDB();
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['Network_Title']; ?>
+         <?=$pia_lang['Network_Title'];?>
          <a class="btn btn-xs btn-success servicelist_add_serv" href="./networkSettings.php" role="button"><i class="bi bi-plus-lg" style="font-size:1.5rem"></i></a>
       </h1>
     </section>
@@ -313,7 +313,7 @@ unset($i);
 
 <div class="box box-default collapsed-box">
     <div class="box-header with-border" data-widget="collapse">
-        <h3 class="box-title"><i class="fa"></i><?php echo $pia_lang['Network_UnassignedDevices']; ?></h3>
+        <h3 class="box-title"><i class="fa"></i><?=$pia_lang['Network_UnassignedDevices'];?></h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
           </div>

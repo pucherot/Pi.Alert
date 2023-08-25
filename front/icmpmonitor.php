@@ -31,7 +31,7 @@ OpenDB();
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['ICMPMonitor_Title']; ?>
+         <?=$pia_lang['ICMPMonitor_Title'];?>
       <button type="button" class="btn btn-xs btn-success icmplist_add_ip" data-toggle="modal" data-target="#modal-add-monitoringIP"><i class="bi bi-plus-lg" style="font-size:1.5rem;"></i></button>
       </h1>
 
@@ -44,36 +44,36 @@ OpenDB();
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title"><?php echo $pia_lang['ICMPMonitor_headline_IP']; ?></h4>
+                            <h4 class="modal-title"><?=$pia_lang['ICMPMonitor_headline_IP'];?></h4>
                         </div>
                         <div class="modal-body">
                             <div style="height: 230px;">
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['ICMPMonitor_label_IP']; ?></label>
+                              <label class="col-xs-3 control-label"><?=$pia_lang['ICMPMonitor_label_IP'];?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="icmphost_ip" placeholder="Host IP">
                               </div>
                             </div>
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['ICMPMonitor_label_Hostname']; ?></label>
+                              <label class="col-xs-3 control-label"><?=$pia_lang['ICMPMonitor_label_Hostname'];?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="icmphost_name" placeholder="Hostname">
                               </div>
                             </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['Device_TableHead_Favorite']; ?></label>
+                                <label class="col-xs-3 control-label"><?=$pia_lang['Device_TableHead_Favorite'];?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox orange" id="insFavorite" type="checkbox">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents']; ?></label>
+                                <label class="col-xs-3 control-label"><?=$pia_lang['WebServices_label_AlertEvents'];?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox blue" id="insAlertEvents" type="checkbox">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertDown']; ?></label>
+                                <label class="col-xs-3 control-label"><?=$pia_lang['WebServices_label_AlertDown'];?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox red" id="insAlertDown" type="checkbox">
                                 </div>
@@ -81,8 +81,8 @@ OpenDB();
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php echo $pia_lang['Gen_Close']; ?></button>
-                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewICMPHost()" ><?php echo $pia_lang['Gen_Save']; ?></button>
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?=$pia_lang['Gen_Close'];?></button>
+                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewICMPHost()" ><?=$pia_lang['Gen_Save'];?></button>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ OpenDB();
         <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-aqua">
             <div class="inner"><h3 id="devicesAll"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_AllDevices']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_AllDevices'];?></p>
             </div>
             <div class="icon"><i class="fa fa-laptop text-aqua-40"></i></div>
           </div>
@@ -107,7 +107,7 @@ OpenDB();
         <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-green">
             <div class="inner"><h3 id="devicesConnected"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Connected']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_Connected'];?></p>
             </div>
             <div class="icon"><i class="fa fa-plug text-green-40"></i></div>
           </div>
@@ -116,7 +116,7 @@ OpenDB();
         <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-yellow">
             <div class="inner"><h3 id="devicesFavorites"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_Favorites']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_Favorites'];?></p>
             </div>
             <div class="icon"><i class="fa fa-star text-yellow-40"></i></div>
           </div>
@@ -125,7 +125,7 @@ OpenDB();
         <div class="col-lg-3 col-sm-3 col-xs-6">
           <div class="small-box bg-red">
             <div class="inner"><h3 id="devicesDown"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['Device_Shortcut_DownAlerts']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['Device_Shortcut_DownAlerts'];?></p>
             </div>
             <div class="icon"><i class="fa fa-warning text-red-40"></i></div>
           </div>
@@ -139,7 +139,7 @@ OpenDB();
 
             <!-- box-header -->
             <div class="box-header">
-              <h3 id="tableDevicesTitle" class="box-title text-aqua"><?php echo $pia_lang['Device_Title']; ?></h3>
+              <h3 id="tableDevicesTitle" class="box-title text-aqua"><?=$pia_lang['Device_Title'];?></h3>
             </div>
 
             <div class="box-body table-responsive">
@@ -226,7 +226,7 @@ function initializeDatatable () {
   $('#tableDevices').DataTable({
     'paging'       : true,
     'lengthChange' : true,
-    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, '<?php echo $pia_lang['Device_Tablelenght_all']; ?>']],
+    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, '<?=$pia_lang['Device_Tablelenght_all'];?>']],
     'searching'    : true,
     'ordering'     : true,
     'info'         : true,
@@ -279,13 +279,13 @@ function initializeDatatable () {
     'language'    : {
       processing: '<table> <td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td> </table>',
       emptyTable: 'No data',
-      "lengthMenu": "<?php echo $pia_lang['Device_Tablelenght']; ?>",
-      "search":     "<?php echo $pia_lang['Device_Searchbox']; ?>: ",
+      "lengthMenu": "<?=$pia_lang['Device_Tablelenght'];?>",
+      "search":     "<?=$pia_lang['Device_Searchbox'];?>: ",
       "paginate": {
-          "next":       "<?php echo $pia_lang['Device_Table_nav_next']; ?>",
-          "previous":   "<?php echo $pia_lang['Device_Table_nav_prev']; ?>"
+          "next":       "<?=$pia_lang['Device_Table_nav_next'];?>",
+          "previous":   "<?=$pia_lang['Device_Table_nav_prev'];?>"
       },
-      "info":           "<?php echo $pia_lang['Device_Table_info']; ?>",
+      "info":           "<?=$pia_lang['Device_Table_info'];?>",
     }
   });
 };

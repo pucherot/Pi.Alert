@@ -143,10 +143,10 @@ if ($ENABLED_DARKMODE === True) {
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg"><?php echo $pia_lang['Login_Box']; ?></p>
+    <p class="login-box-msg"><?=$pia_lang['Login_Box'];?></p>
       <form action="./index.php" method="post">
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="<?php echo $pia_lang['Login_Psw-box']; ?>" name="loginpassword">
+        <input type="password" class="form-control" placeholder="<?=$pia_lang['Login_Psw-box'];?>" name="loginpassword">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -155,31 +155,31 @@ if ($ENABLED_DARKMODE === True) {
             <label for="PWRememberBox">
               <input type="checkbox" name="PWRemember" id="PWRememberBox">
                 <div style="margin-left: 10px; display: inline-block; vertical-align: top;">
-                  <?php echo $pia_lang['Login_Remember']; ?><br><span style="font-size: smaller"><?php echo $pia_lang['Login_Remember_small']; ?></span>
+                  <?=$pia_lang['Login_Remember'];?><br><span style="font-size: smaller"><?=$pia_lang['Login_Remember_small'];?></span>
                 </div>
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4" style="padding-top: 10px;">
-          <button type="submit" class="btn btn-primary btn-block btn-flat"><?php echo $pia_lang['Login_Submit']; ?></button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><?=$pia_lang['Login_Submit'];?></button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
     <div style="padding-top: 10px;">
-      <button class="btn btn-xs btn-primary btn-block btn-flat" onclick="Passwordhinfo()"><?php echo $pia_lang['Login_Toggle_Info']; ?></button>
+      <button class="btn btn-xs btn-primary btn-block btn-flat" onclick="Passwordhinfo()"><?=$pia_lang['Login_Toggle_Info'];?></button>
     </div>
 
   </div>
   <!-- /.login-box-body -->
 
-  <div id="myDIV" class="box-body" style="margin-top: 50px; <?php echo $login_display_mode; ?>">
-      <div class="alert alert-<?php echo $login_mode; ?> alert-dismissible">
-          <h4><i class="icon fa <?php echo $login_icon; ?>"></i><?php echo $login_headline; ?></h4>
-          <p><?php echo $login_info; ?></p>
-          <p><?php echo $pia_lang['Login_Psw_run']; ?><br><span style="border: solid 1px yellow; padding: 2px;">./pialert-cli set_password <?php echo $pia_lang['Login_Psw_new']; ?></span><br><?php echo $pia_lang['Login_Psw_folder']; ?></p>
+  <div id="myDIV" class="box-body" style="margin-top: 50px; <?=$login_display_mode;?>">
+      <div class="alert alert-<?=$login_mode;?> alert-dismissible">
+          <h4><i class="icon fa <?=$login_icon;?>"></i><?=$login_headline;?></h4>
+          <p><?=$login_info;?></p>
+          <p><?=$pia_lang['Login_Psw_run'];?><br><span style="border: solid 1px yellow; padding: 2px;">./pialert-cli set_password <?=$pia_lang['Login_Psw_new'];?></span><br><?=$pia_lang['Login_Psw_folder'];?></p>
       </div>
   </div>
 

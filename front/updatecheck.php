@@ -25,14 +25,14 @@ require 'php/server/journal.php';
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['Updatecheck_Title']; ?>
+         <?=$pia_lang['Updatecheck_Title'];?>
       </h1>
     </section>
 
     <section class="content">
         <div class="box">
             <div class="box-body" id="updatecheck">
-                <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?php echo $pia_lang['Maintenance_Tools_Updatecheck']; ?></button>
+                <button type="button" id="rewwejwejpjo" class="btn btn-primary" onclick="check_github_for_updates()"><?=$pia_lang['Maintenance_Tools_Updatecheck'];?></button>
           	</div>
         </div>
 

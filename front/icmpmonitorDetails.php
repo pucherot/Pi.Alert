@@ -145,7 +145,7 @@ function get_host_statistic($hostip) {
       <?php require 'php/templates/notification.php';?>
 
       <h1 id="pageTitle">
-        <?php echo $hostip; ?>
+        <?=$hostip;?>
       </h1>
     </section>
 
@@ -158,7 +158,7 @@ function get_host_statistic($hostip) {
           <a href="#">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="deviceStatus" class="<?=$headstatus_color?>" style="margin-left: 0em"><?=$headstatus?></h3>
-                <p class="infobox_label"><?php echo $pia_lang['DevDetail_Shortcut_CurrentStatus']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['DevDetail_Shortcut_CurrentStatus'];?></p>
               </div>
               <div class="icon"> <i id="deviceStatusIcon" class="<?=$headstatus_icon?>"></i></div>
             </div>
@@ -166,10 +166,10 @@ function get_host_statistic($hostip) {
         </div>
 
         <div class="col-lg-3 col-sm-6 col-xs-6">
-          <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=all">
+          <a href="./icmpmonitorDetails.php?hostip=<?=$hostip?>&icmpfilter=all">
             <div class="small-box bg-aqua">
               <div class="inner"> <h3 id="eventsAll"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['WebServices_Events_Shortcut_All']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['WebServices_Events_Shortcut_All'];?></p>
               </div>
               <div class="icon"> <i class="fa fa-bolt text-aqua-40"></i> </div>
             </div>
@@ -177,10 +177,10 @@ function get_host_statistic($hostip) {
         </div>
 
         <div class="col-lg-3 col-sm-6 col-xs-6">
-          <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Online">
+          <a href="./icmpmonitorDetails.php?hostip=<?=$hostip?>&icmpfilter=Online">
             <div class="small-box bg-green">
               <div class="inner"> <h3 id="eventsOnline"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['ICMPMonitor_Shortcut_Online']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-check2-square text-green-40"></i> </div>
             </div>
@@ -188,10 +188,10 @@ function get_host_statistic($hostip) {
         </div>
 
         <div class="col-lg-3 col-sm-6 col-xs-6">
-          <a href="./icmpmonitorDetails.php?hostip=<?php echo $hostip ?>&icmpfilter=Offline">
+          <a href="./icmpmonitorDetails.php?hostip=<?=$hostip?>&icmpfilter=Offline">
             <div  class="small-box bg-red">
               <div class="inner"> <h3 id="eventsOffline"> -- </h3>
-                <p class="infobox_label"><?php echo $pia_lang['ICMPMonitor_Shortcut_Offline']; ?></p>
+                <p class="infobox_label"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?></p>
               </div>
               <div class="icon"> <i class="bi bi-sign-turn-right text-red-40"></i> </div>
             </div>
@@ -206,9 +206,9 @@ function get_host_statistic($hostip) {
         <div class="col-lg-12 col-sm-12 col-xs-12">
           <div id="navDevice" class="nav-tabs-custom">
             <ul class="nav nav-tabs" style="fon t-size:16px;">
-              <li class=""> <a id="tabDetails" href="#panDetails" data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Details']; ?></a></li>
-              <li class=""> <a id="tabEvents" href="#panEvents" data-toggle="tab"> <?php echo $pia_lang['DevDetail_Tab_Events']; ?></a></li>
-              <li class=""> <a id="tabGraph" href="#panGraph" data-toggle="tab"> <?php echo $pia_lang['WebServices_Tab_Graph']; ?></a></li>
+              <li class=""> <a id="tabDetails" href="#panDetails" data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Details'];?></a></li>
+              <li class=""> <a id="tabEvents" href="#panEvents" data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Events'];?></a></li>
+              <li class=""> <a id="tabGraph" href="#panGraph" data-toggle="tab"> <?=$pia_lang['WebServices_Tab_Graph'];?></a></li>
             </ul>
 
             <div class="tab-content" style="min-height: 430px;">
@@ -220,31 +220,31 @@ function get_host_statistic($hostip) {
                 <div class="row">
     <!-- column 1 -->
                   <div class="col-sm-6 col-xs-12">
-                    <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_MainInfo_Title']; ?></h4>
+                    <h4 class="bottom-border-aqua"><?=$pia_lang['DevDetail_MainInfo_Title'];?></h4>
                     <div class="box-body form-horizontal">
 
                       <!-- URL -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['ICMPMonitor_label_IP']; ?></label>
+                        <label class="col-sm-3 control-label"><?=$pia_lang['ICMPMonitor_label_IP'];?></label>
                         <div class="col-sm-9">
-                          <input class="form-control" id="txtIP" type="text" readonly value="<?php echo $icmpmonitorDetails['icmp_ip'] ?>">
+                          <input class="form-control" id="txtIP" type="text" readonly value="<?=$icmpmonitorDetails['icmp_ip']?>">
                         </div>
                       </div>
 
                       <!-- Tags -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['ICMPMonitor_label_Hostname']; ?></label>
+                        <label class="col-sm-3 control-label"><?=$pia_lang['ICMPMonitor_label_Hostname'];?></label>
                         <div class="col-sm-9">
-                          <input class="form-control" id="txtHostname" type="text" value="<?php echo $icmpmonitorDetails['icmp_hostname'] ?>">
+                          <input class="form-control" id="txtHostname" type="text" value="<?=$icmpmonitorDetails['icmp_hostname']?>">
                         </div>
                       </div>
 
                       <!-- Owner -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Owner']; ?></label>
+                        <label class="col-sm-3 control-label"><?=$pia_lang['DevDetail_MainInfo_Owner'];?></label>
                         <div class="col-sm-7">
                           <div class="input-group">
-                            <input class="form-control" id="txtOwner" type="text" value="<?php echo $icmpmonitorDetails['icmp_owner'] ?>">
+                            <input class="form-control" id="txtOwner" type="text" value="<?=$icmpmonitorDetails['icmp_owner']?>">
                             <div class="input-group-btn">
                               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <span class="fa fa-caret-down"></span></button>
@@ -257,10 +257,10 @@ function get_host_statistic($hostip) {
 
                       <!-- Type -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Type']; ?></label>
+                        <label class="col-sm-3 control-label"><?=$pia_lang['DevDetail_MainInfo_Type'];?></label>
                         <div class="col-sm-7">
                           <div class="input-group">
-                            <input class="form-control" id="txtDeviceType" type="text" value="<?php echo $icmpmonitorDetails['icmp_type'] ?>">
+                            <input class="form-control" id="txtDeviceType" type="text" value="<?=$icmpmonitorDetails['icmp_type']?>">
                             <div class="input-group-btn">
                               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" >
                                 <span class="fa fa-caret-down"></span></button>
@@ -277,10 +277,10 @@ function get_host_statistic($hostip) {
 
                       <!-- Group -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Group']; ?></label>
+                        <label class="col-sm-3 control-label"><?=$pia_lang['DevDetail_MainInfo_Group'];?></label>
                         <div class="col-sm-7">
                           <div class="input-group">
-                            <input class="form-control" id="txtGroup" type="text" value="<?php echo $icmpmonitorDetails['icmp_group'] ?>">
+                            <input class="form-control" id="txtGroup" type="text" value="<?=$icmpmonitorDetails['icmp_group']?>">
                             <div class="input-group-btn">
                               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <span class="fa fa-caret-down"></span></button>
@@ -298,10 +298,10 @@ function get_host_statistic($hostip) {
 
                       <!-- Location -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['DevDetail_MainInfo_Location']; ?></label>
+                        <label class="col-sm-3 control-label"><?=$pia_lang['DevDetail_MainInfo_Location'];?></label>
                         <div class="col-sm-7">
                           <div class="input-group">
-                            <input class="form-control" id="txtLocation" type="text" value="<?php echo $icmpmonitorDetails['icmp_location'] ?>">
+                            <input class="form-control" id="txtLocation" type="text" value="<?=$icmpmonitorDetails['icmp_location']?>">
                             <div class="input-group-btn">
                               <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <span class="fa fa-caret-down"></span></button>
@@ -321,9 +321,9 @@ function get_host_statistic($hostip) {
 
                       <!-- Notes -->
                       <div class="form-group">
-                        <label class="col-sm-3 control-label"><?php echo $pia_lang['WebServices_label_Notes']; ?></label>
+                        <label class="col-sm-3 control-label"><?=$pia_lang['WebServices_label_Notes'];?></label>
                         <div class="col-sm-9">
-                          <input class="form-control" id="txtNotes" type="text" value="<?php echo $icmpmonitorDetails['icmp_Notes'] ?>">
+                          <input class="form-control" id="txtNotes" type="text" value="<?=$icmpmonitorDetails['icmp_Notes']?>">
                         </div>
                       </div>
 
@@ -332,27 +332,27 @@ function get_host_statistic($hostip) {
 
     <!-- column 2 -->
                   <div class="col-sm-6 col-xs-12" style="margin-bottom: 50px;">
-                    <h4 class="bottom-border-aqua"><?php echo $pia_lang['DevDetail_EveandAl_Title']; ?></h4>
+                    <h4 class="bottom-border-aqua"><?=$pia_lang['DevDetail_EveandAl_Title'];?></h4>
                     <div class="box-body form-horizontal">
 
                       <!-- Last Scan -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['WebServices_label_ScanTime']; ?></label>
+                        <label class="col-sm-4 control-label"><?=$pia_lang['WebServices_label_ScanTime'];?></label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txtLastScan" type="text" readonly value="<?php echo $icmpmonitorDetails['icmp_LastScan'] ?>">
+                          <input class="form-control" id="txtLastScan" type="text" readonly value="<?=$icmpmonitorDetails['icmp_LastScan']?>">
                         </div>
                       </div>
 
                       <!-- Last HTTP Status -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo $pia_lang['ICMPMonitor_label_RTT']; ?></label>
+                        <label class="col-sm-4 control-label"><?=$pia_lang['ICMPMonitor_label_RTT'];?></label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txtavgrtt" type="text" readonly value="<?php echo $icmpmonitorDetails['icmp_avgrtt'] ?>">
+                          <input class="form-control" id="txtavgrtt" type="text" readonly value="<?=$icmpmonitorDetails['icmp_avgrtt']?>">
                         </div>
                       </div>
 
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo $pia_lang['Device_TableHead_Favorite']; ?></label>
+                        <label class="col-xs-4 control-label"><?=$pia_lang['Device_TableHead_Favorite'];?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox orange" id="chkFavorit" <?php if ($icmpmonitorDetails['icmp_Favorite'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
@@ -360,7 +360,7 @@ function get_host_statistic($hostip) {
 
                       <!-- Alert events -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents']; ?></label>
+                        <label class="col-xs-4 control-label"><?=$pia_lang['WebServices_label_AlertEvents'];?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox blue" id="chkAlertEvents" <?php if ($icmpmonitorDetails['icmp_AlertEvents'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
@@ -368,7 +368,7 @@ function get_host_statistic($hostip) {
 
                       <!-- Alert Down -->
                       <div class="form-group">
-                        <label class="col-xs-4 control-label"><?php echo $pia_lang['WebServices_label_AlertDown']; ?></label>
+                        <label class="col-xs-4 control-label"><?=$pia_lang['WebServices_label_AlertDown'];?></label>
                         <div class="col-xs-4" style="padding-top:6px;">
                           <input class="checkbox red" id="chkAlertDown" <?php if ($icmpmonitorDetails['icmp_AlertDown'] == 1) {echo 'checked';}?> type="checkbox">
                         </div>
@@ -380,9 +380,9 @@ function get_host_statistic($hostip) {
                   <!-- Buttons -->
                   <div class="col-xs-12">
                     <div class="pull-right">
-                        <button type="button" class="btn btn-danger servicedet_button_space"  id="btnDelete"   onclick="deleteICMPHost()"> <?php echo $pia_lang['Gen_Delete']; ?> </button>
-                        <button type="button" class="btn btn-default servicedet_button_space" id="btnRestore"  onclick="location.reload()">  <?php echo $pia_lang['Gen_Cancel']; ?> </button>
-                        <button type="button" class="btn btn-primary servicedet_button_space" id="btnSave"     onclick="setICMPHostData()" >  <?php echo $pia_lang['Gen_Save']; ?> </button>
+                        <button type="button" class="btn btn-danger servicedet_button_space"  id="btnDelete"   onclick="deleteICMPHost()"> <?=$pia_lang['Gen_Delete'];?> </button>
+                        <button type="button" class="btn btn-default servicedet_button_space" id="btnRestore"  onclick="location.reload()">  <?=$pia_lang['Gen_Cancel'];?> </button>
+                        <button type="button" class="btn btn-primary servicedet_button_space" id="btnSave"     onclick="setICMPHostData()" >  <?=$pia_lang['Gen_Save'];?> </button>
                     </div>
                   </div>
 
@@ -400,10 +400,10 @@ set_table_headline($icmpfilter);
                   <thead>
                     <tr>
                       <!-- <th>Service URL</th> -->
-                      <th><?php echo $pia_lang['WebServices_tablehead_TargetIP']; ?></th>
-                      <th><?php echo $pia_lang['WebServices_tablehead_ScanTime']; ?></th>
-                      <th><?php echo $pia_lang['WebServices_tablehead_Response_Time']; ?></th>
-                      <th><?php echo $pia_lang['Device_TableHead_Status']; ?></th>
+                      <th><?=$pia_lang['WebServices_tablehead_TargetIP'];?></th>
+                      <th><?=$pia_lang['WebServices_tablehead_ScanTime'];?></th>
+                      <th><?=$pia_lang['WebServices_tablehead_Response_Time'];?></th>
+                      <th><?=$pia_lang['Device_TableHead_Status'];?></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -417,7 +417,7 @@ get_icmphost_events_table($hostip, $icmpfilter);
 
 <!-- Graph ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panGraph">
-                <h4 class="text-aqua" style="font-size: 18px;margin: 0;line-height: 1; margin-bottom: 20px;"><?php echo $pia_lang['WebServices_Chart_a']; ?> <span class="maxlogage-interval">24</span> <?php echo $pia_lang['WebServices_Chart_b']; ?></h4>
+                <h4 class="text-aqua" style="font-size: 18px;margin: 0;line-height: 1; margin-bottom: 20px;"><?=$pia_lang['WebServices_Chart_a'];?> <span class="maxlogage-interval">24</span> <?=$pia_lang['WebServices_Chart_b'];?></h4>
                 <div class="col-md-12">
                   <div class="chart" style="height: 150px;">
                     <script src="lib/AdminLTE/bower_components/chart.js/Chart.js"></script>
@@ -439,11 +439,11 @@ $statistic = get_host_statistic($hostip);
 ?>
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['WebServices_Stats_Time']; ?>:</div>
-                    <div class="col-sm-2">&Oslash; <?php echo $statistic['avg_rtt']; ?> ms</div>
-                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_min']; ?> <?php echo $statistic['rtt_min']; ?> ms</div>
-                    <div class="col-sm-2"><?php echo $pia_lang['WebServices_Stats_Time_max']; ?> <?php echo $statistic['rtt_max']; ?> ms</div>
-                    <div class="col-sm-4"><span style="opacity: 0.6"><?php echo $pia_lang['WebServices_Stats_comment_a']; ?></span></div>
+                    <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['WebServices_Stats_Time'];?>:</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['avg_rtt'];?> ms</div>
+                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_min'];?> <?=$statistic['rtt_min'];?> ms</div>
+                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_max'];?> <?=$statistic['rtt_max'];?> ms</div>
+                    <div class="col-sm-4"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
                   </div>
                 </div>
 
@@ -451,10 +451,10 @@ $statistic = get_host_statistic($hostip);
 
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?php echo $pia_lang['ICMPMonitor_Availability']; ?>:</div>
-                    <div class="col-sm-2"><?php echo $pia_lang['ICMPMonitor_Shortcut_Online']; ?> <?php echo $statistic['online_percent']; ?></div>
-                    <div class="col-sm-2"><?php echo $pia_lang['ICMPMonitor_Shortcut_Offline']; ?> <?php echo $statistic['offline_percent']; ?></div>
-                    <div class="col-sm-6"><span style="opacity: 0.6"><?php echo $pia_lang['WebServices_Stats_comment_a']; ?></span></div>
+                    <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['ICMPMonitor_Availability'];?>:</div>
+                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?> <?=$statistic['online_percent'];?></div>
+                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?> <?=$statistic['offline_percent'];?></div>
+                    <div class="col-sm-6"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
                   </div>
                 </div>
 
@@ -520,7 +520,7 @@ if ($ENABLED_DARKMODE === True) {
 
 // -----------------------------------------------------------------------------
 function main () {
-  hostip = '<?php echo $hostip; ?>'
+  hostip = '<?=$hostip;?>'
   initializeTabs();
   initializeiCheck();
   getEventsTotalsforICMPHost();
@@ -580,7 +580,7 @@ function getEventsTotalsforICMPHost() {
   // stopTimerRefreshData();
 
   // get totals and put in boxes
-  $.get('php/server/icmpmonitor.php?action=getEventsTotalsforICMP&hostip=<?php echo $icmpmonitorDetails['icmp_ip'] ?>', function(data) {
+  $.get('php/server/icmpmonitor.php?action=getEventsTotalsforICMP&hostip=<?=$icmpmonitorDetails['icmp_ip']?>', function(data) {
     var totalsEvents = JSON.parse(data);
 
     $('#eventsAll').html      (totalsEvents[0].toLocaleString());
@@ -635,13 +635,13 @@ function initializeDatatable () {
     'language'    : {
       processing: '<table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td></table>',
       emptyTable: 'No data',
-      "lengthMenu": "<?php echo $pia_lang['Events_Tablelenght']; ?>",
-      "search":     "<?php echo $pia_lang['Events_Searchbox']; ?>: ",
+      "lengthMenu": "<?=$pia_lang['Events_Tablelenght'];?>",
+      "search":     "<?=$pia_lang['Events_Searchbox'];?>: ",
       "paginate": {
-          "next":       "<?php echo $pia_lang['Events_Table_nav_next']; ?>",
-          "previous":   "<?php echo $pia_lang['Events_Table_nav_prev']; ?>"
+          "next":       "<?=$pia_lang['Events_Table_nav_next'];?>",
+          "previous":   "<?=$pia_lang['Events_Table_nav_prev'];?>"
       },
-      "info":           "<?php echo $pia_lang['Events_Table_info']; ?>",
+      "info":           "<?=$pia_lang['Events_Table_info'];?>",
     },
   });
 };
@@ -683,8 +683,8 @@ function askdeleteICMPHost () {
   }
 
   // Ask delete device
-  showModalWarning ('<?php echo $pia_lang['WebServices_button_Delete_label']; ?>', '<?php echo $pia_lang['WebServices_button_Delete_Warning']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteICMPHost');
+  showModalWarning ('<?=$pia_lang['WebServices_button_Delete_label'];?>', '<?=$pia_lang['WebServices_button_Delete_Warning'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteICMPHost');
 }
 
 // -----------------------------------------------------------------------------

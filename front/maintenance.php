@@ -29,7 +29,7 @@ require 'php/server/journal.php';
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['Maintenance_Title']; ?>
+         <?=$pia_lang['Maintenance_Title'];?>
       </h1>
     </section>
 
@@ -257,63 +257,63 @@ if ($_REQUEST['tab'] == '1') {
         <div class="box-body" style="padding-bottom: 5px;">
             <div class="db_info_table">
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell" style="min-width: 140px"><?php echo $pia_lang['Maintenance_database_path']; ?></div>
+                    <div class="db_info_table_cell" style="min-width: 140px"><?=$pia_lang['Maintenance_database_path'];?></div>
                     <div class="db_info_table_cell" style="width: 70%">
-                        <?php echo $DB_SOURCE; ?>
+                        <?=$DB_SOURCE;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_size']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_database_size'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $DB_SIZE_DATA; ?>
+                        <?=$DB_SIZE_DATA;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_lastmod']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_database_lastmod'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $DB_MOD_DATA; ?>
+                        <?=$DB_MOD_DATA;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_database_backup']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_database_backup'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $ARCHIVE_COUNT . ' ' . $pia_lang['Maintenance_database_backup_found'] . ' / ' . $pia_lang['Maintenance_database_backup_total'] . ': ' . $ARCHIVE_DISKUSAGE; ?>
+                        <?=$ARCHIVE_COUNT . ' ' . $pia_lang['Maintenance_database_backup_found'] . ' / ' . $pia_lang['Maintenance_database_backup_total'] . ': ' . $ARCHIVE_DISKUSAGE;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_config_backup']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_config_backup'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $CONFIG_FILE_COUNT . ' ' . $pia_lang['Maintenance_database_backup_found']; ?>
+                        <?=$CONFIG_FILE_COUNT . ' ' . $pia_lang['Maintenance_database_backup_found'];?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_arp_status']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_arp_status'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $_SESSION['arpscan_result'];
-read_arpscan_timer(); ?></div>
+                        <?=$_SESSION['arpscan_result'];
+read_arpscan_timer();?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell">Api-Key</div>
                     <div class="db_info_table_cell" style="overflow-wrap: anywhere;">
-                        <input readonly value="<?php echo $APIKEY; ?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
+                        <input readonly value="<?=$APIKEY;?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_notification_config']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_notification_config'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo format_notifications($CONFIG_FILE_FILTER_VALUE_ARP); ?>
+                        <?=format_notifications($CONFIG_FILE_FILTER_VALUE_ARP);?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_notification_config_webmon']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_notification_config_webmon'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo format_notifications($CONFIG_FILE_FILTER_VALUE_WEB); ?>
+                        <?=format_notifications($CONFIG_FILE_FILTER_VALUE_WEB);?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?php echo $pia_lang['Maintenance_Tool_ignorelist']; ?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_Tool_ignorelist'];?></div>
                     <div class="db_info_table_cell">
-                        <?php echo $MAC_IGNORE_LIST; ?>
+                        <?=$MAC_IGNORE_LIST;?>
                     </div>
                 </div>
             </div>
@@ -331,11 +331,11 @@ read_arpscan_timer(); ?></div>
             <h3 class="box-title">Log Viewer</h3>
         </div>
         <div class="box-body main_logviwer_buttonbox" id="logviewer">
-            <button type="button" id="oisjmofeirfj" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-scan"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Scan']; ?></button>
-            <button type="button" id="wefwfwefewdf" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-iplog"><?php echo $pia_lang['Maintenance_Tools_Logviewer_IPLog']; ?></button>
-            <button type="button" id="tzhrsreawefw" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-vendor"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Vendor']; ?></button>
-            <button type="button" id="arzuozhrsfga" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-cleanup"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Cleanup']; ?></button>
-            <button type="button" id="ufiienfflgze" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-nmap"><?php echo $pia_lang['Maintenance_Tools_Logviewer_Nmap']; ?></button>
+            <button type="button" id="oisjmofeirfj" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-scan"><?=$pia_lang['Maintenance_Tools_Logviewer_Scan'];?></button>
+            <button type="button" id="wefwfwefewdf" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-iplog"><?=$pia_lang['Maintenance_Tools_Logviewer_IPLog'];?></button>
+            <button type="button" id="tzhrsreawefw" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-vendor"><?=$pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
+            <button type="button" id="arzuozhrsfga" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-cleanup"><?=$pia_lang['Maintenance_Tools_Logviewer_Cleanup'];?></button>
+            <button type="button" id="ufiienfflgze" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-nmap"><?=$pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
 
 <?php
 if ($_SESSION['Scan_WebServices'] == True) {
@@ -345,43 +345,33 @@ if ($_SESSION['Scan_WebServices'] == True) {
       </div>
     </div>
 
-<!-- Log Viewer - Modals Scan ----------------------------------------------------------------- -->
 <?php
+// Log Viewer - Modals Scan -->
 print_logviewer_modal_head('scan', 'pialert.1.log (File)');
 read_logfile('pialert.1.log', $pia_lang['Maintenance_Tools_Logviewer_Scan_empty']);
 print_logviewer_modal_foot();
-?>
 
-<!-- Log Viewer - Modals IP ----------------------------------------------------------------- -->
-<?php
+// Log Viewer - Modals IP -->
 print_logviewer_modal_head('iplog', 'pialert.IP.log (File)');
 read_logfile('pialert.IP.log', $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty']);
 print_logviewer_modal_foot();
-?>
 
-<!-- Log Viewer - Modals Vendor Update ----------------------------------------------------------------- -->
-<?php
+// Log Viewer - Modals Vendor Update -->
 print_logviewer_modal_head('vendor', 'pialert.vendors.log (File)');
 read_logfile_vendor();
 print_logviewer_modal_foot();
-?>
 
-<!-- Log Viewer - Modals Cleanup ----------------------------------------------------------------- -->
-<?php
+// Log Viewer - Modals Cleanup -->
 print_logviewer_modal_head('cleanup', 'pialert.cleanup.log (File)');
 read_logfile('pialert.cleanup.log', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty']);
 print_logviewer_modal_foot();
-?>
 
-<!-- Log Viewer - Modals Nmap ----------------------------------------------------------------- -->
-<?php
+// Log Viewer - Modals Nmap -->
 print_logviewer_modal_head('nmap', 'last Nmap Scan (Memory)');
 if (!isset($_SESSION['ScanShortMem_NMAP'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem_NMAP'];}
 print_logviewer_modal_foot();
-?>
 
-<!-- Log Viewer - Modals WebServices ----------------------------------------------------------------- -->
-<?php
+// Log Viewer - Modals WebServices -->
 if ($_SESSION['Scan_WebServices'] == True) {
 	print_logviewer_modal_head('webservices', 'pialert.webservices.log (File)');
 	read_logfile('pialert.webservices.log', $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']);
@@ -390,19 +380,18 @@ if ($_SESSION['Scan_WebServices'] == True) {
 ?>
 
 <!-- Tabs ----------------------------------------------------------------- -->
-
     <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
-        <li class="<?php echo $pia_tab_setting; ?>"><a href="#tab_Settings" data-toggle="tab" onclick="update_tabURL(window.location.href,'1')"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings']; ?></a></li>
-        <li class="<?php echo $pia_tab_tool; ?>"><a href="#tab_DBTools" data-toggle="tab" onclick="update_tabURL(window.location.href,'2')"><?php echo $pia_lang['Maintenance_Tools_Tab_Tools']; ?></a></li>
-        <li class="<?php echo $pia_tab_backup; ?>"><a href="#tab_BackupRestore" data-toggle="tab" onclick="update_tabURL(window.location.href,'3')"><?php echo $pia_lang['Maintenance_Tools_Tab_BackupRestore']; ?></a></li>
+        <li class="<?=$pia_tab_setting?>"><a href="#tab_Settings" data-toggle="tab" onclick="update_tabURL(window.location.href,'1')"><?=$pia_lang['Maintenance_Tools_Tab_Settings']?></a></li>
+        <li class="<?=$pia_tab_tool?>"><a href="#tab_DBTools" data-toggle="tab" onclick="update_tabURL(window.location.href,'2')"><?=$pia_lang['Maintenance_Tools_Tab_Tools']?></a></li>
+        <li class="<?=$pia_tab_backup?>"><a href="#tab_BackupRestore" data-toggle="tab" onclick="update_tabURL(window.location.href,'3')"><?=$pia_lang['Maintenance_Tools_Tab_BackupRestore']?></a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane <?php echo $pia_tab_setting; ?>" id="tab_Settings">
+        <div class="tab-pane <?=$pia_tab_setting;?>" id="tab_Settings">
             <table class="table_settings">
-                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_a']; ?></h4></td></tr>
+                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_a'];?></h4></td></tr>
                 <tr class="table_settings">
-                    <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?php echo $pia_lang['Maintenance_Tools_Tab_Settings_Intro']; ?></td>
+                    <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?=$pia_lang['Maintenance_Tools_Tab_Settings_Intro'];?></td>
                 </tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell" colspan="2" style="padding-bottom: 20px;">
@@ -412,20 +401,20 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
                                       <div class="input-group">
-                                        <input class="form-control" id="txtLangSelection" type="text" value="<?php echo $pia_lang['Maintenance_lang_selector_empty']; ?>" readonly >
+                                        <input class="form-control" id="txtLangSelection" type="text" value="<?=$pia_lang['Maintenance_lang_selector_empty'];?>" readonly >
                                         <div class="input-group-btn">
                                           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonLangSelection">
                                             <span class="fa fa-caret-down"></span></button>
                                           <ul id="dropdownLangSelection" class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','en_us');"><?php echo $pia_lang['Maintenance_lang_en_us']; ?></a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','de_de');"><?php echo $pia_lang['Maintenance_lang_de_de']; ?></a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','fr_fr');"><?php echo $pia_lang['Maintenance_lang_fr_fr']; ?></a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','es_es');"><?php echo $pia_lang['Maintenance_lang_es_es']; ?></a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','en_us');"><?=$pia_lang['Maintenance_lang_en_us'];?></a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','de_de');"><?=$pia_lang['Maintenance_lang_de_de'];?></a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','fr_fr');"><?=$pia_lang['Maintenance_lang_fr_fr'];?></a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtLangSelection','es_es');"><?=$pia_lang['Maintenance_lang_es_es'];?></a></li>
                                           </ul>
                                         </div>
                                       </div>
                                     </div>
-                                    <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?php echo $pia_lang['Maintenance_lang_selector_apply']; ?> </button>
+                                    <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?=$pia_lang['Maintenance_lang_selector_apply'];?> </button>
                                 </div>
                             </div>
 <!-- Theme Selection ----------------------------------------------------------------- -->
@@ -433,7 +422,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
                                       <div class="input-group">
-                                        <input class="form-control" id="txtSkinSelection" type="text" value="<?php echo $pia_lang['Maintenance_themeselector_empty']; ?>" readonly >
+                                        <input class="form-control" id="txtSkinSelection" type="text" value="<?=$pia_lang['Maintenance_themeselector_empty'];?>" readonly >
                                         <div class="input-group-btn">
                                           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonSkinSelection">
                                             <span class="fa fa-caret-down"></span></button>
@@ -454,98 +443,98 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                         </div>
                                       </div>
                                     </div>
-                                    <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?php echo $pia_lang['Maintenance_themeselector_apply']; ?> </button>
+                                    <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?=$pia_lang['Maintenance_themeselector_apply'];?> </button>
                                 </div>
                             </div>
 <!-- Toggle DarkMode ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?php echo $pia_lang['Maintenance_Tool_darkmode']; ?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?=$pia_lang['Maintenance_Tool_darkmode'];?></button>
                                 </div>
                             </div>
 <!-- Toggle History Graph ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph']; ?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?=$pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>
                                 </div>
                             </div>
 <!-- Toggle Web Service Monitoring ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?php echo $pia_lang['Maintenance_Tool_webservicemon']; ?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?=$pia_lang['Maintenance_Tool_webservicemon'];?></button>
                                 </div>
                             </div>
 <!-- Toggle ICMP Monitoring ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableICMPMon" onclick="askPiaEnableICMPMon()"><?php echo $pia_lang['Maintenance_Tool_icmpmon']; ?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableICMPMon" onclick="askPiaEnableICMPMon()"><?=$pia_lang['Maintenance_Tool_icmpmon'];?></button>
                                 </div>
                             </div>
                         </div>
                     </td>
                 </tr>
-                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_b']; ?></h4></td></tr>
+                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_b'];?></h4></td></tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
                         <?php $col_checkbox = set_column_checkboxes(read_DevListCol());?>
                         <div class="form-group">
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkConnectionType" type="checkbox" <?php echo $col_checkbox['ConnectionType']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_ConnectionType']; ?></label>
+                              <input class="checkbox blue" id="chkConnectionType" type="checkbox" <?=$col_checkbox['ConnectionType'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_ConnectionType'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkOwner" type="checkbox" <?php echo $col_checkbox['Owner']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Owner']; ?></label>
+                              <input class="checkbox blue" id="chkOwner" type="checkbox" <?=$col_checkbox['Owner'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_Owner'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkType" type="checkbox" <?php echo $col_checkbox['Type']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Type']; ?></label>
+                              <input class="checkbox blue" id="chkType" type="checkbox" <?=$col_checkbox['Type'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_Type'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkFavorite" type="checkbox" <?php echo $col_checkbox['Favorites']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Favorite']; ?></label>
+                              <input class="checkbox blue" id="chkFavorite" type="checkbox" <?=$col_checkbox['Favorites'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_Favorite'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkGroup" type="checkbox" <?php echo $col_checkbox['Group']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Group']; ?></label>
+                              <input class="checkbox blue" id="chkGroup" type="checkbox" <?=$col_checkbox['Group'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_Group'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkLocation" type="checkbox" <?php echo $col_checkbox['Location']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_Location']; ?></label>
+                              <input class="checkbox blue" id="chkLocation" type="checkbox" <?=$col_checkbox['Location'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_Location'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkfirstSess" type="checkbox" <?php echo $col_checkbox['FirstSession']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_FirstSession']; ?></label>
+                              <input class="checkbox blue" id="chkfirstSess" type="checkbox" <?=$col_checkbox['FirstSession'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_FirstSession'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chklastSess" type="checkbox" <?php echo $col_checkbox['LastSession']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_LastSession']; ?></label>
+                              <input class="checkbox blue" id="chklastSess" type="checkbox" <?=$col_checkbox['LastSession'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_LastSession'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chklastIP" type="checkbox" <?php echo $col_checkbox['LastIP']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_LastIP']; ?></label>
+                              <input class="checkbox blue" id="chklastIP" type="checkbox" <?=$col_checkbox['LastIP'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_LastIP'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkMACtype" type="checkbox" <?php echo $col_checkbox['MACType']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_MAC']; ?></label>
+                              <input class="checkbox blue" id="chkMACtype" type="checkbox" <?=$col_checkbox['MACType'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_MAC'];?></label>
                             </div>
                             <div class="table_settings_col_box" style="">
-                              <input class="checkbox blue" id="chkMACaddress" type="checkbox" <?php echo $col_checkbox['MACAddress']; ?>>
-                              <label class="control-label" style="margin-left: 5px"><?php echo $pia_lang['Device_TableHead_MAC']; ?>-Address</label>
+                              <input class="checkbox blue" id="chkMACaddress" type="checkbox" <?=$col_checkbox['MACAddress'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_MAC'];?>-Address</label>
                             </div>
                             <br>
-                            <button type="button" class="btn btn-default" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?php echo $pia_lang['Gen_Save']; ?></button>
+                            <button type="button" class="btn btn-default" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?=$pia_lang['Gen_Save'];?></button>
                         </div>
                     </td>
                 </tr>
-                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?php echo $pia_lang['Maintenance_Tools_Tab_Subheadline_c']; ?></h4></td></tr>
+                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
                 <tr class="table_settings_row">
-                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?php echo $pia_lang['Maintenance_Tool_setapikey']; ?></button></td>
-                    <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_setapikey_text']; ?></td>
+                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?=$pia_lang['Maintenance_Tool_setapikey'];?></button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_setapikey_text'];?></td>
                 </tr>
                 <tr class="table_settings_row">
-                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?php echo $pia_lang['Maintenance_Tool_test_notification']; ?></button></td>
-                    <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_test_notification_text']; ?></td>
+                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?=$pia_lang['Maintenance_Tool_test_notification'];?></button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_test_notification_text'];?></td>
                 </tr>
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a">
@@ -554,7 +543,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                               <div class="form-group" style="width:160px; margin-bottom:5px;">
                                 <!-- <div class="col-sm-7"> -->
                                   <div class="input-group">
-                                    <input class="form-control" id="txtPiaArpTimer" type="text" value="<?php echo $pia_lang['Maintenance_arpscantimer_empty']; ?>" readonly >
+                                    <input class="form-control" id="txtPiaArpTimer" type="text" value="<?=$pia_lang['Maintenance_arpscantimer_empty'];?>" readonly >
                                     <div class="input-group-btn">
                                       <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonPiaArpTimer">
                                         <span class="fa fa-caret-down"></span></button>
@@ -573,12 +562,12 @@ if ($_SESSION['Scan_WebServices'] == True) {
                             </div>
                             <div style="display: block;">
                             <button type="button" class="btn btn-warning" style="margin-top:0px; width:160px; height:36px" id="btnSavePiaArpTimer" onclick="setPiAlertArpTimer()" ><div id="Timeralertspinner" class="loader disablespinner"></div>
-                                <div id="TimeralertText" class=""><?php echo $pia_lang['Maintenance_Tool_arpscansw']; ?></div></button>
+                                <div id="TimeralertText" class=""><?=$pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
                             </div>
                         </div>
 
                     </td>
-                    <td class="db_info_table_cell db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_arpscansw_text']; ?></td>
+                    <td class="db_info_table_cell db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_arpscansw_text'];?></td>
                 </tr>
                 <tr class="table_settings_row">
 <?php
@@ -592,53 +581,53 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
             </table>
 
         </div>
-        <div class="tab-pane <?php echo $pia_tab_tool; ?>" id="tab_DBTools">
+        <div class="tab-pane <?=$pia_tab_tool;?>" id="tab_DBTools">
             <div class="db_info_table">
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?php echo $pia_lang['Maintenance_Tool_del_alldev']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteMAC" onclick="askDeleteAllDevices()"><?=$pia_lang['Maintenance_Tool_del_alldev'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_alldev_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_del_alldev_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteUnknown" onclick="askDeleteUnknown()"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteUnknown" onclick="askDeleteUnknown()"><?=$pia_lang['Maintenance_Tool_del_unknowndev'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_unknowndev_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_del_unknowndev_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteEvents" onclick="askDeleteEvents()"><?php echo $pia_lang['Maintenance_Tool_del_allevents']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteEvents" onclick="askDeleteEvents()"><?=$pia_lang['Maintenance_Tool_del_allevents'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_allevents_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_del_allevents_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteActHistory" onclick="askDeleteActHistory()"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteActHistory" onclick="askDeleteActHistory()"><?=$pia_lang['Maintenance_Tool_del_ActHistory'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_ActHistory_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_del_ActHistory_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteInactiveHosts" onclick="askDeleteInactiveHosts()"><?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnDeleteInactiveHosts" onclick="askDeleteInactiveHosts()"><?=$pia_lang['Maintenance_Tool_del_Inactive_Hosts'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'];?></div>
                 </div>
             </div>
         </div>
-        <div class="tab-pane <?php echo $pia_tab_backup; ?>" id="tab_BackupRestore">
+        <div class="tab-pane <?=$pia_tab_backup;?>" id="tab_BackupRestore">
             <div class="db_info_table">
 				<div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('yes')"><?php echo $pia_lang['Maintenance_Tool_ConfBackup']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('yes')"><?=$pia_lang['Maintenance_Tool_ConfBackup'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_ConfBackup_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_ConfBackup_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?php echo $pia_lang['Maintenance_Tool_backup']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?=$pia_lang['Maintenance_Tool_backup'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_backup_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_backup_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
@@ -650,13 +639,13 @@ if (!$block_restore_button_db) {
 }
 ?>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_restore_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_restore_text'];?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaPurgeDBBackups" onclick="askPiaPurgeDBBackups()"><?php echo $pia_lang['Maintenance_Tool_purgebackup']; ?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaPurgeDBBackups" onclick="askPiaPurgeDBBackups()"><?=$pia_lang['Maintenance_Tool_purgebackup'];?></button>
                     </div>
-                    <div class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_Tool_purgebackup_text']; ?></div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_purgebackup_text'];?></div>
                 </div>
             </div>
  <?php
@@ -677,13 +666,13 @@ echo '</div>';
 <!-- Config Editor ----------------------------------------------------------------- -->
  <div class="box">
         <div class="box-body" id="configeditor">
-           <button type="button" id="oisggfjergfeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor"><?php echo $pia_lang['Maintenance_ConfEditor_Start']; ?></button>
+           <button type="button" id="oisggfjergfeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor"><?=$pia_lang['Maintenance_ConfEditor_Start'];?></button>
       </div>
     </div>
 
     <div class="box box-solid box-danger collapsed-box" style="margin-top: -15px;">
     <div class="box-header with-border" data-widget="collapse">
-           <h3 class="box-title"><?php echo $pia_lang['Maintenance_ConfEditor_Hint']; ?></h3>
+           <h3 class="box-title"><?=$pia_lang['Maintenance_ConfEditor_Hint'];?></h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
           </div>
@@ -692,16 +681,16 @@ echo '</div>';
            <table class="table configeditor_help">
               <tbody>
                 <tr>
-                  <th scope="row" class="text-nowrap text-danger"><?php echo $pia_lang['Maintenance_ConfEditor_Restore']; ?></th>
-                  <td class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_ConfEditor_Restore_info']; ?></td>
+                  <th scope="row" class="text-nowrap text-danger"><?=$pia_lang['Maintenance_ConfEditor_Restore'];?></th>
+                  <td class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_ConfEditor_Restore_info'];?></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="text-nowrap text-danger"><?php echo $pia_lang['Maintenance_ConfEditor_Backup']; ?></th>
-                  <td class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_ConfEditor_Backup_info']; ?></td>
+                  <th scope="row" class="text-nowrap text-danger"><?=$pia_lang['Maintenance_ConfEditor_Backup'];?></th>
+                  <td class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_ConfEditor_Backup_info'];?></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="text-nowrap text-danger"><?php echo $pia_lang['Gen_Save']; ?></th>
-                  <td class="db_tools_table_cell_b"><?php echo $pia_lang['Maintenance_ConfEditor_Save_info']; ?></td>
+                  <th scope="row" class="text-nowrap text-danger"><?=$pia_lang['Gen_Save'];?></th>
+                  <td class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_ConfEditor_Save_info'];?></td>
                 </tr>
               </tbody>
             </table>
@@ -720,13 +709,13 @@ echo '</div>';
                     <h4 class="modal-title">Config Editor</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
-                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?php echo file_get_contents('../config/pialert.conf'); ?></textarea>
+                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?=file_get_contents('../config/pialert.conf');?></textarea>
                 </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?php echo $pia_lang['Maintenance_ConfEditor_Restore']; ?></button>
-                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('no')"><?php echo $pia_lang['Maintenance_ConfEditor_Backup']; ?></button>
-                    <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig" style="margin: 5px"><?php echo $pia_lang['Gen_Save']; ?></button>
-                    <button type="button" class="btn btn-default" id="btnPiaEditorClose" data-dismiss="modal" style="margin: 5px"><?php echo $pia_lang['Gen_Close']; ?></button>
+                    <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?=$pia_lang['Maintenance_ConfEditor_Restore'];?></button>
+                    <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('no')"><?=$pia_lang['Maintenance_ConfEditor_Backup'];?></button>
+                    <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig" style="margin: 5px"><?=$pia_lang['Gen_Save'];?></button>
+                    <button type="button" class="btn btn-default" id="btnPiaEditorClose" data-dismiss="modal" style="margin: 5px"><?=$pia_lang['Gen_Close'];?></button>
                   </div>
               </form>
             </div>
@@ -752,8 +741,8 @@ require 'php/templates/footer.php';
 initializeiCheck();
 // delete devices with emty macs
 function askDeleteDevicesWithEmptyMACs () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_empty_macs_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_empty_macs_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteDevicesWithEmptyMACs');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_del_empty_macs_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteDevicesWithEmptyMACs');
 }
 function deleteDevicesWithEmptyMACs()
 {
@@ -764,8 +753,8 @@ function deleteDevicesWithEmptyMACs()
 
 // Test Notifications
 function askTestNotificationSystem () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_test_notification_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_test_notification_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Run']; ?>', 'TestNotificationSystem');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_test_notification_noti'];?>', '<?=$pia_lang['Maintenance_Tool_test_notification_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Run'];?>', 'TestNotificationSystem');
 }
 function TestNotificationSystem()
 {
@@ -776,8 +765,8 @@ function TestNotificationSystem()
 
 // delete all devices
 function askDeleteAllDevices () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_alldev_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_alldev_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteAllDevices');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_del_alldev_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_alldev_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteAllDevices');
 }
 function deleteAllDevices()
 {
@@ -788,8 +777,8 @@ function deleteAllDevices()
 
 // delete all (unknown) devices
 function askDeleteUnknown () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_unknowndev_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_unknowndev_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteUnknownDevices');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_del_unknowndev_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_unknowndev_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteUnknownDevices');
 }
 function deleteUnknownDevices()
 {
@@ -800,8 +789,8 @@ function deleteUnknownDevices()
 
 // delete all Events
 function askDeleteEvents () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_allevents_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_allevents_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteEvents');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_del_allevents_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_allevents_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteEvents');
 }
 function deleteEvents()
 {
@@ -812,8 +801,8 @@ function deleteEvents()
 
 // delete Hostory
 function askDeleteActHistory () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_ActHistory_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_ActHistory_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'deleteActHistory');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_del_ActHistory_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_ActHistory_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteActHistory');
 }
 function deleteActHistory()
 {
@@ -824,8 +813,8 @@ function deleteActHistory()
 
 // Backup DB to Archive
 function askPiaBackupDBtoArchive () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_backup_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_backup_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Backup']; ?>', 'PiaBackupDBtoArchive');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_backup_noti'];?>', '<?=$pia_lang['Maintenance_Tool_backup_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Backup'];?>', 'PiaBackupDBtoArchive');
 }
 function PiaBackupDBtoArchive()
 {
@@ -836,8 +825,8 @@ function PiaBackupDBtoArchive()
 
 // Restore DB from Archive
 function askPiaRestoreDBfromArchive () {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_restore_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_restore_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Restore']; ?>', 'PiaRestoreDBfromArchive');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_restore_noti'];?>', '<?=$pia_lang['Maintenance_Tool_restore_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Restore'];?>', 'PiaRestoreDBfromArchive');
 }
 function PiaRestoreDBfromArchive()
 {
@@ -848,8 +837,8 @@ function PiaRestoreDBfromArchive()
 
 // Purge Backups
 function askPiaPurgeDBBackups() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_purgebackup_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_purgebackup_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Purge']; ?>', 'PiaPurgeDBBackups');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_purgebackup_noti'];?>', '<?=$pia_lang['Maintenance_Tool_purgebackup_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Purge'];?>', 'PiaPurgeDBBackups');
 }
 function PiaPurgeDBBackups()
 {
@@ -860,8 +849,8 @@ function PiaPurgeDBBackups()
 
 // Switch Darkmode
 function askPiaEnableDarkmode() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_darkmode_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_darkmode_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableDarkmode');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_darkmode_noti'];?>', '<?=$pia_lang['Maintenance_Tool_darkmode_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableDarkmode');
 }
 function PiaEnableDarkmode()
 {
@@ -872,8 +861,8 @@ function PiaEnableDarkmode()
 
 // Switch Web Service Monitor
 function askPiaEnableWebServiceMon() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_webservicemon_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_webservicemon_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableWebServiceMon');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_webservicemon_noti'];?>', '<?=$pia_lang['Maintenance_Tool_webservicemon_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableWebServiceMon');
 }
 function PiaEnableWebServiceMon()
 {
@@ -884,8 +873,8 @@ function PiaEnableWebServiceMon()
 
 // Switch ICMP Monitor
 function askPiaEnableICMPMon() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_icmpmon_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_icmpmon_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableICMPMon');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_icmpmon_noti'];?>', '<?=$pia_lang['Maintenance_Tool_icmpmon_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableICMPMon');
 }
 function PiaEnableICMPMon()
 {
@@ -896,8 +885,8 @@ function PiaEnableICMPMon()
 
 // Toggle Graph
 function askPiaEnableOnlineHistoryGraph() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaEnableOnlineHistoryGraph');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'];?>', '<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableOnlineHistoryGraph');
 }
 function PiaEnableOnlineHistoryGraph()
 {
@@ -908,8 +897,8 @@ function PiaEnableOnlineHistoryGraph()
 
 // Set API-Key
 function askPiaSetAPIKey() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_setapikey_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_setapikey_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Okay']; ?>', 'PiaSetAPIKey');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_setapikey_noti'];?>', '<?=$pia_lang['Maintenance_Tool_setapikey_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Okay'];?>', 'PiaSetAPIKey');
 }
 function PiaSetAPIKey()
 {
@@ -920,8 +909,8 @@ function PiaSetAPIKey()
 
 // Enable Login
 function askPiaLoginEnable() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_loginenable_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_loginenable_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaLoginEnable');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_loginenable_noti'];?>', '<?=$pia_lang['Maintenance_Tool_loginenable_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaLoginEnable');
 }
 function PiaLoginEnable()
 {
@@ -932,8 +921,8 @@ function PiaLoginEnable()
 
 // Disable Login
 function askPiaLoginDisable() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_logindisable_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_logindisable_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Switch']; ?>', 'PiaLoginDisable');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_logindisable_noti'];?>', '<?=$pia_lang['Maintenance_Tool_logindisable_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaLoginDisable');
 }
 function PiaLoginDisable()
 {
@@ -989,8 +978,8 @@ function BackupConfigFile(reload)  {
 
 // Restore Configfile
 function askRestoreConfigFile() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_ConfEditor_Restore_noti']; ?>', '<?php echo $pia_lang['Maintenance_ConfEditor_Restore_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Run']; ?>', 'RestoreConfigFile');
+  showModalWarning('<?=$pia_lang['Maintenance_ConfEditor_Restore_noti'];?>', '<?=$pia_lang['Maintenance_ConfEditor_Restore_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Run'];?>', 'RestoreConfigFile');
 }
 function RestoreConfigFile() {
   $.get('php/server/devices.php?action=RestoreConfigFile', function(msg) {
@@ -1000,8 +989,8 @@ function RestoreConfigFile() {
 
 // Set Device List Column
 function askDeviceListCol() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti']; ?>', '<?php echo $pia_lang['Maintenance_Tool_DevListCol_noti_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Save']; ?>', 'setDeviceListCol');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_DevListCol_noti'];?>', '<?=$pia_lang['Maintenance_Tool_DevListCol_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Save'];?>', 'setDeviceListCol');
 }
 function setDeviceListCol() {
     $.get('php/server/devices.php?action=setDeviceListCol&'
@@ -1023,8 +1012,8 @@ function setDeviceListCol() {
 
 // Delete Inactive Hosts
 function askDeleteInactiveHosts() {
-  showModalWarning('<?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts']; ?>', '<?php echo $pia_lang['Maintenance_Tool_del_Inactive_Hosts_text']; ?>',
-    '<?php echo $pia_lang['Gen_Cancel']; ?>', '<?php echo $pia_lang['Gen_Delete']; ?>', 'DeleteInactiveHosts');
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_del_Inactive_Hosts'];?>', '<?=$pia_lang['Maintenance_Tool_del_Inactive_Hosts_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'DeleteInactiveHosts');
 }
 function DeleteInactiveHosts() {
   $.get('php/server/devices.php?action=DeleteInactiveHosts', function(msg) {

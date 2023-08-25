@@ -107,8 +107,8 @@ if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['NetworkSettings_Title']; ?>
-         <a href="./network.php" class="btn btn-success pull-right" role="button" style="position: absolute; display: inline-block; top: 5px; right: 15px;"><?php echo $pia_lang['Gen_Close']; ?></a>
+         <?=$pia_lang['NetworkSettings_Title'];?>
+         <a href="./network.php" class="btn btn-success pull-right" role="button" style="position: absolute; display: inline-block; top: 5px; right: 15px;"><?=$pia_lang['Gen_Close'];?></a>
       </h1>
     </section>
 
@@ -117,21 +117,21 @@ if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
     <!-- Manage Devices ---------------------------------------------------------- -->
 		<div class="box "> <!-- collapsed-box -->
         <div class="box-header">
-          <h3 class="box-title" id="netedit"><?php echo $pia_lang['Network_ManageDevices']; ?></h3>
+          <h3 class="box-title" id="netedit"><?=$pia_lang['Network_ManageDevices'];?></h3>
         </div>
         <!-- /.box-header -->
 
         <div class="box-body" style="">
-          <p><?php echo $pia_lang['Network_ManageDevices_Intro']; ?></p>
+          <p><?=$pia_lang['Network_ManageDevices_Intro'];?></p>
           <div class="row">
             <!-- Add Device ---------------------------------------------------------- -->
             <div class="col-md-4">
-            <h4 class="box-title"><?php echo $pia_lang['Network_ManageAdd']; ?></h4>
+            <h4 class="box-title"><?=$pia_lang['Network_ManageAdd'];?></h4>
             <form role="form" method="post" action="./networkSettings.php">
               <div class="form-group has-success">
-                  <label for="NetworkDeviceName"><?php echo $pia_lang['Network_ManageAdd_Name']; ?>:</label>
+                  <label for="NetworkDeviceName"><?=$pia_lang['Network_ManageAdd_Name'];?>:</label>
                   <div class="input-group">
-                      <input class="form-control" id="txtNetworkNodeMac" name="NetworkDeviceName" type="text" placeholder="<?php echo $pia_lang['Network_ManageAdd_Name_text']; ?>">
+                      <input class="form-control" id="txtNetworkNodeMac" name="NetworkDeviceName" type="text" placeholder="<?=$pia_lang['Network_ManageAdd_Name_text'];?>">
                           <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="buttonNetworkNodeMac">
                                 <span class="fa fa-caret-down"></span>
@@ -147,9 +147,9 @@ network_infrastructurelist();
               </div>
               <!-- /.form-group -->
               <div class="form-group has-success">
-               <label><?php echo $pia_lang['Network_ManageAdd_Type']; ?>:</label>
+               <label><?=$pia_lang['Network_ManageAdd_Type'];?>:</label>
                   <select class="form-control" name="NetworkDeviceTyp">
-                    <option value=""><?php echo $pia_lang['Network_ManageAdd_Type_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_ManageAdd_Type_text'];?></option>
                     <option value="0_Internet">Internet</option>
                     <option value="1_Router">Router</option>
                     <option value="2_Switch">Switch</option>
@@ -158,11 +158,11 @@ network_infrastructurelist();
                   </select>
               </div>
               <div class="form-group has-success">
-                <label for="NetworkDevicePort"><?php echo $pia_lang['Network_ManageAdd_Port']; ?>:</label>
-                <input type="text" class="form-control" id="NetworkDevicePort" name="NetworkDevicePort" placeholder="<?php echo $pia_lang['Network_ManageAdd_Port_text']; ?>">
+                <label for="NetworkDevicePort"><?=$pia_lang['Network_ManageAdd_Port'];?>:</label>
+                <input type="text" class="form-control" id="NetworkDevicePort" name="NetworkDevicePort" placeholder="<?=$pia_lang['Network_ManageAdd_Port_text'];?>">
               </div>
               <div class="form-group">
-              <button type="submit" class="btn btn-success" name="Networkinsert" value="yes"><?php echo $pia_lang['Network_ManageAdd_Submit']; ?></button>
+              <button type="submit" class="btn btn-success" name="Networkinsert" value="yes"><?=$pia_lang['Network_ManageAdd_Submit'];?></button>
           	  </div>
           </form>
               <!-- /.form-group -->
@@ -170,12 +170,12 @@ network_infrastructurelist();
             <!-- /.col -->
             <!-- Edit Device ---------------------------------------------------------- -->
             <div class="col-md-4">
-              <h4 class="box-title"><?php echo $pia_lang['Network_ManageEdit']; ?></h4>
+              <h4 class="box-title"><?=$pia_lang['Network_ManageEdit'];?></h4>
               <form role="form" method="post" action="./networkSettings.php">
               <div class="form-group has-warning">
-              	<label><?php echo $pia_lang['Network_ManageEdit_ID']; ?>:</label>
+              	<label><?=$pia_lang['Network_ManageEdit_ID'];?>:</label>
                   <select class="form-control" name="NetworkDeviceID" onchange="get_networkdev_values(event)">
-                    <option value=""><?php echo $pia_lang['Network_ManageEdit_ID_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_ManageEdit_ID_text'];?></option>
 <?php
 $sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port", "net_downstream_devices" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC';
 $result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
@@ -230,13 +230,13 @@ echo '    };';
 };
 </script>
               <div class="form-group has-warning">
-                <label for="NetworkDeviceName"><?php echo $pia_lang['Network_ManageEdit_Name']; ?>:</label>
-                <input type="text" class="form-control" id="NewNetworkDeviceName" name="NewNetworkDeviceName" placeholder="<?php echo $pia_lang['Network_ManageEdit_Name_text']; ?>">
+                <label for="NetworkDeviceName"><?=$pia_lang['Network_ManageEdit_Name'];?>:</label>
+                <input type="text" class="form-control" id="NewNetworkDeviceName" name="NewNetworkDeviceName" placeholder="<?=$pia_lang['Network_ManageEdit_Name_text'];?>">
               </div>
               <div class="form-group has-warning">
-               <label><?php echo $pia_lang['Network_ManageEdit_Type']; ?>:</label>
+               <label><?=$pia_lang['Network_ManageEdit_Type'];?>:</label>
                   <select class="form-control" name="NewNetworkDeviceTyp" id="NewNetworkDeviceTyp">
-                    <option value=""><?php echo $pia_lang['Network_ManageEdit_Type_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_ManageEdit_Type_text'];?></option>
                     <option value="0_Internet">Internet</option>
                     <option value="1_Router">Router</option>
                     <option value="2_Switch">Switch</option>
@@ -245,13 +245,13 @@ echo '    };';
                   </select>
               </div>
               <div class="form-group has-warning">
-                <label for="NetworkDevicePort"><?php echo $pia_lang['Network_ManageEdit_Port']; ?>:</label>
-                <input type="text" class="form-control" id="NewNetworkDevicePort" name="NewNetworkDevicePort" placeholder="<?php echo $pia_lang['Network_ManageEdit_Port_text']; ?>">
+                <label for="NetworkDevicePort"><?=$pia_lang['Network_ManageEdit_Port'];?>:</label>
+                <input type="text" class="form-control" id="NewNetworkDevicePort" name="NewNetworkDevicePort" placeholder="<?=$pia_lang['Network_ManageEdit_Port_text'];?>">
               </div>
               <div class="form-group has-warning">
-                  <label for="NetworkDeviceDownlink"><?php echo $pia_lang['Network_ManageEdit_Downlink']; ?>:</label>
+                  <label for="NetworkDeviceDownlink"><?=$pia_lang['Network_ManageEdit_Downlink'];?>:</label>
                   <div class="input-group">
-                      <input class="form-control" id="txtNetworkDeviceDownlinkMac" name="NetworkDeviceDownlink" type="text" placeholder="<?php echo $pia_lang['Network_ManageEdit_Downlink_text']; ?>">
+                      <input class="form-control" id="txtNetworkDeviceDownlinkMac" name="NetworkDeviceDownlink" type="text" placeholder="<?=$pia_lang['Network_ManageEdit_Downlink_text'];?>">
                           <div class="input-group-btn">
                             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="buttonNetworkDeviceDownlinkMac">
                                 <span class="fa fa-caret-down"></span>
@@ -267,7 +267,7 @@ network_device_downlink_mac();
                   </div>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-warning" name="Networkedit" value="yes"><?php echo $pia_lang['Network_ManageEdit_Submit']; ?></button>
+                <button type="submit" class="btn btn-warning" name="Networkedit" value="yes"><?=$pia_lang['Network_ManageEdit_Submit'];?></button>
               </div>
          	 </form>
               <!-- /.form-group -->
@@ -275,12 +275,12 @@ network_device_downlink_mac();
             <!-- /.col -->
             <!-- Del Device ---------------------------------------------------------- -->
            <div class="col-md-4">
-            <h4 class="box-title"><?php echo $pia_lang['Network_ManageDel']; ?></h4>
+            <h4 class="box-title"><?=$pia_lang['Network_ManageDel'];?></h4>
               <form role="form" method="post" action="./networkSettings.php">
               <div class="form-group has-error">
-                <label><?php echo $pia_lang['Network_ManageDel_Name']; ?>:</label>
+                <label><?=$pia_lang['Network_ManageDel_Name'];?>:</label>
                   <select class="form-control" name="NetworkDeviceID">
-                    <option value=""><?php echo $pia_lang['Network_ManageDel_Name_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_ManageDel_Name_text'];?></option>
 <?php
 $sql = 'SELECT "device_id", "net_device_name", "net_device_typ" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC';
 $result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
@@ -296,7 +296,7 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
               </div>
               <!-- /.form-group -->
               <div class="form-group">
-                <button type="submit" class="btn btn-danger" name="Networkdelete" value="yes"><?php echo $pia_lang['Network_ManageDel_Submit']; ?></button>
+                <button type="submit" class="btn btn-danger" name="Networkdelete" value="yes"><?=$pia_lang['Network_ManageDel_Submit'];?></button>
               </div>
            </form>
               <!-- /.form-group -->
@@ -309,27 +309,27 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
 
     <div class="box ">
         <div class="box-header">
-          <h3 class="box-title" id="hostedit"><?php echo $pia_lang['Network_Unmanaged_Devices']; ?></h3>
+          <h3 class="box-title" id="hostedit"><?=$pia_lang['Network_Unmanaged_Devices'];?></h3>
         </div>
         <!-- /.box-header -->
 
         <div class="box-body" style="">
-          <p><?php echo $pia_lang['Network_Unmanaged_Devices_Intro']; ?></p>
+          <p><?=$pia_lang['Network_Unmanaged_Devices_Intro'];?></p>
           <div class="row">
             <!-- Add Device ---------------------------------------------------------- -->
             <div class="col-md-4">
-            <h4 class="box-title"><?php echo $pia_lang['Network_ManageAdd']; ?></h4>
+            <h4 class="box-title"><?=$pia_lang['Network_ManageAdd'];?></h4>
             <form role="form" method="post" action="./networkSettings.php">
               <!-- /.form-group -->
               <div class="form-group has-success">
-                <label for="NetworkUnmanagedDevName"><?php echo $pia_lang['Network_ManageAdd_Name']; ?>:</label>
-                <input type="text" class="form-control" id="NetworkUnmanagedDevName" name="NetworkUnmanagedDevName" placeholder="<?php echo $pia_lang['Network_ManageAdd_Name_text']; ?>">
+                <label for="NetworkUnmanagedDevName"><?=$pia_lang['Network_ManageAdd_Name'];?>:</label>
+                <input type="text" class="form-control" id="NetworkUnmanagedDevName" name="NetworkUnmanagedDevName" placeholder="<?=$pia_lang['Network_ManageAdd_Name_text'];?>">
               </div>
 
               <div class="form-group has-success">
-                <label><?php echo $pia_lang['Network_Unmanaged_Devices_Connected']; ?>:</label>
+                <label><?=$pia_lang['Network_Unmanaged_Devices_Connected'];?>:</label>
                   <select class="form-control" name="NetworkUnmanagedDevConnect">
-                    <option value=""><?php echo $pia_lang['Network_Unmanaged_Devices_Connected_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_Unmanaged_Devices_Connected_text'];?></option>
 <?php
 $sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port", "net_downstream_devices" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC';
 $result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
@@ -344,11 +344,11 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
                   </select>
               </div>
               <div class="form-group has-success">
-                <label for="NetworkUnmanagedDevPort"><?php echo $pia_lang['Network_Unmanaged_Devices_Port']; ?>:</label>
-                <input type="text" class="form-control" id="NetworkUnmanagedDevPort" name="NetworkUnmanagedDevPort" placeholder="<?php echo $pia_lang['Network_Unmanaged_Devices_Port_text']; ?>">
+                <label for="NetworkUnmanagedDevPort"><?=$pia_lang['Network_Unmanaged_Devices_Port'];?>:</label>
+                <input type="text" class="form-control" id="NetworkUnmanagedDevPort" name="NetworkUnmanagedDevPort" placeholder="<?=$pia_lang['Network_Unmanaged_Devices_Port_text'];?>">
               </div>
               <div class="form-group">
-              <button type="submit" class="btn btn-success" name="NetworkUnmanagedDevinsert" value="yes"><?php echo $pia_lang['Network_ManageAdd_Submit']; ?></button>
+              <button type="submit" class="btn btn-success" name="NetworkUnmanagedDevinsert" value="yes"><?=$pia_lang['Network_ManageAdd_Submit'];?></button>
               </div>
           </form>
               <!-- /.form-group -->
@@ -356,12 +356,12 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
             <!-- /.col -->
             <!-- Edit Device ---------------------------------------------------------- -->
             <div class="col-md-4">
-              <h4 class="box-title"><?php echo $pia_lang['Network_ManageEdit']; ?></h4>
+              <h4 class="box-title"><?=$pia_lang['Network_ManageEdit'];?></h4>
               <form role="form" method="post" action="./networkSettings.php">
               <div class="form-group has-warning">
-                <label><?php echo $pia_lang['Network_ManageEdit_ID']; ?>:</label>
+                <label><?=$pia_lang['Network_ManageEdit_ID'];?>:</label>
                   <select class="form-control" name="NetworkUnmanagedDevID">
-                    <option value=""><?php echo $pia_lang['Network_ManageEdit_ID_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_ManageEdit_ID_text'];?></option>
 <?php
 $sql = 'SELECT * FROM "network_dumb_dev" ORDER BY "dev_Name" ASC';
 $result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
@@ -376,14 +376,14 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
                   </select>
               </div>
               <div class="form-group has-warning">
-                <label for="NewNetworkUnmanagedDevName"><?php echo $pia_lang['Network_ManageEdit_Name']; ?>:</label>
-                <input type="text" class="form-control" id="NewNetworkUnmanagedDevName" name="NewNetworkUnmanagedDevName" placeholder="<?php echo $pia_lang['Network_ManageEdit_Name_text']; ?>">
+                <label for="NewNetworkUnmanagedDevName"><?=$pia_lang['Network_ManageEdit_Name'];?>:</label>
+                <input type="text" class="form-control" id="NewNetworkUnmanagedDevName" name="NewNetworkUnmanagedDevName" placeholder="<?=$pia_lang['Network_ManageEdit_Name_text'];?>">
               </div>
 
               <div class="form-group has-warning">
-                <label><?php echo $pia_lang['Network_Unmanaged_Devices_Connected']; ?>:</label>
+                <label><?=$pia_lang['Network_Unmanaged_Devices_Connected'];?>:</label>
                   <select class="form-control" name="NewNetworkUnmanagedDevConnect">
-                    <option value=""><?php echo $pia_lang['Network_Unmanaged_Devices_Connected_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_Unmanaged_Devices_Connected_text'];?></option>
 <?php
 $sql = 'SELECT "device_id", "net_device_name", "net_device_typ", "net_device_port", "net_downstream_devices" FROM "network_infrastructure" ORDER BY "net_device_typ" ASC';
 $result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
@@ -398,12 +398,12 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
                   </select>
               </div>
               <div class="form-group has-warning">
-                <label for="NetworkDevicePort"><?php echo $pia_lang['Network_Unmanaged_Devices_Port']; ?>:</label>
-                <input type="text" class="form-control" id="NewNetworkUnmanagedDevPort" name="NewNetworkUnmanagedDevPort" placeholder="<?php echo $pia_lang['Network_Unmanaged_Devices_Port_text']; ?>">
+                <label for="NetworkDevicePort"><?=$pia_lang['Network_Unmanaged_Devices_Port'];?>:</label>
+                <input type="text" class="form-control" id="NewNetworkUnmanagedDevPort" name="NewNetworkUnmanagedDevPort" placeholder="<?=$pia_lang['Network_Unmanaged_Devices_Port_text'];?>">
               </div>
 
               <div class="form-group">
-                <button type="submit" class="btn btn-warning" name="NetworkUnmanagedDevedit" value="yes"><?php echo $pia_lang['Network_ManageEdit_Submit']; ?></button>
+                <button type="submit" class="btn btn-warning" name="NetworkUnmanagedDevedit" value="yes"><?=$pia_lang['Network_ManageEdit_Submit'];?></button>
               </div>
            </form>
               <!-- /.form-group -->
@@ -411,12 +411,12 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
             <!-- /.col -->
             <!-- Del Device ---------------------------------------------------------- -->
            <div class="col-md-4">
-            <h4 class="box-title"><?php echo $pia_lang['Network_ManageDel']; ?></h4>
+            <h4 class="box-title"><?=$pia_lang['Network_ManageDel'];?></h4>
               <form role="form" method="post" action="./networkSettings.php">
               <div class="form-group has-error">
-                <label><?php echo $pia_lang['Network_ManageDel_Name']; ?>:</label>
+                <label><?=$pia_lang['Network_ManageDel_Name'];?>:</label>
                   <select class="form-control" name="NetworkUnmanagedDevID">
-                    <option value=""><?php echo $pia_lang['Network_ManageDel_Name_text']; ?></option>
+                    <option value=""><?=$pia_lang['Network_ManageDel_Name_text'];?></option>
 <?php
 $sql = 'SELECT "id", "dev_Name" FROM "network_dumb_dev" ORDER BY "dev_Name" ASC';
 $result = $db->query($sql); //->fetchArray(SQLITE3_ASSOC);
@@ -432,7 +432,7 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
               </div>
               <!-- /.form-group -->
               <div class="form-group">
-                <button type="submit" class="btn btn-danger" name="NetworkUnmanagedDevdelete" value="yes"><?php echo $pia_lang['Network_ManageDel_Submit']; ?></button>
+                <button type="submit" class="btn btn-danger" name="NetworkUnmanagedDevdelete" value="yes"><?=$pia_lang['Network_ManageDel_Submit'];?></button>
               </div>
            </form>
               <!-- /.form-group -->

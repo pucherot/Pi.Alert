@@ -30,7 +30,7 @@ $db->exec('PRAGMA journal_mode = wal;');
 <!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
       <h1 id="pageTitle">
-         <?php echo $pia_journ_lang['Title'] ?>
+         <?=$pia_journ_lang['Title']?>
       </h1>
     </section>
 
@@ -50,13 +50,13 @@ $db->exec('PRAGMA journal_mode = wal;');
               <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                 <thead>
                 <tr>
-                  <th style="min-width: 120px;"><?php echo $pia_lang['Events_TableHead_Date']; ?></th>
+                  <th style="min-width: 120px;"><?=$pia_lang['Events_TableHead_Date'];?></th>
                   <th>LogClass</th>
                   <th style="min-width: 80px;">LogCode</th>
-                  <th style="min-width: 90px;"><?php echo $pia_journ_lang['Journal_TableHead_Class']; ?></th>
-                  <th style="min-width: 100px;"><?php echo $pia_journ_lang['Journal_TableHead_Trigger']; ?></th>
+                  <th style="min-width: 90px;"><?=$pia_journ_lang['Journal_TableHead_Class'];?></th>
+                  <th style="min-width: 100px;"><?=$pia_journ_lang['Journal_TableHead_Trigger'];?></th>
                   <th>Hash</th>
-                  <th style="min-width: 500px;"><?php echo $pia_lang['Events_TableHead_AdditionalInfo']; ?></th>
+                  <th style="min-width: 500px;"><?=$pia_lang['Events_TableHead_AdditionalInfo'];?></th>
                 </tr>
                 </thead>
                   <tbody>
@@ -173,13 +173,13 @@ function initializeDatatable () {
     'language'    : {
       processing: '<table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td></table>',
       emptyTable: 'No data',
-      "lengthMenu": "<?php echo $pia_lang['Events_Tablelenght']; ?>",
-      "search":     "<?php echo $pia_lang['Events_Searchbox']; ?>: ",
+      "lengthMenu": "<?=$pia_lang['Events_Tablelenght'];?>",
+      "search":     "<?=$pia_lang['Events_Searchbox'];?>: ",
       "paginate": {
-          "next":       "<?php echo $pia_lang['Events_Table_nav_next']; ?>",
-          "previous":   "<?php echo $pia_lang['Events_Table_nav_prev']; ?>"
+          "next":       "<?=$pia_lang['Events_Table_nav_next'];?>",
+          "previous":   "<?=$pia_lang['Events_Table_nav_prev'];?>"
       },
-      "info":           "<?php echo $pia_lang['Events_Table_info']; ?>",
+      "info":           "<?=$pia_lang['Events_Table_info'];?>",
     },
   });
 };

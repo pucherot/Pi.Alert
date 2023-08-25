@@ -312,7 +312,7 @@ function get_service_from_unique_device($func_unique_device) {
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
-         <?php echo $pia_lang['WebServices_Title']; ?>
+         <?=$pia_lang['WebServices_Title'];?>
       <button type="button" class="btn btn-xs btn-success servicelist_add_serv" data-toggle="modal" data-target="#modal-add-monitoringURL"><i class="bi bi-plus-lg" style="font-size:1.5rem"></i></button>
       </h1>
 
@@ -324,28 +324,28 @@ function get_service_from_unique_device($func_unique_device) {
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title"><?php echo $pia_lang['WebServices_headline_NewService']; ?></h4>
+                            <h4 class="modal-title"><?=$pia_lang['WebServices_headline_NewService'];?></h4>
                         </div>
                         <div class="modal-body">
                             <div style="height: 230px;">
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_URL']; ?></label>
+                              <label class="col-xs-3 control-label"><?=$pia_lang['WebServices_label_URL'];?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="serviceURL" placeholder="Service URL">
                               </div>
                             </div>
                             <div class="form-group col-xs-12">
-                              <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_Tags']; ?></label>
+                              <label class="col-xs-3 control-label"><?=$pia_lang['WebServices_label_Tags'];?></label>
                               <div class="col-xs-9">
                                 <input type="text" class="form-control" id="serviceTag" placeholder="Tag">
                               </div>
                             </div>
                               <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_MAC']; ?></label>
+                                <label class="col-xs-3 control-label"><?=$pia_lang['WebServices_label_MAC'];?></label>
                                 <div class="col-xs-9">
                                   <div class="input-group">
                                     <div class="input-group-btn">
-                                      <button type="button" class="btn btn-default dropdown-toggle black-tooltip" data-toggle="dropdown" aria-expanded="false"><?php echo $pia_lang['WebServices_label_MAC_Select']; ?>
+                                      <button type="button" class="btn btn-default dropdown-toggle black-tooltip" data-toggle="dropdown" aria-expanded="false"><?=$pia_lang['WebServices_label_MAC_Select'];?>
                                         <span class="fa fa-caret-down"></span></button>
                                       <ul class="dropdown-menu">
                                         <?php getDeviceMacs();?>
@@ -357,13 +357,13 @@ function get_service_from_unique_device($func_unique_device) {
                                 </div>
                               </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertEvents']; ?></label>
+                                <label class="col-xs-3 control-label"><?=$pia_lang['WebServices_label_AlertEvents'];?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox blue" id="insAlertEvents" type="checkbox">
                                 </div>
                             </div>
                             <div class="form-group col-xs-12">
-                                <label class="col-xs-3 control-label"><?php echo $pia_lang['WebServices_label_AlertDown']; ?></label>
+                                <label class="col-xs-3 control-label"><?=$pia_lang['WebServices_label_AlertDown'];?></label>
                                 <div class="col-xs-9" style="margin-top: 0px;">
                                   <input class="checkbox red" id="insAlertDown" type="checkbox">
                                 </div>
@@ -371,8 +371,8 @@ function get_service_from_unique_device($func_unique_device) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php echo $pia_lang['Gen_Close']; ?></button>
-                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewService()" ><?php echo $pia_lang['Gen_Save']; ?></button>
+                            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?=$pia_lang['Gen_Close'];?></button>
+                            <button type="button" class="btn btn-primary" id="btnInsert" onclick="insertNewService()" ><?=$pia_lang['Gen_Save'];?></button>
                         </div>
                     </div>
                 </div>
