@@ -17,7 +17,7 @@ function calc_configfile_hash_top() {
 	$Configfile = '../config/pialert.conf';
 	return hash_file('md5', $Configfile);
 }
-
+// Save Journal
 function pialert_logging($LogClass, $Trigger, $LogString, $Hash, $Additional_Info) {
 	global $db;
 

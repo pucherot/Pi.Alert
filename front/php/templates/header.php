@@ -5,6 +5,7 @@
 #  header.php - Front module. Common header to all the web pages
 #-------------------------------------------------------------------------------
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 #--------------------------------------------------------------------------- -->
 
 <?php
