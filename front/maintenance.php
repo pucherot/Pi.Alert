@@ -709,12 +709,12 @@ echo '</div>';
                     <h4 class="modal-title">Config Editor</h4>
                 </div>
                 <div class="modal-body" style="text-align: left;">
-                    <textarea class="form-control" name="txtConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?=file_get_contents('../config/pialert.conf');?></textarea>
+                    <textarea class="form-control" name="txtConfigFileEditor" id="ConfigFileEditor" spellcheck="false" wrap="off" style="resize: none; font-family: monospace; height: 70vh;"><?=file_get_contents('../config/pialert.conf');?></textarea>
                 </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" id="btnPiaRestoreConfigFile" data-dismiss="modal" style="margin: 5px" onclick="askRestoreConfigFile()"><?=$pia_lang['Maintenance_ConfEditor_Restore'];?></button>
                     <button type="button" class="btn btn-success" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('no')"><?=$pia_lang['Maintenance_ConfEditor_Backup'];?></button>
-                    <button type="submit" class="btn btn-danger" name="SubmitConfigFileEditor" value="SaveNewConfig" style="margin: 5px"><?=$pia_lang['Gen_Save'];?></button>
+                    <button type="button" class="btn btn-danger" id="btnConfigFileEditor" style="margin: 5px" onclick="SaveConfigFile()"><?=$pia_lang['Gen_Save'];?></button>
                     <button type="button" class="btn btn-default" id="btnPiaEditorClose" data-dismiss="modal" style="margin: 5px"><?=$pia_lang['Gen_Close'];?></button>
                   </div>
               </form>
@@ -818,7 +818,7 @@ function askPiaBackupDBtoArchive () {
 }
 function PiaBackupDBtoArchive()
 {
-  $.get('php/server/devices.php?action=PiaBackupDBtoArchive', function(msg) {
+  $.get('php/server/files.php?action=BackupDBtoArchive', function(msg) {
     showMessage (msg);
   });
 }
@@ -830,7 +830,7 @@ function askPiaRestoreDBfromArchive () {
 }
 function PiaRestoreDBfromArchive()
 {
-  $.get('php/server/devices.php?action=PiaRestoreDBfromArchive', function(msg) {
+  $.get('php/server/files.php?action=RestoreDBfromArchive', function(msg) {
     showMessage (msg);
   });
 }
@@ -842,7 +842,7 @@ function askPiaPurgeDBBackups() {
 }
 function PiaPurgeDBBackups()
 {
-  $.get('php/server/devices.php?action=PiaPurgeDBBackups', function(msg) {
+  $.get('php/server/files.php?action=PurgeDBBackups', function(msg) {
     showMessage (msg);
   });
 }
@@ -854,7 +854,7 @@ function askPiaEnableDarkmode() {
 }
 function PiaEnableDarkmode()
 {
-  $.get('php/server/devices.php?action=PiaEnableDarkmode', function(msg) {
+  $.get('php/server/files.php?action=EnableDarkmode', function(msg) {
     showMessage (msg);
   });
 }
@@ -866,7 +866,7 @@ function askPiaEnableWebServiceMon() {
 }
 function PiaEnableWebServiceMon()
 {
-  $.get('php/server/devices.php?action=EnableWebServiceMon', function(msg) {
+  $.get('php/server/services.php?action=EnableWebServiceMon', function(msg) {
     showMessage (msg);
   });
 }
@@ -890,7 +890,7 @@ function askPiaEnableOnlineHistoryGraph() {
 }
 function PiaEnableOnlineHistoryGraph()
 {
-  $.get('php/server/devices.php?action=PiaEnableOnlineHistoryGraph', function(msg) {
+  $.get('php/server/files.php?action=EnableOnlineHistoryGraph', function(msg) {
     showMessage (msg);
   });
 }
@@ -902,7 +902,7 @@ function askPiaSetAPIKey() {
 }
 function PiaSetAPIKey()
 {
-  $.get('php/server/devices.php?action=PiaSetAPIKey', function(msg) {
+  $.get('php/server/files.php?action=SetAPIKey', function(msg) {
     showMessage (msg);
   });
 }
@@ -914,7 +914,7 @@ function askPiaLoginEnable() {
 }
 function PiaLoginEnable()
 {
-  $.get('php/server/devices.php?action=PiaLoginEnable', function(msg) {
+  $.get('php/server/files.php?action=LoginEnable', function(msg) {
     showMessage (msg);
   });
 }
@@ -926,7 +926,7 @@ function askPiaLoginDisable() {
 }
 function PiaLoginDisable()
 {
-  $.get('php/server/devices.php?action=PiaLoginDisable', function(msg) {
+  $.get('php/server/files.php?action=LoginDisable', function(msg) {
     showMessage (msg);
   });
 }
@@ -937,14 +937,14 @@ function setTextValue (textElement, textValue) {
 
 // Set Theme
 function setPiAlertTheme () {
-  $.get('php/server/devices.php?action=setPiAlertTheme&PiaSkinSelection='+ $('#txtSkinSelection').val(), function(msg) {
+  $.get('php/server/files.php?action=setTheme&SkinSelection='+ $('#txtSkinSelection').val(), function(msg) {
     showMessage (msg);
   });
 }
 
 // Set Language
 function setPiAlertLanguage() {
-  $.get('php/server/devices.php?action=setPiAlertLanguage&PiaLangSelection='+ $('#txtLangSelection').val(), function(msg) {
+  $.get('php/server/files.php?action=setLanguage&LangSelection='+ $('#txtLangSelection').val(), function(msg) {
     showMessage (msg);
   });
 }
@@ -953,7 +953,7 @@ function setPiAlertLanguage() {
 function setPiAlertArpTimer() {
   $.ajax({
         method: "GET",
-        url: "./php/server/devices.php?action=setPiAlertArpTimer&PiaArpTimer=" + $('#txtPiaArpTimer').val(),
+        url: "./php/server/files.php?action=setArpTimer&ArpTimer=" + $('#txtPiaArpTimer').val(),
         data: "",
         beforeSend: function() { $('#Timeralertspinner').removeClass("disablespinner"); $('#TimeralertText').addClass("disablespinner");  },
         complete: function() { $('#Timeralertspinner').addClass("disablespinner"); $('#TimeralertText').removeClass("disablespinner"); },
@@ -966,11 +966,11 @@ function setPiAlertArpTimer() {
 // Backup Configfile
 function BackupConfigFile(reload)  {
 	if (reload == 'yes') {
-		$.get('php/server/devices.php?action=BackupConfigFile&reload=yes', function(msg) {
+		$.get('php/server/files.php?action=BackupConfigFile&reload=yes', function(msg) {
 		    showMessage (msg);
 		  });
 	} else {
-		$.get('php/server/devices.php?action=BackupConfigFile&reload=no', function(msg) {
+		$.get('php/server/files.php?action=BackupConfigFile&reload=no', function(msg) {
 		    showMessage (msg);
 		  });
 	}
@@ -982,8 +982,18 @@ function askRestoreConfigFile() {
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Run'];?>', 'RestoreConfigFile');
 }
 function RestoreConfigFile() {
-  $.get('php/server/devices.php?action=RestoreConfigFile', function(msg) {
+  $.get('php/server/files.php?action=RestoreConfigFile', function(msg) {
     showMessage (msg);
+  });
+}
+
+function SaveConfigFile() {
+  var postData = {
+    action: 'SaveConfigFile',
+    configfile: $('#ConfigFileEditor').val()
+  };
+  $.post('php/server/files.php', postData, function(msg) {
+    showMessage(msg);
   });
 }
 
@@ -993,7 +1003,7 @@ function askDeviceListCol() {
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Save'];?>', 'setDeviceListCol');
 }
 function setDeviceListCol() {
-    $.get('php/server/devices.php?action=setDeviceListCol&'
+    $.get('php/server/files.php?action=setDeviceListCol&'
     + '&connectiontype=' + ($('#chkConnectionType')[0].checked * 1)
     + '&favorite='       + ($('#chkFavorite')[0].checked * 1)
     + '&group='          + ($('#chkGroup')[0].checked * 1)

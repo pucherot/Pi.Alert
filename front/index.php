@@ -16,19 +16,6 @@ require 'php/server/journal.php';
 $DBFILE = '../db/pialert.db';
 OpenDB();
 
-// Save Config File
-if ($_REQUEST['SubmitConfigFileEditor'] == 'SaveNewConfig') {
-	$laststate = '../config/pialert-prev.bak';
-	$configfile = '../config/pialert.conf';
-	copy($configfile, $laststate);
-	$newconfig = fopen($configfile, 'w');
-	fwrite($newconfig, $_REQUEST['txtConfigFileEditor']);
-	fclose($newconfig);
-
-	// Logging
-	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_9999', '1', '');
-}
-
 // Processing Logout
 if ($_REQUEST['action'] == 'logout') {
 	// Logging

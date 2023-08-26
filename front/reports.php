@@ -174,7 +174,7 @@ function askdeleteAllNotifications () {
 }
 function deleteAllNotifications()
 {
-  $.get('php/server/devices.php?action=deleteAllNotifications', function(msg) {
+  $.get('php/server/files.php?action=deleteAllNotifications', function(msg) {
     showMessage (msg);
   });
 }
