@@ -21,6 +21,8 @@ $pia_lang['Gen_Switch'] = 'Switch';
 $pia_lang['Gen_Run'] = 'Run';
 $pia_lang['Gen_Save'] = 'Save';
 $pia_lang['Gen_Close'] = 'Close';
+$pia_lang['Gen_on'] = 'On';
+$pia_lang['Gen_off'] = 'Off';
 
 //////////////////////////////////////////////////////////////////
 // Login Page
@@ -383,16 +385,16 @@ $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'General';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configure device overview';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Security';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'The options listed here cause server-side configuration changes. These changes affect all devices that access this page.';
-$pia_lang['Maintenance_Tool_darkmode'] = 'Toggle Modes (Dark&sol;Light)';
+$pia_lang['Maintenance_Tool_darkmode'] = 'Dark Mode';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Toggle Modes';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'After the theme switch, the page tries to reload itself to activate the change. If necessary, the cache must be cleared.';
-$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Toggle History Graph';
+$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'History Graph';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Graph display';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Enables/disables the graph to display the online/offline history over the last 12h.';
-$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (On/Off)';
+$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon.';
 $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Monitoring';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the web service monitoring for Pi.Alert. With activation, additional elements are displayed in the interface. With deactivation, they disappear again.';
-$pia_lang['Maintenance_Tool_icmpmon'] = 'ICMP Monitoring (On/Off)';
+$pia_lang['Maintenance_Tool_icmpmon'] = 'ICMP Monitoring';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'ICMP Monitoring';
 $pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Enables or disables ICMP monitoring for Pi.Alert. Enabling this will display additional elements in the interface. Disabling it will make these elements disappear.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configure device overview';

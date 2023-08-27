@@ -243,7 +243,6 @@ if ($_REQUEST['tab'] == '1') {
 	$pia_tab_setting = 'active';
 	$pia_tab_tool = '';
 	$pia_tab_backup = '';}
-
 ?>
 
     <div class="row">
@@ -346,32 +345,32 @@ if ($_SESSION['Scan_WebServices'] == True) {
     </div>
 
 <?php
-// Log Viewer - Modals Scan -->
+// Log Viewer - Modals Scan
 print_logviewer_modal_head('scan', 'pialert.1.log (File)');
 read_logfile('pialert.1.log', $pia_lang['Maintenance_Tools_Logviewer_Scan_empty']);
 print_logviewer_modal_foot();
 
-// Log Viewer - Modals IP -->
+// Log Viewer - Modals IP
 print_logviewer_modal_head('iplog', 'pialert.IP.log (File)');
 read_logfile('pialert.IP.log', $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty']);
 print_logviewer_modal_foot();
 
-// Log Viewer - Modals Vendor Update -->
+// Log Viewer - Modals Vendor Update
 print_logviewer_modal_head('vendor', 'pialert.vendors.log (File)');
 read_logfile_vendor();
 print_logviewer_modal_foot();
 
-// Log Viewer - Modals Cleanup -->
+// Log Viewer - Modals Cleanup
 print_logviewer_modal_head('cleanup', 'pialert.cleanup.log (File)');
 read_logfile('pialert.cleanup.log', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty']);
 print_logviewer_modal_foot();
 
-// Log Viewer - Modals Nmap -->
+// Log Viewer - Modals Nmap
 print_logviewer_modal_head('nmap', 'last Nmap Scan (Memory)');
 if (!isset($_SESSION['ScanShortMem_NMAP'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem_NMAP'];}
 print_logviewer_modal_foot();
 
-// Log Viewer - Modals WebServices -->
+// Log Viewer - Modals WebServices
 if ($_SESSION['Scan_WebServices'] == True) {
 	print_logviewer_modal_head('webservices', 'pialert.webservices.log (File)');
 	read_logfile('pialert.webservices.log', $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']);
@@ -449,25 +448,29 @@ if ($_SESSION['Scan_WebServices'] == True) {
 <!-- Toggle DarkMode ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?=$pia_lang['Maintenance_Tool_darkmode'];?></button>
+                                	<?php $state = convert_state($ENABLED_DARKMODE, 1);?>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?=$pia_lang['Maintenance_Tool_darkmode'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
 <!-- Toggle History Graph ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?=$pia_lang['Maintenance_Tool_onlinehistorygraph'];?></button>
+                                	<?php $state = convert_state($ENABLED_HISTOY_GRAPH, 1);?>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?=$pia_lang['Maintenance_Tool_onlinehistorygraph'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
 <!-- Toggle Web Service Monitoring ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?=$pia_lang['Maintenance_Tool_webservicemon'];?></button>
+                                	<?php $state = convert_state($_SESSION['Scan_WebServices'], 1);?>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?=$pia_lang['Maintenance_Tool_webservicemon'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
 <!-- Toggle ICMP Monitoring ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableICMPMon" onclick="askPiaEnableICMPMon()"><?=$pia_lang['Maintenance_Tool_icmpmon'];?></button>
+                                	<?php $state = convert_state($_SESSION['ICMPScan'], 1);?>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableICMPMon" onclick="askPiaEnableICMPMon()"><?=$pia_lang['Maintenance_Tool_icmpmon'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
                         </div>
@@ -734,9 +737,37 @@ echo '</div>';
 <?php
 require 'php/templates/footer.php';
 ?>
-
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
 <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+
+<!-- Autoscroll-fix for Modals -->
+<script>
+$(document).ready(function () {
+    $('#modal-config-editor').on('show.bs.modal', function () {
+        // Save the current scroll position and apply styles to the body and modal
+        var scrollPosition = $(window).scrollTop();
+        $('body').css({
+            position: 'fixed',
+            width: '100%',
+            top: -scrollPosition
+        });
+        $('#modal-config-editor').css('overflow-y', 'scroll');
+    });
+
+    $('#modal-config-editor').on('hidden.bs.modal', function () {
+        // Reset styles when modal is hidden
+        var scrollPosition = Math.abs(parseInt($('body').css('top')));
+        $('body').css({
+            position: '',
+            width: '',
+            top: ''
+        });
+        $(window).scrollTop(scrollPosition);
+        $('#modal-config-editor').css('overflow-y', 'hidden');
+    });
+});
+</script>
+
 <script>
 initializeiCheck();
 // delete devices with emty macs

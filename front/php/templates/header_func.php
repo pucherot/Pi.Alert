@@ -51,11 +51,9 @@ function getTemperature() {
 	} else {
 		$output = '';
 	}
-
 	// Test if we succeeded in getting the temperature
 	if (is_numeric($output)) {
-		// $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5
-		// ex. 39007 vs 39
+		// $output could be either 4-5 digits or 2-3, and we only divide by 1000 if it's 4-5 (ex. 39007 vs 39)
 		$celsius = intval($output);
 		// If celsius is greater than 1 degree and is in the 4-5 digit format
 		if ($celsius > 1000) {
@@ -63,10 +61,8 @@ function getTemperature() {
 			$celsius *= 1e-3;
 		}
 		$limit = 60;
-
 	} else {
-		// Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin)
-		// This is the minimum temperature possible (AKA absolute zero)
+		// Nothing can be colder than -273.15 degree Celsius (= 0 Kelvin).This is the minimum temperature possible
 		$celsius = -273.16;
 		// Set templimit to null if no tempsensor was found
 		$limit = null;
@@ -176,6 +172,16 @@ function get_config_parmeter($config_param) {
 if (get_config_parmeter('ICMPSCAN_ACTIVE') == 1) {$_SESSION['ICMPScan'] = True;} else { $_SESSION['ICMPScan'] = False;}
 if (get_config_parmeter('SCAN_WEBSERVICES') == 1) {$_SESSION['Scan_WebServices'] = True;} else { $_SESSION['Scan_WebServices'] = False;}
 
+// State for Toggle Buttons
+function convert_state($state, $revert) {
+	global $pia_lang;
+	if ($revert == 1) {
+		if ($state == 1) {return $pia_lang['Gen_off'];} else {return $pia_lang['Gen_on'];}
+	} elseif ($revert == 0) {
+		if ($state != 1) {return $pia_lang['Gen_off'];} else {return $pia_lang['Gen_on'];}
+	}
+}
+
 // Back button for details pages
 function insert_back_button() {
 	$pagename = basename($_SERVER['PHP_SELF']);
@@ -202,9 +208,9 @@ function set_iconcolor_for_skin($skinname) {
 
 }
 // Darkmode
-if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;}
+if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;} else { $ENABLED_DARKMODE = False;}
 // Arp Histroy Graph
-if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;}
+if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;} else { $ENABLED_HISTOY_GRAPH = True;}
 // Theme
 foreach (glob("../db/setting_skin*") as $filename) {
 	$pia_skin_selected = str_replace('setting_', '', basename($filename));

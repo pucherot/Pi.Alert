@@ -21,6 +21,8 @@ $pia_lang['Gen_Switch'] = 'Switch';
 $pia_lang['Gen_Run'] = 'Exécuter';
 $pia_lang['Gen_Save'] = 'Sauvez';
 $pia_lang['Gen_Close'] = 'Close';
+$pia_lang['Gen_on'] = 'On';
+$pia_lang['Gen_off'] = 'Off';
 
 //////////////////////////////////////////////////////////////////
 // Login Page - ready
@@ -383,16 +385,16 @@ $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'Généralités';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configurer l&apos;aperçu des appareils';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Sécurité';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Les options mentionnées ici entraînent des modifications de configuration côté serveur. Ces modifications concernent donc tous les appareils qui accèdent à cette page.';
-$pia_lang['Maintenance_Tool_darkmode'] = 'Changement d&apos;affichage (sombre/clair)';
+$pia_lang['Maintenance_Tool_darkmode'] = 'Dark Mode';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Changement d&apos;affichage';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Permet de passer de l&apos;affichage clair à l&apos;affichage foncé. Si la commutation ne fonctionne pas correctement, essayez d&apos;effacer le cache du navigateur.';
-$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'dés-/activer l&apos;historique des activités';
+$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'History Graph';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Historique des activités';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'Désactive/active l&apos;historique des activités sur la page de l&apos;appareil et sur la page de présence.';
-$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (On/Off)';
+$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon.';
 $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Monitoring';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the web service monitoring for Pi.Alert. With activation, additional elements are displayed in the interface. With deactivation, they disappear again.';
-$pia_lang['Maintenance_Tool_icmpmon'] = 'Surveillance ICMP (On/Off)';
+$pia_lang['Maintenance_Tool_icmpmon'] = 'Surveillance ICMP';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'Surveillance ICMP';
 $pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Active ou désactive la surveillance ICMP pour Pi.Alert. En l\'activant, des éléments supplémentaires seront affichés dans l\'interface. En la désactivant, ces éléments disparaîtront.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurer l&apos;aperçu des appareils';

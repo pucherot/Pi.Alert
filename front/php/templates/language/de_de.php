@@ -21,6 +21,8 @@ $pia_lang['Gen_Switch'] = 'Umschalten';
 $pia_lang['Gen_Run'] = 'Ausführen';
 $pia_lang['Gen_Save'] = 'Speichern';
 $pia_lang['Gen_Close'] = 'Schließen';
+$pia_lang['Gen_on'] = 'An';
+$pia_lang['Gen_off'] = 'Aus';
 
 //////////////////////////////////////////////////////////////////
 // Login Page
@@ -383,16 +385,16 @@ $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'Allgemein';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Geräteübersicht konfigurieren';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Sicherheit';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Die hier aufgeführten Optionen bewirken serverseitige Konfigurationsänderungen. Diese Änderungen betreffen also alle Geräte die auf diese Seite zugreifen.';
-$pia_lang['Maintenance_Tool_darkmode'] = 'Dunkel Modus (an/aus)';
+$pia_lang['Maintenance_Tool_darkmode'] = 'Dunkel Modus';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Darstellungswechsel';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Wechselt zwischen der hellen und der dunklen Darstellung. Wenn die Umschaltung nicht ordentlich funktionieren sollte, versuchen Sie den Browsercache zu löschen.';
-$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Aktivitätsverlauf<br>(an/aus)';
+$pia_lang['Maintenance_Tool_onlinehistorygraph'] = 'Aktivitätsverlauf';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti'] = 'Aktivitätsverlauf';
 $pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'] = 'De-/Aktiviert den Aktivitätsverlauf auf der Geräte- und der Anwesenheitsseite.';
-$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon. (an/aus)';
+$pia_lang['Maintenance_Tool_webservicemon'] = 'Web Service Mon.';
 $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Überwachung';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Aktiviert oder deaktiviert die Web Service Überwachung für Pi.Alert. Mit der Aktivierung, werden zusätzliche Elemente in der Oberfläche angezeigt. Mit der Deaktivierung, verschwinden diese wieder.';
-$pia_lang['Maintenance_Tool_icmpmon'] = 'ICMP Monitoring (an/aus)';
+$pia_lang['Maintenance_Tool_icmpmon'] = 'ICMP Monitoring';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'ICMP Monitoring';
 $pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Aktiviert oder deaktiviert das ICMP Monitoring für Pi.Alert. Mit der Aktivierung, werden zusätzliche Elemente in der Oberfläche angezeigt. Mit der Deaktivierung, verschwinden diese wieder.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Geräteübersicht konfigurieren';
