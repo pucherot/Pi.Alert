@@ -210,7 +210,7 @@ function print_logviewer_modal_head($id, $title) {
                     <h4 class="modal-title">Viewer: ' . $title . '</h4>
                 </div>
                 <div class="modal-body main_logviwer_text_layout">
-                    <div class="main_logviwer_log">';
+                    <div class="main_logviwer_log" style="max-height: 70vh;">';
 }
 
 // Bottom Modal Block -----------------------------------------------------------------
@@ -622,7 +622,7 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
             <div class="db_info_table">
 				<div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupConfigFile" style="margin: 5px" onclick="BackupConfigFile('yes')"><?=$pia_lang['Maintenance_Tool_ConfBackup'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupConfigFile" onclick="BackupConfigFile('yes')"><?=$pia_lang['Maintenance_Tool_ConfBackup'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_ConfBackup_text'];?></div>
                 </div>
@@ -705,7 +705,7 @@ echo '</div>';
     <div class="modal fade" id="modal-config-editor">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-              <form role="form" accept-charset="utf-8" method="post" action="./index.php">
+              <form role="form" accept-charset="utf-8">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
