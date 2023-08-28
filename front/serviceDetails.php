@@ -45,8 +45,7 @@ function get_service_details($service_URL) {
 	return $row;
 }
 
-// -----------------------------------------------------------------------------------
-# Set Filter of fallback to default
+// ----------------- Set Filter of fallback to default--------------------------
 $http_filter = $_REQUEST['filter'];
 if (!isset($http_filter)) {$http_filter = 'all';}
 
@@ -103,8 +102,7 @@ function set_table_headline($service_filter) {
 
 $servicedetails = get_service_details($service_details_title);
 
-// -----------------------------------------------------------------------------------
-// Get Online Graph Arrays
+// ----------------- Get Online Graph Arrays -----------------------------------
 $graph_arrays = array();
 $graph_arrays = prepare_graph_arrays_webservice($service_details_title);
 $Pia_Graph_Service_Time = $graph_arrays[0];
@@ -119,22 +117,18 @@ $http4xx = $graph_arrays[9];
 $http5xx = $graph_arrays[10];
 $httpdown = $graph_arrays[6];
 
-// -----------------------------------------------------------------------------------
-// Geo Location
+// -----------------Geo Location -----------------------------------------------
 function init_location_array($HOST_IP) {
 	if (file_exists("../db/GeoLite2-Country.mmdb")) {
 		$databasePath = '../db/GeoLite2-Country.mmdb';
-
 		$command = "mmdblookup -f {$databasePath} --ip {$HOST_IP}";
 		exec($command, $output);
 		for ($x = 0; $x < sizeof($output); $x++) {
 			$output[$x] = trim($output[$x]);
 		}
-
 		$output_str = implode("\n", $output);
 		$output_str = str_replace(":\n", ":", $output_str);
 		$location_array = explode("\n", $output_str);
-
 		return $location_array;
 	} else {
 		$nofile = array('######');
@@ -142,7 +136,7 @@ function init_location_array($HOST_IP) {
 	}
 }
 
-// -----------------------------------------------------------------------------------
+// -----------------Parse Geo Location Array -----------------------------------
 function parse_location_array($LOCATION_ARRAY) {
 	global $pia_lang_selected;
 
@@ -161,17 +155,38 @@ function parse_location_array($LOCATION_ARRAY) {
 	return $locations;
 }
 
-// get some stats
-// -----------------------------------------------------------------------------------
-$query = "SELECT AVG(moneve_Latency) AS average_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service_details_title\"";
-$result = $db->querySingle($query);
-$latency_average = round($result, 4);
-$query_max = "SELECT MAX(moneve_Latency) AS max_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service_details_title\"";
-$query_min = "SELECT MIN(moneve_Latency) AS min_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service_details_title\"";
-$result_max = $db->querySingle($query_max);
-$latency_max = round($result_max, 4);
-$result_min = $db->querySingle($query_min);
-$latency_min = round($result_min, 4);
+// ----------------- Get some service stats ------------------------------------
+function get_service_statistic($service) {
+	global $db;
+
+	$statistic = array();
+	$query = "SELECT AVG(moneve_Latency) AS average_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
+	$result = $db->querySingle($query);
+	$statistic['latency_avg'] = round($result, 4);
+	$query_max = "SELECT MAX(moneve_Latency) AS max_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
+	$query_min = "SELECT MIN(moneve_Latency) AS min_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
+	$result_max = $db->querySingle($query_max);
+	$statistic['latency_max'] = round($result_max, 4);
+	$result_min = $db->querySingle($query_min);
+	$statistic['latency_min'] = round($result_min, 4);
+	$query = "SELECT COUNT(*) AS row_count FROM Services_Events WHERE moneve_Latency == 99999999 AND moneve_URL=\"$service\"";
+	$result = $db->querySingle($query);
+	$statistic['offline'] = $result;
+	$query = "SELECT COUNT(*) AS row_count FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_URL=\"$service\"";
+	$result = $db->querySingle($query);
+	$statistic['online'] = $result;
+	$temp100 = $statistic['online'] + $statistic['offline'];
+	if ($temp100 > 0 && $statistic['online'] > 0) {
+		$statistic['online_percent'] = round(($statistic['online'] * 100 / $temp100), 2);
+	} else {
+		$statistic['online_percent'] = 0;
+	}
+	$statistic['offline_percent'] = round((100 - $statistic['online_percent']), 2);
+	$statistic['online_percent'] = $statistic['online_percent'] . ' %';
+	$statistic['offline_percent'] = $statistic['offline_percent'] . ' %';
+	return $statistic;
+}
+
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -189,7 +204,7 @@ $latency_min = round($result_min, 4);
 <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
-<!-- top small box --------------------------------------------------------- -->
+<!-- top small boxes -->
       <div class="row">
 
         <div class="col-lg-2 col-sm-4 col-xs-6">
@@ -203,7 +218,6 @@ $latency_min = round($result_min, 4);
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="./serviceDetails.php?url=<?=$service_details_title?>&filter=2" onclick="javascript: getEventsTotalsforService('2');">
             <div class="small-box bg-green">
@@ -215,7 +229,6 @@ $latency_min = round($result_min, 4);
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="./serviceDetails.php?url=<?=$service_details_title?>&filter=3" onclick="javascript: getEventsTotalsforService('3');">
             <div  class="small-box bg-yellow">
@@ -227,7 +240,6 @@ $latency_min = round($result_min, 4);
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="./serviceDetails.php?url=<?=$service_details_title?>&filter=4" onclick="javascript: getEventsTotalsforService('4');">
             <div  class="small-box bg-yellow">
@@ -239,7 +251,6 @@ $latency_min = round($result_min, 4);
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="./serviceDetails.php?url=<?=$service_details_title?>&filter=5" onclick="javascript: getEventsTotalsforService('5');">
             <div  class="small-box bg-yellow">
@@ -251,7 +262,6 @@ $latency_min = round($result_min, 4);
           </a>
         </div>
 
-<!-- top small box --------------------------------------------------------- -->
         <div class="col-lg-2 col-sm-4 col-xs-6">
           <a href="./serviceDetails.php?url=<?=$service_details_title?>&filter=99999999" onclick="javascript: getEventsTotalsforService('99999999');">
             <div  class="small-box bg-red">
@@ -317,8 +327,6 @@ if ($servicedetails['mon_MAC'] != "") {
 }
 echo '<li> -----  </li>';
 
-//global $db_file;
-//$db = new SQLite3($db_file);
 $dev_res = $db->query('SELECT dev_MAC, dev_Name FROM Devices ORDER BY dev_Name ASC');
 $code_array = array();
 while ($row = $dev_res->fetchArray()) {
@@ -472,20 +480,33 @@ get_service_events_table($service_details_title, $http_filter);
                 </div>
 
                 <div class="col-md-12 bottom-border-aqua" style="margin-top: 10px; opacity: 0.7"></div>
-
+<?php
+# Get Statistic
+$statistic = get_service_statistic($service_details_title);
+?>
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['WebServices_Stats_Time'];?>:</div>
-                    <div class="col-sm-2">&Oslash; <?=$latency_average;?> ms</div>
-                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_min'];?> <?=$latency_min;?> ms</div>
-                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_max'];?> <?=$latency_max;?> ms</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg'];?> ms</div>
+                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_min'];?> <?=$statistic['latency_min'];?> ms</div>
+                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_max'];?> <?=$statistic['latency_max'];?> ms</div>
                     <div class="col-sm-4"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
                   </div>
-
                 </div>
 
                 <div class="col-md-12 bottom-border-aqua" style="margin-top: 10px; opacity: 0.7"></div>
 
+                <div class="col-md-12">
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['ICMPMonitor_Availability'];?>:</div>
+                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?> <?=$statistic['online_percent'];?></div>
+                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?> <?=$statistic['offline_percent'];?></div>
+                    <div class="col-sm-2">&nbsp;</div>
+                    <div class="col-sm-4"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 bottom-border-aqua" style="margin-top: 10px; opacity: 0.7"></div>
 <?php
 $output = init_location_array($servicedetails['mon_TargetIP']);
 if ($output[0] != "######") {
