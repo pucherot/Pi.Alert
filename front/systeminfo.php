@@ -81,6 +81,18 @@ $hdd_devices_mount = explode("\n", trim($hdd_result));
 //usb devices
 $usb_result = shell_exec("lsusb");
 $usb_devices_mount = explode("\n", trim($usb_result));
+// users
+$temp_usercount = shell_exec("w -h | awk '{print $1 \"##\" $2 \"##\" $3 \"//\"}'");
+$search_usercount = array("##:0", "##-");
+$str_usercount = str_replace($search_usercount, '', substr($temp_usercount, 0, -3));
+$arr_usercount = explode("//", $str_usercount);
+foreach ($arr_usercount as $user) {
+	$arr_user = explode("##", $user);
+	$stat['user_count'] = $stat['user_count'] . '<span class="text-aqua">' . $arr_user[0] . '</span> (' . $arr_user[1] . ') <span class="text-red">' . $arr_user[2] . '</span> /';
+}
+$stat['user_count'] = substr($stat['user_count'], 0, -2);
+// count processes
+$stat['process_count'] = shell_exec("ps -e --no-headers | wc -l");
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -139,6 +151,14 @@ echo '<div class="box box-solid">
 				<div class="row">
 				  <div class="col-sm-3 sysinfo_gerneral_a">Memory:</div>
 				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['mem_total'] . ' MB / ' . $stat['mem_used'] . '% is used</div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-3 sysinfo_gerneral_a">Running Processes:</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['process_count'] . '</div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-3 sysinfo_gerneral_a">Logged in Users:</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['user_count'] . '</div>
 				</div>
             </div>
       </div>';
