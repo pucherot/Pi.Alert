@@ -655,10 +655,6 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 												    <td class="help_table_gen_a">reporting_test</td>
 												    <td class="help_table_gen_b">- Prueba de informes para todos los servicios activados.</td>
 												</tr>
-												<tr>
-												    <td class="help_table_gen_a">rewrite_config</td>
-												    <td class="help_table_gen_b">- Se crea un nuevo archivo de configuración desordenado (pialert-rewritten.conf).</td>
-												</tr>
 											    <tr>
 											    	<td class="help_table_gen_a">set_sudoers</td>
 											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td>
