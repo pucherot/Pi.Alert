@@ -1788,19 +1788,29 @@ def icmp_monitoring():
 
     scantime = startTime.strftime("%Y-%m-%d %H:%M")
 
+    icmphosts_all = len(icmphosts)
+    icmphosts_online = 0
+    icmphosts_offline = 0
+
     while icmphosts:
         for host_ip in icmphosts:
             icmp_status = ping(host_ip)
 
             if icmp_status == "1":
                 icmp_rtt = ping_avg(host_ip)
+                icmphosts_online+=1
             else:
                 icmp_rtt = "99999"
+                icmphosts_offline+=1
 
             set_icmphost_events(host_ip, scantime, icmp_status, icmp_rtt)
             set_icmphost_current_scan(host_ip, scantime, icmp_status, icmp_rtt)
             sys.stdout.flush()
             set_icmphost_update(host_ip, scantime, icmp_status, icmp_rtt)
+
+        print("        Online Host(s)  :" + str(icmphosts_online))
+        print("        Offline Host(s) :" + str(icmphosts_offline))
+
         break
 
     else:
