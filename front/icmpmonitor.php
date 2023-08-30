@@ -244,6 +244,7 @@ function initializeDatatable () {
       {targets: [0],
         'createdCell': function (td, cellData, rowData, row, col) {
             $(td).html ('<b><a href="icmpmonitorDetails.php?hostip='+ rowData[1] +'" class="">'+ cellData +'</a></b>');
+            $(td).css('min-width', '160px');
       } },
       {targets: [2],
         'createdCell': function (td, cellData, rowData, row, col) {
