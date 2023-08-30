@@ -86,7 +86,7 @@ function SaveConfigFile() {
 
 	$configContent = preg_replace('/^\s*#.*$/m', '', $_REQUEST['configfile']);
 	$configArray = parse_ini_string($configContent);
-	echo $configArray['MAC_IGNORE_LIST'];
+
 	$ignorlist_search = array("[ ", " ]", ", ", ",", "[", "]");
 	$ignorlist_replace = array("[", "]", ",", "','", "['", "']");
 	// Handle some special entries
