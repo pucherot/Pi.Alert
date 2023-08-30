@@ -86,10 +86,15 @@ function SaveConfigFile() {
 
 	$configContent = preg_replace('/^\s*#.*$/m', '', $_REQUEST['configfile']);
 	$configArray = parse_ini_string($configContent);
-
+	echo $configArray['MAC_IGNORE_LIST'];
 	$ignorlist_search = array("[ ", " ]", ", ", ",", "[", "]");
 	$ignorlist_replace = array("[", "]", ",", "','", "['", "']");
-	$configArray['MAC_IGNORE_LIST'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['MAC_IGNORE_LIST']);
+	// Handle some special entries
+	if ($configArray['MAC_IGNORE_LIST'] != "" && $configArray['MAC_IGNORE_LIST'] != "[]") {
+		$configArray['MAC_IGNORE_LIST'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['MAC_IGNORE_LIST']);
+	} else {
+		$configArray['MAC_IGNORE_LIST'] = "[]";
+	}
 
 	if (substr($configArray['SCAN_SUBNETS'], 0, 2) == "--") {$configArray['SCAN_SUBNETS'] = "'" . $configArray['SCAN_SUBNETS'] . "'";} else {
 		$configArray['SCAN_SUBNETS'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['SCAN_SUBNETS']);
@@ -192,7 +197,7 @@ MAC_IGNORE_LIST = " . $configArray['MAC_IGNORE_LIST'] . "
 SCAN_SUBNETS    = " . $configArray['SCAN_SUBNETS'] . "
 # SCAN_SUBNETS    = '--localnet'
 # SCAN_SUBNETS    = '--localnet --interface=eth0'
-# SCAN_SUBNETS    = [ '192.168.1.0/24 --interface=eth0', '192.168.2.0/24 --interface=eth1' ]
+# SCAN_SUBNETS    = ['192.168.1.0/24 --interface=eth0','192.168.2.0/24 --interface=eth1']
 
 # Pi-hole Configuration
 # ----------------------
