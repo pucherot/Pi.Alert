@@ -91,6 +91,7 @@ start_pialert() {
 # Reset Permissions
 # ------------------------------------------------------------------------------
 reset_permissions() {
+  echo ""
   print_msg "- Reset permissions..."
   sudo chgrp -R www-data $PIALERT_HOME/db                             2>&1 >> "$LOG"
   sudo chmod -R 775 $PIALERT_HOME/db                                  2>&1 >> "$LOG"
@@ -105,7 +106,6 @@ create_backup() {
   # Previous backups are not deleted
   # print_msg "- Deleting previous Pi.Alert backups..."
   # rm "$INSTALL_DIR/"pialert_update_backup_*.tar  2>/dev/null || :
-  
   print_msg "- Creating new Pi.Alert backup..."
   cd "$INSTALL_DIR"
   tar cvf "$INSTALL_DIR"/pialert_update_backup_`date +"%Y-%m-%d_%H-%M"`.tar pialert --checkpoint=100 --checkpoint-action="ttyout=."     2>&1 >> "$LOG"
@@ -290,8 +290,10 @@ update_permissions() {
   ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"          2>&1 >> "$LOG"
   ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"  2>&1 >> "$LOG"
 
-  # Patch DB
-  echo ""
+  print_msg "- Set sudoers..."
+  sudo $PIALERT_HOME/back/pialert-cli set_sudoers
+
+  print_msg "- Patch DB..."
   $PIALERT_HOME/back/pialert-cli update_db
 
 }
@@ -343,7 +345,6 @@ check_python_version() {
     process_error "Python 3 NOT installed"
   fi
 }
-
 
 # ------------------------------------------------------------------------------
 # Move Logfile

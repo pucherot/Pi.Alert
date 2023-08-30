@@ -596,6 +596,9 @@ publish_pialert() {
   ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"
   ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"
 
+  print_msg "- Set sudoers..."
+  sudo $PIALERT_HOME/back/pialert-cli set_sudoers
+
   print_msg "- Publishing Pi.Alert web..."
   sudo ln -s "$PIALERT_HOME/front" "$WEBROOT/pialert"             2>&1 >> "$LOG"
 
