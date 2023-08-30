@@ -87,7 +87,13 @@ function SaveConfigFile() {
 	$configContent = preg_replace('/^\s*#.*$/m', '', $_REQUEST['configfile']);
 	$configArray = parse_ini_string($configContent);
 
-	if (substr($configArray['SCAN_SUBNETS'], 0, 2) == "--") {$configArray['SCAN_SUBNETS'] = "'" . $configArray['SCAN_SUBNETS'] . "'";}
+	$ignorlist_search = array("[ ", " ]", ", ", ",", "[", "]");
+	$ignorlist_replace = array("[", "]", ",", "','", "['", "']");
+	$configArray['MAC_IGNORE_LIST'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['MAC_IGNORE_LIST']);
+
+	if (substr($configArray['SCAN_SUBNETS'], 0, 2) == "--") {$configArray['SCAN_SUBNETS'] = "'" . $configArray['SCAN_SUBNETS'] . "'";} else {
+		$configArray['SCAN_SUBNETS'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['SCAN_SUBNETS']);
+	}
 
 	$config_template = "# General Settings
 # ----------------------
