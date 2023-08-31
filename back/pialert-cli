@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.06'
+SCRIPTVERSION='v1.07'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -301,7 +301,7 @@ EOM
     fi
     # network_infrastructure.net_downstream_devices
     echo -e "...Insert new column 'net_downstream_devices' to table 'network_infrastructure' to DB"
-    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Infrastructure_port")
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('network_infrastructure');" | awk -F\| '{print $2}' | grep -wci "net_downstream_devices")
     if [ $existing -eq 0 ]; then
       sqlite3 $PIA_DB_FILE "ALTER TABLE 'network_infrastructure' ADD COLUMN 'net_downstream_devices' TEXT;"
     else
