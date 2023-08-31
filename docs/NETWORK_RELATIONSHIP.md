@@ -1,5 +1,27 @@
 ## Network Relationship
 
+# Table of Contents
+
+* [Requirements](#requirements)
+* [First start](#first-start)
+* [Editing mode](#editing-mode)
+  * [Manage Devices](#manage-devices)
+  * [Manage Non-Scannable Devices](#manage-non-scannable-devices)
+* [Manage Devices](#manage-devices-1)
+  * [Create a device Internet](#create-a-device-internet)
+  * [Create a device Router](#create-a-device-router)
+  * [Create a device Switch](#create-a-device-switch)
+  * [Create a device WLAN](#create-a-device-wlan)
+  * [Delete a device](#delete-a-device)
+* [Assign Devices](#assign-devices)
+* [Manage Non-Scannable Devices](#manage-non-scannable-devices-1)
+  * [Create a device](#create-a-device)
+  * [Edit a device](#edit-a-device)
+  * [Delete a device](#delete-a-device-1)
+
+
+file:///private/var/folders/gc/wndqhls54dg2ynnvftnn4nym0000gn/T/13.html#create-a-device
+
 ### Requirements
 
 In this description, I assume that devices have already been detected in the Device list and devices have already been assigned types such as switch or router.
@@ -28,7 +50,7 @@ The edit mode also consists of 2 large areas, which in turn are divided into 3 s
 
 ### Manage Devices
 
-![Manage Net Devices - add 1][Manage_Net_Devices_add_1]
+This section is used for creating transparent/IP-less (unmanaged) devices such as hubs or switches, as well as active devices like routers, managed switches, or access points that influence the network structure. Devices already detected by Pi.Alert must be recreated here for display. Editing or deleting devices already detected by Pi.Alert is independent of the "Devices" list and only has significance for the "Network" page.
 
 #### <ins>Create a device Internet:</ins>
 
@@ -37,6 +59,8 @@ For this, it is necessary to have a device with the MAC address "Internet" in th
 Device Name: Internet
 Device Type: Internet
 ```
+
+![Manage Net Devices - add 1][Manage_Net_Devices_add_1]
 
 Now a new box appears with a tab named "Internet
 
@@ -139,7 +163,33 @@ However, this is not an error, but quite intentional. The background is that the
 one port. Another special feature is that you can specify multiple ports, separated by a comma, in the detail view of each device. The reason for this is that 
 there are, for example, servers that are configured with link aggregation, which consequently occupy multiple ports on a switch.
 
+### Manage Non-Scannable Devices
 
+At this location, devices that occupy ports or connections on switches or routers but do not have active network functionality themselves, can be created. 
+Devices that cannot be detected but should be displayed for overview, e.g. lighting with PoE, can also be considered here. The devices created here only appear on the "Network" page.
+
+#### <ins>Create a device</ins>
+
+To create such a device, enter a descriptive name in the green section (this can also contain spaces), select one of the already created network components in the next line where this 
+device should be displayed and specify the port that will be occupied by this device.
+
+![Manage Net Devices - add 5][Manage_Net_Devices_add_5]
+
+In the example shown, I have assigned the "Lighting Basement (PoE)" to the "VirtualBox Interface 2" device on port 5. If you now look at the tab of "VirtualBox Interface 2", you can now see the new device. You will notice that a yellow label with the name "UM" is used here. However, this is only the case when it is assigned to a router or switch. 
+For all other assignments, the devices are provided with the label "Offline".
+
+![Management Tab 9][Management_tab_9]
+
+#### <ins>Edit a device</ins>
+
+Clicking on an "Unmanaged Device" opens the "Settings - Network Overview" page. In the "Manage Non-Scannable Devices" section, select the device to be edited in the yellow area and enter the desired changes.
+
+| ![Manage Net UM Devices - update][Manage_Net_UM_Devices_update] | ![Management Tab 10][Management_tab_10] |
+| --------------------------------------------------------|---------------------------------------|
+
+#### <ins>Delete a device</ins>
+
+To remove a manually created device from the network overview, simply select it in the "Manage Non-Scannable Devices" section, in the red area and click the "Delete Device" button. 
 
 [Back](https://github.com/leiweibau/Pi.Alert#front)
 
@@ -149,6 +199,7 @@ there are, for example, servers that are configured with link aggregation, which
 [Manage_Net_Devices_add_2]:           ./img/netrel_management_add_2.jpg            "Manage Net Devices - add 2"
 [Manage_Net_Devices_add_3]:           ./img/netrel_management_add_3.jpg            "Manage Net Devices - add 3"
 [Manage_Net_Devices_add_4]:           ./img/netrel_management_add_4.jpg            "Manage Net Devices - add 4"
+[Manage_Net_Devices_add_5]:           ./img/netrel_management_add_5.png            "Manage Net Devices - add 5"
 
 [Management_tab_1]:      		      ./img/netrel_management_tab_1.jpg            "Management Tab 1"
 [Management_tab_2]:      		      ./img/netrel_management_tab_2.jpg            "Management Tab 2"
@@ -158,6 +209,10 @@ there are, for example, servers that are configured with link aggregation, which
 [Management_tab_6]:      		      ./img/netrel_management_tab_6.jpg            "Management Tab 6"
 [Management_tab_7]:      		      ./img/netrel_management_tab_7.jpg            "Management Tab 7"
 [Management_tab_8]:      		      ./img/netrel_management_tab_8.jpg            "Management Tab 8"
+
+[Management_tab_9]:      		      ./img/netrel_management_tab_9.png            "Management Tab 9"
+[Management_tab_10]:      		      ./img/netrel_management_tab_10.png            "Management Tab 10"
+
 [Management_Device_Add_Internet]:     ./img/netrel_management_assign_internet.jpg  "Management Device Add Internet"
 [Management_Device_Add_Router_1]:     ./img/netrel_management_assign_router_1.jpg  "Management Device Add Router 1"
 [Management_Device_Add_Router_2]:     ./img/netrel_management_assign_router_2.jpg  "Management Device Add Router 2"
@@ -167,5 +222,8 @@ there are, for example, servers that are configured with link aggregation, which
 [Management_Device_Update_Switch_2]:  ./img/netrel_management_update_switch_2.jpg  "Management Device Update Switch 2"
 
 [Manage_Net_Devices_update]:          ./img/netrel_management_update.jpg           "Manage Net Devices - update"
+
+[Manage_Net_UM_Devices_update]:          ./img/netrel_UM_management_update.png           "Manage Net UM Devices - update"
+
 [Manage_Net_Devices_delete]:          ./img/netrel_management_delete.jpg           "Manage Net Devices - delete"
 [Manage_unassigned_Devices]:          ./img/netrel_unassigned.jpg                  "Manage unassigned Devices"
