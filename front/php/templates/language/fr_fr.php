@@ -711,7 +711,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon
 											        	Normalement, cette option est déjà paramétrée correctement. Ce paramètre est sélectionné lorsque Pi.Alert est installé sur un appareil avec une carte réseau et qu&apos;aucun autre réseau n&apos;est configuré.<br><br>
 											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
 											        	Cette configuration est sélectionnée si Pi.Alert est installé sur un système avec au moins 2 cartes réseau et un réseau configuré. Cependant, la désignation de l&apos;interface peut varier et doit être adaptée aux conditions du système.<br><br>
-											        	&lsquo;<span class="text-maroon help_faq_code">192.168.1.0/24 --interface=eth0, 192.168.2.0/24 --interface=eth1</span>&rsquo;<br>
+											        	<span class="text-maroon help_faq_code">[\'192.168.1.0/24 --interface=eth0\',\'192.168.2.0/24 --interface=eth1\']</span><br>
 											        	La dernière configuration est nécessaire si plusieurs réseaux doivent être surveillés. Pour chaque réseau à surveiller, une carte réseau correspondante doit être configurée. Cela est nécessaire car le "arp-scan" utilisé n&apos;est pas routé, c&apos;est-à-dire qu&apos;il fonctionne uniquement dans son propre sous-réseau. Chaque interface est saisie ici avec le réseau correspondant. La désignation de l&apos;interface doit être adaptée aux conditions du système.
 											        </td></tr>
 											</table>
