@@ -35,7 +35,7 @@ if ($_REQUEST['Networkinsert'] == "yes") {
 		pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0030', '', '');
 	}
 }
-// Edit  Network Devices
+// Edit Network Devices
 // #####################################
 if ($_REQUEST['Networkedit'] == "yes") {
 	if (($_REQUEST['NewNetworkDeviceName'] != "") && isset($_REQUEST['NewNetworkDeviceTyp'])) {
@@ -44,7 +44,7 @@ if ($_REQUEST['Networkedit'] == "yes") {
 	}
 
 	if (($_REQUEST['NewNetworkDeviceName'] == "") && isset($_REQUEST['NewNetworkDeviceTyp'])) {
-		$sql = 'UPDATE "network_infrastructure" SET "net_device_typ" = "' . $_REQUEST['NewNetworkDeviceTyp'] . '", "net_device_port" = "' . $_REQUEST['NewNetworkDevicePort'] . '", "net_downstream_devices" = "' . $_REQUEST['NetworkDeviceDownlink'] . '" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
+		$sql = 'UPDATE "network_infrastructure" SET "net_device_typ" = "' . $_REQUEST['NewNetworkDeviceTyp'] . '", "net_device_port" = "' . $_REQUEST['NewNetworkDevicePort'] . '", "net_downstream_devices" = "' . $_REQUEST['NetworkDeviceDownlink'] . '" WHERE "device_id "="' . $_REQUEST['NetworkDeviceID'] . '"';
 		$result = $db->query($sql);
 	}
 	// Logging
@@ -78,7 +78,7 @@ if ($_REQUEST['NetworkUnmanagedDevinsert'] == "yes") {
 // #####################################
 if ($_REQUEST['NetworkUnmanagedDevedit'] == "yes") {
 	if (($_REQUEST['NewNetworkUnmanagedDevName'] != "") && isset($_REQUEST['NewNetworkUnmanagedDevConnect']) && isset($_REQUEST['NetworkUnmanagedDevID'])) {
-		$sql = 'UPDATE "network_dumb_dev" SET "dev_Name" = "' . $_REQUEST['NewNetworkUnmanagedDevName'] . '", "dev_Infrastructure" = "' . $_REQUEST['NewNetworkUnmanagedDevConnect'] . '", "dev_Infrastructure_port" = "' . $_REQUEST['NewNetworkUnmanagedDevPort'] . '" WHERE "id"="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
+		$sql = 'UPDATE "network_dumb_dev" SET "dev_Name" = "' . $_REQUEST['NewNetworkUnmanagedDevName'] . '", "dev_Infrastructure" = "' . $_REQUEST['NewNetworkUnmanagedDevConnect'] . '", "dev_Infrastructure_port" = "' . $_REQUEST['NewNetworkUnmanagedDevPort'] . '" WHERE "id "="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
 		$result = $db->query($sql);
 	}
 
