@@ -1,7 +1,5 @@
 ## Network Relationship
 
-# Table of Contents
-
 * [Requirements](#requirements)
 * [First start](#first-start)
 * [Editing mode](#editing-mode)
