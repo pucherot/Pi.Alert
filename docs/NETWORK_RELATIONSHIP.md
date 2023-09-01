@@ -19,9 +19,6 @@
   * [Edit a device](#edit-a-device)
   * [Delete a device](#delete-a-device-1)
 
-
-file:///private/var/folders/gc/wndqhls54dg2ynnvftnn4nym0000gn/T/13.html#create-a-device
-
 ### Requirements
 
 In this description, I assume that devices have already been detected in the Device list and devices have already been assigned types such as switch or router.
