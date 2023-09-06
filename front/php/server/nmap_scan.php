@@ -12,7 +12,14 @@ function crosscheckIP($query_ip) {
 	$sql = 'SELECT * FROM Devices WHERE dev_LastIP="' . $query_ip . '"';
 	$result = $db->query($sql);
 	$row = $result->fetchArray(SQLITE3_ASSOC);
-	return $row['dev_LastIP'];
+	$neededIP = $row['dev_LastIP'];
+	if ($neededIP == "") {
+		$sql = 'SELECT * FROM ICMP_Mon WHERE icmp_ip="' . $query_ip . '"';
+		$result = $db->query($sql);
+		$row = $result->fetchArray(SQLITE3_ASSOC);
+		$neededIP = $row['icmp_ip'];
+	}
+	return $neededIP;
 }
 
 $DBFILE = '../../../db/pialert.db';
