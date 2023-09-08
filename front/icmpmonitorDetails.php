@@ -108,31 +108,116 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
 // -----------------------------------------------------------------------------------
 function get_host_statistic($hostip) {
 	global $db;
+	global $pia_lang;
+
+	// Compensate Timezone
+	$stat_query_24h = 24 - (date('Z') / 3600);
+	$stat_query_1w = 168 - (date('Z') / 3600);
+
 	$statistic = array();
 	$query = "SELECT AVG(icmpeve_avgrtt) AS average_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
 	$result = $db->querySingle($query);
-	$statistic['avg_rtt'] = round($result, 3);
+	$statistic['avg_rtt_all'] = round($result, 3) . ' ms';
 	$query_max = "SELECT MAX(icmpeve_avgrtt) AS max_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
 	$query_min = "SELECT MIN(icmpeve_avgrtt) AS min_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
 	$result_max = $db->querySingle($query_max);
-	$statistic['rtt_max'] = round($result_max, 3);
+	$statistic['rtt_max_all'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($result_max, 3) . ' ms';
 	$result_min = $db->querySingle($query_min);
-	$statistic['rtt_min'] = round($result_min, 3);
+	$statistic['rtt_min_all'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($result_min, 3) . ' ms';
 	$query = "SELECT COUNT(*) AS row_count FROM ICMP_Mon_Events WHERE icmpeve_Present = 0 AND icmpeve_ip=\"$hostip\"";
 	$result = $db->querySingle($query);
-	$statistic['offline'] = $result;
+	$statistic['offline_all'] = $result;
 	$query = "SELECT COUNT(*) AS row_count FROM ICMP_Mon_Events WHERE icmpeve_Present = 1 AND icmpeve_ip=\"$hostip\"";
 	$result = $db->querySingle($query);
-	$statistic['online'] = $result;
-	$temp100 = $statistic['online'] + $statistic['offline'];
-	if ($temp100 > 0 && $statistic['online'] > 0) {
-		$statistic['online_percent'] = round($statistic['online'] * 100 / $temp100);
+	$statistic['online_all'] = $result;
+	$temp100 = $statistic['online_all'] + $statistic['offline_all'];
+	if ($temp100 > 0 && $statistic['online_all'] > 0) {
+		$statistic['online_percent_all'] = round($statistic['online_all'] * 100 / $temp100);
 	} else {
-		$statistic['online_percent'] = 0;
+		$statistic['online_percent_all'] = 0;
 	}
-	$statistic['offline_percent'] = 100 - $statistic['online_percent'];
-	$statistic['online_percent'] = $statistic['online_percent'] . ' %';
-	$statistic['offline_percent'] = $statistic['offline_percent'] . ' %';
+	$statistic['offline_percent_all'] = 100 - $statistic['online_percent_all'];
+	$statistic['online_percent_all'] = $statistic['online_percent_all'] . ' %';
+	$statistic['offline_percent_all'] = $statistic['offline_percent_all'] . ' %';
+
+	// 1 Day Stats
+	// ---------------------------------------------------
+	$query = "
+    SELECT *
+    FROM ICMP_Mon_Events
+    WHERE icmpeve_ip=\"$hostip\" AND datetime(icmpeve_DateTime) >= datetime('now', '-$stat_query_24h hours')
+    ORDER BY datetime(icmpeve_DateTime) DESC
+  ";
+
+	$result = $db->query($query);
+	$offline = 0;
+	$online = 0;
+	$min_icmprtt = 99999;
+	$max_icmprtt = 0;
+	$avg_icmprtt = 0;
+	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+		if ($row['icmpeve_avgrtt'] != "" && $row['icmpeve_avgrtt'] != "99999") {
+			$online++;
+			if ($row['icmpeve_avgrtt'] > $max_icmprtt) {$max_icmprtt = $row['icmpeve_avgrtt'];}
+			if ($row['icmpeve_avgrtt'] < $min_icmprtt) {$min_icmprtt = $row['icmpeve_avgrtt'];}
+			$avg_icmprtt = $avg_icmprtt + $row['icmpeve_avgrtt'];
+		} else { $offline++;}
+	}
+	if ($min_icmprtt == 99999) {$statistic['rtt_min_24h'] = 'n.a.';} else { $statistic['rtt_min_24h'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_icmprtt, 3) . ' ms';}
+	if ($max_icmprtt == 0) {$statistic['rtt_max_24h'] = 'n.a.';} else { $statistic['rtt_max_24h'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_icmprtt, 3) . ' ms';}
+	if ($avg_icmprtt > 0) {$statistic['rtt_avg_24h'] = round(($avg_icmprtt / $online), 3) . ' ms';} else { $statistic['rtt_avg_24h'] = 'n.a.';}
+	$statistic['online_24h'] = $online;
+	$statistic['offline_24h'] = $offline;
+
+	$temp24h = $statistic['online_24h'] + $statistic['offline_24h'];
+	if ($temp24h > 0 && $statistic['online_24h'] > 0) {
+		$statistic['online_percent_24h'] = round(($statistic['online_24h'] * 100 / $temp24h), 2);
+	} else {
+		$statistic['online_percent_24h'] = 0;
+	}
+	$statistic['offline_percent_24h'] = round((100 - $statistic['online_percent_24h']), 2);
+	$statistic['online_percent_24h'] = $statistic['online_percent_24h'] . ' %';
+	$statistic['offline_percent_24h'] = $statistic['offline_percent_24h'] . ' %';
+
+	// 1 Week Stats
+	// ---------------------------------------------------
+	$query = "
+    SELECT *
+    FROM ICMP_Mon_Events
+    WHERE icmpeve_ip=\"$hostip\" AND datetime(icmpeve_DateTime) >= datetime('now', '-$stat_query_1w hours')
+    ORDER BY datetime(icmpeve_DateTime) DESC
+  ";
+
+	$result = $db->query($query);
+	$offline = 0;
+	$online = 0;
+	$min_icmprtt = 99999;
+	$max_icmprtt = 0;
+	$avg_icmprtt = 0;
+	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+		if ($row['icmpeve_avgrtt'] != "" && $row['icmpeve_avgrtt'] != "99999") {
+			$online++;
+			if ($row['icmpeve_avgrtt'] > $max_icmprtt) {$max_icmprtt = $row['icmpeve_avgrtt'];}
+			if ($row['icmpeve_avgrtt'] < $min_icmprtt) {$min_icmprtt = $row['icmpeve_avgrtt'];}
+			$avg_icmprtt = $avg_icmprtt + $row['icmpeve_avgrtt'];
+		} else { $offline++;}
+	}
+	if ($min_icmprtt == 99999) {$statistic['rtt_min_1w'] = 'n.a.';} else { $statistic['rtt_min_1w'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_icmprtt, 3) . ' ms';}
+	if ($max_icmprtt == 0) {$statistic['rtt_max_1w'] = 'n.a.';} else { $statistic['rtt_max_1w'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_icmprtt, 3) . ' ms';}
+	if ($avg_icmprtt > 0) {$statistic['rtt_avg_1w'] = round(($avg_icmprtt / $online), 3) . ' ms';} else { $statistic['rtt_avg_1w'] = 'n.a.';}
+	$statistic['online_1w'] = $online;
+	$statistic['offline_1w'] = $offline;
+
+	$temp24h = $statistic['online_1w'] + $statistic['offline_1w'];
+	if ($temp24h > 0 && $statistic['online_1w'] > 0) {
+		$statistic['online_percent_1w'] = round(($statistic['online_1w'] * 100 / $temp24h), 2);
+	} else {
+		$statistic['online_percent_1w'] = 0;
+	}
+	$statistic['offline_percent_1w'] = round((100 - $statistic['online_percent_1w']), 2);
+	$statistic['online_percent_1w'] = $statistic['online_percent_1w'] . ' %';
+	$statistic['offline_percent_1w'] = $statistic['offline_percent_1w'] . ' %';
+
 	return $statistic;
 }
 
@@ -485,12 +570,28 @@ get_icmphost_events_table($hostip, $icmpfilter);
 $statistic = get_host_statistic($hostip);
 ?>
                 <div class="col-md-12">
+
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['WebServices_Stats_Time'];?>:</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['avg_rtt'];?> ms</div>
-                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_min'];?> <?=$statistic['rtt_min'];?> ms</div>
-                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_max'];?> <?=$statistic['rtt_max'];?> ms</div>
-                    <div class="col-sm-4"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
+                    <div class="col-sm-12" style="font-weight: 600;"><?=$pia_lang['WebServices_Stats_Time'];?>:</div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">24h</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['rtt_avg_24h'];?></div>
+                    <div class="col-sm-2"><?=$statistic['rtt_min_24h'];?></div>
+                    <div class="col-sm-2"><?=$statistic['rtt_max_24h'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">7d</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['rtt_avg_1w'];?></div>
+                    <div class="col-sm-2"><?=$statistic['rtt_min_1w'];?></div>
+                    <div class="col-sm-2"><?=$statistic['rtt_max_1w'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">All</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['avg_rtt_all'];?></div>
+                    <div class="col-sm-2"><?=$statistic['rtt_min_all'];?></div>
+                    <div class="col-sm-2"><?=$statistic['rtt_max_all'];?></div>
+                    <div class="col-sm-4">&nbsp;</div>
                   </div>
                 </div>
 
@@ -498,10 +599,22 @@ $statistic = get_host_statistic($hostip);
 
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['ICMPMonitor_Availability'];?>:</div>
-                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?> <?=$statistic['online_percent'];?></div>
-                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?> <?=$statistic['offline_percent'];?></div>
-                    <div class="col-sm-6"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
+                    <div class="col-sm-12" style="font-weight: 600;"><?=$pia_lang['ICMPMonitor_Availability'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">24h</div>
+                    <div class="col-sm-2"><span class="text-green"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?></span> <?=$statistic['online_percent_24h'];?></div>
+                    <div class="col-sm-2"><span class="text-red"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?></span> <?=$statistic['offline_percent_24h'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">7d</div>
+                    <div class="col-sm-2"><span class="text-green"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?></span> <?=$statistic['online_percent_1w'];?></div>
+                    <div class="col-sm-2"><span class="text-red"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?></span> <?=$statistic['offline_percent_1w'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">All</div>
+                    <div class="col-sm-2"><span class="text-green"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?></span> <?=$statistic['online_percent_all'];?></div>
+                    <div class="col-sm-2"><span class="text-red"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?></span> <?=$statistic['offline_percent_all'];?></div>
                   </div>
                 </div>
 

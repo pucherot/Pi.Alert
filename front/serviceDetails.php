@@ -158,17 +158,22 @@ function parse_location_array($LOCATION_ARRAY) {
 // ----------------- Get some service stats ------------------------------------
 function get_service_statistic($service) {
 	global $db;
+	global $pia_lang;
+
+	// Compensate Timezone
+	$stat_query_24h = 24 - (date('Z') / 3600);
+	$stat_query_1w = 168 - (date('Z') / 3600);
 
 	$statistic = array();
 	$query = "SELECT AVG(moneve_Latency) AS average_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
 	$result = $db->querySingle($query);
-	$statistic['latency_avg'] = round($result, 4);
+	$statistic['latency_avg'] = round($result, 4) . ' ms';
 	$query_max = "SELECT MAX(moneve_Latency) AS max_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
 	$query_min = "SELECT MIN(moneve_Latency) AS min_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
 	$result_max = $db->querySingle($query_max);
-	$statistic['latency_max'] = round($result_max, 4);
+	$statistic['latency_max'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($result_max, 4) . ' ms';
 	$result_min = $db->querySingle($query_min);
-	$statistic['latency_min'] = round($result_min, 4);
+	$statistic['latency_min'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($result_min, 4) . ' ms';
 	$query = "SELECT COUNT(*) AS row_count FROM Services_Events WHERE moneve_Latency == 99999999 AND moneve_URL=\"$service\"";
 	$result = $db->querySingle($query);
 	$statistic['offline'] = $result;
@@ -177,13 +182,93 @@ function get_service_statistic($service) {
 	$statistic['online'] = $result;
 	$temp100 = $statistic['online'] + $statistic['offline'];
 	if ($temp100 > 0 && $statistic['online'] > 0) {
-		$statistic['online_percent'] = round(($statistic['online'] * 100 / $temp100), 2);
+		$statistic['online_percent_all'] = round(($statistic['online'] * 100 / $temp100), 2);
 	} else {
-		$statistic['online_percent'] = 0;
+		$statistic['online_percent_all'] = 0;
 	}
-	$statistic['offline_percent'] = round((100 - $statistic['online_percent']), 2);
-	$statistic['online_percent'] = $statistic['online_percent'] . ' %';
-	$statistic['offline_percent'] = $statistic['offline_percent'] . ' %';
+	$statistic['offline_percent_all'] = round((100 - $statistic['online_percent_all']), 2);
+	$statistic['online_percent_all'] = $statistic['online_percent_all'] . ' %';
+	$statistic['offline_percent_all'] = $statistic['offline_percent_all'] . ' %';
+
+	// 1 Day Stats
+	// ---------------------------------------------------
+	$query = "
+	  SELECT *
+	  FROM Services_Events
+	  WHERE moneve_URL=\"$service\" AND datetime(moneve_DateTime) >= datetime('now', '-$stat_query_24h hours')
+	  ORDER BY datetime(moneve_DateTime) DESC
+	";
+
+	$result = $db->query($query);
+	$offline = 0;
+	$online = 0;
+	$min_service = 99999999;
+	$max_service = 0;
+	$avg_service = 0;
+	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+		if ($row['moneve_Latency'] != "" && $row['moneve_Latency'] != "99999999") {
+			$online++;
+			if ($row['moneve_Latency'] > $max_service) {$max_service = $row['moneve_Latency'];}
+			if ($row['moneve_Latency'] < $min_service) {$min_service = $row['moneve_Latency'];}
+			$avg_service = $avg_service + $row['moneve_Latency'];
+		} else { $offline++;}
+	}
+	if ($min_service == 99999999) {$statistic['latency_min_24h'] = 'n.a.';} else { $statistic['latency_min_24h'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_service, 4) . ' ms';}
+	if ($max_service == 0) {$statistic['latency_max_24h'] = 'n.a.';} else { $statistic['latency_max_24h'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_service, 4) . ' ms';}
+	if ($avg_service > 0) {$statistic['latency_avg_24h'] = round(($avg_service / $online), 4) . ' ms';} else { $statistic['latency_avg_24h'] = 'n.a.';}
+	$statistic['online_24h'] = $online;
+	$statistic['offline_24h'] = $offline;
+
+	$temp24h = $statistic['online_24h'] + $statistic['offline_24h'];
+	if ($temp24h > 0 && $statistic['online_24h'] > 0) {
+		$statistic['online_percent_24h'] = round(($statistic['online_24h'] * 100 / $temp24h), 2);
+	} else {
+		$statistic['online_percent_24h'] = 0;
+	}
+	$statistic['offline_percent_24h'] = round((100 - $statistic['online_percent_24h']), 2);
+	$statistic['online_percent_24h'] = $statistic['online_percent_24h'] . ' %';
+	$statistic['offline_percent_24h'] = $statistic['offline_percent_24h'] . ' %';
+
+	// 1 Week Stats
+	// ---------------------------------------------------
+	$query = "
+	  SELECT *
+	  FROM Services_Events
+	  WHERE moneve_URL=\"$service\" AND datetime(moneve_DateTime) >= datetime('now', '-$stat_query_1w hours')
+	  ORDER BY datetime(moneve_DateTime) DESC
+	";
+
+	$result = $db->query($query);
+	$offline = 0;
+	$online = 0;
+	$min_service = 99999999;
+	$max_service = 0;
+	$avg_service = 0;
+	while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+		if ($row['moneve_Latency'] != "" && $row['moneve_Latency'] != "99999999") {
+			$online++;
+			if ($row['moneve_Latency'] > $max_service) {$max_service = $row['moneve_Latency'];}
+			if ($row['moneve_Latency'] < $min_service) {$min_service = $row['moneve_Latency'];}
+			$avg_service = $avg_service + $row['moneve_Latency'];
+		} else { $offline++;}
+	}
+
+	if ($min_service == 99999999) {$statistic['latency_min_1w'] = 'n.a.';} else { $statistic['latency_min_1w'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_service, 4) . ' ms';}
+	if ($max_service == 0) {$statistic['latency_max_1w'] = 'n.a.';} else { $statistic['latency_max_1w'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_service, 4) . ' ms';}
+	if ($avg_service > 0) {$statistic['latency_avg_1w'] = round(($avg_service / $online), 4) . ' ms';} else { $statistic['latency_avg_1w'] = 'n.a.';}
+	$statistic['online_1w'] = $online;
+	$statistic['offline_1w'] = $offline;
+
+	$temp24h = $statistic['online_1w'] + $statistic['offline_1w'];
+	if ($temp24h > 0 && $statistic['online_1w'] > 0) {
+		$statistic['online_percent_1w'] = round(($statistic['online_1w'] * 100 / $temp24h), 2);
+	} else {
+		$statistic['online_percent_1w'] = 0;
+	}
+	$statistic['offline_percent_1w'] = round((100 - $statistic['online_percent_1w']), 2);
+	$statistic['online_percent_1w'] = $statistic['online_percent_1w'] . ' %';
+	$statistic['offline_percent_1w'] = $statistic['offline_percent_1w'] . ' %';
+
 	return $statistic;
 }
 
@@ -486,11 +571,25 @@ $statistic = get_service_statistic($service_details_title);
 ?>
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['WebServices_Stats_Time'];?>:</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg'];?> ms</div>
-                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_min'];?> <?=$statistic['latency_min'];?> ms</div>
-                    <div class="col-sm-2"><?=$pia_lang['WebServices_Stats_Time_max'];?> <?=$statistic['latency_max'];?> ms</div>
-                    <div class="col-sm-4"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
+                    <div class="col-sm-12" style="font-weight: 600;"><?=$pia_lang['WebServices_Stats_Time'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">24h</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg_24h'];?></div>
+                    <div class="col-sm-2"><?=$statistic['latency_min_24h'];?></div>
+                    <div class="col-sm-2"><?=$statistic['latency_max_24h'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">7d</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg_1w'];?></div>
+                    <div class="col-sm-2"><?=$statistic['latency_min_1w'];?></div>
+                    <div class="col-sm-2"><?=$statistic['latency_max_1w'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">All</div>
+                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg'];?></div>
+                    <div class="col-sm-2"><?=$statistic['latency_min'];?></div>
+                    <div class="col-sm-2"><?=$statistic['latency_max'];?></div>
                   </div>
                 </div>
 
@@ -498,11 +597,22 @@ $statistic = get_service_statistic($service_details_title);
 
                 <div class="col-md-12">
                   <div class="row" style="margin-top: 10px;">
-                    <div class="col-sm-2" style="font-weight: 600;"><?=$pia_lang['ICMPMonitor_Availability'];?>:</div>
-                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?> <?=$statistic['online_percent'];?></div>
-                    <div class="col-sm-2"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?> <?=$statistic['offline_percent'];?></div>
-                    <div class="col-sm-2">&nbsp;</div>
-                    <div class="col-sm-4"><span style="opacity: 0.6"><?=$pia_lang['WebServices_Stats_comment_a'];?></span></div>
+                    <div class="col-sm-12" style="font-weight: 600;"><?=$pia_lang['ICMPMonitor_Availability'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">24h</div>
+                    <div class="col-sm-2"><span class="text-green"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?></span> <?=$statistic['online_percent_24h'];?></div>
+                    <div class="col-sm-2"><span class="text-red"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?></span> <?=$statistic['offline_percent_24h'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">7d</div>
+                    <div class="col-sm-2"><span class="text-green"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?></span> <?=$statistic['online_percent_1w'];?></div>
+                    <div class="col-sm-2"><span class="text-red"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?></span> <?=$statistic['offline_percent_1w'];?></div>
+                  </div>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-2" style="font-weight: 600;">All</div>
+                    <div class="col-sm-2"><span class="text-green"><?=$pia_lang['ICMPMonitor_Shortcut_Online'];?></span> <?=$statistic['online_percent_all'];?></div>
+                    <div class="col-sm-2"><span class="text-red"><?=$pia_lang['ICMPMonitor_Shortcut_Offline'];?></span> <?=$statistic['offline_percent_all'];?></div>
                   </div>
                 </div>
 
