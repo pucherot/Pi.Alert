@@ -21,10 +21,9 @@ from fritzconnection.lib.fritzhosts import FritzHosts
 from mac_vendor_lookup import MacLookup
 from time import sleep, time, strftime
 from base64 import b64encode
-try:
-  from urlparse import urlparse
-except ImportError:
-  from urllib.parse import urlparse
+from urllib.parse import urlparse
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
 import sys
 import subprocess
 import os
@@ -40,6 +39,7 @@ import time
 import pwd
 import glob
 import ipaddress
+import ssl
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -1377,75 +1377,6 @@ def rogue_dhcp_notification ():
         sending_notifications ('rogue_dhcp', rogue_dhcp_server_string, rogue_dhcp_server_string)
 
 #===============================================================================
-# nmap Scan of a single device (inactive)
-# Maybe outsource to an extra script because of longer runtime
-#===============================================================================
-def prepare_nmap_env ():
-    # create table in db
-    sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_cur(
-                                mac TEXT NOT NULL,
-                                scan_time TEXT NOT NULL,
-                                port_protocol TEXT NOT NULL,
-                                port_status TEXT NOT NULL,
-                                port_description TEXT NOT NULL,
-                            ); """
-    sql.execute(sql_create_table)
-
-    sql_create_table = """ CREATE TABLE IF NOT EXISTS nmap_scan_prev(
-                                mac TEXT NOT NULL,
-                                scan_time TEXT NOT NULL,
-                                port_protocol TEXT NOT NULL,
-                                port_status TEXT NOT NULL,
-                                port_description TEXT NOT NULL,
-                            ); """
-    sql.execute(sql_create_table)
-
-#-------------------------------------------------------------------------------
-def use_nmap_regex(_nmap_raw_result):
-    # Filter for relevant lines from output
-    pattern = re.compile(r"^.*\d\d/.*$", re.IGNORECASE)
-    return pattern.match(_nmap_raw_result)
-
-#-------------------------------------------------------------------------------
-def execute_nmap_scan(_IP):
-    # nmap scan
-    stream = os.popen('nmap -n -p -10000 ' + _IP)
-    output = stream.read()
-    nmap_scan = output.split("\n")
-    # get MAC of current ip. Both should be insert in the Database for a unique host
-    process_nmap_scan(nmap_scan)
-
-#-------------------------------------------------------------------------------
-def process_nmap_scan(_nmap_result):
-    # apply filter on output
-    for x in range(len(_nmap_result)):
-        if use_nmap_regex(_nmap_result[x]):
-            # split filtered lines and remove empty elements from list
-            # not tested with python 2
-            temp = _nmap_result[x].split(" ")
-            temp = list(filter(None, temp))
-
-            # processing results (maybe write to db or to temp file)
-            # compare to prev scan or not?
-            # maybe INSERT INTO old_scan SELECT * FROM current_scan;
-            # Do not write intermediate results to the DB immediately, but to a temporary variable/list first, to have only one big DB operation at the end and not many small ones during runtime.
-            #print(temp[0] + " - " + temp[2])
-            
-            # ============================
-            # Actual Output for IP (DEMO)|
-            # ----------------------------
-            # 21/tcp - ftp               |
-            # 53/tcp - domain            |
-            # 80/tcp - http              |
-            # 443/tcp - https            |
-            # 5060/tcp - sip             |
-            # 8181/tcp - intermapper     |
-            # ============================
-
-# DEBUG
-#execute_nmap_scan(IP)
-
-#===============================================================================
 # Services Monitoring
 #===============================================================================
 def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect):
@@ -1553,6 +1484,48 @@ def check_services_redirect(site):
     except:
         # HTTP Status Code for offline services
         return 0
+
+# -----------------------------------------------------------------------------
+def get_ssl_cert_info(url, timeout=10):
+    
+    try:
+        parsed_url = urlparse(url)
+        hostname = parsed_url.hostname
+
+        socket.setdefaulttimeout(timeout)
+
+        with socket.create_connection((hostname, 443)) as sock:
+            context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+            context.check_hostname = False
+            context.verify_mode = ssl.CERT_NONE  # Disable certificate verification
+            with context.wrap_socket(sock, server_hostname=hostname, do_handshake_on_connect=False) as ssock:
+                ssock.do_handshake()  # Perform the SSL handshake
+
+                cert_data = ssock.getpeercert(binary_form=True)
+                cert = x509.load_der_x509_certificate(cert_data, default_backend())
+
+                ssl_info = dict();
+                ssl_info['Subject'] = f"""{cert.subject}"""
+                ssl_info['Issuer'] = f"""{cert.issuer}"""
+                ssl_info['Valid_from'] = f"""{cert.not_valid_before}"""
+                ssl_info['Valid_to'] = f"""{cert.not_valid_after}"""
+
+                return ssl_info
+
+    except socket.timeout:
+        return "SSL certificate could not be found (Timeout)"
+
+    except socket.gaierror:
+        return "SSL certificate could not be found (Host down or does not exists)"
+        # return 0
+
+    except ConnectionRefusedError:
+        return "SSL certificate could not be found (Connection Refused)"
+        # return 0
+
+    except Exception as e:
+        return "SSL certificate could not be found (General Error)"
+        # print(e)
 
 # -----------------------------------------------------------------------------
 def get_services_list():
@@ -1750,8 +1723,10 @@ def service_monitoring():
                 redirect_state = check_services_redirect(site)
                 domain = urlparse(site).netloc
                 domain = domain.split(":")[0]
-                #print(domain)
                 domain_ip = socket.gethostbyname(domain)
+                # get SSL info
+                ssl_info = get_ssl_cert_info(site)
+                #print(ssl_info)
             else:
                 domain_ip = ""
                 redirect_state = ""
@@ -1808,8 +1783,8 @@ def icmp_monitoring():
             sys.stdout.flush()
             set_icmphost_update(host_ip, scantime, icmp_status, icmp_rtt)
 
-        print("        Online Host(s)  :" + str(icmphosts_online))
-        print("        Offline Host(s) :" + str(icmphosts_offline))
+        print("        Online Host(s)  : " + str(icmphosts_online))
+        print("        Offline Host(s) : " + str(icmphosts_offline))
 
         break
 
@@ -1832,7 +1807,7 @@ def get_icmphost_list():
 def ping(host):
 
     command = ['ping', '-c', '1', host]
-    result = subprocess.run(command, stdout=subprocess.PIPE)
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     output = result.stdout.decode('utf8')
     if "Request timed out." in output or "100% packet loss" in output:
         return "0"
