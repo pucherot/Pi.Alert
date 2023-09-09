@@ -158,7 +158,6 @@ function parse_location_array($LOCATION_ARRAY) {
 // ----------------- Get some service stats ------------------------------------
 function get_service_statistic($service) {
 	global $db;
-	global $pia_lang;
 
 	// Compensate Timezone
 	$stat_query_24h = 24 - (date('Z') / 3600);
@@ -171,9 +170,9 @@ function get_service_statistic($service) {
 	$query_max = "SELECT MAX(moneve_Latency) AS max_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
 	$query_min = "SELECT MIN(moneve_Latency) AS min_latency FROM Services_Events WHERE moneve_Latency != 99999999 AND moneve_Latency IS NOT NULL AND moneve_URL=\"$service\"";
 	$result_max = $db->querySingle($query_max);
-	$statistic['latency_max'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($result_max, 4) . ' ms';
+	$statistic['latency_max'] = '<i class="bi bi-speedometer2 flip-horizontal text-red"></i> ' . round($result_max, 4) . ' ms';
 	$result_min = $db->querySingle($query_min);
-	$statistic['latency_min'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($result_min, 4) . ' ms';
+	$statistic['latency_min'] = '<i class="bi bi-speedometer2 text-green"></i> ' . round($result_min, 4) . ' ms';
 	$query = "SELECT COUNT(*) AS row_count FROM Services_Events WHERE moneve_Latency == 99999999 AND moneve_URL=\"$service\"";
 	$result = $db->querySingle($query);
 	$statistic['offline'] = $result;
@@ -192,12 +191,9 @@ function get_service_statistic($service) {
 
 	// 1 Day Stats
 	// ---------------------------------------------------
-	$query = "
-	  SELECT *
-	  FROM Services_Events
+	$query = "SELECT * FROM Services_Events
 	  WHERE moneve_URL=\"$service\" AND datetime(moneve_DateTime) >= datetime('now', '-$stat_query_24h hours')
-	  ORDER BY datetime(moneve_DateTime) DESC
-	";
+	  ORDER BY datetime(moneve_DateTime) DESC";
 
 	$result = $db->query($query);
 	$offline = 0;
@@ -213,8 +209,8 @@ function get_service_statistic($service) {
 			$avg_service = $avg_service + $row['moneve_Latency'];
 		} else { $offline++;}
 	}
-	if ($min_service == 99999999) {$statistic['latency_min_24h'] = 'n.a.';} else { $statistic['latency_min_24h'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_service, 4) . ' ms';}
-	if ($max_service == 0) {$statistic['latency_max_24h'] = 'n.a.';} else { $statistic['latency_max_24h'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_service, 4) . ' ms';}
+	if ($min_service == 99999999) {$statistic['latency_min_24h'] = 'n.a.';} else { $statistic['latency_min_24h'] = '<i class="bi bi-speedometer2 text-green"></i> ' . round($min_service, 4) . ' ms';}
+	if ($max_service == 0) {$statistic['latency_max_24h'] = 'n.a.';} else { $statistic['latency_max_24h'] = '<i class="bi bi-speedometer2 flip-horizontal text-red"></i> ' . round($max_service, 4) . ' ms';}
 	if ($avg_service > 0) {$statistic['latency_avg_24h'] = round(($avg_service / $online), 4) . ' ms';} else { $statistic['latency_avg_24h'] = 'n.a.';}
 	$statistic['online_24h'] = $online;
 	$statistic['offline_24h'] = $offline;
@@ -231,12 +227,9 @@ function get_service_statistic($service) {
 
 	// 1 Week Stats
 	// ---------------------------------------------------
-	$query = "
-	  SELECT *
-	  FROM Services_Events
+	$query = "SELECT * FROM Services_Events
 	  WHERE moneve_URL=\"$service\" AND datetime(moneve_DateTime) >= datetime('now', '-$stat_query_1w hours')
-	  ORDER BY datetime(moneve_DateTime) DESC
-	";
+	  ORDER BY datetime(moneve_DateTime) DESC";
 
 	$result = $db->query($query);
 	$offline = 0;
@@ -253,8 +246,8 @@ function get_service_statistic($service) {
 		} else { $offline++;}
 	}
 
-	if ($min_service == 99999999) {$statistic['latency_min_1w'] = 'n.a.';} else { $statistic['latency_min_1w'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_service, 4) . ' ms';}
-	if ($max_service == 0) {$statistic['latency_max_1w'] = 'n.a.';} else { $statistic['latency_max_1w'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_service, 4) . ' ms';}
+	if ($min_service == 99999999) {$statistic['latency_min_1w'] = 'n.a.';} else { $statistic['latency_min_1w'] = '<i class="bi bi-speedometer2 text-green"></i> ' . round($min_service, 4) . ' ms';}
+	if ($max_service == 0) {$statistic['latency_max_1w'] = 'n.a.';} else { $statistic['latency_max_1w'] = '<i class="bi bi-speedometer2 flip-horizontal text-red"></i> ' . round($max_service, 4) . ' ms';}
 	if ($avg_service > 0) {$statistic['latency_avg_1w'] = round(($avg_service / $online), 4) . ' ms';} else { $statistic['latency_avg_1w'] = 'n.a.';}
 	$statistic['online_1w'] = $online;
 	$statistic['offline_1w'] = $offline;
@@ -575,19 +568,19 @@ $statistic = get_service_statistic($service_details_title);
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;">24h</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg_24h'];?></div>
+                    <div class="col-sm-2"><span class="text-aqua">&Oslash;</span> <?=$statistic['latency_avg_24h'];?></div>
                     <div class="col-sm-2"><?=$statistic['latency_min_24h'];?></div>
                     <div class="col-sm-2"><?=$statistic['latency_max_24h'];?></div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;">7d</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg_1w'];?></div>
+                    <div class="col-sm-2"><span class="text-aqua">&Oslash;</span> <?=$statistic['latency_avg_1w'];?></div>
                     <div class="col-sm-2"><?=$statistic['latency_min_1w'];?></div>
                     <div class="col-sm-2"><?=$statistic['latency_max_1w'];?></div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;">All</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['latency_avg'];?></div>
+                    <div class="col-sm-2"><span class="text-aqua">&Oslash;</span> <?=$statistic['latency_avg'];?></div>
                     <div class="col-sm-2"><?=$statistic['latency_min'];?></div>
                     <div class="col-sm-2"><?=$statistic['latency_max'];?></div>
                   </div>

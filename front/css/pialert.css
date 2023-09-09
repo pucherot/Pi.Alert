@@ -530,3 +530,7 @@ body.modal-open {
 /* ----------------- Network ------------------------------------------------ */
 .network_tab_icon {font-size: 16px; position: relative;}
 
+.flip-horizontal {
+  transform: scaleX(-1);
+  display: inline-block;
+}

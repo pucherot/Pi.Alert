@@ -108,28 +108,35 @@ $Pia_Graph_ICMPHost_Down = $graph_arrays[2];
 // -----------------------------------------------------------------------------------
 function get_host_statistic($hostip) {
 	global $db;
-	global $pia_lang;
 
 	// Compensate Timezone
 	$stat_query_24h = 24 - (date('Z') / 3600);
 	$stat_query_1w = 168 - (date('Z') / 3600);
 
 	$statistic = array();
-	$query = "SELECT AVG(icmpeve_avgrtt) AS average_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+
+	$query = "SELECT AVG(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
 	$result = $db->querySingle($query);
 	$statistic['avg_rtt_all'] = round($result, 3) . ' ms';
-	$query_max = "SELECT MAX(icmpeve_avgrtt) AS max_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
-	$query_min = "SELECT MIN(icmpeve_avgrtt) AS min_latency FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+
+	$query_max = "SELECT MAX(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
 	$result_max = $db->querySingle($query_max);
-	$statistic['rtt_max_all'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($result_max, 3) . ' ms';
+//	$statistic['rtt_max_all'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($result_max, 3) . ' ms';
+	$statistic['rtt_max_all'] = '<i class="bi bi-speedometer2 flip-horizontal text-red"></i> ' . round($result_max, 3) . ' ms';
+
+	$query_min = "SELECT MIN(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
 	$result_min = $db->querySingle($query_min);
-	$statistic['rtt_min_all'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($result_min, 3) . ' ms';
+//	$statistic['rtt_min_all'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($result_min, 3) . ' ms';
+	$statistic['rtt_min_all'] = '<i class="bi bi-speedometer2 text-green"></i> ' . round($result_min, 3) . ' ms';
+
 	$query = "SELECT COUNT(*) AS row_count FROM ICMP_Mon_Events WHERE icmpeve_Present = 0 AND icmpeve_ip=\"$hostip\"";
 	$result = $db->querySingle($query);
 	$statistic['offline_all'] = $result;
+
 	$query = "SELECT COUNT(*) AS row_count FROM ICMP_Mon_Events WHERE icmpeve_Present = 1 AND icmpeve_ip=\"$hostip\"";
 	$result = $db->querySingle($query);
 	$statistic['online_all'] = $result;
+
 	$temp100 = $statistic['online_all'] + $statistic['offline_all'];
 	if ($temp100 > 0 && $statistic['online_all'] > 0) {
 		$statistic['online_percent_all'] = round($statistic['online_all'] * 100 / $temp100);
@@ -142,12 +149,9 @@ function get_host_statistic($hostip) {
 
 	// 1 Day Stats
 	// ---------------------------------------------------
-	$query = "
-    SELECT *
-    FROM ICMP_Mon_Events
+	$query = "SELECT * FROM ICMP_Mon_Events
     WHERE icmpeve_ip=\"$hostip\" AND datetime(icmpeve_DateTime) >= datetime('now', '-$stat_query_24h hours')
-    ORDER BY datetime(icmpeve_DateTime) DESC
-  ";
+    ORDER BY datetime(icmpeve_DateTime) DESC";
 
 	$result = $db->query($query);
 	$offline = 0;
@@ -163,8 +167,8 @@ function get_host_statistic($hostip) {
 			$avg_icmprtt = $avg_icmprtt + $row['icmpeve_avgrtt'];
 		} else { $offline++;}
 	}
-	if ($min_icmprtt == 99999) {$statistic['rtt_min_24h'] = 'n.a.';} else { $statistic['rtt_min_24h'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_icmprtt, 3) . ' ms';}
-	if ($max_icmprtt == 0) {$statistic['rtt_max_24h'] = 'n.a.';} else { $statistic['rtt_max_24h'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_icmprtt, 3) . ' ms';}
+	if ($min_icmprtt == 99999) {$statistic['rtt_min_24h'] = 'n.a.';} else { $statistic['rtt_min_24h'] = '<i class="bi bi-speedometer2 text-green"></i> ' . round($min_icmprtt, 3) . ' ms';}
+	if ($max_icmprtt == 0) {$statistic['rtt_max_24h'] = 'n.a.';} else { $statistic['rtt_max_24h'] = '<i class="bi bi-speedometer2 flip-horizontal text-red"></i> ' . round($max_icmprtt, 3) . ' ms';}
 	if ($avg_icmprtt > 0) {$statistic['rtt_avg_24h'] = round(($avg_icmprtt / $online), 3) . ' ms';} else { $statistic['rtt_avg_24h'] = 'n.a.';}
 	$statistic['online_24h'] = $online;
 	$statistic['offline_24h'] = $offline;
@@ -181,12 +185,9 @@ function get_host_statistic($hostip) {
 
 	// 1 Week Stats
 	// ---------------------------------------------------
-	$query = "
-    SELECT *
-    FROM ICMP_Mon_Events
+	$query = "SELECT * FROM ICMP_Mon_Events
     WHERE icmpeve_ip=\"$hostip\" AND datetime(icmpeve_DateTime) >= datetime('now', '-$stat_query_1w hours')
-    ORDER BY datetime(icmpeve_DateTime) DESC
-  ";
+    ORDER BY datetime(icmpeve_DateTime) DESC";
 
 	$result = $db->query($query);
 	$offline = 0;
@@ -202,8 +203,8 @@ function get_host_statistic($hostip) {
 			$avg_icmprtt = $avg_icmprtt + $row['icmpeve_avgrtt'];
 		} else { $offline++;}
 	}
-	if ($min_icmprtt == 99999) {$statistic['rtt_min_1w'] = 'n.a.';} else { $statistic['rtt_min_1w'] = $pia_lang['WebServices_Stats_Time_min'] . ' ' . round($min_icmprtt, 3) . ' ms';}
-	if ($max_icmprtt == 0) {$statistic['rtt_max_1w'] = 'n.a.';} else { $statistic['rtt_max_1w'] = $pia_lang['WebServices_Stats_Time_max'] . ' ' . round($max_icmprtt, 3) . ' ms';}
+	if ($min_icmprtt == 99999) {$statistic['rtt_min_1w'] = 'n.a.';} else { $statistic['rtt_min_1w'] = '<i class="bi bi-speedometer2 text-green"></i> ' . round($min_icmprtt, 3) . ' ms';}
+	if ($max_icmprtt == 0) {$statistic['rtt_max_1w'] = 'n.a.';} else { $statistic['rtt_max_1w'] = '<i class="bi bi-speedometer2 flip-horizontal text-red"></i> ' . round($max_icmprtt, 3) . ' ms';}
 	if ($avg_icmprtt > 0) {$statistic['rtt_avg_1w'] = round(($avg_icmprtt / $online), 3) . ' ms';} else { $statistic['rtt_avg_1w'] = 'n.a.';}
 	$statistic['online_1w'] = $online;
 	$statistic['offline_1w'] = $offline;
@@ -290,14 +291,14 @@ function get_host_statistic($hostip) {
       <div class="row">
         <div class="col-lg-12 col-sm-12 col-xs-12">
           <div id="navDevice" class="nav-tabs-custom">
-            <ul class="nav nav-tabs" style="fon t-size:16px;">
+            <ul class="nav nav-tabs" style="font-size:16px;">
               <li class=""> <a id="tabDetails" href="#panDetails" data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Details'];?></a></li>
               <li class=""> <a id="tabNmap" href="#panNmap" data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Nmap'];?>     </a></li>
               <li class=""> <a id="tabEvents" href="#panEvents" data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Events'];?></a></li>
               <li class=""> <a id="tabGraph" href="#panGraph" data-toggle="tab"> <?=$pia_lang['WebServices_Tab_Graph'];?></a></li>
             </ul>
 
-            <div class="tab-content" style="min-height: 430px;">
+            <div class="tab-content" style="min-height: 480px;">
 
 <!-- tab page 1 ------------------------------------------------------------ -->
 
@@ -548,7 +549,7 @@ get_icmphost_events_table($hostip, $icmpfilter);
               </div>
 
 <!-- Graph ------------------------------------------------------------ -->
-              <div class="tab-pane fade table-responsive" id="panGraph">
+              <div class="tab-pane fade table-responsive" id="panGraph" style="height:100%;">
                 <h4 class="text-aqua" style="font-size: 18px;margin: 0;line-height: 1; margin-bottom: 20px;"><?=$pia_lang['WebServices_Chart_a'];?> <span class="maxlogage-interval">24</span> <?=$pia_lang['WebServices_Chart_b'];?></h4>
                 <div class="col-md-12">
                   <div class="chart" style="height: 150px;">
@@ -576,19 +577,19 @@ $statistic = get_host_statistic($hostip);
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;">24h</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['rtt_avg_24h'];?></div>
+                    <div class="col-sm-2"><span class="text-aqua">&Oslash;</span> <?=$statistic['rtt_avg_24h'];?></div>
                     <div class="col-sm-2"><?=$statistic['rtt_min_24h'];?></div>
                     <div class="col-sm-2"><?=$statistic['rtt_max_24h'];?></div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;">7d</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['rtt_avg_1w'];?></div>
+                    <div class="col-sm-2"><span class="text-aqua">&Oslash;</span> <?=$statistic['rtt_avg_1w'];?></div>
                     <div class="col-sm-2"><?=$statistic['rtt_min_1w'];?></div>
                     <div class="col-sm-2"><?=$statistic['rtt_max_1w'];?></div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-2" style="font-weight: 600;">All</div>
-                    <div class="col-sm-2">&Oslash; <?=$statistic['avg_rtt_all'];?></div>
+                    <div class="col-sm-2"><span class="text-aqua">&Oslash;</span> <?=$statistic['avg_rtt_all'];?></div>
                     <div class="col-sm-2"><?=$statistic['rtt_min_all'];?></div>
                     <div class="col-sm-2"><?=$statistic['rtt_max_all'];?></div>
                     <div class="col-sm-4">&nbsp;</div>
