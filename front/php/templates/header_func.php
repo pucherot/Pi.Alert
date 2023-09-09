@@ -155,7 +155,7 @@ function toggle_icmpscan_menu($section) {
 	global $pia_lang;
 	if (($_SESSION['ICMPScan'] == True) && ($section == "Main")) {
 		echo '<li class="';
-		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('icmpmonitor.php'))) {echo 'active';}
+		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('icmpmonitor.php', 'icmpmonitorDetails.php'))) {echo 'active';}
 		echo '">
                 <a href="icmpmonitor.php"><i class="fa fa-magnifying-glass"></i> <span>' . $pia_lang['Navigation_ICMPScan'] . '</span></a>
               </li>';
@@ -166,7 +166,7 @@ function get_config_parmeter($config_param) {
 	$configContent = file_get_contents('../config/pialert.conf');
 	$configContent = preg_replace('/^\s*#.*$/m', '', $configContent);
 	$configArray = parse_ini_string($configContent);
-	if (isset($configArray[$config_param])) {return $configArray[$config_param];} else {return false;}
+	if (isset($configArray[$config_param])) {return $configArray[$config_param];} else {return False;}
 }
 // Set Session Vars
 if (get_config_parmeter('ICMPSCAN_ACTIVE') == 1) {$_SESSION['ICMPScan'] = True;} else { $_SESSION['ICMPScan'] = False;}
