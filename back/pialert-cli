@@ -354,17 +354,104 @@ EOM
     else
       echo "        Column 'dev_ConnectionType' already exists in the 'Devices' table."
     fi
-
-
-# ICMP_Mon
+    # ICMP_Mon
     echo -e "...Insert new table 'ICMP_Mon' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon' ('icmp_ip' NUMERIC NOT NULL, 'icmp_hostname' TEXT, 'icmp_LastScan' TEXT NOT NULL, 'icmp_PresentLastScan' INTEGER DEFAULT 0, 'icmp_avgrtt' NUMERIC, 'icmp_AlertEvents' INTEGER DEFAULT 0, 'icmp_AlertDown' INTEGER DEFAULT 0, 'icmp_Favorite' INTEGER DEFAULT 0, 'icmp_Notes' INTEGER, 'icmp_type' TEXT, 'icmp_group' TEXT, 'icmp_location' TEXT, 'icmp_owner' TEXT, PRIMARY KEY('icmp_ip'));"
-# ICMP_Mon_CurrentScan
+    # ICMP_Mon_CurrentScan
     echo -e "...Insert new table 'ICMP_Mon_CurrentScan' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon_CurrentScan' ('cur_ip' NUMERIC NOT NULL, 'cur_LastScan' TEXT NOT NULL, 'cur_Present' INTEGER, 'cur_PresentChanged' INTEGER, 'cur_avgrrt' NUMERIC, 'cur_AlertEvents' INTEGER NOT NULL DEFAULT 0, 'cur_AlertDown' INTEGER NOT NULL DEFAULT 0, PRIMARY KEY('cur_ip'));"
-# ICMP_Mon_Events
+    # ICMP_Mon_Events
     echo -e "...Insert new table 'ICMP_Mon_Events' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon_Events' ( 'icmpeve_ip' NUMERIC NOT NULL, 'icmpeve_DateTime' TEXT NOT NULL, 'icmpeve_Present' INTEGER, 'icmpeve_avgrtt' NUMERIC);"
+    # Services.mon_ssl_subject
+    echo -e "...Insert new column 'mon_ssl_subject' to table 'Services' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_ssl_subject")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services' ADD COLUMN 'mon_ssl_subject' TEXT;"
+    else
+      echo "        Column 'mon_ssl_subject' already exists in the 'Services' table."
+    fi
+    # Services.mon_ssl_issuer
+    echo -e "...Insert new column 'mon_ssl_issuer' to table 'Services' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_ssl_issuer")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services' ADD COLUMN 'mon_ssl_issuer' TEXT;"
+    else
+      echo "        Column 'mon_ssl_issuer' already exists in the 'Services' table."
+    fi
+    # Services.mon_ssl_valid_from
+    echo -e "...Insert new column 'mon_ssl_valid_from' to table 'Services' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_ssl_valid_from")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services' ADD COLUMN 'mon_ssl_valid_from' TEXT;"
+    else
+      echo "        Column 'mon_ssl_valid_from' already exists in the 'Services' table."
+    fi
+    # Services.mon_ssl_valid_to
+    echo -e "...Insert new column 'mon_ssl_valid_to' to table 'Services' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_ssl_valid_to")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services' ADD COLUMN 'mon_ssl_valid_to' TEXT;"
+    else
+      echo "        Column 'mon_ssl_valid_to' already exists in the 'Services' table."
+    fi
+    # Services.mon_ssl_fc
+    echo -e "...Insert new column 'mon_ssl_fc' to table 'Services' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_ssl_fc")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services' ADD COLUMN 'mon_ssl_fc' INTEGER DEFAULT 0;"
+    else
+      echo "        Column 'mon_ssl_fc' already exists in the 'Services' table."
+    fi
+    # Services_CurrentScan.cur_ssl_subject
+    echo -e "...Insert new column 'cur_ssl_subject' to table 'Services_CurrentScan' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services_CurrentScan');" | awk -F\| '{print $2}' | grep -wci "cur_ssl_subject")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services_CurrentScan' ADD COLUMN 'cur_ssl_subject' TEXT;"
+    else
+      echo "        Column 'cur_ssl_subject' already exists in the 'Services_CurrentScan' table."
+    fi
+    # Services_CurrentScan.cur_ssl_issuer
+    echo -e "...Insert new column 'cur_ssl_issuer' to table 'Services_CurrentScan' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services_CurrentScan');" | awk -F\| '{print $2}' | grep -wci "cur_ssl_issuer")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services_CurrentScan' ADD COLUMN 'cur_ssl_issuer' TEXT;"
+    else
+      echo "        Column 'cur_ssl_issuer' already exists in the 'Services_CurrentScan' table."
+    fi
+    # Services_CurrentScan.cur_ssl_valid_from
+    echo -e "...Insert new column 'cur_ssl_valid_from' to table 'Services_CurrentScan' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services_CurrentScan');" | awk -F\| '{print $2}' | grep -wci "cur_ssl_valid_from")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services_CurrentScan' ADD COLUMN 'cur_ssl_valid_from' TEXT;"
+    else
+      echo "        Column 'cur_ssl_valid_from' already exists in the 'Services_CurrentScan' table."
+    fi
+    # Services_CurrentScan.cur_ssl_valid_to
+    echo -e "...Insert new column 'cur_ssl_valid_to' to table 'Services_CurrentScan' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services_CurrentScan');" | awk -F\| '{print $2}' | grep -wci "cur_ssl_valid_to")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services_CurrentScan' ADD COLUMN 'cur_ssl_valid_to' TEXT;"
+    else
+      echo "        Column 'cur_ssl_valid_to' already exists in the 'Services_CurrentScan' table."
+    fi
+    # Services_CurrentScan.cur_ssl_fc
+    echo -e "...Insert new column 'cur_ssl_fc' to table 'Services_CurrentScan' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services_CurrentScan');" | awk -F\| '{print $2}' | grep -wci "cur_ssl_fc")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services_CurrentScan' ADD COLUMN 'cur_ssl_fc' INTEGER DEFAULT 0;"
+    else
+      echo "        Column 'cur_ssl_fc' already exists in the 'Services_CurrentScan' table."
+    fi
+    # Services_Events.moneve_ssl_fc
+    echo -e "...Insert new column 'moneve_ssl_fc' to table 'Services_Events' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services_Events');" | awk -F\| '{print $2}' | grep -wci "moneve_ssl_fc")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Services_Events' ADD COLUMN 'moneve_ssl_fc' INTEGER DEFAULT 0;"
+    else
+      echo "        Column 'moneve_ssl_fc' already exists in the 'Services_Events' table."
+    fi
+
 
     echo -e "\nUpdate finished!\n"
 

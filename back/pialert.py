@@ -1379,32 +1379,46 @@ def rogue_dhcp_notification ():
 #===============================================================================
 # Services Monitoring
 #===============================================================================
-def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect):
+def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect, _mon_ssl_info, _mon_ssl_fc):
+
+    # SSL Info change
+    if len(_mon_ssl_info) == 4 :
+        _mon_ssl_subject = _mon_ssl_info['Subject']
+        _mon_ssl_issuer = _mon_ssl_info['Issuer']
+        _mon_ssl_valid_from = _mon_ssl_info['Valid_from']
+        _mon_ssl_valid_to = _mon_ssl_info['Valid_to']
+    else :
+        _mon_ssl_subject = ""
+        _mon_ssl_issuer = ""
+        _mon_ssl_valid_from = ""
+        _mon_ssl_valid_to = ""
+
+    ssl_fc = str(_mon_ssl_fc)
 
     if _mon_Redirect != 200 and _mon_lastStatus == 200:
         _mon_Redirect_Text = "Redirected by " + str(_mon_Redirect)
     else:
         _mon_Redirect_Text = ""
 
-    sqlite_insert = """UPDATE Services SET mon_LastScan=?, mon_LastStatus=?, mon_LastLatency=?, mon_TargetIP=?, mon_Notes=? WHERE mon_URL=?;"""
+    sqlite_insert = """UPDATE Services SET mon_LastScan=?, mon_LastStatus=?, mon_LastLatency=?, mon_TargetIP=?, mon_Notes=?, mon_ssl_subject=?, mon_ssl_issuer=?, mon_ssl_valid_from=?, mon_ssl_valid_to=?, mon_ssl_fc=? WHERE mon_URL=?;"""
 
-    table_data = (_mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect_Text, _mon_URL)
+    table_data = (_mon_lastScan, _mon_lastStatus, _mon_lastLatence, _mon_TargetIP, _mon_Redirect_Text, _mon_ssl_subject, _mon_ssl_issuer, _mon_ssl_valid_from, _mon_ssl_valid_to, ssl_fc, _mon_URL)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
 # -----------------------------------------------------------------------------
-def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency, _moneve_TargetIP):
+def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency, _moneve_TargetIP, _moneve_ssl_fc):
 
     sqlite_insert = """INSERT INTO Services_Events
-                     (moneve_URL, moneve_DateTime, moneve_StatusCode, moneve_Latency, moneve_TargetIP) 
-                     VALUES (?, ?, ?, ?, ?);"""
+                     (moneve_URL, moneve_DateTime, moneve_StatusCode, moneve_Latency, moneve_TargetIP, moneve_ssl_fc) 
+                     VALUES (?, ?, ?, ?, ?, ?);"""
 
-    table_data = (_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency, _moneve_TargetIP)
+    table_data = (_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _moneve_Latency, _moneve_TargetIP, _moneve_ssl_fc)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
 # -----------------------------------------------------------------------------
-def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP):
+def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP, _cur_ssl_info):
 
     sql.execute("SELECT * FROM Services WHERE mon_URL = ?", [_cur_URL])
     rows = sql.fetchall()
@@ -1414,14 +1428,48 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _mon_StatusCode = row[2]
         _mon_Latency = row[3]
         _mon_TargetIP = row[8]
+        _mon_ssl_subject = row[10] # FC value 8
+        _mon_ssl_issuer = row[11] # FC value 4
+        _mon_ssl_valid_from = row[12] # FC value 2
+        _mon_ssl_valid_to = row[13] # FC value 1
+        _mon_ssl_fc = row[14] # FC value between 0 and 15
 
+    # SSL Info change - Calc FC
+    if len(_cur_ssl_info) == 4:
+        _cur_ssl_fc = 0
+        if _cur_ssl_info['Subject'] != _mon_ssl_subject :
+            _cur_ssl_fc = _cur_ssl_fc + 8
+        _cur_ssl_subject = _cur_ssl_info['Subject']
+        if _cur_ssl_info['Issuer'] != _mon_ssl_issuer :
+            _cur_ssl_fc = _cur_ssl_fc + 4
+        _cur_ssl_issuer = _cur_ssl_info['Issuer']
+        if _cur_ssl_info['Valid_from'] != _mon_ssl_valid_from :
+            _cur_ssl_fc = _cur_ssl_fc + 2
+        _cur_ssl_valid_from = _cur_ssl_info['Valid_from']
+        if _cur_ssl_info['Valid_to'] != _mon_ssl_valid_to :
+            _cur_ssl_fc = _cur_ssl_fc + 1
+        _cur_ssl_valid_to = _cur_ssl_info['Valid_to']
+    else:
+        _cur_ssl_fc = 0
+        _cur_ssl_subject = ""
+        _cur_ssl_issuer = ""
+        _cur_ssl_valid_from = ""
+        _cur_ssl_valid_to = ""
+
+    # SSL Info change - Compare FC
+    if _mon_ssl_fc != _cur_ssl_fc:
+        _cur_StatusChanged = 1
+    else:
+        _cur_StatusChanged = 0
+
+    # IP change
     if _mon_TargetIP != _cur_TargetIP:
         _cur_StatusChanged = 1
     elif _mon_StatusCode != _cur_StatusCode:
         _cur_StatusChanged = 1
     else:
         _cur_StatusChanged = 0
-
+    # Latency / Down
     if _mon_Latency == "99999999" and _mon_Latency != _cur_Latency:
         _cur_LatencyChanged = 0
         _cur_StatusChanged = 1
@@ -1431,12 +1479,14 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _cur_LatencyChanged = 0 
 
     sqlite_insert = """INSERT INTO Services_CurrentScan
-                     (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev) 
-                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
+                     (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev, cur_ssl_subject, cur_ssl_issuer, cur_ssl_valid_from, cur_ssl_valid_to, cur_ssl_fc) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
 
-    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP, _mon_StatusCode, _mon_TargetIP)
+    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP, _mon_StatusCode, _mon_TargetIP, _cur_ssl_subject, _cur_ssl_issuer, _cur_ssl_valid_from, _cur_ssl_valid_to, _cur_ssl_fc)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
+
+    return _cur_ssl_fc
 
 # -----------------------------------------------------------------------------
 def service_monitoring_log(site, status, latency):
@@ -1491,10 +1541,15 @@ def get_ssl_cert_info(url, timeout=10):
     try:
         parsed_url = urlparse(url)
         hostname = parsed_url.hostname
+        port = parsed_url.port
+
+        if not port :
+            port = 443
 
         socket.setdefaulttimeout(timeout)
 
-        with socket.create_connection((hostname, 443)) as sock:
+        #with socket.create_connection((hostname, 443)) as sock:
+        with socket.create_connection((hostname, port)) as sock:
             context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
             context.check_hostname = False
             context.verify_mode = ssl.CERT_NONE  # Disable certificate verification
@@ -1730,12 +1785,14 @@ def service_monitoring():
             else:
                 domain_ip = ""
                 redirect_state = ""
+                ssl_info = ""
 
             service_monitoring_log(site + ' ' + site_retry, status, latency)
-            set_services_events(site, scantime, status, latency, domain_ip)
-            set_services_current_scan(site, scantime, status, latency, domain_ip)
+            ssl_fc = set_services_current_scan(site, scantime, status, latency, domain_ip, ssl_info)
+            set_services_events(site, scantime, status, latency, domain_ip, ssl_fc)
+#            set_services_current_scan(site, scantime, status, latency, domain_ip, ssl_info)
             sys.stdout.flush()
-            set_service_update(site, scantime, status, latency, domain_ip, redirect_state)
+            set_service_update(site, scantime, status, latency, domain_ip, redirect_state, ssl_info, ssl_fc)
         break
 
     else:

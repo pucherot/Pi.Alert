@@ -77,6 +77,7 @@ function get_service_events_table($service_URL, $service_filter) {
                   <td>' . $row['moneve_DateTime'] . '</td>
                   <td>' . $row['moneve_StatusCode'] . '</td>
                   <td>' . $row['moneve_Latency'] . '</td>
+                  <td>' . $row['moneve_ssl_fc'] . '</td>
               </tr>';
 	}
 }
@@ -431,7 +432,7 @@ while ($row = $dev_res->fetchArray()) {
                   </div>
 
     <!-- column 2 -->
-                  <div class="col-sm-6 col-xs-12" style="margin-bottom: 50px;">
+                  <div class="col-sm-6 col-xs-12">
                     <h4 class="bottom-border-aqua"><?=$pia_lang['DevDetail_EveandAl_Title'];?></h4>
                     <div class="box-body form-horizontal">
 
@@ -440,6 +441,14 @@ while ($row = $dev_res->fetchArray()) {
                         <label class="col-sm-4 control-label"><?=$pia_lang['WebServices_label_StatusCode'];?></label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_LastStatus']?>">
+                        </div>
+                      </div>
+
+                      <!-- Last HTTP Status -->
+                      <div class="form-group">
+                        <label class="col-sm-4 control-label">SSL FC</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_fc']?>">
                         </div>
                       </div>
 
@@ -485,7 +494,34 @@ while ($row = $dev_res->fetchArray()) {
 
                     </div>
                   </div>
+								</div>
 
+								<div class="row" style="margin-bottom: 20px;">
+                  	<div class="col-xs-12">
+                    <h4 class="bottom-border-aqua">SSL Certificate Info</h4>
+                    <div class="box-body form-horizontal">
+                        <label class="col-sm-2 control-label">Subject</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_subject']?>">
+                        </div>
+                        <label class="col-sm-2 control-label">Issuer</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_issuer']?>">
+                        </div>
+                        <label class="col-sm-2 control-label">Valid from</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_valid_from']?>">
+                        </div>
+                        <label class="col-sm-2 control-label">Valid to</label>
+                        <div class="col-sm-10">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_valid_to']?>">
+                        </div>
+                      </div>
+                  </div>
+                </div>
+
+
+								<div class="row">
                   <!-- Buttons -->
                   <div class="col-xs-12">
                     <div class="pull-right">
@@ -494,8 +530,8 @@ while ($row = $dev_res->fetchArray()) {
                         <button type="button" class="btn btn-primary servicedet_button_space" id="btnSave"     onclick="setServiceData()" >  <?=$pia_lang['Gen_Save'];?> </button>
                     </div>
                   </div>
-
                 </div>
+
               </div>
 
 <!-- Events ------------------------------------------------------------ -->
@@ -513,6 +549,7 @@ set_table_headline($http_filter);
                       <th><?=$pia_lang['WebServices_tablehead_ScanTime'];?></th>
                       <th><?=$pia_lang['WebServices_tablehead_Status_Code'];?></th>
                       <th><?=$pia_lang['WebServices_tablehead_Response_Time'];?></th>
+                      <th>SSL FC</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -825,11 +862,12 @@ function initializeDatatable () {
         { "data": 0 },
         { "data": 1 },
         { "data": 2 },
-        { "data": 3 }
+        { "data": 3 },
+        { "data": 4 }
       ],
 
     'columnDefs'  : [
-      {className: 'text-center', targets: [1,2,3] },
+      {className: 'text-center', targets: [1,2,3,4] },
 
       //Device Name
       {targets: [0],
