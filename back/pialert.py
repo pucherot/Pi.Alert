@@ -1420,6 +1420,8 @@ def set_services_events(_moneve_URL, _moneve_DateTime, _moneve_StatusCode, _mone
 # -----------------------------------------------------------------------------
 def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _cur_TargetIP, _cur_ssl_info):
 
+    _cur_StatusChanged = 0
+
     sql.execute("SELECT * FROM Services WHERE mon_URL = ?", [_cur_URL])
     rows = sql.fetchall()
     for row in rows:
@@ -1457,32 +1459,35 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _cur_ssl_valid_to = ""
 
     # SSL Info change - Compare FC
-    if _mon_ssl_fc != _cur_ssl_fc:
-        _cur_StatusChanged = 1
-    else:
-        _cur_StatusChanged = 0
+    if _cur_ssl_fc > 0:
+        _cur_StatusChanged += 1
 
     # IP change
     if _mon_TargetIP != _cur_TargetIP:
-        _cur_StatusChanged = 1
+        _cur_StatusChanged += 1
     elif _mon_StatusCode != _cur_StatusCode:
-        _cur_StatusChanged = 1
-    else:
-        _cur_StatusChanged = 0
-    # Latency / Down
+        _cur_StatusChanged += 1
+
+    # Down or Online
     if _mon_Latency == "99999999" and _mon_Latency != _cur_Latency:
         _cur_LatencyChanged = 0
-        _cur_StatusChanged = 1
+        _cur_StatusChanged += 1
     elif _cur_Latency == "99999999" and _mon_Latency != _cur_Latency:
         _cur_LatencyChanged = 1
     else:
         _cur_LatencyChanged = 0 
 
+    # Merge Changes from all Events to 1 or 0
+    if _cur_StatusChanged > 0 :
+        StatusChanged = 1
+    else:
+        StatusChanged = 0
+
     sqlite_insert = """INSERT INTO Services_CurrentScan
                      (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev, cur_ssl_subject, cur_ssl_issuer, cur_ssl_valid_from, cur_ssl_valid_to, cur_ssl_fc) 
                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
 
-    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, _cur_StatusChanged, _cur_LatencyChanged, _cur_TargetIP, _mon_StatusCode, _mon_TargetIP, _cur_ssl_subject, _cur_ssl_issuer, _cur_ssl_valid_from, _cur_ssl_valid_to, _cur_ssl_fc)
+    table_data = (_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Latency, _mon_AlertEvents, _mon_AlertDown, StatusChanged, _cur_LatencyChanged, _cur_TargetIP, _mon_StatusCode, _mon_TargetIP, _cur_ssl_subject, _cur_ssl_issuer, _cur_ssl_valid_from, _cur_ssl_valid_to, _cur_ssl_fc)
     sql.execute(sqlite_insert, table_data)
     sql_connection.commit()
 
@@ -1688,11 +1693,11 @@ def service_monitoring_notification():
     mail_section_events = False
     mail_text_events   = ''
     mail_html_events   = ''
-    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}{}\n\n'
+    text_line_template = '{}{}\n\t{}\t\t\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}\t{}\n\t{}{}\n\t{}\t\t{}\n\n'
     html_line_template = '<tr>\n  <td>'+ \
             '  {} </td>\n  <td> {} </td>\n'+ \
-            '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
-            '  <td> {} </td>\n</tr>\n'
+            '  <td> {} </td>\n <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n'+ \
+            '  <td> {} </td>\n <td> {} </td>\n</tr>\n'
 
     sql.execute ("""SELECT * FROM Services_CurrentScan
                     WHERE cur_AlertEvents = 1 AND cur_StatusChanged = 1
@@ -1715,11 +1720,12 @@ def service_monitoring_notification():
             'Destination IP: ', _func_cur_TargetIP,
             'prev. Destination IP: ', _func_cur_TargetIP_prev, 
             'HTTP Status Code: ', eventAlert['cur_StatusCode'], 
-            'prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'])
+            'prev. HTTP Status Code: ', eventAlert['cur_StatusCode_prev'],
+            'SSL Status: ', eventAlert['cur_ssl_fc'])
         mail_html_events += html_line_template.format (
             eventAlert['cur_URL'], eventAlert['cur_Latency'], _func_cur_TargetIP,
             _func_cur_TargetIP_prev, eventAlert['cur_DateTime'], eventAlert['cur_StatusCode'],
-            eventAlert['cur_StatusCode_prev'])
+            eventAlert['cur_StatusCode_prev'], eventAlert['cur_ssl_fc'])
 
     format_report_section_services (mail_section_events, 'SECTION_EVENTS',
         'TABLE_EVENTS', mail_text_events, mail_html_events)
