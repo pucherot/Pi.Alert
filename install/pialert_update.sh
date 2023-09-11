@@ -6,6 +6,7 @@
 #  pialert_update.sh - Update script
 # ------------------------------------------------------------------------------
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
+#  leiweibau 2023                                          GNU GPLv3
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
@@ -154,7 +155,7 @@ check_packages() {
   sudo apt-get install php-curl -y                                2>&1 >> "$LOG"
 
   print_msg "- Checking packages perl and python3-requests..."
-  sudo apt-get install python3-requests libwww-perl -y            2>&1 >> "$LOG"
+  sudo apt-get install python3-requests python3-cryptography libwww-perl -y            2>&1 >> "$LOG"
 
   print_msg "- Checking packages mmdblookup"
   sudo apt-get install mmdb-bin -y                                2>&1 >> "$LOG"

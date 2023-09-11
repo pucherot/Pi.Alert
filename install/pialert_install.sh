@@ -383,10 +383,10 @@ install_python() {
   if [ $USE_PYTHON_VERSION -eq 3 ] ; then
     if $PYTHON3 ; then
       print_msg "- Using Python 3"
-      sudo apt-get install python3-pip python3-requests -y                 2>&1 >> "$LOG"
+      sudo apt-get install python3-pip python3-cryptography python3-requests -y                 2>&1 >> "$LOG"
     else
       print_msg "- Installing Python 3..."
-      sudo apt-get install python3 python3-pip python3-requests -y         2>&1 >> "$LOG"
+      sudo apt-get install python3 python3-pip python3-cryptography python3-requests -y         2>&1 >> "$LOG"
     fi
     print_msg "    - Install additional packages"
     # sudo should not be necessary
