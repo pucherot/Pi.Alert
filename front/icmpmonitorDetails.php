@@ -139,7 +139,7 @@ function get_host_statistic($hostip) {
 
 	$temp100 = $statistic['online_all'] + $statistic['offline_all'];
 	if ($temp100 > 0 && $statistic['online_all'] > 0) {
-		$statistic['online_percent_all'] = round($statistic['online_all'] * 100 / $temp100);
+		$statistic['online_percent_all'] = round(($statistic['online_all'] * 100 / $temp100), 2);
 	} else {
 		$statistic['online_percent_all'] = 0;
 	}

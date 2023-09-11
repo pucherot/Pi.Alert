@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.07'
+SCRIPTVERSION='v1.08'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -482,8 +482,12 @@ EOM
     # get username from install directory
     PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
     echo "Pi.Alert User: $PIA_USER"
+    echo "    Set DB Permissions"
     sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
     sudo chmod -R 770 $PIA_DB_FILE
+    echo "    Set Config Permissions"
+    sudo chmod -R 775 $PIA_CONF_FILE_PATH
+    sudo chown ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
     echo "Permissions set"
     ;;
 
