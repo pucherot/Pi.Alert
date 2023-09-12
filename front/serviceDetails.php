@@ -446,7 +446,7 @@ while ($row = $dev_res->fetchArray()) {
 
                       <!-- Last HTTP Status -->
                       <div class="form-group">
-                        <label class="col-sm-4 control-label">SSL FC</label>
+                        <label class="col-sm-4 control-label">SSL Status</label>
                         <div class="col-sm-8">
                           <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_fc']?>">
                         </div>
@@ -502,11 +502,11 @@ while ($row = $dev_res->fetchArray()) {
                     <div class="box-body form-horizontal">
                         <label class="col-sm-2 control-label">Subject</label>
                         <div class="col-sm-10">
-                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_subject']?>">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=str_replace("<Name(", "", str_replace(")>", "", $servicedetails['mon_ssl_subject']))?>">
                         </div>
                         <label class="col-sm-2 control-label">Issuer</label>
                         <div class="col-sm-10">
-                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=$servicedetails['mon_ssl_issuer']?>">
+                          <input class="form-control" id="txtLastStatus" type="text" readonly value="<?=str_replace("<Name(", "", str_replace(")>", "", $servicedetails['mon_ssl_issuer']))?>">
                         </div>
                         <label class="col-sm-2 control-label">Valid from</label>
                         <div class="col-sm-10">
