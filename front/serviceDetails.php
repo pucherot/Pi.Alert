@@ -549,7 +549,7 @@ set_table_headline($http_filter);
                       <th><?=$pia_lang['WebServices_tablehead_ScanTime'];?></th>
                       <th><?=$pia_lang['WebServices_tablehead_Status_Code'];?></th>
                       <th><?=$pia_lang['WebServices_tablehead_Response_Time'];?></th>
-                      <th>SSL FC</th>
+                      <th>SSL Status</th>
                     </tr>
                   </thead>
                   <tbody>
