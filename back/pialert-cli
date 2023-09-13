@@ -486,8 +486,9 @@ EOM
     sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
     sudo chmod -R 770 $PIA_DB_FILE
     echo "    Set Config Permissions"
-    sudo chmod -R 775 $PIA_CONF_FILE_PATH
-    sudo chown ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
+    sudo chmod -R 664 $PIA_CONF_FILE_PATH
+    sudo chmod 775 $PIA_CONF_FILE_PATH
+    sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
     echo "Permissions set"
     ;;
 
