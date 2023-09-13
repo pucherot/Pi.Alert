@@ -277,7 +277,7 @@ update_permissions() {
   chmod +x "$PIALERT_HOME/back/pialert.py"                          2>&1 >> "$LOG"
   chmod +x "$PIALERT_HOME/back/update_vendors.sh"                   2>&1 >> "$LOG"
   sudo chmod -R 775 "$PIALERT_HOME/config/"                         2>&1 >> "$LOG"
-  sudo chgrp -R www-data "$PIALERT_HOME/config/pialert.conf"        2>&1 >> "$LOG"
+  sudo chgrp -R www-data "$PIALERT_HOME/config"                     2>&1 >> "$LOG"
   sudo chmod -R 775 "$PIALERT_HOME/front/reports"                   2>&1 >> "$LOG"
   sudo chgrp -R www-data "$PIALERT_HOME/front/reports"              2>&1 >> "$LOG"
   print_msg "- Create Logfile Symlinks..."
