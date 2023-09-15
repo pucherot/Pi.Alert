@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.08'
+SCRIPTVERSION='v1.10'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -478,24 +478,68 @@ EOM
     ;;
 
   set_permissions)
-    ## Set file permissions
-    # get username from install directory
-    PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
-    echo "Pi.Alert User: $PIA_USER"
-    echo "    Set DB Permissions"
-    sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
-    sudo chmod -R 770 $PIA_DB_FILE
-    echo "    Set Config Permissions"
-    sudo chmod -R 664 $PIA_CONF_FILE_PATH
-    sudo chmod 775 $PIA_CONF_FILE_PATH
-    sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
-    echo "Permissions set"
+    # get username
+    if [ "$2" == "--lxc" ]; then
+        PIA_USER="root"
+        echo "Pi.Alert User: $PIA_USER"
+        echo "    Set DB Permissions"
+        sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
+        sudo chmod -R 770 $PIA_DB_FILE
+        echo "    Set Config Permissions"
+        sudo chmod -R 664 $PIA_CONF_FILE_PATH
+        sudo chmod 775 $PIA_CONF_FILE_PATH
+        sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
+        echo "Permissions set"
+    elif [ "$2" == "--custom" ]; then
+        read -p "Enter the username: " CUSTOM_USER
+        PIA_USER="$CUSTOM_USER"
+        echo "Pi.Alert User: $PIA_USER"
+        echo "    Set DB Permissions"
+        sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
+        sudo chmod -R 770 $PIA_DB_FILE
+        echo "    Set Config Permissions"
+        sudo chmod -R 664 $PIA_CONF_FILE_PATH
+        sudo chmod 775 $PIA_CONF_FILE_PATH
+        sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
+        echo "Permissions set"
+    elif [ "$2" == "--homedir" ]; then
+        # Default behavior, calculate PIA_USER from SCRIPTPATH
+        PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
+        echo "Pi.Alert User: $PIA_USER"
+        echo "    Set DB Permissions"
+        sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
+        sudo chmod -R 770 $PIA_DB_FILE
+        echo "    Set Config Permissions"
+        sudo chmod -R 664 $PIA_CONF_FILE_PATH
+        sudo chmod 775 $PIA_CONF_FILE_PATH
+        sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
+        echo "Permissions set"
+    else
+        echo "Pi.Alert Group: www-data"
+        echo "    Set DB Group Permissions only"
+        sudo chgrp www-data $PIA_DB_FILE
+        sudo chmod -R 770 $PIA_DB_FILE
+        echo "    Set Config Group Permissions only"
+        sudo chmod -R 664 $PIA_CONF_FILE_PATH
+        sudo chmod 775 $PIA_CONF_FILE_PATH
+        sudo chgrp -R www-data $PIA_CONF_FILE_PATH
+        echo "Group Permissions set"
+    fi
+
     ;;
 
   set_sudoers)
-    ## Set file permissions
+    # get username
+    if [ "$2" == "--lxc" ]; then
+        PIA_USER="root"
+    elif [ "$2" == "--custom" ]; then
+        read -p "Enter the username: " CUSTOM_USER
+        PIA_USER="$CUSTOM_USER"
+    else
+        # Default behavior, calculate PIA_USER from SCRIPTPATH
+        PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
+    fi
     # get username from install directory
-    PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
     echo "Pi.Alert User: $PIA_USER"
     echo -e "\nFrontend sudoer"
     echo "www-data ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/pialert-cli" | sudo tee /etc/sudoers.d/pialert-frontend
