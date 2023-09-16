@@ -352,8 +352,8 @@ def update_devices_MAC_vendors (pArg = ''):
     print ('Update HW Vendors')
     print ('    Timestamp:', startTime )
 
-    # Update vendors DB (iab oui)
-    print ('\nUpdating vendors DB (iab & oui)...')
+    # Update vendors DB (oui)
+    print ('\nUpdating vendors DB...')
     update_args = ['sh', PIALERT_BACK_PATH + '/update_vendors.sh', pArg]
     update_output = subprocess.check_output (update_args)
 
