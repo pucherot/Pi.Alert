@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.10'
+SCRIPTVERSION='v1.11'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -68,10 +68,20 @@ This is the list of supported commands
     enabled).
 
  ${bold}set_permissions${normal}
-    Repair file permissions
+    Repair file group permissions
+
+    Options:
+    Repair file user and group permissions.
+    --lxc:        set "root" as user name
+    --custom:     set individual user name
+    --homedir:    get user name from homedir
 
  ${bold}set_sudoers${normal}
     Create sudoer file for www-data and Pi.Alert user
+
+    Options:
+    --lxc:        set "root" as user name
+    --custom:     set individual user name
 
  ${bold}unset_login${normal}
     Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE. If
@@ -479,52 +489,44 @@ EOM
 
   set_permissions)
     # get username
-    if [ "$2" == "--lxc" ]; then
-        PIA_USER="root"
+    user() {
         echo "Pi.Alert User: $PIA_USER"
         echo "    Set DB Permissions"
-        sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
-        sudo chmod -R 770 $PIA_DB_FILE
+        sudo chown "$PIA_USER":www-data "$PIA_DB_FILE"
+        sudo chmod -R 770 "$PIA_DB_FILE"
         echo "    Set Config Permissions"
-        sudo chmod -R 664 $PIA_CONF_FILE_PATH
-        sudo chmod 775 $PIA_CONF_FILE_PATH
-        sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
-        echo "Permissions set"
-    elif [ "$2" == "--custom" ]; then
-        read -p "Enter the username: " CUSTOM_USER
-        PIA_USER="$CUSTOM_USER"
-        echo "Pi.Alert User: $PIA_USER"
-        echo "    Set DB Permissions"
-        sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
-        sudo chmod -R 770 $PIA_DB_FILE
-        echo "    Set Config Permissions"
-        sudo chmod -R 664 $PIA_CONF_FILE_PATH
-        sudo chmod 775 $PIA_CONF_FILE_PATH
-        sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
-        echo "Permissions set"
-    elif [ "$2" == "--homedir" ]; then
-        # Default behavior, calculate PIA_USER from SCRIPTPATH
-        PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
-        echo "Pi.Alert User: $PIA_USER"
-        echo "    Set DB Permissions"
-        sudo chown ${PIA_USER}:www-data $PIA_DB_FILE
-        sudo chmod -R 770 $PIA_DB_FILE
-        echo "    Set Config Permissions"
-        sudo chmod -R 664 $PIA_CONF_FILE_PATH
-        sudo chmod 775 $PIA_CONF_FILE_PATH
-        sudo chown -R ${PIA_USER}:www-data $PIA_CONF_FILE_PATH
-        echo "Permissions set"
-    else
-        echo "Pi.Alert Group: www-data"
-        echo "    Set DB Group Permissions only"
-        sudo chgrp www-data $PIA_DB_FILE
-        sudo chmod -R 770 $PIA_DB_FILE
-        echo "    Set Config Group Permissions only"
-        sudo chmod -R 664 $PIA_CONF_FILE_PATH
-        sudo chmod 775 $PIA_CONF_FILE_PATH
-        sudo chgrp -R www-data $PIA_CONF_FILE_PATH
-        echo "Group Permissions set"
-    fi
+        sudo chmod -R 664 "$PIA_CONF_FILE_PATH"
+        sudo chmod 775 "$PIA_CONF_FILE_PATH"
+        sudo chown -R "$PIA_USER":www-data "$PIA_CONF_FILE_PATH"
+        echo "Permissions set"; }
+    case "$2" in
+        --custom)
+            read -p "Enter the username: " CUSTOM_USER
+            PIA_USER="$CUSTOM_USER"
+            user
+            ;;
+        --homedir)
+            PIA_USER=$(basename "$(dirname "$(dirname "$SCRIPTPATH")")")
+            #PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
+            user
+            ;;
+        --lxc)
+            PIA_USER="root"
+            user
+            ;;
+        *)
+            echo "Pi.Alert Group: www-data"
+            echo "    Set DB Group Permissions only"
+            sudo chgrp www-data "$PIA_DB_FILE"
+            sudo chmod -R 770 "$PIA_DB_FILE"
+            echo "    Set Config Group Permissions only"
+            sudo chmod -R 664 "$PIA_CONF_FILE_PATH"
+            sudo chmod 775 "$PIA_CONF_FILE_PATH"
+            sudo chgrp -R www-data "$PIA_CONF_FILE_PATH"
+            echo "Group Permissions set"
+            ;;
+    esac
+
 
     ;;
 
