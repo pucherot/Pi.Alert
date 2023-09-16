@@ -54,6 +54,7 @@ if (file_exists('/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq')) {
 	// Fallback
 	$stat['cpu_frequ'] = "unknown";
 }
+$kernel_arch = exec('dpkg --print-architecture');
 //memory stat
 $mem_result = shell_exec("cat /proc/meminfo | grep MemTotal");
 $stat['mem_total'] = round(preg_replace("#[^0-9]+(?:\.[0-9]*)?#", "", $mem_result) / 1024 / 1024, 3);
@@ -139,6 +140,10 @@ echo '<div class="box box-solid">
 				<div class="row">
 				  <div class="col-sm-3 sysinfo_gerneral_a">Operating System</div>
 				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['os_version'] . '</div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-3 sysinfo_gerneral_a">Kernel Architecture</div>
+				  <div class="col-sm-9 sysinfo_gerneral_b">' . $kernel_arch . '</div>
 				</div>
 				<div class="row">
 				  <div class="col-sm-3 sysinfo_gerneral_a">CPU Name:</div>
