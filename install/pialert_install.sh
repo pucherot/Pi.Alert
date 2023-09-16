@@ -298,8 +298,8 @@ add_pialert_DNS() {
   fi
 
   print_msg "- Adding 'pi.alert' to Local DNS..."
-  sudo sh -c "echo $MAIN_IP pi.alert >> /etc/pihole/custom.list"  2>&1 >> "$LOG"
-  sudo pihole restartdns                                          2>&1 >> "$LOG"
+  sudo sh -c "echo $MAIN_IP pi.alert >> /etc/pihole/custom.list"            2>&1 >> "$LOG"
+  sudo pihole restartdns                                                    2>&1 >> "$LOG"
 }
 
 # ------------------------------------------------------------------------------
@@ -309,13 +309,13 @@ install_lighttpd() {
   print_header "Lighttpd & PHP"
 
   print_msg "- Installing apt-utils..."
-  sudo apt-get install apt-utils -y                               2>&1 >> "$LOG"
+  sudo apt-get install apt-utils -y                                         2>&1 >> "$LOG"
 
   print_msg "- Installing lighttpd..."
-  sudo apt-get install lighttpd -y                                2>&1 >> "$LOG"
+  sudo apt-get install lighttpd -y                                          2>&1 >> "$LOG"
   
   print_msg "- Installing PHP..."
-  sudo apt-get install php php-cgi php-fpm php-curl php-sqlite3 -y         2>&1 >> "$LOG"
+  sudo apt-get install php php-cgi php-fpm php-curl php-sqlite3 -y          2>&1 >> "$LOG"
 
   print_msg "- Activating PHP..."
   ERRNO=0
@@ -326,14 +326,14 @@ install_lighttpd() {
   fi
   
   print_msg "- Restarting lighttpd..."
-  sudo service lighttpd restart                                   2>&1 >> "$LOG"
+  sudo service lighttpd restart                                             2>&1 >> "$LOG"
   # sudo /etc/init.d/lighttpd restart                             2>&1 >> "$LOG"
 
   print_msg "- Installing sqlite3..."
-  sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
+  sudo apt-get install sqlite3 -y                                           2>&1 >> "$LOG"
 
   print_msg "- Installing mmdblookup"
-  sudo apt-get install mmdb-bin -y                                2>&1 >> "$LOG"
+  sudo apt-get install mmdb-bin -y                                          2>&1 >> "$LOG"
 }
 
 # ------------------------------------------------------------------------------
@@ -343,16 +343,16 @@ install_arpscan() {
   print_header "arp-scan, dnsutils and nmap"
 
   print_msg "- Installing arp-scan..."
-  sudo apt-get install arp-scan -y                                2>&1 >> "$LOG"
+  sudo apt-get install arp-scan -y                                          2>&1 >> "$LOG"
 
   print_msg "- Testing arp-scan..."
   sudo arp-scan -l | head -n -3 | tail +3                        | tee -a "$LOG"
 
   print_msg "- Installing dnsutils & net-tools..."
-  sudo apt-get install dnsutils net-tools libwww-perl -y          2>&1 >> "$LOG"
+  sudo apt-get install dnsutils net-tools libwww-perl -y                    2>&1 >> "$LOG"
 
   print_msg "- Installing nmap, zip and wakeonlan"
-  sudo apt-get install nmap zip wakeonlan -y                      2>&1 >> "$LOG"
+  sudo apt-get install nmap zip wakeonlan -y                                2>&1 >> "$LOG"
 }
   
 # ------------------------------------------------------------------------------
@@ -390,8 +390,8 @@ install_python() {
     fi
     print_msg "    - Install additional packages"
     # sudo should not be necessary
-    pip3 -q install mac-vendor-lookup                                      2>&1 >> "$LOG"
-    pip3 -q install fritzconnection                                        2>&1 >> "$LOG"
+    pip3 -q install mac-vendor-lookup                                                           2>&1 >> "$LOG"
+    pip3 -q install fritzconnection                                                             2>&1 >> "$LOG"
 
     PYTHON_BIN="python3"
   else
@@ -454,11 +454,11 @@ download_pialert() {
   echo ""
 
   print_msg "- Uncompressing tar file"
-  tar xf "$INSTALL_DIR/pialert_latest.tar" -C "$INSTALL_DIR" --checkpoint=100 --checkpoint-action="ttyout=."  2>&1 >> "$LOG"
+  tar xf "$INSTALL_DIR/pialert_latest.tar" -C "$INSTALL_DIR" --checkpoint=100 --checkpoint-action="ttyout=."        2>&1 >> "$LOG"
   echo ""
 
   print_msg "- Deleting downloaded tar file..."
-  rm -r "$INSTALL_DIR/pialert_latest.tar"
+  rm -r "$INSTALL_DIR/pialert_latest.tar"                                                                           2>&1 >> "$LOG"
 
   print_msg "- Generate autocomplete file..."
   PIALERT_CLI_PATH=$(dirname $PIALERT_HOME)
@@ -466,9 +466,9 @@ download_pialert() {
 
   print_msg "- Copy autocomplete file..."
   if [ -d "/etc/bash_completion.d" ] ; then
-      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /etc/bash_completion.d/pialert-cli
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /etc/bash_completion.d/pialert-cli                     2>&1 >> "$LOG"
   elif [ -d "/usr/share/bash-completion/completions" ] ; then
-      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /usr/share/bash-completion/completions/pialert-cli
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /usr/share/bash-completion/completions/pialert-cli     2>&1 >> "$LOG"
   fi
 
 }
@@ -551,7 +551,7 @@ test_pialert() {
 add_jobs_to_crontab() {
   if crontab -l 2>/dev/null | grep -Fq pialert ; then
     print_msg "- Pi.Alert crontab jobs already exists. This is your crontab:"
-    crontab -l | grep -F pialert                           2>&1 | tee -ai "$LOG"
+    crontab -l | grep -F pialert                                                                 2>&1 | tee -ai "$LOG"
     return    
   fi
 
@@ -569,53 +569,53 @@ add_jobs_to_crontab() {
 publish_pialert() {
   if [ -e "$WEBROOT/pialert" ] || [ -L "$WEBROOT/pialert" ] ; then
     print_msg "- Deleting previous Pi.Alert site"
-    sudo rm -r "$WEBROOT/pialert"                                            2>&1 >> "$LOG"
+    sudo rm -r "$WEBROOT/pialert"                                                                               2>&1 >> "$LOG"
   fi
 
   print_msg "- Setting permissions..."
   chmod go+x $INSTALL_DIR
-  sudo chgrp -R www-data $PIALERT_HOME/db                         2>&1 >> "$LOG"
-  sudo chmod -R 775 $PIALERT_HOME/db                              2>&1 >> "$LOG"
-  sudo chmod -R 775 $PIALERT_HOME/db/temp                         2>&1 >> "$LOG"
-  sudo chgrp -R www-data $PIALERT_HOME/config                     2>&1 >> "$LOG"
-  sudo chmod -R 775 $PIALERT_HOME/config                          2>&1 >> "$LOG"
-  sudo chmod -R 775 $PIALERT_HOME/front/reports                   2>&1 >> "$LOG"
-  sudo chgrp -R www-data $PIALERT_HOME/front/reports              2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/shoutrrr/arm64/shoutrrr             2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/shoutrrr/armhf/shoutrrr             2>&1 >> "$LOG"
-  chmod +x $PIALERT_HOME/back/shoutrrr/x86/shoutrrr               2>&1 >> "$LOG"
+  sudo chgrp -R www-data $PIALERT_HOME/db                                                                       2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/db                                                                            2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/db/temp                                                                       2>&1 >> "$LOG"
+  sudo chgrp -R www-data $PIALERT_HOME/config                                                                   2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/config                                                                        2>&1 >> "$LOG"
+  sudo chmod -R 775 $PIALERT_HOME/front/reports                                                                 2>&1 >> "$LOG"
+  sudo chgrp -R www-data $PIALERT_HOME/front/reports                                                            2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/arm64/shoutrrr                                                           2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/armhf/shoutrrr                                                           2>&1 >> "$LOG"
+  chmod +x $PIALERT_HOME/back/shoutrrr/x86/shoutrrr                                                             2>&1 >> "$LOG"
   print_msg "- Create Logfile Symlinks..."
-  touch "$PIALERT_HOME/log/pialert.vendors.log"
-  touch "$PIALERT_HOME/log/pialert.1.log"
-  touch "$PIALERT_HOME/log/pialert.cleanup.log"
-  touch "$PIALERT_HOME/log/pialert.webservices.log"
-  ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"
-  ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"
-  ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"
-  ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"
-  ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"
+  touch "$PIALERT_HOME/log/pialert.vendors.log"                                                                 2>&1 >> "$LOG"
+  touch "$PIALERT_HOME/log/pialert.1.log"                                                                       2>&1 >> "$LOG"
+  touch "$PIALERT_HOME/log/pialert.cleanup.log"                                                                 2>&1 >> "$LOG"
+  touch "$PIALERT_HOME/log/pialert.webservices.log"                                                             2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"            2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"                      2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"                        2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"            2>&1 >> "$LOG"
+  ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"    2>&1 >> "$LOG"
 
   print_msg "- Set sudoers..."
-  sudo $PIALERT_HOME/back/pialert-cli set_sudoers
+  sudo $PIALERT_HOME/back/pialert-cli set_sudoers                                                               2>&1 >> "$LOG"
 
   print_msg "- Publishing Pi.Alert web..."
-  sudo ln -s "$PIALERT_HOME/front" "$WEBROOT/pialert"             2>&1 >> "$LOG"
+  sudo ln -s "$PIALERT_HOME/front" "$WEBROOT/pialert"                                                           2>&1 >> "$LOG"
 
   print_msg "- Configuring http://pi.alert/ redirection..."
   if [ -e "$LIGHTTPD_CONF_DIR/conf-available/pialert_front.conf" ] ; then
-    sudo rm -r "$LIGHTTPD_CONF_DIR/conf-available/pialert_front.conf"  2>&1 >> "$LOG"
+    sudo rm -r "$LIGHTTPD_CONF_DIR/conf-available/pialert_front.conf"                                           2>&1 >> "$LOG"
   fi
-  sudo cp "$PIALERT_HOME/install/pialert_front.conf" "$LIGHTTPD_CONF_DIR/conf-available"  2>&1 >> "$LOG"
+  sudo cp "$PIALERT_HOME/install/pialert_front.conf" "$LIGHTTPD_CONF_DIR/conf-available"                        2>&1 >> "$LOG"
 
   if [ -e "$LIGHTTPD_CONF_DIR/conf-enabled/pialert_front.conf" ] || \
      [ -L "$LIGHTTPD_CONF_DIR/conf-enabled/pialert_front.conf" ] ; then
-    sudo rm -r "$LIGHTTPD_CONF_DIR/conf-enabled/pialert_front.conf" 2>&1 >> "$LOG"
+    sudo rm -r "$LIGHTTPD_CONF_DIR/conf-enabled/pialert_front.conf"                                             2>&1 >> "$LOG"
   fi
 
-  sudo ln -s ../conf-available/pialert_front.conf  "$LIGHTTPD_CONF_DIR/conf-enabled/pialert_front.conf"  2>&1 >> "$LOG"
+  sudo ln -s ../conf-available/pialert_front.conf  "$LIGHTTPD_CONF_DIR/conf-enabled/pialert_front.conf"         2>&1 >> "$LOG"
 
   print_msg "- Restarting lighttpd..."
-  sudo sudo service lighttpd restart                              2>&1 >> "$LOG"
+  sudo sudo service lighttpd restart                                                                            2>&1 >> "$LOG"
   # sudo /etc/init.d/lighttpd restart                             2>&1 >> "$LOG"
 }
 
@@ -631,21 +631,21 @@ set_pialert_default_page() {
 
   if [ -e "$WEBROOT/index.lighttpd.html" ] ; then
     if [ -e "$WEBROOT/index.lighttpd.html.orig" ] ; then
-      sudo rm "$WEBROOT/index.lighttpd.html"                      2>&1 >> "$LOG"
+      sudo rm "$WEBROOT/index.lighttpd.html"                                        2>&1 >> "$LOG"
     else
-      sudo mv "$WEBROOT/index.lighttpd.html"  "$WEBROOT/index.lighttpd.html.orig"  2>&1 >> "$LOG"
+      sudo mv "$WEBROOT/index.lighttpd.html"  "$WEBROOT/index.lighttpd.html.orig"   2>&1 >> "$LOG"
     fi
   fi
 
   if [ -e "$WEBROOT/index.html" ] || [ -L "$WEBROOT/index.html" ] ; then
     if [ -e "$WEBROOT/index.html.orig" ] ; then
-      sudo rm "$WEBROOT/index.html"                               2>&1 >> "$LOG"
+      sudo rm "$WEBROOT/index.html"                                                 2>&1 >> "$LOG"
     else
-      sudo mv "$WEBROOT/index.html" "$WEBROOT/index.html.orig"    2>&1 >> "$LOG"
+      sudo mv "$WEBROOT/index.html" "$WEBROOT/index.html.orig"                      2>&1 >> "$LOG"
     fi
   fi
 
-  sudo cp "$PIALERT_HOME/install/index.html" "$WEBROOT/index.html" 2>&1 >>"$LOG"
+  sudo cp "$PIALERT_HOME/install/index.html" "$WEBROOT/index.html"                  2>&1 >>"$LOG"
 }
 
 # ------------------------------------------------------------------------------
