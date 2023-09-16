@@ -322,17 +322,17 @@ $pia_lang['BackWebServices_DelServError'] = 'The web service could not be delete
 
 $pia_lang['ICMPMonitor_Title'] = 'Surveillance ICMP';
 $pia_lang['ICMPMonitor_headline_IP'] = 'Surveiller une nouvelle adresse IP';
-$pia_lang['ICMPMonitor_label_IP'] = 'IP de l\'hôte';
-$pia_lang['ICMPMonitor_label_Hostname'] = 'Nom d\'hôte';
+$pia_lang['ICMPMonitor_label_IP'] = 'IP de l&apos;hôte';
+$pia_lang['ICMPMonitor_label_Hostname'] = 'Nom d&apos;hôte';
 $pia_lang['ICMPMonitor_label_RTT'] = 'RTT moyen';
 $pia_lang['BackICMP_mon_disabled'] = 'La surveillance ICMP est désactivée';
 $pia_lang['BackICMP_mon_enabled'] = 'La surveillance ICMP est activée';
-$pia_lang['BackICMP_mon_InsICMP'] = 'L\'hôte ICMP a été enregistré';
-$pia_lang['BackICMP_mon_InsICMPError'] = 'L\'hôte ICMP n\'a pas été enregistré';
-$pia_lang['BackICMP_mon_DelICMP'] = 'L\'hôte ICMP a été supprimé de la base de données';
-$pia_lang['BackICMP_mon_DelICMPError'] = 'L\'hôte ICMP n\'a pas pu être supprimé, ou n\'a pas été complètement supprimé';
-$pia_lang['BackICMP_mon_UpdICMP'] = 'L\'hôte ICMP a été mis à jour';
-$pia_lang['BackICMP_mon_UpdICMPError'] = 'L\'hôte ICMP n\'a pas pu être mis à jour';
+$pia_lang['BackICMP_mon_InsICMP'] = 'L&apos;hôte ICMP a été enregistré';
+$pia_lang['BackICMP_mon_InsICMPError'] = 'L&apos;hôte ICMP n&apos;a pas été enregistré';
+$pia_lang['BackICMP_mon_DelICMP'] = 'L&apos;hôte ICMP a été supprimé de la base de données';
+$pia_lang['BackICMP_mon_DelICMPError'] = 'L&apos;hôte ICMP n&apos;a pas pu être supprimé, ou n\'a pas été complètement supprimé';
+$pia_lang['BackICMP_mon_UpdICMP'] = 'L&apos;hôte ICMP a été mis à jour';
+$pia_lang['BackICMP_mon_UpdICMPError'] = 'L&apos;hôte ICMP n&apos;a pas pu être mis à jour';
 $pia_lang['ICMPMonitor_Shortcut_Online'] = 'En ligne';
 $pia_lang['ICMPMonitor_Shortcut_Offline'] = 'Hors ligne/Indisponible';
 $pia_lang['ICMPMonitor_Availability'] = 'Availability';
@@ -396,7 +396,7 @@ $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Monitoring';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the web service monitoring for Pi.Alert. With activation, additional elements are displayed in the interface. With deactivation, they disappear again.';
 $pia_lang['Maintenance_Tool_icmpmon'] = 'Surveillance ICMP';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'Surveillance ICMP';
-$pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Active ou désactive la surveillance ICMP pour Pi.Alert. En l\'activant, des éléments supplémentaires seront affichés dans l\'interface. En la désactivant, ces éléments disparaîtront.';
+$pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Active ou désactive la surveillance ICMP pour Pi.Alert. En l&apos;activant, des éléments supplémentaires seront affichés dans l&apos;interface. En la désactivant, ces éléments disparaîtront.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurer l&apos;aperçu des appareils';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Souhaitez-vous enregistrer les modifications que vous avez apportées ? Cette modification s&apos;applique à tous les appareils avec lesquels vous accédez à cette page.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'Pas de clé API définie';
@@ -659,8 +659,8 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td>
 											    </tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Certaines composantes de Pi.Alert nécessitent l\'autorisation "sudo"</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certaines fonctionnalités de Pi.Alert, telles que l\'envoi de messages de test, la détection de serveurs DHCP étrangers ou l\'identification de périphériques à l\'aide de arp-scan,
+$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Certaines composantes de Pi.Alert nécessitent l&apos;autorisation "sudo"</span>';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certaines fonctionnalités de Pi.Alert, telles que l&apos;envoi de messages de test, la détection de serveurs DHCP étrangers ou l&apos;identification de périphériques à l&apos;aide de arp-scan,
 											 nécessitent des autorisations "sudo". Un ajustement de configuration est nécessaire pour cela. Pour ce faire, dans le répertoire <span class="text-maroon help_faq_code">~/pialert/back</span>,
 											 exécutez la commande <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span>.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
@@ -711,7 +711,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon
 											        	Normalement, cette option est déjà paramétrée correctement. Ce paramètre est sélectionné lorsque Pi.Alert est installé sur un appareil avec une carte réseau et qu&apos;aucun autre réseau n&apos;est configuré.<br><br>
 											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
 											        	Cette configuration est sélectionnée si Pi.Alert est installé sur un système avec au moins 2 cartes réseau et un réseau configuré. Cependant, la désignation de l&apos;interface peut varier et doit être adaptée aux conditions du système.<br><br>
-											        	<span class="text-maroon help_faq_code">[\'192.168.1.0/24 --interface=eth0\',\'192.168.2.0/24 --interface=eth1\']</span><br>
+											        	<span class="text-maroon help_faq_code">[&apos;192.168.1.0/24 --interface=eth0&apos;,&apos;192.168.2.0/24 --interface=eth1&apos;]</span><br>
 											        	La dernière configuration est nécessaire si plusieurs réseaux doivent être surveillés. Pour chaque réseau à surveiller, une carte réseau correspondante doit être configurée. Cela est nécessaire car le "arp-scan" utilisé n&apos;est pas routé, c&apos;est-à-dire qu&apos;il fonctionne uniquement dans son propre sous-réseau. Chaque interface est saisie ici avec le réseau correspondant. La désignation de l&apos;interface doit être adaptée aux conditions du système.
 											        </td></tr>
 											</table>
@@ -863,7 +863,7 @@ $pia_lang['HelpFAQ_Cat_Detail_301_text'] = 'L&apos;intervalle de temps entre les
 											En fonction de la configuration du réseau, cette durée peut varier. Pour modifier le cronjob, vous pouvez utiliser la commande suivante dans le terminal/console <span class="text-maroon help_faq_code">crontab -e</span>
 											et modifier l&apos;intervalle.';
 $pia_lang['HelpFAQ_Cat_Detail_302_head_a'] = 'What means ';
-$pia_lang['HelpFAQ_Cat_Detail_302_head_b'] = 'and why can\'t I select that?';
+$pia_lang['HelpFAQ_Cat_Detail_302_head_b'] = 'and why can&apos;t I select that?';
 $pia_lang['HelpFAQ_Cat_Detail_302_text'] = 'Some modern devices generate random MAC addresses for privacy reasons, which can no longer be associated with any manufacturer and which change again with each new connection.
         									Pi.Alert detects if it is such a random MAC address and activates this "field" automatically. To disable this behavior you have to look in your device how to disable
         									MAC address randomization.';
@@ -961,7 +961,7 @@ $pia_lang['SysInfo_storage_note'] = 'Il est possible que l&apos;utilisation de l
 $pia_journ_lang['Journal_TableHead_Class'] = 'Méthode';
 $pia_journ_lang['Journal_TableHead_Trigger'] = 'Déclencheur';
 
-$pia_journ_lang['Title'] = 'Journal d\'application';
+$pia_journ_lang['Title'] = 'Journal d&apos;application';
 $pia_journ_lang['File_hash'] = 'pialert.conf - Hachage';
 // Frontend
 $pia_journ_lang['a_000'] = 'Fichier de configuration';
@@ -1003,14 +1003,14 @@ $pia_journ_lang['LogStr_0016'] = 'Suppression de tous les hôtes sans adresse MA
 $pia_journ_lang['LogStr_0017'] = 'Suppression de tous les hôtes sans adresse MAC (avec erreur)';
 $pia_journ_lang['LogStr_0018'] = 'Suppression de tous les hôtes (inconnus)';
 $pia_journ_lang['LogStr_0019'] = 'Suppression de tous les hôtes (inconnus) (avec erreur)';
-$pia_journ_lang['LogStr_0020'] = 'Suppression de tous les événements d\'un dispositif';
-$pia_journ_lang['LogStr_0021'] = 'Suppression de tous les événements d\'un dispositif (avec erreur)';
+$pia_journ_lang['LogStr_0020'] = 'Suppression de tous les événements d&apos;un dispositif';
+$pia_journ_lang['LogStr_0021'] = 'Suppression de tous les événements d&apos;un dispositif (avec erreur)';
 $pia_journ_lang['LogStr_0022'] = 'Suppression de tous les hôtes de la liste des dispositifs';
 $pia_journ_lang['LogStr_0023'] = 'Suppression de tous les hôtes de la liste des dispositifs (avec erreur)';
 $pia_journ_lang['LogStr_0024'] = 'Suppression de tous les événements';
 $pia_journ_lang['LogStr_0025'] = 'Suppression de tous les événements (avec erreur)';
-$pia_journ_lang['LogStr_0026'] = 'Réinitialisation de l\'activité réseau';
-$pia_journ_lang['LogStr_0027'] = 'Réinitialisation de l\'activité réseau (avec erreur)';
+$pia_journ_lang['LogStr_0026'] = 'Réinitialisation de l&apos;activité réseau';
+$pia_journ_lang['LogStr_0027'] = 'Réinitialisation de l&apos;activité réseau (avec erreur)';
 $pia_journ_lang['LogStr_0030'] = 'Composant réseau actif ajouté (Switch, Routeur, etc.)';
 $pia_journ_lang['LogStr_0031'] = 'Composant réseau actif modifié (Switch, Routeur, etc.)';
 $pia_journ_lang['LogStr_0032'] = 'Composant réseau actif supprimé (Switch, Routeur, etc.)';
@@ -1031,7 +1031,7 @@ $pia_journ_lang['LogStr_0062'] = 'Aucune mise à jour Pi.Alert disponible';
 $pia_journ_lang['LogStr_0063'] = 'Mise à jour de la base de données GeoLite2 disponible';
 $pia_journ_lang['LogStr_0064'] = 'Aucune mise à jour de la base de données GeoLite2 disponible';
 $pia_journ_lang['LogStr_0065'] = 'Base de données GeoLite2 non installée';
-$pia_journ_lang['LogStr_0210'] = 'Exécution d\'un scan nmap individuel';
+$pia_journ_lang['LogStr_0210'] = 'Exécution d&apos;un scan nmap individuel';
 $pia_journ_lang['LogStr_0251'] = 'Exécution de Wake-on-lan';
 $pia_journ_lang['LogStr_0255'] = 'Exécution du test de vitesse en ligne';
 $pia_journ_lang['LogStr_0301'] = $pia_lang['BackDevices_webservicemon_enabled'];
@@ -1043,10 +1043,10 @@ $pia_journ_lang['LogStr_0510'] = 'Réactivation de Pi.Alert';
 $pia_journ_lang['LogStr_0511'] = 'Pi.Alert désactivé (avec indication du temps)';
 $pia_journ_lang['LogStr_0512'] = 'Pi.Alert désactivé (pendant 10 minutes)';
 $pia_journ_lang['LogStr_0700'] = 'Clé API définie';
-$pia_journ_lang['LogStr_9001'] = 'Accès à l\'interface web commencé';
+$pia_journ_lang['LogStr_9001'] = 'Accès à l&apos;interface web commencé';
 $pia_journ_lang['LogStr_9002'] = 'Déconnexion effectuée';
 $pia_journ_lang['LogStr_9003'] = 'Erreur de connexion (mot de passe incorrect !)';
-$pia_journ_lang['LogStr_9004'] = 'Accès à l\'interface web commencé (avec cookie)';
+$pia_journ_lang['LogStr_9004'] = 'Accès à l&apos;interface web commencé (avec cookie)';
 $pia_journ_lang['LogStr_9999'] = 'Fichier de configuration modifié';
 
 ?>
