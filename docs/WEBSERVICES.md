@@ -39,6 +39,17 @@ If you hover over the box with the status code, you will get a short explanation
 
 By clicking on the blue URL, you will get to the details page of the service, where you can change the tag, the assigned device and the desired alert. You also have the option to delete the service or view more details. Information about the colors used and a list of the different HTTP status codes can be found on the Help/FAQ page in Pi.Alert.
 
+In addition, this page also shows you the current information from the SSL certificate of the web server. If these change, this is also recognized as an event and a notification can be sent. The notification does not contain the changed data, but a code that indicates the changed field. The code is composed as follows:
+
+| Code | Field |
+| ---- | ------|
+| 8 | Subject |
+| 4 | Issuer |
+| 2 | Valid from |
+| 1 | Valid to |
+
+A code "12" therefore means changes in the fields "Subject" and "Issuer", a code "11" means changes in the fields "Subject", "Valid from" and "Valid to". After the change is detected, the fields are updated accordingly and the code "0" appears again in the following scan. There is no notification for the change back to code "0".
+
 [Back](https://github.com/leiweibau/Pi.Alert#front)
 
 
