@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ------------------------------------------------------------------------------
 #  Pi.Alert
 #  Open Source Network Guard / WIFI & LAN intrusion detector 
@@ -12,7 +12,11 @@
 # ------------------------------------------------------------------------------
 # Variables
 # ------------------------------------------------------------------------------
-INSTALL_DIR=~
+if [ "$1" = "--lxc" ]; then
+  INSTALL_DIR="/opt"
+else
+  INSTALL_DIR="$HOME"
+fi
 PIALERT_HOME="$INSTALL_DIR/pialert"
 LOG="pialert_update_`date +"%Y-%m-%d_%H-%M"`.log"
 PYTHON_BIN=python3
@@ -104,9 +108,9 @@ reset_permissions() {
 # Create backup
 # ------------------------------------------------------------------------------
 create_backup() {
-  # Previous backups are not deleted
-  # print_msg "- Deleting previous Pi.Alert backups..."
-  # rm "$INSTALL_DIR/"pialert_update_backup_*.tar  2>/dev/null || :
+  # Previous backups are deleted to preserve storage 
+  print_msg "- Deleting previous Pi.Alert backups..."
+  rm -f "$INSTALL_DIR/"pialert_update_backup_*.tar
   print_msg "- Creating new Pi.Alert backup..."
   cd "$INSTALL_DIR"
   tar cvf "$INSTALL_DIR"/pialert_update_backup_`date +"%Y-%m-%d_%H-%M"`.tar pialert --checkpoint=100 --checkpoint-action="ttyout=."     2>&1 >> "$LOG"
@@ -129,36 +133,31 @@ move_files() {
 # ------------------------------------------------------------------------------
 clean_files() {
   print_msg "- Cleaning previous version..."
-  rm -rf "$PIALERT_HOME/back"    2>/dev/null || :
-  rm -rf "$PIALERT_HOME/doc"     2>/dev/null || :
-  rm -rf "$PIALERT_HOME/docs"    2>/dev/null || :
-  rm -rf "$PIALERT_HOME/front"   2>/dev/null || :
-  rm -rf "$PIALERT_HOME/install" 2>/dev/null || :
-  rm -rf "$PIALERT_HOME/"*.txt   2>/dev/null || :
-  rm -rf "$PIALERT_HOME/"*.md    2>/dev/null || :
+  rm -rf "$PIALERT_HOME/back"
+  rm -rf "$PIALERT_HOME/doc"
+  rm -rf "$PIALERT_HOME/docs"
+  rm -rf "$PIALERT_HOME/front"
+  rm -rf "$PIALERT_HOME/install"
+  rm -rf "$PIALERT_HOME/*.txt"
+  rm -rf "$PIALERT_HOME/*.md"
 }
 
 # ------------------------------------------------------------------------------
 # Check packages
 # ------------------------------------------------------------------------------
 check_packages() {
-  print_msg "- Checking package apt-utils..."
-  sudo apt-get install apt-utils -y                               2>&1 >> "$LOG"
-
-  print_msg "- Checking package sqlite3..."
-  sudo apt-get install sqlite3 -y                                 2>&1 >> "$LOG"
-
-  print_msg "- Checking packages dnsutils & net-tools..."
-  sudo apt-get install dnsutils net-tools wakeonlan -y            2>&1 >> "$LOG"
-
-  print_msg "- Checking package php-curl..."
-  sudo apt-get install php-curl -y                                2>&1 >> "$LOG"
-
-  print_msg "- Checking packages perl and python3-requests..."
-  sudo apt-get install python3-requests python3-cryptography libwww-perl -y            2>&1 >> "$LOG"
-
-  print_msg "- Checking packages mmdblookup"
-  sudo apt-get install mmdb-bin -y                                2>&1 >> "$LOG"
+  packages=("apt-utils" "sqlite3" "dnsutils" "net-tools" "wakeonlan" "php-curl" "python3-requests" "python3-cryptography" "libwww-perl" "mmdb-bin" )
+  print_msg "- Checking packages..."
+  missing_packages=()
+  for package in "${packages[@]}"; do
+    if ! dpkg -l | grep -q "$package"; then
+      missing_packages+=("$package")
+    fi
+  done
+  if [ ${#missing_packages[@]} -gt 0 ]; then
+    print_msg "- Installing missing packages: ${missing_packages[*]}"
+    sudo apt-get install -y "${missing_packages[@]}" 2>&1 >>"$LOG"
+  fi
 }
 
 # ------------------------------------------------------------------------------
@@ -167,12 +166,12 @@ check_packages() {
 download_pialert() {
   if [ -f "$INSTALL_DIR/pialert_latest.tar" ] ; then
     print_msg "- Deleting previous downloaded tar file"
-    rm -r "$INSTALL_DIR/pialert_latest.tar"
+    rm -f "$INSTALL_DIR/pialert_latest.tar"
   fi
-  
+
   print_msg "- Downloading update file..."
-  curl -Lo "$INSTALL_DIR/pialert_latest.tar" https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar
-  echo ""
+  URL="https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar"
+  wget -q --show-progress -O "$INSTALL_DIR/pialert_latest.tar" "$URL"
 
   print_msg "- Uncompressing tar file"
   tar xf "$INSTALL_DIR/pialert_latest.tar" -C "$INSTALL_DIR" \
@@ -183,7 +182,7 @@ download_pialert() {
   echo ""
 
   print_msg "- Deleting downloaded tar file..."
-  rm -r "$INSTALL_DIR/pialert_latest.tar"
+  rm -f "$INSTALL_DIR/pialert_latest.tar"
 
   print_msg "- Generate autocomplete file..."
   PIALERT_CLI_PATH=$(dirname $PIALERT_HOME)
@@ -285,12 +284,11 @@ update_permissions() {
   touch "$PIALERT_HOME/log/pialert.1.log"                           2>&1 >> "$LOG"
   touch "$PIALERT_HOME/log/pialert.cleanup.log"                     2>&1 >> "$LOG"
   touch "$PIALERT_HOME/log/pialert.webservices.log"                 2>&1 >> "$LOG"
-  ln -s "$PIALERT_HOME/log/pialert.vendors.log" "$PIALERT_HOME/front/php/server/pialert.vendors.log"          2>&1 >> "$LOG"
-  ln -s "$PIALERT_HOME/log/pialert.IP.log" "$PIALERT_HOME/front/php/server/pialert.IP.log"                    2>&1 >> "$LOG"
-  ln -s "$PIALERT_HOME/log/pialert.1.log" "$PIALERT_HOME/front/php/server/pialert.1.log"                      2>&1 >> "$LOG"
-  ln -s "$PIALERT_HOME/log/pialert.cleanup.log" "$PIALERT_HOME/front/php/server/pialert.cleanup.log"          2>&1 >> "$LOG"
-  ln -s "$PIALERT_HOME/log/pialert.webservices.log" "$PIALERT_HOME/front/php/server/pialert.webservices.log"  2>&1 >> "$LOG"
-
+  src_dir="/opt/pialert/log"
+  dest_dir="/opt/pialert/front/php/server"
+  for file in pialert.vendors.log pialert.IP.log pialert.1.log pialert.cleanup.log pialert.webservices.log; do
+      ln -s "$src_dir/$file" "$dest_dir/$file" 2>&1 >> "$LOG"
+  done
   print_msg "- Set sudoers..."
   sudo $PIALERT_HOME/back/pialert-cli set_sudoers
 
@@ -329,21 +327,27 @@ check_pialert_home() {
 # ------------------------------------------------------------------------------
 # Check Python versions available
 # ------------------------------------------------------------------------------
+check_and_install_package() {
+  package_name="$1"
+  if pip3 show "$package_name" > /dev/null 2>&1; then
+    print_msg "$package_name is already installed"
+  else
+    print_msg "Installing $package_name..."
+    pip3 -q install "$package_name" 2>&1 >>"$LOG"
+    print_msg "$package_name is now installed"
+  fi
+}
 check_python_version() {
   print_msg "- Checking Python..."
-  if [ -f /usr/bin/python ] ; then
-    # PYTHON_BIN="python"
-    print_msg "Python 2 no longer supported by Pi.Alert"
-  fi
-
-  if [ -f /usr/bin/python3 ] ; then
+  PYTHON_BIN=""
+  if [ -f /usr/bin/python3 ]; then
     PYTHON_BIN="python3"
     print_msg "Python 3 is installed on your system"
-    # sudo should not be necessary
-    pip3 -q install mac-vendor-lookup
-    pip3 -q install fritzconnection
+    check_and_install_package "mac-vendor-lookup"
+    check_and_install_package "fritzconnection"
   else
-    process_error "Python 3 NOT installed"
+    print_msg "Python 3 NOT installed"
+    process_error "Python 3 is required for this application"
   fi
 }
 
