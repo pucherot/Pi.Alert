@@ -90,6 +90,9 @@ function SaveConfigFile() {
 	$ignorlist_search = array("[ ", " ]", ", ", ",", "[", "]");
 	$ignorlist_replace = array("[", "]", ",", "','", "['", "']");
 	// Handle some special entries
+	$configArray['REPORT_FROM'] = str_replace(" ", "", $configArray['REPORT_FROM']);
+	$configArray['REPORT_FROM'] = str_replace("<+SMTP_USER+>", " <' + SMTP_USER + '>", $configArray['REPORT_FROM']);
+
 	if ($configArray['MAC_IGNORE_LIST'] != "" && $configArray['MAC_IGNORE_LIST'] != "[]") {
 		$configArray['MAC_IGNORE_LIST'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['MAC_IGNORE_LIST']);
 	} else {
