@@ -118,13 +118,17 @@ Linux distributions which use the "apt" package manager. With minor adjustments 
 An also active developed Docker version of Pi.Alert can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
 
 - One-step Automated Install:
-  #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh | bash`
+```
+bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh)"
+``` 
 
 
 - Debian 12 and newer:
 
   If you are using Debian 12 or a related distribution, the script throws an error when installing packages with pip3. To counter this, I have provided a script that uses the pip3 parameter "--break-system-packages".
-  #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install_debian12.sh | bash`
+```
+bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install_debian12.sh)"
+```
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
@@ -140,8 +144,13 @@ This update script is only recommended for an already existing installation of t
 I recommend uninstalling it first. If you backup the database, it may be possible to continue using it with my fork after a patch ([pialert-cli](docs/PIALERTCLI.md)).
 
 - One-step Automated Update:
-  #### `curl -sSL https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh | bash`
-
+```
+bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)"
+```
+- One-step LXC Automated Update:
+```
+bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)" -s --lxc
+```
 # Closing words
 <!--- --------------------------------------------------------------------- --->
 
