@@ -198,13 +198,13 @@ block is not necessary
 
   If Python 3 is installed, necessary packages have to be installed afterwards.
   ```
-  sudo apt-get install python3-pip python3-requests
+  sudo apt-get install python3-pip python3-cryptography python3-requests
   ```
 
 4.5 - If Python 3 is not installed in your system, you can install it with this
   command:
   ```
-  sudo apt-get install python3 python3-pip python3-requests
+  sudo apt-get install python3 python3-pip python3-cryptography python3-requests
   ```
 
 4.6 - Install additional packages
