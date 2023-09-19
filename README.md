@@ -130,7 +130,7 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 You can always check for a new release using the "Update Check" button in the sidebar. This check will show you if the GeoLite2 DB is 
 installed or up to date and which new features, fixes or changes are available in the new Pi.Alert release, if you are not already using the latest version.
 
-There are no updates as Github release package, because the update function is done by the "curl" command anyway. Instead, after a certain number of commits, 
+There are no updates as Github release package, because the update function is done by the "wget" command anyway. Instead, after a certain number of commits, 
 a new archive is created, which is used as the source for the update.
 
 This update script is only recommended for an already existing installation of this fork. If you are using another fork, 
