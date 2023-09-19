@@ -390,11 +390,11 @@ install_python() {
     fi
     print_msg "    - Install additional packages"
     if [[ -f /usr/lib/python3.*/EXTERNALLY-MANAGED ]]; then
-      pip3 -q install mac-vendor-lookup --break-system-packages                                   2>&1 >> "$LOG"
-      pip3 -q install fritzconnection --break-system-packages                                     2>&1 >> "$LOG"
+      pip3 -q install mac-vendor-lookup --break-system-packages                                 2>&1 >> "$LOG"
+      pip3 -q install fritzconnection --break-system-packages                                   2>&1 >> "$LOG"
     else
-      pip3 -q install mac-vendor-lookup                                                           2>&1 >> "$LOG"
-      pip3 -q install fritzconnection                                                             2>&1 >> "$LOG"
+      pip3 -q install mac-vendor-lookup                                                         2>&1 >> "$LOG"
+      pip3 -q install fritzconnection                                                           2>&1 >> "$LOG"
     fi
 
     PYTHON_BIN="python3"
