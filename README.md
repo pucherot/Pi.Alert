@@ -140,10 +140,7 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 ```
 bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)"
 ```
-- One-step LXC Automated Update:
-```
-bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)" -s --lxc
-```
+
 # Closing words
 <!--- --------------------------------------------------------------------- --->
 
