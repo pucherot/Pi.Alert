@@ -123,13 +123,6 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 ``` 
 
 
-- Debian 12 and newer:
-
-  If you are using Debian 12 or a related distribution, the script throws an error when installing packages with pip3. To counter this, I have provided a script that uses the pip3 parameter "--break-system-packages".
-```
-bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install_debian12.sh)"
-```
-
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
 # Update
