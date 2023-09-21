@@ -24,15 +24,17 @@ sudo mkdir -p 2_backup
 sudo cp *.txt 2_backup
 sudo cp *.csv 2_backup
 
-sudo curl $1 -# -O https://standards-oui.ieee.org/oui28/mam.csv
-sudo curl $1 -# -O https://standards-oui.ieee.org/oui28/mam.txt
+# sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/iab/iab.csv"
+# sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/iab/iab.txt"
 
-sudo curl $1 -# -O https://standards-oui.ieee.org/oui36/oui36.csv
-sudo curl $1 -# -O https://standards-oui.ieee.org/oui36/oui36.txt
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui28/mam.csv"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui28/mam.txt"
 
-sudo curl $1 -# -O https://standards-oui.ieee.org/oui/oui.csv
-sudo curl $1 -# -O https://standards-oui.ieee.org/oui/oui.txt
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui36/oui36.csv"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui36/oui36.txt"
 
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui/oui.csv"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui/oui.txt"
 
 # ----------------------------------------------------------------------
 echo ""
@@ -43,11 +45,11 @@ sudo mkdir -p 2_backup
 sudo cp *.txt 2_backup
 
 # Update from /usb/lib/ieee-data
-sudo get-oui -v
+# sudo get-oui -v
 
 # Update from ieee website
 # sudo get-iab -v -u http://standards-oui.ieee.org/iab/iab.txt
-# sudo get-oui -v -u http://standards-oui.ieee.org/oui/oui.txt
+sudo get-oui -v -u http://standards-oui.ieee.org/oui/oui.txt
 
 # Update from ieee website develop
 # sudo get-iab -v -u http://standards.ieee.org/develop/regauth/iab/iab.txt
