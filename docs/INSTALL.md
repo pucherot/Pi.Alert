@@ -217,10 +217,7 @@ block is not necessary
 <!--- --------------------------------------------------------------------- --->
 5.1 - Download Pi.Alert and uncompress
   ```
-  cd
-  curl -LO https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar
-  tar xvf pialert_latest.tar
-  rm pialert_latest.tar
+curl -sL https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar | tar xf - -C $HOME
   ```
 
 5.2 - Public the front portal
