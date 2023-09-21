@@ -24,17 +24,17 @@ sudo mkdir -p 2_backup
 sudo cp *.txt 2_backup
 sudo cp *.csv 2_backup
 
-# sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/iab/iab.csv"
-# sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/iab/iab.txt"
+# sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/iab/iab.csv"
+# sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/iab/iab.txt"
 
-sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui28/mam.csv"
-sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui28/mam.txt"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/oui28/mam.csv"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/oui28/mam.txt"
 
-sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui36/oui36.csv"
-sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui36/oui36.txt"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/oui36/oui36.csv"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/oui36/oui36.txt"
 
-sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui/oui.csv"
-sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 "https://standards-oui.ieee.org/oui/oui.txt"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/oui/oui.csv"
+sudo aria2c --dir=/usr/share/ieee-data/ --max-connection-per-server=5 --allow-overwrite=true "https://standards-oui.ieee.org/oui/oui.txt"
 
 # ----------------------------------------------------------------------
 echo ""
