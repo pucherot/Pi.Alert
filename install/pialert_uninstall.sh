@@ -14,7 +14,7 @@
   COLS=70
   ROWS=12
   
-  INSTALL_DIR=~
+  INSTALL_DIR=$HOME
   PIALERT_HOME="$INSTALL_DIR/pialert"
   
   LIGHTTPD_CONF_DIR="/etc/lighttpd"

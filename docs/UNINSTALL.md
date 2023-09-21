@@ -12,7 +12,7 @@ Estimated time: 5'
 
 1.1 - Remove Pi.Alert files
   ```
-  rm -r "~/pialert"
+  rm -r "$HOME/pialert"
   ```
 
 1.2 - Remove Pi.Alert web front

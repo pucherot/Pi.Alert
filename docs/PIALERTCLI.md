@@ -1,6 +1,6 @@
 ## pialert-cli
 
-To get an overview of the available commands, you have to enter "./pialert-cli help" in the directory "~/pialert/back".
+To get an overview of the available commands, you have to enter "./pialert-cli help" in the directory "$HOME/pialert/back".
 The current commands are:
 
 | command | explanation |

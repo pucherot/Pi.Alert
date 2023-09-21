@@ -1,6 +1,6 @@
 ## Installation
 
-To set a HomeScreen icon you have to insert the following line in the file `~/pialert/front/php/templates/header.php` between the tags &lt;head&gt; and &lt;/head&gt;.
+To set a HomeScreen icon you have to insert the following line in the file `$HOME/pialert/front/php/templates/header.php` between the tags &lt;head&gt; and &lt;/head&gt;.
 
 ```
   <link rel="apple-touch-icon" href="https://[URL]/[YourIcon]">

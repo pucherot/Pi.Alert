@@ -139,7 +139,7 @@ block is not necessary
   redirect the default server page to pialert subfolder
   ```
   sudo mv /var/www/html/index.lighttpd.html /var/www/html/index.lighttpd.html.old
-  sudo ln -s ~/pialert/install/index.html /var/www/html/index.html
+  sudo ln -s $HOME/pialert/install/index.html /var/www/html/index.html
   ```
 
 3.4 - Install PHP
@@ -225,7 +225,7 @@ block is not necessary
 
 5.2 - Public the front portal
   ```
-  sudo ln -s ~/pialert/front /var/www/html/pialert
+  sudo ln -s $HOME/pialert/front /var/www/html/pialert
   ```
 
 5.3 - Configure web server redirection
@@ -234,7 +234,7 @@ block is not necessary
   with the IP of your raspberry, youy must configure lighttpd to redirect these 
   requests to the correct pialert web folder
   ```
-  sudo cp ~/pialert/install/pialert_front.conf /etc/lighttpd/conf-available
+  sudo cp $HOME/pialert/install/pialert_front.conf /etc/lighttpd/conf-available
   sudo ln -s ../conf-available/pialert_front.conf /etc/lighttpd/conf-enabled/pialert_front.conf
   sudo /etc/init.d/lighttpd restart
   ```
@@ -248,8 +248,8 @@ block is not necessary
 
 5.5 - Config Pialert parameters
   ```
-  sed -i "s,'/home/pi/pialert','$HOME/pialert'," ~/pialert/config/pialert.conf          
-  nano  ~/pialert/config/pialert.conf
+  sed -i "s,'/home/pi/pialert','$HOME/pialert'," $HOME/pialert/config/pialert.conf          
+  nano  $HOME/pialert/config/pialert.conf
   ```
   - If you want to use email reporting, configure this parameters
     ```ini
@@ -278,48 +278,48 @@ block is not necessary
 
 5.6 - Update vendors DB
   ```
-  python3 ~/pialert/back/pialert.py update_vendors
+  python3 $HOME/pialert/back/pialert.py update_vendors
   ```
 
 5.7 - Test Pi.Alert Scan
   ```
-  python3 ~/pialert/back/pialert.py internet_IP
-  python3 ~/pialert/back/pialert.py 1
+  python3 $HOME/pialert/back/pialert.py internet_IP
+  python3 $HOME/pialert/back/pialert.py 1
   ```
 
 5.8 - Add crontab jobs
   ```
-  (crontab -l 2>/dev/null; cat ~/pialert/install/pialert.cron) | crontab -
+  (crontab -l 2>/dev/null; cat $HOME/pialert/install/pialert.cron) | crontab -
   ```
 
 5.9 - Add necessary permissions
   ```
-  chmod go+x ~/pialert
-  sudo chgrp -R www-data ~/pialert/db
-  sudo chmod -R 775 ~/pialert/db
-  sudo chmod -R 775 ~/pialert/db/temp
-  sudo chgrp www-data ~/pialert/config
-  sudo chmod -R 775 ~/pialert/config
-  sudo chgrp www-data ~/pialert/config/pialert.conf
-  sudo chmod -R 775 ~/pialert/front/reports
-  sudo chgrp -R www-data ~/pialert/front/reports
-  chmod +x ~/pialert/back/shoutrrr/arm64/shoutrrr
-  chmod +x ~/pialert/back/shoutrrr/armhf/shoutrrr
-  chmod +x ~/pialert/back/shoutrrr/x86/shoutrrr
+  chmod go+x $HOME/pialert
+  sudo chgrp -R www-data $HOME/pialert/db
+  sudo chmod -R 775 $HOME/pialert/db
+  sudo chmod -R 775 $HOME/pialert/db/temp
+  sudo chgrp www-data $HOME/pialert/config
+  sudo chmod -R 775 $HOME/pialert/config
+  sudo chgrp www-data $HOME/pialert/config/pialert.conf
+  sudo chmod -R 775 $HOME/pialert/front/reports
+  sudo chgrp -R www-data $HOME/pialert/front/reports
+  chmod +x $HOME/pialert/back/shoutrrr/arm64/shoutrrr
+  chmod +x $HOME/pialert/back/shoutrrr/armhf/shoutrrr
+  chmod +x $HOME/pialert/back/shoutrrr/x86/shoutrrr
   ```
 
 5.10 - Create Symlinks for the Log-Viewer
   ```
-  touch "~/pialert/log/pialert.vendors.log"
-  touch "~/pialert/log/pialert.IP.log"
-  touch "~/pialert/log/pialert.1.log"
-  touch "~/pialert/log/pialert.cleanup.log"
-  touch "~/pialert/log/pialert.webservices.log"
-  ln -s "~/pialert/log/pialert.vendors.log" "~/pialert/front/php/server/pialert.vendors.log"
-  ln -s "~/pialert/log/pialert.IP.log" "~/pialert/front/php/server/pialert.IP.log"
-  ln -s "~/pialert/log/pialert.1.log" "~/pialert/front/php/server/pialert.1.log"
-  ln -s "~/pialert/log/pialert.cleanup.log" "~/pialert/front/php/server/pialert.cleanup.log"
-  ln -s "~/pialert/log/pialert.webservices.log" "~/pialert/front/php/server/pialert.webservices.log"
+  touch "$HOME/pialert/log/pialert.vendors.log"
+  touch "$HOME/pialert/log/pialert.IP.log"
+  touch "$HOME/pialert/log/pialert.1.log"
+  touch "$HOME/pialert/log/pialert.cleanup.log"
+  touch "$HOME/pialert/log/pialert.webservices.log"
+  ln -s "$HOME/pialert/log/pialert.vendors.log" "$HOME/pialert/front/php/server/pialert.vendors.log"
+  ln -s "$HOME/pialert/log/pialert.IP.log" "$HOME/pialert/front/php/server/pialert.IP.log"
+  ln -s "$HOME/pialert/log/pialert.1.log" "$HOME/pialert/front/php/server/pialert.1.log"
+  ln -s "$HOME/pialert/log/pialert.cleanup.log" "$HOME/pialert/front/php/server/pialert.cleanup.log"
+  ln -s "$HOME/pialert/log/pialert.webservices.log" "$HOME/pialert/front/php/server/pialert.webservices.log"
   ```
 
 5.11 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole

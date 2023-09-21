@@ -195,7 +195,7 @@ Updated:
   - pialert_update.sh (extension of the configuration file)
 
 Changed:
-  - If the user running Pi.Alert is set up in sudoers, then the database permission can be set to the correct values before the scan (addresses "Read Only Database" errors). To do this, uncomment line 67 in ~/pialert/back/pialert.py. This is disabled by default.
+  - If the user running Pi.Alert is set up in sudoers, then the database permission can be set to the correct values before the scan (addresses "Read Only Database" errors). To do this, uncomment line 67 in $HOME/pialert/back/pialert.py. This is disabled by default.
 
 ## Pi.Alert v3.7.9
 <!--- --------------------------------------------------------------------- --->
