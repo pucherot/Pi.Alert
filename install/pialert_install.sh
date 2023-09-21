@@ -344,6 +344,7 @@ install_arpscan() {
 
   print_msg "- Installing arp-scan..."
   sudo apt-get install arp-scan -y                                          2>&1 >> "$LOG"
+  sudo mkdir -p /usr/share/ieee-data                                        2>&1 >> "$LOG"
 
   print_msg "- Testing arp-scan..."
   sudo arp-scan -l | head -n -3 | tail +3                        | tee -a "$LOG"
@@ -389,7 +390,7 @@ install_python() {
       sudo apt-get install python3 python3-pip python3-cryptography python3-requests -y         2>&1 >> "$LOG"
     fi
     print_msg "    - Install additional packages"
-    if [[ -f /usr/lib/python3.*/EXTERNALLY-MANAGED ]]; then
+    if [ -f /usr/lib/python3.*/EXTERNALLY-MANAGED ]; then
       pip3 -q install mac-vendor-lookup --break-system-packages                                 2>&1 >> "$LOG"
       pip3 -q install fritzconnection --break-system-packages                                   2>&1 >> "$LOG"
     else
@@ -454,7 +455,8 @@ download_pialert() {
   fi
   
   print_msg "- Downloading installation tar file..."
-  curl -Lo "$INSTALL_DIR/pialert_latest.tar" https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar
+  URL="https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar"
+  wget -q --show-progress -O "$INSTALL_DIR/pialert_latest.tar" "$URL"
   echo ""
 
   print_msg "- Uncompressing tar file"
