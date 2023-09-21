@@ -10,7 +10,7 @@ Brief summary of the work steps
 
 1. https://core.telegram.org/bots#how-do-i-create-a-bot or https://core.telegram.org/bots/features#creating-a-new-bot
 2. Send a Message to your new created Bot
-3. Change to the shoutrrr directory corresponding to your system (e.g. ~/pialert/back/shoutrrr/armhf)
+3. Change to the shoutrrr directory corresponding to your system (e.g. $HOME/pialert/back/shoutrrr/armhf)
 4. run `./shoutrrr generate telegram`
 5. enter the API token you got when you created the bot
 ```

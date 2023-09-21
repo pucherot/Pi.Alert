@@ -69,7 +69,7 @@ a notification can be sent.
 
 ### Front
 
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `$HOME/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
   - Manage the devices inventory and the characteristics (individually or with a [bulk editor](docs/BULKEDITOR.md))
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
   - Manual Nmap scans for regular devices and speedtest for the device "Internet" in the details view

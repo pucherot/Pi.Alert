@@ -394,9 +394,9 @@ def update_devices_MAC_vendors (pArg = ''):
     except:
         print ('\nFallback')
         print ('    Backup old mac-vendors.txt for mac-vendor-lookup')
-        p = subprocess.call(["cp ~/.cache/mac-vendors.txt ~/.cache/mac-vendors.bak"], shell=True)
+        p = subprocess.call(["cp $HOME/.cache/mac-vendors.txt $HOME/.cache/mac-vendors.bak"], shell=True)
         print ('    Create mac-vendors.txt for mac-vendor-lookup')
-        p = subprocess.call(["/usr/bin/sed -e 's/\t/:/g' -e 's/Ã¼/ü/g' -e 's/Ã¶/ö/g' -e 's/Ã¤/ä/g' -e 's/Ã³/ó/g' -e 's/Ã©/é/g' -e 's/â/–/g' -e 's/Â//g' -e '/^#/d' /usr/share/arp-scan/ieee-oui.txt > ~/.cache/mac-vendors.txt"], shell=True)
+        p = subprocess.call(["/usr/bin/sed -e 's/\t/:/g' -e 's/Ã¼/ü/g' -e 's/Ã¶/ö/g' -e 's/Ã¤/ä/g' -e 's/Ã³/ó/g' -e 's/Ã©/é/g' -e 's/â/–/g' -e 's/Â//g' -e '/^#/d' /usr/share/arp-scan/ieee-oui.txt > $HOME/.cache/mac-vendors.txt"], shell=True)
 
     # update devices
     sql.executemany ("UPDATE Devices SET dev_Vendor = ? WHERE dev_MAC = ? ",

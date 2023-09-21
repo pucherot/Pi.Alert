@@ -7,7 +7,7 @@
 #  Puche 2021        pi.alert.application@gmail.com        GNU GPLv3
 #-------------------------------------------------------------------------------
 
-0 3 * * 1      python3 ~/pialert/back/pialert.py update_vendors >~/pialert/log/pialert.vendors.log  2>&1
-*/3 * * * *    python3 ~/pialert/back/pialert.py internet_IP    >~/pialert/log/pialert.IP.log       2>&1
-*/5 * * * *    python3 ~/pialert/back/pialert.py 1              >~/pialert/log/pialert.1.log        2>&1
-0 2 * * */4    python3 ~/pialert/back/pialert.py cleanup        >~/pialert/log/pialert.cleanup.log  2>&1
+0 3 * * 1      python3 $HOME/pialert/back/pialert.py update_vendors >$HOME/pialert/log/pialert.vendors.log  2>&1
+*/3 * * * *    python3 $HOME/pialert/back/pialert.py internet_IP    >$HOME/pialert/log/pialert.IP.log       2>&1
+*/5 * * * *    python3 $HOME/pialert/back/pialert.py 1              >$HOME/pialert/log/pialert.1.log        2>&1
+0 2 * * */4    python3 $HOME/pialert/back/pialert.py cleanup        >$HOME/pialert/log/pialert.cleanup.log  2>&1
