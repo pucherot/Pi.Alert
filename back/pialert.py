@@ -17,7 +17,6 @@ from __future__ import print_function
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from fritzconnection.lib.fritzhosts import FritzHosts
 from mac_vendor_lookup import MacLookup
 from time import sleep, time, strftime
 from base64 import b64encode
@@ -467,6 +466,16 @@ def scan_network ():
     openDB()
     print_log ('Fritzbox copy starts...')
     read_fritzbox_active_hosts()
+    # Mikrotik method
+    print ('    Mikrotik Method...')
+    openDB()
+    print_log ('Mikrotik copy starts...')
+    read_mikrotik_leases()
+    # UniFi method
+    print ('    UniFi Method...')
+    openDB()
+    print_log ('UniFi copy starts...')
+    read_unifi_clients()
     # Load current scan data 1/2
     print ('\nProcessing scan results...')
     # Load current scan data 2/2
@@ -667,6 +676,8 @@ def read_fritzbox_active_hosts ():
     if not FRITZBOX_ACTIVE :
         return
 
+    from fritzconnection.lib.fritzhosts import FritzHosts
+
     # copy Fritzbox Network list
     fh = FritzHosts(address=FRITZBOX_IP, user=FRITZBOX_USER, password=FRITZBOX_PASS)
     hosts = fh.get_hosts_info()
@@ -683,6 +694,81 @@ def read_fritzbox_active_hosts ():
             
             sql.execute ("INSERT INTO Fritzbox_Network (FB_MAC, FB_IP, FB_Name, FB_Vendor) "+
                          "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
+
+#-------------------------------------------------------------------------------
+def read_mikrotik_leases ():
+
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS Mikrotik_Network(
+                                "MT_MAC" STRING(50) NOT NULL COLLATE NOCASE,
+                                "MT_IP" STRING(50) COLLATE NOCASE,
+                                "MT_Name" STRING(50),
+                                "MT_Vendor" STRING(250)
+                            ); """
+    sql.execute(sql_create_table)
+    sql_connection.commit()
+
+    sql.execute ("DELETE FROM Mikrotik_Network")
+
+    if not MIKROTIK_ACTIVE:
+        return
+
+    #installed using pip3 install routeros_api
+    import routeros_api
+
+    data = []
+    conn = routeros_api.RouterOsApiPool(MIKROTIK_IP, MIKROTIK_USER, MIKROTIK_PASS, plaintext_login=True)
+    api = conn.get_api()
+    ret = api.get_resource('/ip/dhcp-server/lease').get()
+    conn.disconnect()
+    for row in ret:
+        if 'active-mac-address' in row:
+            mac = row['active-mac-address'].lower()
+            ip = row['active-address']
+            hostname = row.get('host-name','')
+            try:
+                vendor = MacLookup().lookup(mac)
+            except:
+                vendor = "Prefix is not registered"
+
+            sql.execute ("INSERT INTO Mikrotik_Network (MT_MAC, MT_IP, MT_Name, MT_Vendor) "+
+                         "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
+
+#-------------------------------------------------------------------------------
+def read_unifi_clients ():
+
+    sql_create_table = """ CREATE TABLE IF NOT EXISTS Unifi_Network(
+                                "UF_MAC" STRING(50) NOT NULL COLLATE NOCASE,
+                                "UF_IP" STRING(50) COLLATE NOCASE,
+                                "UF_Name" STRING(50),
+                                "UF_Vendor" STRING(250)
+                            ); """
+    sql.execute(sql_create_table)
+    sql_connection.commit()
+
+    sql.execute ("DELETE FROM Unifi_Network")
+
+    if not UNIFI_ACTIVE:
+        return
+
+    #installed using pip3 install unifi
+    from pyunifi.controller import Controller
+
+    data = []
+    c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,'v5','default',ssl_verify=False)
+    clients = c.get_clients()
+    for row in clients:
+        mac = row['mac'].lower()
+        ip = row.get('ip','no IP')
+        hostname = row.get('hostname',row.get('name',''))
+        vendor = row.get('oui',None)
+        if not vendor:
+            try:
+                vendor = MacLookup().lookup(mac)
+            except:
+                vendor = "Prefix is not registered"
+
+        sql.execute ("INSERT INTO Unifi_Network (UF_MAC, UF_IP, UF_Name, UF_Vendor) "+
+                     "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
 
 #-------------------------------------------------------------------------------
 def read_DHCP_leases ():
@@ -739,6 +825,24 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
                                       WHERE cur_MAC = FB_MAC )""",
                     (cycle) )
 
+    # Insert Mikrotik devices
+    sql.execute ("""INSERT INTO CurrentScan (cur_ScanCycle, cur_MAC, 
+                        cur_IP, cur_Vendor, cur_ScanMethod)
+                    SELECT ?, MT_MAC, MT_IP, MT_Vendor, 'Mikrotik'
+                    FROM Mikrotik_Network
+                    WHERE NOT EXISTS (SELECT 'X' FROM CurrentScan
+                                      WHERE cur_MAC = MT_MAC )""",
+                    (cycle) )
+
+    # Insert UniFi devices
+    sql.execute ("""INSERT INTO CurrentScan (cur_ScanCycle, cur_MAC, 
+                        cur_IP, cur_Vendor, cur_ScanMethod)
+                    SELECT ?, UF_MAC, UF_IP, UF_Vendor, 'UniFi'
+                    FROM Unifi_Network
+                    WHERE NOT EXISTS (SELECT 'X' FROM CurrentScan
+                                      WHERE cur_MAC = UF_MAC )""",
+                    (cycle) )
+
     # Check Internet connectivity
     internet_IP = get_internet_IP()
         # TESTING - Force IP
@@ -775,6 +879,10 @@ def remove_entries_from_table():
         sql.execute(query)
         query = 'DELETE FROM Fritzbox_Network WHERE FB_MAC IN ({})'.format(mac_addresses)
         sql.execute(query)
+        query = 'DELETE FROM Mikrotik_Network WHERE MT_MAC IN ({})'.format(mac_addresses)
+        sql.execute(query)
+        query = 'DELETE FROM Unifi_Network WHERE UF_MAC IN ({})'.format(mac_addresses)
+        sql.execute(query)
     except NameError:
         print("        No ignore list defined")
 
@@ -795,11 +903,21 @@ def print_scan_stats ():
                     WHERE cur_ScanMethod='Pi-hole' AND cur_ScanCycle = ? """,
                     (cycle,))
     print ('        Pi-hole Method.....: +' + str (sql.fetchone()[0]) )
-    # Devices Pi-hole
+    # Devices Fritzbox
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Fritzbox' AND cur_ScanCycle = ? """,
                     (cycle,))
     print ('        Fritzbox Method....: +' + str (sql.fetchone()[0]) )
+    # Devices Mikrotik
+    sql.execute ("""SELECT COUNT(*) FROM CurrentScan
+                    WHERE cur_ScanMethod='Mikrotik' AND cur_ScanCycle = ? """,
+                    (cycle,))
+    print ('        Mikrotik Method....: +' + str (sql.fetchone()[0]) )
+    # Devices UniFi
+    sql.execute ("""SELECT COUNT(*) FROM CurrentScan
+                    WHERE cur_ScanMethod='UniFi' AND cur_ScanCycle = ? """,
+                    (cycle,))
+    print ('        UniFi Method.......: +' + str (sql.fetchone()[0]) )
     # New Devices
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanCycle = ? 
@@ -1076,6 +1194,30 @@ def update_devices_data_from_scan ():
                            OR dev_Name IS NULL)
                       AND EXISTS (SELECT 1 FROM DHCP_Leases
                                   WHERE DHCP_MAC = dev_MAC)""")
+
+    # Mikrotik Leases - Update (unknown) Name
+    sql.execute ("""UPDATE Devices
+                    SET dev_Name = (SELECT MT_Name FROM Mikrotik_Network
+                                    WHERE MT_MAC = dev_MAC)
+                    WHERE (dev_Name = "(unknown)"
+                           OR dev_Name = ""
+                           OR dev_Name IS NULL)
+                      AND EXISTS (SELECT 1 FROM Mikrotik_Network
+                                  WHERE MT_MAC = dev_MAC
+                                    AND MT_NAME IS NOT NULL
+                                    AND MT_NAME <> '') """)
+
+    # Unifi Leases - Update (unknown) Name
+    sql.execute ("""UPDATE Devices
+                    SET dev_Name = (SELECT UF_Name FROM Unifi_Network
+                                    WHERE UF_MAC = dev_MAC)
+                    WHERE (dev_Name = "(unknown)"
+                           OR dev_Name = ""
+                           OR dev_Name IS NULL)
+                      AND EXISTS (SELECT 1 FROM Unifi_Network
+                                  WHERE UF_MAC = dev_MAC
+                                    AND UF_Name IS NOT NULL
+                                    AND UF_Name <> '') """)
 
     # DHCP Leases - Vendor
     print_log ('Update devices - 5 Vendor')
@@ -1869,7 +2011,12 @@ def get_icmphost_list():
 # -----------------------------------------------------------------------------
 def ping(host):
 
-    command = ['ping', '-c', '1', host]
+    try:
+        ping_count = str(ICMP_ONLINE_TEST)
+    except NameError: # variable not defined, use a default
+        ping_count = str(1) # 1
+
+    command = ['ping', '-c', ping_count, host]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     output = result.stdout.decode('utf8')
     if "Request timed out." in output or "100% packet loss" in output:
@@ -1879,7 +2026,13 @@ def ping(host):
 # -----------------------------------------------------------------------------
 def ping_avg(host):
 
-    command = ['ping', '-c', '2', host]
+    try:
+        ping_count = str(ICMP_GET_AVG_RTT)
+    except NameError: # variable not defined, use a default
+        ping_count = str(2) # 1
+
+    print(ping_count)
+    command = ['ping', '-c', ping_count, host]
     ping_process = subprocess.Popen(command, stdout=subprocess.PIPE)
     tail_process = subprocess.Popen(['tail', '-1'], stdin=ping_process.stdout, stdout=subprocess.PIPE)
     awk_process = subprocess.Popen(['awk', '-F/', '{print $5}'], stdin=tail_process.stdout, stdout=subprocess.PIPE)

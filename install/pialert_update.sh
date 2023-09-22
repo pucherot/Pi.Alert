@@ -266,6 +266,17 @@ UNIFI_PASS   = 'password'
 EOF
 fi
 
+# 2023-09-22
+if ! grep -Fq "# ICMP Monitoring Options" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# ICMP Monitoring Options
+# ----------------------
+ICMP_ONLINE_TEST  = 1
+ICMP_GET_AVG_RTT  = 2
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------

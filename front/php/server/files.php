@@ -208,6 +208,11 @@ SCAN_SUBNETS    = " . $configArray['SCAN_SUBNETS'] . "
 # SCAN_SUBNETS    = '--localnet --interface=eth0'
 # SCAN_SUBNETS    = ['192.168.1.0/24 --interface=eth0','192.168.2.0/24 --interface=eth1']
 
+# ICMP Monitoring Options
+# ----------------------
+ICMP_ONLINE_TEST   = " . $configArray['ICMP_ONLINE_TEST'] . "
+ICMP_GET_AVG_RTT   = " . $configArray['ICMP_GET_AVG_RTT'] . "
+
 # Pi-hole Configuration
 # ----------------------
 PIHOLE_ACTIVE     = " . convert_bool($configArray['PIHOLE_ACTIVE']) . "
