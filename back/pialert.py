@@ -2031,7 +2031,6 @@ def ping_avg(host):
     except NameError: # variable not defined, use a default
         ping_count = str(2) # 1
 
-    print(ping_count)
     command = ['ping', '-c', ping_count, host]
     ping_process = subprocess.Popen(command, stdout=subprocess.PIPE)
     tail_process = subprocess.Popen(['tail', '-1'], stdin=ping_process.stdout, stdout=subprocess.PIPE)
