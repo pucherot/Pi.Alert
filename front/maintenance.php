@@ -45,6 +45,7 @@ if ($APIKEY == "") {$APIKEY = $pia_lang['Maintenance_Tool_setapikey_false'];}
 $MAC_IGNORE_LIST_LINE = get_config_parmeter('MAC_IGNORE_LIST');
 if ($MAC_IGNORE_LIST_LINE == "" || $MAC_IGNORE_LIST_LINE == "[]") {$MAC_IGNORE_LIST = $pia_lang['Maintenance_Tool_ignorelist_false'];} else {
 	$MAC_IGNORE_LIST = str_replace("[", "", str_replace("]", "", str_replace("'", "", trim($MAC_IGNORE_LIST_LINE))));
+	$MAC_IGNORE_LIST = str_replace(",", ", ", trim($MAC_IGNORE_LIST));
 }
 
 // Get Notification Settings ------------------------------------------------------------------
