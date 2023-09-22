@@ -14,7 +14,7 @@
   COLS=70
   ROWS=12
   
-  INSTALL_DIR=$HOME
+  INSTALL_DIR=~
   PIALERT_HOME="$INSTALL_DIR/pialert"
 
   LIGHTTPD_CONF_DIR="/etc/lighttpd"
@@ -345,14 +345,15 @@ install_arpscan() {
   print_msg "- Installing arp-scan..."
   sudo apt-get install arp-scan -y                                          2>&1 >> "$LOG"
   sudo mkdir -p /usr/share/ieee-data                                        2>&1 >> "$LOG"
+  sudo mkdir -p /var/lib/ieee-data                                          2>&1 >> "$LOG"
 
   print_msg "- Testing arp-scan..."
   sudo arp-scan -l | head -n -3 | tail +3                        | tee -a "$LOG"
 
   print_msg "- Installing dnsutils & net-tools..."
-  sudo apt-get install dnsutils net-tools libwww-perl libtext-csv-perl -y         2>&1 >> "$LOG"
+  sudo apt-get install dnsutils net-tools libwww-perl libtext-csv-perl -y                    2>&1 >> "$LOG"
 
-  print_msg "- Installing nmap, zip and wakeonlan"
+  print_msg "- Installing nmap, zip, aria2 and wakeonlan"
   sudo apt-get install nmap zip wakeonlan aria2 -y                                2>&1 >> "$LOG"
 }
   
@@ -456,6 +457,9 @@ download_pialert() {
   
   print_msg "- Downloading installation tar file..."
   URL="https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar"
+  # Testing
+  # ----------------------------------
+  #URL=""
   wget -q --show-progress -O "$INSTALL_DIR/pialert_latest.tar" "$URL"
   echo ""
 
