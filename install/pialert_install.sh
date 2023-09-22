@@ -345,16 +345,15 @@ install_arpscan() {
   print_msg "- Installing arp-scan..."
   sudo apt-get install arp-scan -y                                          2>&1 >> "$LOG"
   sudo mkdir -p /usr/share/ieee-data                                        2>&1 >> "$LOG"
-  sudo mkdir -p /var/lib/ieee-data                                          2>&1 >> "$LOG"
 
   print_msg "- Testing arp-scan..."
-  sudo arp-scan -l | head -n -3 | tail +3                        | tee -a "$LOG"
+  sudo arp-scan -l | head -n -3 | tail +3 | tee -a "$LOG"
 
   print_msg "- Installing dnsutils & net-tools..."
-  sudo apt-get install dnsutils net-tools libwww-perl libtext-csv-perl -y                    2>&1 >> "$LOG"
+  sudo apt-get install dnsutils net-tools libwww-perl libtext-csv-perl -y   2>&1 >> "$LOG"
 
   print_msg "- Installing nmap, zip, aria2 and wakeonlan"
-  sudo apt-get install nmap zip wakeonlan aria2 -y                                2>&1 >> "$LOG"
+  sudo apt-get install nmap zip wakeonlan aria2 -y                          2>&1 >> "$LOG"
 }
   
 # ------------------------------------------------------------------------------
@@ -392,11 +391,11 @@ install_python() {
     fi
     print_msg "    - Install additional packages"
     if [ -f /usr/lib/python3.*/EXTERNALLY-MANAGED ]; then
-      pip3 -q install mac-vendor-lookup --break-system-packages                                 2>&1 >> "$LOG"
-      pip3 -q install fritzconnection --break-system-packages                                   2>&1 >> "$LOG"
+      pip3 -q install mac-vendor-lookup --break-system-packages --no-warn-script-location       2>&1 >> "$LOG"
+      pip3 -q install fritzconnection --break-system-packages --no-warn-script-location         2>&1 >> "$LOG"
     else
-      pip3 -q install mac-vendor-lookup                                                         2>&1 >> "$LOG"
-      pip3 -q install fritzconnection                                                           2>&1 >> "$LOG"
+      pip3 -q install mac-vendor-lookup  --no-warn-script-location                              2>&1 >> "$LOG"
+      pip3 -q install fritzconnection --no-warn-script-location                                 2>&1 >> "$LOG"
     fi
 
     PYTHON_BIN="python3"
@@ -520,7 +519,7 @@ set_pialert_parameter() {
     VALUE="$2"
   fi
   
-  sed -i "/^$1.*=/s|=.*|= $VALUE|" $PIALERT_HOME/config/pialert.conf  2>&1 >> "$LOG"
+  sed -i "/^$1.*=/s|=.*|= $VALUE|" $PIALERT_HOME/config/pialert.conf                             2>&1 >> "$LOG"
 }
 
 # ------------------------------------------------------------------------------
@@ -528,6 +527,11 @@ set_pialert_parameter() {
 # ------------------------------------------------------------------------------
 test_pialert() {
   print_msg "- Testing Pi.Alert HW vendors database update process..."
+  print_msg "- Prepare directories..."
+  if [ ! -e /var/lib/ieee-data ]; then
+    sudo ln -s /usr/share/ieee-data/ /var/lib/ieee-data                                          2>&1 >> "$LOG"
+  fi
+
   print_msg "*** PLEASE WAIT A COUPLE OF MINUTES..."
   stdbuf -i0 -o0 -e0  $PYTHON_BIN $PIALERT_HOME/back/pialert.py update_vendors_silent            2>&1 | tee -ai "$LOG"
 
