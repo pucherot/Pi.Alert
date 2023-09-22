@@ -45,6 +45,10 @@ a notification can be sent.
   - **Fritzbox**. This method is optional. If you use a Fritzbox (a router from the company "AVM"), 
         it is possible to perform a query of the active hosts. This also 
         includes hosts of the guest WLAN and Powerline devices from "AVM".
+  - **Mikrotik**. This method is optional. If you use Mikrotik RouterBoard as DHCP server,
+        it is possible to read DHCP leases.
+  - **UniFi**. This method is optional. If you use UniFi controller,
+        it is possible to read clients (Client Devices)
   - **Web service monitoring**. This method is optional. An HTTP request is 
         sent and the web server's response is processed. If self signed 
         certificates are used, no validation of the certificate is performed.
@@ -69,7 +73,7 @@ a notification can be sent.
 
 ### Front
 
-There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `$HOME/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
+There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
   - Manage the devices inventory and the characteristics (individually or with a [bulk editor](docs/BULKEDITOR.md))
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
   - Manual Nmap scans for regular devices and speedtest for the device "Internet" in the details view

@@ -246,6 +246,26 @@ ICMPSCAN_ACTIVE = True
 EOF
 fi
 
+# 2023-09-22
+if ! grep -Fq "# Mikrotik Configuration" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# Mikrotik Configuration
+# ----------------------
+MIKROTIK_ACTIVE = False
+MIKROTIK_IP     = '10.0.0.1'
+MIKROTIK_USER   = 'user'
+MIKROTIK_PASS   = 'password'
+
+# UniFi Configuration
+# -------------------
+UNIFI_ACTIVE = False
+UNIFI_IP     = '10.0.0.2'
+UNIFI_USER   = 'user'
+UNIFI_PASS   = 'password'
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------
@@ -333,7 +353,11 @@ check_and_install_package() {
     print_msg "$package_name is already installed"
   else
     print_msg "Installing $package_name..."
-    pip3 -q install "$package_name" 2>&1 >>"$LOG"
+    if [ -f /usr/lib/python3.*/EXTERNALLY-MANAGED ]; then
+      pip3 -q install "$package_name" --break-system-packages --no-warn-script-location       2>&1 >> "$LOG"
+    else
+      pip3 -q install "$package_name" --no-warn-script-location                               2>&1 >> "$LOG"
+    fi
     print_msg "$package_name is now installed"
   fi
 }
@@ -345,6 +369,8 @@ check_python_version() {
     print_msg "Python 3 is installed on your system"
     check_and_install_package "mac-vendor-lookup"
     check_and_install_package "fritzconnection"
+    check_and_install_package "routeros_api"
+    check_and_install_package "unifi"
   else
     print_msg "Python 3 NOT installed"
     process_error "Python 3 is required for this application"

@@ -211,13 +211,18 @@ block is not necessary
   ```
   pip3 install mac-vendor-lookup
   pip3 install fritzconnection
+  pip3 install routeros_api
+  pip3 install unifi
   ```
 
 ### Pi.Alert
 <!--- --------------------------------------------------------------------- --->
 5.1 - Download Pi.Alert and uncompress
   ```
-curl -sL https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar | tar xf - -C $HOME
+  cd
+  curl -LO https://github.com/leiweibau/Pi.Alert/raw/main/tar/pialert_latest.tar
+  tar xvf pialert_latest.tar
+  rm pialert_latest.tar
   ```
 
 5.2 - Public the front portal

@@ -222,6 +222,20 @@ FRITZBOX_IP       = '" . $configArray['FRITZBOX_IP'] . "'
 FRITZBOX_USER     = '" . $configArray['FRITZBOX_USER'] . "'
 FRITZBOX_PASS     = '" . $configArray['FRITZBOX_PASS'] . "'
 
+# Mikrotik Configuration
+# ----------------------
+MIKROTIK_ACTIVE = " . convert_bool($configArray['MIKROTIK_ACTIVE']) . "
+MIKROTIK_IP     = '" . $configArray['MIKROTIK_IP'] . "'
+MIKROTIK_USER   = '" . $configArray['MIKROTIK_USER'] . "'
+MIKROTIK_PASS   = '" . $configArray['MIKROTIK_PASS'] . "'
+
+# UniFi Configuration
+# -------------------
+UNIFI_ACTIVE = " . convert_bool($configArray['UNIFI_ACTIVE']) . "
+UNIFI_IP     = '" . $configArray['UNIFI_IP'] . "'
+UNIFI_USER   = '" . $configArray['UNIFI_USER'] . "'
+UNIFI_PASS   = '" . $configArray['UNIFI_PASS'] . "'
+
 # Maintenance Tasks Cron
 # ----------------------
 DAYS_TO_KEEP_ONLINEHISTORY = " . $configArray['DAYS_TO_KEEP_ONLINEHISTORY'] . "
