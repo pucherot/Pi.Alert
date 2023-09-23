@@ -16,7 +16,7 @@
 # ----------------------------------------------------------------------
 
 # ----------------------------------------------------------------------
-echo Updating... /usr/share/ieee-data/
+echo "Updating... /usr/share/ieee-data/"
 cd /usr/share/ieee-data/
 
 sudo aria2c --dir=/usr/share/ieee-data --max-connection-per-server=3 --allow-overwrite=true --quiet=true "https://standards-oui.ieee.org/oui/oui.csv"
@@ -30,7 +30,7 @@ sudo aria2c --dir=/usr/share/ieee-data --max-connection-per-server=3 --allow-ove
 
 # ----------------------------------------------------------------------
 echo ""
-echo Updating... /usr/share/arp-scan/
+echo "Updating... /usr/share/arp-scan/"
 cd /usr/share/arp-scan
 
 # Update from /var/lib/ieee-data
