@@ -678,22 +678,6 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											        <td class="help_table_gen_b">Hier wird die IP des bekannten DHCP Servers hinterlegt.</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
-											    <tr><td class="help_table_gen_a">MAC_IGNORE_LIST</td>
-											        <td class="help_table_gen_b">
-											            <span class="text-maroon help_faq_code">[&lsquo;MAC-Adresse 1&rsquo;, &lsquo;MAC-Adresse 2&rsquo;]</span><br>
-											            Diese MAC-Adresse(n) (mit kleinen Buchstaben abspeichern) werden aus den Scan-Ergebnissen herausgefiltert.</td></tr>
-											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
-											        <td class="help_table_gen_b">
-											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
-											        	Im Normalfall ist diese Option bereits die korrekte Einstellungen. Diese Einstellung wird gewählt, wenn Pi.Alert auf einem Gerät mit einer Netzwerkkarte installiert ist und keine weiteren Netzwerke konfiguriert sind.<br><br>
-											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
-											        	Diese Konfiguration wird gewählt, wenn Pi.Alert auf einem System, mit mindestens 2 Netzwerkkarten und einem konfigurierten Netzwerk, installiert ist. Die Interface-Bezeichnung kann jedoch abweichen und muss den Gegebenheiten des Systems angepasst werden.<br><br>
-											        	<span class="text-maroon help_faq_code">[\'192.168.1.0/24 --interface=eth0\',\'192.168.2.0/24 --interface=eth1\']</span><br>
-											        	Die letzte Konfiguration ist dann notwendig, wenn mehrere Netzwerke überwacht werden sollen. Für jedes, zu überwachenden Netzwerk, muss eine entsprechende Netzwerkkarte konfiguriert sein. Dies ist deshalb notwendig, da der verwendete "arp-scan" nicht geroutet wird, also nur innerhalb des eigenen Subnetzes funktioniert. Jede Schnittstelle wird hier mit dem dazugehörigen Netzwerk eingetragen. Die Interface-Bezeichnung muss den Gegebenheiten des Systems angepasst werden.
-											        </td></tr>
-											</table>
-											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Mail-Account Settings</td></tr>
 											    <tr><td class="help_table_gen_a">SMTP_SERVER</td>
 											        <td class="help_table_gen_b">Addresse des eMail Servers. (z.B. smtp.gmail.com)</td></tr>
@@ -803,6 +787,29 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											        <td class="help_table_gen_b">    </td></tr>
 											</table>
 											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+											    <tr><td class="help_table_gen_a">MAC_IGNORE_LIST</td>
+											        <td class="help_table_gen_b">
+											            <span class="text-maroon help_faq_code">[&apos;MAC-Adresse 1&apos;, &apos;MAC-Adresse 2&apos;]</span><br>
+											            Diese MAC-Adresse(n) (mit kleinen Buchstaben abspeichern) werden aus den Scan-Ergebnissen herausgefiltert.</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
+											        <td class="help_table_gen_b">
+											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
+											        	Im Normalfall ist diese Option bereits die korrekte Einstellungen. Diese Einstellung wird gewählt, wenn Pi.Alert auf einem Gerät mit einer Netzwerkkarte installiert ist und keine weiteren Netzwerke konfiguriert sind.<br><br>
+											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
+											        	Diese Konfiguration wird gewählt, wenn Pi.Alert auf einem System, mit mindestens 2 Netzwerkkarten und einem konfigurierten Netzwerk, installiert ist. Die Interface-Bezeichnung kann jedoch abweichen und muss den Gegebenheiten des Systems angepasst werden.<br><br>
+											        	<span class="text-maroon help_faq_code">[&apos;192.168.1.0/24 --interface=eth0&apos;,&apos;192.168.2.0/24 --interface=eth1&apos;]</span><br>
+											        	Die letzte Konfiguration ist dann notwendig, wenn mehrere Netzwerke überwacht werden sollen. Für jedes, zu überwachenden Netzwerk, muss eine entsprechende Netzwerkkarte konfiguriert sein. Dies ist deshalb notwendig, da der verwendete "arp-scan" nicht geroutet wird, also nur innerhalb des eigenen Subnetzes funktioniert. Jede Schnittstelle wird hier mit dem dazugehörigen Netzwerk eingetragen. Die Interface-Bezeichnung muss den Gegebenheiten des Systems angepasst werden.
+											        </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">ICMP Monitoring Options</td></tr>
+											    <tr><td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
+											        <td class="help_table_gen_b">Anzahl der "ping&apos;s" um festzustellen, ob ein Gerät online ist (Default 1).</td></tr>
+											    <tr><td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
+											        <td class="help_table_gen_b">Anzahl der "ping&apos;s" zur Berechnung der durchschnittlichen Antwortzeit (Default 2).</td></tr>
+											</table>
+											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Pi-hole Configuration</td></tr>
 											    <tr><td class="help_table_gen_a">PIHOLE_ACTIVE</td>
 											        <td class="help_table_gen_b">Diese Variable wird während der Installation gesetzt.</td></tr>
@@ -822,6 +829,28 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											    <tr><td class="help_table_gen_a">FRITZBOX_USER</td>
 											        <td class="help_table_gen_b">Benutzername<br>Dies setzt voraus, dass die Fritzbox für eine Anmeldung mit Benutzername und Passwort, anstatt nur mit Passwort, konfiguiert ist. Eine Anmeldung, nur mit Passwort, wird nicht unterstützt.</td></tr>
 											    <tr><td class="help_table_gen_a">FRITZBOX_PASS</td>
+											        <td class="help_table_gen_b">Passwort</td></tr>
+											</table>
+											<table class="help_table_gen">
+					    						<tr><td class="help_table_gen_section" colspan="2">Mikrotik Configuration</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_ACTIVE</td>
+											        <td class="help_table_gen_b">Wenn ein Mikrotik Router im Netzwerk zum Einsatz kommt, kann dieser als Datenquelle genutzt werden. An dieser Stelle kann dies aktiviert oder deaktiviert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_IP</td>
+											        <td class="help_table_gen_b">IP-Adresse des Mikrotik Router.</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_USER</td>
+											        <td class="help_table_gen_b">Benutzername</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_PASS</td>
+											        <td class="help_table_gen_b">Passwort</td></tr>
+											</table>
+											<table class="help_table_gen">
+					    						<tr><td class="help_table_gen_section" colspan="2">UniFi Configuration</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_ACTIVE</td>
+											        <td class="help_table_gen_b">Wenn ein UniFi System im Netzwerk zum Einsatz kommt, kann dieses als Datenquelle genutzt werden. An dieser Stelle kann dies aktiviert oder deaktiviert werden.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
+											        <td class="help_table_gen_b">IP-Adresse des Unifi Systems.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
+											        <td class="help_table_gen_b">Benutzername</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>
 											        <td class="help_table_gen_b">Passwort</td></tr>
 											</table>
 											<table class="help_table_gen">

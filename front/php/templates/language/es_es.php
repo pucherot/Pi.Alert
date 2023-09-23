@@ -706,21 +706,6 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 												    <td class="help_table_gen_b">Aquí se almacena la dirección IP del servidor DHCP conocido.</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
-											        <td class="help_table_gen_b">
-											            <span class="text-maroon help_faq_code">[&lsquo;MAC-Address 1&rsquo;, &lsquo;MAC-Address 2&rsquo;]</span><br>
-											            Estas direcciones MAC (guardadas con letras minúsculas) se filtran de los resultados del escaneo.</td></tr>
-											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
-												    <td class="help_table_gen_b">
-												        &lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
-												        Normalmente esta opción ya está configurada correctamente. Esta configuración se selecciona cuando Pi.Alert se instala en un dispositivo con una tarjeta de red y no se configuran otras redes.<br><br>
-												        &lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
-												        Esta configuración se selecciona si Pi.Alert se instala en un sistema con al menos 2 tarjetas de red y una red configurada. Sin embargo, la designación de la interfaz puede variar y debe adaptarse a las condiciones del sistema.<br><br>
-												        <span class="text-maroon help_faq_code">[\'192.168.1.0/24 --interface=eth0\',\'192.168.2.0/24 --interface=eth1\']</span><br>
-												        La última configuración es necesaria si se van a monitorear varias redes. Para cada red que se va a monitorear, se debe configurar una tarjeta de red correspondiente. Esto es necesario porque el "arp-scan" utilizado no está enrutado, es decir, solo funciona dentro de su propio subred. Cada interfaz se ingresa aquí con la red correspondiente. La designación de la interfaz debe adaptarse a las condiciones del sistema.
-												    </td></tr>
-											</table>
-											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Mail-Account Settings</td></tr>
 											    <tr><td class="help_table_gen_a">SMTP_SERVER</td>
 												    <td class="help_table_gen_b">Dirección del servidor de correo electrónico (por ejemplo, smtp.gmail.com)</td></tr>
@@ -826,6 +811,28 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											        <td class="help_table_gen_b">    </td></tr>
 											</table>
 											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+											        <td class="help_table_gen_b">
+											            <span class="text-maroon help_faq_code">[&apos;MAC-Address 1&apos;, &apos;MAC-Address 2&apos;]</span><br>
+											            Estas direcciones MAC (guardadas con letras minúsculas) se filtran de los resultados del escaneo.</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
+												    <td class="help_table_gen_b">
+												        &lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
+												        Normalmente esta opción ya está configurada correctamente. Esta configuración se selecciona cuando Pi.Alert se instala en un dispositivo con una tarjeta de red y no se configuran otras redes.<br><br>
+												        &lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
+												        Esta configuración se selecciona si Pi.Alert se instala en un sistema con al menos 2 tarjetas de red y una red configurada. Sin embargo, la designación de la interfaz puede variar y debe adaptarse a las condiciones del sistema.<br><br>
+												        <span class="text-maroon help_faq_code">[&apos;192.168.1.0/24 --interface=eth0&apos;,&apos;192.168.2.0/24 --interface=eth1&apos;]</span><br>
+												        La última configuración es necesaria si se van a monitorear varias redes. Para cada red que se va a monitorear, se debe configurar una tarjeta de red correspondiente. Esto es necesario porque el "arp-scan" utilizado no está enrutado, es decir, solo funciona dentro de su propio subred. Cada interfaz se ingresa aquí con la red correspondiente. La designación de la interfaz debe adaptarse a las condiciones del sistema.
+												    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Opciones de Monitoreo ICMP</td></tr>
+											    <tr><td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
+											        <td class="help_table_gen_b">Número de "ping&apos;s" para determinar si un dispositivo está en línea (Valor predeterminado 1).</td></tr>
+											    <tr><td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
+											        <td class="help_table_gen_b">Número de "ping&apos;s" para calcular el tiempo de respuesta promedio (Valor predeterminado 2).</td></tr>
+											</table>
+											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Pi-hole Configuration</td></tr>
 												<tr><td class="help_table_gen_a">PIHOLE_ACTIVE</td>
 												    <td class="help_table_gen_b">Esta variable se configura durante la instalación.</td></tr>
@@ -846,6 +853,28 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 												    <td class="help_table_gen_b">Nombre de usuario<br>Esto asume que el Fritzbox está configurado para un inicio de sesión con nombre de usuario y contraseña, en lugar de solo contraseña. No se admite el inicio de sesión solo con contraseña.</td></tr>
 												<tr><td class="help_table_gen_a">FRITZBOX_PASS</td>
 												    <td class="help_table_gen_b">Contraseña</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Configuración de Mikrotik</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_ACTIVE</td>
+											        <td class="help_table_gen_b">Si se utiliza un router Mikrotik en la red, se puede utilizar como fuente de datos. Esto se puede habilitar o deshabilitar en este punto.</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_IP</td>
+											        <td class="help_table_gen_b">Dirección IP del router Mikrotik.</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_USER</td>
+											        <td class="help_table_gen_b">Nombre de usuario</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_PASS</td>
+											        <td class="help_table_gen_b">Contraseña</td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Configuración de UniFi</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_ACTIVE</td>
+											        <td class="help_table_gen_b">Si se utiliza un sistema UniFi en la red, se puede utilizar como fuente de datos. Esto se puede habilitar o deshabilitar en este punto.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
+											        <td class="help_table_gen_b">Dirección IP del sistema Unifi.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
+											        <td class="help_table_gen_b">Nombre de usuario</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>
+											        <td class="help_table_gen_b">Contraseña</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Maintenance Tasks Cron</td></tr>
