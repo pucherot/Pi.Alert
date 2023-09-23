@@ -191,9 +191,9 @@ download_pialert() {
 
   print_msg "- Copy autocomplete file..."
   if [ -d "/etc/bash_completion.d" ] ; then
-      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /etc/bash_completion.d/pialert-cli
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /etc/bash_completion.d/pialert-cli 2>&1 >> "$LOG"
   elif [ -d "/usr/share/bash-completion/completions" ] ; then
-      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /usr/share/bash-completion/completions/pialert-cli
+      sudo cp $PIALERT_HOME/install/pialert-cli.autocomplete /usr/share/bash-completion/completions/pialert-cli 2>&1 >> "$LOG"
   fi
 }
 
@@ -322,7 +322,7 @@ update_permissions() {
       ln -s "$src_dir/$file" "$dest_dir/$file" 2>&1 >> "$LOG"
   done
   print_msg "- Set sudoers..."
-  sudo $PIALERT_HOME/back/pialert-cli set_sudoers
+  sudo $PIALERT_HOME/back/pialert-cli set_sudoers                   2>&1 >> "$LOG"
 
   print_msg "- Patch DB..."
   $PIALERT_HOME/back/pialert-cli update_db
