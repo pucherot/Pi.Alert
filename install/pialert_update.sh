@@ -146,7 +146,7 @@ clean_files() {
 # Check packages
 # ------------------------------------------------------------------------------
 check_packages() {
-  sudo apt-get update
+  sudo apt-get update 2>&1 >>"$LOG"
   packages=("apt-utils" "sqlite3" "dnsutils" "net-tools" "wakeonlan" "php-curl" "python3-requests" "python3-cryptography" "libwww-perl" "mmdb-bin" "libtext-csv-perl" "aria2")
   print_msg "- Checking packages..."
   missing_packages=()
