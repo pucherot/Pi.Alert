@@ -1,11 +1,12 @@
 #!/bin/bash
-SCRIPTVERSION='v1.11'
+SCRIPTVERSION='v1.12'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
 PIA_CONF_FILE_PATH=${SCRIPTPATH}'/../config'
 PIA_DB_FILE=${SCRIPTPATH}'/../db/pialert.db'
 PIA_DB_FILE_PATH=${SCRIPTPATH}'/../db'
+PIA_REPORTS_PATH=${SCRIPTPATH}'/../front/reports'
 #Textformating
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -492,12 +493,14 @@ EOM
     user() {
         echo "Pi.Alert User: $PIA_USER"
         echo "    Set DB Permissions"
-        sudo chown "$PIA_USER":www-data "$PIA_DB_FILE"
-        sudo chmod -R 770 "$PIA_DB_FILE"
+        sudo chown -R "$PIA_USER":www-data "$PIA_DB_FILE_PATH"
+        sudo chmod -R 664 "$PIA_DB_FILE_PATH"
         echo "    Set Config Permissions"
         sudo chmod -R 664 "$PIA_CONF_FILE_PATH"
-        sudo chmod 775 "$PIA_CONF_FILE_PATH"
         sudo chown -R "$PIA_USER":www-data "$PIA_CONF_FILE_PATH"
+        echo "    Set Reports Permissions"
+        sudo chmod -R 775 "$PIA_REPORTS_PATH"
+        sudo chown -R "$PIA_USER":www-data "$PIA_REPORTS_PATH"
         echo "Permissions set"; }
     case "$2" in
         --custom)
@@ -517,12 +520,14 @@ EOM
         *)
             echo "Pi.Alert Group: www-data"
             echo "    Set DB Group Permissions only"
-            sudo chgrp www-data "$PIA_DB_FILE"
-            sudo chmod -R 770 "$PIA_DB_FILE"
+            sudo chgrp -R www-data "$PIA_DB_FILE_PATH"
+            sudo chmod -R 664 "$PIA_DB_FILE_PATH"
             echo "    Set Config Group Permissions only"
             sudo chmod -R 664 "$PIA_CONF_FILE_PATH"
-            sudo chmod 775 "$PIA_CONF_FILE_PATH"
             sudo chgrp -R www-data "$PIA_CONF_FILE_PATH"
+            echo "    Set Reports Permissions"
+            sudo chmod -R 664 "$PIA_REPORTS_PATH"
+            sudo chown -R "$PIA_USER":www-data "$PIA_REPORTS_PATH"
             echo "Group Permissions set"
             ;;
     esac
