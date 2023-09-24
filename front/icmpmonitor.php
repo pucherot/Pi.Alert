@@ -17,10 +17,19 @@ if ($_SESSION["login"] != 1) {
 
 require 'php/templates/header.php';
 require 'php/server/db.php';
+require 'php/server/graph.php';
 require 'php/server/journal.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
+
+// Get Online Graph Arrays
+$graph_arrays = array();
+$graph_arrays = prepare_graph_arrays_history("icmpscan");
+$Pia_Graph_Device_Time = $graph_arrays[0];
+$Pia_Graph_Device_Down = $graph_arrays[1];
+$Pia_Graph_Device_All = $graph_arrays[2];
+$Pia_Graph_Device_Online = $graph_arrays[3];
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -132,6 +141,40 @@ OpenDB();
         </div>
 
       </div>
+
+
+<!-- Activity Chart ------------------------------------------------------- -->
+
+<?php
+If ($ENABLED_HISTOY_GRAPH !== False) {
+	?>
+      <div class="row">
+          <div class="col-md-12">
+          <div class="box" id="clients">
+              <div class="box-header with-border">
+                <h3 class="box-title"><?=$pia_lang['Device_Shortcut_OnlineChart_a'];?><span class="maxlogage-interval">12</span> <?=$pia_lang['Device_Shortcut_OnlineChart_b'];?></h3>
+              </div>
+              <div class="box-body">
+                <div class="chart">
+                  <script src="lib/AdminLTE/bower_components/chart.js/Chart.js"></script>
+                  <canvas id="OnlineChart" style="width:100%; height: 150px;  margin-bottom: 15px;"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <script src="js/graph_online_history.js"></script>
+      <script>
+        var pia_js_online_history_time = [<?php pia_graph_devices_data($Pia_Graph_Device_Time);?>];
+        var pia_js_online_history_ondev = [<?php pia_graph_devices_data($Pia_Graph_Device_Online);?>];
+        var pia_js_online_history_dodev = [<?php pia_graph_devices_data($Pia_Graph_Device_Down);?>];
+        graph_online_history_icmp(pia_js_online_history_time, pia_js_online_history_ondev, pia_js_online_history_dodev);
+      </script>
+<?php
+}
+?>
+
 
       <div class="row">
         <div class="col-xs-12">
