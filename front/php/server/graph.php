@@ -9,25 +9,45 @@
 #--------------------------------------------------------------------------- -->
 
 // History Graph Online/Offline/Archive Devices
-function prepare_graph_arrays_history() {
+function prepare_graph_arrays_history($data_source) {
 	global $db;
 
-	$Pia_Graph_Device_Time = array();
-	$Pia_Graph_Device_All = array();
-	$Pia_Graph_Device_Online = array();
-	$Pia_Graph_Device_Down = array();
-	$Pia_Graph_Device_Arch = array();
-	$results = $db->query('SELECT * FROM Online_History ORDER BY Scan_Date DESC LIMIT 144');
-	while ($row = $results->fetchArray()) {
-		$time_raw = explode(' ', $row['Scan_Date']);
-		$time = explode(':', $time_raw[1]);
-		array_push($Pia_Graph_Device_Time, $time[0] . ':' . $time[1]);
-		array_push($Pia_Graph_Device_Down, $row['Down_Devices']);
-		array_push($Pia_Graph_Device_All, $row['All_Devices']);
-		array_push($Pia_Graph_Device_Online, $row['Online_Devices']);
-		array_push($Pia_Graph_Device_Arch, $row['Archived_Devices']);
+	if ($data_source == "mainscan") {
+		$Pia_Graph_Device_Time = array();
+		$Pia_Graph_Device_All = array();
+		$Pia_Graph_Device_Online = array();
+		$Pia_Graph_Device_Down = array();
+		$Pia_Graph_Device_Arch = array();
+		$results = $db->query('SELECT Scan_Date, Down_Devices, All_Devices, Online_Devices, Archived_Devices FROM Online_History WHERE Data_Source="main_scan" ORDER BY Scan_Date DESC LIMIT 144');
+		while ($row = $results->fetchArray()) {
+			$time_raw = explode(' ', $row['Scan_Date']);
+			$time = explode(':', $time_raw[1]);
+			array_push($Pia_Graph_Device_Time, $time[0] . ':' . $time[1]);
+			array_push($Pia_Graph_Device_Down, $row['Down_Devices']);
+			array_push($Pia_Graph_Device_All, $row['All_Devices']);
+			array_push($Pia_Graph_Device_Online, $row['Online_Devices']);
+			array_push($Pia_Graph_Device_Arch, $row['Archived_Devices']);
+		}
+		return array($Pia_Graph_Device_Time, $Pia_Graph_Device_Down, $Pia_Graph_Device_All, $Pia_Graph_Device_Online, $Pia_Graph_Device_Arch);
 	}
-	return array($Pia_Graph_Device_Time, $Pia_Graph_Device_Down, $Pia_Graph_Device_All, $Pia_Graph_Device_Online, $Pia_Graph_Device_Arch);
+
+	if ($data_source == "icmpscan") {
+		$Pia_Graph_Device_Time = array();
+		$Pia_Graph_Device_All = array();
+		$Pia_Graph_Device_Online = array();
+		$Pia_Graph_Device_Down = array();
+		$results = $db->query('SELECT Scan_Date, Down_Devices, All_Devices, Online_Devices FROM Online_History WHERE Data_Source="icmp_scan" ORDER BY Scan_Date DESC LIMIT 144');
+		while ($row = $results->fetchArray()) {
+			$time_raw = explode(' ', $row['Scan_Date']);
+			$time = explode(':', $time_raw[1]);
+			array_push($Pia_Graph_Device_Time, $time[0] . ':' . $time[1]);
+			array_push($Pia_Graph_Device_Down, $row['Down_Devices']);
+			array_push($Pia_Graph_Device_All, $row['All_Devices']);
+			array_push($Pia_Graph_Device_Online, $row['Online_Devices']);
+		}
+		return array($Pia_Graph_Device_Time, $Pia_Graph_Device_Down, $Pia_Graph_Device_All, $Pia_Graph_Device_Online);
+	}
+
 }
 
 function pia_graph_devices_data($Pia_Graph_Array) {

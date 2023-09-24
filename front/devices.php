@@ -45,7 +45,7 @@ function print_box_bottom_element() {
 
 // Get Online Graph Arrays
 $graph_arrays = array();
-$graph_arrays = prepare_graph_arrays_history();
+$graph_arrays = prepare_graph_arrays_history("mainscan");
 $Pia_Graph_Device_Time = $graph_arrays[0];
 $Pia_Graph_Device_Down = $graph_arrays[1];
 $Pia_Graph_Device_All = $graph_arrays[2];
@@ -542,7 +542,7 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
         var online_history_ondev = [<?php pia_graph_devices_data($Pia_Graph_Device_Online);?>];
         var online_history_dodev = [<?php pia_graph_devices_data($Pia_Graph_Device_Down);?>];
         var online_history_ardev = [<?php pia_graph_devices_data($Pia_Graph_Device_Arch);?>];
-        pia_draw_graph_online_history(online_history_time, online_history_ondev, online_history_dodev, online_history_ardev);
+        graph_online_history_main(online_history_time, online_history_ondev, online_history_dodev, online_history_ardev);
       </script>
 
 <?php
