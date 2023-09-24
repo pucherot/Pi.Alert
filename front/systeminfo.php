@@ -142,7 +142,7 @@ echo '<div class="box box-solid">
 				  <div class="col-sm-9 sysinfo_gerneral_b">' . $stat['os_version'] . '</div>
 				</div>
 				<div class="row">
-				  <div class="col-sm-3 sysinfo_gerneral_a">Kernel Architecture</div>
+				  <div class="col-sm-3 sysinfo_gerneral_a">Kernel Architecture:</div>
 				  <div class="col-sm-9 sysinfo_gerneral_b">' . $kernel_arch . '</div>
 				</div>
 				<div class="row">
