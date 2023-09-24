@@ -517,7 +517,7 @@ def scan_network ():
     skip_repeated_notifications ()
     # Calc Activity History
     print ('    Calculate Activity History...')
-    calculate_activity_history ()
+    calc_activity_history_main_scan ()
     # Web Service Monitoring
     try:
         enable_services_monitoring = SCAN_WEBSERVICES
@@ -977,7 +977,7 @@ def print_scan_stats ():
     print ('        IP Changes.........: ' + str ( sql.fetchone()[0]) )
 
 #------------------------------------------------------------------------------
-def calculate_activity_history ():
+def calc_activity_history_main_scan ():
     # Add to History
     sql.execute("SELECT * FROM Devices WHERE dev_Archived = 0 AND dev_PresentLastScan = 1")
     Querry_Online_Devices = sql.fetchall()
@@ -989,8 +989,8 @@ def calculate_activity_history ():
     Querry_Archived_Devices = sql.fetchall()
     History_Archived_Devices  = len(Querry_Archived_Devices)
     History_ALL_Devices = History_Online_Devices + History_Offline_Devices + History_Archived_Devices
-    sql.execute ("INSERT INTO Online_History (Scan_Date, Online_Devices, Down_Devices, All_Devices, Archived_Devices ) "+
-                 "VALUES ( ?, ?, ?, ?, ?)", (startTime, History_Online_Devices, History_Offline_Devices, History_ALL_Devices, History_Archived_Devices ) )
+    sql.execute ("INSERT INTO Online_History (Scan_Date, Online_Devices, Down_Devices, All_Devices, Archived_Devices, Data_Source) "+
+                 "VALUES ( ?, ?, ?, ?, ?, ?)", (startTime, History_Online_Devices, History_Offline_Devices, History_ALL_Devices, History_Archived_Devices, 'main_scan') )
 
 #-------------------------------------------------------------------------------
 def create_new_devices ():
@@ -2002,6 +2002,9 @@ def icmp_monitoring():
         print("        Online Host(s)  : " + str(icmphosts_online))
         print("        Offline Host(s) : " + str(icmphosts_offline))
 
+        print("    Calculate Activity History...")
+        calc_activity_history_icmp(icmphosts_online, icmphosts_offline)
+
         break
 
     else:
@@ -2106,6 +2109,14 @@ def get_icmphost_name(_icmp_ip):
         hostname = 'No Hostname set'
 
     return hostname
+
+# -----------------------------------------------------------------------------
+def calc_activity_history_icmp(History_Online_Devices, History_Offline_Devices):
+
+    History_ALL_Devices = History_Online_Devices + History_Offline_Devices
+    sql.execute ("INSERT INTO Online_History (Scan_Date, Online_Devices, Down_Devices, All_Devices, Data_Source) "+
+                 "VALUES ( ?, ?, ?, ?, ?)", (startTime, History_Online_Devices, History_Offline_Devices, History_ALL_Devices, 'icmp_scan') )
+    sql_connection.commit()
 
 # -----------------------------------------------------------------------------
 def icmphost_monitoring_notification():
