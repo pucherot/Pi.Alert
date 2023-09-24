@@ -8,6 +8,7 @@
 #-------------------------------------------------------------------------------
 #  Puche 2021                                              GNU GPLv3
 #  leiweibau 2023                                          GNU GPLv3
+#  piapiacz, hspindel
 #-------------------------------------------------------------------------------
 
 #===============================================================================
@@ -1972,12 +1973,22 @@ def icmp_monitoring():
     icmphosts_online = 0
     icmphosts_offline = 0
 
+    try:
+        ping_retries = ICMP_ONLINE_TEST
+    except NameError: # variable not defined, use a default
+        ping_retries = 1 # 1
+
     while icmphosts:
         for host_ip in icmphosts:
-            icmp_status = ping(host_ip)
+            for i in range(ping_retries):
+                # print("Host %s retry %s" % (host_ip, str(i+1)))
+                icmp_status = ping(host_ip)
+                if icmp_status == "1":
+                    break;
 
             if icmp_status == "1":
                 icmp_rtt = ping_avg(host_ip)
+                # print("Host %s RTT %s" % (host_ip, str(icmp_rtt)))
                 icmphosts_online+=1
             else:
                 icmp_rtt = "99999"
@@ -2011,12 +2022,7 @@ def get_icmphost_list():
 # -----------------------------------------------------------------------------
 def ping(host):
 
-    try:
-        ping_count = str(ICMP_ONLINE_TEST)
-    except NameError: # variable not defined, use a default
-        ping_count = str(1) # 1
-
-    command = ['ping', '-c', ping_count, host]
+    command = ['ping', '-c', '1', host]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     output = result.stdout.decode('utf8')
     if "Request timed out." in output or "100% packet loss" in output:
