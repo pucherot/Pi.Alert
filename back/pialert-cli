@@ -462,6 +462,14 @@ EOM
     else
       echo "        Column 'moneve_ssl_fc' already exists in the 'Services_Events' table."
     fi
+    # Online_History.data_source
+    echo -e "...Insert new column 'Data_Source' to table 'Online_History' to DB"
+    existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Online_History');" | awk -F\| '{print $2}' | grep -wci "Data_Source")
+    if [ $existing -eq 0 ]; then
+      sqlite3 $PIA_DB_FILE "ALTER TABLE 'Online_History' ADD COLUMN 'Data_Source' TEXT;"
+    else
+      echo "        Column 'Data_Source' already exists in the 'Online_History' table."
+    fi
 
 
     echo -e "\nUpdate finished!\n"
@@ -494,9 +502,9 @@ EOM
         echo "Pi.Alert User: $PIA_USER"
         echo "    Set DB Permissions"
         sudo chown -R "$PIA_USER":www-data "$PIA_DB_FILE_PATH"
-        sudo chmod -R 664 "$PIA_DB_FILE_PATH"
+        sudo chmod -R 775 "$PIA_DB_FILE_PATH"
         echo "    Set Config Permissions"
-        sudo chmod -R 664 "$PIA_CONF_FILE_PATH"
+        sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
         sudo chown -R "$PIA_USER":www-data "$PIA_CONF_FILE_PATH"
         echo "    Set Reports Permissions"
         sudo chmod -R 775 "$PIA_REPORTS_PATH"
@@ -521,12 +529,12 @@ EOM
             echo "Pi.Alert Group: www-data"
             echo "    Set DB Group Permissions only"
             sudo chgrp -R www-data "$PIA_DB_FILE_PATH"
-            sudo chmod -R 664 "$PIA_DB_FILE_PATH"
+            sudo chmod -R 775 "$PIA_DB_FILE_PATH"
             echo "    Set Config Group Permissions only"
-            sudo chmod -R 664 "$PIA_CONF_FILE_PATH"
+            sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
             sudo chgrp -R www-data "$PIA_CONF_FILE_PATH"
             echo "    Set Reports Permissions"
-            sudo chmod -R 664 "$PIA_REPORTS_PATH"
+            sudo chmod -R 775 "$PIA_REPORTS_PATH"
             sudo chown -R "$PIA_USER":www-data "$PIA_REPORTS_PATH"
             echo "Group Permissions set"
             ;;
