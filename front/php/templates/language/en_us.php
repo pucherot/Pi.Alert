@@ -484,6 +484,8 @@ $pia_lang['BackDevices_darkmode_disabled'] = 'Darkmode Disabled';
 $pia_lang['BackDevices_darkmode_enabled'] = 'Darkmode Enabled';
 $pia_lang['BackDevices_webservicemon_disabled'] = 'Web Service Monitoring Disabled';
 $pia_lang['BackDevices_webservicemon_enabled'] = 'Web Service Monitoring Enabled';
+$pia_lang['BackDevices_MainScan_disabled'] = 'Main Scan is disabled';
+$pia_lang['BackDevices_MainScan_enabled'] = 'Main Scan is enabled';
 $pia_lang['BackDevices_onlinehistorygraph_disabled'] = 'Graph disabled.';
 $pia_lang['BackDevices_onlinehistorygraph_enabled'] = 'Graph enabled.';
 $pia_lang['BackDevices_Restore_CopError'] = 'The original database could not be saved.';
@@ -1017,6 +1019,7 @@ $pia_journ_lang['a_021'] = 'Multi-Editor';
 $pia_journ_lang['a_025'] = 'Tools';
 $pia_journ_lang['a_030'] = 'Web Service Monitoring';
 $pia_journ_lang['a_031'] = 'ICMP Monitoring';
+$pia_journ_lang['a_032'] = 'Main Scan';
 $pia_journ_lang['a_040'] = 'Network Overview';
 $pia_journ_lang['a_050'] = 'Reports';
 $pia_journ_lang['a_060'] = 'Update Check';
@@ -1024,6 +1027,9 @@ $pia_journ_lang['a_070'] = 'API';
 // pialert-cli
 $pia_journ_lang['b_002'] = $pia_journ_lang['a_002'];
 $pia_journ_lang['b_010'] = 'DB Maintenance';
+$pia_journ_lang['b_030'] = $pia_journ_lang['a_030'];
+$pia_journ_lang['b_031'] = $pia_journ_lang['a_031'];
+$pia_journ_lang['b_032'] = $pia_journ_lang['a_032'];
 // cronjob
 $pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
 // Log Strings

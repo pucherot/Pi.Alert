@@ -1011,6 +1011,9 @@ $pia_journ_lang['a_070'] = 'API';
 // pialert-cli
 $pia_journ_lang['b_002'] = $pia_journ_lang['a_002'];
 $pia_journ_lang['b_010'] = 'DB Wartung';
+$pia_journ_lang['b_030'] = $pia_journ_lang['a_030'];
+$pia_journ_lang['b_031'] = $pia_journ_lang['a_031'];
+$pia_journ_lang['b_032'] = $pia_journ_lang['a_032'];
 // cronjob
 $pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
 //LogStrings
