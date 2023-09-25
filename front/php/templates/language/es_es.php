@@ -384,6 +384,7 @@ $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Respaldo / Restaurar';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'General';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configurar la vista general del dispositivo';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Seguridad';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_d'] = 'Modules';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Las opciones enumeradas aquí efectúan cambios en la configuración del servidor. Por lo tanto, estos cambios afectan a todos los dispositivos que accedan a esta página.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Dark Mode';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Cambiar Modo';
@@ -396,6 +397,9 @@ $pia_lang['Maintenance_Tool_webservicemon_noti'] = 'Web Service Monitoring';
 $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the web service monitoring for Pi.Alert. With activation, additional elements are displayed in the interface. With deactivation, they disappear again.';
 $pia_lang['Maintenance_Tool_icmpmon'] = 'Monitoreo ICMP';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'Monitoreo ICMP';
+$pia_lang['Maintenance_Tool_mainscan'] = 'Escaneo Principal';
+$pia_lang['Maintenance_Tool_mainscan_noti'] = 'Escaneo Principal';
+$pia_lang['Maintenance_Tool_mainscan_noti_text'] = 'Activa o desactiva el método principal de escaneo para Pi.Alert (escaneo ARP).';
 $pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Habilita o deshabilita el monitoreo ICMP para Pi.Alert. Al habilitarlo, se mostrarán elementos adicionales en la interfaz. Al deshabilitarlo, estos elementos desaparecerán.';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurar la vista general del dispositivo';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = '¿Desea guardar los cambios realizados? Este cambio afectará a todos los dispositivos que utilices para acceder a esta página.';
@@ -1081,6 +1085,8 @@ $pia_journ_lang['LogStr_9001'] = 'Inicio de acceso a la interfaz web';
 $pia_journ_lang['LogStr_9002'] = 'Cierre de sesión realizado';
 $pia_journ_lang['LogStr_9003'] = 'Error de inicio de sesión (¡contraseña incorrecta!)';
 $pia_journ_lang['LogStr_9004'] = 'Inicio de acceso a la interfaz web (con cookie)';
+$pia_journ_lang['LogStr_9991'] = $pia_lang['BackDevices_MainScan_enabled'];
+$pia_journ_lang['LogStr_9992'] = $pia_lang['BackDevices_MainScan_disabled'];
 $pia_journ_lang['LogStr_9999'] = 'Archivo de configuración editado';
 
 ?>

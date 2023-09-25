@@ -384,6 +384,7 @@ $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Backup &sol; Restore';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'General';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configure device overview';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Security';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_d'] = 'Modules';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'The options listed here cause server-side configuration changes. These changes affect all devices that access this page.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Dark Mode';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Toggle Modes';
@@ -397,6 +398,9 @@ $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the
 $pia_lang['Maintenance_Tool_icmpmon'] = 'ICMP Monitoring';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'ICMP Monitoring';
 $pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Enables or disables ICMP monitoring for Pi.Alert. Enabling this will display additional elements in the interface. Disabling it will make these elements disappear.';
+$pia_lang['Maintenance_Tool_mainscan'] = 'Main Scan';
+$pia_lang['Maintenance_Tool_mainscan_noti'] = 'Main Scan';
+$pia_lang['Maintenance_Tool_mainscan_noti_text'] = 'Enables or disables the main scanning method for Pi.Alert (ARP scan).';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configure device overview';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Do you want to save the changes you have made? This change will affect all devices you use to access this page.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'No API-Key set';
@@ -1086,6 +1090,8 @@ $pia_journ_lang['LogStr_9001'] = 'Access to the web interface started';
 $pia_journ_lang['LogStr_9002'] = 'Logout performed';
 $pia_journ_lang['LogStr_9003'] = 'Login error (incorrect password!)';
 $pia_journ_lang['LogStr_9004'] = 'Access to the web interface started (with cookie)';
+$pia_journ_lang['LogStr_9991'] = $pia_lang['BackDevices_MainScan_enabled'];
+$pia_journ_lang['LogStr_9992'] = $pia_lang['BackDevices_MainScan_disabled'];
 $pia_journ_lang['LogStr_9999'] = 'Configuration file edited';
 
 ?>

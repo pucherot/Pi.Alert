@@ -384,6 +384,7 @@ $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Sauvegarde / Restauration';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'Généralités';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configurer l&apos;aperçu des appareils';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Sécurité';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_d'] = 'Modules';
 $pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Les options mentionnées ici entraînent des modifications de configuration côté serveur. Ces modifications concernent donc tous les appareils qui accèdent à cette page.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Dark Mode';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Changement d&apos;affichage';
@@ -397,6 +398,9 @@ $pia_lang['Maintenance_Tool_webservicemon_noti_text'] = 'Enables or disables the
 $pia_lang['Maintenance_Tool_icmpmon'] = 'Surveillance ICMP';
 $pia_lang['Maintenance_Tool_icmpmon_noti'] = 'Surveillance ICMP';
 $pia_lang['Maintenance_Tool_icmpmon_noti_text'] = 'Active ou désactive la surveillance ICMP pour Pi.Alert. En l&apos;activant, des éléments supplémentaires seront affichés dans l&apos;interface. En la désactivant, ces éléments disparaîtront.';
+$pia_lang['Maintenance_Tool_mainscan'] = 'Numérisation Principale';
+$pia_lang['Maintenance_Tool_mainscan_noti'] = 'Numérisation Principale';
+$pia_lang['Maintenance_Tool_mainscan_noti_text'] = 'Active ou désactive la méthode principale de numérisation pour Pi.Alert (numérisation ARP).';
 $pia_lang['Maintenance_Tool_DevListCol_noti'] = 'Configurer l&apos;aperçu des appareils';
 $pia_lang['Maintenance_Tool_DevListCol_noti_text'] = 'Souhaitez-vous enregistrer les modifications que vous avez apportées ? Cette modification s&apos;applique à tous les appareils avec lesquels vous accédez à cette page.';
 $pia_lang['Maintenance_Tool_setapikey_false'] = 'Pas de clé API définie';
@@ -1076,6 +1080,8 @@ $pia_journ_lang['LogStr_9001'] = 'Accès à l&apos;interface web commencé';
 $pia_journ_lang['LogStr_9002'] = 'Déconnexion effectuée';
 $pia_journ_lang['LogStr_9003'] = 'Erreur de connexion (mot de passe incorrect !)';
 $pia_journ_lang['LogStr_9004'] = 'Accès à l&apos;interface web commencé (avec cookie)';
+$pia_journ_lang['LogStr_9991'] = $pia_lang['BackDevices_MainScan_enabled'];
+$pia_journ_lang['LogStr_9992'] = $pia_lang['BackDevices_MainScan_disabled'];
 $pia_journ_lang['LogStr_9999'] = 'Fichier de configuration modifié';
 
 ?>

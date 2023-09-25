@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.12'
+SCRIPTVERSION='v1.13'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -10,6 +10,7 @@ PIA_REPORTS_PATH=${SCRIPTPATH}'/../front/reports'
 #Textformating
 bold=$(tput bold)
 normal=$(tput sgr0)
+CURRENT_USER=$(whoami)
 
 case $1 in
 
@@ -22,25 +23,35 @@ Usage: ${bold}pialert-cli <command>${normal}
 
 This is the list of supported commands
 
- ${bold}disable_icmp_mon${normal}
-    Allows the start of new scans again. If the ICMPSCAN_ACTIVE parameter
-    does not exist yet, it will be created and set to FALSE.
-
  ${bold}disable_scan <MIN>${normal}
     Stops all active scans and prevents new scans from starting. You can set a
     Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with
     the next scan after 10min.
 
+ ${bold}disable_mainscan <MIN>${normal}
+    Disables the main scanning method for Pi.Alert (ARP scan, reading the 
+    Pi-hole DHCP leases and device database, as well as collecting data from 
+    other routers).
+
+ ${bold}disable_icmp_mon${normal}
+    Allows the start of new scans again. If the ICMPSCAN_ACTIVE parameter
+    does not exist yet, it will be created and set to FALSE.
+
  ${bold}disable_service_mon${normal}
     Allows the start of new scans again. If the SCAN_WEBSERVICES parameter
     does not exist yet, it will be created and set to FALSE.
 
+ ${bold}enable_scan${normal}
+    Allows the start of new scans again.
+
+ ${bold}enable_mainscan <MIN>${normal}
+    Enables the main scanning method for Pi.Alert (ARP scan, reading the 
+    Pi-hole DHCP leases and device database, as well as collecting data from 
+    other routers).
+
  ${bold}enable_icmp_mon${normal}
     Enable ICMP Monitoring. If the ICMPSCAN_ACTIVE parameter does not
     exist yet, it will be created and set to TRUE.
-
- ${bold}enable_scan${normal}
-    Allows the start of new scans again.
 
  ${bold}enable_service_mon${normal}"
     Enable Web Service Monitoring. If the SCAN_WEBSERVICES parameter does not
@@ -186,7 +197,6 @@ EOM
     ;;
 
   disable_scan)
-    current_user=$(whoami)
     STOPTIMER=$2
     re='^[0-9]+$'
     if ! [[ $STOPTIMER =~ $re ]] ; then
@@ -197,18 +207,17 @@ EOM
     echo $STOPTIMER > ${SCRIPTPATH}/../db/setting_stoppialert
     /usr/bin/python3 ${SCRIPTPATH}/pialert_reporting_test.py reporting_starttimer
     echo "Configured Pi.Alert scans are disabled"
-    if [ "$current_user" != "www-data" ]; then
+    if [ "$CURRENT_USER" != "www-data" ]; then
         sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_002', 'pialert-cli', 'LogStr_0511', '', '${STOPTIMER} min');"
     fi
 
     ;;
 
   enable_scan)
-    current_user=$(whoami)
     rm ${SCRIPTPATH}/../db/setting_stoppialert
     /usr/bin/python3 ${SCRIPTPATH}/pialert_reporting_test.py reporting_stoptimer
     echo "Configured Pi.Alert scans are enabled"
-    if [ "$current_user" != "www-data" ]; then
+    if [ "$CURRENT_USER" != "www-data" ]; then
         sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_002', 'pialert-cli', 'LogStr_0510', '', '');"
     fi
     ;;
@@ -224,6 +233,9 @@ EOM
         ## Switch SCAN_WEBSERVICES to enable
         sed -i "/SCAN_WEBSERVICES/c\SCAN_WEBSERVICES = True" $PIA_CONF_FILE
     fi
+    if [ "$CURRENT_USER" != "www-data" ]; then
+        sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_030', 'pialert-cli', 'LogStr_0301', '', '');"
+    fi
     echo "Web Service Monitoring is now enabled"
     ;;
 
@@ -237,6 +249,9 @@ EOM
     else
         ## Switch SCAN_WEBSERVICES to disable
         sed -i "/SCAN_WEBSERVICES/c\SCAN_WEBSERVICES = False" $PIA_CONF_FILE
+    fi
+    if [ "$CURRENT_USER" != "www-data" ]; then
+        sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_030', 'pialert-cli', 'LogStr_0302', '', '');"
     fi
     echo "Web Service Monitoring is now disabled"
     ;;
@@ -252,6 +267,9 @@ EOM
         ## Switch ICMPSCAN_ACTIVE to enable
         sed -i "/ICMPSCAN_ACTIVE/c\ICMPSCAN_ACTIVE = True" $PIA_CONF_FILE
     fi
+    if [ "$CURRENT_USER" != "www-data" ]; then
+        sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_031', 'pialert-cli', 'LogStr_0303', '', '');"
+    fi
     echo "ICMP Monitoring is now enabled"
     ;;
 
@@ -266,7 +284,44 @@ EOM
         ## Switch ICMPSCAN_ACTIVE to disable
         sed -i "/ICMPSCAN_ACTIVE/c\ICMPSCAN_ACTIVE = False" $PIA_CONF_FILE
     fi
+    if [ "$CURRENT_USER" != "www-data" ]; then
+        sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_031', 'pialert-cli', 'LogStr_0304', '', '');"
+    fi
     echo "ICMP Monitoring is now disabled"
+    ;;
+
+  enable_mainscan)
+    ## Check if ARPSCAN_ACTIVE exists
+    CHECK_PROT=$(grep "ARPSCAN_ACTIVE" $PIA_CONF_FILE | wc -l)
+    if [ $CHECK_PROT -eq 0 ]
+    then
+        ## Create ARPSCAN_ACTIVE and enable it
+        sed -i "/^VENDORS_DB.*/a ARPSCAN_ACTIVE = True" $PIA_CONF_FILE
+    else
+        ## Switch ARPSCAN_ACTIVE to enable
+        sed -i "/ARPSCAN_ACTIVE/c\ARPSCAN_ACTIVE = True" $PIA_CONF_FILE
+    fi
+    if [ "$CURRENT_USER" != "www-data" ]; then
+        sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_032', 'pialert-cli', 'LogStr_9991', '', '');"
+    fi
+    echo "Main Scan is now enabled"
+    ;;
+
+  disable_mainscan)
+    ## Check if ARPSCAN_ACTIVE exists
+    CHECK_PROT=$(grep "ARPSCAN_ACTIVE" $PIA_CONF_FILE | wc -l)
+    if [ $CHECK_PROT -eq 0 ]
+    then
+        ## Create ARPSCAN_ACTIVE and disable it
+        sed -i "/^VENDORS_DB.*/a ARPSCAN_ACTIVE = False" $PIA_CONF_FILE
+    else
+        ## Switch ARPSCAN_ACTIVE to disable
+        sed -i "/ARPSCAN_ACTIVE/c\ARPSCAN_ACTIVE = False" $PIA_CONF_FILE
+    fi
+    if [ "$CURRENT_USER" != "www-data" ]; then
+        sqlite3 $PIA_DB_FILE "INSERT INTO 'pialert_journal' ('Journal_DateTime', 'LogClass', 'Trigger', 'LogString', 'Hash', 'Additional_Info') VALUES('$(date '+%Y-%m-%d %H:%M:%S')', 'b_032', 'pialert-cli', 'LogStr_9992', '', '');"
+    fi
+    echo "Main Scan is now disabled"
     ;;
 
   update_db)
@@ -581,7 +636,7 @@ EOM
     ;;
 
   arg_list)
-    echo disable_scan disable_icmp_mon disable_service_mon enable_scan enable_icmp_mon enable_service_mon reporting_test set_apikey set_autopassword set_login set_password set_permissions set_sudoers unset_login unset_sudoers update_db
+    echo disable_scan disable_mainscan disable_icmp_mon disable_service_mon enable_scan enable_mainscan enable_icmp_mon enable_service_mon reporting_test set_apikey set_autopassword set_login set_password set_permissions set_sudoers unset_login unset_sudoers update_db
     ;;
 
   *)

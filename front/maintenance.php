@@ -450,33 +450,48 @@ if ($_SESSION['Scan_WebServices'] == True) {
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($ENABLED_DARKMODE, 1);?>
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableDarkmode" onclick="askPiaEnableDarkmode()"><?=$pia_lang['Maintenance_Tool_darkmode'] . '<br>' . $state;?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnEnableDarkmode" onclick="askEnableDarkmode()"><?=$pia_lang['Maintenance_Tool_darkmode'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
 <!-- Toggle History Graph ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($ENABLED_HISTOY_GRAPH, 1);?>
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableOnlineHistoryGraph" onclick="askPiaEnableOnlineHistoryGraph()"><?=$pia_lang['Maintenance_Tool_onlinehistorygraph'] . '<br>' . $state;?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnEnableOnlineHistoryGraph" onclick="askEnableOnlineHistoryGraph()"><?=$pia_lang['Maintenance_Tool_onlinehistorygraph'] . '<br>' . $state;?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_d'];?></h4></td></tr>
+                <tr class="table_settings_row">
+                    <td class="db_info_table_cell" colspan="2" style="padding-bottom: 20px;">
+                        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+
+<!-- Toggle Main Scan ----------------------------------------------------------------- -->
+                            <div class="settings_button_wrapper">
+                                <div class="settings_button_box">
+                                	<?php $state = convert_state($_SESSION['Scan_MainScan'], 1);?>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnEnableMainScanMon" onclick="askEnableMainScan()"><?=$pia_lang['Maintenance_Tool_mainscan'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
 <!-- Toggle Web Service Monitoring ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($_SESSION['Scan_WebServices'], 1);?>
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableWebServiceMon" onclick="askPiaEnableWebServiceMon()"><?=$pia_lang['Maintenance_Tool_webservicemon'] . '<br>' . $state;?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnEnableWebServiceMon" onclick="askEnableWebServiceMon()"><?=$pia_lang['Maintenance_Tool_webservicemon'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
 <!-- Toggle ICMP Monitoring ----------------------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($_SESSION['ICMPScan'], 1);?>
-                                    <button type="button" class="btn btn-default dbtools-button" id="btnPiaEnableICMPMon" onclick="askPiaEnableICMPMon()"><?=$pia_lang['Maintenance_Tool_icmpmon'] . '<br>' . $state;?></button>
+                                    <button type="button" class="btn btn-default dbtools-button" id="btnEnableICMPMon" onclick="askEnableICMPMon()"><?=$pia_lang['Maintenance_Tool_icmpmon'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
                         </div>
                     </td>
-                </tr>
+				</tr>
                 <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_b'];?></h4></td></tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
@@ -533,7 +548,7 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 </tr>
                 <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
                 <tr class="table_settings_row">
-                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaSetAPIKey" onclick="askPiaSetAPIKey()"><?=$pia_lang['Maintenance_Tool_setapikey'];?></button></td>
+                    <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnSetAPIKey" onclick="askSetAPIKey()"><?=$pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_setapikey_text'];?></td>
                 </tr>
                 <tr class="table_settings_row">
@@ -576,9 +591,9 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 <tr class="table_settings_row">
 <?php
 if (strtolower($_SESSION['WebProtection']) != 'true') {
-	echo '          <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiaLoginEnable" onclick="askPiaLoginEnable()">' . $pia_lang['Maintenance_Tool_loginenable'] . '</button></td>
+	echo '          <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnPiAlertLoginEnable" onclick="askPiAlertLoginEnable()">' . $pia_lang['Maintenance_Tool_loginenable'] . '</button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b">' . $pia_lang['Maintenance_Tool_loginenable_text'] . '</td>';} else {
-	echo '      <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-danger dbtools-button" id="btnPiaLoginDisable" onclick="askPiaLoginDisable()">' . $pia_lang['Maintenance_Tool_logindisable'] . '</button></td>
+	echo '      <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-danger dbtools-button" id="btnPiAlertLoginDisable" onclick="askPiAlertLoginDisable()">' . $pia_lang['Maintenance_Tool_logindisable'] . '</button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b">' . $pia_lang['Maintenance_Tool_logindisable_text'] . '</td>';}
 ?>
                 </tr>
@@ -629,7 +644,7 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaBackupDBtoArchive" onclick="askPiaBackupDBtoArchive()"><?=$pia_lang['Maintenance_Tool_backup'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnBackupDBtoArchive" onclick="askBackupDBtoArchive()"><?=$pia_lang['Maintenance_Tool_backup'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_backup_text'];?></div>
                 </div>
@@ -637,9 +652,9 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                     <div class="db_tools_table_cell_a" style="">
 <?php
 if (!$block_restore_button_db) {
-	echo '<button type="button" class="btn btn-default dbtools-button" id="btnPiaRestoreDBfromArchive" onclick="askPiaRestoreDBfromArchive()">' . $pia_lang['Maintenance_Tool_restore'] . '<br>' . $LATEST_BACKUP_DATE . '</button>';
+	echo '<button type="button" class="btn btn-default dbtools-button" id="btnRestoreDBfromArchive" onclick="askRestoreDBfromArchive()">' . $pia_lang['Maintenance_Tool_restore'] . '<br>' . $LATEST_BACKUP_DATE . '</button>';
 } else {
-	echo '<button type="button" class="btn btn-default dbtools-button disabled" id="btnPiaRestoreDBfromArchive">' . $pia_lang['Maintenance_Tool_restore'] . '<br>' . $LATEST_BACKUP_DATE . '</button>';
+	echo '<button type="button" class="btn btn-default dbtools-button disabled" id="btnRestoreDBfromArchive">' . $pia_lang['Maintenance_Tool_restore'] . '<br>' . $LATEST_BACKUP_DATE . '</button>';
 }
 ?>
                     </div>
@@ -647,7 +662,7 @@ if (!$block_restore_button_db) {
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_tools_table_cell_a" style="">
-                        <button type="button" class="btn btn-default dbtools-button" id="btnPiaPurgeDBBackups" onclick="askPiaPurgeDBBackups()"><?=$pia_lang['Maintenance_Tool_purgebackup'];?></button>
+                        <button type="button" class="btn btn-default dbtools-button" id="btnPurgeDBBackups" onclick="askPurgeDBBackups()"><?=$pia_lang['Maintenance_Tool_purgebackup'];?></button>
                     </div>
                     <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_purgebackup_text'];?></div>
                 </div>
@@ -844,11 +859,11 @@ function deleteActHistory()
 }
 
 // Backup DB to Archive
-function askPiaBackupDBtoArchive () {
+function askBackupDBtoArchive () {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_backup_noti'];?>', '<?=$pia_lang['Maintenance_Tool_backup_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Backup'];?>', 'PiaBackupDBtoArchive');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Backup'];?>', 'BackupDBtoArchive');
 }
-function PiaBackupDBtoArchive()
+function BackupDBtoArchive()
 {
   $.get('php/server/files.php?action=BackupDBtoArchive', function(msg) {
     showMessage (msg);
@@ -856,11 +871,11 @@ function PiaBackupDBtoArchive()
 }
 
 // Restore DB from Archive
-function askPiaRestoreDBfromArchive () {
+function askRestoreDBfromArchive () {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_restore_noti'];?>', '<?=$pia_lang['Maintenance_Tool_restore_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Restore'];?>', 'PiaRestoreDBfromArchive');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Restore'];?>', 'RestoreDBfromArchive');
 }
-function PiaRestoreDBfromArchive()
+function RestoreDBfromArchive()
 {
   $.get('php/server/files.php?action=RestoreDBfromArchive', function(msg) {
     showMessage (msg);
@@ -868,11 +883,11 @@ function PiaRestoreDBfromArchive()
 }
 
 // Purge Backups
-function askPiaPurgeDBBackups() {
+function askPurgeDBBackups() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_purgebackup_noti'];?>', '<?=$pia_lang['Maintenance_Tool_purgebackup_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Purge'];?>', 'PiaPurgeDBBackups');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Purge'];?>', 'PurgeDBBackups');
 }
-function PiaPurgeDBBackups()
+function PurgeDBBackups()
 {
   $.get('php/server/files.php?action=PurgeDBBackups', function(msg) {
     showMessage (msg);
@@ -880,11 +895,11 @@ function PiaPurgeDBBackups()
 }
 
 // Switch Darkmode
-function askPiaEnableDarkmode() {
+function askEnableDarkmode() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_darkmode_noti'];?>', '<?=$pia_lang['Maintenance_Tool_darkmode_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableDarkmode');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableDarkmode');
 }
-function PiaEnableDarkmode()
+function EnableDarkmode()
 {
   $.get('php/server/files.php?action=EnableDarkmode', function(msg) {
     showMessage (msg);
@@ -892,11 +907,11 @@ function PiaEnableDarkmode()
 }
 
 // Switch Web Service Monitor
-function askPiaEnableWebServiceMon() {
+function askEnableWebServiceMon() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_webservicemon_noti'];?>', '<?=$pia_lang['Maintenance_Tool_webservicemon_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableWebServiceMon');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableWebServiceMon');
 }
-function PiaEnableWebServiceMon()
+function EnableWebServiceMon()
 {
   $.get('php/server/services.php?action=EnableWebServiceMon', function(msg) {
     showMessage (msg);
@@ -904,23 +919,35 @@ function PiaEnableWebServiceMon()
 }
 
 // Switch ICMP Monitor
-function askPiaEnableICMPMon() {
+function askEnableICMPMon() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_icmpmon_noti'];?>', '<?=$pia_lang['Maintenance_Tool_icmpmon_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableICMPMon');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableICMPMon');
 }
-function PiaEnableICMPMon()
+function EnableICMPMon()
 {
   $.get('php/server/icmpmonitor.php?action=EnableICMPMon', function(msg) {
     showMessage (msg);
   });
 }
 
-// Toggle Graph
-function askPiaEnableOnlineHistoryGraph() {
-  showModalWarning('<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'];?>', '<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaEnableOnlineHistoryGraph');
+// Switch MainScan
+function askEnableMainScan() {
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_mainscan_noti'];?>', '<?=$pia_lang['Maintenance_Tool_mainscan_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableMainScan');
 }
-function PiaEnableOnlineHistoryGraph()
+function EnableMainScan()
+{
+  $.get('php/server/devices.php?action=EnableMainScan', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Toggle Graph
+function askEnableOnlineHistoryGraph() {
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'];?>', '<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableOnlineHistoryGraph');
+}
+function EnableOnlineHistoryGraph()
 {
   $.get('php/server/files.php?action=EnableOnlineHistoryGraph', function(msg) {
     showMessage (msg);
@@ -928,11 +955,11 @@ function PiaEnableOnlineHistoryGraph()
 }
 
 // Set API-Key
-function askPiaSetAPIKey() {
+function askSetAPIKey() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_setapikey_noti'];?>', '<?=$pia_lang['Maintenance_Tool_setapikey_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Okay'];?>', 'PiaSetAPIKey');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Okay'];?>', 'SetAPIKey');
 }
-function PiaSetAPIKey()
+function SetAPIKey()
 {
   $.get('php/server/files.php?action=SetAPIKey', function(msg) {
     showMessage (msg);
@@ -940,11 +967,11 @@ function PiaSetAPIKey()
 }
 
 // Enable Login
-function askPiaLoginEnable() {
+function askPiAlertLoginEnable() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_loginenable_noti'];?>', '<?=$pia_lang['Maintenance_Tool_loginenable_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaLoginEnable');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiAlertLoginEnable');
 }
-function PiaLoginEnable()
+function PiAlertLoginEnable()
 {
   $.get('php/server/files.php?action=LoginEnable', function(msg) {
     showMessage (msg);
@@ -952,11 +979,11 @@ function PiaLoginEnable()
 }
 
 // Disable Login
-function askPiaLoginDisable() {
+function askPiAlertLoginDisable() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_logindisable_noti'];?>', '<?=$pia_lang['Maintenance_Tool_logindisable_noti_text'];?>',
-    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiaLoginDisable');
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiAlertLoginDisable');
 }
-function PiaLoginDisable()
+function PiAlertLoginDisable()
 {
   $.get('php/server/files.php?action=LoginDisable', function(msg) {
     showMessage (msg);

@@ -80,6 +80,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'getLocations':getLocations();
 		break;
+	case 'EnableMainScan':EnableMainScan();
+		break;
 	default:logServerConsole('Action: ' . $action);
 		break;
 	}
@@ -717,5 +719,25 @@ function BulkDeletion() {
 	pialert_logging('a_021', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $journal_hosts);
 
 }
+
+//  Toggle Web Service Monitoring
+function EnableMainScan() {
+	global $pia_lang;
+
+	if ($_SESSION['Scan_MainScan'] == True) {
+		exec('../../../back/pialert-cli disable_mainscan', $output);
+		echo $pia_lang['BackDevices_MainScan_disabled'];
+		// Logging
+		pialert_logging('a_032', $_SERVER['REMOTE_ADDR'], 'LogStr_9992', '', '');
+		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+	} else {
+		exec('../../../back/pialert-cli enable_mainscan', $output);
+		echo $pia_lang['BackDevices_MainScan_enabled'];
+		// Logging
+		pialert_logging('a_032', $_SERVER['REMOTE_ADDR'], 'LogStr_9991', '', '');
+		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+	}
+}
+
 //  End
 ?>
