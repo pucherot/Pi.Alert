@@ -1017,8 +1017,12 @@ $pia_journ_lang['a_070'] = 'API';
 // pialert-cli
 $pia_journ_lang['b_002'] = $pia_journ_lang['a_002'];
 $pia_journ_lang['b_010'] = 'Maintenance BD';
+$pia_journ_lang['b_030'] = $pia_journ_lang['a_030'];
+$pia_journ_lang['b_031'] = $pia_journ_lang['a_031'];
+$pia_journ_lang['b_032'] = $pia_journ_lang['a_032'];
 // cronjob
 $pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
+$pia_journ_lang['c_010'] = $pia_journ_lang['a_010'];
 // LogStrings
 $pia_journ_lang['LogStr_0001'] = 'Entrée ajoutée';
 $pia_journ_lang['LogStr_0002'] = 'Entrée modifiée';
@@ -1067,6 +1071,7 @@ $pia_journ_lang['LogStr_0062'] = 'Aucune mise à jour Pi.Alert disponible';
 $pia_journ_lang['LogStr_0063'] = 'Mise à jour de la base de données GeoLite2 disponible';
 $pia_journ_lang['LogStr_0064'] = 'Aucune mise à jour de la base de données GeoLite2 disponible';
 $pia_journ_lang['LogStr_0065'] = 'Base de données GeoLite2 non installée';
+$pia_journ_lang['LogStr_0101'] = 'Base de données nettoyée et optimisée';
 $pia_journ_lang['LogStr_0210'] = 'Exécution d&apos;un scan nmap individuel';
 $pia_journ_lang['LogStr_0251'] = 'Exécution de Wake-on-lan';
 $pia_journ_lang['LogStr_0255'] = 'Exécution du test de vitesse en ligne';

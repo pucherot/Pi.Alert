@@ -321,11 +321,11 @@ def cleanup_database ():
     try:
         strdaystokeepOH = str(DAYS_TO_KEEP_ONLINEHISTORY)
     except NameError: # variable not defined, use a default
-        strdaystokeepOH = str(60) # 2 months
+        strdaystokeepOH = str(30) # 1 month
     try:
         strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     except NameError: # variable not defined, use a default
-        strdaystokeepEV = str(200) # 200 days
+        strdaystokeepEV = str(90) # 90 days
 
     print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
@@ -339,6 +339,9 @@ def cleanup_database ():
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
+
+    sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
+                    VALUES (?, 'c_010', 'cronjob', 'LogStr_0101', '', '') """, (startTime,))
 
     closeDB()
     

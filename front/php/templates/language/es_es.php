@@ -1027,6 +1027,7 @@ $pia_journ_lang['b_031'] = $pia_journ_lang['a_031'];
 $pia_journ_lang['b_032'] = $pia_journ_lang['a_032'];
 //cronjob
 $pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
+$pia_journ_lang['c_010'] = $pia_journ_lang['a_010'];
 // LogStrings
 $pia_journ_lang['LogStr_0001'] = 'Entrada agregada';
 $pia_journ_lang['LogStr_0002'] = 'Entrada editada';
@@ -1075,6 +1076,7 @@ $pia_journ_lang['LogStr_0062'] = 'No hay actualización de Pi.Alert disponible';
 $pia_journ_lang['LogStr_0063'] = 'Actualización de la base de datos GeoLite2 disponible';
 $pia_journ_lang['LogStr_0064'] = 'No hay actualización de la base de datos GeoLite2 disponible';
 $pia_journ_lang['LogStr_0065'] = 'Base de datos GeoLite2 no instalada';
+$pia_journ_lang['LogStr_0101'] = 'Base de datos limpiada y optimizada';
 $pia_journ_lang['LogStr_0210'] = 'Escaneo individual de nmap realizado';
 $pia_journ_lang['LogStr_0251'] = 'Ejecutado Wake-on-lan';
 $pia_journ_lang['LogStr_0255'] = 'Ejecutado Speedtest en línea';
