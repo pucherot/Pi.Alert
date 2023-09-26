@@ -25,6 +25,9 @@ The following fields are returned with the API call "system-status".
 "All_Services":<Integer>
 ```
 
+[Query with PHP](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-system-status), 
+[Query with curl](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-system-status)
+
 The following fields are returned with the API call "mac-status".
 
 ```
@@ -56,17 +59,52 @@ The following fields are returned with the API call "mac-status".
 "dev_Serialnumber":"<String>",
 "dev_ConnectionType":"<String>"
 ```
+[Query with PHP](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-mac-status), 
+[Query with curl](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-mac-status)
+
+The following fields are returned with the API call "all-online" or "all-offline" for each device.
+
+```
+"dev_MAC":"<String>",
+"dev_Name":"<String>",
+"dev_Vendor":"<String>",
+"dev_LastIP":"<String>",
+"dev_Infrastructure":<Integer>,
+"dev_Infrastructure_port":<Integer>
+```
+
+[Query with PHP](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline), 
+[Query with curl](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-all-online-or-all-offline)
+
+The following fields are returned with the API call "all-online-icmp" for each device.
+
+```
+"icmp_ip":"<String>",
+"icmp_hostname":"<String>",
+"icmp_avgrtt":<Float>
+```
+
+[Query with PHP](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline), 
+[Query with curl](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-all-online-or-all-offline)
+
+The following fields are returned with the API call "all-offline-icmp" for each device.
+
+```
+"icmp_ip":"<String>",
+"icmp_hostname":"<String>"
+```
+
+[Query with PHP](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline), 
+[Query with curl](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-all-online-or-all-offline)
 
 
-## Examples
-[Query with PHP (system-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-system-status)<br>
-[Query with PHP (mac-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-mac-status)<br>
-[Query with PHP (all-online, all-offline, all-online-icmp, all-offline-icmp)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline)<br><br>
-[Query with curl (system-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-system-status)<br>
-[Query with curl (mac-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-mac-status)<br>
-[Query with curl (all-online or all-offline)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-all-online-or-all-offline)<br><br>
+## Home Assistant Integration
+
+The API can also be used to make information available in Home Assistant.
+
 [Use API-Call for Home Assistant](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#use-api-call-for-home-assistant)
-<br><hr><br>
+
+<hr>
 
 ### Example of a query with PHP (system-status)
 
