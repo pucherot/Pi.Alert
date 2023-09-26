@@ -423,7 +423,7 @@ function PurgeDBBackups() {
 	unset($Pia_Backupfiles);
 	$Pia_Archive_Path = '../../../config';
 	$Pia_Backupfiles = array();
-	$files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.conf', 'version.conf', 'pialert-prev.bak'));
+	$files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.conf', 'version.conf', 'pialert-prev.bak', 'pialert.conf.back'));
 	foreach ($files as &$item) {
 		$item = $Pia_Archive_Path . '/' . $item;
 		array_push($Pia_Backupfiles, $item);
