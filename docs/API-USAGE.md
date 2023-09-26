@@ -9,10 +9,59 @@ all-offline). For a query we need the API key, which can be created via the fron
 via the pialer-cli in the "/back" directory.
 The API key must be transmitted with "post", at least that's how it's written on my part at the moment.
 
+The following fields are returned with the API call "system-status".
+
+```
+"Scanning":"<String>",
+"Last_Scan":"<String>",
+"All_Devices":<Integer>,
+"Offline_Devices":<Integer>,
+"Online_Devices":<Integer>,
+"Archived_Devices":<Integer>,
+"New_Devices":<Integer>,
+"All_Devices_ICMP":<Integer>,
+"Offline_Devices_ICMP":<Integer>,
+"Online_Devices_ICMP":<Integer>,
+"All_Services":<Integer>
+```
+
+The following fields are returned with the API call "mac-status".
+
+```
+"dev_MAC":"<String>",
+"dev_Name":"<String>",
+"dev_Owner":"<String>",
+"dev_DeviceType":"<String>",
+"dev_Vendor":"<String>",
+"dev_Favorite":<Integer>,
+"dev_Group":"<String>",
+"dev_Comments":"<String>",
+"dev_FirstConnection":"<String>",
+"dev_LastConnection":"<String>",
+"dev_LastIP":"<String>",
+"dev_StaticIP":<Integer>,
+"dev_ScanCycle":<Integer>,
+"dev_LogEvents":<Integer>,
+"dev_AlertEvents":<Integer>,
+"dev_AlertDeviceDown":<Integer>,
+"dev_SkipRepeated":<Integer>,
+"dev_LastNotification":"<String>",
+"dev_PresentLastScan":<Integer>,
+"dev_NewDevice":<Integer>,
+"dev_Location":"<String>",
+"dev_Archived":<Integer>,
+"dev_Infrastructure":<Integer>,
+"dev_Infrastructure_port":<Integer>,
+"dev_Model":"<String>",
+"dev_Serialnumber":"<String>",
+"dev_ConnectionType":"<String>"
+```
+
+
 ## Examples
 [Query with PHP (system-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-system-status)<br>
 [Query with PHP (mac-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-mac-status)<br>
-[Query with PHP (all-online or all-offline)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline)<br><br>
+[Query with PHP (all-online, all-offline, all-online-icmp, all-offline-icmp)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-php-all-online-or-all-offline)<br><br>
 [Query with curl (system-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-system-status)<br>
 [Query with curl (mac-status)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-mac-status)<br>
 [Query with curl (all-online or all-offline)](https://github.com/leiweibau/Pi.Alert/blob/main/docs/API-USAGE.md#example-of-a-query-with-the-commandline-tool-curl-all-online-or-all-offline)<br><br>
@@ -94,7 +143,7 @@ Demo output
 print_r(json_decode($response));
 ```
 
-### Example of a query with PHP (all-online or all-offline)
+### Query with PHP (all-online, all-offline, all-online-icmp, all-offline-icmp)
 
 Prepare post fields
 ```
