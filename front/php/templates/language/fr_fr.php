@@ -595,75 +595,47 @@ $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
 $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-maroon help_faq_code">pialert-cli</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert
                                              without web page or change to the configuration file. With the command <span class="text-maroon help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
 											 <table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_a">set_login</td>
+											    <tr><td class="help_table_gen_a">set_login</td>
 											        <td class="help_table_gen_b">- Définit le paramètre PIALERT_WEB_PROTECTION dans le fichier de configuration sur TRUE<br>
-											            - Si le paramètre n&apos;est pas présent, il sera créé. De plus, le mot de passe par défaut "123456" est défini.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">unset_login</td>
+											            - Si le paramètre n&apos;est pas présent, il sera créé. De plus, le mot de passe par défaut "123456" est défini.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">unset_login</td>
 											        <td class="help_table_gen_b">- Définit le paramètre PIALERT_WEB_PROTECTION dans le fichier de configuration sur FALSE<br>
-											            - Si le paramètre n&apos;est pas présent, il sera créé. De plus, le mot de passe par défaut "123456" est défini.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_password &lt;password&gt;</td>
+											            - Si le paramètre n&apos;est pas présent, il sera créé. De plus, le mot de passe par défaut "123456" est défini.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_password &lt;password&gt;</td>
 											        <td class="help_table_gen_b">- Définit le nouveau mot de passe sous forme de valeur hachée.<br>
-											            - Si le paramètre PIALERT_WEB_PROTECTION n&apos;existe pas encore, il sera créé et défini sur "TRUE" (connexion activée)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_autopassword</td>
+											            - Si le paramètre PIALERT_WEB_PROTECTION n&apos;existe pas encore, il sera créé et défini sur "TRUE" (connexion activée)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_autopassword</td>
 											        <td class="help_table_gen_b">- Définit un nouveau mot de passe aléatoire sous forme de valeur hachée et l&apos;affiche en texte brut dans la console.<br>
-											            - Si le paramètre PIALERT_WEB_PROTECTION n&apos;existe pas encore, il sera créé et défini sur "TRUE" (connexion activée)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
+											            - Si le paramètre PIALERT_WEB_PROTECTION n&apos;existe pas encore, il sera créé et défini sur "TRUE" (connexion activée)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
 											        <td class="help_table_gen_b">- Arrête toutes les numérisations en cours.<br>
-											            - Empêche le démarrage de nouvelles numérisations.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_scan</td>
-											        <td class="help_table_gen_b">- Permet le démarrage de nouvelles numérisations.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_service_mon</td>
-											        <td class="help_table_gen_b">- Active la surveillance des services Web.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_service_mon</td>
-											        <td class="help_table_gen_b">- Désactive la surveillance des services Web.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_icmp_mon</td>
-											        <td class="help_table_gen_b">- Enable ICMP Monitoring (ping)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_icmp_mon</td>
-											        <td class="help_table_gen_b">- Disable ICMP Monitoring (ping)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">update_db</td>
-											        <td class="help_table_gen_b">- Le script tente de rendre la base de données compatible avec cette version.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_apikey</td>
-											        <td class="help_table_gen_b">- Avec la clé API, il est possible de faire des requêtes à la base de données sans utiliser la page web. Si une clé API existe déjà, elle sera remplacée.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-												    <td class="help_table_gen_a">set_permissions</td>
-												    <td class="help_table_gen_b">- Corrige les permissions de fichier de la base de données.</td>
-												</tr>
-											    <tr>
-											        <td class="help_table_gen_a">reporting_test</td>
-											        <td class="help_table_gen_b">- Teste les notifications pour tous les services activés.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											    	<td class="help_table_gen_a">set_sudoers</td>
-											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td>
-											    </tr>
-											    <tr>
-													<td class="help_table_gen_a">unset_sudoers</td>
-											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td>
-											    </tr>
+											            - Empêche le démarrage de nouvelles numérisations.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">enable_scan</td>
+											        <td class="help_table_gen_b">- Permet le démarrage de nouvelles numérisations.<br>&nbsp;</td></tr>
+												<tr><td class="help_table_gen_a">disable_mainscan</td>
+												    <td class="help_table_gen_b">- Désactive la méthode principale de numérisation pour Pi.Alert (numérisation ARP)</td></tr>
+												<tr><td class="help_table_gen_a">enable_mainscan</td>
+												    <td class="help_table_gen_b">- Active la méthode principale de numérisation pour Pi.Alert (numérisation ARP)</td></tr>
+											    <tr><td class="help_table_gen_a">enable_service_mon</td>
+											        <td class="help_table_gen_b">- Active la surveillance des services Web.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">disable_service_mon</td>
+											        <td class="help_table_gen_b">- Désactive la surveillance des services Web.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">enable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Enable ICMP Monitoring (ping)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">disable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Disable ICMP Monitoring (ping)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">update_db</td>
+											        <td class="help_table_gen_b">- Le script tente de rendre la base de données compatible avec cette version.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_apikey</td>
+											        <td class="help_table_gen_b">- Avec la clé API, il est possible de faire des requêtes à la base de données sans utiliser la page web. Si une clé API existe déjà, elle sera remplacée.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_permissions</td>
+												    <td class="help_table_gen_b">- Corrige les permissions de fichier de la base de données.</td></tr>
+											    <tr><td class="help_table_gen_a">reporting_test</td>
+											        <td class="help_table_gen_b">- Teste les notifications pour tous les services activés.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_sudoers</td>
+											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td></tr>
+											    <tr><td class="help_table_gen_a">unset_sudoers</td>
+											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Certaines composantes de Pi.Alert nécessitent l&apos;autorisation "sudo"</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certaines fonctionnalités de Pi.Alert, telles que l&apos;envoi de messages de test, la détection de serveurs DHCP étrangers ou l&apos;identification de périphériques à l&apos;aide de arp-scan,
@@ -820,7 +792,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon
 											        <td class="help_table_gen_b">
 											        	&lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
 											        	Normalement, cette option est déjà paramétrée correctement. Ce paramètre est sélectionné lorsque Pi.Alert est installé sur un appareil avec une carte réseau et qu&apos;aucun autre réseau n&apos;est configuré.<br><br>
-											        	&lsquo;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&rsquo;<br>
+											        	&apos;<span class="text-maroon help_faq_code">--localnet --interface=eth0</span>&apos;<br>
 											        	Cette configuration est sélectionnée si Pi.Alert est installé sur un système avec au moins 2 cartes réseau et un réseau configuré. Cependant, la désignation de l&apos;interface peut varier et doit être adaptée aux conditions du système.<br><br>
 											        	<span class="text-maroon help_faq_code">[&apos;192.168.1.0/24 --interface=eth0&apos;,&apos;192.168.2.0/24 --interface=eth1&apos;]</span><br>
 											        	La dernière configuration est nécessaire si plusieurs réseaux doivent être surveillés. Pour chaque réseau à surveiller, une carte réseau correspondante doit être configurée. Cela est nécessaire car le "arp-scan" utilisé n&apos;est pas routé, c&apos;est-à-dire qu&apos;il fonctionne uniquement dans son propre sous-réseau. Chaque interface est saisie ici avec le réseau correspondant. La désignation de l&apos;interface doit être adaptée aux conditions du système.
@@ -829,7 +801,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Options de Surveillance ICMP</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
-											        <td class="help_table_gen_b">Nombre de "ping&apos;s" pour déterminer si un appareil est en ligne (Par défaut 1).</td></tr>
+											        <td class="help_table_gen_b">Nombre d&apos;essais pour déterminer si un appareil est en ligne (Par défaut 1).</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
 											        <td class="help_table_gen_b">Nombre de "ping&apos;s" pour calculer le temps de réponse moyen (Par défaut 2).</td></tr>
 											</table>

@@ -621,6 +621,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											            - Verhindert den Start neuer Scans.<br>- Sie können eine Zeitspanne in Minuten festlegen. Wenn keine Zeitspanne festgelegt wird, startet Pi.Alert mit dem nächsten Scan nach 10 Minuten neu</td></tr>
 											    <tr><td class="help_table_gen_a">enable_scan</td>
 											        <td class="help_table_gen_b">- Aktiviert den Start neuer Scans wieder</td></tr>
+											    <tr><td class="help_table_gen_a">disable_mainscan</td>
+											        <td class="help_table_gen_b">- Deaktiviert die Haupt Scan Methode für Pi.Alert (Arp-scan)</td></tr>
+											    <tr><td class="help_table_gen_a">enable_mainscan</td>
+											        <td class="help_table_gen_b">- Aktiviert die Haupt Scan Methode für Pi.Alert (Arp-scan)</td></tr>
 											    <tr><td class="help_table_gen_a">disable_service_mon</td>
 											        <td class="help_table_gen_b">- Deaktiviert die Web Service Überwachung</td></tr>
 											    <tr><td class="help_table_gen_a">enable_service_mon</td>
@@ -811,7 +815,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">ICMP Monitoring Options</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
-											        <td class="help_table_gen_b">Anzahl der "ping&apos;s" um festzustellen, ob ein Gerät online ist (Default 1).</td></tr>
+											        <td class="help_table_gen_b">Anzahl der Versuche um festzustellen, ob ein Gerät online ist (Default 1).</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
 											        <td class="help_table_gen_b">Anzahl der "ping&apos;s" zur Berechnung der durchschnittlichen Antwortzeit (Default 2).</td></tr>
 											</table>

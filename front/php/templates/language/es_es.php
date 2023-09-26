@@ -600,75 +600,47 @@ $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
 $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-maroon help_faq_code">pialert-cli</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert
                                              without web page or change to the configuration file. With the command <span class="text-maroon help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
 											 <table class="help_table_gen">
-											    <tr>
-												    <td class="help_table_gen_a">set_login</td>
+											    <tr><td class="help_table_gen_a">set_login</td>
 												    <td class="help_table_gen_b">- Establece el parámetro PIALERT_WEB_PROTECTION en el archivo de configuración a TRUE.<br>
-												        - Si el parámetro no está presente, se creará. Además, se establecerá la contraseña predeterminada "123456".</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">unset_login</td>
+												        - Si el parámetro no está presente, se creará. Además, se establecerá la contraseña predeterminada "123456".</td></tr>
+												<tr><td class="help_table_gen_a">unset_login</td>
 												    <td class="help_table_gen_b">- Establece el parámetro PIALERT_WEB_PROTECTION en el archivo de configuración a FALSE.<br>
-												        - Si el parámetro no está presente, se creará. Además, se establecerá la contraseña predeterminada "123456".</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">set_password &lt;password&gt;</td>
+												        - Si el parámetro no está presente, se creará. Además, se establecerá la contraseña predeterminada "123456".</td></tr>
+												<tr><td class="help_table_gen_a">set_password &lt;password&gt;</td>
 												    <td class="help_table_gen_b">- Establece la nueva contraseña como un valor hash.<br>
-												        - Si el parámetro PIALERT_WEB_PROTECTION no existe aún, se creará y se establecerá en "TRUE" (inicio de sesión habilitado).</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">set_autopassword</td>
+												        - Si el parámetro PIALERT_WEB_PROTECTION no existe aún, se creará y se establecerá en "TRUE" (inicio de sesión habilitado).</td></tr>
+												<tr><td class="help_table_gen_a">set_autopassword</td>
 												    <td class="help_table_gen_b">- Establece una nueva contraseña aleatoria como un valor hash y la muestra en texto sin formato en la consola.<br>
-												        - Si el parámetro PIALERT_WEB_PROTECTION no existe aún, se creará y se establecerá en "TRUE" (inicio de sesión habilitado).</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
+												        - Si el parámetro PIALERT_WEB_PROTECTION no existe aún, se creará y se establecerá en "TRUE" (inicio de sesión habilitado).</td></tr>
+												<tr><td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
 												    <td class="help_table_gen_b">- Detiene todas las exploraciones activas.<br>
-												        - Impide que se inicien nuevas exploraciones.</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">enable_scan</td>
-												    <td class="help_table_gen_b">- Permite el inicio de nuevas exploraciones nuevamente.</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">enable_service_mon</td>
-												    <td class="help_table_gen_b">- Habilita la supervisión de servicios web.</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">disable_service_mon</td>
-												    <td class="help_table_gen_b">- Deshabilita la supervisión de servicios web.</td>
-												</tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_icmp_mon</td>
-											        <td class="help_table_gen_b">- Enable ICMP Monitoring (ping)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_icmp_mon</td>
-											        <td class="help_table_gen_b">- Disable ICMP Monitoring (ping)<br>&nbsp;</td>
-											    </tr>
-												<tr>
-												    <td class="help_table_gen_a">update_db</td>
-												    <td class="help_table_gen_b">- El script intenta hacer que la base de datos sea compatible con esta bifurcación.</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">set_apikey</td>
-												    <td class="help_table_gen_b">- Con la clave API es posible hacer consultas a la base de datos sin utilizar la página web. Si ya existe una clave API, se reemplazará.</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">set_permissions</td>
-												    <td class="help_table_gen_b">- Corrige los permisos de archivo de la base de datos.</td>
-												</tr>
-												<tr>
-												    <td class="help_table_gen_a">reporting_test</td>
-												    <td class="help_table_gen_b">- Prueba de informes para todos los servicios activados.</td>
-												</tr>
-											    <tr>
-											    	<td class="help_table_gen_a">set_sudoers</td>
-											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td>
-											    </tr>
-											    <tr>
-													<td class="help_table_gen_a">unset_sudoers</td>
-											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td>
-											    </tr>
+												        - Impide que se inicien nuevas exploraciones.</td></tr>
+												<tr><td class="help_table_gen_a">enable_scan</td>
+												    <td class="help_table_gen_b">- Permite el inicio de nuevas exploraciones nuevamente.</td></tr>
+												<tr><td class="help_table_gen_a">disable_mainscan</td>
+												    <td class="help_table_gen_b">- Desactiva el método principal de escaneo para Pi.Alert (escaneo ARP)</td></tr>
+												<tr><td class="help_table_gen_a">enable_mainscan</td>
+												    <td class="help_table_gen_b">- Activa el método principal de escaneo para Pi.Alert (escaneo ARP)</td></tr>
+												<tr><td class="help_table_gen_a">enable_service_mon</td>
+												    <td class="help_table_gen_b">- Habilita la supervisión de servicios web.</td></tr>
+												<tr><td class="help_table_gen_a">disable_service_mon</td>
+												    <td class="help_table_gen_b">- Deshabilita la supervisión de servicios web.</td></tr>
+											    <tr><td class="help_table_gen_a">enable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Enable ICMP Monitoring (ping)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">disable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Disable ICMP Monitoring (ping)<br>&nbsp;</td></tr>
+												<tr><td class="help_table_gen_a">update_db</td>
+												    <td class="help_table_gen_b">- El script intenta hacer que la base de datos sea compatible con esta bifurcación.</td></tr>
+												<tr><td class="help_table_gen_a">set_apikey</td>
+												    <td class="help_table_gen_b">- Con la clave API es posible hacer consultas a la base de datos sin utilizar la página web. Si ya existe una clave API, se reemplazará.</td></tr>
+												<tr><td class="help_table_gen_a">set_permissions</td>
+												    <td class="help_table_gen_b">- Corrige los permisos de archivo de la base de datos.</td></tr>
+												<tr><td class="help_table_gen_a">reporting_test</td>
+												    <td class="help_table_gen_b">- Prueba de informes para todos los servicios activados.</td></tr>
+											    <tr><td class="help_table_gen_a">set_sudoers</td>
+											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td></tr>
+											    <tr><td class="help_table_gen_a">unset_sudoers</td>
+											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Algunos componentes de Pi.Alert requieren permisos "sudo"</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'Ciertas funciones de Pi.Alert, como el envío de mensajes de prueba, la detección de servidores DHCP extranjeros o la identificación de dispositivos mediante arp-scan,
@@ -834,7 +806,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Opciones de Monitoreo ICMP</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
-											        <td class="help_table_gen_b">Número de "ping&apos;s" para determinar si un dispositivo está en línea (Valor predeterminado 1).</td></tr>
+											        <td class="help_table_gen_b">Número de intentos para determinar si un dispositivo está en línea (Valor predeterminado 1).</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
 											        <td class="help_table_gen_b">Número de "ping&apos;s" para calcular el tiempo de respuesta promedio (Valor predeterminado 2).</td></tr>
 											</table>

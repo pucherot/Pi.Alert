@@ -600,76 +600,48 @@ $pia_lang['HelpFAQ_Cat_General_105_head'] = 'pialert-cli';
 $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="text-maroon help_faq_code">pialert-cli</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/back</span> and offers the possibility to make settings to Pi.Alert
                                              without web page or change to the configuration file. With the command <span class="text-maroon help_faq_code">./pialert-cli help</span> a list with the supported options can be called.
 											 <table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_a">set_login</td>
+											    <tr><td class="help_table_gen_a">set_login</td>
 											        <td class="help_table_gen_b">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to TRUE<br>
-											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">unset_login</td>
+											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">unset_login</td>
 											        <td class="help_table_gen_b">- Sets the parameter PIALERT_WEB_PROTECTION in the config file to FALSE<br>
-											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_password &lt;password&gt;</td>
+											            - If the parameter is not present, it will be created. Additionally the default password "123456" is set.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_password &lt;password&gt;</td>
 											        <td class="help_table_gen_b">- Sets the new password as a hashed value.<br>
-											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_autopassword</td>
+											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_autopassword</td>
 											        <td class="help_table_gen_b">- Sets a new random password as a hashed value and show it plaintext in the console.<br>
-											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
+											            - If the PIALERT_WEB_PROTECTION parameter does not exist yet, it will be created and set to "TRUE" (login enabled)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">disable_scan &lt;MIN&gt;</td>
 											        <td class="help_table_gen_b">- Stops all active scans.<br>
 											            - Prevents new scans from starting.<br>
-											            - You can set a Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with the next scan after 10min.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_scan</td>
-											        <td class="help_table_gen_b">- Allows the start of new scans again.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_service_mon</td>
-											        <td class="help_table_gen_b">- Enable Web Service Monitoring<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_service_mon</td>
-											        <td class="help_table_gen_b">- Disable Web Service Monitoring<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">enable_icmp_mon</td>
-											        <td class="help_table_gen_b">- Enable ICMP Monitoring (ping)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">disable_icmp_mon</td>
-											        <td class="help_table_gen_b">- Disable ICMP Monitoring (ping)<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">update_db</td>
-											        <td class="help_table_gen_b">- The script tries to make the database compatible for this fork.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">set_apikey</td>
-											        <td class="help_table_gen_b">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											    	<td class="help_table_gen_a">set_permissions</td>
-    												<td class="help_table_gen_b">- Fixes the file permissions of the database.</td>
-    											</tr>
-											    <tr>
-											        <td class="help_table_gen_a">reporting_test</td>
-											        <td class="help_table_gen_b">- Test reporting for all activated services.<br>&nbsp;</td>
-											    </tr>
-											    <tr>
-											    	<td class="help_table_gen_a">set_sudoers</td>
-											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td>
-											    </tr>
-											    <tr>
-													<td class="help_table_gen_a">unset_sudoers</td>
-											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td>
-											    </tr>
+											            - You can set a Timeout in minutes. If no timeout is set, Pi.Alert restarts itself with the next scan after 10min.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">enable_scan</td>
+											        <td class="help_table_gen_b">- Allows the start of new scans again.<br>&nbsp;</td></tr>
+												<tr><td class="help_table_gen_a">disable_mainscan</td>
+												    <td class="help_table_gen_b">- Disables the main scanning method for Pi.Alert (ARP scan)</td></tr>
+												<tr><td class="help_table_gen_a">enable_mainscan</td>
+												    <td class="help_table_gen_b">- Enables the main scanning method for Pi.Alert (ARP scan)</td></tr>
+											    <tr><td class="help_table_gen_a">enable_service_mon</td>
+											        <td class="help_table_gen_b">- Enable Web Service Monitoring<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">disable_service_mon</td>
+											        <td class="help_table_gen_b">- Disable Web Service Monitoring<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">enable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Enable ICMP Monitoring (ping)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">disable_icmp_mon</td>
+											        <td class="help_table_gen_b">- Disable ICMP Monitoring (ping)<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">update_db</td>
+											        <td class="help_table_gen_b">- The script tries to make the database compatible for this fork.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_apikey</td>
+											        <td class="help_table_gen_b">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_permissions</td>
+    												<td class="help_table_gen_b">- Fixes the file permissions of the database.</td></tr>
+											    <tr><td class="help_table_gen_a">reporting_test</td>
+											        <td class="help_table_gen_b">- Test reporting for all activated services.<br>&nbsp;</td></tr>
+											    <tr><td class="help_table_gen_a">set_sudoers</td>
+											        <td class="help_table_gen_b">- Create sudoer file for www-data and Pi.Alert user</td></tr>
+											    <tr><td class="help_table_gen_a">unset_sudoers</td>
+											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
 $pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Some Pi.Alert components need "sudo" permission</span>';
 $pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certain functions of Pi.Alert, like sending test messages, detecting foreign DHCP servers or detecting devices using arp-scan, require "sudo" permissions. Here a configuration adjustment is necessary.
@@ -839,7 +811,7 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">ICMP Monitoring Options</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
-											        <td class="help_table_gen_b">Number of "ping&apos;s" to determine if a device is online (Default 1).</td></tr>
+											        <td class="help_table_gen_b">Number of attempts to determine if a device is online (Default 1).</td></tr>
 											    <tr><td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
 											        <td class="help_table_gen_b">Number of "ping&apos;s" to calculate the average response time (Default 2).</td></tr>
 											</table>
