@@ -82,7 +82,7 @@ function get_pialert_journal() {
 	global $db;
 	global $pia_journ_lang;
 
-	$pia_journal = $db->query('SELECT * FROM pialert_journal ORDER BY Journal_DateTime DESC Limit 1000');
+	$pia_journal = $db->query('SELECT * FROM pialert_journal ORDER BY Journal_DateTime DESC Limit 500');
 	while ($row = $pia_journal->fetchArray()) {
 		if ($row['LogClass'] == "a_000") {$full_additional_info = $pia_journ_lang[$row['LogString']] . '<br>' . $pia_journ_lang['File_hash'] . ': <span class="text-danger">' . $row['Hash'] . '</span>';} else { $full_additional_info = $pia_journ_lang[$row['LogString']];}
 		$full_additional_info = $full_additional_info . '<br>' . $row['Additional_Info'];
