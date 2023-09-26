@@ -62,10 +62,10 @@ a notification can be sent.
 ### Back
 
   - Scan the network searching connected devices using the scanning methods described earlier
-  - Checks the reachability of web services
+  - Checks the reachability of web services and informs about SSL certificate changes
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services ([Pushsafer](https://www.pushsafer.com/), [Pushover](https://pushover.net/), NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
-  - DB cleanup tasks via cron
+  - automated DB cleanup tasks
   - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
   - Additional information
     - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
@@ -93,7 +93,7 @@ There is a configurable login to prevent unauthorized use. The default password 
   - Help/FAQ section
   - Wake-on-LAN (must be supported by the target device)
   - Notification page with download options
-  - Journal that tracks operations via the frontend
+  - Journal that tracks operations via the frontend, pialert-cli and cronjob
 
 Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
