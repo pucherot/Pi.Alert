@@ -6,6 +6,7 @@ PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
 PIA_CONF_FILE_PATH=${SCRIPTPATH}'/../config'
 PIA_DB_FILE=${SCRIPTPATH}'/../db/pialert.db'
 PIA_DB_FILE_PATH=${SCRIPTPATH}'/../db'
+PIA_BACK_FILE_PATH=${SCRIPTPATH}'/../back'
 PIA_REPORTS_PATH=${SCRIPTPATH}'/../front/reports'
 #Textformating
 bold=$(tput bold)
@@ -561,6 +562,9 @@ EOM
         echo "    Set Config Permissions"
         sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
         sudo chown -R "$PIA_USER":www-data "$PIA_CONF_FILE_PATH"
+        echo "    Set Back Permissions"
+        sudo chmod -R 775 "$PIA_BACK_FILE_PATH"
+        sudo chown -R "$PIA_USER":www-data "$PIA_BACK_FILE_PATH"
         echo "    Set Reports Permissions"
         sudo chmod -R 775 "$PIA_REPORTS_PATH"
         sudo chown -R "$PIA_USER":www-data "$PIA_REPORTS_PATH"
@@ -588,6 +592,9 @@ EOM
             echo "    Set Config Group Permissions only"
             sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
             sudo chgrp -R www-data "$PIA_CONF_FILE_PATH"
+            echo "    Set Back Group Permissions only"
+            sudo chmod -R 775 "$PIA_BACK_FILE_PATH"
+            sudo chgrp -R www-data "$PIA_BACK_FILE_PATH"
             echo "    Set Reports Permissions"
             sudo chmod -R 775 "$PIA_REPORTS_PATH"
             sudo chown -R "$PIA_USER":www-data "$PIA_REPORTS_PATH"
