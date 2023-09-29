@@ -1,0 +1,5 @@
+This directory is used for the speedtest client of Ookla which can be downloaded 
+from "https://www.speedtest.net/apps/cli". Before this client can be used via the 
+frontend, it must be started once as "root" and the license agreement must be 
+accepted.
+

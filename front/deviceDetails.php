@@ -524,8 +524,16 @@ if ($_REQUEST['mac'] == 'Internet') {$DevDetail_Tap_temp = "Tools";} else { $Dev
 if ($_REQUEST['mac'] == 'Internet') {
 	?>
                 <h4 class="">Online Speedtest</h4>
-                <div style="width:100%; text-align: center; margin-bottom: 50px;">
-                  <button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin: auto;" onclick="speedtestcli()">Start Speedtest</button>
+                <div style="width:100%; text-align: center; margin-bottom: 50px; display: inline-block;">
+                  <button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtestcli()">Start Speedtest-cli</button>
+<?php
+
+	$speedtest_binary = '../back/speedtest/speedtest';
+	if (file_exists($speedtest_binary)) {
+		echo '<button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtest_ookla()">Start Speedtest (Ookla)</button>';
+	}
+
+	?>
                 </div>
 
                   <script>
@@ -534,6 +542,19 @@ if ($_REQUEST['mac'] == 'Internet') {
                     $.ajax({
                       method: "POST",
                       url: "./php/server/speedtestcli.php",
+                      beforeSend: function() { $('#scanoutput').addClass("ajax_scripts_loading"); },
+                      complete: function() { $('#scanoutput').removeClass("ajax_scripts_loading"); },
+                      success: function(data, textStatus) {
+                          $("#scanoutput").html(data);
+                      }
+                    })
+                  }
+
+                  function speedtest_ookla() {
+                    $( "#scanoutput" ).empty();
+                    $.ajax({
+                      method: "POST",
+                      url: "./php/server/speedtest_ookla.php",
                       beforeSend: function() { $('#scanoutput').addClass("ajax_scripts_loading"); },
                       complete: function() { $('#scanoutput').removeClass("ajax_scripts_loading"); },
                       success: function(data, textStatus) {
