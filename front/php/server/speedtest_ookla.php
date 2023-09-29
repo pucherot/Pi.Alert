@@ -89,7 +89,9 @@ function delete_speedtest_archive() {
 
 	if (file_exists($achivePath)) {
 		unlink($achivePath);
-		echo 'File delete successfully!';
+	}
+	if (!file_exists($achivePath)) {
+		echo 'Archive deleted successfully!';
 	}
 }
 
@@ -141,15 +143,28 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 		echo "\n";
 		delete_speedtest_archive();
 		echo "\n";
-		echo 'Page will be reloaded';
-		echo ("<meta http-equiv='refresh' content='4; URL=./deviceDetails.php?mac=Internet'>");
+
+		//echo 'Page will be reloaded';
+		//echo ("<meta http-equiv='refresh' content='4; URL=./deviceDetails.php?mac=Internet'>");
 
 	} elseif ($kernel_arch == "amd64") {
 		# Compatible client possible
-		echo "manuell got " . $kernel_arch;
+		echo "Detected System Architecture: " . $kernel_arch . "\n";
+		$downloadlink = get_speedtest_link('x86_64');
+		echo "Selected Downloadlink: " . $downloadlink . "\n";
+		download_speedtest($downloadlink);
+		echo "\n";
+		extract_speedtest();
+		echo "\n";
+		delete_speedtest_archive();
+		echo "\n";
+		//echo 'Page will be reloaded';
+		//echo ("<meta http-equiv='refresh' content='4; URL=./deviceDetails.php?mac=Internet'>");
 	}
 
 	echo '</pre>';
+
+	echo '<span class="text-red" style="font-size: 18px;">Before you can to use the speedtest client from Ookla, you have to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/".</span>';
 
 # Speedtest not installed
 # ------------------------------------------------------------------------------
