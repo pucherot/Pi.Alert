@@ -125,15 +125,14 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 } elseif ($mod == "get") {
 	echo '<h4>Speedtest (Ookla) Results</h4>';
 	echo '<pre style="border: none;">';
-	echo 'Try to install the speedtest. Only i386, x86_64, armel, armhf and aarch64 are currently supported.';
-
-	echo "\n";
+	echo "Try to install the speedtest. Only i386, x86_64, armel, armhf and aarch64 are currently supported.\n";
 
 	$supported_arch = array('i386', 'x86_64', 'armel', 'armhf', 'aarch64');
 	$kernel_arch = exec('dpkg --print-architecture');
 
 	if (in_array($kernel_arch, $supported_arch)) {
 		# System matches one of the clients
+		# -----------------------------------
 		echo "Detected System Architecture: " . $kernel_arch . "\n";
 		$downloadlink = get_speedtest_link($kernel_arch);
 		echo "Selected Downloadlink: " . $downloadlink . "\n";
@@ -143,12 +142,10 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 		echo "\n";
 		delete_speedtest_archive();
 		echo "\n";
-
-		//echo 'Page will be reloaded';
-		//echo ("<meta http-equiv='refresh' content='4; URL=./deviceDetails.php?mac=Internet'>");
-
+		$show_hint = 1;
 	} elseif ($kernel_arch == "amd64") {
 		# Compatible client possible
+		# -----------------------------------
 		echo "Detected System Architecture: " . $kernel_arch . "\n";
 		$downloadlink = get_speedtest_link('x86_64');
 		echo "Selected Downloadlink: " . $downloadlink . "\n";
@@ -158,13 +155,19 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 		echo "\n";
 		delete_speedtest_archive();
 		echo "\n";
-		//echo 'Page will be reloaded';
-		//echo ("<meta http-equiv='refresh' content='4; URL=./deviceDetails.php?mac=Internet'>");
+		$show_hint = 1;
+	} else {
+		# Compatible client possible
+		# -----------------------------------
+		echo "Detected System Architecture: " . $kernel_arch . "\n\n";
+		echo "No client was found for the existing system architecture!!!";
+		$show_hint = 0;
 	}
 
 	echo '</pre>';
-
-	echo '<span class="text-red" style="font-size: 18px;">Before you can to use the speedtest client from Ookla, you have to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/".</span>';
+	if ($show_hint == 1) {
+		echo '<span class="text-red" style="font-size: 18px;">Before you can to use the speedtest client from Ookla, you have to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/". The Speedtest button is activated with a page reload, but only works after the Ookla license has been accepted.</span>';
+	}
 
 # Speedtest not installed
 # ------------------------------------------------------------------------------
