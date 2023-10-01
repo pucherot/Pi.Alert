@@ -7,13 +7,25 @@
 //------------------------------------------------------------------------------
 //  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
+
 session_start();
+
+if ($_SESSION["login"] != 1) {
+	header('Location: ../../index.php');
+	exit;
+}
+
+foreach (glob("../../../db/setting_language*") as $filename) {
+	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
+}
+if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
 
 require 'db.php';
 require 'journal.php';
-$DBFILE = '../../../db/pialert.db';
+require '../templates/language/' . $pia_lang_selected . '.php';
 
 // Open DB
+$DBFILE = '../../../db/pialert.db';
 OpenDB();
 
 $speedtest_binary = '../../../back/speedtest/speedtest';
@@ -166,7 +178,7 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 
 	echo '</pre>';
 	if ($show_hint == 1) {
-		echo '<span class="text-red" style="font-size: 18px;">Before you can to use the speedtest client from Ookla, you have to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/". The Speedtest button is activated with a page reload, but only works after the Ookla license has been accepted.</span>';
+		echo '<span class="text-red" style="font-size: 18px;">' . $pia_lang['ookla_postinstall_note'] . '</span>';
 	}
 
 # Speedtest not installed

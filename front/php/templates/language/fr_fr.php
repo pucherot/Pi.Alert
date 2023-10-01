@@ -963,6 +963,12 @@ $pia_lang['GeoLiteDB_absent'] = 'DB not installed';
 
 $pia_lang['SysInfo_storage_note'] = 'Il est possible que l&apos;utilisation de la mémoire ne puisse pas être déterminée pour tous les lecteurs énumérés ci-dessus. Cela dépend de l&apos;utilisateur sous lequel les lecteurs sont montés.';
 
+//////////////////////////////////////////////////////////////////
+// Speedtest
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['ookla_postinstall_note'] = 'Avant de pouvoir utiliser le client speedtest d&apos;Ookla, vous devez exécuter la commande "sudo ./speedtest" une fois dans le répertoire "$HOME/pialert/back/speedtest/". Le bouton speedtest est activé lors du rechargement de la page, mais ne fonctionne qu&apos;après l&apos;acceptation de la licence Ookla.';
+
 // =============================================================================================================
 
 $pia_journ_lang['Journal_TableHead_Class'] = 'Méthode';

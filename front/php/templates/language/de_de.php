@@ -989,6 +989,12 @@ $pia_lang['GeoLiteDB_absent'] = 'DB nicht installiert';
 
 $pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung nicht für alle oben gelisteten Laufwerke ermittelt werden kann. Dies ist abhängig davon, unter welchem Benutzer die Laufwerke gemoutet sind.';
 
+//////////////////////////////////////////////////////////////////
+// Speedtest
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['ookla_postinstall_note'] = 'Bevor Sie den Speedtest-Client von Ookla nutzen können, müssen Sie einmalig den Befehl "sudo ./speedtest" im Verzeichnis "$HOME/pialert/back/speedtest/" ausführen. Die Speedtest-Schaltfläche wird mit einem Neuladen der Seite aktiviert, funktioniert aber erst, nachdem die Ookla-Lizenz akzeptiert wurde.';
+
 // =============================================================================================================
 
 $pia_journ_lang['Journal_TableHead_Class'] = 'Methode';

@@ -1,11 +1,4 @@
 <?php
-session_start();
-
-if ($_SESSION["login"] != 1) {
-	header('Location: ../../index.php');
-	exit;
-}
-
 //------------------------------------------------------------------------------
 //  Pi.Alert
 //  Open Source Network Guard / WIFI & LAN intrusion detector
@@ -14,6 +7,13 @@ if ($_SESSION["login"] != 1) {
 //------------------------------------------------------------------------------
 //  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
 //------------------------------------------------------------------------------
+
+session_start();
+
+if ($_SESSION["login"] != 1) {
+	header('Location: ../../index.php');
+	exit;
+}
 
 foreach (glob("../../../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));

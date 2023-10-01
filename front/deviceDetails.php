@@ -530,7 +530,9 @@ if ($_REQUEST['mac'] == 'Internet') {
 
 	$speedtest_binary = '../back/speedtest/speedtest';
 	if (file_exists($speedtest_binary)) {
-		echo '<button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtest_ookla()">Start Speedtest (Ookla)</button>';
+		echo '<button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtest_ookla(\'test\')">Start Speedtest (Ookla)</button>';
+	} else {
+		echo '<button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtest_ookla(\'get\')">Download Speedtest-Client</button>';
 	}
 
 	?>
@@ -550,11 +552,15 @@ if ($_REQUEST['mac'] == 'Internet') {
                     })
                   }
 
-                  function speedtest_ookla() {
+                  function speedtest_ookla(modus) {
                     $( "#scanoutput" ).empty();
+                    var additionalData = {
+                      mod: modus
+                    };
                     $.ajax({
                       method: "POST",
                       url: "./php/server/speedtest_ookla.php",
+                      data: additionalData,
                       beforeSend: function() { $('#scanoutput').addClass("ajax_scripts_loading"); },
                       complete: function() { $('#scanoutput').removeClass("ajax_scripts_loading"); },
                       success: function(data, textStatus) {

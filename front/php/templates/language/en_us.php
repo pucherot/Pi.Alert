@@ -973,6 +973,12 @@ $pia_lang['GeoLiteDB_absent'] = 'DB not installed';
 
 $pia_lang['SysInfo_storage_note'] = 'It is possible that the memory usage cannot be determined for all drives listed above. This depends on the user under which the drives are mounted.';
 
+//////////////////////////////////////////////////////////////////
+// Speedtest
+//////////////////////////////////////////////////////////////////
+
+$pia_lang['ookla_postinstall_note'] = 'Before you can to use the speedtest client from Ookla, you have to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/". The Speedtest button is activated with a page reload, but only works after the Ookla license has been accepted.';
+
 // =============================================================================================================
 
 $pia_journ_lang['Journal_TableHead_Class'] = 'Method';
