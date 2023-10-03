@@ -76,22 +76,15 @@ a notification can be sent.
 There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
   - Manage the devices inventory and the characteristics (individually or with a [bulk editor](docs/BULKEDITOR.md))
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
-  - Manual Nmap scans for regular devices and speedtest for the device "Internet" in the details view
+  - Manual Nmap scans and Wake-on-LAN (must be supported by the target device) for regular devices and speedtest for the device "Internet" in the details view
   - Simple [network relationship](docs/NETWORK_RELATIONSHIP.md) display
-  - Maintenance tasks and settings like:
-    - Status information *(active scans, database size, backup counter)*
-    - Light/Dark-Mode switch and theme selection *(blue, red, green, yellow, black, purple)*
-    - Language selection *(english, german, spanish, french)*
-    - Enable/Disable network activity graph 
-    - Pause arp-scan
+  - Various maintenance tasks and settings (Selection):
+    - Language selection *(english, german, spanish, french)* 
     - Set API-key
     - Enable/Disable login
-    - DB maintenance tools and a possibility for backup, restore and cleanup the database and the config file
-    - Send test notifications
-    - Config file editor
-  - [Web service monitoring](docs/WEBSERVICES.md)
+    - DB maintenance tools
+    - Config file editor, and many more ...
   - Help/FAQ section
-  - Wake-on-LAN (must be supported by the target device)
   - Notification page with download options
   - Journal that tracks operations via the frontend, pialert-cli and cronjob
 
@@ -109,6 +102,8 @@ A possibility to send a request to the Pi.Alert backend via different ways. Curr
   - System status *(Scan on or off, Counts all, online, offline, archived and new devices)*
   - All online devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
   - All offline devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
+  - All online ICMP devices *(IP, Name, RTT)*
+  - All offline ICMP devices *(IP, Name)*
   - Information about a specific device *(all information, without events and presence)*
 
 With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Home Assistant. How it works, you can look up in the API documentation.
@@ -120,7 +115,7 @@ With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Ho
 Initially designed to run on a Raspberry Pi, probably it can run on some other
 Linux distributions which use the "apt" package manager. With minor adjustments (FAQ page) I tested Pi.Alert on Dietpi and Ubuntu Server.
 
-If you want to use my fork as LXC container, feel free to check out the Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
+If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
 
 An also active developed Docker version of Pi.Alert can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
 
@@ -169,7 +164,7 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 
   This code is a collaborative body of work, with special thanks to:
 
-[Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert) and many more
+[Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert), [tteck/Proxmox](https://github.com/tteck/Proxmox) and many more
 
 ### Contact
 
