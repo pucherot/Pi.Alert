@@ -117,15 +117,18 @@ Linux distributions which use the "apt" package manager. With minor adjustments 
 
 If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
 
-Another active developed fork of Pi.Alert based on Docker can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
-
 - One-step Automated Install:
 ```
 bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh)"
 ``` 
 
-
 - [Installation Guide (step by step)](docs/INSTALL.md)
+
+### Other Pi.Alert projects
+
+Another active developed fork of Pi.Alert based on Docker can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
+
+The original, but unmaintained, Pi.Alert can be found here [pucherot/Pi.Alert](https://github.com/pucherot/Pi.Alert/)
 
 # Update
 <!--- --------------------------------------------------------------------- --->
