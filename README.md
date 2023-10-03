@@ -98,15 +98,13 @@ Instead of 'glass_black_white.png' you can use one of the following files.
 
 ### API
 
-A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 4 things:
+A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 6 things:
   - System status *(Scan on or off, Counts all, online, offline, archived and new devices)*
   - All online devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
   - All offline devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
   - All online ICMP devices *(IP, Name, RTT)*
   - All offline ICMP devices *(IP, Name)*
   - Information about a specific device *(all information, without events and presence)*
-
-With the API (from Pi.Alert 3.7.9+) it is possible to integrate Pi.Alert into Home Assistant. How it works, you can look up in the API documentation.
 
 [Pi.Alert API Usage and Examples / Home Assistant integration](docs/API-USAGE.md)
 
