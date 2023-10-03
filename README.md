@@ -90,9 +90,11 @@ There is a configurable login to prevent unauthorized use. The default password 
 
 Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
 
-```https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_black_white.png```
+```
+https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_black_white.png
+```
 
-Instead of 'glass_black_white.png' you can use one of the following files.
+Instead of "glass_black_white.png" you can use one of the following files.
 
 [List of Favicons/Homescreen icons](docs/ICONS.md)
 
@@ -113,14 +115,14 @@ A possibility to send a request to the Pi.Alert backend via different ways. Curr
 Initially designed to run on a Raspberry Pi, probably it can run on some other
 Linux distributions which use the "apt" package manager. With minor adjustments (FAQ page) I tested Pi.Alert on Dietpi and Ubuntu Server.
 
-If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
-
 - One-step Automated Install:
 ```
 bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh)"
 ``` 
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
+
+If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
 
 ### Other Pi.Alert projects
 
@@ -165,7 +167,7 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 
   This code is a collaborative body of work, with special thanks to:
 
-[Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert), [tteck/Proxmox](https://github.com/tteck/Proxmox) and many more
+[Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert), [tteck](https://github.com/tteck/Proxmox) and many more
 
 ### Contact
 

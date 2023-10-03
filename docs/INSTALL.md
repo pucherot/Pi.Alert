@@ -144,7 +144,7 @@ block is not necessary
 
 3.4 - Install PHP
   ```
-  sudo apt-get install php php-cgi php-fpm php-curl php-sqlite3 -y     
+  sudo apt-get install php php-cgi php-fpm php-curl php-xml php-sqlite3 -y     
   ```
 
 3.5 - Activate PHP
@@ -173,12 +173,12 @@ block is not necessary
 
 4.2 - Install dnsutils & net-tools utilities
   ```
-  sudo apt-get install dnsutils net-tools libwww-perl -y
+  sudo apt-get install dnsutils net-tools libwww-perl libtext-csv-perl -y
   ```
 
 4.3 - Installing nmap, zip and wakeonlan
   ```
-  sudo apt-get install nmap zip wakeonlan -y
+  sudo apt-get install nmap zip wakeonlan aria2 -y
   ```
 
 4.4 - Test Python
@@ -278,39 +278,46 @@ block is not necessary
     DHCP_ACTIVE     = True
     ```
 
-5.6 - Update vendors DB
+5.6 - Enable some executables
+  ```
+  chmod +x $HOME/pialert/back/speedtest-cli  
+  chmod +x $HOME/pialert/back/pialert-cli 
+  ``
+
+5.7 - Update vendors DB
   ```
   python3 $HOME/pialert/back/pialert.py update_vendors
   ```
 
-5.7 - Test Pi.Alert Scan
+5.8 - Test Pi.Alert Scan
   ```
   python3 $HOME/pialert/back/pialert.py internet_IP
   python3 $HOME/pialert/back/pialert.py 1
   ```
 
-5.8 - Add crontab jobs
+5.9 - Add crontab jobs
   ```
   (crontab -l 2>/dev/null; cat $HOME/pialert/install/pialert.cron) | crontab -
   ```
 
-5.9 - Add necessary permissions
+5.10 - Add necessary permissions
   ```
   chmod go+x $HOME/pialert
-  sudo chgrp -R www-data $HOME/pialert/db
-  sudo chmod -R 775 $HOME/pialert/db
-  sudo chmod -R 775 $HOME/pialert/db/temp
-  sudo chgrp www-data $HOME/pialert/config
-  sudo chmod -R 775 $HOME/pialert/config
-  sudo chgrp www-data $HOME/pialert/config/pialert.conf
-  sudo chmod -R 775 $HOME/pialert/front/reports
-  sudo chgrp -R www-data $HOME/pialert/front/reports
+  sudo chgrp -R www-data "$HOME/pialert/db"
+  sudo chmod -R 775 "$HOME/pialert/db"
+  sudo chmod -R 775 "$HOME/pialert/db/temp"
+  sudo chgrp -R www-data "$HOME/pialert/config"
+  sudo chmod -R 775 "$HOME/pialert/config"
+  sudo chgrp -R www-data "$HOME/pialert/front/reports"
+  sudo chmod -R 775 "$HOME/pialert/front/reports"
+  sudo chgrp -R www-data "$HOME/pialert/back/speedtest/"
+  sudo chmod -R 775 "$HOME/pialert/back/speedtest/"
   chmod +x $HOME/pialert/back/shoutrrr/arm64/shoutrrr
   chmod +x $HOME/pialert/back/shoutrrr/armhf/shoutrrr
   chmod +x $HOME/pialert/back/shoutrrr/x86/shoutrrr
   ```
 
-5.10 - Create Symlinks for the Log-Viewer
+5.11 - Create Symlinks for the Log-Viewer
   ```
   touch "$HOME/pialert/log/pialert.vendors.log"
   touch "$HOME/pialert/log/pialert.IP.log"
@@ -324,7 +331,12 @@ block is not necessary
   ln -s "$HOME/pialert/log/pialert.webservices.log" "$HOME/pialert/front/php/server/pialert.webservices.log"
   ```
 
-5.11 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole
+5.12 - Set sudoers
+  ```
+  sudo $HOME/back/pialert-cli set_sudoers
+  ```
+
+5.13 - Check DNS record for pi.alert (explained in point 2.7 of Pi.hole
   installation)
   - Add pi.alert DNS Record
     ```
@@ -338,7 +350,7 @@ block is not necessary
       - pi.alert    192.168.1.x
       - (*replace 192.168.1.x with your Raspberry IP*)
 
-5.12 - Use admin panel to configure the devices
+5.14 - Use admin panel to configure the devices
   - http://pi.alert/
   - http://192.168.1.x/pialert/
     - (*replace 192.168.1.x with your Raspberry IP*)
