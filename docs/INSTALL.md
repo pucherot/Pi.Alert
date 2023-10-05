@@ -282,7 +282,7 @@ block is not necessary
   ```
   chmod +x $HOME/pialert/back/speedtest-cli  
   chmod +x $HOME/pialert/back/pialert-cli 
-  ``
+  ```
 
 5.7 - Update vendors DB
   ```
