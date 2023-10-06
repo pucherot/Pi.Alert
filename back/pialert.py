@@ -24,22 +24,7 @@ from base64 import b64encode
 from urllib.parse import urlparse
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
-import sys
-import subprocess
-import os
-import re
-import datetime
-import sqlite3
-import socket
-import io
-import smtplib
-import csv
-import requests
-import time
-import pwd
-import glob
-import ipaddress
-import ssl
+import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -2168,7 +2153,7 @@ def icmphost_monitoring_notification():
         mail_section_icmphost_down = True
         mail_text_icmphost_down += text_line_template.format (
             'IP: ', eventAlert['cur_ip'],
-            'Hostname:', hostname,
+            'Hostname: ', hostname,
             'Time: ', eventAlert['cur_LastScan'], 
             'Status: ', 'Down')
         mail_html_icmphost_down += html_line_template.format (
