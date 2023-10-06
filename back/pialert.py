@@ -740,7 +740,7 @@ def read_unifi_clients ():
         return
 
     #installed using pip3 install unifi
-    from pyunifi.controller import Controller
+    from unifi.controller import Controller
 
     data = []
     c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,'v5','default',ssl_verify=False)
