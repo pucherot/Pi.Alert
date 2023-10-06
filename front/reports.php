@@ -57,7 +57,7 @@ function get_notification_class($filename) {
 	}
 }
 
-function process_standard_notifications($class_name, $event_time, $filename, $directory, $color) {
+function process_standard_notifications($class_name, $event_time, $filename, $directory, $color, $notification_icon) {
 	$lines = file($directory . $filename);
 	$x = 0;
 	foreach ($lines as $line) {
@@ -67,6 +67,10 @@ function process_standard_notifications($class_name, $event_time, $filename, $di
 				// edit MAC line - add link
 				$tempmac = explode(": ", $line);
 				$webgui_report .= "\tMAC: <a href=\"./deviceDetails.php?mac=" . $tempmac[1] . "\">" . $tempmac[1] . "</a>";
+			} elseif (stristr($line, "Service:")) {
+				// edit Service line - add link
+				$tempmac = explode(": ", $line);
+				$webgui_report .= "Service: <a href=\"./serviceDetails.php?url=" . $tempmac[1] . "\">" . $tempmac[1] . "</a>";
 			} elseif (stristr($line, "Event:")) {
 				// edit Event line - add color depending on status
 				$tempmac = explode(": ", $line);
@@ -76,6 +80,15 @@ function process_standard_notifications($class_name, $event_time, $filename, $di
 				} elseif ($tempmac[1] == "Connected") {
 					$webgui_report .= "\tEvent:\t\t<span class=\"text-green\">" . $tempmac[1] . "</span>\n";
 				} else { $webgui_report .= "\tEvent:\t\t" . $tempmac[1] . "</span>\n";}
+			} elseif (stristr($line, "\tHTTP Status Code:")) {
+				// edit Event line - add color depending on status
+				$tempmac = explode(": ", $line);
+				$tempmac[1] = trim($tempmac[1]);
+				if ($tempmac[1] != "200") {
+					$webgui_report .= "\tHTTP Status Code:\t<span class=\"text-red\">" . $tempmac[1] . "</span>\n";
+				} else {
+					$webgui_report .= "\tHTTP Status Code:\t<span class=\"text-green\">" . $tempmac[1] . "</span>\n";
+				}
 			} else {
 				// Default handling
 				$webgui_report .= $line;
@@ -87,7 +100,7 @@ function process_standard_notifications($class_name, $event_time, $filename, $di
 
 	return '<div class="box box-solid">
 	          <div class="box-header">
-	            <h3 class="box-title" style="color: ' . $color . '"><i class="fa fa-laptop"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
+	            <h3 class="box-title" style="color: ' . $color . '"><i class="fa ' . $notification_icon . '"></i>&nbsp;&nbsp;' . $event_time . ' - ' . $class_name . '</h3>
 	              <div class="pull-right">
 	                <a href="./download/report.php?report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-success" target="_blank"><i class="fa fa-fw fa-download"></i></a>
 	                <a href="./reports.php?remove_report=' . substr($filename, 0, -4) . '" class="btn btn-sm btn-danger"><i class="fa fa-fw fa-trash"></i></a>
@@ -180,11 +193,11 @@ foreach ($scanned_directory as $file) {
 	if (substr($file, -4) == '.txt') {
 		$notification_class = get_notification_class($file);
 		if ($notification_class[1] == "arp") {
-			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#D81B60'));
+			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#D81B60', 'fa-laptop'));
 		} elseif ($notification_class[1] == "internet") {
-			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#30bbbb'));
+			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#30bbbb', 'fa-globe'));
 		} elseif ($notification_class[1] == "webmon") {
-			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#00c0ef'));
+			array_push($standard_notification, process_standard_notifications($notification_class[0], $notification_class[2], $file, $directory, '#00c0ef', 'fa-globe'));
 		} elseif ($notification_class[1] == "icmpmon") {
 			array_push($standard_notification, process_icmp_notifications($notification_class[0], $notification_class[2], $file, $directory, '#831CFF'));
 		} elseif ($notification_class[1] == "test") {
