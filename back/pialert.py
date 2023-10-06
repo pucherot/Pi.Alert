@@ -740,24 +740,28 @@ def read_unifi_clients ():
         return
 
     #installed using pip3 install unifi
-    from unifi.controller import Controller
+    from pyunifi.controller import Controller
 
-    data = []
-    c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,'v5','default',ssl_verify=False)
-    clients = c.get_clients()
-    for row in clients:
-        mac = row['mac'].lower()
-        ip = row.get('ip','no IP')
-        hostname = row.get('hostname',row.get('name',''))
-        vendor = row.get('oui',None)
-        if not vendor:
-            try:
-                vendor = MacLookup().lookup(mac)
-            except:
-                vendor = "Prefix is not registered"
+    try:
+        data = []
+        c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,'v5','default',ssl_verify=False)
+        clients = c.get_clients()
+        for row in clients:
+            mac = row['mac'].lower()
+            ip = row.get('ip','no IP')
+            hostname = row.get('hostname',row.get('name',''))
+            vendor = row.get('oui',None)
+            if not vendor:
+                try:
+                    vendor = MacLookup().lookup(mac)
+                except:
+                    vendor = "Prefix is not registered"
 
-        sql.execute ("INSERT INTO Unifi_Network (UF_MAC, UF_IP, UF_Name, UF_Vendor) "+
-                     "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
+            sql.execute ("INSERT INTO Unifi_Network (UF_MAC, UF_IP, UF_Name, UF_Vendor) "+
+                         "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
+
+    except Exception as e:
+        print('        Could not connect to Controller')
 
 #-------------------------------------------------------------------------------
 def read_DHCP_leases ():
