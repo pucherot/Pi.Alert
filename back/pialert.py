@@ -562,7 +562,8 @@ def execute_arpscan ():
     except NameError:
         module_arpscan_status = True
     if not module_arpscan_status :
-        unique_devices = [] 
+        print('        ...Skipped')
+        unique_devices = []
         return unique_devices
 
     # output of possible multiple interfaces
@@ -624,6 +625,7 @@ def copy_pihole_network ():
 
     # check if Pi-hole is active
     if not PIHOLE_ACTIVE :
+        print('        ...Skipped')
         return
 
     # Open Pi-hole DB
@@ -663,6 +665,7 @@ def read_fritzbox_active_hosts ():
 
     # check if Pi-hole is active
     if not FRITZBOX_ACTIVE :
+        print('        ...Skipped')
         return
 
     from fritzconnection.lib.fritzhosts import FritzHosts
@@ -699,6 +702,7 @@ def read_mikrotik_leases ():
     sql.execute ("DELETE FROM Mikrotik_Network")
 
     if not MIKROTIK_ACTIVE:
+        print('        ...Skipped')
         return
 
     #installed using pip3 install routeros_api
@@ -737,6 +741,7 @@ def read_unifi_clients ():
     sql.execute ("DELETE FROM Unifi_Network")
 
     if not UNIFI_ACTIVE:
+        print('        ...Skipped')
         return
 
     #installed using pip3 install unifi
@@ -767,6 +772,7 @@ def read_unifi_clients ():
 def read_DHCP_leases ():
     # check DHCP Leases is active
     if not DHCP_ACTIVE :
+        print('        ...Skipped')
         return
             
     # Read DHCP Leases
