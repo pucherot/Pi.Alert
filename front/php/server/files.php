@@ -551,7 +551,8 @@ function setLanguage() {
 	$pia_installed_langs = array('en_us',
 		'de_de',
 		'es_es',
-		'fr_fr');
+		'fr_fr',
+		'it_it');
 
 	if (isset($_REQUEST['LangSelection'])) {
 		$pia_lang_set_dir = '../../../db/';
