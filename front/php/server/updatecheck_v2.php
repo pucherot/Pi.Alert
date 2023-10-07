@@ -43,6 +43,8 @@ $geoliteDB_file = '../../../db/GeoLite2-Country.mmdb';
 if (file_exists($geoliteDB_file)) {
 	$geolite_cur_version = date("Y.m.d", filemtime($geoliteDB_file));
 } else { $geolite_cur_version = "###";}
+// DEBUG
+// $geolite_cur_version = '2023-05-28';
 
 // Get Pi.Alert Version fro Github timestamp
 $utc_ts = strtotime($pialert_update['0']['commit']['author']['date']);
@@ -57,7 +59,7 @@ $updatenotes_array = explode("\n", $pialert_update['0']['commit']['message']);
 $updatenotes_array = array_filter($updatenotes_array);
 
 // DEBUG
-//$pialert_cur_version = '2023-05-28';
+// $pialert_cur_version = '2023-05-28';
 $pialert_new_version = substr($updatenotes_array[0], -10);
 // prepare dates for comparison
 $temp_geolite_cur_version = str_replace(".", "-", $geolite_cur_version);
@@ -73,6 +75,35 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 				' . $pia_lang['GeoLiteDB_cur'] . ': 	<span class="text-green">	' . $geolite_cur_version . '</span><br>
 				' . $pia_lang['GeoLiteDB_new'] . ': 	<span class="text-red">		' . $geolite_new_version . '</span>
 				</p>
+
+
+
+          <div class="row" style="margin-top: 30px;">
+            <style>
+                .downloader {
+                    border: 6px solid #f3f3f3; /* Light gray */
+                    border-top: 6px solid #3498db; /* Blue */
+                    border-radius: 50%;
+                    width: 32px;
+                    height: 32px;
+                    animation: spin 2s linear infinite;
+                    margin-left: 50px;
+                }
+
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>
+            <div class="col-sm-12" style="">
+              <div style="height: 60px;">
+                <div class="downloader" id="downloader" style="display: none;"></div>
+                <button class="btn btn-default" id="updateDB-button">' . $pia_lang['GeoLiteDB_button_upd'] . '</button>
+              </div>
+            </div>
+          </div>
+
+
 			</div>
 		  </div>';
 	// Logging
@@ -89,7 +120,7 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 	// Logging
 	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0065', '', '');
 } else {
-// DB prensent an newer as github version
+// DB present an newer as github version
 	echo '<div class="box">
     		<div class="box-body">
 				<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['GeoLiteDB_Title'] . '</h4>
@@ -163,6 +194,35 @@ if ($pialert_cur_version == $pialert_new_version) {
 
 echo '</div>';
 echo '</div>';
+
+echo '
+<script>
+$("#updateDB-button").on(\'click\', function() {
+    var loader = $("#downloader");
+    var downloadButton = $(this);
+    // Hide the download button
+    downloadButton.hide();
+    // Display the loading animation
+    loader.show();
+    // Send an AJAX request to initiate the file download
+    $.ajax({
+        url: \'./php/server/services.php?action=updateGeoDB\',
+        method: \'GET\',
+        success: function(response) {
+            console.log(\'Download complete!\');
+        },
+        // error: function() {
+        //     console.error(\'Download error!\');
+        // },
+        complete: function() {
+            // Show the download button again
+            setTimeout(function () {
+              location.reload(true);
+            }, 1000);
+        }
+    });
+});
+</script>';
 
 ?>
 

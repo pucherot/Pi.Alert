@@ -24,22 +24,7 @@ from base64 import b64encode
 from urllib.parse import urlparse
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
-import sys
-import subprocess
-import os
-import re
-import datetime
-import sqlite3
-import socket
-import io
-import smtplib
-import csv
-import requests
-import time
-import pwd
-import glob
-import ipaddress
-import ssl
+import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -577,7 +562,8 @@ def execute_arpscan ():
     except NameError:
         module_arpscan_status = True
     if not module_arpscan_status :
-        unique_devices = [] 
+        print('        ...Skipped')
+        unique_devices = []
         return unique_devices
 
     # output of possible multiple interfaces
@@ -639,6 +625,7 @@ def copy_pihole_network ():
 
     # check if Pi-hole is active
     if not PIHOLE_ACTIVE :
+        print('        ...Skipped')
         return
 
     # Open Pi-hole DB
@@ -678,6 +665,7 @@ def read_fritzbox_active_hosts ():
 
     # check if Pi-hole is active
     if not FRITZBOX_ACTIVE :
+        print('        ...Skipped')
         return
 
     from fritzconnection.lib.fritzhosts import FritzHosts
@@ -714,6 +702,7 @@ def read_mikrotik_leases ():
     sql.execute ("DELETE FROM Mikrotik_Network")
 
     if not MIKROTIK_ACTIVE:
+        print('        ...Skipped')
         return
 
     #installed using pip3 install routeros_api
@@ -752,32 +741,38 @@ def read_unifi_clients ():
     sql.execute ("DELETE FROM Unifi_Network")
 
     if not UNIFI_ACTIVE:
+        print('        ...Skipped')
         return
 
     #installed using pip3 install unifi
     from pyunifi.controller import Controller
 
-    data = []
-    c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,'v5','default',ssl_verify=False)
-    clients = c.get_clients()
-    for row in clients:
-        mac = row['mac'].lower()
-        ip = row.get('ip','no IP')
-        hostname = row.get('hostname',row.get('name',''))
-        vendor = row.get('oui',None)
-        if not vendor:
-            try:
-                vendor = MacLookup().lookup(mac)
-            except:
-                vendor = "Prefix is not registered"
+    try:
+        data = []
+        c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,'v5','default',ssl_verify=False)
+        clients = c.get_clients()
+        for row in clients:
+            mac = row['mac'].lower()
+            ip = row.get('ip','no IP')
+            hostname = row.get('hostname',row.get('name',''))
+            vendor = row.get('oui',None)
+            if not vendor:
+                try:
+                    vendor = MacLookup().lookup(mac)
+                except:
+                    vendor = "Prefix is not registered"
 
-        sql.execute ("INSERT INTO Unifi_Network (UF_MAC, UF_IP, UF_Name, UF_Vendor) "+
-                     "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
+            sql.execute ("INSERT INTO Unifi_Network (UF_MAC, UF_IP, UF_Name, UF_Vendor) "+
+                         "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
+
+    except Exception as e:
+        print('        Could not connect to Controller')
 
 #-------------------------------------------------------------------------------
 def read_DHCP_leases ():
     # check DHCP Leases is active
     if not DHCP_ACTIVE :
+        print('        ...Skipped')
         return
             
     # Read DHCP Leases
@@ -2168,7 +2163,7 @@ def icmphost_monitoring_notification():
         mail_section_icmphost_down = True
         mail_text_icmphost_down += text_line_template.format (
             'IP: ', eventAlert['cur_ip'],
-            'Hostname:', hostname,
+            'Hostname: ', hostname,
             'Time: ', eventAlert['cur_LastScan'], 
             'Status: ', 'Down')
         mail_html_icmphost_down += html_line_template.format (

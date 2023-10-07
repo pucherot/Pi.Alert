@@ -394,12 +394,12 @@ install_python() {
       pip3 -q install mac-vendor-lookup --break-system-packages --no-warn-script-location       2>&1 >> "$LOG"
       pip3 -q install fritzconnection --break-system-packages --no-warn-script-location         2>&1 >> "$LOG"
       pip3 -q install routeros_api --break-system-packages --no-warn-script-location            2>&1 >> "$LOG"
-      pip3 -q install unifi --break-system-packages --no-warn-script-location                   2>&1 >> "$LOG"
+      pip3 -q install pyunifi --break-system-packages --no-warn-script-location                 2>&1 >> "$LOG"
     else
       pip3 -q install mac-vendor-lookup  --no-warn-script-location                              2>&1 >> "$LOG"
       pip3 -q install fritzconnection --no-warn-script-location                                 2>&1 >> "$LOG"
       pip3 -q install routeros_api --no-warn-script-location                                    2>&1 >> "$LOG"
-      pip3 -q install unifi --no-warn-script-location                                           2>&1 >> "$LOG"
+      pip3 -q install pyunifi --no-warn-script-location                                         2>&1 >> "$LOG"
     fi
 
     PYTHON_BIN="python3"
