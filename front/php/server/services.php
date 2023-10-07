@@ -53,9 +53,33 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'deleteGeoDB':deleteGeoDB();
 		break;
+	case 'updateGeoDB':updateGeoDB();
+		break;
 	case 'EnableWebServiceMon':EnableWebServiceMon();
 		break;
 	}
+}
+
+function updateGeoDB() {
+	global $pia_lang;
+
+	$deletePath = '../../../db/GeoLite2-Country.mmdb';
+	if (file_exists($deletePath)) {
+		unlink($deletePath);
+	}
+
+	$fileUrl = 'https://github.com/P3TERX/GeoLite.mmdb/raw/download/GeoLite2-Country.mmdb';
+	$savePath = '../../../db/GeoLite2-Country.mmdb';
+
+	// Disable caching
+	header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+	header('Cache-Control: post-check=0, pre-check=0', false);
+	header('Pragma: no-cache');
+
+	file_put_contents($savePath, fopen($fileUrl, 'r'));
+	echo json_encode(['filePath' => $savePath]);
+	// Logging
+	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0008', '', '');
 }
 
 //  Toggle Web Service Monitoring
