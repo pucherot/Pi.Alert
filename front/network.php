@@ -91,11 +91,18 @@ function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_ne
 	echo getNodeOnlineState($pia_func_netdevname);
 	echo $pia_func_netdevname . ' / ';
 	if (substr($pia_func_netdevtyp, 2) == 'WLAN') {
-		echo '<i class="bi bi-wifi network_tab_icon text-aqua" style="top: 1px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Powerline') {
-		echo '<i class="bi bi-plug-fill network_tab_icon text-aqua" style="top: 2px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Router') {
-		echo '<i class="bi bi-router-fill network_tab_icon text-aqua" style="top: 2px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Switch') {
-		echo '<i class="bi bi-ethernet network_tab_icon text-aqua" style="top: 2px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Internet') {
-		echo '<i class="bi bi-globe network_tab_icon text-aqua" style="top: 2px;"></i>';} else {echo substr($pia_func_netdevtyp, 2);}
+		echo '<i class="bi bi-wifi network_tab_icon text-aqua" style="top: 1px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Powerline') {
+		echo '<i class="bi bi-plug-fill network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Router') {
+		echo '<i class="bi bi-router-fill network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Switch') {
+		echo '<i class="bi bi-ethernet network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Internet') {
+		echo '<i class="bi bi-globe network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Hypervisor') {
+		echo '<i class="bi bi-hdd-stack-fill network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} else {echo substr($pia_func_netdevtyp, 2);}
 	// Enable the display of the complete Portcount
 	//if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
 	echo '</a></li>';
@@ -168,6 +175,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 			// Specific icon for devicetype
 			if (substr($pia_func_netdevtyp, 2) == "WLAN") {$dev_port_icon = 'fa-wifi';}
 			if (substr($pia_func_netdevtyp, 2) == "Powerline") {$dev_port_icon = 'fa-flash';}
+			if (substr($pia_func_netdevtyp, 2) == "Hypervisor") {$dev_port_icon = 'fa-computer';}
 
 			if ($func_res['dev_MAC'] != "dumb") {
 				// detectable Device

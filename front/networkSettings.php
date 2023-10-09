@@ -155,6 +155,7 @@ network_infrastructurelist();
                     <option value="2_Switch">Switch</option>
                     <option value="3_WLAN">WLAN</option>
                     <option value="4_Powerline">Powerline</option>
+                    <option value="5_Hypervisor">Hypervisor</option>
                   </select>
               </div>
               <div class="form-group has-success">
