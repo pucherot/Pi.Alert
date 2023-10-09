@@ -744,12 +744,19 @@ def read_unifi_clients ():
         print('        ...Skipped')
         return
 
-    #installed using pip3 install unifi
     from pyunifi.controller import Controller
+
+    # Enable self signed SSL / no warnings
+    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+    try:
+        UNIFI_API_VERSION = UNIFI_API
+    except NameError: # variable not defined, use a default
+        UNIFI_API_VERSION = 'v5'
 
     try:
         data = []
-        c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,'v5','default',ssl_verify=False)
+        c = Controller(UNIFI_IP,UNIFI_USER,UNIFI_PASS,8443,UNIFI_API_VERSION,'default',ssl_verify=False)
         clients = c.get_clients()
         for row in clients:
             mac = row['mac'].lower()
@@ -766,7 +773,7 @@ def read_unifi_clients ():
                          "VALUES (?, ?, ?, ?) ", (mac, ip, hostname, vendor) )
 
     except Exception as e:
-        print('        Could not connect to Controller')
+        print('        Could not connect to UniFi Controller')
 
 #-------------------------------------------------------------------------------
 def read_DHCP_leases ():
@@ -930,7 +937,7 @@ def print_scan_stats ():
                       AND dev_ScanCycle = ? """,
                     (cycle,))
     print ('')
-    print ('    Devices in this cycle..: ' + str (sql.fetchone()[0]) )
+    print ('    Devices in this scan...: ' + str (sql.fetchone()[0]) )
     # Down Alerts
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_AlertDeviceDown = 1
@@ -1649,7 +1656,7 @@ def service_monitoring_log(site, status, latency):
 
 # -----------------------------------------------------------------------------
 def check_services_health(site):
-    # Enable self signed SSL
+    # Enable self signed SSL / no warningd
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     try:
         resp = requests.get(site, verify=False, timeout=10)
