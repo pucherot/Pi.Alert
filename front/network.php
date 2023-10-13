@@ -81,6 +81,8 @@ function printNodeOnlineState($pia_func_node_state) {
 		echo '<i class="fa fa-w fa-circle text-green-light fa-gradient-green"></i>&nbsp;';
 	} elseif ($pia_func_node_state == "offline") {
 		echo '<i class="fa fa-w fa-circle text-red fa-gradient-red"></i>&nbsp;';
+	} elseif ($pia_func_node_state == "inactive") {
+		echo '<i class="fa fa-w fa-circle text-gray"></i>&nbsp;';
 	}
 }
 
@@ -101,6 +103,7 @@ function getNodeClientsOnlineState($pia_node_id) {
 	$rows = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
 	$row = $rows->fetchArray();
 	$count = $row['count'];
+	//$count = 0;
 	if ($count > 0) {$node_state = 'online';} else { $node_state = 'offline';}
 	$state_data = array($node_state, $count);
 	return $state_data;
@@ -117,7 +120,11 @@ function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_ne
 	if ($nodestate == "offline") {
 		// if Node was offline, check if a connected Client was online and print "light" color depending on that status
 		$temp_array = getNodeClientsOnlineState($pia_func_netdevid);
-		printNodeOnlineState($temp_array[0]);
+		if (($temp_array[0] == "offline") && (substr($pia_func_netdevtyp, 2) == 'WLAN')) {
+			printNodeOnlineState('inactive');
+		} else {
+			printNodeOnlineState($temp_array[0]);
+		}
 	} else {
 		// print "light" color
 		printNodeOnlineState(getNodeOnlineState($pia_func_netdevname));
@@ -148,20 +155,20 @@ function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_ne
 	}
 
 	// Enable the display of the complete Portcount
-	//if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
+	//if ($pia_func_netdevport != "") {echo ' (' . $pia_func_netdevport . ')';}
 	echo '</a></li>';
 }
 // Create the Tabspage
 function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
 	global $pia_lang;
 
-	if ($pia_func_netdevname != "Internet") {
-		$nodestate = getNodeClientsOnlineState($pia_func_netdevid);
-		$clientstate = ' (' . $nodestate[1] . ' Clients online)';
-	} else { $clientstate = "";}
+//	if ($pia_func_netdevname != "Internet") {
+//		$nodestate = getNodeClientsOnlineState($pia_func_netdevid);
+//		$clientstate = ' (' . $nodestate[1] . ' Clients online)';
+//	} else { $clientstate = "";}
 
 	echo '<div class="tab-pane ' . $activetab . '" id="' . $pia_func_netdevid . '">
-	      <h4>' . $pia_func_netdevname . $clientstate . '</h4><br>';
+	      <h4>' . $pia_func_netdevname . '</h4><br>';
 
 	$downstream_devices = get_downstream_devices($pia_func_netdevid);
 
