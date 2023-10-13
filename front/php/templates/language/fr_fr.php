@@ -330,7 +330,7 @@ $pia_lang['BackICMP_mon_enabled'] = 'La surveillance ICMP est activée';
 $pia_lang['BackICMP_mon_InsICMP'] = 'L&apos;hôte ICMP a été enregistré';
 $pia_lang['BackICMP_mon_InsICMPError'] = 'L&apos;hôte ICMP n&apos;a pas été enregistré';
 $pia_lang['BackICMP_mon_DelICMP'] = 'L&apos;hôte ICMP a été supprimé de la base de données';
-$pia_lang['BackICMP_mon_DelICMPError'] = 'L&apos;hôte ICMP n&apos;a pas pu être supprimé, ou n\'a pas été complètement supprimé';
+$pia_lang['BackICMP_mon_DelICMPError'] = 'L&apos;hôte ICMP n&apos;a pas pu être supprimé, ou n&apos;a pas été complètement supprimé';
 $pia_lang['BackICMP_mon_UpdICMP'] = 'L&apos;hôte ICMP a été mis à jour';
 $pia_lang['BackICMP_mon_UpdICMPError'] = 'L&apos;hôte ICMP n&apos;a pas pu être mis à jour';
 $pia_lang['ICMPMonitor_Shortcut_Online'] = 'En ligne';
@@ -377,6 +377,7 @@ $pia_lang['Maintenance_lang_en_us'] = 'Anglais (US)';
 $pia_lang['Maintenance_lang_de_de'] = 'Allemand (DE)';
 $pia_lang['Maintenance_lang_es_es'] = 'Espagnol (ES)';
 $pia_lang['Maintenance_lang_fr_fr'] = 'Français (FR)';
+$pia_lang['Maintenance_lang_it_it'] = 'Italien (IT)';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Appliquer';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Paramètres';
 $pia_lang['Maintenance_Tools_Tab_Tools'] = 'Maintenance';
@@ -470,7 +471,7 @@ $pia_lang['Maintenance_ConfEditor_Backup_info'] = 'Outre le fichier "pialert-pre
 $pia_lang['Maintenance_ConfEditor_Restore_info'] = 'Cette fonction restaure le fichier denfiguration à partir du fichier "pialert-prev.bak". Le fichier "pialert-prev.bak" est créé lors de l&apos;enregistrement et de la création d&apos;une sauvegarde.';
 $pia_lang['Maintenance_ConfEditor_Save_info'] = 'Le contenu du champ de texte avec les éventuelles modifications est enregistré dans le fichier "pialert.conf". La configuration précédente est sauvegardée en tant que "pialert-prev.bak". A chaque sauvegarde, le fichier "pialert-prev.bak" est toujours écrasé par le fichier de configuration précédent.';
 $pia_lang['Maintenance_Tool_ConfBackup'] = 'Créer une Sauvegarde de la Configuration';
-$pia_lang['Maintenance_Tool_ConfBackup_text'] = 'En plus du fichier "pialert-prev.bak", une autre sauvegarde est créée avec la date et l\'heure actuelles. Cette sauvegarde doit être restaurée manuellement en cas de besoin (la renommer en "pialert.conf").';
+$pia_lang['Maintenance_Tool_ConfBackup_text'] = 'En plus du fichier "pialert-prev.bak", une autre sauvegarde est créée avec la date et l&apos;heure actuelles. Cette sauvegarde doit être restaurée manuellement en cas de besoin (la renommer en "pialert.conf").';
 
 /////////////////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend) - ready

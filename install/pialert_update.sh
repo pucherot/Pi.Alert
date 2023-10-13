@@ -208,19 +208,6 @@ update_config() {
 
   print_msg "- Updating config file..."
 
-# 2023-04-13
-if ! grep -Fq "# Fritzbox Configuration" "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
-
-# Fritzbox Configuration
-# ----------------------
-FRITZBOX_ACTIVE   = False
-FRITZBOX_IP       = '192.168.17.1'
-FRITZBOX_USER     = 'user'
-FRITZBOX_PASS     = 'password'
-EOF
-fi
-
 # 2023-06-30
 if ! grep -q "MAC_IGNORE_LIST" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
@@ -275,6 +262,15 @@ if ! grep -Fq "# ICMP Monitoring Options" "$PIALERT_HOME/config/pialert.conf" ; 
 # ----------------------
 ICMP_ONLINE_TEST  = 1
 ICMP_GET_AVG_RTT  = 2
+EOF
+fi
+
+# 2023-10-09
+if ! grep -Fq "UNIFI_API" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+UNIFI_API    = 'v5'
+# Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS
 EOF
 fi
 

@@ -238,8 +238,10 @@ MIKROTIK_PASS   = '" . $configArray['MIKROTIK_PASS'] . "'
 # -------------------
 UNIFI_ACTIVE = " . convert_bool($configArray['UNIFI_ACTIVE']) . "
 UNIFI_IP     = '" . $configArray['UNIFI_IP'] . "'
+UNIFI_API    = '" . $configArray['UNIFI_API'] . "'
 UNIFI_USER   = '" . $configArray['UNIFI_USER'] . "'
 UNIFI_PASS   = '" . $configArray['UNIFI_PASS'] . "'
+# Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS
 
 # Maintenance Tasks Cron
 # ----------------------
@@ -551,7 +553,8 @@ function setLanguage() {
 	$pia_installed_langs = array('en_us',
 		'de_de',
 		'es_es',
-		'fr_fr');
+		'fr_fr',
+		'it_it');
 
 	if (isset($_REQUEST['LangSelection'])) {
 		$pia_lang_set_dir = '../../../db/';

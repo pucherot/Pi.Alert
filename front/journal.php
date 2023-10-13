@@ -87,10 +87,16 @@ function get_pialert_journal() {
 		if ($row['LogClass'] == "a_000") {$full_additional_info = $pia_journ_lang[$row['LogString']] . '<br>' . $pia_journ_lang['File_hash'] . ': <span class="text-danger">' . $row['Hash'] . '</span>';} else { $full_additional_info = $pia_journ_lang[$row['LogString']];}
 		$full_additional_info = $full_additional_info . '<br>' . $row['Additional_Info'];
 
+		// DEBUG
+		// $logcode = str_replace('LogStr', $row['LogClass'], $row['LogString']);
+		// $logclass = $row['LogClass'];
+		$logcode = "";
+		$logclass = "";
+
 		echo '<tr>
               <td style="">' . $row['Journal_DateTime'] . '</td>
-              <td>' . $row['LogClass'] . '</td>
-              <td>' . str_replace('LogStr', $row['LogClass'], $row['LogString']) . '</td>
+              <td>' . $logclass . '</td>
+              <td>' . $logcode . '</td>
               <td style="white-space: nowrap;">' . $pia_journ_lang[$row['LogClass']] . '</td>
               <td>' . $row['Trigger'] . '</td>
               <td>' . $row['Hash'] . '</td>
@@ -163,7 +169,7 @@ function initializeDatatable () {
             }
         }
       },
-      {targets: [1,5],
+      {targets: [1,2,5],
           visible: false
       },
     ],

@@ -76,33 +76,97 @@ function get_downstream_from_mac($pia_func_down_mac) {
 	}
 }
 
+function printNodeOnlineState($pia_func_node_state) {
+	if ($pia_func_node_state == "online") {
+		echo '<i class="fa fa-w fa-circle text-green-light fa-gradient-green"></i>&nbsp;';
+	} elseif ($pia_func_node_state == "offline") {
+		echo '<i class="fa fa-w fa-circle text-red fa-gradient-red"></i>&nbsp;';
+	} elseif ($pia_func_node_state == "inactive") {
+		echo '<i class="fa fa-w fa-circle text-gray"></i>&nbsp;';
+	}
+}
+
 function getNodeOnlineState($pia_node_name) {
 	global $db;
 	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_Name" = "' . $pia_node_name . '"';
 	$func_result = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
 	while ($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
-		if ($func_res['dev_PresentLastScan'] == 1) {return '<i class="fa fa-w fa-circle text-green-light fa-gradient-green"></i>&nbsp;';} else {return '<i class="fa fa-w fa-circle text-red fa-gradient-red"></i>&nbsp;';}
+		if ($func_res['dev_PresentLastScan'] == 1) {$node_state = 'online';} else { $node_state = 'offline';}
 	}
+	if (!isset($node_state)) {$node_state = "offline";}
+	return $node_state;
 }
+
+function getNodeClientsOnlineState($pia_node_id) {
+	global $db;
+	$func_sql = 'SELECT COUNT(*) as count FROM "Devices" WHERE "dev_PresentLastScan" = 1 AND "dev_Infrastructure" = "' . $pia_node_id . '"';
+	$rows = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
+	$row = $rows->fetchArray();
+	$count = $row['count'];
+	//$count = 0;
+	if ($count > 0) {$node_state = 'online';} else { $node_state = 'offline';}
+	$state_data = array($node_state, $count);
+	return $state_data;
+}
+
 // Create the Tabs
 function createnetworktab($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
+	global $db;
 	echo '<li class="' . $activetab . '">';
 	echo '<a href="#' . $pia_func_netdevid . '" data-toggle="tab">';
-	echo getNodeOnlineState($pia_func_netdevname);
+	// Check Node name, if is was present last scan
+	$nodestate = getNodeOnlineState($pia_func_netdevname);
+	//echo $nodestate;
+	if ($nodestate == "offline") {
+		// if Node was offline, check if a connected Client was online and print "light" color depending on that status
+		$temp_array = getNodeClientsOnlineState($pia_func_netdevid);
+		if (($temp_array[0] == "offline") && (substr($pia_func_netdevtyp, 2) == 'WLAN')) {
+			printNodeOnlineState('inactive');
+		} else {
+			printNodeOnlineState($temp_array[0]);
+		}
+	} else {
+		// print "light" color
+		printNodeOnlineState(getNodeOnlineState($pia_func_netdevname));
+	}
+	//echo getNodeClientsOnlineState($pia_func_netdevid);
 	echo $pia_func_netdevname . ' / ';
 	if (substr($pia_func_netdevtyp, 2) == 'WLAN') {
-		echo '<i class="bi bi-wifi network_tab_icon text-aqua" style="top: 1px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Powerline') {
-		echo '<i class="bi bi-plug-fill network_tab_icon text-aqua" style="top: 2px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Router') {
-		echo '<i class="bi bi-router-fill network_tab_icon text-aqua" style="top: 2px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Switch') {
-		echo '<i class="bi bi-ethernet network_tab_icon text-aqua" style="top: 2px;"></i>';} elseif (substr($pia_func_netdevtyp, 2) == 'Internet') {
-		echo '<i class="bi bi-globe network_tab_icon text-aqua" style="top: 2px;"></i>';} else {echo substr($pia_func_netdevtyp, 2);}
+		// Tab icon depending on the pia_func_netdevty (first 2 chars "x_" removed)
+		echo '<i class="bi bi-wifi network_tab_icon text-aqua" style="top: 1px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Powerline') {
+		// Tab icon depending on the pia_func_netdevty (first 2 chars "x_" removed)
+		echo '<i class="bi bi-plug-fill network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Router') {
+		// Tab icon depending on the pia_func_netdevty (first 2 chars "x_" removed)
+		echo '<i class="bi bi-router-fill network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Switch') {
+		// Tab icon depending on the pia_func_netdevty (first 2 chars "x_" removed)
+		echo '<i class="bi bi-ethernet network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Internet') {
+		// Tab icon depending on the pia_func_netdevty (first 2 chars "x_" removed)
+		echo '<i class="bi bi-globe network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} elseif (substr($pia_func_netdevtyp, 2) == 'Hypervisor') {
+		// Tab icon depending on the pia_func_netdevty (first 2 chars "x_" removed)
+		echo '<i class="bi bi-hdd-stack-fill network_tab_icon text-aqua" style="top: 2px;"></i>';
+	} else {
+		// No tab icon (first 2 chars "x_" removed)
+		echo substr($pia_func_netdevtyp, 2);
+	}
+
 	// Enable the display of the complete Portcount
-	//if ($pia_func_netdevport != "") {echo ' ('.$pia_func_netdevport.')';}
+	//if ($pia_func_netdevport != "") {echo ' (' . $pia_func_netdevport . ')';}
 	echo '</a></li>';
 }
 // Create the Tabspage
 function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_func_netdevtyp, $pia_func_netdevport, $activetab) {
 	global $pia_lang;
+
+//	if ($pia_func_netdevname != "Internet") {
+//		$nodestate = getNodeClientsOnlineState($pia_func_netdevid);
+//		$clientstate = ' (' . $nodestate[1] . ' Clients online)';
+//	} else { $clientstate = "";}
+
 	echo '<div class="tab-pane ' . $activetab . '" id="' . $pia_func_netdevid . '">
 	      <h4>' . $pia_func_netdevname . '</h4><br>';
 
@@ -168,6 +232,7 @@ function createnetworktabcontent($pia_func_netdevid, $pia_func_netdevname, $pia_
 			// Specific icon for devicetype
 			if (substr($pia_func_netdevtyp, 2) == "WLAN") {$dev_port_icon = 'fa-wifi';}
 			if (substr($pia_func_netdevtyp, 2) == "Powerline") {$dev_port_icon = 'fa-flash';}
+			if (substr($pia_func_netdevtyp, 2) == "Hypervisor") {$dev_port_icon = 'fa-computer';}
 
 			if ($func_res['dev_MAC'] != "dumb") {
 				// detectable Device

@@ -155,6 +155,7 @@ network_infrastructurelist();
                     <option value="2_Switch">Switch</option>
                     <option value="3_WLAN">WLAN</option>
                     <option value="4_Powerline">Powerline</option>
+                    <option value="5_Hypervisor">Hypervisor</option>
                   </select>
               </div>
               <div class="form-group has-success">
@@ -455,7 +456,9 @@ function setTextValue (textElement, textValue) {
 // #####################################
 function network_infrastructurelist() {
 	global $db;
-	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
+	//$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
+	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" IN ("Router", "Switch", "AP", "Access Point", "Hypervisor") OR "dev_MAC" = "Internet"';
+
 	$func_result = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
 	while ($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
 		echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkNodeMac\',\'' . $func_res['dev_Name'] . '\')">' . $func_res['dev_Name'] . '/' . $func_res['dev_DeviceType'] . '</a></li>';
@@ -464,7 +467,8 @@ function network_infrastructurelist() {
 
 function network_device_downlink_mac() {
 	global $db;
-	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
+	//$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
+	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" IN ("Router", "Switch", "AP", "Access Point") OR "dev_MAC" = "Internet"';
 	$func_result = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
 	while ($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
 		echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkDeviceDownlinkMac\',\'' . $func_res['dev_MAC'] . ',\')">' . $func_res['dev_Name'] . '</a></li>';

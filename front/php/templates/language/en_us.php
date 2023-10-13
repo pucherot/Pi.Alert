@@ -377,6 +377,7 @@ $pia_lang['Maintenance_lang_en_us'] = 'English (US)';
 $pia_lang['Maintenance_lang_de_de'] = 'German (DE)';
 $pia_lang['Maintenance_lang_es_es'] = 'Spanish (ES)';
 $pia_lang['Maintenance_lang_fr_fr'] = 'French (FR)';
+$pia_lang['Maintenance_lang_it_it'] = 'Italian (IT)';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Apply';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Settings';
 $pia_lang['Maintenance_Tools_Tab_Tools'] = 'Maintenance';
