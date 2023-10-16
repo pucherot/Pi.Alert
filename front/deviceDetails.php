@@ -22,6 +22,23 @@ require 'php/server/journal.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
+
+function get_speedtestresults_table() {
+	global $db;
+
+	$res = $db->query('SELECT * FROM Tools_Speedtest_History');
+	while ($row = $res->fetchArray()) {
+		echo '<tr>
+            <td>' . $row['speed_date'] . '</td>
+            <td>' . $row['speed_isp'] . '</td>
+            <td>' . $row['speed_server'] . '</td>
+            <td>' . $row['speed_ping'] . '</td>
+            <td>' . $row['speed_down'] . '</td>
+            <td>' . $row['speed_up'] . '</td>
+          </tr>';
+	}
+}
+
 ?>
 
 <!-- Page ------------------------------------------------------------------ -->
@@ -115,6 +132,11 @@ if ($_REQUEST['mac'] == 'Internet') {$DevDetail_Tap_temp = "Tools";} else { $Dev
               <li> <a id="tabSessions" href="#panSessions" data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Sessions'];?> </a></li>
               <li> <a id="tabPresence" href="#panPresence" data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Presence'];?> </a></li>
               <li> <a id="tabEvents"   href="#panEvents"   data-toggle="tab"> <?=$pia_lang['DevDetail_Tab_Events'];?>   </a></li>
+<?php
+if ($_REQUEST['mac'] == 'Internet') {
+	echo '<li> <a id="tabSpeedtest"   href="#panSpeedtest"   data-toggle="tab">' . $pia_lang['ookla_devdetails_tab_title'] . '  </a></li>';
+}
+?>
 
               <div class="btn-group pull-right">
                 <button type="button" class="btn btn-default"  style="padding: 10px; min-width: 30px;"
@@ -586,7 +608,6 @@ if ($_REQUEST['mac'] != 'Internet') {
                   </script>
                   <button type="button" id="wakeonlan" class="btn btn-primary pa-btn" style="margin-bottom: 20px; margin-left: 10px; margin-right: 10px;" onclick="askwakeonlan()">Loading...</button>
                 </div>
-
 <?php
 }
 ?>
@@ -672,6 +693,47 @@ if ($_REQUEST['mac'] != 'Internet') {
                   </thead>
                 </table>
               </div>
+
+<?php
+if ($_REQUEST['mac'] == 'Internet') {
+	?>
+<!-- tab page 6 ------------------------------------------------------------ -->
+              <div class="tab-pane fade table-responsive" id="panSpeedtest">
+
+<?php
+// Check iff Ookla Speedtest is installed
+	if (file_exists('../back/speedtest/speedtest')) {
+		echo '<h4 class="">' . $pia_lang['ookla_devdetails_tab_headline'] . '</h4>';
+
+		echo '<table id="tableSpeedtest" class="table table-bordered table-hover table-striped ">
+            <thead>
+              <tr>
+                <th>' . $pia_lang['ookla_devdetails_table_time'] . '</th>
+                <th>' . $pia_lang['ookla_devdetails_table_isp'] . '</th>
+                <th>' . $pia_lang['ookla_devdetails_table_server'] . '</th>
+                <th>' . $pia_lang['ookla_devdetails_table_ping'] . '</th>
+                <th>' . $pia_lang['ookla_devdetails_table_down'] . '</th>
+                <th>' . $pia_lang['ookla_devdetails_table_up'] . '</th>
+              </tr>
+            </thead>
+            <tbody>';
+
+# Create Speedtest table
+		get_speedtestresults_table();
+
+		echo '  </tbody>
+    </table>';
+
+	} else {
+		echo $pia_lang['ookla_devdetails_required'];
+	}
+
+	?>
+
+              </div>
+<?php
+}
+?>
 
             </div>
             <!-- /.tab-content -->
@@ -792,6 +854,7 @@ function main () {
             initializeCombos();
             initializeDatatables();
             initializeCalendar();
+            initializeSpeedtest();
 
             // Read Cookies
             devicesList = getCookie('devicesList');
@@ -1462,6 +1525,63 @@ function setDeviceData (refreshCallback='') {
     }
   });
 }
+
+function initializeSpeedtest () {
+  $('#tableSpeedtest').DataTable({
+    'paging'       : true,
+    'lengthChange' : true,
+    'lengthMenu'   : [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
+    //'bLengthChange': false,
+    'searching'    : true,
+    'ordering'     : true,
+    'info'         : true,
+    'autoWidth'    : false,
+    'pageLength'   : 10,
+    'order'        : [[1, 'desc']],
+    'columns': [
+        { "data": 0 },
+        { "data": 1 },
+        { "data": 2 },
+        { "data": 3 },
+        { "data": 4 },
+        { "data": 5 }
+      ],
+
+    'columnDefs'  : [
+      {className: 'text-center', targets: [3,4,5] },
+
+      //Device Name
+      {targets: [0],
+       "createdCell": function (td, cellData, rowData, row, col) {
+         $(td).html ('<b>'+ cellData +'</b>');
+      } },
+      {targets: [3],
+       "createdCell": function (td, cellData, rowData, row, col) {
+         $(td).html ('<b>'+ cellData +' ms</b>');
+      } },
+      {targets: [4,5],
+       "createdCell": function (td, cellData, rowData, row, col) {
+         $(td).html ('<b>'+ cellData +' Mbps</b>');
+      } },
+
+    ],
+
+    // Processing
+    'processing'  : true,
+    'language'    : {
+      processing: '<table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td></table>',
+      emptyTable: 'No data',
+      "lengthMenu": "<?=$pia_lang['Events_Tablelenght'];?>",
+      "search":     "<?=$pia_lang['Events_Searchbox'];?>: ",
+      "paginate": {
+          "next":       "<?=$pia_lang['Events_Table_nav_next'];?>",
+          "previous":   "<?=$pia_lang['Events_Table_nav_prev'];?>"
+      },
+      "info":           "<?=$pia_lang['Events_Table_info'];?>",
+    },
+  });
+};
+
 
 // -----------------------------------------------------------------------------
 function askSkipNotifications () {

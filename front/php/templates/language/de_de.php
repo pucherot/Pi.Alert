@@ -996,6 +996,15 @@ $pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung 
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['ookla_postinstall_note'] = 'Bevor Sie den Speedtest-Client von Ookla nutzen können, müssen Sie einmalig den Befehl "sudo ./speedtest" im Verzeichnis "$HOME/pialert/back/speedtest/" ausführen. Die Speedtest-Schaltfläche wird mit einem Neuladen der Seite aktiviert, funktioniert aber erst, nachdem die Ookla-Lizenz akzeptiert wurde.';
+$pia_lang['ookla_devdetails_tab_title'] = 'Speedtest Verlauf';
+$pia_lang['ookla_devdetails_required'] = 'Der Verlauf der Speedtest Messergebisse wird zur Zeit nur mit dem offiziellen Speedtest von Ookla (<a href="https://www.speedtest.net/apps/cli" target="blank">speedtest.net</a>) unterstützt.';
+$pia_lang['ookla_devdetails_tab_headline'] = 'Speedtest Verlauf';
+$pia_lang['ookla_devdetails_table_time'] = 'Datum';
+$pia_lang['ookla_devdetails_table_isp'] = 'ISP';
+$pia_lang['ookla_devdetails_table_server'] = 'Server';
+$pia_lang['ookla_devdetails_table_ping'] = 'Ping';
+$pia_lang['ookla_devdetails_table_down'] = 'Download';
+$pia_lang['ookla_devdetails_table_up'] = 'Upload';
 
 // =============================================================================================================
 
