@@ -1537,7 +1537,7 @@ function initializeSpeedtest () {
     'info'         : true,
     'autoWidth'    : false,
     'pageLength'   : 10,
-    'order'        : [[1, 'desc']],
+    'order'        : [[0, 'desc']],
     'columns': [
         { "data": 0 },
         { "data": 1 },
@@ -1557,11 +1557,11 @@ function initializeSpeedtest () {
       } },
       {targets: [3],
        "createdCell": function (td, cellData, rowData, row, col) {
-         $(td).html ('<b>'+ cellData +' ms</b>');
+         $(td).html (cellData +' ms');
       } },
       {targets: [4,5],
        "createdCell": function (td, cellData, rowData, row, col) {
-         $(td).html ('<b>'+ cellData +' Mbps</b>');
+         $(td).html (cellData +' Mbps');
       } },
 
     ],

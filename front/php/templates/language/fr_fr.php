@@ -969,7 +969,16 @@ $pia_lang['SysInfo_storage_note'] = 'Il est possible que l&apos;utilisation de l
 // Speedtest
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['ookla_postinstall_note'] = 'Avant de pouvoir utiliser le client speedtest d&apos;Ookla, vous devez exécuter la commande "sudo ./speedtest" une fois dans le répertoire "$HOME/pialert/back/speedtest/". Le bouton speedtest est activé lors du rechargement de la page, mais ne fonctionne qu&apos;après l&apos;acceptation de la licence Ookla.';
+$pia_lang['ookla_postinstall_note'] = 'Avant de pouvoir utiliser le client Speedtest d&apos;Ookla, vous devez exécuter la commande "sudo ./speedtest" une fois dans le répertoire "$HOME/pialert/back/speedtest/." Le bouton Speedtest sera activé après le rechargement de la page, mais il ne fonctionnera qu&apos;après avoir accepté la licence Ookla.';
+$pia_lang['ookla_devdetails_tab_title'] = 'Historique Speedtest';
+$pia_lang['ookla_devdetails_required'] = 'L&apos;historique des résultats de Speedtest est actuellement pris en charge uniquement avec le Speedtest officiel d&apos;Ookla (<a href="https://www.speedtest.net/apps/cli" target="blank">speedtest.net</a>).';
+$pia_lang['ookla_devdetails_tab_headline'] = 'Historique Speedtest';
+$pia_lang['ookla_devdetails_table_time'] = 'Date';
+$pia_lang['ookla_devdetails_table_isp'] = 'Fournisseur d&apos;accès';
+$pia_lang['ookla_devdetails_table_server'] = 'Serveur';
+$pia_lang['ookla_devdetails_table_ping'] = 'Ping';
+$pia_lang['ookla_devdetails_table_down'] = 'Téléchargement';
+$pia_lang['ookla_devdetails_table_up'] = 'Téléversement';
 
 // =============================================================================================================
 

@@ -979,7 +979,16 @@ $pia_lang['SysInfo_storage_note'] = 'It is possible that the memory usage cannot
 // Speedtest
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['ookla_postinstall_note'] = 'Before you can to use the speedtest client from Ookla, you have to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/". The Speedtest button is activated with a page reload, but only works after the Ookla license has been accepted.';
+$pia_lang['ookla_postinstall_note'] = 'Before you can use the Ookla Speedtest client, you need to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/." The Speedtest button will be enabled after reloading the page, but it will only work after accepting the Ookla license.';
+$pia_lang['ookla_devdetails_tab_title'] = 'Speedtest History';
+$pia_lang['ookla_devdetails_required'] = 'The history of Speedtest results is currently supported only with the official Speedtest by Ookla (<a href="https://www.speedtest.net/apps/cli" target="blank">speedtest.net</a>).';
+$pia_lang['ookla_devdetails_tab_headline'] = 'Speedtest History';
+$pia_lang['ookla_devdetails_table_time'] = 'Date';
+$pia_lang['ookla_devdetails_table_isp'] = 'ISP';
+$pia_lang['ookla_devdetails_table_server'] = 'Server';
+$pia_lang['ookla_devdetails_table_ping'] = 'Ping';
+$pia_lang['ookla_devdetails_table_down'] = 'Download';
+$pia_lang['ookla_devdetails_table_up'] = 'Upload';
 
 // =============================================================================================================
 
