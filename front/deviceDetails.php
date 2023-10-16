@@ -685,10 +685,10 @@ if ($_REQUEST['mac'] != 'Internet') {
                 <table id="tableEvents" class="table table-bordered table-hover table-striped ">
                   <thead>
                   <tr>
-                    <th>Date</th>
-                    <th>Event type</th>
-                    <th>IP</th>
-                    <th>Additional info</th>
+                    <th><?=$pia_lang['Events_TableHead_Date'];?></th>
+                    <th><?=$pia_lang['Events_TableHead_EventType'];?></th>
+                    <th><?=$pia_lang['Events_TableHead_IP'];?></th>
+                    <th><?=$pia_lang['Events_TableHead_AdditionalInfo'];?></th>
                   </tr>
                   </thead>
                 </table>
