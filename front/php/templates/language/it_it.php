@@ -654,10 +654,6 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Lo strumento da riga di comando <sp
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Elimina i file sudoers per l&apos;utente www-data e l&apos;utente sotto cui è installato Pi.Alert</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Alcune componenti di Pi.Alert richiedono i permessi "sudo"</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Alcune funzionalità di Pi.Alert, come l&apos;invio di messaggi di test, il rilevamento dei server DHCP esterni o la rilevazione dei dispositivi tramite arp-scan,
-											 richiedono i permessi "sudo". È necessaria una modifica nella configurazione. Esegui il comando <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span> nella directory <span class="text-maroon help_faq_code">~/pialert/back</span> per abilitare questa funzionalità.';
-
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Il file <span class="text-maroon help_faq_code">pialert.conf</span> si trova nella directory <span class="text-maroon help_faq_code">~/pialert/config</span>. In questo file di configurazione è possibile personalizzare molte funzionalità di Pi.Alert in base alle proprie preferenze. Poiché le opzioni sono varie, fornirò una breve spiegazione di ciascun punto.
                                             <table class="help_table_gen">
@@ -779,63 +775,36 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Il file <span class="text-maroon he
                                                     <td class="help_table_gen_b">Qui è necessario configurare quale binario di Shoutrrr utilizzare, in base all&apos;hardware su cui è installato Pi.Alert.</td></tr>
                                             </table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Telegram tramite Shoutrrr</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">REPORT_TELEGRAM</td>
-											        <td class="help_table_gen_b">Attiva/Disattiva le notifiche sulle modifiche di rete tramite Telegram</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">REPORT_TELEGRAM_WEBMON</td>
-											        <td class="help_table_gen_b">Attiva/Disattiva le notifiche sulle modifiche nei servizi web monitorati tramite Telegram</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">TELEGRAM_BOT_TOKEN_URL</td>
-											        <td class="help_table_gen_b">URL del token del bot Telegram</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">Telegram tramite Shoutrrr</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TELEGRAM</td>
+											        <td class="help_table_gen_b">Attiva/Disattiva le notifiche sulle modifiche di rete tramite Telegram</td></tr>
+											    <tr><td class="help_table_gen_a">REPORT_TELEGRAM_WEBMON</td>
+											        <td class="help_table_gen_b">Attiva/Disattiva le notifiche sulle modifiche nei servizi web monitorati tramite Telegram</td></tr>
+											    <tr><td class="help_table_gen_a">TELEGRAM_BOT_TOKEN_URL</td>
+											        <td class="help_table_gen_b">URL del token del bot Telegram</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">DynDNS e IP</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">QUERY_MYIP_SERVER</td>
-											        <td class="help_table_gen_b">URL del server che recupera e restituisce l&apos;indirizzo IP pubblico corrente</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DDNS_ACTIVE</td>
-											        <td class="help_table_gen_b">Attiva/Disattiva il servizio DDNS configurato in Pi.Alert. Il DDNS, noto anche come DynDNS, consente di aggiornare un nome di dominio con un indirizzo IP che cambia dinamicamente. Diversi fornitori di servizi offrono questo servizio.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DDNS_DOMAIN</td>
-											        <td class="help_table_gen_b">Dominio DDNS</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DDNS_USER</td>
-											        <td class="help_table_gen_b">Nome utente</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DDNS_PASSWORD</td>
-											        <td class="help_table_gen_b">Password</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DDNS_UPDATE_URL</td>
-											        <td class="help_table_gen_b">URL di aggiornamento DDNS</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">DynDNS e IP</td></tr>
+											    <tr><td class="help_table_gen_a">QUERY_MYIP_SERVER</td>
+											        <td class="help_table_gen_b">URL del server che recupera e restituisce l&apos;indirizzo IP pubblico corrente</td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_ACTIVE</td>
+											        <td class="help_table_gen_b">Attiva/Disattiva il servizio DDNS configurato in Pi.Alert. Il DDNS, noto anche come DynDNS, consente di aggiornare un nome di dominio con un indirizzo IP che cambia dinamicamente. Diversi fornitori di servizi offrono questo servizio.</td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_DOMAIN</td>
+											        <td class="help_table_gen_b">Dominio DDNS</td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_USER</td>
+											        <td class="help_table_gen_b">Nome utente</td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_PASSWORD</td>
+											        <td class="help_table_gen_b">Password</td></tr>
+											    <tr><td class="help_table_gen_a">DDNS_UPDATE_URL</td>
+											        <td class="help_table_gen_b">URL di aggiornamento DDNS</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Opzioni e campioni di arp-scan</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">MAC_IGNORE_LIST</td>
+											    <tr><td class="help_table_gen_section" colspan="2">Opzioni e campioni di arp-scan</td></tr>
+											    <tr><td class="help_table_gen_a">MAC_IGNORE_LIST</td>
 											        <td class="help_table_gen_b">
 											            <span class="text-maroon help_faq_code">[&apos;Indirizzo MAC 1&apos;, &apos;Indirizzo MAC 2&apos;]</span><br>
-											            Questi indirizzi MAC (in minuscolo) verranno filtrati dai risultati della scansione.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">SCAN_SUBNETS</td>
+											            Questi indirizzi MAC (in minuscolo) verranno filtrati dai risultati della scansione.</td></tr>
+											    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
 											        <td class="help_table_gen_b">
 											            &lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
 											            Questa opzione è di solito l&apos;impostazione corretta. Utilizzala quando Pi.Alert è installato su un dispositivo con una scheda di rete e non sono configurate reti aggiuntive.<br><br>
@@ -843,120 +812,68 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Il file <span class="text-maroon he
 											            Questa configurazione viene scelta quando Pi.Alert è installato su un sistema con almeno 2 schede di rete e una rete configurata. Il nome dell&apos;interfaccia potrebbe variare e dovrebbe essere adattato alla configurazione del sistema.<br><br>
 											            <span class="text-maroon help_faq_code">[&apos;192.168.1.0/24 --interface=eth0&apos;, &apos;192.168.2.0/24 --interface=eth1&apos;]</span><br>
 											            L&apos;ultima configurazione è necessaria quando si monitorano più reti. Dovrebbe essere configurata una scheda di rete dedicata per ogni rete da monitorare. Questo è necessario perché il comando "arp-scan" utilizzato non effettua il routing ed è in grado di funzionare solo all&apos;interno del proprio subnet. Ogni interfaccia è associata alla rispettiva rete e il nome dell&apos;interfaccia dovrebbe essere adattato alla configurazione del sistema.
-											        </td>
-											    </tr>
+											        </td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Opzioni di monitoraggio ICMP</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
-											        <td class="help_table_gen_b">Numero di tentativi per determinare se un dispositivo è online (impostazione predefinita 1).</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
-											        <td class="help_table_gen_b">Numero di richieste "ping" per calcolare il tempo medio di risposta (impostazione predefinita 2).</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">Opzioni di monitoraggio ICMP</td></tr>
+											    <tr><td class="help_table_gen_a">ICMP_ONLINE_TEST</td>
+											        <td class="help_table_gen_b">Numero di tentativi per determinare se un dispositivo è online (impostazione predefinita 1).</td></tr>
+											    <tr><td class="help_table_gen_a">ICMP_GET_AVG_RTT</td>
+											        <td class="help_table_gen_b">Numero di richieste "ping" per calcolare il tempo medio di risposta (impostazione predefinita 2).</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Configurazione di Pi-hole</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">PIHOLE_ACTIVE</td>
-											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">PIHOLE_DB</td>
-											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione e non dovrebbe essere più modificata.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DHCP_ACTIVE</td>
-											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DHCP_LEASES</td>
-											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione e non dovrebbe essere più modificata.</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">Configurazione di Pi-hole</td></tr>
+											    <tr><td class="help_table_gen_a">PIHOLE_ACTIVE</td>
+											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione.</td></tr>
+											    <tr><td class="help_table_gen_a">PIHOLE_DB</td>
+											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione e non dovrebbe essere più modificata.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_ACTIVE</td>
+											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione.</td></tr>
+											    <tr><td class="help_table_gen_a">DHCP_LEASES</td>
+											        <td class="help_table_gen_b">Questa variabile viene impostata durante l&apos;installazione e non dovrebbe essere più modificata.</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Configurazione di Fritzbox</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">FRITZBOX_ACTIVE</td>
-											        <td class="help_table_gen_b">Se viene utilizzato un router Fritzbox nella rete, questo può essere utilizzato come fonte dati. In questo punto è possibile attivarlo o disattivarlo.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">FRITZBOX_IP</td>
-											        <td class="help_table_gen_b">Indirizzo IP del Fritzbox.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">FRITZBOX_USER</td>
-											        <td class="help_table_gen_b">Nome utente<br>Questo presuppone che il Fritzbox sia configurato per l&apos;accesso con nome utente e password anziché solo con la password. L&apos;accesso solo con password non è supportato.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">FRITZBOX_PASS</td>
-											        <td class="help_table_gen_b">Password</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">Configurazione di Fritzbox</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_ACTIVE</td>
+											        <td class="help_table_gen_b">Se viene utilizzato un router Fritzbox nella rete, questo può essere utilizzato come fonte dati. In questo punto è possibile attivarlo o disattivarlo.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_IP</td>
+											        <td class="help_table_gen_b">Indirizzo IP del Fritzbox.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_USER</td>
+											        <td class="help_table_gen_b">Nome utente<br>Questo presuppone che il Fritzbox sia configurato per l&apos;accesso con nome utente e password anziché solo con la password. L&apos;accesso solo con password non è supportato.</td></tr>
+											    <tr><td class="help_table_gen_a">FRITZBOX_PASS</td>
+											        <td class="help_table_gen_b">Password</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Configurazione di Mikrotik</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">MIKROTIK_ACTIVE</td>
-											        <td class="help_table_gen_b">Se viene utilizzato un router Mikrotik nella rete, questo può essere utilizzato come fonte dati. In questo punto è possibile attivarlo o disattivarlo.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">MIKROTIK_IP</td>
-											        <td class="help_table_gen_b">Indirizzo IP del router Mikrotik.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">MIKROTIK_USER</td>
-											        <td class="help_table_gen_b">Nome utente</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">MIKROTIK_PASS</td>
-											        <td class="help_table_gen_b">Password</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">Configurazione di Mikrotik</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_ACTIVE</td>
+											        <td class="help_table_gen_b">Se viene utilizzato un router Mikrotik nella rete, questo può essere utilizzato come fonte dati. In questo punto è possibile attivarlo o disattivarlo.</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_IP</td>
+											        <td class="help_table_gen_b">Indirizzo IP del router Mikrotik.</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_USER</td>
+											        <td class="help_table_gen_b">Nome utente</td></tr>
+											    <tr><td class="help_table_gen_a">MIKROTIK_PASS</td>
+											        <td class="help_table_gen_b">Password</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Configurazione di UniFi</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">UNIFI_ACTIVE</td>
-											        <td class="help_table_gen_b">Se un sistema UniFi è utilizzato nella rete, questo può essere utilizzato come fonte dati. In questo punto è possibile attivarlo o disattivarlo.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">UNIFI_IP</td>
-											        <td class="help_table_gen_b">Indirizzo IP del sistema UniFi.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">UNIFI_USER</td>
-											        <td class="help_table_gen_b">Nome utente</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">UNIFI_PASS</td>
-											        <td class="help_table_gen_b">Password</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">Configurazione di UniFi</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_ACTIVE</td>
+											        <td class="help_table_gen_b">Se un sistema UniFi è utilizzato nella rete, questo può essere utilizzato come fonte dati. In questo punto è possibile attivarlo o disattivarlo.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
+											        <td class="help_table_gen_b">Indirizzo IP del sistema UniFi.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_API</td>
+											        <td class="help_table_gen_b">Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
+											        <td class="help_table_gen_b">Nome utente</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>
+											        <td class="help_table_gen_b">Password</td></tr>
 											</table>
 											<table class="help_table_gen">
-											    <tr>
-											        <td class="help_table_gen_section" colspan="2">Compiti di manutenzione Cron</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DAYS_TO_KEEP_ONLINEHISTORY</td>
-											        <td class="help_table_gen_b">Numero di giorni per cui la cronologia online (grafico di attività) deve essere conservata nel database. Un giorno genera 288 di tali record.</td>
-											    </tr>
-											    <tr>
-											        <td class="help_table_gen_a">DAYS_TO_KEEP_EVENTS</td>
-											        <td class="help_table_gen_b">Numero di giorni per cui gli eventi dei singoli dispositivi devono essere conservati.</td>
-											    </tr>
+											    <tr><td class="help_table_gen_section" colspan="2">Compiti di manutenzione Cron</td></tr>
+											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_ONLINEHISTORY</td>
+											        <td class="help_table_gen_b">Numero di giorni per cui la cronologia online (grafico di attività) deve essere conservata nel database. Un giorno genera 288 di tali record.</td></tr>
+											    <tr><td class="help_table_gen_a">DAYS_TO_KEEP_EVENTS</td>
+											        <td class="help_table_gen_b">Numero di giorni per cui gli eventi dei singoli dispositivi devono essere conservati.</td></tr>
 											</table>';
-
 $pia_lang['HelpFAQ_Cat_Device_200_head'] = 'Ho dispositivi nella mia lista che sono sconosciuti o che non uso più. Dopo averli cancellati, ricompaiono sempre.';
 $pia_lang['HelpFAQ_Cat_Device_200_text'] = 'Se stai utilizzando Pi-hole, tieni presente che Pi.Alert recupera informazioni da Pi-hole. Sospendi Pi.Alert, vai alla pagina Impostazioni di Pi-hole e cancella eventuali lease DHCP
 											relativi ai dispositivi che desideri rimuovere. Successivamente, controlla anche nella sezione Strumenti -> Rete di Pi-hole se trovi i dispositivi che riappaiono. Se li trovi, cancellali
