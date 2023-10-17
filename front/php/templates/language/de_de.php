@@ -590,11 +590,17 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob d
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
-                							 chmod -R 770 ~/pialert/db
+                							 chmod -R 775 ~/pialert/db
               								 </div>
-              								 Du hast auch die Möglichkeit, diese Schritte im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> mit dem Befehl <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> auszuführen.
-											 Falls die Datenbank danach weiterhin schreibgeschützt ist, empfiehlt sich eine erneute Installation oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.
-											 Beachte dabei, dass es wichtig ist, die Rechte im Anschluss zu überprüfen und gegebenenfalls zu korrigieren.';
+              								 Ein ander Möglichkeit wäre, die notwendigen Rechte mit Hilfe von <span class="text-maroon help_faq_code">pialert-cli</span> im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> neu zu setze. Hier stehen dir mehrere Optionen zur Verfügung.<br><br>
+              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span><br>
+              								 Hier werden nur die Gruppenrechte neu gesetzt. Der Eigentümer der Datei bleibt unangetastet.<br><br>
+              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
+              								 Dieses zusätzliche Option wurde für die Nutzung in einem LXC Container eingeführt. Sie ändert die Gruppe, gemäß der Grundfunktion und setzt als Eigentümer den User "root". Außerhalb einer LXC Umgebung ist diese Option nicht relevant.<br><br>
+              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --custom</span><br>
+              								 Mit dieser Option hast du die Möglichkeit einen individuellen Usernamen zu setzen, welcher der Eigentümer der Dateien wird. Die Gruppe, wird gemäß der Grundfunktion gesetzt. Diese Option soll Sonderfälle abdecken, welche ich derzeit nicht benennen kann.<br><br>
+              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
+              								 Dies sollte die bevorzugte Option sein. Hier wird der Username anhand des übergeordnenten Home Verzeichnisses der Pi.Alert-Installation ermittelt. Dieser Username wird als Eigentümer der Dateien gesetzt. Die Gruppe, wird gemäß der Grundfunktion gesetzt.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
