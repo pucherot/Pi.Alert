@@ -580,7 +580,7 @@ $pia_lang['HelpFAQ_Cat_General_101_head'] = 'Mon réseau semble ralentir, le str
 $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Il est tout à fait possible que les appareils peu performants atteignent leurs limites de performance avec la manière dont Pi.Alert détecte les nouveaux appareils sur le réseau. Cela est encore plus vrai si ces appareils communiquent avec le réseau par WLAN. La solution serait alors de passer à une connexion câblée si possible ou, si l&apos;appareil ne doit être utilisé que pendant une période limitée, de mettre en pause le scan arp sur la page de maintenance.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Je reçois un message indiquant que la base de données est protégée en écriture (read only).';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Vérifie dans le répertoire Pi.Alert si le dossier de la base de données (db) s&apos;est vu attribuer les bons droits :<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (nombre de usuario) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (nombre de usuario) www-data</span><br>
               								 Si l&apos;autorisation n&apos;est pas correcte, tu peux la rétablir avec les commandes suivantes dans le terminal ou la console :<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
@@ -592,8 +592,6 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Vérifie dans le répertoire Pi.Ale
 											 Cette commande réinitialise uniquement les autorisations de groupe, laissant le propriétaire du fichier inchangé.<br><br>
 											 <span class "text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
 											 Cette option supplémentaire est introduite pour une utilisation dans un conteneur LXC. Elle modifie le groupe conformément à la fonction de base et défini l&apos;utilisateur "root" comme propriétaire. Cette option n&apos;est pas pertinente en dehors d&apos;un environnement LXC.<br><br>
-											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --custom</span><br>
-											 Avec cette option, vous avez la possibilité de définir un nom d&apos;utilisateur personnalisé qui devient le propriétaire du fichier. Le groupe est défini conformément à la fonction de base. Cette option est conçue pour couvrir des cas spéciaux que je ne peux actuellement pas nommer.<br><br>
 											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
 											 Cette option devrait être privilégiée. Ici, le nom d&apos;utilisateur est déterminé en fonction du répertoire parent du dossier d&apos;installation de Pi.Alert. Ce nom d&apos;utilisateur devient le propriétaire des fichiers. Le groupe est défini conformément à la fonction de base.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La page de connexion n&apos;apparaît pas, même après la modification du mot de passe.';
@@ -638,7 +636,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											    <tr><td class="help_table_gen_a">set_apikey</td>
 											        <td class="help_table_gen_b">- Avec la clé API, il est possible de faire des requêtes à la base de données sans utiliser la page web. Si une clé API existe déjà, elle sera remplacée.<br>&nbsp;</td></tr>
 											    <tr><td class="help_table_gen_a">set_permissions</td>
-												    <td class="help_table_gen_b">- Corrige les permissions de fichier de la base de données.</td></tr>
+													<td class="help_table_gen_b">- Répare les autorisations de fichier de la base de données pour le groupe. Si les autorisations doivent également être réinitialisées pour l&apos;utilisateur, une option supplémentaire est nécessaire:<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span> définit "root" comme nom d&apos;utilisateur<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span> définit un nom d&apos;utilisateur personnalisé<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span> prend le nom d&apos;utilisateur à partir du répertoire de la maison</td></tr>
 											    <tr><td class="help_table_gen_a">reporting_test</td>
 											        <td class="help_table_gen_b">- Teste les notifications pour tous les services activés.<br>&nbsp;</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>

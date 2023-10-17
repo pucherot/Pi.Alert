@@ -582,7 +582,7 @@ $pia_lang['HelpFAQ_Cat_General_101_text'] = 'It may well be that low-powered dev
 											 pause the arp scan on the maintenance page.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'I get the message that the database is read only.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if the database folder (db) has been assigned the correct permissions:<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (your username) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (your username) www-data</span><br>
               								 If the permission is not correct, you can set it again with the following commands in the terminal or the console:<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
@@ -594,8 +594,6 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if 
 											 This command only resets the group permissions, leaving the file owner unchanged.<br><br>
 											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
 											 This additional option is introduced for use within an LXC container. It changes the group as per the basic functionality and sets the user "root" as the owner. This option is not relevant outside of an LXC environment.<br><br>
-											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --custom</span><br>
-											 With this option, you have the ability to set a custom username that becomes the file owner. The group is set according to the basic functionality. This option is designed to cover special cases that I cannot currently name.<br><br>
 											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
 											 This option should be the preferred one. Here, the username is determined based on the parent home directory of the Pi.Alert installation. This username becomes the owner of the files. The group is set according to the basic functionality.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'The login page does not appear, even after changing the password.';
@@ -642,8 +640,11 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td class="help_table_gen_b">- The script tries to make the database compatible for this fork.<br>&nbsp;</td></tr>
 											    <tr><td class="help_table_gen_a">set_apikey</td>
 											        <td class="help_table_gen_b">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td></tr>
-											    <tr><td class="help_table_gen_a">set_permissions</td>
-    												<td class="help_table_gen_b">- Fixes the file permissions of the database.</td></tr>
+												<tr><td class="help_table_gen_a">set_permissions</td>
+													<td class="help_table_gen_b">- Repairs the file permissions of the database for the group. If permissions need to be reset for the user as well, an additional option is required:<br>
+																				<span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span> sets "root" as the username<br>
+																				<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span> sets a custom username<br>
+																				<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span> takes the username from the home directory</td></tr>
 											    <tr><td class="help_table_gen_a">reporting_test</td>
 											        <td class="help_table_gen_b">- Test reporting for all activated services.<br>&nbsp;</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>

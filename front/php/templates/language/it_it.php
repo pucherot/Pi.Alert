@@ -585,7 +585,7 @@ $pia_lang['HelpFAQ_Cat_General_101_head'] = 'La mia rete sembra rallentare, lo s
 $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Potrebbe succedere che dispositivi poco potenti raggiungano i propri limiti di prestazione con il modo in cui Pi.Alert rileva i nuovi dispositivi nella rete. Questo problema si accentua ulteriormente se tali dispositivi comunicano tramite WLAN con la rete. Le soluzioni possibili includono il passaggio a una connessione cablata, se possibile, o la sospensione dell&apos;arp-scan nella pagina di manutenzione se si desidera utilizzare il dispositivo solo per un breve periodo.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Ricevo un messaggio che il database è in modalità sola lettura (read-only).';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Verifica nella directory di Pi.Alert se la cartella del database (db) ha i permessi corretti assegnati:<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (tuo nome utente) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (tuo nome utente) www-data</span><br>
               								 Se i permessi non sono corretti, puoi reimpostarli con i seguenti comandi nel terminale o nella console:<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
@@ -597,8 +597,6 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Verifica nella directory di Pi.Aler
 											 Questo comando ripristina solo i permessi del gruppo, lasciando inalterato il proprietario del file.<br><br>
 											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
 											 Questa opzione aggiuntiva è stata introdotta per l&apos;uso all&apos;interno di un container LXC. Modifica il gruppo secondo la funzionalità di base e imposta l&apos;utente "root" come proprietario. Questa opzione non è rilevante al di fuori di un ambiente LXC.<br><br>
-											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --custom</span><br>
-											 Con questa opzione, hai la possibilità di impostare un nome utente personalizzato che diventa il proprietario del file. Il gruppo è impostato secondo la funzionalità di base. Questa opzione è progettata per coprire casi speciali che al momento non posso nominare.<br><br>
 											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
 											 Questa opzione dovrebbe essere quella preferita. Qui, il nome utente viene determinato in base alla directory principale dell&apos;installazione di Pi.Alert. Questo nome utente diventa il proprietario dei file. Il gruppo è impostato secondo la funzionalità di base.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La pagina di accesso non appare, nemmeno dopo aver cambiato la password.';
@@ -645,7 +643,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Lo strumento da riga di comando <sp
 											    <tr><td class="help_table_gen_a">set_apikey</td>
 											        <td class="help_table_gen_b">- Consente di effettuare query al database senza utilizzare il sito web, utilizzando una chiave API. Se una chiave API esiste già, verrà sovrascritta</td></tr>
 											    <tr><td class="help_table_gen_a">set_permissions</td>
-											        <td class="help_table_gen_b">- Ripristina i permessi dei file del database.</td></tr>
+													<td class="help_table_gen_b">- Ripara i permessi del file del database per il gruppo. Se è necessario ripristinare anche i permessi per l&apos;utente, è necessaria un&apos;opzione aggiuntiva:<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span> imposta "root" come nome utente<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span> imposta un nome utente personalizzato<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span> prende il nome utente dalla directory home</td></tr>
 											    <tr><td class="help_table_gen_a">reporting_test</td>
 											        <td class="help_table_gen_b">- Testa tutti i servizi di notifica attivi</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>

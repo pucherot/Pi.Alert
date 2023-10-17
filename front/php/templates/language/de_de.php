@@ -584,8 +584,8 @@ $pia_lang['HelpFAQ_Cat_General_100_text_c'] = 'Suche in dieser Datei nach dem Ei
 $pia_lang['HelpFAQ_Cat_General_101_head'] = 'Mein Netzwerk scheint langsamer zu werden, Streaming "ruckelt".';
 $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es kann durchaus sein, dass leistungsschwache Geräte mit der Art und Weise, wie Pi.Alert neue Geräte im Netzwerk erkennt, an ihre Leistungsgrenzen stoßen. Dies verstärkt sich noch einmal, wenn diese Geräte per WLAN mit dem Netzwerk kommunizieren. Lösungen wären hier, wenn möglich ein Wechsel auf eine Kabelverbindung oder, falls das Geräte nur einen begrenzten Zeitraum genutzt werden soll, den arp-Scan auf der Wartungsseite zu pausieren.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Ich bekomme die Meldung, dass die Datenbank schreibgeschützt (read only) ist.';
-$pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (dein Username) www-data</span><br>
+$pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert Verzeichnis, ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (dein Username) www-data</span><br>
               								 Sollte die Berechtigung nicht stimmen, kannst du sie mit folgenden Befehlen im Terminal oder der Konsole wieder setzen:<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
@@ -597,8 +597,6 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob d
               								 Hier werden nur die Gruppenrechte neu gesetzt. Der Eigentümer der Datei bleibt unangetastet.<br><br>
               								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
               								 Dieses zusätzliche Option wurde für die Nutzung in einem LXC Container eingeführt. Sie ändert die Gruppe, gemäß der Grundfunktion und setzt als Eigentümer den User "root". Außerhalb einer LXC Umgebung ist diese Option nicht relevant.<br><br>
-              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --custom</span><br>
-              								 Mit dieser Option hast du die Möglichkeit einen individuellen Usernamen zu setzen, welcher der Eigentümer der Dateien wird. Die Gruppe, wird gemäß der Grundfunktion gesetzt. Diese Option soll Sonderfälle abdecken, welche ich derzeit nicht benennen kann.<br><br>
               								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
               								 Dies sollte die bevorzugte Option sein. Hier wird der Username anhand des übergeordnenten Home Verzeichnisses der Pi.Alert-Installation ermittelt. Dieser Username wird als Eigentümer der Dateien gesetzt. Die Gruppe, wird gemäß der Grundfunktion gesetzt.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
@@ -645,7 +643,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											    <tr><td class="help_table_gen_a">set_apikey</td>
 											        <td class="help_table_gen_b">- Mit dem API-Schlüssel ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Webseite zu benutzen. Wenn bereits ein API-Schlüssel existiert, wird er ersetzt</td></tr>
 											    <tr><td class="help_table_gen_a">set_permissions</td>
-											        <td class="help_table_gen_b">- Repariert die Dateiberechtigung der Datenbank.</td></tr>
+											        <td class="help_table_gen_b">- Repariert die Dateiberechtigung der Datenbank für die Gruppe. Wenn die Berechtigungen für den User ebenfalls neu gesetzt werden sollen, ist eine zusäzliche Option notwendig:<br>
+											        							    <span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span>        setzt "root" as Usernamen<br>
+    																				<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span>     setzt einen individuellen Usernamen<br>
+    																				<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span>    übernimmt den Username vom Home-Verzeichnis</td></tr>
 											    <tr><td class="help_table_gen_a">reporting_test</td>
 											        <td class="help_table_gen_b">- Testet alle aktiven Benachrichtigungsdienste</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>

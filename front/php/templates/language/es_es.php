@@ -582,7 +582,7 @@ $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es muy posible que los dispositivos
 											pausar el arp scan en la página de mantenimiento.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Me aparece el mensaje de que la base de datos es de sólo de lectura.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Compruebe en el directorio Pi.Alert si la carpeta de la base de datos (db) tiene asignados los permisos correctos:<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (nombre de usuario) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (nombre de usuario) www-data</span><br>
               								 Si el permiso no es correcto, puede establecerlo de nuevo con los siguientes comandos en la terminal o la consola:<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
@@ -594,8 +594,6 @@ $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Compruebe en el directorio Pi.Alert
 											 Este comando solo restablece los permisos del grupo, dejando sin cambios al propietario del archivo.<br><br>
 											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
 											 Esta opción adicional se introdujo para su uso en un contenedor LXC. Cambia el grupo según la funcionalidad básica y establece al usuario "root" como propietario. Esta opción no es relevante fuera de un entorno LXC.<br><br>
-											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --custom</span><br>
-											 Con esta opción, tienes la capacidad de establecer un nombre de usuario personalizado que se convierte en el propietario del archivo. El grupo se establece según la funcionalidad básica. Esta opción está diseñada para cubrir casos especiales que actualmente no puedo nombrar.<br><br>
 											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
 											 Esta opción debería ser la preferida. Aquí, el nombre de usuario se determina en función del directorio principal del hogar de la instalación de Pi.Alert. Este nombre de usuario se convierte en el propietario de los archivos. El grupo se establece según la funcionalidad básica.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La página de inicio de sesión no aparece, incluso después de cambiar la contraseña.';
@@ -642,7 +640,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 												<tr><td class="help_table_gen_a">set_apikey</td>
 												    <td class="help_table_gen_b">- Con la clave API es posible hacer consultas a la base de datos sin utilizar la página web. Si ya existe una clave API, se reemplazará.</td></tr>
 												<tr><td class="help_table_gen_a">set_permissions</td>
-												    <td class="help_table_gen_b">- Corrige los permisos de archivo de la base de datos.</td></tr>
+													<td class="help_table_gen_b">- Repara los permisos del archivo de la base de datos para el grupo. Si también es necesario restablecer los permisos para el usuario, se requiere una opción adicional:<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span> establece "root" como nombre de usuario<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span> establece un nombre de usuario personalizado<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span> toma el nombre de usuario del directorio de inicio</td></tr>
 												<tr><td class="help_table_gen_a">reporting_test</td>
 												    <td class="help_table_gen_b">- Prueba de informes para todos los servicios activados.</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>
