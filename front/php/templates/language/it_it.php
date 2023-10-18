@@ -654,6 +654,17 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Lo strumento da riga di comando <sp
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Elimina i file sudoers per l&apos;utente www-data e l&apos;utente sotto cui è installato Pi.Alert</td></tr>
 											</table>';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = 'Come posso eseguire una verifica di integrità del database?';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Se desideri verificare il database attualmente in uso, arresta Pi.Alert per circa 1 ora per evitare qualsiasi accesso in scrittura al database durante la verifica. Inoltre, l&apos;interfaccia web non dovrebbe essere aperta per altre operazioni di scrittura durante la verifica.
+											 Ora apri la console nella directory <span class="text-maroon help_faq_code">~/pialert/back</span> e utilizza il comando <span class="text-maroon help_faq_code">ls</span> per elencare il contenuto della directory. Se i file
+											 <span class="text-maroon help_faq_code">pialert.db-shm</span> e <span class="text-maroon help_faq_code">pialert.db-wal</span> compaiono nell&apos;elenco (con lo stesso timestamp del file "pialert.db"), significa che ci sono ancora transazioni di database aperte. In questo caso, attendi semplicemente un momento e, per verificare, esegui nuovamente il comando <span class="text-maroon help_faq_code">ls</span>.
+											 <br><br>
+											 Una volta che questi file sono scomparsi, è possibile eseguire la verifica. Per farlo, esegui i seguenti comandi:<br>
+											 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
+											    sqlite3 pialert.db "PRAGMA integrity_check"<br>
+											    sqlite3 pialert.db "PRAGMA foreign_key_check"
+											 </div><br>
+											 In entrambi i casi, non dovrebbero essere segnalati errori. Dopo la verifica, puoi riavviare Pi.Alert.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Il file <span class="text-maroon help_faq_code">pialert.conf</span> si trova nella directory <span class="text-maroon help_faq_code">~/pialert/config</span>. In questo file di configurazione è possibile personalizzare molte funzionalità di Pi.Alert in base alle proprie preferenze. Poiché le opzioni sono varie, fornirò una breve spiegazione di ciascun punto.
                                             <table class="help_table_gen">

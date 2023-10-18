@@ -647,10 +647,17 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Certaines composantes de Pi.Alert nécessitent l&apos;autorisation "sudo"</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certaines fonctionnalités de Pi.Alert, telles que l&apos;envoi de messages de test, la détection de serveurs DHCP étrangers ou l&apos;identification de périphériques à l&apos;aide de arp-scan,
-											 nécessitent des autorisations "sudo". Un ajustement de configuration est nécessaire pour cela. Pour ce faire, dans le répertoire <span class="text-maroon help_faq_code">~/pialert/back</span>,
-											 exécutez la commande <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span>.';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = 'Comment puis-je effectuer une vérification d&apos;intégrité de la base de données ?';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Si vous souhaitez vérifier la base de données actuellement en cours d&apos;utilisation, arrêtez Pi.Alert pendant environ 1 heure pour éviter tout accès en écriture à la base de données pendant la vérification. De plus, l&apos;interface Web ne doit pas être ouverte pour d&apos;autres opérations d&apos;écriture pendant la vérification.
+											 Maintenant, ouvrez la console dans le répertoire <span class="text-maroon help_faq_code">~/pialert/db</span> et utilisez la commande <span class="text-maroon help_faq_code">ls</span> pour répertorier le contenu du répertoire. Si les fichiers
+											 <span class="text-maroon help_faq_code">pialert.db-shm</span> et <span class="text-maroon help_faq_code">pialert.db-wal</span> apparaissent dans la liste (avec la même horodatage que le fichier "pialert.db"), cela signifie qu&apos;il existe encore des transactions de base de données ouvertes. Dans ce cas, attendez simplement un moment, et pour vérifier, exécutez à nouveau la commande <span class="text-maroon help_faq_code">ls</span>.
+											 <br><br>
+											 Une fois que ces fichiers ont disparu, la vérification peut être effectuée. Pour ce faire, exécutez les commandes suivantes :<br>
+											 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
+											    sqlite3 pialert.db "PRAGMA integrity_check"<br>
+											    sqlite3 pialert.db "PRAGMA foreign_key_check"
+											 </div><br>
+											 Dans les deux cas, aucun erreur ne devrait être signalée. Après la vérification, vous pouvez redémarrer Pi.Alert.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon help_faq_code">pialert.conf</span> se trouve dans le répertoire <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 Dans ce fichier de configuration, de nombreuses fonctions de Pi.Alert peuvent être configurées selon les préférences personnelles. Comme les possibilités sont variées, je souhaiterais donner une
@@ -854,6 +861,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Le fichier <span class="text-maroon
 											        <td class="help_table_gen_b">Si un système UniFi est utilisé dans le réseau, il peut être utilisé comme source de données. Cela peut être activé ou désactivé à ce stade.</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
 											        <td class="help_table_gen_b">Adresse IP du système Unifi.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_API</td>
+											        <td class="help_table_gen_b">Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
 											        <td class="help_table_gen_b">Nom d&apos;utilisateur</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>

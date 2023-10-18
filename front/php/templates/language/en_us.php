@@ -652,9 +652,17 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Some Pi.Alert components need "sudo" permission</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certain functions of Pi.Alert, like sending test messages, detecting foreign DHCP servers or detecting devices using arp-scan, require "sudo" permissions. Here a configuration adjustment is necessary.
-											 Execute the command <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span> in the directory <span class="text-maroon help_faq_code">~/pialert/back</span>.';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = 'How can I perform an integrity check on the database?';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'If you want to check the database currently in use, stop Pi.Alert for about 1 hour to prevent any writing access to the database during the check. Also, the web interface should not be open for any other write operations during the check.
+											 Now, open the console in the directory <span class="text-maroon help_faq_code">~/pialert/db</span> and use the command <span class="text-maroon help_faq_code">ls</span> to list the contents of the directory. If the files
+											 <span class="text-maroon help_faq_code">pialert.db-shm</span> and <span class="text-maroon help_faq_code">pialert.db-wal</span> appear in the list (with the same timestamp as the "pialert.db" file), it means that there are still database transactions open. In this case, just wait a moment, and to check, run the <span class="text-maroon help_faq_code">ls</span> command again.
+											 <br><br>
+											 Once these files have disappeared, the check can be performed. To do this, execute the following commands:<br>
+											 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
+											    sqlite3 pialert.db "PRAGMA integrity_check"<br>
+											    sqlite3 pialert.db "PRAGMA foreign_key_check"
+											 </div><br>
+											 In both cases, no errors should be reported. After the check, you can restart Pi.Alert.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon help_faq_code">pialert.conf</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 In this configuration file many functions of Pi.Alert can be set according to the personal wishes. Since the possibilities are various, I would like to give a
@@ -863,6 +871,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											        <td class="help_table_gen_b">If a UniFi system is used in the network, it can be used as a data source. This can be enabled or disabled at this point.</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
 											        <td class="help_table_gen_b">IP address of the Unifi system.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_API</td>
+											        <td class="help_table_gen_b">Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
 											        <td class="help_table_gen_b">Username</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>

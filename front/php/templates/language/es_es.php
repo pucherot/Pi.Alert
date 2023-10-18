@@ -651,10 +651,17 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Algunos componentes de Pi.Alert requieren permisos "sudo"</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Ciertas funciones de Pi.Alert, como el envío de mensajes de prueba, la detección de servidores DHCP extranjeros o la identificación de dispositivos mediante arp-scan,
-											 requieren permisos "sudo". Es necesario realizar un ajuste de configuración para esto. Para hacerlo, en el directorio <span class="text-maroon help_faq_code">~/pialert/back</span>,
-											 ejecuta el comando <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span>.';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = '¿Cómo puedo realizar una comprobación de integridad en la base de datos?';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Si deseas comprobar la base de datos que está en uso, detén Pi.Alert durante aproximadamente 1 hora para evitar cualquier acceso de escritura a la base de datos durante la comprobación. Además, la interfaz web no debe estar abierta para otras operaciones de escritura durante la comprobación.
+ 											 Ahora, abre la consola en el directorio <span class="text-maroon help_faq_code">~/pialert/db</span> y utiliza el comando <span class="text-maroon help_faq_code">ls</span> para listar el contenido del directorio. Si los archivos
+ 											 <span class="text-maroon help_faq_code">pialert.db-shm</span> y <span class="text-maroon help_faq_code">pialert.db-wal</span> aparecen en la lista (con la misma marca de tiempo que el archivo "pialert.db"), significa que todavía hay transacciones de base de datos abiertas. En este caso, simplemente espera un momento y, para verificar, ejecuta nuevamente el comando <span class="text-maroon help_faq_code">ls</span>.
+ 											 <br><br>
+											 Una vez que estos archivos hayan desaparecido, se puede realizar la comprobación. Para hacerlo, ejecuta los siguientes comandos:<br>
+											 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
+											    sqlite3 pialert.db "PRAGMA integrity_check"<br>
+											    sqlite3 pialert.db "PRAGMA foreign_key_check"
+											 </div><br>
+											 En ambos casos, no debería informarse de errores. Después de la comprobación, puedes reiniciar Pi.Alert.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon help_faq_code">pialert.conf</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 In this configuration file many functions of Pi.Alert can be set according to the personal wishes. Since the possibilities are various, I would like to give a
@@ -858,6 +865,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											        <td class="help_table_gen_b">Si se utiliza un sistema UniFi en la red, se puede utilizar como fuente de datos. Esto se puede habilitar o deshabilitar en este punto.</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
 											        <td class="help_table_gen_b">Dirección IP del sistema Unifi.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_API</td>
+											        <td class="help_table_gen_b">Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
 											        <td class="help_table_gen_b">Nombre de usuario</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>
