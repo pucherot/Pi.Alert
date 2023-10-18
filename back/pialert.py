@@ -1656,7 +1656,7 @@ def service_monitoring_log(site, status, latency):
 
 # -----------------------------------------------------------------------------
 def check_services_health(site):
-    # Enable self signed SSL / no warningd
+    # Enable self signed SSL / no warning
     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
     try:
         resp = requests.get(site, verify=False, timeout=10)
