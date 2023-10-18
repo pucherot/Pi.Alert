@@ -560,8 +560,8 @@ EOM
     user() {
         echo "Pi.Alert User: $PIA_USER"
         echo "    Set DB Permissions"
-        sudo chown -R "$PIA_USER":www-data "$PIA_DB_FILE_PATH"
         sudo chmod -R 775 "$PIA_DB_FILE_PATH"
+        sudo chown -R "$PIA_USER":www-data "$PIA_DB_FILE_PATH"
         echo "    Set Config Permissions"
         sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
         sudo chown -R "$PIA_USER":www-data "$PIA_CONF_FILE_PATH"
@@ -590,8 +590,8 @@ EOM
         *)
             echo "Pi.Alert Group: www-data"
             echo "    Set DB Group Permissions only"
-            sudo chgrp -R www-data "$PIA_DB_FILE_PATH"
             sudo chmod -R 775 "$PIA_DB_FILE_PATH"
+            sudo chgrp -R www-data "$PIA_DB_FILE_PATH"
             echo "    Set Config Group Permissions only"
             sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
             sudo chgrp -R www-data "$PIA_CONF_FILE_PATH"
