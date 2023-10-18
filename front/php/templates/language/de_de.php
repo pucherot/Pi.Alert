@@ -584,17 +584,21 @@ $pia_lang['HelpFAQ_Cat_General_100_text_c'] = 'Suche in dieser Datei nach dem Ei
 $pia_lang['HelpFAQ_Cat_General_101_head'] = 'Mein Netzwerk scheint langsamer zu werden, Streaming "ruckelt".';
 $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es kann durchaus sein, dass leistungsschwache Geräte mit der Art und Weise, wie Pi.Alert neue Geräte im Netzwerk erkennt, an ihre Leistungsgrenzen stoßen. Dies verstärkt sich noch einmal, wenn diese Geräte per WLAN mit dem Netzwerk kommunizieren. Lösungen wären hier, wenn möglich ein Wechsel auf eine Kabelverbindung oder, falls das Geräte nur einen begrenzten Zeitraum genutzt werden soll, den arp-Scan auf der Wartungsseite zu pausieren.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Ich bekomme die Meldung, dass die Datenbank schreibgeschützt (read only) ist.';
-$pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert verzeichnis ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (dein Username) www-data</span><br>
+$pia_lang['HelpFAQ_Cat_General_102_text'] = 'Prüfe im Pi.Alert Verzeichnis, ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (dein Username) www-data</span><br>
               								 Sollte die Berechtigung nicht stimmen, kannst du sie mit folgenden Befehlen im Terminal oder der Konsole wieder setzen:<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
-                							 chmod -R 770 ~/pialert/db
+                							 chmod -R 775 ~/pialert/db
               								 </div>
-              								 Du hast auch die Möglichkeit, diese Schritte im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> mit dem Befehl <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> auszuführen.
-											 Falls die Datenbank danach weiterhin schreibgeschützt ist, empfiehlt sich eine erneute Installation oder das Zurückspielen eines Datenbank-Backups über die Wartungsseite.
-											 Beachte dabei, dass es wichtig ist, die Rechte im Anschluss zu überprüfen und gegebenenfalls zu korrigieren.';
+              								 Ein ander Möglichkeit wäre, die notwendigen Rechte mit Hilfe von <span class="text-maroon help_faq_code">pialert-cli</span> im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span> neu zu setze. Hier stehen dir mehrere Optionen zur Verfügung.<br><br>
+              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span><br>
+              								 Hier werden nur die Gruppenrechte neu gesetzt. Der Eigentümer der Datei bleibt unangetastet.<br><br>
+              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
+              								 Dieses zusätzliche Option wurde für die Nutzung in einem LXC Container eingeführt. Sie ändert die Gruppe, gemäß der Grundfunktion und setzt als Eigentümer den User "root". Außerhalb einer LXC Umgebung ist diese Option nicht relevant.<br><br>
+              								 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
+              								 Dies sollte die bevorzugte Option sein. Hier wird der Username anhand des übergeordnenten Home Verzeichnisses der Pi.Alert-Installation ermittelt. Dieser Username wird als Eigentümer der Dateien gesetzt. Die Gruppe, wird gemäß der Grundfunktion gesetzt.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'Die Login-Seite erscheint nicht, auch nicht nach der Passwortänderung.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Neben dem Passwort, muss in der Konfigurationsdatei <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 auch der Parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> auf <span class="text-maroon help_faq_code">True</span> gesetzt sein.';
@@ -639,7 +643,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											    <tr><td class="help_table_gen_a">set_apikey</td>
 											        <td class="help_table_gen_b">- Mit dem API-Schlüssel ist es möglich, Abfragen an die Datenbank zu stellen, ohne die Webseite zu benutzen. Wenn bereits ein API-Schlüssel existiert, wird er ersetzt</td></tr>
 											    <tr><td class="help_table_gen_a">set_permissions</td>
-											        <td class="help_table_gen_b">- Repariert die Dateiberechtigung der Datenbank.</td></tr>
+											        <td class="help_table_gen_b">- Repariert die Dateiberechtigung der Datenbank für die Gruppe. Wenn die Berechtigungen für den User ebenfalls neu gesetzt werden sollen, ist eine zusäzliche Option notwendig:<br>
+											        							    <span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span>        setzt "root" as Usernamen<br>
+    																				<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span>     setzt einen individuellen Usernamen<br>
+    																				<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span>    übernimmt den Username vom Home-Verzeichnis</td></tr>
 											    <tr><td class="help_table_gen_a">reporting_test</td>
 											        <td class="help_table_gen_b">- Testet alle aktiven Benachrichtigungsdienste</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>
@@ -647,10 +654,18 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'Das Kommandozeilen-Tool <span class
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Löscht die sudoers Dateien für den User www-data und den User, unter dem Pi.Alert installiert ist</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Einige Pi.Alert Komponenten benötigen "sudo" Berechtigung</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Bestimmte Funktionen von Pi.Alert, wie das Versenden von Testnachrichten, das Erkennen von fremden DHCP Servern oder die Erkennung von Geräten mittels arp-scan,
-											 benötigen "sudo" Berechtigungen. Hier ist eine Konfigurationsanpassung notwendig. Führe dazu im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/back</span>
-											 den Befehl <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span> aus.';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = 'Wie kannn ich eine Integritätsprüfungdie der Datenbnak durchführen?';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Wenn du die Datenbank, welche gerade in Benutzung ist, überprüfen willst, stoppe Pi.Alert für vielleicht eine 1h, damit nicht zwischendurch schreibende Zugriffe auf die Datenbank erfolgen.
+											 Auch die Weboberfläche sollte während der Prüfung nicht anderweitig geöffnet sein um auch hier keine Schreibvorgänge zu ermöglichen. Öffnet nun in der Konsole das Verzeichen <span class="text-maroon help_faq_code">~/pialert/db</span>
+											 und lasse dir mit dem Befehl <span class="text-maroon help_faq_code">ls</span> den Inhalt des Verzeichnisses anzeigen. Wenn die Dateien <span class="text-maroon help_faq_code">pialert.db-shm</span> und <span class="text-maroon help_faq_code">pialert.db-wal</span>
+											 in der Liste (mit dem gleichen Zeitstempel wie die Datei "pialert.db") auftauchen, dann sind noch Datenbanktransaktionen offen. In diesem Fall, einfach noch einen Moment warten und zur Kontrolle einfach noch einmal den Befehl <span class="text-maroon help_faq_code">ls</span> ausführen.
+											 <br><br>
+											 Wenn diese Dateien verschunden sind, kann die Prüfung durchgeführt werden. Dazu werden folgende Befehle ausgeführt:<br>
+											 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
+											 	sqlite3 pialert.db "PRAGMA integrity_check"<br>
+												sqlite3 pialert.db "PRAGMA foreign_key_check"
+											 </div><br>
+											 In beiden Fällen sollten keine Fehler gemeldet werden. Nach der Prüfung kannst du Pi.Alert wieder starten.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon help_faq_code">pialert.conf</span> befindet sich im Verzeichnis <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 In dieser Konfigurationsdatei können viele Funktionen von Pi.Alert ensprechend der persönlichen Wünsche eingestellt werden.
@@ -859,6 +874,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											        <td class="help_table_gen_b">Wenn ein UniFi System im Netzwerk zum Einsatz kommt, kann dieses als Datenquelle genutzt werden. An dieser Stelle kann dies aktiviert oder deaktiviert werden.</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
 											        <td class="help_table_gen_b">IP-Adresse des Unifi Systems.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_API</td>
+											        <td class="help_table_gen_b">Mögliche UNIFI APIs sind v4, v5, unifiOS, UDMP-unifiOS</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
 											        <td class="help_table_gen_b">Benutzername</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>
@@ -996,6 +1013,15 @@ $pia_lang['SysInfo_storage_note'] = 'Es ist möglich, dass die Speicherbelegung 
 //////////////////////////////////////////////////////////////////
 
 $pia_lang['ookla_postinstall_note'] = 'Bevor Sie den Speedtest-Client von Ookla nutzen können, müssen Sie einmalig den Befehl "sudo ./speedtest" im Verzeichnis "$HOME/pialert/back/speedtest/" ausführen. Die Speedtest-Schaltfläche wird mit einem Neuladen der Seite aktiviert, funktioniert aber erst, nachdem die Ookla-Lizenz akzeptiert wurde.';
+$pia_lang['ookla_devdetails_tab_title'] = 'Speedtest Verlauf';
+$pia_lang['ookla_devdetails_required'] = 'Der Verlauf der Speedtest Messergebisse wird zur Zeit nur mit dem offiziellen Speedtest von Ookla (<a href="https://www.speedtest.net/apps/cli" target="blank">speedtest.net</a>) unterstützt.';
+$pia_lang['ookla_devdetails_tab_headline'] = 'Speedtest Verlauf';
+$pia_lang['ookla_devdetails_table_time'] = 'Datum';
+$pia_lang['ookla_devdetails_table_isp'] = 'ISP';
+$pia_lang['ookla_devdetails_table_server'] = 'Server';
+$pia_lang['ookla_devdetails_table_ping'] = 'Ping';
+$pia_lang['ookla_devdetails_table_down'] = 'Download';
+$pia_lang['ookla_devdetails_table_up'] = 'Upload';
 
 // =============================================================================================================
 

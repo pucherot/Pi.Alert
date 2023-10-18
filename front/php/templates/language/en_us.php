@@ -582,15 +582,20 @@ $pia_lang['HelpFAQ_Cat_General_101_text'] = 'It may well be that low-powered dev
 											 pause the arp scan on the maintenance page.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'I get the message that the database is read only.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Check in the Pi.Alert directory if the database folder (db) has been assigned the correct permissions:<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (your username) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (your username) www-data</span><br>
               								 If the permission is not correct, you can set it again with the following commands in the terminal or the console:<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
-                							 chmod -R 770 ~/pialert/db
+                							 chmod -R 775 ~/pialert/db
               								 </div>
-              								 You can also perform these steps using <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> in the directory <span class="text-maroon help_faq_code">~/pialert/back</span>.
-              								 If the database remains read-only afterwards, try reinstalling or restoring a database backup through the maintenance page. Please make sure to check and adjust the permissions accordingly.';
+              								 Another option is to reset the necessary permissions in the directory <span class="text-maroon help_faq_code">~/pialert/back</span> using <span class="text-maroon help_faq_code">pialert-cli</span>. There are several options available to you.<br><br>
+											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span><br>
+											 This command only resets the group permissions, leaving the file owner unchanged.<br><br>
+											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
+											 This additional option is introduced for use within an LXC container. It changes the group as per the basic functionality and sets the user "root" as the owner. This option is not relevant outside of an LXC environment.<br><br>
+											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
+											 This option should be the preferred one. Here, the username is determined based on the parent home directory of the Pi.Alert installation. This username becomes the owner of the files. The group is set according to the basic functionality.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'The login page does not appear, even after changing the password.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'In addition to the password, the configuration file must contain <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 also the parameter <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> must set to <span class="text-maroon help_faq_code">True</span>.';
@@ -635,8 +640,11 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											        <td class="help_table_gen_b">- The script tries to make the database compatible for this fork.<br>&nbsp;</td></tr>
 											    <tr><td class="help_table_gen_a">set_apikey</td>
 											        <td class="help_table_gen_b">- With the API key it is possible to make queries to the database without using the web page. If an API key already exists, it will be replaced.<br>&nbsp;</td></tr>
-											    <tr><td class="help_table_gen_a">set_permissions</td>
-    												<td class="help_table_gen_b">- Fixes the file permissions of the database.</td></tr>
+												<tr><td class="help_table_gen_a">set_permissions</td>
+													<td class="help_table_gen_b">- Repairs the file permissions of the database for the group. If permissions need to be reset for the user as well, an additional option is required:<br>
+																				<span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span> sets "root" as the username<br>
+																				<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span> sets a custom username<br>
+																				<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span> takes the username from the home directory</td></tr>
 											    <tr><td class="help_table_gen_a">reporting_test</td>
 											        <td class="help_table_gen_b">- Test reporting for all activated services.<br>&nbsp;</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>
@@ -644,9 +652,17 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Some Pi.Alert components need "sudo" permission</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Certain functions of Pi.Alert, like sending test messages, detecting foreign DHCP servers or detecting devices using arp-scan, require "sudo" permissions. Here a configuration adjustment is necessary.
-											 Execute the command <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span> in the directory <span class="text-maroon help_faq_code">~/pialert/back</span>.';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = 'How can I perform an integrity check on the database?';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'If you want to check the database currently in use, stop Pi.Alert for about 1 hour to prevent any writing access to the database during the check. Also, the web interface should not be open for any other write operations during the check.
+											 Now, open the console in the directory <span class="text-maroon help_faq_code">~/pialert/db</span> and use the command <span class="text-maroon help_faq_code">ls</span> to list the contents of the directory. If the files
+											 <span class="text-maroon help_faq_code">pialert.db-shm</span> and <span class="text-maroon help_faq_code">pialert.db-wal</span> appear in the list (with the same timestamp as the "pialert.db" file), it means that there are still database transactions open. In this case, just wait a moment, and to check, run the <span class="text-maroon help_faq_code">ls</span> command again.
+											 <br><br>
+											 Once these files have disappeared, the check can be performed. To do this, execute the following commands:<br>
+											 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
+											    sqlite3 pialert.db "PRAGMA integrity_check"<br>
+											    sqlite3 pialert.db "PRAGMA foreign_key_check"
+											 </div><br>
+											 In both cases, no errors should be reported. After the check, you can restart Pi.Alert.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon help_faq_code">pialert.conf</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 In this configuration file many functions of Pi.Alert can be set according to the personal wishes. Since the possibilities are various, I would like to give a
@@ -855,6 +871,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											        <td class="help_table_gen_b">If a UniFi system is used in the network, it can be used as a data source. This can be enabled or disabled at this point.</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
 											        <td class="help_table_gen_b">IP address of the Unifi system.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_API</td>
+											        <td class="help_table_gen_b">Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
 											        <td class="help_table_gen_b">Username</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>
@@ -979,7 +997,16 @@ $pia_lang['SysInfo_storage_note'] = 'It is possible that the memory usage cannot
 // Speedtest
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['ookla_postinstall_note'] = 'Before you can to use the speedtest client from Ookla, you have to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/". The Speedtest button is activated with a page reload, but only works after the Ookla license has been accepted.';
+$pia_lang['ookla_postinstall_note'] = 'Before you can use the Ookla Speedtest client, you need to execute the command "sudo ./speedtest" once in the directory "$HOME/pialert/back/speedtest/." The Speedtest button will be enabled after reloading the page, but it will only work after accepting the Ookla license.';
+$pia_lang['ookla_devdetails_tab_title'] = 'Speedtest History';
+$pia_lang['ookla_devdetails_required'] = 'The history of Speedtest results is currently supported only with the official Speedtest by Ookla (<a href="https://www.speedtest.net/apps/cli" target="blank">speedtest.net</a>).';
+$pia_lang['ookla_devdetails_tab_headline'] = 'Speedtest History';
+$pia_lang['ookla_devdetails_table_time'] = 'Date';
+$pia_lang['ookla_devdetails_table_isp'] = 'ISP';
+$pia_lang['ookla_devdetails_table_server'] = 'Server';
+$pia_lang['ookla_devdetails_table_ping'] = 'Ping';
+$pia_lang['ookla_devdetails_table_down'] = 'Download';
+$pia_lang['ookla_devdetails_table_up'] = 'Upload';
 
 // =============================================================================================================
 

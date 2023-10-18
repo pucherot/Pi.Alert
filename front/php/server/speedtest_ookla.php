@@ -110,6 +110,7 @@ function delete_speedtest_archive() {
 # Start the Test if speedtest exists
 # ------------------------------------------------------------------------------
 if (file_exists($speedtest_binary) && $mod == "test") {
+
 	exec('sudo ' . $speedtest_binary . $speedtest_option, $output);
 
 	echo '<h4>Speedtest (Ookla) Results</h4>';
@@ -127,6 +128,19 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 	echo $cli_output;
 
 	echo '</pre>';
+
+	//Insert to Speedtest History
+	// $test_time = actual Time;
+	// $isp - Your ISP
+	// $server - Speedtest Server
+	// $ping - Ping
+	// $download_mbps - Download Speed Mbps
+	// $upload_mbps - Upload Speed Mbps
+
+	$test_time = date('Y-m-d H:i:s');
+
+	$sql = 'INSERT INTO "Tools_Speedtest_History" ("speed_date", "speed_isp", "speed_server", "speed_ping", "speed_down", "speed_up") VALUES("' . $test_time . '", "' . $isp . '", "' . $server . '", "' . $ping . '", "' . $download_mbps . '", "' . $upload_mbps . '")';
+	$result = $db->query($sql);
 
 	$cli_output = str_replace("\n", "<br>", $cli_output);
 	// Logging

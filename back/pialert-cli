@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.14'
+SCRIPTVERSION='v1.15'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -346,10 +346,10 @@ EOM
     sqlite3 "$PIA_DB_FILE" ".backup '${PIA_DB_FILE_PATH}/pialert.db.bak'"
     # Online_History
     echo -e "...Insert new table 'Online_History' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Online_History' ('Index' INTEGER, 'Scan_Date' TEXT, 'Online_Devices' INTEGER, 'Down_Devices' INTEGER, 'All_Devices' INTEGER, 'Archived_Devices' INTEGER, PRIMARY KEY('Index' AUTOINCREMENT));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Online_History' ('Index' INTEGER, 'Scan_Date' TEXT, 'Online_Devices' INTEGER, 'Down_Devices' INTEGER, 'All_Devices' INTEGER, 'Archived_Devices' INTEGER, PRIMARY KEY(\"Index\" AUTOINCREMENT));"
     # network_infrastructure
     echo -e "...Insert new table 'network_infrastructure' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_infrastructure' ('device_id' INTEGER, 'net_device_name' TEXT NOT NULL, 'net_device_typ' TEXT NOT NULL, 'net_device_port' INTEGER, 'net_downstream_devices' TEXT, PRIMARY KEY('device_id' AUTOINCREMENT));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_infrastructure' ('device_id' INTEGER, 'net_device_name' TEXT NOT NULL, 'net_device_typ' TEXT NOT NULL, 'net_device_port' INTEGER, 'net_downstream_devices' TEXT, PRIMARY KEY(\"device_id\" AUTOINCREMENT));"
     # Devices.dev_Infrastructure
     echo -e "...Insert new column 'dev_Infrastructure' to table 'Devices' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Infrastructure")
@@ -376,7 +376,7 @@ EOM
     fi
     # network_dumb_dev
     echo -e "...Insert new table 'network_dumb_dev' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_dumb_dev' ('dev_Name' TEXT, 'dev_MAC' TEXT, 'dev_Infrastructure' INTEGER, 'dev_Infrastructure_port' INTEGER, 'dev_PresentLastScan' TEXT, 'dev_LastIP' TEXT, 'id' INTEGER, PRIMARY KEY('id' AUTOINCREMENT));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'network_dumb_dev' ('dev_Name' TEXT, 'dev_MAC' TEXT, 'dev_Infrastructure' INTEGER, 'dev_Infrastructure_port' INTEGER, 'dev_PresentLastScan' TEXT, 'dev_LastIP' TEXT, 'id' INTEGER, PRIMARY KEY(\"id\" AUTOINCREMENT));"
     # Services_Events
     echo -e "...Insert new table 'Services_Events' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services_Events' ('moneve_URL' TEXT NOT NULL, 'moneve_DateTime' TEXT NOT NULL, 'moneve_StatusCode' NUMERIC NOT NULL, 'moneve_Latency' TEXT NOT NULL, 'moneve_TargetIP' TEXT NOT NULL);"
@@ -385,7 +385,7 @@ EOM
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services_CurrentScan' ('cur_URL' TEXT NOT NULL, 'cur_DateTime' TEXT NOT NULL, 'cur_StatusCode' NUMERIC NOT NULL, 'cur_Latency' TEXT NOT NULL, 'cur_AlertEvents' INTEGER DEFAULT 0, 'cur_AlertDown' INTEGER DEFAULT 0, 'cur_StatusChanged' INTEGER DEFAULT 0, 'cur_LatencyChanged' INTEGER DEFAULT 0, 'cur_TargetIP' TEXT NOT NULL, 'cur_StatusCode_prev' NUMERIC, 'cur_TargetIP_prev' TEXT);"
     # Services
     echo -e "...Insert new table 'Services' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services' ('mon_URL' TEXT NOT NULL, 'mon_MAC' TEXT, 'mon_LastStatus' NUMERIC NOT NULL, 'mon_LastLatency' TEXT NOT NULL, 'mon_LastScan' TEXT NOT NULL, 'mon_Tags' TEXT, 'mon_AlertEvents' INTEGER DEFAULT 0, 'mon_AlertDown' INTEGER DEFAULT 0, 'mon_TargetIP' TEXT NOT NULL, PRIMARY KEY('mon_URL'));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Services' ('mon_URL' TEXT NOT NULL, 'mon_MAC' TEXT, 'mon_LastStatus' NUMERIC NOT NULL, 'mon_LastLatency' TEXT NOT NULL, 'mon_LastScan' TEXT NOT NULL, 'mon_Tags' TEXT, 'mon_AlertEvents' INTEGER DEFAULT 0, 'mon_AlertDown' INTEGER DEFAULT 0, 'mon_TargetIP' TEXT NOT NULL, PRIMARY KEY(\"mon_URL\"));"
     # Services.mon_Notes
     echo -e "...Insert new column 'mon_Notes' to table 'Services' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Services');" | awk -F\| '{print $2}' | grep -wci "mon_Notes")
@@ -396,7 +396,7 @@ EOM
     fi
     # Pi.Alert Journal
     echo -e "...Insert new table 'pialert_journal' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'pialert_journal' ('journal_id' INTEGER, 'Journal_DateTime' TEXT NOT NULL, 'LogClass' NUMERIC NOT NULL, 'Trigger' TEXT NOT NULL, 'LogString' TEXT NOT NULL, 'Hash' TEXT, 'Additional_Info' TEXT, PRIMARY KEY('journal_id' AUTOINCREMENT));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'pialert_journal' ('journal_id' INTEGER, 'Journal_DateTime' TEXT NOT NULL, 'LogClass' NUMERIC NOT NULL, 'Trigger' TEXT NOT NULL, 'LogString' TEXT NOT NULL, 'Hash' TEXT, 'Additional_Info' TEXT, PRIMARY KEY(\"journal_id\" AUTOINCREMENT));"
     # Devices.dev_Model
     echo -e "...Insert new column 'dev_Model' to table 'Devices' to DB"
     existing=$(sqlite3 $PIA_DB_FILE "PRAGMA table_info('Devices');" | awk -F\| '{print $2}' | grep -wci "dev_Model")
@@ -423,10 +423,10 @@ EOM
     fi
     # ICMP_Mon
     echo -e "...Insert new table 'ICMP_Mon' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon' ('icmp_ip' NUMERIC NOT NULL, 'icmp_hostname' TEXT, 'icmp_LastScan' TEXT NOT NULL, 'icmp_PresentLastScan' INTEGER DEFAULT 0, 'icmp_avgrtt' NUMERIC, 'icmp_AlertEvents' INTEGER DEFAULT 0, 'icmp_AlertDown' INTEGER DEFAULT 0, 'icmp_Favorite' INTEGER DEFAULT 0, 'icmp_Notes' INTEGER, 'icmp_type' TEXT, 'icmp_group' TEXT, 'icmp_location' TEXT, 'icmp_owner' TEXT, PRIMARY KEY('icmp_ip'));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon' ('icmp_ip' NUMERIC NOT NULL, 'icmp_hostname' TEXT, 'icmp_LastScan' TEXT NOT NULL, 'icmp_PresentLastScan' INTEGER DEFAULT 0, 'icmp_avgrtt' NUMERIC, 'icmp_AlertEvents' INTEGER DEFAULT 0, 'icmp_AlertDown' INTEGER DEFAULT 0, 'icmp_Favorite' INTEGER DEFAULT 0, 'icmp_Notes' INTEGER, 'icmp_type' TEXT, 'icmp_group' TEXT, 'icmp_location' TEXT, 'icmp_owner' TEXT, PRIMARY KEY(\"icmp_ip\"));"
     # ICMP_Mon_CurrentScan
     echo -e "...Insert new table 'ICMP_Mon_CurrentScan' to DB"
-    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon_CurrentScan' ('cur_ip' NUMERIC NOT NULL, 'cur_LastScan' TEXT NOT NULL, 'cur_Present' INTEGER, 'cur_PresentChanged' INTEGER, 'cur_avgrrt' NUMERIC, 'cur_AlertEvents' INTEGER NOT NULL DEFAULT 0, 'cur_AlertDown' INTEGER NOT NULL DEFAULT 0, PRIMARY KEY('cur_ip'));"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon_CurrentScan' ('cur_ip' NUMERIC NOT NULL, 'cur_LastScan' TEXT NOT NULL, 'cur_Present' INTEGER, 'cur_PresentChanged' INTEGER, 'cur_avgrrt' NUMERIC, 'cur_AlertEvents' INTEGER NOT NULL DEFAULT 0, 'cur_AlertDown' INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(\"cur_ip\"));"
     # ICMP_Mon_Events
     echo -e "...Insert new table 'ICMP_Mon_Events' to DB"
     sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'ICMP_Mon_Events' ( 'icmpeve_ip' NUMERIC NOT NULL, 'icmpeve_DateTime' TEXT NOT NULL, 'icmpeve_Present' INTEGER, 'icmpeve_avgrtt' NUMERIC);"
@@ -526,6 +526,9 @@ EOM
     else
       echo "        Column 'Data_Source' already exists in the 'Online_History' table."
     fi
+    # Tools_Speedtest_History
+    echo -e "...Insert new table 'Tools_Speedtest_History' to DB"
+    sqlite3 $PIA_DB_FILE "CREATE TABLE IF NOT EXISTS 'Tools_Speedtest_History' ('ID' INTEGER, 'speed_date' TEXT, 'speed_isp' TEXT, 'speed_server' TEXT, 'speed_ping' NUMERIC, 'speed_down' NUMERIC, 'speed_up' INUMERIC, PRIMARY KEY(\"ID\" AUTOINCREMENT));"
 
 
     echo -e "\nUpdate finished!\n"
@@ -557,8 +560,8 @@ EOM
     user() {
         echo "Pi.Alert User: $PIA_USER"
         echo "    Set DB Permissions"
-        sudo chown -R "$PIA_USER":www-data "$PIA_DB_FILE_PATH"
         sudo chmod -R 775 "$PIA_DB_FILE_PATH"
+        sudo chown -R "$PIA_USER":www-data "$PIA_DB_FILE_PATH"
         echo "    Set Config Permissions"
         sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
         sudo chown -R "$PIA_USER":www-data "$PIA_CONF_FILE_PATH"
@@ -587,8 +590,8 @@ EOM
         *)
             echo "Pi.Alert Group: www-data"
             echo "    Set DB Group Permissions only"
-            sudo chgrp -R www-data "$PIA_DB_FILE_PATH"
             sudo chmod -R 775 "$PIA_DB_FILE_PATH"
+            sudo chgrp -R www-data "$PIA_DB_FILE_PATH"
             echo "    Set Config Group Permissions only"
             sudo chmod -R 775 "$PIA_CONF_FILE_PATH"
             sudo chgrp -R www-data "$PIA_CONF_FILE_PATH"

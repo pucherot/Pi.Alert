@@ -582,15 +582,20 @@ $pia_lang['HelpFAQ_Cat_General_101_text'] = 'Es muy posible que los dispositivos
 											pausar el arp scan en la página de mantenimiento.';
 $pia_lang['HelpFAQ_Cat_General_102_head'] = 'Me aparece el mensaje de que la base de datos es de sólo de lectura.';
 $pia_lang['HelpFAQ_Cat_General_102_text'] = 'Compruebe en el directorio Pi.Alert si la carpeta de la base de datos (db) tiene asignados los permisos correctos:<br>
-              								 <span class="text-maroon help_faq_code">drwxrwx---  2 (nombre de usuario) www-data</span><br>
+              								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (nombre de usuario) www-data</span><br>
               								 Si el permiso no es correcto, puede establecerlo de nuevo con los siguientes comandos en la terminal o la consola:<br>
               								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
               								 sudo chgrp -R www-data ~/pialert/db<br>
               								 sudo chown [Username]:www-data ~/pialert/db/pialert.db<br>
-                							 chmod -R 770 ~/pialert/db
+                							 chmod -R 775 ~/pialert/db
               								 </div>
-              								 También puedes realizar estos pasos utilizando <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span> en el directorio <span class="text-maroon help_faq_code">~/pialert/back</span>. Si la base de datos sigue estando en modo de solo lectura después de esto,
-              								 intenta reinstalar o restaurar una copia de seguridad de la base de datos a través de la página de mantenimiento. Por favor, asegúrate de verificar y ajustar los permisos correspondientes.';
+											 Otra opción es restablecer los permisos necesarios en el directorio <span class="text-maroon help_faq_code">~/pialert/back</span> utilizando <span class="text-maroon help_faq_code">pialert-cli</span>. Tienes varias opciones disponibles.<br><br>
+											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions</span><br>
+											 Este comando solo restablece los permisos del grupo, dejando sin cambios al propietario del archivo.<br><br>
+											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --lxc</span><br>
+											 Esta opción adicional se introdujo para su uso en un contenedor LXC. Cambia el grupo según la funcionalidad básica y establece al usuario "root" como propietario. Esta opción no es relevante fuera de un entorno LXC.<br><br>
+											 <span class="text-maroon help_faq_code">./pialert-cli set_permissions --homedir</span><br>
+											 Esta opción debería ser la preferida. Aquí, el nombre de usuario se determina en función del directorio principal del hogar de la instalación de Pi.Alert. Este nombre de usuario se convierte en el propietario de los archivos. El grupo se establece según la funcionalidad básica.';
 $pia_lang['HelpFAQ_Cat_General_103_head'] = 'La página de inicio de sesión no aparece, incluso después de cambiar la contraseña.';
 $pia_lang['HelpFAQ_Cat_General_103_text'] = 'Además de la contraseña, el archivo de configuración debe contener <span class="text-maroon help_faq_code">~/pialert/config/pialert.conf</span>
               								 además el parámetro <span class="text-maroon help_faq_code">PIALERT_WEB_PROTECTION</span> debe ajustarse a <span class="text-maroon help_faq_code">True</span>.';
@@ -635,7 +640,10 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 												<tr><td class="help_table_gen_a">set_apikey</td>
 												    <td class="help_table_gen_b">- Con la clave API es posible hacer consultas a la base de datos sin utilizar la página web. Si ya existe una clave API, se reemplazará.</td></tr>
 												<tr><td class="help_table_gen_a">set_permissions</td>
-												    <td class="help_table_gen_b">- Corrige los permisos de archivo de la base de datos.</td></tr>
+													<td class="help_table_gen_b">- Repara los permisos del archivo de la base de datos para el grupo. Si también es necesario restablecer los permisos para el usuario, se requiere una opción adicional:<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--lxc</span> establece "root" como nombre de usuario<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--custom</span> establece un nombre de usuario personalizado<br>
+													<span class="text-maroon" style="display:inline-block;width:130px;">--homedir</span> toma el nombre de usuario del directorio de inicio</td></tr>
 												<tr><td class="help_table_gen_a">reporting_test</td>
 												    <td class="help_table_gen_b">- Prueba de informes para todos los servicios activados.</td></tr>
 											    <tr><td class="help_table_gen_a">set_sudoers</td>
@@ -643,10 +651,17 @@ $pia_lang['HelpFAQ_Cat_General_105_text'] = 'The command line tool <span class="
 											    <tr><td class="help_table_gen_a">unset_sudoers</td>
 											        <td class="help_table_gen_b">- Delete sudoer file for www-data and Pi.Alert user</td></tr>
 											</table>';
-$pia_lang['HelpFAQ_Cat_General_106_head'] = '<span class="text-maroon help_faq_code">Algunos componentes de Pi.Alert requieren permisos "sudo"</span>';
-$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Ciertas funciones de Pi.Alert, como el envío de mensajes de prueba, la detección de servidores DHCP extranjeros o la identificación de dispositivos mediante arp-scan,
-											 requieren permisos "sudo". Es necesario realizar un ajuste de configuración para esto. Para hacerlo, en el directorio <span class="text-maroon help_faq_code">~/pialert/back</span>,
-											 ejecuta el comando <span class="text-maroon help_faq_code">sudo ./pialert-cli set_sudoers</span>.';
+$pia_lang['HelpFAQ_Cat_General_106_head'] = '¿Cómo puedo realizar una comprobación de integridad en la base de datos?';
+$pia_lang['HelpFAQ_Cat_General_106_text'] = 'Si deseas comprobar la base de datos que está en uso, detén Pi.Alert durante aproximadamente 1 hora para evitar cualquier acceso de escritura a la base de datos durante la comprobación. Además, la interfaz web no debe estar abierta para otras operaciones de escritura durante la comprobación.
+ 											 Ahora, abre la consola en el directorio <span class="text-maroon help_faq_code">~/pialert/db</span> y utiliza el comando <span class="text-maroon help_faq_code">ls</span> para listar el contenido del directorio. Si los archivos
+ 											 <span class="text-maroon help_faq_code">pialert.db-shm</span> y <span class="text-maroon help_faq_code">pialert.db-wal</span> aparecen en la lista (con la misma marca de tiempo que el archivo "pialert.db"), significa que todavía hay transacciones de base de datos abiertas. En este caso, simplemente espera un momento y, para verificar, ejecuta nuevamente el comando <span class="text-maroon help_faq_code">ls</span>.
+ 											 <br><br>
+											 Una vez que estos archivos hayan desaparecido, se puede realizar la comprobación. Para hacerlo, ejecuta los siguientes comandos:<br>
+											 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
+											    sqlite3 pialert.db "PRAGMA integrity_check"<br>
+											    sqlite3 pialert.db "PRAGMA foreign_key_check"
+											 </div><br>
+											 En ambos casos, no debería informarse de errores. Después de la comprobación, puedes reiniciar Pi.Alert.';
 $pia_lang['HelpFAQ_Cat_General_107_head'] = 'pialert.conf';
 $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon help_faq_code">pialert.conf</span> is located in the directory <span class="text-maroon help_faq_code">~/pialert/config</span>.
 											 In this configuration file many functions of Pi.Alert can be set according to the personal wishes. Since the possibilities are various, I would like to give a
@@ -850,6 +865,8 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											        <td class="help_table_gen_b">Si se utiliza un sistema UniFi en la red, se puede utilizar como fuente de datos. Esto se puede habilitar o deshabilitar en este punto.</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_IP</td>
 											        <td class="help_table_gen_b">Dirección IP del sistema Unifi.</td></tr>
+											    <tr><td class="help_table_gen_a">UNIFI_API</td>
+											        <td class="help_table_gen_b">Possible UNIFI APIs are v4, v5, unifiOS, UDMP-unifiOS</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_USER</td>
 											        <td class="help_table_gen_b">Nombre de usuario</td></tr>
 											    <tr><td class="help_table_gen_a">UNIFI_PASS</td>
@@ -974,7 +991,16 @@ $pia_lang['SysInfo_storage_note'] = 'Es posible que no se pueda determinar el us
 // Speedtest
 //////////////////////////////////////////////////////////////////
 
-$pia_lang['ookla_postinstall_note'] = 'Antes de poder utilizar el cliente speedtest de Ookla, tienes que ejecutar el comando "sudo ./speedtest" una vez en el directorio "$HOME/pialert/back/speedtest/". El botón speedtest se activa al recargar la página, pero sólo funciona una vez aceptada la licencia de Ookla.';
+$pia_lang['ookla_postinstall_note'] = 'Antes de poder utilizar el cliente de Speedtest de Ookla, debe ejecutar el comando "sudo ./speedtest" una vez en el directorio "$HOME/pialert/back/speedtest/." El botón de Speedtest se habilitará después de recargar la página, pero solo funcionará después de aceptar la licencia de Ookla.';
+$pia_lang['ookla_devdetails_tab_title'] = 'Historial de Speedtest';
+$pia_lang['ookla_devdetails_required'] = 'Actualmente, el historial de los resultados de Speedtest solo es compatible con el Speedtest oficial de Ookla (<a href="https://www.speedtest.net/apps/cli" target="blank">speedtest.net</a>).';
+$pia_lang['ookla_devdetails_tab_headline'] = 'Historial de Speedtest';
+$pia_lang['ookla_devdetails_table_time'] = 'Fecha';
+$pia_lang['ookla_devdetails_table_isp'] = 'ISP';
+$pia_lang['ookla_devdetails_table_server'] = 'Servidor';
+$pia_lang['ookla_devdetails_table_ping'] = 'Ping';
+$pia_lang['ookla_devdetails_table_down'] = 'Descarga';
+$pia_lang['ookla_devdetails_table_up'] = 'Carga';
 
 // =============================================================================================================
 
