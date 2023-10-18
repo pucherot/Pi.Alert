@@ -703,7 +703,7 @@ if ($_REQUEST['mac'] == 'Internet') {
 <?php
 // Check iff Ookla Speedtest is installed
 	if (file_exists('../back/speedtest/speedtest')) {
-		echo '<h4 class="">' . $pia_lang['ookla_devdetails_tab_headline'] . '</h4>';
+		//echo '<h4 class="">' . $pia_lang['ookla_devdetails_tab_headline'] . '</h4>';
 
 		echo '<table id="tableSpeedtest" class="table table-bordered table-hover table-striped ">
             <thead>
