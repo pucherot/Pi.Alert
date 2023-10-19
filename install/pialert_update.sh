@@ -274,6 +274,17 @@ UNIFI_API    = 'v5'
 EOF
 fi
 
+# 2023-10-19
+if ! grep -Fq "# ICMP Monitoring Options" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+# Automatic Speedtest
+# ----------------------
+SPEEDTEST_TASK_ACTIVE = False
+SPEEDTEST_TASK_HOUR   = []
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------

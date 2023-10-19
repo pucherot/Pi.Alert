@@ -199,6 +199,11 @@ DDNS_USER         = '" . $configArray['DDNS_USER'] . "'
 DDNS_PASSWORD     = '" . $configArray['DDNS_PASSWORD'] . "'
 DDNS_UPDATE_URL   = '" . $configArray['DDNS_UPDATE_URL'] . "'
 
+# Automatic Speedtest
+# ----------------------
+SPEEDTEST_TASK_ACTIVE = " . convert_bool($configArray['SPEEDTEST_TASK_ACTIVE']) . "
+SPEEDTEST_TASK_HOUR   = " . $configArray['SPEEDTEST_TASK_HOUR'] . "
+
 # Arp-scan Options & Samples
 # ----------------------
 ARPSCAN_ACTIVE  = " . convert_bool($configArray['ARPSCAN_ACTIVE']) . "
