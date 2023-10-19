@@ -24,7 +24,7 @@ from base64 import b64encode
 from urllib.parse import urlparse
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
-import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl
+import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl, json
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -216,6 +216,70 @@ def check_internet_IP ():
             print ('    No changes to perform')
     else :
         print ('\nSkipping Dynamic DNS update...')
+
+    # Run automated Speedtest
+    if SPEEDTEST_TASK_ACTIVE :
+        # Check if Speedtest is installed
+        speedtest_binary = './speedtest/speedtest'
+
+        if os.path.exists(speedtest_binary):
+            print ('\nRun daily Speedtest...')
+            run_speedtest_task()
+        else:
+            print('\nSkipping Speedtest... Not installed!')
+    else :
+        print ('\nSkipping Speedtest...')
+
+    return 0
+
+#-------------------------------------------------------------------------------
+def run_speedtest_task ():
+
+    # Define the command and arguments
+    command = ["sudo", "./speedtest/speedtest", "-p", "no", "-f", "json"]
+
+    if len(SPEEDTEST_TASK_HOUR) != 0:
+        openDB()
+
+        speedtest_actual_hour = startTime.hour
+        speedtest_actual_min = startTime.minute
+
+        for value in SPEEDTEST_TASK_HOUR:
+            if value == speedtest_actual_hour and speedtest_actual_min == 0:
+
+                try:
+                    output = subprocess.check_output(command, text=True)
+                    
+                    # Parse the JSON output
+                    result = json.loads(output)
+
+                    # Access the speed test results
+                    speedtest_isp = result['isp']
+                    speedtest_server = result['server']['name'] + ' (' + result['server']['location'] + ') (' + result['server']['host'] + ')'
+                    speedtest_ping = result['ping']['latency']
+                    speedtest_down = round(result['download']['bandwidth'] / 125000, 2)
+                    speedtest_up = round(result['upload']['bandwidth'] / 125000, 2)
+
+                    print(f"    ISP:            {speedtest_isp}")
+                    print(f"    Server:         {speedtest_server}")
+                    print(f"    Ping:           {speedtest_ping} ms")
+                    print(f"    Download Speed: {speedtest_down} Mbps")
+                    print(f"    Upload Speed:   {speedtest_up} Mbps")
+
+                    sql.execute ("INSERT INTO Tools_Speedtest_History (speed_date, speed_isp, speed_server, speed_ping, speed_down, speed_up) " +
+                                 "VALUES (?, ?, ?, ?, ?, ?) ", (startTime, speedtest_isp, speedtest_server, speedtest_ping, speedtest_down, speedtest_up) )
+                    sql_connection.commit()
+
+                except subprocess.CalledProcessError as e:
+                    print(f"Error running 'speedtest': {e}")
+                except json.JSONDecodeError as e:
+                    print(f"Error parsing JSON output: {e}")
+            else :
+                print (f"    Planned time ({value}:00) not reached yet")
+        closeDB()
+
+    else:
+        print("    The Parameter SPEEDTEST_TASK_HOUR is not set.")
 
     return 0
 
