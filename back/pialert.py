@@ -220,8 +220,7 @@ def check_internet_IP ():
     # Run automated Speedtest
     if SPEEDTEST_TASK_ACTIVE :
         # Check if Speedtest is installed
-        speedtest_binary = './speedtest/speedtest'
-
+        speedtest_binary = PIALERT_BACK_PATH + '/speedtest/speedtest'
         if os.path.exists(speedtest_binary):
             print ('\nRun daily Speedtest...')
             run_speedtest_task()
@@ -229,47 +228,45 @@ def check_internet_IP ():
             print('\nSkipping Speedtest... Not installed!')
     else :
         print ('\nSkipping Speedtest...')
-
     return 0
 
 #-------------------------------------------------------------------------------
 def run_speedtest_task ():
-
     # Define the command and arguments
-    command = ["sudo", "./speedtest/speedtest", "-p", "no", "-f", "json"]
-
+    command = ["sudo", PIALERT_BACK_PATH + "/speedtest/speedtest", "-p", "no", "-f", "json"]
     if len(SPEEDTEST_TASK_HOUR) != 0:
         openDB()
-
         speedtest_actual_hour = startTime.hour
         speedtest_actual_min = startTime.minute
-
         for value in SPEEDTEST_TASK_HOUR:
             if value == speedtest_actual_hour and speedtest_actual_min == 0:
-
                 try:
                     output = subprocess.check_output(command, text=True)
-                    
                     # Parse the JSON output
                     result = json.loads(output)
-
                     # Access the speed test results
                     speedtest_isp = result['isp']
                     speedtest_server = result['server']['name'] + ' (' + result['server']['location'] + ') (' + result['server']['host'] + ')'
                     speedtest_ping = result['ping']['latency']
                     speedtest_down = round(result['download']['bandwidth'] / 125000, 2)
                     speedtest_up = round(result['upload']['bandwidth'] / 125000, 2)
-
-                    print(f"    ISP:            {speedtest_isp}")
-                    print(f"    Server:         {speedtest_server}")
-                    print(f"    Ping:           {speedtest_ping} ms")
-                    print(f"    Download Speed: {speedtest_down} Mbps")
-                    print(f"    Upload Speed:   {speedtest_up} Mbps")
-
-                    sql.execute ("INSERT INTO Tools_Speedtest_History (speed_date, speed_isp, speed_server, speed_ping, speed_down, speed_up) " +
-                                 "VALUES (?, ?, ?, ?, ?, ?) ", (startTime, speedtest_isp, speedtest_server, speedtest_ping, speedtest_down, speedtest_up) )
+                    # Build output
+                    speedtest_output = ""
+                    speedtest_output += f"    ISP:            {speedtest_isp}\n"
+                    speedtest_output += f"    Server:         {speedtest_server}\n\n"
+                    speedtest_output += f"    Ping:           {speedtest_ping} ms\n"
+                    speedtest_output += f"    Download Speed: {speedtest_down} Mbps\n"
+                    speedtest_output += f"    Upload Speed:   {speedtest_up} Mbps\n"
+                    print(speedtest_output)
+                    # Prepare db string
+                    speedtest_db_output = speedtest_output.replace("\n", "<br>")
+                    # Insert in db
+                    sql.execute ("""INSERT INTO Tools_Speedtest_History (speed_date, speed_isp, speed_server, speed_ping, speed_down, speed_up)
+                                    VALUES (?, ?, ?, ?, ?, ?) """, (startTime, speedtest_isp, speedtest_server, speedtest_ping, speedtest_down, speedtest_up))
+                    # Logging
+                    sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
+                                    VALUES (?, 'c_002', 'cronjob', 'LogStr_0255', '', ?) """, (startTime, speedtest_db_output))
                     sql_connection.commit()
-
                 except subprocess.CalledProcessError as e:
                     print(f"Error running 'speedtest': {e}")
                 except json.JSONDecodeError as e:
@@ -277,10 +274,8 @@ def run_speedtest_task ():
             else :
                 print (f"    Planned time ({value}:00) not reached yet")
         closeDB()
-
     else:
         print("    The Parameter SPEEDTEST_TASK_HOUR is not set.")
-
     return 0
 
 #-------------------------------------------------------------------------------
@@ -289,7 +284,6 @@ def get_internet_IP ():
     # cmd_output = subprocess.check_output (dig_args, universal_newlines=True)
     curl_args = ['curl', '-s', QUERY_MYIP_SERVER]
     cmd_output = subprocess.check_output (curl_args, universal_newlines=True)
-
     # Check result is an IP
     IP = check_IP_format (cmd_output)
     return IP
@@ -300,7 +294,6 @@ def get_dynamic_DNS_IP ():
     dig_args = ['dig', '+short', DDNS_DOMAIN]
     # dig_args = ['dig', '+short', DDNS_DOMAIN, '@resolver1.opendns.com']
     dig_output = subprocess.check_output (dig_args, universal_newlines=True)
-
     # Check result is an IP
     IP = check_IP_format (dig_output)
     return IP
