@@ -58,9 +58,6 @@ def main ():
     print ('---------------------------------------------------------')
     print("Current User: %s \n" % get_username())
     
-    # If user is a sudoer, you can uncomment the line below to set the correct db permission every scan
-    # set_pia_file_permissions()
-    
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
 
@@ -115,10 +112,6 @@ def main ():
 #===============================================================================
 def get_username():
     return pwd.getpwuid(os.getuid())[0]
-
-# ------------------------------------------------------------------------------
-def set_pia_file_permissions():
-    os.system("sudo chown " + get_username() + ":www-data " + PIALERT_DB_FILE)
 
 # ------------------------------------------------------------------------------
 def set_pia_reports_permissions():
@@ -321,7 +314,6 @@ def save_new_internet_IP (pNewIP):
     # Log new IP into logfile
     append_line_to_file (LOG_PATH + '/IP_changes.log',
         str(startTime) +'\t'+ pNewIP +'\n')
-
     # Save event
     sql.execute ("""INSERT INTO Events (eve_MAC, eve_IP, eve_DateTime,
                         eve_EventType, eve_AdditionalInfo,
@@ -329,12 +321,10 @@ def save_new_internet_IP (pNewIP):
                     VALUES ('Internet', ?, ?, 'Internet IP Changed',
                         'Previous Internet IP: '|| ?, 1) """,
                     (pNewIP, startTime, get_previous_internet_IP() ) )
-
     # Save new IP
     sql.execute ("""UPDATE Devices SET dev_LastIP = ?
                     WHERE dev_MAC = 'Internet' """,
                     (pNewIP,) )
-
     sql_connection.commit()
     
 #-------------------------------------------------------------------------------
@@ -343,23 +333,18 @@ def check_IP_format (pIP):
     IPv4SEG  = r'(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])'
     IPv4ADDR = r'(?:(?:' + IPv4SEG + r'\.){3,3}' + IPv4SEG + r')'
     IP = re.search(IPv4ADDR, pIP)
-
     # Return error if not IP
     if IP is None :
         return ""
-
     return IP.group(0)
 
 #===============================================================================
 # Cleanup Tasks
 #===============================================================================
 def cleanup_database ():
-    # Header
     print ('Cleanup Database')
     print ('    Timestamp:', startTime )
-
     openDB()
-
     try:
         strdaystokeepOH = str(DAYS_TO_KEEP_ONLINEHISTORY)
     except NameError: # variable not defined, use a default
@@ -368,7 +353,6 @@ def cleanup_database ():
         strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(90) # 90 days
-
     print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
     print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
@@ -381,19 +365,15 @@ def cleanup_database ():
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
-
     sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
                     VALUES (?, 'c_010', 'cronjob', 'LogStr_0101', '', '') """, (startTime,))
-
-    closeDB()
-    
+    closeDB()    
     return 0
 
 #===============================================================================
 # UPDATE DEVICE MAC VENDORS
 #===============================================================================
 def update_devices_MAC_vendors (pArg = ''):
-    # Header
     print ('Update HW Vendors')
     print ('    Timestamp:', startTime )
 
@@ -424,7 +404,6 @@ def update_devices_MAC_vendors (pArg = ''):
         print ('.', end='')
         sys.stdout.flush()
             
-    # Print log
     print ('')
     print ("    Devices Ignored:  ", ignored)
     print ("    Vendors Not Found:", notFound)
@@ -499,25 +478,25 @@ def scan_network ():
     print_log ('arp-scan starts...')
     arpscan_devices = execute_arpscan ()
     print_log ('arp-scan ends')
-    # Pi-hole method
+    # Pi-hole
     print ('    Pi-hole Method...')
     openDB()
     print_log ('Pi-hole copy starts...')
     copy_pihole_network()
-    # DHCP Leases method
+    # DHCP Leases
     print ('    DHCP Leases Method...')
     read_DHCP_leases ()
-    # Fritzbox method
+    # Fritzbox
     print ('    Fritzbox Method...')
     openDB()
     print_log ('Fritzbox copy starts...')
     read_fritzbox_active_hosts()
-    # Mikrotik method
+    # Mikrotik
     print ('    Mikrotik Method...')
     openDB()
     print_log ('Mikrotik copy starts...')
     read_mikrotik_leases()
-    # UniFi method
+    # UniFi
     print ('    UniFi Method...')
     openDB()
     print_log ('UniFi copy starts...')
@@ -1505,7 +1484,6 @@ def validate_dhcp_address(ip_string):
 
 # -----------------------------------------------------------------------------------
 def rogue_dhcp_detection ():
-    print_log ('Looking for Rogue DHCP Servers')
     # Create Table is not exist
     sql_create_table = """ CREATE TABLE IF NOT EXISTS Nmap_DHCP_Server(
                                 scan_num INTEGER NOT NULL,
