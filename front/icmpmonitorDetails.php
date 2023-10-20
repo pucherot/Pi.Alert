@@ -562,7 +562,7 @@ get_icmphost_events_table($hostip, $icmpfilter);
                   var pia_js_online_history_time = [<?php pia_graph_devices_data($Pia_Graph_ICMPHost_Time);?>];
                   var pia_js_online_history_online = [<?php pia_graph_devices_data($Pia_Graph_ICMPHost_Up);?>];
                   var pia_js_online_history_offline = [<?php pia_graph_devices_data($Pia_Graph_ICMPHost_Down);?>];
-                  pia_draw_graph_icmphost_history(pia_js_online_history_time, pia_js_online_history_offline, pia_js_online_history_online);
+                  graph_icmphost_history(pia_js_online_history_time, pia_js_online_history_offline, pia_js_online_history_online);
                 </script>
 
                 <div class="col-md-12 bottom-border-aqua" style="margin-top: 30px; opacity: 0.7"></div>

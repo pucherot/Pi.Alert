@@ -151,4 +151,26 @@ function prepare_graph_arrays_ICMPHost($icmp_ip) {
 	}
 	return array($Pia_Graph_ICMPHost_Time, $Pia_Graph_ICMPHost_Up, $Pia_Graph_ICMPHost_Down);
 }
+
+// History Graph for device "Internet" / Speedtest Results
+function prepare_speedtestresults_graph() {
+	global $db;
+
+	$Speedtest_Graph_Time = array();
+	$Speedtest_Graph_ping = array();
+	$Speedtest_Graph_Down = array();
+	$Speedtest_Graph_Up = array();
+	$results = $db->query('SELECT speed_date, speed_ping, speed_down, speed_up FROM Tools_Speedtest_History ORDER BY speed_date DESC LIMIT 10');
+	while ($row = $results->fetchArray()) {
+		$time_raw = explode(' ', $row['speed_date']);
+		$time = explode(':', $time_raw[1]);
+		$day = explode('-', $time_raw[0]);
+		//array_push($Speedtest_Graph_Time, $time[0] . ':' . $time[1]);
+		array_push($Speedtest_Graph_Time, $day[2] . '.' . $day[1] . '. ' . $time[0] . ':' . $time[1]);
+		array_push($Speedtest_Graph_ping, $row['speed_ping']);
+		array_push($Speedtest_Graph_Down, $row['speed_down']);
+		array_push($Speedtest_Graph_Up, $row['speed_up']);
+	}
+	return array($Speedtest_Graph_Time, $Speedtest_Graph_ping, $Speedtest_Graph_Down, $Speedtest_Graph_Up);
+}
 ?>

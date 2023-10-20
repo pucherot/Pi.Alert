@@ -578,7 +578,7 @@ get_service_events_table($service_details_title, $http_filter);
                   var pia_js_online_history_3xx = [<?php pia_graph_devices_data($Pia_Graph_Service_3xx);?>];
                   var pia_js_online_history_4xx = [<?php pia_graph_devices_data($Pia_Graph_Service_4xx);?>];
                   var pia_js_online_history_5xx = [<?php pia_graph_devices_data($Pia_Graph_Service_5xx);?>];
-                  pia_draw_graph_services_history(pia_js_online_history_time, pia_js_online_history_down, pia_js_online_history_2xx, pia_js_online_history_3xx, pia_js_online_history_4xx, pia_js_online_history_5xx);
+                  graph_services_history(pia_js_online_history_time, pia_js_online_history_down, pia_js_online_history_2xx, pia_js_online_history_3xx, pia_js_online_history_4xx, pia_js_online_history_5xx);
                 </script>
 
                 <div class="col-md-12 bottom-border-aqua" style="margin-top: 30px; opacity: 0.7"></div>

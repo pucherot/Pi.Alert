@@ -19,6 +19,7 @@ if ($_SESSION["login"] != 1) {
 require 'php/templates/header.php';
 require 'php/server/db.php';
 require 'php/server/journal.php';
+require 'php/server/graph.php';
 
 $DBFILE = '../db/pialert.db';
 OpenDB();
@@ -38,6 +39,14 @@ function get_speedtestresults_table() {
           </tr>';
 	}
 }
+
+// ----------------- Get Graph Arrays -----------------------------------
+$speedtest_graph_array = array();
+$speedtest_graph_array = prepare_speedtestresults_graph();
+$Speedtest_Graph_Time = $speedtest_graph_array[0];
+$Speedtest_Graph_ping = $speedtest_graph_array[1];
+$Speedtest_Graph_Down = $speedtest_graph_array[2];
+$Speedtest_Graph_Up = $speedtest_graph_array[3];
 
 ?>
 
@@ -510,7 +519,6 @@ if ($_REQUEST['mac'] == 'Internet') {
 
                 </div>
                     <div style="width: 100%; position: relative; top: 12px; right: -10px;">
-
                       <div class="btn-group pull-right" style="position: relative; right: 0px;">
                         <button type="button" class="btn btn-default" style="padding: 10px; min-width: 30px;"
                           id="btnPrevious_down" onclick="previousRecord()"> <i class="fa fa-chevron-left"></i> </button>
@@ -519,7 +527,6 @@ if ($_REQUEST['mac'] == 'Internet') {
                         <button type="button" class="btn btn-default" style="padding: 10px; min-width: 30px; margin-left: 1px;"
                           id="btnNext_down" onclick="nextRecord()"> <i class="fa fa-chevron-right"></i> </button>
                       </div>
-
                     </div>
               </div>
 
@@ -541,9 +548,8 @@ if ($_REQUEST['mac'] == 'Internet') {
                 </table>
               </div>
 
-<!-- tab page 5 ------------------------------------------------------------ -->
+<!-- tab page 3 ------------------------------------------------------------ -->
               <div class="tab-pane fade" id="panNmap">
-
 <?php
 if ($_REQUEST['mac'] == 'Internet') {
 	?>
@@ -551,17 +557,14 @@ if ($_REQUEST['mac'] == 'Internet') {
                 <div style="width:100%; text-align: center; margin-bottom: 50px; display: inline-block;">
                   <button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtestcli()">Start Speedtest-cli</button>
 <?php
-
-	$speedtest_binary = '../back/speedtest/speedtest';
+$speedtest_binary = '../back/speedtest/speedtest';
 	if (file_exists($speedtest_binary)) {
 		echo '<button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtest_ookla(\'test\')">Start Speedtest (Ookla)</button>';
 	} else {
 		echo '<button type="button" id="speedtestcli" class="btn btn-primary pa-btn" style="margin-left: 10px; margin-right: 10px;" onclick="speedtest_ookla(\'get\')">Download Speedtest-Client</button>';
 	}
-
 	?>
                 </div>
-
                   <script>
                   function speedtestcli() {
                     $( "#scanoutput" ).empty();
@@ -654,7 +657,7 @@ if ($_REQUEST['mac'] != 'Internet') {
 
               </div>
 
-<!-- tab page 3 ------------------------------------------------------------ -->
+<!-- tab page 4 ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panPresence">
 
                   <!-- spinner -->
@@ -670,7 +673,7 @@ if ($_REQUEST['mac'] != 'Internet') {
                   </div>
               </div>
 
-<!-- tab page 4 ------------------------------------------------------------ -->
+<!-- tab page 5 ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panEvents">
 
                 <!-- Hide Connections -->
@@ -700,11 +703,26 @@ if ($_REQUEST['mac'] == 'Internet') {
 <!-- tab page 6 ------------------------------------------------------------ -->
               <div class="tab-pane fade table-responsive" id="panSpeedtest">
 
+                <!-- Speedtest Graph -->
+                <div class="col-md-12" style="margin-bottom:20px;">
+                  <div class="chart" style="height: 200px;">
+                    <script src="lib/AdminLTE/bower_components/chart.js/Chart.js"></script>
+                    <canvas id="SpeedtestChart"></canvas>
+                  </div>
+                </div>
+                <script src="./js/graph_online_history.js"></script>
+                <script>
+                  var speedtest_js_time = [<?php pia_graph_devices_data($Speedtest_Graph_Time);?>];
+                  var speedtest_js_ping = [<?php pia_graph_devices_data($Speedtest_Graph_ping);?>];
+                  var speedtest_js_down = [<?php pia_graph_devices_data($Speedtest_Graph_Down);?>];
+                  var speedtest_js_up = [<?php pia_graph_devices_data($Speedtest_Graph_Up);?>];
+                  graph_speedtest_history(speedtest_js_time, speedtest_js_ping, speedtest_js_down, speedtest_js_up);
+                </script>
+
 <?php
-// Check iff Ookla Speedtest is installed
+// Check if Ookla Speedtest is installed
 	if (file_exists('../back/speedtest/speedtest')) {
 		//echo '<h4 class="">' . $pia_lang['ookla_devdetails_tab_headline'] . '</h4>';
-
 		echo '<table id="tableSpeedtest" class="table table-bordered table-hover table-striped ">
             <thead>
               <tr>
@@ -717,24 +735,18 @@ if ($_REQUEST['mac'] == 'Internet') {
               </tr>
             </thead>
             <tbody>';
-
-# Create Speedtest table
 		get_speedtestresults_table();
-
 		echo '  </tbody>
     </table>';
-
 	} else {
 		echo $pia_lang['ookla_devdetails_required'];
 	}
-
 	?>
 
               </div>
 <?php
 }
 ?>
-
             </div>
             <!-- /.tab-content -->
           </div>
@@ -751,7 +763,6 @@ if ($_REQUEST['mac'] == 'Internet') {
   </div>
   <!-- /.content-wrapper -->
 
-
 <!-- ----------------------------------------------------------------------- -->
 <?php
 require 'php/templates/footer.php';
@@ -760,12 +771,10 @@ require 'php/templates/footer.php';
 <!-- iCkeck -->
 <link rel="stylesheet" href="lib/AdminLTE/plugins/iCheck/all.css">
 <script src="lib/AdminLTE/plugins/iCheck/icheck.min.js"></script>
-
 <!-- Datatable -->
 <link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-
 <!-- fullCalendar -->
 <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.css">
 <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
