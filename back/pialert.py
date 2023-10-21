@@ -363,6 +363,8 @@ def cleanup_database ():
     sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
     print ('    Trim Journal to the lastest 1000 entries')
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
+    print ('    Speedtest_History, up to the lastest '+strdaystokeepOH+' days...')
+    sql.execute ("DELETE FROM Tools_Speedtest_History WHERE speed_date <= date('now', '-"+strdaystokeepOH+" day')")
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
     sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)

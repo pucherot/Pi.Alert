@@ -275,7 +275,7 @@ EOF
 fi
 
 # 2023-10-19
-if ! grep -Fq "# ICMP Monitoring Options" "$PIALERT_HOME/config/pialert.conf" ; then
+if ! grep -Fq "# Automatic Speedtest" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
 
 # Automatic Speedtest
