@@ -172,6 +172,19 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 		delete_speedtest_archive();
 		echo "\n";
 		$show_hint = 1;
+	} elseif ($kernel_arch == "arm64") {
+		# Compatible client possible
+		# -----------------------------------
+		echo "Detected System Architecture: " . $kernel_arch . "\n";
+		$downloadlink = get_speedtest_link('aarch64');
+		echo "Selected Downloadlink: " . $downloadlink . "\n";
+		download_speedtest($downloadlink);
+		echo "\n";
+		extract_speedtest();
+		echo "\n";
+		delete_speedtest_archive();
+		echo "\n";
+		$show_hint = 1;
 	} else {
 		# Compatible client possible
 		# -----------------------------------
