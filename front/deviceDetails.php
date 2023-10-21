@@ -710,7 +710,7 @@ if ($_REQUEST['mac'] == 'Internet') {
                     <canvas id="SpeedtestChart"></canvas>
                   </div>
                 </div>
-                <script src="./js/graph_online_history.js"></script>
+                <script src="js/graph_online_history.js"></script>
                 <script>
                   var speedtest_js_time = [<?php pia_graph_devices_data($Speedtest_Graph_Time);?>];
                   var speedtest_js_ping = [<?php pia_graph_devices_data($Speedtest_Graph_ping);?>];
