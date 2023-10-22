@@ -810,6 +810,13 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Il file <span class="text-maroon he
 											        <td class="help_table_gen_b">URL di aggiornamento DDNS</td></tr>
 											</table>
 											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Automatic Speedtest</td></tr>
+											    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_ACTIVE</td>
+											        <td class="help_table_gen_b"></td></tr>
+											    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_HOUR</td>
+											        <td class="help_table_gen_b"></td></tr>
+											</table>
+											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Opzioni e campioni di arp-scan</td></tr>
 											    <tr><td class="help_table_gen_a">MAC_IGNORE_LIST</td>
 											        <td class="help_table_gen_b">

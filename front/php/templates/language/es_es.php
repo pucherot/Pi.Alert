@@ -805,6 +805,13 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'The file <span class="text-maroon h
 											        <td class="help_table_gen_b">    </td></tr>
 											</table>
 											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Automatic Speedtest</td></tr>
+											    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_ACTIVE</td>
+											        <td class="help_table_gen_b"></td></tr>
+											    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_HOUR</td>
+											        <td class="help_table_gen_b"></td></tr>
+											</table>
+											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
 											        <td class="help_table_gen_b">
 											            <span class="text-maroon help_faq_code">[&apos;MAC-Address 1&apos;, &apos;MAC-Address 2&apos;]</span><br>
