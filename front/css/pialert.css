@@ -33,7 +33,7 @@
 .box-body { padding-top: 0px; padding-bottom: 0px; }
 .main-footer { padding: 5px; color: gray; }
 /* -----------------  Customized Main Menu ---------------------------------- */
-.main-header .logo { width: 170px; }
+.main-header .logo { width: 170px;}
 .main-header>.navbar { margin-left: 170px; }
 .main-sidebar, .left-side { width: 170px; }
 .content-wrapper, .right-side, .main-footer { margin-left: 170px; }
@@ -204,7 +204,7 @@
 }
 /* ----------------- Customized Menu dropdown ------------------------------- */
 .dropdown-menu {
-    max-height: 250px;
+    max-height: 300px;
     overflow-x: hidden;
     box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
 }
@@ -376,60 +376,22 @@ body.modal-open {
   color: #000;
 }
 
-.text-green-light {
-  color: #5ca314 !important;
-}
-.text-green {
-  color: #00aa60 !important;
-}
-.text-orange {
-  color: #b1720c !important;
-}
-.text-red {
-  color: #bd2c19 !important;
-}
-.text-vivid-blue {
-  color: #007997 !important;
-}
-
-.loader {
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  animation: spin 2s linear infinite;
-  margin-left: 55px;
-  margin-top: 0px;
-}
-
-.disablespinner {
- display: none;
-}
+.text-green-light { color: #5ca314 !important;}
+.text-green { color: #00aa60 !important;}
+.text-orange { color: #b1720c !important;}
+.text-red { color: #bd2c19 !important;}
+.text-vivid-blue { color: #007997 !important;}
+.loader { border: 5px solid #f3f3f3; border-top: 5px solid #3498db; border-radius: 50%; width: 25px; height: 25px; animation: spin 2s linear infinite; margin-left: 55px; margin-top: 0px;}
+.disablespinner { display: none;}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
-.spinnerOverlay {
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-.table_settings_col_box {
-    padding-top:6px; display: inline-block; margin: 5px 10px; padding-left: 10px; padding-right: 10px; border: 1px solid #aaa; padding-bottom: 2px;
-}
-
-.table_settings_col_box_check {
-    position: relative; margin-top:-3px; margin-right: 5px;
-}
-
-.tooltip-inner {
-  background-color: #000;
-  box-shadow: 0px 0px 4px black;
-  opacity: 0.85 !important;
-}
-
+.spinnerOverlay { background-color: rgba(0, 0, 0, 0.6);}
+.table_settings_col_box { padding-top:6px; display: inline-block; margin: 5px 10px; padding-left: 10px; padding-right: 10px; border: 1px solid #aaa; padding-bottom: 2px;}
+.table_settings_col_box_check { position: relative; margin-top:-3px; margin-right: 5px;}
+.tooltip-inner { background-color: #000; box-shadow: 0px 0px 4px black; opacity: 0.85 !important;}
 .fa-gradient-green {
     background: -webkit-gradient(linear, left top, left bottom, from(#AEFF01), to(#01A000));
     -webkit-background-clip: text;
@@ -440,19 +402,14 @@ body.modal-open {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.bg-orange-custom { background-color: #FE4C00 !important; color:  #444;}
+.text-orange-custom { color: #FE4C00 !important;}
+#custom-menu-report-button { background-color: #d58512; color: #FFF; width: 190px;}
+#custom-menu-default-button { color: #000; width: 190px;}
+.custom-menu-button-text {display: inline-block; width: 140px; text-align: left;}
+.custom-menu-button-icon {width: 15px; margin-right: 10px;}
+.custom-menu-icon-links {display: inline-block; width: 30%; text-align: center;}
 
-.bg-orange-custom {
-    background-color: #FE4C00 !important;
-    color:  #444;
-}
-
-.text-orange-custom {
-    color: #FE4C00 !important;
-}
-#custom-menu-report-button {
-    background-color: #d58512;
-    color: #FFF;
-}
 /* ----------------- Header ------------------------------------------------- */
 #custom-menu-logout-button {background-color: #d73925; color: #FFF;}
 #navbar-reload-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
@@ -529,8 +486,5 @@ body.modal-open {
 .icmplist_add_ip {display: inline-block; margin-top: -5px; margin-left: 15px;}
 /* ----------------- Network ------------------------------------------------ */
 .network_tab_icon {font-size: 16px; position: relative;}
+.flip-horizontal { transform: scaleX(-1); display: inline-block;}
 
-.flip-horizontal {
-  transform: scaleX(-1);
-  display: inline-block;
-}

@@ -117,7 +117,6 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 	echo '<pre style="border: none;">';
 
 	$output_json = json_decode($output[0], true);
-
 	$isp = $output_json['isp'];
 	$server = $output_json['server']['name'] . ' (' . $output_json['server']['location'] . ') (' . $output_json['server']['host'] . ')';
 	$ping = $output_json['ping']['latency'];
@@ -126,16 +125,7 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 
 	$cli_output = "ISP: " . $isp . "\nServer: " . $server . "\n\nPing:     " . $ping . " ms\nDownload: " . $download_mbps . " Mbps\nUpload:   " . $upload_mbps . " Mbps";
 	echo $cli_output;
-
 	echo '</pre>';
-
-	//Insert to Speedtest History
-	// $test_time = actual Time;
-	// $isp - Your ISP
-	// $server - Speedtest Server
-	// $ping - Ping
-	// $download_mbps - Download Speed Mbps
-	// $upload_mbps - Upload Speed Mbps
 
 	$test_time = date('Y-m-d H:i:s');
 
@@ -174,6 +164,19 @@ if (file_exists($speedtest_binary) && $mod == "test") {
 		# -----------------------------------
 		echo "Detected System Architecture: " . $kernel_arch . "\n";
 		$downloadlink = get_speedtest_link('x86_64');
+		echo "Selected Downloadlink: " . $downloadlink . "\n";
+		download_speedtest($downloadlink);
+		echo "\n";
+		extract_speedtest();
+		echo "\n";
+		delete_speedtest_archive();
+		echo "\n";
+		$show_hint = 1;
+	} elseif ($kernel_arch == "arm64") {
+		# Compatible client possible
+		# -----------------------------------
+		echo "Detected System Architecture: " . $kernel_arch . "\n";
+		$downloadlink = get_speedtest_link('aarch64');
 		echo "Selected Downloadlink: " . $downloadlink . "\n";
 		download_speedtest($downloadlink);
 		echo "\n";

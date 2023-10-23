@@ -24,7 +24,7 @@ from base64 import b64encode
 from urllib.parse import urlparse
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
-import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl
+import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl, json
 
 #===============================================================================
 # CONFIG CONSTANTS
@@ -57,9 +57,6 @@ def main ():
     print ('\nPi.Alert ' + VERSION +' ('+ VERSION_DATE +')')
     print ('---------------------------------------------------------')
     print("Current User: %s \n" % get_username())
-    
-    # If user is a sudoer, you can uncomment the line below to set the correct db permission every scan
-    # set_pia_file_permissions()
     
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
@@ -115,10 +112,6 @@ def main ():
 #===============================================================================
 def get_username():
     return pwd.getpwuid(os.getuid())[0]
-
-# ------------------------------------------------------------------------------
-def set_pia_file_permissions():
-    os.system("sudo chown " + get_username() + ":www-data " + PIALERT_DB_FILE)
 
 # ------------------------------------------------------------------------------
 def set_pia_reports_permissions():
@@ -217,6 +210,65 @@ def check_internet_IP ():
     else :
         print ('\nSkipping Dynamic DNS update...')
 
+    # Run automated Speedtest
+    if SPEEDTEST_TASK_ACTIVE :
+        # Check if Speedtest is installed
+        speedtest_binary = PIALERT_BACK_PATH + '/speedtest/speedtest'
+        if os.path.exists(speedtest_binary):
+            print ('\nRun daily Speedtest...')
+            run_speedtest_task()
+        else:
+            print('\nSkipping Speedtest... Not installed!')
+    else :
+        print ('\nSkipping Speedtest...')
+    return 0
+
+#-------------------------------------------------------------------------------
+def run_speedtest_task ():
+    # Define the command and arguments
+    command = ["sudo", PIALERT_BACK_PATH + "/speedtest/speedtest", "-p", "no", "-f", "json"]
+    if len(SPEEDTEST_TASK_HOUR) != 0:
+        openDB()
+        speedtest_actual_hour = startTime.hour
+        speedtest_actual_min = startTime.minute
+        for value in SPEEDTEST_TASK_HOUR:
+            if value == speedtest_actual_hour and speedtest_actual_min == 0:
+                try:
+                    output = subprocess.check_output(command, text=True)
+                    # Parse the JSON output
+                    result = json.loads(output)
+                    # Access the speed test results
+                    speedtest_isp = result['isp']
+                    speedtest_server = result['server']['name'] + ' (' + result['server']['location'] + ') (' + result['server']['host'] + ')'
+                    speedtest_ping = result['ping']['latency']
+                    speedtest_down = round(result['download']['bandwidth'] / 125000, 2)
+                    speedtest_up = round(result['upload']['bandwidth'] / 125000, 2)
+                    # Build output
+                    speedtest_output = ""
+                    speedtest_output += f"    ISP:            {speedtest_isp}\n"
+                    speedtest_output += f"    Server:         {speedtest_server}\n\n"
+                    speedtest_output += f"    Ping:           {speedtest_ping} ms\n"
+                    speedtest_output += f"    Download Speed: {speedtest_down} Mbps\n"
+                    speedtest_output += f"    Upload Speed:   {speedtest_up} Mbps\n"
+                    print(speedtest_output)
+                    # Prepare db string
+                    speedtest_db_output = speedtest_output.replace("\n", "<br>")
+                    # Insert in db
+                    sql.execute ("""INSERT INTO Tools_Speedtest_History (speed_date, speed_isp, speed_server, speed_ping, speed_down, speed_up)
+                                    VALUES (?, ?, ?, ?, ?, ?) """, (startTime, speedtest_isp, speedtest_server, speedtest_ping, speedtest_down, speedtest_up))
+                    # Logging
+                    sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
+                                    VALUES (?, 'c_002', 'cronjob', 'LogStr_0255', '', ?) """, (startTime, speedtest_db_output))
+                    sql_connection.commit()
+                except subprocess.CalledProcessError as e:
+                    print(f"Error running 'speedtest': {e}")
+                except json.JSONDecodeError as e:
+                    print(f"Error parsing JSON output: {e}")
+            else :
+                print (f"    Planned time ({value}:00) not reached yet")
+        closeDB()
+    else:
+        print("    The Parameter SPEEDTEST_TASK_HOUR is not set.")
     return 0
 
 #-------------------------------------------------------------------------------
@@ -225,7 +277,6 @@ def get_internet_IP ():
     # cmd_output = subprocess.check_output (dig_args, universal_newlines=True)
     curl_args = ['curl', '-s', QUERY_MYIP_SERVER]
     cmd_output = subprocess.check_output (curl_args, universal_newlines=True)
-
     # Check result is an IP
     IP = check_IP_format (cmd_output)
     return IP
@@ -236,7 +287,6 @@ def get_dynamic_DNS_IP ():
     dig_args = ['dig', '+short', DDNS_DOMAIN]
     # dig_args = ['dig', '+short', DDNS_DOMAIN, '@resolver1.opendns.com']
     dig_output = subprocess.check_output (dig_args, universal_newlines=True)
-
     # Check result is an IP
     IP = check_IP_format (dig_output)
     return IP
@@ -264,7 +314,6 @@ def save_new_internet_IP (pNewIP):
     # Log new IP into logfile
     append_line_to_file (LOG_PATH + '/IP_changes.log',
         str(startTime) +'\t'+ pNewIP +'\n')
-
     # Save event
     sql.execute ("""INSERT INTO Events (eve_MAC, eve_IP, eve_DateTime,
                         eve_EventType, eve_AdditionalInfo,
@@ -272,12 +321,10 @@ def save_new_internet_IP (pNewIP):
                     VALUES ('Internet', ?, ?, 'Internet IP Changed',
                         'Previous Internet IP: '|| ?, 1) """,
                     (pNewIP, startTime, get_previous_internet_IP() ) )
-
     # Save new IP
     sql.execute ("""UPDATE Devices SET dev_LastIP = ?
                     WHERE dev_MAC = 'Internet' """,
                     (pNewIP,) )
-
     sql_connection.commit()
     
 #-------------------------------------------------------------------------------
@@ -286,23 +333,18 @@ def check_IP_format (pIP):
     IPv4SEG  = r'(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])'
     IPv4ADDR = r'(?:(?:' + IPv4SEG + r'\.){3,3}' + IPv4SEG + r')'
     IP = re.search(IPv4ADDR, pIP)
-
     # Return error if not IP
     if IP is None :
         return ""
-
     return IP.group(0)
 
 #===============================================================================
 # Cleanup Tasks
 #===============================================================================
 def cleanup_database ():
-    # Header
     print ('Cleanup Database')
     print ('    Timestamp:', startTime )
-
     openDB()
-
     try:
         strdaystokeepOH = str(DAYS_TO_KEEP_ONLINEHISTORY)
     except NameError: # variable not defined, use a default
@@ -311,7 +353,6 @@ def cleanup_database ():
         strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(90) # 90 days
-
     print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
     print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
@@ -322,21 +363,19 @@ def cleanup_database ():
     sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
     print ('    Trim Journal to the lastest 1000 entries')
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
+    print ('    Speedtest_History, up to the lastest '+strdaystokeepOH+' days...')
+    sql.execute ("DELETE FROM Tools_Speedtest_History WHERE speed_date <= date('now', '-"+strdaystokeepOH+" day')")
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
-
     sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
                     VALUES (?, 'c_010', 'cronjob', 'LogStr_0101', '', '') """, (startTime,))
-
-    closeDB()
-    
+    closeDB()    
     return 0
 
 #===============================================================================
 # UPDATE DEVICE MAC VENDORS
 #===============================================================================
 def update_devices_MAC_vendors (pArg = ''):
-    # Header
     print ('Update HW Vendors')
     print ('    Timestamp:', startTime )
 
@@ -367,7 +406,6 @@ def update_devices_MAC_vendors (pArg = ''):
         print ('.', end='')
         sys.stdout.flush()
             
-    # Print log
     print ('')
     print ("    Devices Ignored:  ", ignored)
     print ("    Vendors Not Found:", notFound)
@@ -442,25 +480,25 @@ def scan_network ():
     print_log ('arp-scan starts...')
     arpscan_devices = execute_arpscan ()
     print_log ('arp-scan ends')
-    # Pi-hole method
+    # Pi-hole
     print ('    Pi-hole Method...')
     openDB()
     print_log ('Pi-hole copy starts...')
     copy_pihole_network()
-    # DHCP Leases method
+    # DHCP Leases
     print ('    DHCP Leases Method...')
     read_DHCP_leases ()
-    # Fritzbox method
+    # Fritzbox
     print ('    Fritzbox Method...')
     openDB()
     print_log ('Fritzbox copy starts...')
     read_fritzbox_active_hosts()
-    # Mikrotik method
+    # Mikrotik
     print ('    Mikrotik Method...')
     openDB()
     print_log ('Mikrotik copy starts...')
     read_mikrotik_leases()
-    # UniFi method
+    # UniFi
     print ('    UniFi Method...')
     openDB()
     print_log ('UniFi copy starts...')
@@ -1448,7 +1486,6 @@ def validate_dhcp_address(ip_string):
 
 # -----------------------------------------------------------------------------------
 def rogue_dhcp_detection ():
-    print_log ('Looking for Rogue DHCP Servers')
     # Create Table is not exist
     sql_create_table = """ CREATE TABLE IF NOT EXISTS Nmap_DHCP_Server(
                                 scan_num INTEGER NOT NULL,

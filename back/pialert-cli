@@ -624,7 +624,7 @@ EOM
     echo -e "\nFrontend sudoer"
     echo "www-data ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/pialert-cli" | sudo tee /etc/sudoers.d/pialert-frontend
     echo "www-data ALL=(ALL) NOPASSWD: /usr/bin/df" | sudo tee -a /etc/sudoers.d/pialert-frontend
-    echo "www-data ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/speedtest/speedtest" | sudo tee /etc/sudoers.d/pialert-frontend
+    echo "www-data ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/speedtest/speedtest" | sudo tee -a /etc/sudoers.d/pialert-frontend
     echo -e "\nBackend sudoer"
     echo "${PIA_USER} ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/pialert-cli" | sudo tee /etc/sudoers.d/pialert-backend
     echo "${PIA_USER} ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan" | sudo tee -a /etc/sudoers.d/pialert-backend

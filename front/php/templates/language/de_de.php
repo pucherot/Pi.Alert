@@ -4,7 +4,6 @@ unset($pia_lang);
 // About - Update by @TeroRERO 07ago2022
 //////////////////////////////////////////////////////////////////
 $pia_lang['About_Title'] = 'Open Source Network Guard';
-$pia_lang['About_Design'] = 'Designed for:';
 $pia_lang['About_Exit'] = 'Abmelden';
 $pia_lang['About_Reports'] = 'Meldungen zeigen';
 
@@ -811,6 +810,13 @@ $pia_lang['HelpFAQ_Cat_General_107_text'] = 'Die Datei <span class="text-maroon 
 											        <td class="help_table_gen_b">Passwort</td></tr>
 											    <tr><td class="help_table_gen_a">DDNS_UPDATE_URL</td>
 											        <td class="help_table_gen_b">    </td></tr>
+											</table>
+											<table class="help_table_gen">
+											    <tr><td class="help_table_gen_section" colspan="2">Automatic Speedtest</td></tr>
+											    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_ACTIVE</td>
+											        <td class="help_table_gen_b">Automatischen Speedtest aktivieren/deaktivieren</td></tr>
+											    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_HOUR</td>
+											        <td class="help_table_gen_b">Volle Stunde(n) zu denen der Speedtest gestartet werden soll.</td></tr>
 											</table>
 											<table class="help_table_gen">
 											    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
