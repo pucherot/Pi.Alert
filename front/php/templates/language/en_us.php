@@ -4,7 +4,6 @@ unset($pia_lang);
 // About - Update by @TeroRERO 07ago2022
 //////////////////////////////////////////////////////////////////
 $pia_lang['About_Title'] = 'Open Source Network Guard';
-$pia_lang['About_Design'] = 'Designed for:';
 $pia_lang['About_Exit'] = 'Sign out';
 $pia_lang['About_Reports'] = 'Show notifications';
 

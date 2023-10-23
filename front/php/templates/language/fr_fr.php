@@ -4,7 +4,6 @@ unset($pia_lang);
 // About - ready
 //////////////////////////////////////////////////////////////////
 $pia_lang['About_Title'] = 'Garde réseau open source';
-$pia_lang['About_Design'] = 'Conçu pour:';
 $pia_lang['About_Exit'] = 'Logout';
 $pia_lang['About_Reports'] = 'Afficher les messages';
 

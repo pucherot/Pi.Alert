@@ -4,7 +4,6 @@ unset($pia_lang);
 // About - Update by @TeroRERO 07ago2022
 //////////////////////////////////////////////////////////////////
 $pia_lang['About_Title'] = 'Guadián de Red <br>(Código Abierto)';
-$pia_lang['About_Design'] = 'Diseñado para:';
 $pia_lang['About_Exit'] = 'Salir';
 $pia_lang['About_Reports'] = 'Notificaciones';
 

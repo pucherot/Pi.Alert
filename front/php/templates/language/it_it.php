@@ -4,7 +4,6 @@ unset($pia_lang);
 // About
 //////////////////////////////////////////////////////////////////
 $pia_lang['About_Title'] = 'Guardia di Rete Open Source';
-$pia_lang['About_Design'] = 'Progettato per:';
 $pia_lang['About_Exit'] = 'Esci';
 $pia_lang['About_Reports'] = 'Mostra Report';
 
