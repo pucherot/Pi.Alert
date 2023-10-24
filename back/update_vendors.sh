@@ -49,6 +49,10 @@ sudo cp *.txt 2_backup
 sudo get-iab -v
 sudo get-oui -v
 
+# Rename files /usb/lib/ieee-data
+mv -v ieee-oui.txt.bak ieee-oui.txt
+mv -v ieee-iab.txt.bak ieee-iab.txt
+
 # Update from ieee website
 # sudo get-iab -v -u http://standards-oui.ieee.org/iab/iab.txt
 # sudo get-oui -v -u http://standards-oui.ieee.org/oui/oui.txt
