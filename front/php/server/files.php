@@ -104,7 +104,11 @@ function SaveConfigFile() {
 	} else {
 		$configArray['MAC_IGNORE_LIST'] = "[]";
 	}
-
+	if ($configArray['IP_IGNORE_LIST'] != "" && $configArray['IP_IGNORE_LIST'] != "[]") {
+		$configArray['IP_IGNORE_LIST'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['IP_IGNORE_LIST']);
+	} else {
+		$configArray['IP_IGNORE_LIST'] = "[]";
+	}
 	if (substr($configArray['SCAN_SUBNETS'], 0, 2) == "--") {$configArray['SCAN_SUBNETS'] = "'" . $configArray['SCAN_SUBNETS'] . "'";} else {
 		$configArray['SCAN_SUBNETS'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['SCAN_SUBNETS']);
 	}
@@ -208,6 +212,7 @@ SPEEDTEST_TASK_HOUR   = " . $configArray['SPEEDTEST_TASK_HOUR'] . "
 # ----------------------
 ARPSCAN_ACTIVE  = " . convert_bool($configArray['ARPSCAN_ACTIVE']) . "
 MAC_IGNORE_LIST = " . $configArray['MAC_IGNORE_LIST'] . "
+IP_IGNORE_LIST  = " . $configArray['IP_IGNORE_LIST'] . "
 SCAN_SUBNETS    = " . $configArray['SCAN_SUBNETS'] . "
 # SCAN_SUBNETS    = '--localnet'
 # SCAN_SUBNETS    = '--localnet --interface=eth0'
