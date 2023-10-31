@@ -253,6 +253,9 @@ if ($_REQUEST['tab'] == '1') {
     <div class="box" id="Maintain-Status">
         <div class="box-header with-border">
             <h3 class="box-title">Status</h3>
+	        <div class="box-tools pull-right">
+	        	<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+	    	</div>
         </div>
         <div class="box-body" style="padding-bottom: 5px;">
             <div class="db_info_table">
@@ -782,6 +785,39 @@ $(document).ready(function () {
         $(window).scrollTop(scrollPosition);
         $('#modal-config-editor').css('overflow-y', 'hidden');
     });
+
+    var countdown = 3; // Initial countdown value in seconds
+
+    // Update the box title with the countdown
+    function updateBoxTitle() {
+        $('#Maintain-Status .box-title').text(countdown > 0 ? 'Status (' + countdown + ' sec)' : 'Status');
+    }
+
+    updateBoxTitle(); // Initialize the title
+
+    // Update the countdown every second
+    var countdownInterval = setInterval(function () {
+        countdown--;
+        updateBoxTitle();
+
+        if (countdown <= 0) {
+            clearInterval(countdownInterval);
+            collapseBox(); // Call the function to collapse the box
+        }
+    }, 1000);
+
+    // Function to collapse the box
+    function collapseBox() {
+        // Find the collapse button within the box
+        var collapseButton = $('#Maintain-Status').find('[data-widget="collapse"]');
+
+        // Check if the box is not already collapsed
+        if (!collapseButton.hasClass('collapsed')) {
+            // Trigger a click event on the collapse button
+            collapseButton.click();
+        }
+    }
+
 });
 </script>
 
