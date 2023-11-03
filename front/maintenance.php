@@ -262,7 +262,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px"><?=$pia_lang['Maintenance_database_path'];?></div>
                     <div class="db_info_table_cell" style="width: 70%">
-                        <?=$DB_SOURCE;?>
+                        <input readonly value="<?=$DB_SOURCE;?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
                     </div>
                 </div>
                 <div class="db_info_table_row">
