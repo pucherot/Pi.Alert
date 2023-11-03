@@ -509,7 +509,7 @@ def scan_network ():
     print_log ('Save scanned devices')
     save_scanned_devices (arpscan_devices, cycle_interval)
     # Process Ignore list
-    print ('    Processing ignore lists...')
+    print ('    Processing ignore list...')
     remove_entries_from_table()
         # Print stats
     print_log ('Print Stats')
@@ -912,7 +912,7 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
 def remove_entries_from_table():
     try:
         MAC_IGNORE_LIST
-        print ('        Delete ' + str(len(MAC_IGNORE_LIST)) + ' ignored devices (MAC) from scan on appearance')
+        print ('        Delete ' + str(len(MAC_IGNORE_LIST)) + ' ignored devices from scan on appearance')
 
         mac_addresses = ','.join(['"{}"'.format(mac) for mac in MAC_IGNORE_LIST])
         query = 'DELETE FROM CurrentScan WHERE cur_MAC IN ({})'.format(mac_addresses)
@@ -928,27 +928,7 @@ def remove_entries_from_table():
         query = 'DELETE FROM Unifi_Network WHERE UF_MAC IN ({})'.format(mac_addresses)
         sql.execute(query)
     except NameError:
-        print("        No ignore list (MAC) defined")
-
-    try:
-        IP_IGNORE_LIST
-        print ('        Delete ' + str(len(IP_IGNORE_LIST)) + ' ignored devices (IP) from scan on appearance')
-
-        ip_addresses = ','.join(['"{}"'.format(ips) for ips in IP_IGNORE_LIST])
-        query = 'DELETE FROM CurrentScan WHERE cur_IP IN ({})'.format(ip_addresses)
-        sql.execute(query)
-        query = 'DELETE FROM PiHole_Network WHERE PH_IP IN ({})'.format(ip_addresses)
-        sql.execute(query)
-        query = 'DELETE FROM DHCP_Leases WHERE DHCP_IP IN ({})'.format(ip_addresses)
-        sql.execute(query)
-        query = 'DELETE FROM Fritzbox_Network WHERE FB_IP IN ({})'.format(ip_addresses)
-        sql.execute(query)
-        query = 'DELETE FROM Mikrotik_Network WHERE MT_IP IN ({})'.format(ip_addresses)
-        sql.execute(query)
-        query = 'DELETE FROM Unifi_Network WHERE UF_IP IN ({})'.format(ip_addresses)
-        sql.execute(query)
-    except NameError:
-        print("        No ignore list (IP) defined")
+        print("        No ignore list defined")
 
 #-------------------------------------------------------------------------------
 def print_scan_stats ():
