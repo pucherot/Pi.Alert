@@ -342,9 +342,9 @@ $pia_lang['ICMPMonitor_Availability'] = 'Availability';
 
 $pia_lang['Maintenance_Title'] = 'Herramientas de mantenimiento';
 $pia_lang['Maintenance_database_path'] = 'Ruta de la base de datos:';
-$pia_lang['Maintenance_database_size'] = 'Tamaño de base de datos:';
-$pia_lang['Maintenance_database_lastmod'] = 'Última modificación:';
-$pia_lang['Maintenance_database_backup'] = 'Copias de seguridad de la BD:';
+$pia_lang['Maintenance_database_size'] = 'Tamaño de base de datos';
+$pia_lang['Maintenance_database_lastmod'] = 'Última actualización (DB)';
+$pia_lang['Maintenance_database_backup'] = 'Copias de seguridad de la BD';
 $pia_lang['Maintenance_config_backup'] = 'Config Backups';
 $pia_lang['Maintenance_database_backup_found'] = 'copia(s) de seguridad encontrada(s)';
 $pia_lang['Maintenance_database_backup_total'] = 'Uso total de disco';
