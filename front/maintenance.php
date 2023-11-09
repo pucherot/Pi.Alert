@@ -251,10 +251,10 @@ if ($_REQUEST['tab'] == '1') {
 
 <!-- Status Box ----------------------------------------------------------------- -->
     <div class="box" id="Maintain-Status">
-        <div class="box-header with-border">
+        <div class="box-header with-border" data-widget="collapse">
             <h3 class="box-title">Status</h3>
 	        <div class="box-tools pull-right">
-	        	<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+	        	<button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
 	    	</div>
         </div>
         <div class="box-body" style="padding-bottom: 5px;">
