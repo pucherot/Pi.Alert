@@ -2717,7 +2717,8 @@ def send_email (pText, pHTML):
         smtp_connection.starttls()
         smtp_connection.ehlo()
     if not SafeParseGlobalBool("SMTP_SKIP_LOGIN"):
-        smtp_connection.login (SMTP_USER, SMTP_PASS)
+        escaped_password = repr(SMTP_PASS)[1:-1]
+        smtp_connection.login (SMTP_USER, escaped_password)
     smtp_connection.sendmail (REPORT_FROM, REPORT_TO, msg.as_string())
     smtp_connection.quit()
 

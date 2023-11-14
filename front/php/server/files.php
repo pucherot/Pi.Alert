@@ -104,7 +104,6 @@ function SaveConfigFile() {
 	} else {
 		$configArray['MAC_IGNORE_LIST'] = "[]";
 	}
-
 	if (substr($configArray['SCAN_SUBNETS'], 0, 2) == "--") {$configArray['SCAN_SUBNETS'] = "'" . $configArray['SCAN_SUBNETS'] . "'";} else {
 		$configArray['SCAN_SUBNETS'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['SCAN_SUBNETS']);
 	}

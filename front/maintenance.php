@@ -250,16 +250,19 @@ if ($_REQUEST['tab'] == '1') {
       <div class="col-md-12">
 
 <!-- Status Box ----------------------------------------------------------------- -->
-    <div class="box" id="Maintain-Status">
-        <div class="box-header with-border">
+    <div class="box collapsed-box" id="Maintain-Status">
+        <div class="box-header with-border" data-widget="collapse">
             <h3 class="box-title">Status</h3>
+	        <div class="box-tools pull-right">
+	        	<button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+	    	</div>
         </div>
         <div class="box-body" style="padding-bottom: 5px;">
             <div class="db_info_table">
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell" style="min-width: 140px"><?=$pia_lang['Maintenance_database_path'];?></div>
                     <div class="db_info_table_cell" style="width: 70%">
-                        <?=$DB_SOURCE;?>
+                        <input readonly value="<?=$DB_SOURCE;?>" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
                     </div>
                 </div>
                 <div class="db_info_table_row">

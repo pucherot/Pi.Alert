@@ -361,7 +361,6 @@ if ($_REQUEST['mac'] == 'Internet') {
                         <label class="col-sm-6 control-label"><?=$pia_lang['DevDetail_MainInfo_Network'];?></label>
                         <div class="col-sm-6">
                           <div class="input-group">
-
                             <input class="form-control" id="txtNetworkNodeMac" type="text" value="--">
                             <div class="input-group-btn">
 
@@ -404,7 +403,6 @@ if ($_REQUEST['mac'] == 'Internet') {
                         </div>
                       </div>
                     </div>
-
 
                   </div>
 
@@ -718,12 +716,11 @@ if ($_REQUEST['mac'] == 'Internet') {
                   var speedtest_js_up = [<?php pia_graph_devices_data($Speedtest_Graph_Up);?>];
                   graph_speedtest_history(speedtest_js_time, speedtest_js_ping, speedtest_js_down, speedtest_js_up);
                 </script>
-
 <?php
 // Check if Ookla Speedtest is installed
 	if (file_exists('../back/speedtest/speedtest')) {
 		//echo '<h4 class="">' . $pia_lang['ookla_devdetails_tab_headline'] . '</h4>';
-		echo '<table id="tableSpeedtest" class="table table-bordered table-hover table-striped ">
+		echo '<table id="tableSpeedtest" class="table table-bordered table-hover table-striped">
             <thead>
               <tr>
                 <th>' . $pia_lang['ookla_devdetails_table_time'] . '</th>
@@ -742,7 +739,6 @@ if ($_REQUEST['mac'] == 'Internet') {
 		echo $pia_lang['ookla_devdetails_required'];
 	}
 	?>
-
               </div>
 <?php
 }
@@ -1137,7 +1133,6 @@ function initializeCalendar () {
     editable          : false,
     droppable         : false,
     defaultView       : 'agendaMonth',
-
     height            : 'auto',
     firstDay          : 1,
     allDaySlot        : false,
