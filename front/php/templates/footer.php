@@ -38,5 +38,21 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
     initCPUtemp();
   </script>
 
+  <script>
+    function getDevicesTotalsBadge () {
+      // get totals and put in boxes
+      $.get('php/server/devices.php?action=getDevicesTotals', function(data) {
+        var totalsDevicesbadge = JSON.parse(data);
+
+        $('#header_dev_count_on').html   (totalsDevicesbadge[1].toLocaleString());
+        if (totalsDevicesbadge[3] > 0) {$('#header_dev_count_new').html  (totalsDevicesbadge[3].toLocaleString());}
+        if (totalsDevicesbadge[4] > 0) {$('#header_dev_count_down').html (totalsDevicesbadge[4].toLocaleString());}
+      } );
+    }
+
+    getDevicesTotalsBadge();
+    setInterval(getDevicesTotalsBadge, 60000);
+  </script>
+
 </body>
 </html>
