@@ -33,10 +33,10 @@
 .box-body { padding-top: 0px; padding-bottom: 0px; }
 .main-footer { padding: 5px; color: gray; }
 /* -----------------  Customized Main Menu ---------------------------------- */
-.main-header .logo { width: 170px;}
-.main-header>.navbar { margin-left: 170px; }
-.main-sidebar, .left-side { width: 170px; }
-.content-wrapper, .right-side, .main-footer { margin-left: 170px; }
+.main-header .logo { width: 210px;}
+.main-header>.navbar { margin-left: 210px; }
+.main-sidebar, .left-side { width: 210px; }
+.content-wrapper, .right-side, .main-footer { margin-left: 210px; }
 
 @media (max-width: 767px) {
     .main-header .logo {
@@ -63,10 +63,10 @@
     -ms-transform: translate(150px, 0);
     -o-transform: translate(150px, 0);
     transform: translate(150px, 0) */
-    -webkit-transform: translate(170px, 0);
-    -ms-transform: translate(170px, 0);
-    -o-transform: translate(170px, 0);
-    transform: translate(170px, 0)
+    -webkit-transform: translate(210px, 0);
+    -ms-transform: translate(210px, 0);
+    -o-transform: translate(210px, 0);
+    transform: translate(210px, 0)
 }
 .skin-yellow-light .sidebar-menu>li>a:hover {
     background: #f0f0f0;
@@ -417,6 +417,7 @@ body.modal-open {
 #navbar-back-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
 #navbar-back-button:hover {background-color: rgba(0, 0, 0, 0.1);}
 /* ----------------- System Info -------------------------------------------- */
+.user-panel {padding-left: 0px;}
 .sysinfo_headline {color: #00c0ef;}
 .sysinfo_gerneral_a {font-weight: bold; padding-top: 2px; padding-bottom: 2px;}
 .sysinfo_gerneral_b {padding-left: 30px; padding-top: 2px; padding-bottom: 2px;}
