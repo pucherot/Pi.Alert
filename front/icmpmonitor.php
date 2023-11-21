@@ -56,11 +56,6 @@ $Pia_Graph_Device_Online = $graph_arrays[3];
 
 <div class="content-wrapper">
 
-
-
-
-
-
 <?php
 // ################### Start Bulk-Editor #######################################
 if ($_REQUEST['mod'] == 'bulkedit') {
@@ -116,7 +111,8 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 		} else {
 			// Fields were selected for modification
 			echo '<h4>' . $pia_lang['Device_bulkEditor_savebox_mod_devices'] . ':</h4>';
-			// Update Segment start
+			// Prepare Update Segment start
+			$sql_modified_hosts = array();
 			$sql = 'SELECT icmp_hostname, icmp_ip FROM ICMP_Mon ORDER BY icmp_hostname COLLATE NOCASE ASC';
 			$results = $db->query($sql);
 			while ($row = $results->fetchArray()) {
@@ -125,8 +121,8 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 					$modified_hosts = $modified_hosts . $row['icmp_hostname'] . '; ';
 					// Build sql query and update
 					$sql_queue_str = implode(', ', $sql_queue);
-					$sql_update = 'UPDATE ICMP_Mon SET ' . $sql_queue_str . ' WHERE icmp_ip="' . $row['icmp_ip'] . '"';
-					$results_update = $db->query($sql_update);
+					// Build Host list
+					array_push($sql_modified_hosts, $row['icmp_ip']);
 				}
 			}
 			// output modified hosts
@@ -140,25 +136,27 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 			if (isset($set_bulk_comments)) {echo $pia_lang['DevDetail_MainInfo_Comments'] . ': ' . $set_bulk_comments . '<br>';}
 			if (isset($set_bulk_AlertAllEvents)) {echo $pia_lang['DevDetail_EveandAl_AlertAllEvents'] . ': ' . $set_bulk_AlertAllEvents . '<br>';}
 			if (isset($set_bulk_AlertDown)) {echo $pia_lang['DevDetail_EveandAl_AlertDown'] . ': ' . $set_bulk_AlertDown . '<br>';}
-			// Update Segment stop
+			// Prepare Update Segment stop
+
+			// Update Segment
+			foreach ($sql_modified_hosts as $value) {
+				$sql_update = 'UPDATE ICMP_Mon SET ' . $sql_queue_str . ' WHERE icmp_ip="' . $value . '"';
+				$results_update = $db->query($sql_update);
+			}
 
 			// Logging
 			pialert_logging('a_021', $_SERVER['REMOTE_ADDR'], 'LogStr_0002', '', $modified_hosts);
-
 		}
 
 		echo '<a href="./icmpmonitor.php?mod=bulkedit" class="btn btn-default pull-right" role="button" style="margin-bottom: 10px;">' . $pia_lang['Gen_Close'] . '</a>';
-
 		print_box_bottom_element();
 	}
 
 	echo '<form method="post" action="./icmpmonitor.php">
           <input type="hidden" id="mod" name="mod" value="bulkedit">
           <input type="hidden" id="savedata" name="savedata" value="yes">';
-
 	print_box_top_element($pia_lang['Device_bulkEditor_hostbox_title']);
 
-	//$sql = 'SELECT dev_Name, dev_MAC, dev_PresentLastScan, dev_Archived, dev_NewDevice, dev_AlertEvents, dev_AlertDeviceDown FROM Devices ORDER BY dev_Name COLLATE NOCASE ASC';
 	$sql = 'SELECT icmp_hostname, icmp_ip, icmp_PresentLastScan, icmp_AlertEvents, icmp_AlertDown FROM ICMP_Mon ORDER BY icmp_hostname COLLATE NOCASE ASC';
 	$results = $db->query($sql);
 	while ($row = $results->fetchArray()) {
@@ -176,20 +174,16 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 	// Check/Uncheck All Button
 	echo '<button type="button" class="btn btn-warning pull-right checkall" style="display: block; margin-top: 20px; margin-bottom: 10px; min-width: 180px;">' . $pia_lang['Device_bulkEditor_selectall'] . '</button>';
 	echo '<script>
-
             var clicked = false;
             $(".checkall").on("click", function() {
               $(".hostselection").prop("checked", !clicked);
               clicked = !clicked;
               this.innerHTML = clicked ? \'' . $pia_lang['Device_bulkEditor_selectnone'] . '\' : \'' . $pia_lang['Device_bulkEditor_selectall'] . '\';
             });
-
         </script>';
-
 	print_box_bottom_element();
 
 	print_box_top_element($pia_lang['Device_bulkEditor_inputbox_title']);
-
 	// Inputs
 	echo '<table style="margin-bottom:30px; width: 100%">
           <tr>
@@ -323,13 +317,6 @@ if ($_REQUEST['mod'] == 'bulkedit') {
               $("#bulk_comments").prop("disabled", !bulk_comments);
               bulk_comments = !bulk_comments;
             });
-            var bulk_connectiontype = true;
-            $("#en_bulk_connectiontype").on("click", function() {
-              $("#bulk_connectiontype").val(\'\');
-              $("#bulk_connectiontype").prop("disabled", !bulk_connectiontype);
-              $("#bulk_connectiontype_selector").prop("disabled", !bulk_connectiontype);
-              bulk_connectiontype = !bulk_connectiontype;
-            });
             var bulk_AlertAllEvents = true;
             $("#en_bulk_AlertAllEvents").on("click", function() {
               $("#bulk_AlertAllEvents").prop("checked", false);
@@ -341,18 +328,6 @@ if ($_REQUEST['mod'] == 'bulkedit') {
               $("#bulk_AlertDown").prop("checked", false);
               $("#bulk_AlertDown").prop("disabled", !bulk_AlertDown);
               bulk_AlertDown = !bulk_AlertDown;
-            });
-            var bulk_NewDevice = true;
-            $("#en_bulk_NewDevice").on("click", function() {
-              $("#bulk_NewDevice").prop("checked", false);
-              $("#bulk_NewDevice").prop("disabled", !bulk_NewDevice);
-              bulk_NewDevice = !bulk_NewDevice;
-            });
-            var bulk_Archived = true;
-            $("#en_bulk_Archived").on("click", function() {
-              $("#bulk_Archived").prop("checked", false);
-              $("#bulk_Archived").prop("disabled", !bulk_Archived);
-              bulk_Archived = !bulk_Archived;
             });
 
             function setTextValue (textElement, textValue) {
@@ -390,12 +365,8 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 	require 'php/templates/footer.php';
 // ################### End Bulk-Editor #########################################
 } else {
-// ################### Start Device List #######################################
+// ################### Start ICMP List #######################################
 	?>
-
-
-
-
 
 <!-- Content header--------------------------------------------------------- -->
     <section class="content-header">
@@ -535,7 +506,6 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
 <?php
 }
 	?>
-
 
       <div class="row">
         <div class="col-xs-12">
@@ -744,5 +714,5 @@ function insertNewICMPHost(refreshCallback='') {
 
 <?php
 }
-// ################### End Device List #########################################
+// ################### End ICMP List #########################################
 ?>
