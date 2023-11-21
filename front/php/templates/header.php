@@ -196,11 +196,12 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
 
-        <div class="logo" style="width:50%; margin:auto;">
+        <div class="logo" style="width:58px; display: inline-block;">
            <a href="./"><img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/></a>
         </div>
-        <a href="systeminfo.php">
-          <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
+        <div style="width:142px; display: inline-block; padding-left: 8px;">
+          <a href="systeminfo.php">
+            <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
 <?php
 arpscanstatus();
 
@@ -216,8 +217,9 @@ echo '<br/>';
 list($celsius, $temperaturelimit) = getTemperature();
 format_temperature($celsius, $temperaturelimit);
 ?>
-          </div>
-        </a>
+            </div>
+          </a>
+        </div>
       </div>
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
