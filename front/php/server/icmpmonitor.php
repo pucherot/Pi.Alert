@@ -52,6 +52,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'BulkDeletion':BulkDeletion();
 		break;
+	case 'getICMPTotals':getICMPTotals();
+		break;
 	}
 }
 
@@ -268,5 +270,31 @@ function BulkDeletion() {
 	// Logging
 	pialert_logging('a_021', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $journal_hosts);
 
+}
+
+//  Query total numbers of Devices by status
+function getICMPTotals() {
+	global $db;
+
+	// combined query
+	$result = $db->query(
+		'SELECT
+        (SELECT COUNT(*) FROM ICMP_Mon ' . getICMPCondition('connected') . ') as connected,
+        (SELECT COUNT(*) FROM ICMP_Mon ' . getICMPCondition('down') . ') as down
+   ');
+	$row = $result->fetchArray(SQLITE3_NUM);
+	echo (json_encode(array($row[0], $row[1])));
+}
+
+//  Status Where conditions
+function getICMPCondition($deviceStatus) {
+	switch ($deviceStatus) {
+	case 'connected':return 'WHERE icmp_PresentLastScan=1';
+		break;
+	case 'down':return 'WHERE icmp_AlertDown=1 AND icmp_PresentLastScan=0';
+		break;
+	default:return 'WHERE 1=0';
+		break;
+	}
 }
 ?>

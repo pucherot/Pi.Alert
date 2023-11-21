@@ -227,7 +227,15 @@ format_temperature($celsius, $temperaturelimit);
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?=$pia_lang['Navigation_Section_A'];?></li>
 
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('devices.php', 'deviceDetails.php'))) {echo 'active';}?>">
-          <a href="devices.php"><i class="fa fa-laptop"></i> <span><?=$pia_lang['Navigation_Devices'];?></span></a>
+          <a href="devices.php">
+            <i class="fa fa-laptop"></i>
+            <span><?=$pia_lang['Navigation_Devices'];?></span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-yellow" id="header_dev_count_new"></small>
+              <small class="label pull-right bg-red" id="header_dev_count_down"></small>
+              <small class="label pull-right bg-green" id="header_dev_count_on"></small>
+            </span>
+          </a>
         </li>
 
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('network.php', 'networkSettings.php'))) {echo 'active';}?>">

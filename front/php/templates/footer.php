@@ -44,14 +44,29 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       $.get('php/server/devices.php?action=getDevicesTotals', function(data) {
         var totalsDevicesbadge = JSON.parse(data);
 
-        $('#header_dev_count_on').html   (totalsDevicesbadge[1].toLocaleString());
+        if (totalsDevicesbadge[1] > 0) {$('#header_dev_count_on').html   (totalsDevicesbadge[1].toLocaleString());}
         if (totalsDevicesbadge[3] > 0) {$('#header_dev_count_new').html  (totalsDevicesbadge[3].toLocaleString());}
         if (totalsDevicesbadge[4] > 0) {$('#header_dev_count_down').html (totalsDevicesbadge[4].toLocaleString());}
       } );
     }
 
-    getDevicesTotalsBadge();
-    setInterval(getDevicesTotalsBadge, 60000);
+    function getICMPTotalsBadge () {
+      // get totals and put in boxes
+      $.get('php/server/icmpmonitor.php?action=getICMPTotals', function(data) {
+        var totalsICMPbadge = JSON.parse(data);
+
+        if (totalsICMPbadge[0] > 0) {$('#header_icmp_count_on').html   (totalsICMPbadge[0].toLocaleString());}
+        if (totalsICMPbadge[1] > 0) {$('#header_icmp_count_down').html (totalsICMPbadge[1].toLocaleString());}
+      } );
+    }
+
+    function updateTotals() {
+      getDevicesTotalsBadge();
+      getICMPTotalsBadge();
+    }
+
+    updateTotals();
+    setInterval(updateTotals, 60000);
   </script>
 
 </body>

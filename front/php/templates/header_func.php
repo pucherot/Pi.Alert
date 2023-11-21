@@ -157,7 +157,14 @@ function toggle_icmpscan_menu($section) {
 		echo '<li class="';
 		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('icmpmonitor.php', 'icmpmonitorDetails.php'))) {echo 'active';}
 		echo '">
-                <a href="icmpmonitor.php"><i class="fa fa-magnifying-glass"></i> <span>' . $pia_lang['Navigation_ICMPScan'] . '</span></a>
+                <a href="icmpmonitor.php">
+                    <i class="fa fa-magnifying-glass"></i>
+                    <span>' . $pia_lang['Navigation_ICMPScan'] . '</span>
+					<span class="pull-right-container">
+						<small class="label pull-right bg-red" id="header_icmp_count_down"></small>
+						<small class="label pull-right bg-green" id="header_icmp_count_on"></small>
+					</span>
+                </a>
               </li>';
 	}
 }
