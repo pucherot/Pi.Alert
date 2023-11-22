@@ -1,11 +1,10 @@
 <?php
-// Delete WebGUI Reports
+// Delete Single WebGUI Reports
 function useRegex($input) {
 	$regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
 	return preg_match($regex, $input);
 }
-
-function count_webgui_reports() {
+function delete_single_webgui_report() {
 	global $db;
 
 	if (isset($_REQUEST['remove_report'])) {
@@ -14,15 +13,10 @@ function count_webgui_reports() {
 			if (file_exists('./reports/' . $prep_remove_report)) {
 				unlink('./reports/' . $prep_remove_report);
 			}
+			// Logging
+			pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0503', '', $prep_remove_report);
 		}
-		// Logging
-		pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0503', '', $prep_remove_report);
 	}
-
-	$files = array_diff(scandir('./reports'), array('..', '.', 'download_report.php'));
-	$report_counter = count($files);
-	if ($report_counter == 0) {unset($report_counter);}
-	return $report_counter;
 }
 // Pause Arp Scan Section
 function arpscanstatus() {

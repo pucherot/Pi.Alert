@@ -21,6 +21,9 @@ OpenDB();
 require 'php/server/journal.php';
 require 'php/templates/header.php';
 
+// Delete Reports
+delete_single_webgui_report();
+
 function get_notification_class($filename) {
 	$headtitle = explode("-", $filename);
 	$headeventtype = explode("_", $filename);

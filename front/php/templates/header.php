@@ -113,12 +113,10 @@ if ($ENABLED_DARKMODE === True) {
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" onclick="toggle_systeminfobox()">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
 <?php
 insert_back_button();
 $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
 ?>
-
       <a id="navbar-reload-button" href="" role="button" onclick="window.location.href=window.location.href" style="">
         <i class="fa fa-repeat"></i>
       </a>
@@ -142,7 +140,7 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
               <img src="img/<?=$PIALERTLOGO_LINK;?>.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <!-- <span class="hidden-xs">Pi.Alert</span> -->
-              <span class="label label-danger"><?php echo count_webgui_reports();if (count_webgui_reports() > 0) {$activemail = "text-red";} else { $activemail = "";} ?></span>
+              <span class="label label-danger" id="Menu_Report_Counter_Badge"></span>
             </a>
             <ul class="dropdown-menu" style="width: 240px;">
               <!-- The user image in the menu -->
@@ -161,7 +159,7 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
               </li>
               <li class="user-footer">
                 <div class="" style="text-align: center;">
-                  <a href="./reports.php" id="custom-menu-report-button" class="btn btn-warning"><i class="fa-regular fa-envelope-open custom-menu-button-icon <?=$activemail;?>"></i><div class="custom-menu-button-text"><?=$pia_lang['About_Reports'];?></div></a>
+                  <a href="./reports.php" id="custom-menu-report-button" class="btn btn-warning"><i class="fa-regular fa-envelope-open custom-menu-button-icon" id="Menu_Report_Envelope_Icon"></i><div class="custom-menu-button-text"><?=$pia_lang['About_Reports'];?></div></a>
                 </div>
               </li>
               <li class="user-footer">

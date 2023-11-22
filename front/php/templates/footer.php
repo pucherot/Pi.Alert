@@ -43,21 +43,39 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       // get totals and put in boxes
       $.get('php/server/devices.php?action=getDevicesTotals', function(data) {
         var totalsDevicesbadge = JSON.parse(data);
+        var unsetbadge = "";
 
-        if (totalsDevicesbadge[1] > 0) {$('#header_dev_count_on').html   (totalsDevicesbadge[1].toLocaleString());}
-        if (totalsDevicesbadge[3] > 0) {$('#header_dev_count_new').html  (totalsDevicesbadge[3].toLocaleString());}
-        if (totalsDevicesbadge[4] > 0) {$('#header_dev_count_down').html (totalsDevicesbadge[4].toLocaleString());}
+        if (totalsDevicesbadge[1] > 0) {$('#header_dev_count_on').html(totalsDevicesbadge[1].toLocaleString());} else {$('#header_dev_count_on').html(unsetbadge.toLocaleString());}
+        if (totalsDevicesbadge[3] > 0) {$('#header_dev_count_new').html(totalsDevicesbadge[3].toLocaleString());} else {$('#header_dev_count_new').html(unsetbadge.toLocaleString());}
+        if (totalsDevicesbadge[4] > 0) {$('#header_dev_count_down').html(totalsDevicesbadge[4].toLocaleString());} else {$('#header_dev_count_down').html(unsetbadge.toLocaleString());}
       } );
     }
 
     function getICMPTotalsBadge () {
       // get totals and put in boxes
-      $.get('php/server/icmpmonitor.php?action=getICMPTotals', function(data) {
+      $.get('php/server/icmpmonitor.php?action=getICMPHostTotals', function(data) {
         var totalsICMPbadge = JSON.parse(data);
+        var unsetbadge = "";
 
-        if (totalsICMPbadge[0] > 0) {$('#header_icmp_count_on').html   (totalsICMPbadge[0].toLocaleString());}
-        if (totalsICMPbadge[1] > 0) {$('#header_icmp_count_down').html (totalsICMPbadge[1].toLocaleString());}
+        if (totalsICMPbadge[2] > 0) {$('#header_icmp_count_on').html(totalsICMPbadge[2].toLocaleString());} else {$('#header_icmp_count_on').html(unsetbadge.toLocaleString());}
+        if (totalsICMPbadge[1] > 0) {$('#header_icmp_count_down').html(totalsICMPbadge[1].toLocaleString());} else {$('#header_icmp_count_down').html(unsetbadge.toLocaleString());}
       } );
+    }
+
+    function getReportTotals () {
+      // get totals and put in boxes
+      $.get('php/server/files.php?action=getReportTotals', function(data) {
+        var totalsReportbadge = JSON.parse(data);
+        var unsetbadge = "";
+
+        if (totalsReportbadge[0] > 0) {
+          $('#Menu_Report_Counter_Badge').html(totalsReportbadge[0].toLocaleString());
+          $('#Menu_Report_Envelope_Icon' ).addClass("text-red");
+        } else {
+          $('#Menu_Report_Counter_Badge').html(unsetbadge.toLocaleString());
+          $('#Menu_Report_Envelope_Icon' ).removeClass("text-red");
+        }
+      });
     }
 
     function updateTotals() {
@@ -65,8 +83,10 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       getICMPTotalsBadge();
     }
 
+    getReportTotals();
     updateTotals();
     setInterval(updateTotals, 60000);
+    setInterval(getReportTotals, 10000);
   </script>
 
 </body>
