@@ -68,6 +68,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'SaveConfigFile':SaveConfigFile();
 		break;
+	case 'getReportTotals':getReportTotals();
+		break;
 	default:logServerConsole('Action: ' . $action);
 		break;
 	}
@@ -678,5 +680,14 @@ function deleteAllNotifications() {
 	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0504', '', '');
 }
 
-//  End
+// Get Report Counter
+function getReportTotals() {
+	$files = array_diff(scandir('../../reports'), array('..', '.', 'download_report.php'));
+	$report_counter = count($files);
+	if ($report_counter == 0) {unset($report_counter);}
+
+	$totals = array($report_counter);
+	echo (json_encode($totals));
+
+}
 ?>
