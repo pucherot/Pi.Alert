@@ -34,9 +34,6 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
   <script src="lib/AdminLTE/dist/js/adminlte.min.js"></script>
 <!-- Custom JS -->
   <script src="js/pialert_common.js"></script>
-  <script>
-    initCPUtemp();
-  </script>
 
   <script>
     function getDevicesTotalsBadge () {
@@ -62,7 +59,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       } );
     }
 
-    function getReportTotals () {
+    function getReportTotalsBadge () {
       // get totals and put in boxes
       $.get('php/server/files.php?action=getReportTotals', function(data) {
         var totalsReportbadge = JSON.parse(data);
@@ -78,15 +75,67 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       });
     }
 
+    function initializeiCheck () {
+       // Blue
+       $('input[type="checkbox"].blue').iCheck({
+         checkboxClass: 'icheckbox_flat-blue',
+         radioClass:    'iradio_flat-blue',
+         increaseArea:  '20%'
+       });
+    }
+
     function updateTotals() {
       getDevicesTotalsBadge();
       getICMPTotalsBadge();
     }
 
-    getReportTotals();
+    // Init functions
+    initCPUtemp();
+    getReportTotalsBadge();
     updateTotals();
+
+    // Start function timers
     setInterval(updateTotals, 60000);
-    setInterval(getReportTotals, 10000);
+    setInterval(getReportTotalsBadge, 15000);
+  </script>
+
+  <script>
+    var timeoutId; // Declare the timeoutId variable globally
+
+    // Function to reload the page every 60 seconds
+    function reloadPage() {
+      timeoutId = setTimeout(function () {
+        location.reload();
+      }, 120000); // 120 seconds
+    }
+
+    // Function to handle checkbox state changes
+    function handleCheckboxChange() {
+      var autoReloadCheckbox = document.getElementById('autoReloadCheckbox');
+
+      if (autoReloadCheckbox.checked) {
+        // Start auto-reload if checked
+        reloadPage();
+        // Save checkbox state to localStorage
+        localStorage.setItem('autoReloadChecked', 'true');
+      } else {
+        // Stop auto-reload if unchecked
+        clearTimeout(timeoutId);
+        // Remove checkbox state from localStorage
+        localStorage.removeItem('autoReloadChecked');
+      }
+    }
+
+    // Attach the event listener to the checkbox
+    document.getElementById('autoReloadCheckbox').addEventListener('change', handleCheckboxChange);
+
+    // Check localStorage for the saved state
+    var savedState = localStorage.getItem('autoReloadChecked');
+    if (savedState === 'true') {
+      document.getElementById('autoReloadCheckbox').checked = true;
+      // Start auto-reload
+      reloadPage();
+    }
   </script>
 
 </body>

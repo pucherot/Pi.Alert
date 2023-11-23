@@ -12,9 +12,9 @@ function delete_single_webgui_report() {
 		if (useRegex($prep_remove_report) == TRUE) {
 			if (file_exists('./reports/' . $prep_remove_report)) {
 				unlink('./reports/' . $prep_remove_report);
+				// Logging
+				pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0503', '', $prep_remove_report);
 			}
-			// Logging
-			pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0503', '', $prep_remove_report);
 		}
 	}
 }

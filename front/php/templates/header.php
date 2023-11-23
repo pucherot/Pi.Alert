@@ -152,6 +152,14 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
               </li>
 
               <!-- Menu Body -->
+              <li class="user-footer" style="padding-top: 15px; padding-bottom: 0px;">
+                <div class="" style="text-align: center;">
+                  <label>
+                    <input type="checkbox" id="autoReloadCheckbox" style="margin-right: 10px;"> Auto Page Reload (2min)
+                  </label>
+                </div>
+              </li>
+
               <li class="user-footer">
                 <div class="" style="text-align: center;">
                   <a href="./deviceDetails.php?mac=Internet" id="custom-menu-default-button" class="btn btn-default"><i class="fa-solid fa-globe custom-menu-button-icon"></i><div class="custom-menu-button-text">Internet</div></a>
