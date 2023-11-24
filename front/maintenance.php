@@ -250,12 +250,9 @@ if ($_REQUEST['tab'] == '1') {
       <div class="col-md-12">
 
 <!-- Status Box ----------------------------------------------------------------- -->
-    <div class="box collapsed-box" id="Maintain-Status">
-        <div class="box-header with-border" data-widget="collapse">
+    <div class="box" id="Maintain-Status">
+        <div class="box-header with-border">
             <h3 class="box-title">Status</h3>
-	        <div class="box-tools pull-right">
-	        	<button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
-	    	</div>
         </div>
         <div class="box-body" style="padding-bottom: 5px;">
             <div class="db_info_table">
@@ -292,8 +289,8 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?=$pia_lang['Maintenance_arp_status'];?></div>
                     <div class="db_info_table_cell">
-                        <?=$_SESSION['arpscan_result'];
-read_arpscan_timer();?></div>
+                        <?php echo $_SESSION['arpscan_result'];
+read_arpscan_timer(); ?> <div id="nextscancountdown" style="display: inline-block;"></div></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell">Api-Key</div>
@@ -1130,6 +1127,46 @@ function initializeiCheck () {
    });
 
 }
-</script>
 
+function startCountdown() {
+    var currentTime = new Date();
+    var minutes = currentTime.getMinutes();
+    var seconds = currentTime.getSeconds();
+
+    // Calculate the time until the next 5-minute interval
+    var countdownMinutes = ((5 - (minutes % 5)) % 5) - 1;
+    var countdownSeconds = 60 - seconds;
+
+    // Display initial countdown
+    displayCountdown(countdownMinutes, countdownSeconds);
+
+    // Update countdown every second
+    setInterval(function() {
+        countdownSeconds--;
+        if (countdownSeconds < 0) {
+            countdownSeconds = 59;
+            countdownMinutes--;
+
+            if (countdownMinutes < 0) {
+                // Reset countdown for the next 5-minute interval
+                countdownMinutes = 4;
+                countdownSeconds = 59;
+            }
+        }
+
+        displayCountdown(countdownMinutes, countdownSeconds);
+    }, 1000);
+}
+
+function displayCountdown(minutes, seconds) {
+    var countdownElement = document.getElementById('nextscancountdown');
+    countdownElement.textContent = '(next Scan in: ' + formatTime(minutes) + ':' + formatTime(seconds) + ')';
+}
+
+function formatTime(time) {
+    return time < 10 ? '0' + time : time;
+}
+
+startCountdown();
+</script>
 
