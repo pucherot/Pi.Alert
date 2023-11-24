@@ -9,12 +9,13 @@
 * [Installation](#installation)
 * [Update](#update)
 * Additional information
-  * [Uninstall Pi.Alert](docs/UNINSTALL.md)
+  * [Some tips on using Pi.Alert](docs/TIPS_USING.md)
+  * [Screenshots](docs/SCREENSHOTS.md)
   * [Device Management](docs/DEVICE_MANAGEMENT.md)
   * [Bulk Editor](docs/BULKEDITOR.md)
   * [Network Relationship](docs/NETWORK_RELATIONSHIP.md)
   * [Web service monitoring](docs/WEBSERVICES.md)
-  * [Screenshots](docs/SCREENSHOTS.md)
+  * [Uninstall Pi.Alert](docs/UNINSTALL.md)
 * [Closing words](#closing-words)
 
 
