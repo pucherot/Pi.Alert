@@ -200,14 +200,14 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
+      <div class="user-panel" id="sidebar_systeminfobox">
 
         <div class="logo" style="width:58px; display: inline-block;">
            <a href="./"><img src="img/pialertLogoGray80.png" class="img-responsive" alt="Pi.Alert Logo"/></a>
         </div>
         <div style="width:142px; display: inline-block; padding-left: 8px;">
           <a href="systeminfo.php">
-            <div class="systemstatusbox" id="sidebar_systeminfobox" style="font-size: smaller; margin-top:10px;">
+            <div class="systemstatusbox" style="font-size: smaller; margin-top:10px;">
 <?php
 arpscanstatus();
 
