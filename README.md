@@ -9,7 +9,6 @@
 * [Installation](#installation)
 * [Update](#update)
 * Additional information
-  * [Some tips on using Pi.Alert](docs/TIPS_USING.md)
   * [Screenshots](docs/SCREENSHOTS.md)
   * [Device Management](docs/DEVICE_MANAGEMENT.md)
   * [Bulk Editor](docs/BULKEDITOR.md)
