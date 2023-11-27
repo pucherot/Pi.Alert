@@ -59,6 +59,18 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       } );
     }
 
+    function getServicesTotalsBadge () {
+      // get totals and put in boxes
+      $.get('php/server/services.php?action=getServiceMonTotals', function(data) {
+        var totalsServicesbadge = JSON.parse(data);
+        var unsetbadge = "";
+
+        if (totalsServicesbadge[2] > 0) {$('#header_services_count_on').html(totalsServicesbadge[2].toLocaleString());} else {$('#header_services_count_on').html(unsetbadge.toLocaleString());}
+        if (totalsServicesbadge[1] > 0) {$('#header_services_count_down').html(totalsServicesbadge[1].toLocaleString());} else {$('#header_services_count_down').html(unsetbadge.toLocaleString());}
+        if (totalsServicesbadge[3] > 0) {$('#header_services_count_warning').html(totalsServicesbadge[3].toLocaleString());} else {$('#header_services_count_warning').html(unsetbadge.toLocaleString());}
+      } );
+    }
+
     function getReportTotalsBadge () {
       // get totals and put in boxes
       $.get('php/server/files.php?action=getReportTotals', function(data) {
@@ -87,6 +99,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
     function updateTotals() {
       getDevicesTotalsBadge();
       getICMPTotalsBadge();
+      getServicesTotalsBadge();
     }
 
     // Init functions

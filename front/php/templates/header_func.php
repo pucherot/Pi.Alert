@@ -132,17 +132,25 @@ function toggle_webservices_menu($section) {
 		echo '<li class="';
 		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('services.php', 'serviceDetails.php'))) {echo 'active';}
 		echo '">
-                <a href="services.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Services'] . '</span></a>
+                <a href="services.php">
+                	<i class="fa fa-globe"></i>
+                	<span>' . $pia_lang['Navigation_Services'] . '</span>
+		          	<span class="pull-right-container">
+		              <small class="label pull-right bg-yellow" id="header_services_count_warning"></small>
+		              <small class="label pull-right bg-red" id="header_services_count_down"></small>
+		              <small class="label pull-right bg-green" id="header_services_count_on"></small>
+		            </span>
+                </a>
               </li>';
 	}
 
-	if (($_SESSION['Scan_WebServices'] == True) && ($section == "Event")) {
-		echo '<li class="';
-		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php'))) {echo 'active';}
-		echo '">
-	          <a href="servicesEvents.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Events_Serv'] . '</span></a>
-	        </li>';
-	}
+	// if (($_SESSION['Scan_WebServices'] == True) && ($section == "Event")) {
+	// 	echo '<li class="';
+	// 	if (in_array(basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php'))) {echo 'active';}
+	// 	echo '">
+	//           <a href="servicesEvents.php"><i class="fa fa-globe"></i><span>' . $pia_lang['Navigation_Events_Serv'] . '</span></a>
+	//         </li>';
+	// }
 }
 // ICPMScan Menu Items
 function toggle_icmpscan_menu($section) {
