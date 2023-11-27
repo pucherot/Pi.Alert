@@ -667,14 +667,24 @@ if (!$block_restore_button_db) {
                     </div>
                     <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_purgebackup_text'];?></div>
                 </div>
+                <div class="db_info_table_row">
+                    <div class="db_tools_table_cell_a" style="">
+                        <button type="button" class="btn btn-default dbtools-button" id="btnBackupDBtoCSV" onclick="askBackupDBtoCSV()"><?=$pia_lang['Maintenance_Tool_backupcsv'];?></button>
+                    </div>
+                    <div class="db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_backupcsv_text'];?></div>
+                </div>
             </div>
  <?php
 echo '<div class="row">';
 if (!$block_restore_button_db) {
-	echo '<div class="col-sm-6" style="text-align: center;">
+	echo '<div class="col-sx-6 col-md-4" style="text-align: center;">
 			<a class="btn btn-default" href="./download/database.php" role="button" style="margin-top: 20px; margin-bottom: 20px;">' . $pia_lang['Maintenance_Tool_latestdb_download'] . '</a>
 			</div>';}
-echo '<div class="col-sm-6" style="text-align: center;">
+if (file_exists('../db/pialertcsv.zip')) {
+	echo '<div class="col-sx-6 col-md-4" style="text-align: center;">
+			<a class="btn btn-default" href="./download/databasecsv.php" role="button" style="margin-top: 20px; margin-bottom: 20px;">' . $pia_lang['Maintenance_Tool_CSVExport_download'] . '</a>
+			</div>';}
+echo '<div class="col-sx-6 col-md-4" style="text-align: center;">
 			<a class="btn btn-default" href="./download/config.php" role="button" style="margin-top: 20px; margin-bottom: 20px;">' . $pia_lang['Maintenance_Tool_latestconf_download'] . '</a>
 			</div>';
 echo '</div>';
@@ -891,6 +901,18 @@ function askPurgeDBBackups() {
 function PurgeDBBackups()
 {
   $.get('php/server/files.php?action=PurgeDBBackups', function(msg) {
+    showMessage (msg);
+  });
+}
+
+// Backup DB to CSV
+function askBackupDBtoCSV() {
+  showModalWarning('<?=$pia_lang['Maintenance_Tool_backupcsv_noti'];?>', '<?=$pia_lang['Maintenance_Tool_backupcsv_noti_text'];?>',
+    '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Backup'];?>', 'BackupDBtoCSV');
+}
+function BackupDBtoCSV()
+{
+  $.get('php/server/files.php?action=BackupDBtoCSV', function(msg) {
     showMessage (msg);
   });
 }
@@ -1134,7 +1156,7 @@ function startCountdown() {
     var seconds = currentTime.getSeconds();
 
     // Calculate the time until the next 5-minute interval
-    var countdownMinutes = ((5 - (minutes % 5)) % 5) - 1;
+    var countdownMinutes = (4 - (minutes % 5)) % 5;
     var countdownSeconds = 60 - seconds;
 
     // Display initial countdown
@@ -1153,7 +1175,6 @@ function startCountdown() {
                 countdownSeconds = 59;
             }
         }
-
         displayCountdown(countdownMinutes, countdownSeconds);
     }, 1000);
 }

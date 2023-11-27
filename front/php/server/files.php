@@ -66,6 +66,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'BackupDBtoArchive':BackupDBtoArchive();
 		break;
+	case 'BackupDBtoCSV':BackupDBtoCSV();
+		break;
 	case 'SaveConfigFile':SaveConfigFile();
 		break;
 	case 'getReportTotals':getReportTotals();
@@ -269,7 +271,6 @@ DAYS_TO_KEEP_EVENTS        = " . $configArray['DAYS_TO_KEEP_EVENTS'] . "
 
 //  Backup DB to Archiv
 function BackupDBtoArchive() {
-	// prepare fast Backup
 
 	$db_file_path = '../../../db';
 	$db_file_name_org = 'pialert.db';
@@ -328,6 +329,55 @@ function BackupDBtoArchive() {
 	}
 	// Logging
 	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0011', '', '');
+}
+
+//  Backup DB to CSV
+function BackupDBtoCSV() {
+	global $pia_lang;
+
+	$Pia_Archive_Name = 'pialertcsv.zip';
+	$Pia_Archive_Path = '../../../db/';
+
+	$db_file_path = '../../../db';
+	$db_file_name_org = 'pialert.db';
+	$db_file_path_temp = '../../../db/temp';
+
+	$db_file_org_full = $db_file_path . '/' . $db_file_name_org; # ../../../db/pialert.db
+	$csv_file_devices = $db_file_path_temp . '/devices.csv'; # ../../../db/temp/devices.csv
+	$csv_file_services = $db_file_path_temp . '/services.csv'; # ../../../db/temp/services.csv
+	$csv_file_icmphosts = $db_file_path_temp . '/icmphosts.csv'; # ../../../db/temp/icmphosts.csv
+
+	// delete old archive
+	unlink($Pia_Archive_Path . $Pia_Archive_Name);
+
+	exec('sqlite3 -header -csv "' . $db_file_org_full . '" "select * from devices;" > ' . $csv_file_devices, $output);
+	exec('sqlite3 -header -csv "' . $db_file_org_full . '" "select * from services;" > ' . $csv_file_services, $output);
+	exec('sqlite3 -header -csv "' . $db_file_org_full . '" "select * from ICMP_Mon;" > ' . $csv_file_icmphosts, $output);
+
+	if (!file_exists($csv_file_devices) || !file_exists($csv_file_services) || !file_exists($csv_file_icmphosts)) {
+		echo $pia_lang['BackDevices_BackupCSV_FailedExport'];
+		// delete csv files
+		unlink($csv_file_devices);
+		unlink($csv_file_services);
+		unlink($csv_file_icmphosts);
+		exit;
+	}
+
+	// create new archive
+	exec('zip -j ' . $Pia_Archive_Path . $Pia_Archive_Name . ' ' . $db_file_path_temp . '/*.csv', $output);
+	// delete csv files
+	unlink($csv_file_devices);
+	unlink($csv_file_services);
+	unlink($csv_file_icmphosts);
+
+	if (!file_exists($Pia_Archive_Path . $Pia_Archive_Name)) {
+		echo $pia_lang['BackDevices_BackupCSV_FailedZip'];
+		exit;
+	}
+
+	echo $pia_lang['BackDevices_BackupCSV_okay'];
+	// Logging
+	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0036', '', '');
 }
 
 //  Restore DB from Archiv
@@ -414,7 +464,7 @@ function PurgeDBBackups() {
 	// Clean DB Backups
 	$Pia_Archive_Path = '../../../db';
 	$Pia_Backupfiles = array();
-	$files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip', 'temp', 'GeoLite2-Country.mmdb', 'pialert.db-shm', 'pialert.db-wal'));
+	$files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip', 'temp', 'GeoLite2-Country.mmdb', 'pialert.db-shm', 'pialert.db-wal', 'pialertcsv.zip'));
 	foreach ($files as &$item) {
 		$item = $Pia_Archive_Path . '/' . $item;
 		if (stristr($item, 'setting_') == '') {array_push($Pia_Backupfiles, $item);}
