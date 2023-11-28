@@ -1,5 +1,4 @@
 <?php
-
 $ARCHIVE_PATH = str_replace('download', '', str_replace('front', 'config', getcwd()));
 $DOWN_CONF_FILE = $ARCHIVE_PATH . "pialert.conf";
 
@@ -12,5 +11,4 @@ header('Pragma: public');
 header('Content-Length: ' . filesize($DOWN_CONF_FILE));
 readfile($DOWN_CONF_FILE);
 exit;
-
 ?>

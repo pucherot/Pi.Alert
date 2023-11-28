@@ -50,6 +50,8 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'getEventsTotalsforICMP':getEventsTotalsforICMP();
 		break;
+	case 'BulkDeletion':BulkDeletion();
+		break;
 	}
 }
 
@@ -235,4 +237,37 @@ function getEventsTotalsforICMP() {
 	// Return json
 	echo (json_encode(array($eventsAll, $eventsonline, $eventsoffline)));
 }
+
+//  Bulk Deletion
+function BulkDeletion() {
+	global $db;
+	global $pia_lang;
+
+	$hosts = str_replace("_", ".", '"' . implode('","', $_REQUEST['hosts']) . '"');
+	$journal_hosts = str_replace("_", ".", implode(',', $_REQUEST['hosts']));
+	echo $pia_lang['Device_bulkDel_back_hosts'] . ': ' . str_replace(",", ", ", $hosts) . '<br><br>';
+
+	$sql = "SELECT COUNT(*) AS row_count FROM ICMP_Mon";
+	$result = $db->query($sql);
+
+	$row = $result->fetchArray();
+	$rowCount_before = $row['row_count'];
+
+	$sql = "DELETE FROM ICMP_Mon WHERE icmp_ip IN ($hosts)";
+	$result = $db->query($sql);
+
+	$sql = "SELECT COUNT(*) AS row_count FROM ICMP_Mon";
+	$result = $db->query($sql);
+
+	$row = $result->fetchArray();
+	$rowCount_after = $row['row_count'];
+
+	echo $pia_lang['Device_bulkDel_back_before'] . ': ' . $rowCount_before . '<br>' . $pia_lang['Device_bulkDel_back_after'] . ': ' . $rowCount_after;
+	echo ("<meta http-equiv='refresh' content='2; URL=./icmpmonitor.php?mod=bulkedit'>");
+
+	// Logging
+	pialert_logging('a_021', $_SERVER['REMOTE_ADDR'], 'LogStr_0003', '', $journal_hosts);
+
+}
+
 ?>

@@ -170,7 +170,11 @@ if ($pialert_cur_version != $pialert_new_version) {
 			echo '<div style="display: list-item; margin-left : 2em;">' . str_replace('* ', '', $row) . '</div>';
 		}
 	}
-	echo '<br><br></div>
+	echo '<br><br>
+			<lable for="bashupdatecommand" class="text-red"><i>Update command:</i></lable>
+			<input id="bashupdatecommand" readonly value="bash -c &quot;$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)&quot;" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
+		  <br><br>
+		</div>
     <div class="box-footer">
         <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
     </div>

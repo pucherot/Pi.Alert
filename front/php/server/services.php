@@ -57,7 +57,25 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'EnableWebServiceMon':EnableWebServiceMon();
 		break;
+	case 'getServiceMonTotals':getServiceMonTotals();
+		break;
 	}
+}
+
+function getServiceMonTotals() {
+	global $db;
+
+	$query = "SELECT COUNT(*) AS rowCount FROM Services WHERE mon_LastStatus=0 AND mon_LastLatency=99999999 AND mon_AlertDown=1";
+	$alertDown_Count = $db->querySingle($query);
+	$query = "SELECT COUNT(*) AS rowCount FROM Services WHERE mon_LastStatus=200";
+	$online_Count = $db->querySingle($query);
+	$query = "SELECT COUNT(*) AS rowCount FROM Services WHERE mon_LastStatus!=200 AND mon_LastStatus!=0";
+	$warning_Count = $db->querySingle($query);
+	$query = "SELECT COUNT(*) AS rowCount FROM Services";
+	$all_Count = $db->querySingle($query);
+
+	$totals = array($all_Count, $alertDown_Count, $online_Count, $warning_Count);
+	echo (json_encode($totals));
 }
 
 function updateGeoDB() {

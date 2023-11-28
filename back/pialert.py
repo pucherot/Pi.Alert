@@ -359,8 +359,8 @@ def cleanup_database ():
     sql.execute ("DELETE FROM Events WHERE eve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
     print ('    Services_Events, up to the lastest '+strdaystokeepOH+' days...')
     sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
-    print ('    ICMP_Mon_Events, up to the lastest '+strdaystokeepEV+' days...')
-    sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
+    print ('    ICMP_Mon_Events, up to the lastest '+strdaystokeepOH+' days...')
+    sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
     print ('    Trim Journal to the lastest 1000 entries')
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
     print ('    Speedtest_History, up to the lastest '+strdaystokeepOH+' days...')
@@ -2009,7 +2009,10 @@ def icmp_monitoring():
     flush_icmphost_current_scan()
     print("    Ping Hosts...")
 
+    closeDB()
     scantime = startTime.strftime("%Y-%m-%d %H:%M")
+
+    icmp_scan_results = {}
 
     icmphosts_all = len(icmphosts)
     icmphosts_online = 0
@@ -2020,8 +2023,11 @@ def icmp_monitoring():
     except NameError: # variable not defined, use a default
         ping_retries = 1 # 1
 
-    while icmphosts:
-        for host_ip in icmphosts:
+    icmphosts_index = 0
+
+    if icmphosts_all > 0 :
+        while icmphosts_index < icmphosts_all:
+            host_ip = icmphosts[icmphosts_index]
             for i in range(ping_retries):
                 # print("Host %s retry %s" % (host_ip, str(i+1)))
                 icmp_status = ping(host_ip)
@@ -2036,21 +2042,41 @@ def icmp_monitoring():
                 icmp_rtt = "99999"
                 icmphosts_offline+=1
 
-            set_icmphost_events(host_ip, scantime, icmp_status, icmp_rtt)
-            set_icmphost_current_scan(host_ip, scantime, icmp_status, icmp_rtt)
+            current_data = {
+                "host_ip": host_ip,
+                "scantime": scantime,
+                "icmp_status": icmp_status,
+                "icmp_rtt": icmp_rtt
+            }
+
+            icmp_scan_results[host_ip] = current_data
             sys.stdout.flush()
-            set_icmphost_update(host_ip, scantime, icmp_status, icmp_rtt)
+
+            icmphosts_index += 1
 
         print("        Online Host(s)  : " + str(icmphosts_online))
         print("        Offline Host(s) : " + str(icmphosts_offline))
 
+        openDB()
+        # Save Scan Results
+        icmp_save_scandata(icmp_scan_results)
+
         print("    Calculate Activity History...")
         calc_activity_history_icmp(icmphosts_online, icmphosts_offline)
 
-        break
-
     else:
+        openDB()
         print("    No Hosts(s) to monitor!")
+
+# -----------------------------------------------------------------------------
+def icmp_save_scandata(data):
+    print("    Save scan results...")
+    for host_ip, scan_data in data.items():
+        #print(f"Host IP: {host_ip}")
+        #print(f"ICMP Status: {scan_data['icmp_status']}")
+        set_icmphost_events(host_ip, scan_data['scantime'], scan_data['icmp_status'], scan_data['icmp_rtt'])
+        set_icmphost_current_scan(host_ip, scan_data['scantime'], scan_data['icmp_status'], scan_data['icmp_rtt'])
+        set_icmphost_update(host_ip, scan_data['scantime'], scan_data['icmp_status'], scan_data['icmp_rtt'])
 
 # -----------------------------------------------------------------------------
 def get_icmphost_list():

@@ -66,7 +66,13 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'BackupDBtoArchive':BackupDBtoArchive();
 		break;
+	case 'BackupDBtoCSV':BackupDBtoCSV();
+		break;
 	case 'SaveConfigFile':SaveConfigFile();
+		break;
+	case 'getReportTotals':getReportTotals();
+		break;
+	case 'setFavIconURL':setFavIconURL();
 		break;
 	default:logServerConsole('Action: ' . $action);
 		break;
@@ -262,12 +268,11 @@ DAYS_TO_KEEP_EVENTS        = " . $configArray['DAYS_TO_KEEP_EVENTS'] . "
 
 	// Logging
 	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_9999', '1', '');
-	echo ("<meta http-equiv='refresh' content='2; URL=./index.php'>");
+	echo "<meta http-equiv='refresh' content='2; URL=./index.php'>";
 }
 
 //  Backup DB to Archiv
 function BackupDBtoArchive() {
-	// prepare fast Backup
 
 	$db_file_path = '../../../db';
 	$db_file_name_org = 'pialert.db';
@@ -328,6 +333,55 @@ function BackupDBtoArchive() {
 	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0011', '', '');
 }
 
+//  Backup DB to CSV
+function BackupDBtoCSV() {
+	global $pia_lang;
+
+	$Pia_Archive_Name = 'pialertcsv.zip';
+	$Pia_Archive_Path = '../../../db/';
+
+	$db_file_path = '../../../db';
+	$db_file_name_org = 'pialert.db';
+	$db_file_path_temp = '../../../db/temp';
+
+	$db_file_org_full = $db_file_path . '/' . $db_file_name_org; # ../../../db/pialert.db
+	$csv_file_devices = $db_file_path_temp . '/devices.csv'; # ../../../db/temp/devices.csv
+	$csv_file_services = $db_file_path_temp . '/services.csv'; # ../../../db/temp/services.csv
+	$csv_file_icmphosts = $db_file_path_temp . '/icmphosts.csv'; # ../../../db/temp/icmphosts.csv
+
+	// delete old archive
+	unlink($Pia_Archive_Path . $Pia_Archive_Name);
+
+	exec('sqlite3 -header -csv "' . $db_file_org_full . '" "select * from devices;" > ' . $csv_file_devices, $output);
+	exec('sqlite3 -header -csv "' . $db_file_org_full . '" "select * from services;" > ' . $csv_file_services, $output);
+	exec('sqlite3 -header -csv "' . $db_file_org_full . '" "select * from ICMP_Mon;" > ' . $csv_file_icmphosts, $output);
+
+	if (!file_exists($csv_file_devices) || !file_exists($csv_file_services) || !file_exists($csv_file_icmphosts)) {
+		echo $pia_lang['BackDevices_BackupCSV_FailedExport'];
+		// delete csv files
+		unlink($csv_file_devices);
+		unlink($csv_file_services);
+		unlink($csv_file_icmphosts);
+		exit;
+	}
+
+	// create new archive
+	exec('zip -j ' . $Pia_Archive_Path . $Pia_Archive_Name . ' ' . $db_file_path_temp . '/*.csv', $output);
+	// delete csv files
+	unlink($csv_file_devices);
+	unlink($csv_file_services);
+	unlink($csv_file_icmphosts);
+
+	if (!file_exists($Pia_Archive_Path . $Pia_Archive_Name)) {
+		echo $pia_lang['BackDevices_BackupCSV_FailedZip'];
+		exit;
+	}
+
+	echo $pia_lang['BackDevices_BackupCSV_okay'];
+	// Logging
+	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0036', '', '');
+}
+
 //  Restore DB from Archiv
 function RestoreDBfromArchive() {
 	// prepare fast Backup
@@ -346,7 +400,7 @@ function RestoreDBfromArchive() {
 	if (file_exists($file)) {
 		echo $pia_lang['BackDevices_Restore_okay'];
 		// unlink($oldfile);
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
+		echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>";
 	} else {
 		echo $pia_lang['BackDevices_Restore_Failed'];
 	}
@@ -362,7 +416,7 @@ function LoginEnable() {
 	// Logging
 	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0050', '', '');
 	echo $pia_lang['BackDevices_Login_enabled'];
-	echo ("<meta http-equiv='refresh' content='1; ./index.php?action=logout'>");
+	echo "<meta http-equiv='refresh' content='1; ./index.php?action=logout'>";
 }
 
 //  Disable Login
@@ -376,7 +430,7 @@ function LoginDisable() {
 	setcookie("PiAlert_SaveLogin", "", time() - 3600);
 	exec('../../../back/pialert-cli unset_login', $output);
 	echo $pia_lang['BackDevices_Login_disabled'];
-	echo ("<meta http-equiv='refresh' content='1; ./index.php?action=logout'>");
+	echo "<meta http-equiv='refresh' content='1; ./index.php?action=logout'>";
 }
 
 //  Set Device List Columns
@@ -400,7 +454,7 @@ function setDeviceListCol() {
 	$DevListCol_new = fopen($DevListCol_file, 'w');
 	fwrite($DevListCol_new, json_encode($config_array));
 	fclose($DevListCol_new);
-	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+	echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php'>";
 	// Logging
 	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0052', '', '');
 }
@@ -412,7 +466,7 @@ function PurgeDBBackups() {
 	// Clean DB Backups
 	$Pia_Archive_Path = '../../../db';
 	$Pia_Backupfiles = array();
-	$files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip', 'temp', 'GeoLite2-Country.mmdb', 'pialert.db-shm', 'pialert.db-wal'));
+	$files = array_diff(scandir($Pia_Archive_Path, SCANDIR_SORT_DESCENDING), array('.', '..', 'pialert.db', 'pialertdb-reset.zip', 'temp', 'GeoLite2-Country.mmdb', 'pialert.db-shm', 'pialert.db-wal', 'pialertcsv.zip'));
 	foreach ($files as &$item) {
 		$item = $Pia_Archive_Path . '/' . $item;
 		if (stristr($item, 'setting_') == '') {array_push($Pia_Backupfiles, $item);}
@@ -446,7 +500,7 @@ function PurgeDBBackups() {
 	pialert_logging('a_010', $_SERVER['REMOTE_ADDR'], 'LogStr_0013', '', '');
 
 	echo $pia_lang['BackDevices_DBTools_Purge'];
-	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
+	echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>";
 }
 
 //  Toggle Dark/Light Themes
@@ -460,13 +514,13 @@ function EnableDarkmode() {
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0055', '', '');
 
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+		echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 	} else {
 		echo $pia_lang['BackDevices_darkmode_enabled'];
 		$darkmode = fopen($file, 'w');
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0056', '', '');
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+		echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 	}
 }
 
@@ -480,14 +534,14 @@ function EnableOnlineHistoryGraph() {
 		unlink($file);
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0058', '', '');
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+		echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 	} else {
 		echo $pia_lang['BackDevices_onlinehistorygraph_disabled'];
 		$history = fopen($file, 'w');
 		fclose($history);
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0057', '', '');
-		echo ("<meta http-equiv='refresh'content='2; URL=./maintenance.php?tab=1'>");
+		echo "<meta http-equiv='refresh'content='2; URL=./maintenance.php?tab=4'>";
 	}
 }
 
@@ -500,7 +554,7 @@ function SetAPIKey() {
 	// Logging
 	pialert_logging('a_070', $_SERVER['REMOTE_ADDR'], 'LogStr_0700', '', '');
 	echo $pia_lang['BackDevices_setapikey'];
-	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+	echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>";
 }
 
 //  Set Theme
@@ -539,10 +593,10 @@ function setTheme() {
 			if ($pia_skin_error == False) {
 				$testskin = fopen($pia_skin_set_dir . 'setting_' . $pia_skin_selector, 'w');
 				echo $pia_lang['BackDevices_Theme_set'] . ': ' . $_REQUEST['SkinSelection'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 			} else {
 				echo $pia_lang['BackDevices_Theme_notset'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 			}
 		} else {echo $pia_lang['BackDevices_Theme_invalid'];}
 	}
@@ -578,10 +632,10 @@ function setLanguage() {
 			if ($pia_lang_error == False) {
 				$testlang = fopen($pia_lang_set_dir . 'setting_language_' . $pia_lang_selector, 'w');
 				echo $pia_lang['BackDevices_Language_set'] . ': ' . $_REQUEST['LangSelection'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 			} else {
 				echo $pia_lang['BackDevices_Language_notset'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 			}
 		} else {echo $pia_lang['BackDevices_Language_invalid'];}
 	}
@@ -601,7 +655,7 @@ function setArpTimer() {
 			// Logging
 			pialert_logging('a_002', $_SERVER['REMOTE_ADDR'], 'LogStr_0510', '', '');
 			exec('../../../back/pialert-cli enable_scan', $output);
-			echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+			echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php'>";
 		} else {
 			if (is_numeric($_REQUEST['ArpTimer'])) {
 				// Logging
@@ -613,7 +667,7 @@ function setArpTimer() {
 				exec('../../../back/pialert-cli disable_scan', $output);
 			}
 			echo $pia_lang['BackDevices_Arpscan_disabled'];
-			echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+			echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php'>";
 		}
 	}
 }
@@ -633,7 +687,7 @@ function RestoreConfigFile() {
 	copy($file, $laststate);
 	// Logging
 	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_0006', '1', '');
-	echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+	echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php'>";
 }
 
 //  Backup Config File
@@ -655,7 +709,7 @@ function BackupConfigFile() {
 	// Logging
 	pialert_logging('a_000', $_SERVER['REMOTE_ADDR'], 'LogStr_0007', '1', '');
 	if ($_REQUEST['reload'] == 'yes') {
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>");
+		echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=3'>";
 	}
 }
 
@@ -673,10 +727,100 @@ function deleteAllNotifications() {
 		}
 	}
 	echo $count_all_reports . ' ' . $pia_lang['BackDevices_Report_Delete'];
-	echo ("<meta http-equiv='refresh' content='2; URL=./reports.php'>");
+	echo "<meta http-equiv='refresh' content='2; URL=./reports.php'>";
 	// Logging
 	pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0504', '', '');
 }
 
-//  End
+// Get Report Counter
+function getReportTotals() {
+	$files = array_diff(scandir('../../reports'), array('..', '.', 'download_report.php'));
+	$report_counter = count($files);
+	if ($report_counter == 0) {unset($report_counter);}
+
+	$totals = array($report_counter);
+	echo (json_encode($totals));
+
+}
+
+//  Set Language
+function setFavIconURL() {
+	global $pia_lang;
+
+	if (isset($_REQUEST['FavIconURL'])) {
+		$iconlist = array();
+		$iconlist['redglass_w_local'] = 'img/favicons/glass_red_white.png';
+		$iconlist['redflat_w_local'] = 'img/favicons/flat_red_white.png';
+		$iconlist['redglass_b_local'] = 'img/favicons/glass_red_black.png';
+		$iconlist['redflat_b_local'] = 'img/favicons/flat_red_black.png';
+		$iconlist['blueglass_w_local'] = 'img/favicons/glass_blue_white.png';
+		$iconlist['blueflat_w_local'] = 'img/favicons/flat_blue_white.png';
+		$iconlist['blueglass_b_local'] = 'img/favicons/glass_blue_black.png';
+		$iconlist['blueflat_b_local'] = 'img/favicons/flat_blue_black.png';
+		$iconlist['greenglass_w_local'] = 'img/favicons/glass_green_white.png';
+		$iconlist['greenflat_w_local'] = 'img/favicons/flat_green_white.png';
+		$iconlist['greenglass_b_local'] = 'img/favicons/glass_green_black.png';
+		$iconlist['greenflat_b_local'] = 'img/favicons/flat_green_black.png';
+		$iconlist['yellowglass_w_local'] = 'img/favicons/glass_yellow_white.png';
+		$iconlist['yellowflat_w_local'] = 'img/favicons/flat_yellow_white.png';
+		$iconlist['yellowglass_b_local'] = 'img/favicons/glass_yellow_black.png';
+		$iconlist['yellowflat_b_local'] = 'img/favicons/flat_yellow_black.png';
+		$iconlist['purpleglass_w_local'] = 'img/favicons/glass_purple_white.png';
+		$iconlist['purpleflat_w_local'] = 'img/favicons/flat_purple_white.png';
+		$iconlist['purpleglass_b_local'] = 'img/favicons/glass_purple_black.png';
+		$iconlist['purpleflat_b_local'] = 'img/favicons/flat_purple_black.png';
+		$iconlist['blackglass_w_local'] = 'img/favicons/glass_black_white.png';
+		$iconlist['blackflat_w_local'] = 'img/favicons/flat_black_white.png';
+		$iconlist['whiteglass_b_local'] = 'img/favicons/glass_white_black.png';
+		$iconlist['whiteflat_b_local'] = 'img/favicons/flat_white_black.png';
+		$iconlist['redglass_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_red_white.png';
+		$iconlist['redflat_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_red_white.png';
+		$iconlist['redglass_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_red_black.png';
+		$iconlist['redflat_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_red_black.png';
+		$iconlist['blueglass_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_blue_white.png';
+		$iconlist['blueflat_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_blue_white.png';
+		$iconlist['blueglass_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_blue_black.png';
+		$iconlist['blueflat_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_blue_black.png';
+		$iconlist['greenglass_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_green_white.png';
+		$iconlist['greenflat_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_green_white.png';
+		$iconlist['greenglass_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_green_black.png';
+		$iconlist['greenflat_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_green_black.png';
+		$iconlist['yellowglass_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_yellow_white.png';
+		$iconlist['yellowflat_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_yellow_white.png';
+		$iconlist['yellowglass_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_yellow_black.png';
+		$iconlist['yellowflat_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_yellow_black.png';
+		$iconlist['purpleglass_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_purple_white.png';
+		$iconlist['purpleflat_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_purple_white.png';
+		$iconlist['purpleglass_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_purple_black.png';
+		$iconlist['purpleflat_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_purple_black.png';
+		$iconlist['blackglass_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_black_white.png';
+		$iconlist['blackflat_w_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_black_white.png';
+		$iconlist['whiteglass_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_white_black.png';
+		$iconlist['whiteflat_b_remote'] = 'https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/flat_white_black.png';
+
+		$url = $_REQUEST['FavIconURL'];
+
+		if ($iconlist[$url] != "") {
+			$newfavicon_url = $iconlist[$url];
+		} else {
+			$temp_favicon_url = filter_var($url, FILTER_SANITIZE_URL);
+			if (filter_var($temp_favicon_url, FILTER_VALIDATE_URL)) {
+				if (strtolower(substr($temp_favicon_url, 0, 4)) == "http") {
+					$newfavicon_url = $temp_favicon_url;
+				} else {
+					echo $pia_lang['BackFiles_FavIcon_invalidURL'];
+				}
+			} else {
+				echo $pia_lang['BackFiles_FavIcon_ErrorURL'];
+			}
+		}
+		$file_path = '../../../db/setting_favicon';
+		file_put_contents($file_path, $newfavicon_url);
+	}
+
+	echo $pia_lang['BackFiles_FavIcon_okay'];
+	echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
+	// Logging
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0059', '', $_REQUEST['FavIconURL']);
+}
 ?>

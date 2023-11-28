@@ -1,11 +1,10 @@
 <?php
-// Delete WebGUI Reports
+// Delete Single WebGUI Reports
 function useRegex($input) {
 	$regex = '/[0-9]+-[0-9]+_.*\\.txt/i';
 	return preg_match($regex, $input);
 }
-
-function count_webgui_reports() {
+function delete_single_webgui_report() {
 	global $db;
 
 	if (isset($_REQUEST['remove_report'])) {
@@ -13,16 +12,11 @@ function count_webgui_reports() {
 		if (useRegex($prep_remove_report) == TRUE) {
 			if (file_exists('./reports/' . $prep_remove_report)) {
 				unlink('./reports/' . $prep_remove_report);
+				// Logging
+				pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0503', '', $prep_remove_report);
 			}
 		}
-		// Logging
-		pialert_logging('a_050', $_SERVER['REMOTE_ADDR'], 'LogStr_0503', '', $prep_remove_report);
 	}
-
-	$files = array_diff(scandir('./reports'), array('..', '.', 'download_report.php'));
-	$report_counter = count($files);
-	if ($report_counter == 0) {unset($report_counter);}
-	return $report_counter;
 }
 // Pause Arp Scan Section
 function arpscanstatus() {
@@ -138,17 +132,25 @@ function toggle_webservices_menu($section) {
 		echo '<li class="';
 		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('services.php', 'serviceDetails.php'))) {echo 'active';}
 		echo '">
-                <a href="services.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Services'] . '</span></a>
+                <a href="services.php">
+                	<i class="fa fa-globe"></i>
+                	<span>' . $pia_lang['Navigation_Services'] . '</span>
+		          	<span class="pull-right-container">
+		              <small class="label pull-right bg-yellow" id="header_services_count_warning"></small>
+		              <small class="label pull-right bg-red" id="header_services_count_down"></small>
+		              <small class="label pull-right bg-green" id="header_services_count_on"></small>
+		            </span>
+                </a>
               </li>';
 	}
 
-	if (($_SESSION['Scan_WebServices'] == True) && ($section == "Event")) {
-		echo '<li class="';
-		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php'))) {echo 'active';}
-		echo '">
-	          <a href="servicesEvents.php"><i class="fa fa-globe"></i> <span>' . $pia_lang['Navigation_Events_Serv'] . '</span></a>
-	        </li>';
-	}
+	// if (($_SESSION['Scan_WebServices'] == True) && ($section == "Event")) {
+	// 	echo '<li class="';
+	// 	if (in_array(basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php'))) {echo 'active';}
+	// 	echo '">
+	//           <a href="servicesEvents.php"><i class="fa fa-globe"></i><span>' . $pia_lang['Navigation_Events_Serv'] . '</span></a>
+	//         </li>';
+	// }
 }
 // ICPMScan Menu Items
 function toggle_icmpscan_menu($section) {
@@ -157,7 +159,14 @@ function toggle_icmpscan_menu($section) {
 		echo '<li class="';
 		if (in_array(basename($_SERVER['SCRIPT_NAME']), array('icmpmonitor.php', 'icmpmonitorDetails.php'))) {echo 'active';}
 		echo '">
-                <a href="icmpmonitor.php"><i class="fa fa-magnifying-glass"></i> <span>' . $pia_lang['Navigation_ICMPScan'] . '</span></a>
+                <a href="icmpmonitor.php">
+                    <i class="fa fa-magnifying-glass"></i>
+                    <span>' . $pia_lang['Navigation_ICMPScan'] . '</span>
+					<span class="pull-right-container">
+						<small class="label pull-right bg-red" id="header_icmp_count_down"></small>
+						<small class="label pull-right bg-green" id="header_icmp_count_on"></small>
+					</span>
+                </a>
               </li>';
 	}
 }
@@ -222,5 +231,10 @@ foreach (glob("../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
 }
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
-
+// FavIcon
+if (file_exists('../db/setting_favicon')) {
+	$FRONTEND_FAVICON = file('../db/setting_favicon', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0];
+} else {
+	$FRONTEND_FAVICON = 'img/favicons/flat_blue_white.png';
+}
 ?>
