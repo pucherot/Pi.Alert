@@ -15,7 +15,8 @@ $help_lang['Cat_General_100_text_c'] = 'Suche in dieser Datei nach dem Eintrag "
 $help_lang['Cat_General_101_head'] = 'Mein Netzwerk scheint langsamer zu werden, Streaming "ruckelt".';
 $help_lang['Cat_General_101_text'] = 'Es kann durchaus sein, dass leistungsschwache Geräte mit der Art und Weise, wie Pi.Alert neue Geräte im Netzwerk erkennt, an ihre Leistungsgrenzen stoßen. Dies verstärkt sich noch einmal, wenn diese Geräte per WLAN mit dem Netzwerk kommunizieren. Lösungen wären hier, wenn möglich ein Wechsel auf eine Kabelverbindung oder, falls das Geräte nur einen begrenzten Zeitraum genutzt werden soll, den arp-Scan auf der Wartungsseite zu pausieren.';
 $help_lang['Cat_General_102_head'] = 'Ich bekomme die Meldung, dass die Datenbank schreibgeschützt (read only) ist.';
-$help_lang['Cat_General_102_text'] = 'Prüfe im Pi.Alert Verzeichnis, ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
+$help_lang['Cat_General_102_text'] = 'Möglicherweise werden durch das Backend gerade Änderungen in die Datenbank geschrieben. Probiere es nach einer kurzen Wartezeit einfach noch einmal. Sollte sich das Verhalten nicht ändern, halte dich an die folgenden Hinweise. <br><br>
+									 Prüfe im Pi.Alert Verzeichnis, ob der Ordner der Datenbank (db) die richtigen Rechte zugewiesen bekommen hat:<br>
       								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (dein Username) www-data</span><br>
       								 Sollte die Berechtigung nicht stimmen, kannst du sie mit folgenden Befehlen im Terminal oder der Konsole wieder setzen:<br>
       								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">

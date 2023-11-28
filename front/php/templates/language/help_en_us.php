@@ -13,7 +13,8 @@ $help_lang['Cat_General_101_text'] = 'It may well be that low-powered devices re
 									 if these devices communicate with the network via WLAN. Solutions here would be to switch to a wired connection if possible or, if the device is only to be used for a limited period of time, to use the arp scan.
 									 pause the arp scan on the maintenance page.';
 $help_lang['Cat_General_102_head'] = 'I get the message that the database is read only.';
-$help_lang['Cat_General_102_text'] = 'Check in the Pi.Alert directory if the database folder (db) has been assigned the correct permissions:<br>
+$help_lang['Cat_General_102_text'] = 'Changes may currently be written to the database by the backend. Please try again after a short wait. If the behavior does not change, follow the instructions below.<br><br>
+									 Check in the Pi.Alert directory if the database folder (db) has been assigned the correct permissions:<br>
       								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (your username) www-data</span><br>
       								 If the permission is not correct, you can set it again with the following commands in the terminal or the console:<br>
       								 <div class="help_faq_code" style="padding-left: 10px; margin-bottom: 10px;">
