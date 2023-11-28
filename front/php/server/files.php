@@ -512,13 +512,13 @@ function EnableDarkmode() {
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0055', '', '');
 
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>");
 	} else {
 		echo $pia_lang['BackDevices_darkmode_enabled'];
 		$darkmode = fopen($file, 'w');
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0056', '', '');
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>");
 	}
 }
 
@@ -532,14 +532,14 @@ function EnableOnlineHistoryGraph() {
 		unlink($file);
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0058', '', '');
-		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=1'>");
+		echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>");
 	} else {
 		echo $pia_lang['BackDevices_onlinehistorygraph_disabled'];
 		$history = fopen($file, 'w');
 		fclose($history);
 		// Logging
 		pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0057', '', '');
-		echo ("<meta http-equiv='refresh'content='2; URL=./maintenance.php?tab=1'>");
+		echo ("<meta http-equiv='refresh'content='2; URL=./maintenance.php?tab=4'>");
 	}
 }
 
@@ -591,10 +591,10 @@ function setTheme() {
 			if ($pia_skin_error == False) {
 				$testskin = fopen($pia_skin_set_dir . 'setting_' . $pia_skin_selector, 'w');
 				echo $pia_lang['BackDevices_Theme_set'] . ': ' . $_REQUEST['SkinSelection'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>");
 			} else {
 				echo $pia_lang['BackDevices_Theme_notset'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>");
 			}
 		} else {echo $pia_lang['BackDevices_Theme_invalid'];}
 	}
@@ -630,10 +630,10 @@ function setLanguage() {
 			if ($pia_lang_error == False) {
 				$testlang = fopen($pia_lang_set_dir . 'setting_language_' . $pia_lang_selector, 'w');
 				echo $pia_lang['BackDevices_Language_set'] . ': ' . $_REQUEST['LangSelection'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>");
 			} else {
 				echo $pia_lang['BackDevices_Language_notset'];
-				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php'>");
+				echo ("<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>");
 			}
 		} else {echo $pia_lang['BackDevices_Language_invalid'];}
 	}
