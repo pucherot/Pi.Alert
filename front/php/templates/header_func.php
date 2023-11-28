@@ -231,5 +231,10 @@ foreach (glob("../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
 }
 if (strlen($pia_lang_selected) == 0) {$pia_lang_selected = 'en_us';}
-
+// FavIcon
+if (file_exists('../db/setting_favicon')) {
+	$FRONTEND_FAVICON = file('../db/setting_favicon', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)[0];
+} else {
+	$FRONTEND_FAVICON = 'img/favicons/flat_blue_white.png';
+}
 ?>

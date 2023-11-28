@@ -379,6 +379,7 @@ $pia_lang['Maintenance_lang_fr_fr'] = 'Francese (FR)';
 $pia_lang['Maintenance_lang_it_it'] = 'Italiano (IT)';
 $pia_lang['Maintenance_lang_selector_apply'] = 'Applica';
 $pia_lang['Maintenance_Tools_Tab_Settings'] = 'Impostazioni';
+$pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Le opzioni elencate qui apportano modifiche alla configurazione lato server. Queste modifiche influiscono su tutti i dispositivi che accedono a questa pagina.';
 $pia_lang['Maintenance_Tools_Tab_GUI'] = 'GUI';
 $pia_lang['Maintenance_Tools_Tab_Tools'] = 'Manutenzione';
 $pia_lang['Maintenance_Tools_Tab_BackupRestore'] = 'Backup';
@@ -386,7 +387,8 @@ $pia_lang['Maintenance_Tools_Tab_Subheadline_a'] = 'Generale';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_b'] = 'Configura la panoramica dei dispositivi';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_c'] = 'Sicurezza';
 $pia_lang['Maintenance_Tools_Tab_Subheadline_d'] = 'Scans';
-$pia_lang['Maintenance_Tools_Tab_Settings_Intro'] = 'Le opzioni elencate qui apportano modifiche alla configurazione lato server. Queste modifiche influiscono su tutti i dispositivi che accedono a questa pagina.';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_e'] = 'FavIcon';
+$pia_lang['Maintenance_Tools_Tab_Subheadline_e_Intro'] = 'Puoi inserire l&apos;URL del FavIcon desiderato nel campo, o scegliere tra FavIcons locali o remoti (https://github.com/leiweibau/Pi.Alert). A seconda della configurazione, i FavIcons locali potrebbero non funzionare come icona della schermata principale.';
 $pia_lang['Maintenance_Tool_darkmode'] = 'Modalità Scuro';
 $pia_lang['Maintenance_Tool_darkmode_noti'] = 'Cambio Modalità';
 $pia_lang['Maintenance_Tool_darkmode_noti_text'] = 'Cambia tra la modalità chiara e quella scura. Se il cambio di modalità dovesse non funzionare correttamente, prova a cancellare la cache del browser.';
@@ -477,6 +479,19 @@ $pia_lang['Maintenance_ConfEditor_Restore_info'] = 'Questa funzione ripristina i
 $pia_lang['Maintenance_ConfEditor_Save_info'] = 'Il contenuto del campo di testo con eventuali modifiche verrà salvato nel file "pialert.conf". La configurazione precedente verrà salvata come "pialert-prev.bak". Ogni volta che si salva, il file "pialert-prev.bak" verrà sovrascritto con la versione precedente del file di configurazione.';
 $pia_lang['Maintenance_Tool_ConfBackup'] = 'Crea backup della configurazione';
 $pia_lang['Maintenance_Tool_ConfBackup_text'] = 'Oltre al file "pialert-prev.bak", verrà creato un altro backup con la data corrente inclusa l&apos;ora. Questo backup deve essere ripristinato manualmente in caso di necessità (rinominandolo in "pialert.conf").';
+$pia_lang['FavIcon_color_white'] = 'white';
+$pia_lang['FavIcon_color_black'] = 'black';
+$pia_lang['FavIcon_color_red'] = 'red';
+$pia_lang['FavIcon_color_blue'] = 'blue';
+$pia_lang['FavIcon_color_green'] = 'green';
+$pia_lang['FavIcon_color_yellow'] = 'yellow';
+$pia_lang['FavIcon_color_purple'] = 'purple';
+$pia_lang['FavIcon_logo_white'] = 'white Logo';
+$pia_lang['FavIcon_logo_black'] = 'black Logo';
+$pia_lang['FavIcon_mode_glass'] = 'glass';
+$pia_lang['FavIcon_mode_flat'] = 'flat';
+$pia_lang['FavIcon_local'] = 'local';
+$pia_lang['FavIcon_remote'] = 'remote';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)
@@ -532,6 +547,9 @@ $pia_lang['BackDevices_ConfEditor_CopOkay'] = 'Backup della configurazione compl
 $pia_lang['BackDevices_ConfEditor_RestoreError'] = 'Impossibile ripristinare la versione precedente della configurazione.';
 $pia_lang['BackDevices_ConfEditor_RestoreOkay'] = 'Ripristino della versione precedente della configurazione completato.';
 $pia_lang['BackDevices_Report_Delete'] = 'Notifica/e eliminata/e.';
+$pia_lang['BackFiles_FavIcon_invalidURL'] = 'È stata inserita un URL non valida.';
+$pia_lang['BackFiles_FavIcon_ErrorURL'] = 'Un FavIcon inserito manualmente deve essere un URL. I riferimenti al percorso per un file locale non verranno salvati.';
+$pia_lang['BackFiles_FavIcon_okay'] = 'Il nuovo FavIcon è stato salvato.';
 
 //////////////////////////////////////////////////////////////////
 // Network Page
@@ -707,6 +725,7 @@ $pia_journ_lang['LogStr_0055'] = $pia_lang['BackDevices_darkmode_disabled'];
 $pia_journ_lang['LogStr_0056'] = $pia_lang['BackDevices_darkmode_enabled'];
 $pia_journ_lang['LogStr_0057'] = $pia_lang['BackDevices_onlinehistorygraph_disabled'];
 $pia_journ_lang['LogStr_0058'] = $pia_lang['BackDevices_onlinehistorygraph_enabled'];
+$pia_journ_lang['LogStr_0059'] = 'FavIcon changed';
 $pia_journ_lang['LogStr_0061'] = 'Aggiornamento Pi.Alert disponibile';
 $pia_journ_lang['LogStr_0062'] = 'Nessun aggiornamento Pi.Alert disponibile';
 $pia_journ_lang['LogStr_0063'] = 'Aggiornamento GeoLite2 DB disponibile';

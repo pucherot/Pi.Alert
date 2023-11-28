@@ -44,13 +44,14 @@ require 'php/templates/language/' . $pia_lang_selected . '.php';
   <!-- Theme style -->
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. -->
-  <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?php echo $pia_skin_selected; ?>.min.css">
+  <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?=$pia_skin_selected;?>.min.css">
   <!-- Pi.Alert CSS -->
-  <link rel="stylesheet" href="css/pialert.css?<?php echo $conf_data['VERSION_DATE']; ?>">
+  <link rel="stylesheet" href="css/pialert.css?<?=$conf_data['VERSION_DATE'];?>">
   <!-- Offline Font -->
   <link rel="stylesheet" href="css/offline-font.css">
   <!-- Fav / Homescreen Icon -->
-  <link rel="icon" type="image/x-icon" href="img/favicons/flat_blue_white.png">
+  <link rel="icon" type="image/x-icon" href="<?=$FRONTEND_FAVICON?>">
+  <link rel="apple-touch-icon" href="<?=$FRONTEND_FAVICON?>">
   <!-- For better UX on Mobile Devices using the Shortcut on the Homescreen -->
   <link rel="manifest" href="img/manifest.json">
 
@@ -89,7 +90,6 @@ if ($ENABLED_DARKMODE === True) {
       });
     }
   </script>
-
 </head>
 
 <!-- Layout Boxed Yellow -->
@@ -150,7 +150,6 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
                 <?=$pia_lang['About_Title'];?>
                 </p>
               </li>
-
               <!-- Menu Body -->
               <li class="user-footer" style="padding-top: 15px; padding-bottom: 0px;">
                 <div class="" style="text-align: center;">
@@ -159,7 +158,6 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
                   </label>
                 </div>
               </li>
-
               <li class="user-footer">
                 <div class="" style="text-align: center;">
                   <a href="./deviceDetails.php?mac=Internet" id="custom-menu-default-button" class="btn btn-default"><i class="fa-solid fa-globe custom-menu-button-icon"></i><div class="custom-menu-button-text">Internet</div></a>
@@ -229,9 +227,7 @@ format_temperature($celsius, $temperaturelimit);
       </div>
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?=$pia_lang['Navigation_Section_A'];?></li>
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('devices.php', 'deviceDetails.php'))) {echo 'active';}?>">
           <a href="devices.php">
             <i class="fa fa-laptop"></i>
@@ -243,41 +239,30 @@ format_temperature($celsius, $temperaturelimit);
             </span>
           </a>
         </li>
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('network.php', 'networkSettings.php'))) {echo 'active';}?>">
           <a href="network.php"><i class="fa fa-server"></i> <span><?=$pia_lang['Navigation_Network'];?></span></a>
         </li>
-
         <?php toggle_webservices_menu('Main');?>
-
         <?php toggle_icmpscan_menu('Main');?>
 
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?=$pia_lang['Navigation_Section_B'];?></li>
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('devicesEvents.php'))) {echo 'active';}?>">
           <a href="devicesEvents.php"><i class="fa fa-laptop"></i> <span><?=$pia_lang['Navigation_Events_Dev'];?></span></a>
         </li>
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('presence.php'))) {echo 'active';}?>">
           <a href="presence.php"><i class="fa fa-calendar"></i> <span><?=$pia_lang['Navigation_Presence'];?></span></a>
         </li>
-
-        <!-- <?php toggle_webservices_menu('Event');?> -->
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('journal.php'))) {echo 'active';}?>">
           <a href="journal.php"><i class="fa fa-list"></i> <span><?=$pia_lang['Navigation_Journal'];?></span></a>
         </li>
 
         <li class="header text-uppercase" style="font-size: 10; padding: 1px;"><?=$pia_lang['Navigation_Section_C'];?></li>
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('maintenance.php'))) {echo 'active';}?>">
           <a href="maintenance.php"><i class="fa fa-cog"></i> <span><?=$pia_lang['Navigation_Maintenance'];?></span></a>
         </li>
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('help_faq.php'))) {echo 'active';}?>">
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?=$pia_lang['Navigation_HelpFAQ'];?></span></a>
         </li>
-
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('updatecheck.php'))) {echo 'active';}?>">
           <a href="updatecheck.php"><i class="fa fa-rotate-right"></i> <span> <?=$pia_lang['Navigation_UpdateCheck'];?></span></a>
         </li>
