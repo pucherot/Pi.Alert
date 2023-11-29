@@ -109,19 +109,19 @@ The API can also be used to make information available in Home Assistant.
 ### Example of a query with PHP (system-status)
 
 Prepare post fields
-```
+```php
 $api_url = 'https://[URL]/api/'; //Pi.Alert URL
 $api_key = 'YourApi-Key'; //api-key
 $api_action = 'system-status';
 ```
 
 Set post fields
-```
+```php
 $post = ['api-key' => $api_key, 'get' => $api_action];
 ```
 
 Init PHP curl
-```
+```php
 $apicall = curl_init($api_url);
 curl_setopt($apicall, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($apicall, CURLOPT_POSTFIELDS, $post);
@@ -129,24 +129,24 @@ curl_setopt($apicall, CURLOPT_SSL_VERIFYPEER, false);
 ```
 
 Execute PHP curl
-```
+```php
 $response = curl_exec($apicall);
 ```
 
 Close the PHP curl connection
-```
+```php
 curl_close($apicall);
 ```
 
 Demo output
-```
+```php
 print_r(json_decode($response));
 ```
 
 ### Example of a query with PHP (mac-status)
 
 Prepare post fields
-```
+```php
 $api_url = 'https://[URL]/api/'; //Pi.Alert URL
 $api_key = 'YourApi-Key'; //api-key
 $api_action = 'mac-status';
@@ -154,12 +154,12 @@ $api_macquery = '00:0d:93:89:15:90'; // single mac address
 ```
 
 Set post fields
-```
+```php
 $post = ['api-key' => $api_key, 'get' => $api_action,  'mac' => $api_macquery];
 ```
 
 Init PHP curl
-```
+```php
 $apicall = curl_init($api_url);
 curl_setopt($apicall, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($apicall, CURLOPT_POSTFIELDS, $post);
@@ -167,36 +167,36 @@ curl_setopt($apicall, CURLOPT_SSL_VERIFYPEER, false);
 ```
 
 Execute PHP curl
-```
+```php
 $response = curl_exec($apicall);
 ```
 
 Close the PHP curl connection
-```
+```php
 curl_close($apicall);
 ```
 
 Demo output
-```
+```php
 print_r(json_decode($response));
 ```
 
 ### Query with PHP (all-online, all-offline, all-online-icmp, all-offline-icmp)
 
 Prepare post fields
-```
+```php
 $api_url = 'https://[URL]/api/'; //Pi.Alert URL
 $api_key = 'YourApi-Key'; //api-key
 $api_action = 'all-online'; //all-online, all-offline
 ```
 
 Set post fields
-```
+```php
 $post = ['api-key' => $api_key, 'get' => $api_action];
 ```
 
 Init PHP curl
-```
+```php
 $apicall = curl_init($api_url);
 curl_setopt($apicall, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($apicall, CURLOPT_POSTFIELDS, $post);
@@ -204,34 +204,34 @@ curl_setopt($apicall, CURLOPT_SSL_VERIFYPEER, false);
 ```
 
 Execute PHP curl
-```
+```php
 $response = curl_exec($apicall);
 ```
 
 Close the PHP curl connection
-```
+```php
 curl_close($apicall);
 ```
 
 Demo output
-```
+```php
 print_r(json_decode($response));
 ```
 <hr>
 
 ### Example of a query with the commandline tool curl (system-status)
-```
+```bash
 curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
 ```
 
 ### Example of a query with the commandline tool curl (mac-status)
-```
+```bash
 curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=mac-status' -F 'mac=00:11:22:aa:bb:cc' https://[URL]/api/
 ```
 
 ### Example of a query with the commandline tool curl (all-online or all-offline)
 
-```
+```bash
 curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=all-offline' https://[URL]/api/
 ```
 <hr>
@@ -239,7 +239,60 @@ curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=all-offline' https://[URL]/api/
 ### Use API-Call for Home Assistant
 
 For possibly better integrations in Home Assistant a pull request is welcome. First, the sensors must be added manually to the "configuration.yaml" file. If you don't use HTTPS, you have to replace it with HTTP in the following code.
+
+For actual versions of Home Assistant
+```yaml
+command_line:
+  - sensor:
+      name: "PiAlert - Last Scan"
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      scan_interval: 200
+      unique_id: pialert.status.lastscan
+      value_template: "{{ value_json.Last_Scan }}"
+  - sensor:
+      name: "PiAlert - All Devices"
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      scan_interval: 200
+      unique_id: pialert.status.alldevices
+      unit_of_measurement: ""
+      value_template: "{{ value_json.All_Devices }}"
+  - sensor:
+      name: "PiAlert - Online Devices"
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      scan_interval: 200
+      unique_id: pialert.status.onlinedevices
+      unit_of_measurement: ""
+      value_template: "{{ value_json.Online_Devices }}"
+  - sensor:
+      name: "PiAlert - Offline Devices"
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      scan_interval: 200
+      unique_id: pialert.status.offlinedevices
+      unit_of_measurement: ""
+      value_template: "{{ value_json.Offline_Devices }}"
+  - sensor:
+      name: "PiAlert - Archived Devices"
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      scan_interval: 200
+      unique_id: pialert.status.archiveddevices
+      unit_of_measurement: ""
+      value_template: "{{ value_json.Archived_Devices }}"
+  - sensor:
+      name: "PiAlert - New Devices"
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      scan_interval: 200
+      unique_id: pialert.status.newdevices
+      unit_of_measurement: ""
+      value_template: "{{ value_json.New_Devices }}"
+  - sensor:
+      name: "PiAlert - Scanning"
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      scan_interval: 120
+      unique_id: pialert.status.scanning
+      value_template: "{{ value_json.Scanning }}"
 ```
+For older versions of Home Assistant
+```yaml
 sensor:
   - platform: command_line
     name: "PiAlert - Last Scan"
