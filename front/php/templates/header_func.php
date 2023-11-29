@@ -26,12 +26,12 @@ function arpscanstatus() {
 		$pia_arpscans = "";
 		exec($execstring, $pia_arpscans);
 		unset($_SESSION['arpscan_timerstart']);
-		$_SESSION['arpscan_result'] = sizeof($pia_arpscans) - 2 . ' ' . $pia_lang['Maintenance_arp_status_on'];
+		$_SESSION['arpscan_result'] = sizeof($pia_arpscans) - 2 . ' ' . $pia_lang['Maintenance_arp_status_on'] . ' <div id="nextscancountdown" style="display: inline-block;"></div>';
 		$_SESSION['arpscan_sidebarstate'] = 'Active';
 		$_SESSION['arpscan_sidebarstate_light'] = 'green-light fa-gradient-green';
 	} else {
 		$_SESSION['arpscan_timerstart'] = date("H:i:s", filectime('../db/setting_stoppialert'));
-		$_SESSION['arpscan_result'] = '<span style="color:red;">arp-Scan ' . $pia_lang['Maintenance_arp_status_off'] . '</span>';
+		$_SESSION['arpscan_result'] = '<span style="color:red;">arp-Scan ' . $pia_lang['Maintenance_arp_status_off'] . '</span> <div id="nextscancountdown" style="display: none;"></div>';
 		$_SESSION['arpscan_sidebarstate'] = 'Disabled&nbsp;&nbsp;&nbsp;(' . $_SESSION['arpscan_timerstart'] . ')';
 		$_SESSION['arpscan_sidebarstate_light'] = 'red fa-gradient-red';
 	}
