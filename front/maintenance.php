@@ -1,13 +1,13 @@
-<!-- ---------------------------------------------------------------------------
+<!-- --------------------------------------------------------------------------
 #  Pi.Alert
 #  Open Source Network Guard / WIFI & LAN intrusion detector
 #
 #  maintenance.php - Front module. Server side. Manage Devices
-#-------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 #  Puche      2021        pi.alert.application@gmail.com   GNU GPLv3
 #  jokob-sk   2022        jokob.sk@gmail.com               GNU GPLv3
 #  leiweibau  2023        https://github.com/leiweibau     GNU GPLv3
-#--------------------------------------------------------------------------- -->
+#-------------------------------------------------------------------------- -->
 
 <?php
 session_start();
@@ -22,10 +22,10 @@ require 'php/templates/header.php';
 require 'php/server/journal.php';
 
 ?>
-<!-- Page ------------------------------------------------------------------ -->
+<!-- Page ----------------------------------------------------------------- -->
 <div class="content-wrapper">
 
-<!-- Content header--------------------------------------------------------- -->
+<!-- Content header-------------------------------------------------------- -->
     <section class="content-header">
     <?php require 'php/templates/notification.php';?>
       <h1 id="pageTitle">
@@ -33,22 +33,22 @@ require 'php/server/journal.php';
       </h1>
     </section>
 
-    <!-- Main content ---------------------------------------------------------- -->
+    <!-- Main content ----------------------------------------------------- -->
     <section class="content">
 
 <?php
-// Get API-Key ------------------------------------------------------------------
+// Get API-Key ----------------------------------------------------------------
 $APIKEY = get_config_parmeter('PIALERT_APIKEY');
 if ($APIKEY == "") {$APIKEY = $pia_lang['Maintenance_Tool_setapikey_false'];}
 
-// Get Ignore List ------------------------------------------------------------------
+// Get Ignore List ------------------------------------------------------------
 $MAC_IGNORE_LIST_LINE = get_config_parmeter('MAC_IGNORE_LIST');
 if ($MAC_IGNORE_LIST_LINE == "" || $MAC_IGNORE_LIST_LINE == "[]") {$MAC_IGNORE_LIST = $pia_lang['Maintenance_Tool_ignorelist_false'];} else {
 	$MAC_IGNORE_LIST = str_replace("[", "", str_replace("]", "", str_replace("'", "", trim($MAC_IGNORE_LIST_LINE))));
 	$MAC_IGNORE_LIST = str_replace(",", ", ", trim($MAC_IGNORE_LIST));
 }
 
-// Get Notification Settings ------------------------------------------------------------------
+// Get Notification Settings --------------------------------------------------
 $CONFIG_FILE_SOURCE = "../config/pialert.conf";
 $CONFIG_FILE_KEY_LINE = file($CONFIG_FILE_SOURCE);
 $CONFIG_FILE_FILTER_VALUE_ARP = array_values(preg_grep("/(REPORT_MAIL|REPORT_NTFY|REPORT_WEBGUI|REPORT_PUSHSAFER|REPORT_PUSHOVER|REPORT_TELEGRAM)(?!_)/i", $CONFIG_FILE_KEY_LINE));
@@ -82,19 +82,19 @@ function format_notifications($source_array) {
 	echo $output;
 }
 
-// Size and last mod of DB ------------------------------------------------------
+// Size and last mod of DB ----------------------------------------------------
 $DB_SOURCE = str_replace('front', 'db', getcwd()) . '/pialert.db';
 $DB_SIZE_DATA = number_format((filesize($DB_SOURCE) / 1000000), 2, ",", ".") . ' MB';
 $DB_MOD_DATA = date("d.m.Y, H:i:s", filemtime($DB_SOURCE)) . ' Uhr';
 
-// Count Config Backups -------------------------s------------------------------
+// Count Config Backups -------------------------s-----------------------------
 $CONFIG_FILE_DIR = str_replace('front', 'config', getcwd()) . '/';
 $files = glob($CONFIG_FILE_DIR . "pialert-20*.bak");
 if ($files) {
 	$CONFIG_FILE_COUNT = count($files);
 } else { $CONFIG_FILE_COUNT = 0;}
 
-// Count and Calc DB Backups -------------------------------------------------------
+// Count and Calc DB Backups --------------------------------------------------
 $ARCHIVE_PATH = str_replace('front', 'db', getcwd()) . '/';
 $ARCHIVE_COUNT = 0;
 $ARCHIVE_DISKUSAGE = 0;
@@ -107,7 +107,7 @@ foreach ($files as $result) {
 }
 $ARCHIVE_DISKUSAGE = number_format(($ARCHIVE_DISKUSAGE / 1000000), 2, ",", ".") . ' MB';
 
-// Find latest DB Backup for restore and download -----------------------------------
+// Find latest DB Backup for restore and download -----------------------------
 $LATEST_FILES = glob($ARCHIVE_PATH . "pialertdb_*.zip");
 if (sizeof($LATEST_FILES) == 0) {
 	$LATEST_BACKUP_DATE = $pia_lang['Maintenance_Tool_restore_blocked'];
@@ -119,7 +119,7 @@ if (sizeof($LATEST_FILES) == 0) {
 	$LATEST_BACKUP_DATE = date("Y-m-d H:i:s", filemtime($LATEST_BACKUP));
 }
 
-// Aprscan read Timer -----------------------------------------------------------------
+// Aprscan read Timer ---------------------------------------------------------
 function read_arpscan_timer() {
 	$file = '../db/setting_stoppialert';
 	if (file_exists($file)) {
@@ -139,7 +139,7 @@ function read_arpscan_timer() {
 	echo $timer_output;
 }
 
-// Get Device List Columns -----------------------------------------------------------------
+// Get Device List Columns ----------------------------------------------------
 function read_DevListCol() {
 	$file = '../db/setting_devicelist';
 	if (file_exists($file)) {
@@ -151,7 +151,7 @@ function read_DevListCol() {
 	return $output_array;
 }
 
-// Set preset checkboxes for Columnconfig -----------------------------------------------------------------
+// Set preset checkboxes for Columnconfig -------------------------------------
 function set_column_checkboxes($table_config) {
 	if ($table_config['ConnectionType'] == 1) {$col_checkbox['ConnectionType'] = "checked";}
 	if ($table_config['Favorites'] == 1) {$col_checkbox['Favorites'] = "checked";}
@@ -167,7 +167,7 @@ function set_column_checkboxes($table_config) {
 	return $col_checkbox;
 }
 
-// Read logfiles -----------------------------------------------------------------
+// Read logfiles --------------------------------------------------------------
 function read_logfile($logfile, $logmessage) {
 	$file = file_get_contents('./php/server/' . $logfile, true);
 	if ($file == "") {echo $logmessage;}
@@ -178,7 +178,7 @@ function read_logfile($logfile, $logmessage) {
 	echo str_replace("\n", '<br>', str_replace("    ", '&nbsp;&nbsp;&nbsp;&nbsp;', str_replace("        ", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $file)));
 }
 
-// Read Vendor logfiles -----------------------------------------------------------------
+// Read Vendor logfiles -------------------------------------------------------
 function read_logfile_vendor() {
 	global $pia_lang;
 
@@ -200,7 +200,7 @@ function read_logfile_vendor() {
 	}
 }
 
-// Top Modal Block -----------------------------------------------------------------
+// Top Modal Block ------------------------------------------------------------
 function print_logviewer_modal_head($id, $title) {
 	echo '<div class="modal fade" id="modal-logviewer-' . $id . '">
         <div class="modal-dialog modal-dialog-centered">
@@ -214,7 +214,7 @@ function print_logviewer_modal_head($id, $title) {
                     <div class="main_logviwer_log" style="max-height: 70vh;">';
 }
 
-// Bottom Modal Block -----------------------------------------------------------------
+// Bottom Modal Block ---------------------------------------------------------
 function print_logviewer_modal_foot() {
 	global $pia_lang;
 	echo '                <br></div>
@@ -226,8 +226,7 @@ function print_logviewer_modal_foot() {
         </div>
     </div>';
 }
-
-// Set Tab ----------------------------------------------------------------------------
+// Set Tab --------------------------------------------------------------------
 if ($_REQUEST['tab'] == '1') {
 	$pia_tab_setting = 'active';
 	$pia_tab_tool = '';
@@ -258,7 +257,7 @@ if ($_REQUEST['tab'] == '1') {
     <div class="row">
       <div class="col-md-12">
 
-<!-- Status Box ----------------------------------------------------------------- -->
+<!-- Status Box ----------------------------------------------------------- -->
     <div class="box" id="Maintain-Status">
         <div class="box-header with-border">
             <h3 class="box-title">Status</h3>
@@ -299,7 +298,7 @@ if ($_REQUEST['tab'] == '1') {
                     <div class="db_info_table_cell"><?=$pia_lang['Maintenance_arp_status'];?></div>
                     <div class="db_info_table_cell">
                         <?php echo $_SESSION['arpscan_result'];
-read_arpscan_timer(); ?> <div id="nextscancountdown" style="display: inline-block;"></div></div>
+read_arpscan_timer(); ?></div>
                 </div>
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell">Api-Key</div>
@@ -333,7 +332,7 @@ read_arpscan_timer(); ?> <div id="nextscancountdown" style="display: inline-bloc
       </div>
     </div>
 
-<!-- Log Viewer ----------------------------------------------------------------- -->
+<!-- Log Viewer ----------------------------------------------------------- -->
 
     <div class="box">
         <div class="box-header with-border">
@@ -345,7 +344,6 @@ read_arpscan_timer(); ?> <div id="nextscancountdown" style="display: inline-bloc
             <button type="button" id="tzhrsreawefw" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-vendor"><?=$pia_lang['Maintenance_Tools_Logviewer_Vendor'];?></button>
             <button type="button" id="arzuozhrsfga" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-cleanup"><?=$pia_lang['Maintenance_Tools_Logviewer_Cleanup'];?></button>
             <button type="button" id="ufiienfflgze" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-nmap"><?=$pia_lang['Maintenance_Tools_Logviewer_Nmap'];?></button>
-
 <?php
 if ($_SESSION['Scan_WebServices'] == True) {
 	echo '<button type="button" id="erftttwrdwqqq" class="btn btn-primary main_logviwer_button_m" data-toggle="modal" data-target="#modal-logviewer-webservices">' . $pia_lang['Maintenance_Tools_Logviewer_WebServices'] . '</button>';
@@ -355,32 +353,28 @@ if ($_SESSION['Scan_WebServices'] == True) {
     </div>
 
 <?php
-// Log Viewer - Modals Scan
+// Log Viewer - Modals
+// Scan
 print_logviewer_modal_head('scan', 'pialert.1.log (File)');
 read_logfile('pialert.1.log', $pia_lang['Maintenance_Tools_Logviewer_Scan_empty']);
 print_logviewer_modal_foot();
-
-// Log Viewer - Modals IP
+// Internet IP
 print_logviewer_modal_head('iplog', 'pialert.IP.log (File)');
 read_logfile('pialert.IP.log', $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty']);
 print_logviewer_modal_foot();
-
-// Log Viewer - Modals Vendor Update
+// Vendor Update
 print_logviewer_modal_head('vendor', 'pialert.vendors.log (File)');
 read_logfile_vendor();
 print_logviewer_modal_foot();
-
-// Log Viewer - Modals Cleanup
+// Cleanup
 print_logviewer_modal_head('cleanup', 'pialert.cleanup.log (File)');
 read_logfile('pialert.cleanup.log', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty']);
 print_logviewer_modal_foot();
-
-// Log Viewer - Modals Nmap
+// Nmap
 print_logviewer_modal_head('nmap', 'last Nmap Scan (Memory)');
 if (!isset($_SESSION['ScanShortMem_NMAP'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem_NMAP'];}
 print_logviewer_modal_foot();
-
-// Log Viewer - Modals WebServices
+// WebServices
 if ($_SESSION['Scan_WebServices'] == True) {
 	print_logviewer_modal_head('webservices', 'pialert.webservices.log (File)');
 	read_logfile('pialert.webservices.log', $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']);
@@ -403,22 +397,21 @@ if ($_SESSION['Scan_WebServices'] == True) {
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell" colspan="2" style="padding-bottom: 20px;">
                         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-
-<!-- Toggle Main Scan ----------------------------------------------------------------- -->
+<!-- Toggle Main Scan ----------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($_SESSION['Scan_MainScan'], 1);?>
                                     <button type="button" class="btn btn-default dbtools-button" id="btnEnableMainScanMon" onclick="askEnableMainScan()"><?=$pia_lang['Maintenance_Tool_mainscan'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
-<!-- Toggle Web Service Monitoring ----------------------------------------------------------------- -->
+<!-- Toggle Web Service Monitoring ---------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($_SESSION['Scan_WebServices'], 1);?>
                                     <button type="button" class="btn btn-default dbtools-button" id="btnEnableWebServiceMon" onclick="askEnableWebServiceMon()"><?=$pia_lang['Maintenance_Tool_webservicemon'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
-<!-- Toggle ICMP Monitoring ----------------------------------------------------------------- -->
+<!-- Toggle ICMP Monitoring ----------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($_SESSION['ICMPScan'], 1);?>
@@ -429,17 +422,19 @@ if ($_SESSION['Scan_WebServices'] == True) {
                     </td>
 				</tr>
                 <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_c'];?></h4></td></tr>
+<!-- API Key -------------------------------------------------------------- -->
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnSetAPIKey" onclick="askSetAPIKey()"><?=$pia_lang['Maintenance_Tool_setapikey'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_setapikey_text'];?></td>
                 </tr>
+<!-- Test Notification ---------------------------------------------------- -->
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a"><button type="button" class="btn btn-default dbtools-button" id="btnTestNotific" onclick="askTestNotificationSystem()"><?=$pia_lang['Maintenance_Tool_test_notification'];?></button></td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_test_notification_text'];?></td>
                 </tr>
+<!-- Pause Scan ----------------------------------------------------------- -->
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell db_tools_table_cell_a">
-
                         <div style="display: inline-block; text-align: center;">
                               <div class="form-group" style="width:160px; margin-bottom:5px;">
                                 <!-- <div class="col-sm-7"> -->
@@ -466,7 +461,6 @@ if ($_SESSION['Scan_WebServices'] == True) {
                                 <div id="TimeralertText" class=""><?=$pia_lang['Maintenance_Tool_arpscansw'];?></div></button>
                             </div>
                         </div>
-
                     </td>
                     <td class="db_info_table_cell db_tools_table_cell_b"><?=$pia_lang['Maintenance_Tool_arpscansw_text'];?></td>
                 </tr>
@@ -480,7 +474,6 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
 ?>
                 </tr>
             </table>
-
         </div>
         <div class="tab-pane <?=$pia_tab_gui;?>" id="tab_GUI">
 			<table class="table_settings">
@@ -491,7 +484,7 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                 <tr class="table_settings_row">
                     <td class="db_info_table_cell" colspan="2" style="padding-bottom: 20px;">
                         <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-<!-- Language Selection ----------------------------------------------------------------- -->
+<!-- Language Selection --------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
@@ -513,7 +506,7 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                                     <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveLangSelection" onclick="setPiAlertLanguage()" ><?=$pia_lang['Maintenance_lang_selector_apply'];?> </button>
                                 </div>
                             </div>
-<!-- Theme Selection ----------------------------------------------------------------- -->
+<!-- Theme Selection ------------------------------------------------------ -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                     <div class="form-group" style="width:160px; margin-bottom:5px;">
@@ -542,14 +535,14 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                                     <button type="button" class="btn btn-default" style="margin-top:0px; width:160px;" id="btnSaveSkinSelection" onclick="setPiAlertTheme()" ><?=$pia_lang['Maintenance_themeselector_apply'];?> </button>
                                 </div>
                             </div>
-<!-- Toggle DarkMode ----------------------------------------------------------------- -->
+<!-- Toggle DarkMode ------------------------------------------------------ -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($ENABLED_DARKMODE, 1);?>
                                     <button type="button" class="btn btn-default dbtools-button" id="btnEnableDarkmode" onclick="askEnableDarkmode()"><?=$pia_lang['Maintenance_Tool_darkmode'] . '<br>' . $state;?></button>
                                 </div>
                             </div>
-<!-- Toggle History Graph ----------------------------------------------------------------- -->
+<!-- Toggle History Graph ------------------------------------------------- -->
                             <div class="settings_button_wrapper">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($ENABLED_HISTOY_GRAPH, 1);?>
@@ -564,86 +557,94 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                     <td class="db_info_table_cell" colspan="2" style="text-align: justify;"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_e_Intro'];?></td>
                 </tr>
                 <tr><td class="db_info_table_cell" colspan="2" style="padding: 10px;">
-                      <div class="form-group">
-                        <label class="col-xs-3 col-md-1" style="margin-top: 5px;">FavIcon</label>
-                        <div class="col-xs-9 col-md-6">
-                          <div class="input-group">
-                            <input class="form-control" id="txtFavIconURL" type="text" value="<?=$FRONTEND_FAVICON?>">
-                            <div class="input-group-btn">
-                              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" >
-                                <span class="fa fa-caret-down"></span></button>
-                              <ul id="dropdownFavIcons" class="dropdown-menu dropdown-menu-right">
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_w_local')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_w_local')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_b_local')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_b_local')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+					<div class="row">
+        				<div class="col-md-10">
+	                      <div class="form-group">
+	                        <label class="col-xs-3 col-md-2" style="margin-top: 5px;">FavIcon</label>
+	                        <div class="col-xs-9 col-md-10">
+	                          <div class="input-group" style="margin-bottom: 20px;">
+	                            <input class="form-control" id="txtFavIconURL" type="text" value="<?=$FRONTEND_FAVICON?>">
+	                            <div class="input-group-btn">
+	                              <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" >
+	                                <span class="fa fa-caret-down"></span></button>
+	                              <ul id="dropdownFavIcons" class="dropdown-menu dropdown-menu-right">
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_w_local')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_w_local')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_b_local')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_b_local')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_w_local')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_w_local')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_b_local')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_b_local')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_w_local')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_w_local')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_b_local')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_b_local')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_w_local')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_w_local')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_b_local')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_b_local')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_w_local')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_w_local')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_b_local')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_b_local')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_w_local')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_w_local')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_b_local')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_b_local')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_w_local')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_w_local')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_b_local')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_b_local')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_w_local')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_w_local')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_b_local')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_b_local')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_w_local')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_w_local')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_b_local')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_b_local')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackglass_w_local')">  <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackflat_w_local')">   <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteglass_b_local')">  <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteflat_b_local')">   <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackglass_w_local')">  <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackflat_w_local')">   <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteglass_b_local')">  <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteflat_b_local')">   <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_local'];?>)</a></li>
 
+	                                <li class="divider"></li>
 
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_w_remote')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_w_remote')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_b_remote')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_b_remote')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_w_remote')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_w_remote')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redglass_b_remote')">    <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','redflat_b_remote')">     <?=$pia_lang['FavIcon_color_red'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_w_remote')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_w_remote')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_b_remote')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_b_remote')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_w_remote')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_w_remote')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueglass_b_remote')">   <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blueflat_b_remote')">    <?=$pia_lang['FavIcon_color_blue'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_w_remote')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_w_remote')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_b_remote')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_b_remote')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_w_remote')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_w_remote')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenglass_b_remote')">  <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','greenflat_b_remote')">   <?=$pia_lang['FavIcon_color_green'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_w_remote')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_w_remote')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_b_remote')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_b_remote')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_w_remote')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_w_remote')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowglass_b_remote')"> <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','yellowflat_b_remote')">  <?=$pia_lang['FavIcon_color_yellow'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_w_remote')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_w_remote')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_b_remote')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_b_remote')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_w_remote')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_w_remote')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleglass_b_remote')"> <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','purpleflat_b_remote')">  <?=$pia_lang['FavIcon_color_purple'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackglass_w_remote')">  <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackflat_w_remote')">   <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteglass_b_remote')">  <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteflat_b_remote')">   <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
+	                              </ul>
+	                            </div>
+	                          </div>
+	                        </div>
+	                      </div>
+        				</div>
+        				<div class="col-md-2 text-center">
+        					 <img src="<?=$FRONTEND_FAVICON?>" alt="FavIcon Preview" width="50" height="50" style="margin-bottom: 20px;">
+        				</div>
+     				</div>
+					<div class="row">
+        				<div class="col-md-12 text-center">
+        					<button type="button" class="btn btn-default" style="width:160px; margin-bottom: 20px;" id="btnSaveFavIconSelection" onclick="setFavIconURL()" ><?=$pia_lang['Maintenance_themeselector_apply'];?> </button>
+        				</div>
+        			</div>
 
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackglass_w_remote')">  <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','blackflat_w_remote')">   <?=$pia_lang['FavIcon_color_black'];?>, <?=$pia_lang['FavIcon_logo_white']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteglass_b_remote')">  <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_glass'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                                <li><a href="javascript:void(0)" onclick="setTextValue('txtFavIconURL','whiteflat_b_remote')">   <?=$pia_lang['FavIcon_color_white'];?>, <?=$pia_lang['FavIcon_logo_black']?>, <?=$pia_lang['FavIcon_mode_flat'];?> (<?=$pia_lang['FavIcon_remote'];?>)</a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                </tr>
-                <tr class="table_settings">
-                    <td class="db_info_table_cell" colspan="2" style="text-align: center; padding-bottom: 20px;">
-						<button type="button" class="btn btn-default" style="margin-top:10px; width:160px;" id="btnSaveFavIconSelection" onclick="setFavIconURL()" ><?=$pia_lang['Maintenance_themeselector_apply'];?> </button>
                     </td>
                 </tr>
                 <tr><td colspan="2"><h4 class="bottom-border-aqua"><?=$pia_lang['Maintenance_Tools_Tab_Subheadline_b'];?></h4></td></tr>
@@ -794,7 +795,7 @@ echo '</div>';
     </div>
 </div>
 
-<!-- Config Editor ----------------------------------------------------------------- -->
+<!-- Config Editor -------------------------------------------------------- -->
  <div class="box">
         <div class="box-body" id="configeditor">
            <button type="button" id="oisggfjergfeirfj" class="btn btn-danger" data-toggle="modal" data-target="#modal-config-editor"><?=$pia_lang['Maintenance_ConfEditor_Start'];?></button>
@@ -829,7 +830,7 @@ echo '</div>';
     <!-- /.box-body -->
 </div>
 
-<!-- Config Editor - Modals ----------------------------------------------------------------- -->
+<!-- Config Editor - Modals ----------------------------------------------- -->
     <div class="modal fade" id="modal-config-editor">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -854,14 +855,14 @@ echo '</div>';
     </div>
 
 <div style="width: 100%; height: 20px;"></div>
-    <!-- ----------------------------------------------------------------------- -->
+    <!-- ------------------------------------------------------------------ -->
 
 </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
 
-<!-- ----------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------- -->
 <?php
 require 'php/templates/footer.php';
 ?>
@@ -899,99 +900,75 @@ $(document).ready(function () {
 <script>
 initializeiCheck();
 // delete devices with emty macs
-function askDeleteDevicesWithEmptyMACs () {
+function askDeleteDevicesWithEmptyMACs() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_del_empty_macs_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_empty_macs_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteDevicesWithEmptyMACs');
 }
-function deleteDevicesWithEmptyMACs()
-{
-  $.get('php/server/devices.php?action=deleteAllWithEmptyMACs', function(msg) {
-    showMessage (msg);
-  });
+function deleteDevicesWithEmptyMACs() {
+	$.get('php/server/devices.php?action=deleteAllWithEmptyMACs', function(msg) {showMessage (msg);});
 }
 
 // Test Notifications
-function askTestNotificationSystem () {
+function askTestNotificationSystem() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_test_notification_noti'];?>', '<?=$pia_lang['Maintenance_Tool_test_notification_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Run'];?>', 'TestNotificationSystem');
 }
-function TestNotificationSystem()
-{
-  $.get('php/server/devices.php?action=TestNotificationSystem', function(msg) {
-    showMessage (msg);
-  });
+function TestNotificationSystem() {
+	$.get('php/server/devices.php?action=TestNotificationSystem', function(msg) {showMessage (msg);});
 }
 
 // delete all devices
-function askDeleteAllDevices () {
+function askDeleteAllDevices() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_del_alldev_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_alldev_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteAllDevices');
 }
-function deleteAllDevices()
-{
-  $.get('php/server/devices.php?action=deleteAllDevices', function(msg) {
-    showMessage (msg);
-  });
+function deleteAllDevices() {
+	$.get('php/server/devices.php?action=deleteAllDevices', function(msg) {showMessage (msg);});
 }
 
 // delete all (unknown) devices
-function askDeleteUnknown () {
+function askDeleteUnknown() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_del_unknowndev_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_unknowndev_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteUnknownDevices');
 }
-function deleteUnknownDevices()
-{
-  $.get('php/server/devices.php?action=deleteUnknownDevices', function(msg) {
-    showMessage (msg);
-  });
+function deleteUnknownDevices() {
+	$.get('php/server/devices.php?action=deleteUnknownDevices', function(msg) {showMessage (msg);});
 }
 
 // delete all Events
-function askDeleteEvents () {
+function askDeleteEvents() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_del_allevents_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_allevents_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteEvents');
 }
-function deleteEvents()
-{
-  $.get('php/server/devices.php?action=deleteEvents', function(msg) {
-    showMessage (msg);
-  });
+function deleteEvents() {
+	$.get('php/server/devices.php?action=deleteEvents', function(msg) {showMessage (msg);});
 }
 
 // delete Hostory
-function askDeleteActHistory () {
+function askDeleteActHistory() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_del_ActHistory_noti'];?>', '<?=$pia_lang['Maintenance_Tool_del_ActHistory_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'deleteActHistory');
 }
-function deleteActHistory()
-{
-  $.get('php/server/devices.php?action=deleteActHistory', function(msg) {
-    showMessage (msg);
-  });
+function deleteActHistory() {
+	$.get('php/server/devices.php?action=deleteActHistory', function(msg) {showMessage (msg);});
 }
 
 // Backup DB to Archive
-function askBackupDBtoArchive () {
+function askBackupDBtoArchive() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_backup_noti'];?>', '<?=$pia_lang['Maintenance_Tool_backup_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Backup'];?>', 'BackupDBtoArchive');
 }
-function BackupDBtoArchive()
-{
-  $.get('php/server/files.php?action=BackupDBtoArchive', function(msg) {
-    showMessage (msg);
-  });
+function BackupDBtoArchive() {
+	$.get('php/server/files.php?action=BackupDBtoArchive', function(msg) {showMessage (msg);});
 }
 
 // Restore DB from Archive
-function askRestoreDBfromArchive () {
+function askRestoreDBfromArchive() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_restore_noti'];?>', '<?=$pia_lang['Maintenance_Tool_restore_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Restore'];?>', 'RestoreDBfromArchive');
 }
-function RestoreDBfromArchive()
-{
-  $.get('php/server/files.php?action=RestoreDBfromArchive', function(msg) {
-    showMessage (msg);
-  });
+function RestoreDBfromArchive() {
+	$.get('php/server/files.php?action=RestoreDBfromArchive', function(msg) {showMessage (msg);});
 }
 
 // Purge Backups
@@ -999,11 +976,8 @@ function askPurgeDBBackups() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_purgebackup_noti'];?>', '<?=$pia_lang['Maintenance_Tool_purgebackup_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Purge'];?>', 'PurgeDBBackups');
 }
-function PurgeDBBackups()
-{
-  $.get('php/server/files.php?action=PurgeDBBackups', function(msg) {
-    showMessage (msg);
-  });
+function PurgeDBBackups() {
+	$.get('php/server/files.php?action=PurgeDBBackups', function(msg) {showMessage (msg);});
 }
 
 // Backup DB to CSV
@@ -1011,11 +985,8 @@ function askBackupDBtoCSV() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_backupcsv_noti'];?>', '<?=$pia_lang['Maintenance_Tool_backupcsv_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Backup'];?>', 'BackupDBtoCSV');
 }
-function BackupDBtoCSV()
-{
-  $.get('php/server/files.php?action=BackupDBtoCSV', function(msg) {
-    showMessage (msg);
-  });
+function BackupDBtoCSV() {
+	$.get('php/server/files.php?action=BackupDBtoCSV', function(msg) {showMessage (msg);});
 }
 
 // Switch Darkmode
@@ -1023,11 +994,8 @@ function askEnableDarkmode() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_darkmode_noti'];?>', '<?=$pia_lang['Maintenance_Tool_darkmode_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableDarkmode');
 }
-function EnableDarkmode()
-{
-  $.get('php/server/files.php?action=EnableDarkmode', function(msg) {
-    showMessage (msg);
-  });
+function EnableDarkmode() {
+	$.get('php/server/files.php?action=EnableDarkmode', function(msg) {showMessage (msg);});
 }
 
 // Switch Web Service Monitor
@@ -1035,11 +1003,8 @@ function askEnableWebServiceMon() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_webservicemon_noti'];?>', '<?=$pia_lang['Maintenance_Tool_webservicemon_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableWebServiceMon');
 }
-function EnableWebServiceMon()
-{
-  $.get('php/server/services.php?action=EnableWebServiceMon', function(msg) {
-    showMessage (msg);
-  });
+function EnableWebServiceMon() {
+	$.get('php/server/services.php?action=EnableWebServiceMon', function(msg) {showMessage (msg);});
 }
 
 // Switch ICMP Monitor
@@ -1047,11 +1012,8 @@ function askEnableICMPMon() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_icmpmon_noti'];?>', '<?=$pia_lang['Maintenance_Tool_icmpmon_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableICMPMon');
 }
-function EnableICMPMon()
-{
-  $.get('php/server/icmpmonitor.php?action=EnableICMPMon', function(msg) {
-    showMessage (msg);
-  });
+function EnableICMPMon() {
+	$.get('php/server/icmpmonitor.php?action=EnableICMPMon', function(msg) {showMessage (msg);});
 }
 
 // Switch MainScan
@@ -1059,11 +1021,8 @@ function askEnableMainScan() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_mainscan_noti'];?>', '<?=$pia_lang['Maintenance_Tool_mainscan_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableMainScan');
 }
-function EnableMainScan()
-{
-  $.get('php/server/devices.php?action=EnableMainScan', function(msg) {
-    showMessage (msg);
-  });
+function EnableMainScan() {
+	$.get('php/server/devices.php?action=EnableMainScan', function(msg) {showMessage (msg);});
 }
 
 // Toggle Graph
@@ -1071,11 +1030,8 @@ function askEnableOnlineHistoryGraph() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti'];?>', '<?=$pia_lang['Maintenance_Tool_onlinehistorygraph_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'EnableOnlineHistoryGraph');
 }
-function EnableOnlineHistoryGraph()
-{
-  $.get('php/server/files.php?action=EnableOnlineHistoryGraph', function(msg) {
-    showMessage (msg);
-  });
+function EnableOnlineHistoryGraph() {
+	$.get('php/server/files.php?action=EnableOnlineHistoryGraph', function(msg) {showMessage (msg);});
 }
 
 // Set API-Key
@@ -1083,11 +1039,8 @@ function askSetAPIKey() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_setapikey_noti'];?>', '<?=$pia_lang['Maintenance_Tool_setapikey_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Okay'];?>', 'SetAPIKey');
 }
-function SetAPIKey()
-{
-  $.get('php/server/files.php?action=SetAPIKey', function(msg) {
-    showMessage (msg);
-  });
+function SetAPIKey() {
+	$.get('php/server/files.php?action=SetAPIKey', function(msg) {showMessage (msg);});
 }
 
 // Enable Login
@@ -1095,11 +1048,8 @@ function askPiAlertLoginEnable() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_loginenable_noti'];?>', '<?=$pia_lang['Maintenance_Tool_loginenable_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiAlertLoginEnable');
 }
-function PiAlertLoginEnable()
-{
-  $.get('php/server/files.php?action=LoginEnable', function(msg) {
-    showMessage (msg);
-  });
+function PiAlertLoginEnable() {
+	$.get('php/server/files.php?action=LoginEnable', function(msg) {showMessage (msg);});
 }
 
 // Disable Login
@@ -1107,11 +1057,8 @@ function askPiAlertLoginDisable() {
   showModalWarning('<?=$pia_lang['Maintenance_Tool_logindisable_noti'];?>', '<?=$pia_lang['Maintenance_Tool_logindisable_noti_text'];?>',
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Switch'];?>', 'PiAlertLoginDisable');
 }
-function PiAlertLoginDisable()
-{
-  $.get('php/server/files.php?action=LoginDisable', function(msg) {
-    showMessage (msg);
-  });
+function PiAlertLoginDisable() {
+	$.get('php/server/files.php?action=LoginDisable', function(msg) {showMessage (msg);});
 }
 
 function setTextValue (textElement, textValue) {
@@ -1120,23 +1067,17 @@ function setTextValue (textElement, textValue) {
 
 // Set Theme
 function setPiAlertTheme () {
-  $.get('php/server/files.php?action=setTheme&SkinSelection='+ $('#txtSkinSelection').val(), function(msg) {
-    showMessage (msg);
-  });
+	$.get('php/server/files.php?action=setTheme&SkinSelection='+ $('#txtSkinSelection').val(), function(msg) {showMessage (msg);});
 }
 
 // Set Language
 function setPiAlertLanguage() {
-  $.get('php/server/files.php?action=setLanguage&LangSelection='+ $('#txtLangSelection').val(), function(msg) {
-    showMessage (msg);
-  });
+	$.get('php/server/files.php?action=setLanguage&LangSelection='+ $('#txtLangSelection').val(), function(msg) {showMessage (msg);});
 }
 
 // Set FavIcon
 function setFavIconURL() {
-  $.get('php/server/files.php?action=setFavIconURL&FavIconURL='+ $('#txtFavIconURL').val(), function(msg) {
-    showMessage (msg);
-  });
+	$.get('php/server/files.php?action=setFavIconURL&FavIconURL='+ $('#txtFavIconURL').val(), function(msg) {showMessage (msg);});
 }
 
 // Set ArpScanTimer
@@ -1156,13 +1097,9 @@ function setPiAlertArpTimer() {
 // Backup Configfile
 function BackupConfigFile(reload)  {
 	if (reload == 'yes') {
-		$.get('php/server/files.php?action=BackupConfigFile&reload=yes', function(msg) {
-		    showMessage (msg);
-		  });
+		$.get('php/server/files.php?action=BackupConfigFile&reload=yes', function(msg) {showMessage (msg);});
 	} else {
-		$.get('php/server/files.php?action=BackupConfigFile&reload=no', function(msg) {
-		    showMessage (msg);
-		  });
+		$.get('php/server/files.php?action=BackupConfigFile&reload=no', function(msg) {showMessage (msg);});
 	}
 }
 
@@ -1172,19 +1109,15 @@ function askRestoreConfigFile() {
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Run'];?>', 'RestoreConfigFile');
 }
 function RestoreConfigFile() {
-  $.get('php/server/files.php?action=RestoreConfigFile', function(msg) {
-    showMessage (msg);
-  });
+	$.get('php/server/files.php?action=RestoreConfigFile', function(msg) {showMessage (msg);});
 }
 
 function SaveConfigFile() {
-  var postData = {
-    action: 'SaveConfigFile',
-    configfile: $('#ConfigFileEditor').val()
-  };
-  $.post('php/server/files.php', postData, function(msg) {
-    showMessage(msg);
-  });
+	var postData = {
+		action: 'SaveConfigFile',
+		configfile: $('#ConfigFileEditor').val()
+	};
+	$.post('php/server/files.php', postData, function(msg) {showMessage(msg);});
 }
 
 // Set Device List Column
@@ -1216,9 +1149,7 @@ function askDeleteInactiveHosts() {
     '<?=$pia_lang['Gen_Cancel'];?>', '<?=$pia_lang['Gen_Delete'];?>', 'DeleteInactiveHosts');
 }
 function DeleteInactiveHosts() {
-  $.get('php/server/devices.php?action=DeleteInactiveHosts', function(msg) {
-    showMessage (msg);
-  });
+	$.get('php/server/devices.php?action=DeleteInactiveHosts', function(msg) {showMessage (msg);});
 }
 
 // Update Check
