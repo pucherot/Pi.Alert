@@ -21,7 +21,8 @@ function setCookie (cookie, value, expirationHours='') {
   }
 
   // Save Cookie
-  document.cookie = cookie + "=" + value + expires;
+//  document.cookie = cookie + "=" + value + expires;
+  document.cookie = cookie + "=" + value + expires + "; SameSite=Strict; path=/";
 }
 
 // -----------------------------------------------------------------------------
