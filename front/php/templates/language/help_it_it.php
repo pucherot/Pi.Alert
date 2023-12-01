@@ -382,12 +382,14 @@ $help_lang['Cat_Service_701_head'] = 'Quali sono i codici di stato HTTP? (ingles
 // da json
 $help_lang['Cat_Service_702_head'] = 'Quali modifiche vengono segnalate?';
 $help_lang['Cat_Service_702_text'] = 'Gli eventi rilevabili includono:<br>
-									<ul>
-										<li>Cambio del codice di stato HTTP</li>
-										<li>Cambio dell&apos;indirizzo IP</li>
-										<li>Tempo di risposta del server o mancanza di risposta</li>
-									</ul>
-									A seconda delle impostazioni di notifica, verranno segnalati tutti o solo la mancanza di risposta del server.';
+  									<ul>
+  										<li>Cambio nel codice di stato HTTP</li>
+  										<li>Cambio dell&apos;indirizzo IP</li>
+  										<li>Tempo di risposta del server o mancanza di risposta</li>
+  										<li>Modifiche al certificato SSL</li>
+  									</ul>
+  								 A seconda della scelta della notifica, verrà segnalato tutto o solo l&apos;assenza di una risposta dal server. Per le modifiche al certificato viene utilizzato un codice, che viene calcolato nel modo seguente.
+  								 In questo caso, ai singoli campi vengono assegnati i valori 8 = Subject, 4 = Issuer, 2 = Valid from e 1 = Valid to. Quindi, un codice di 13 significa che ci sono state modifiche nei campi Subject, Issuer e Valid to.';
 $help_lang['Cat_Service_703_head'] = 'Informazioni generali sul "Monitoraggio dei servizi web".';
 $help_lang['Cat_Service_703_text'] = 'Il monitoraggio si basa esclusivamente sulle risposte alle richieste HTTP inviate al server web di destinazione. A seconda dello stato del server, possono essere rilevati errori significativi. Se il server non risponde affatto, ciò viene considerato come "Non disponibile/Offline". Queste richieste ai server web vengono eseguite ogni 10 minuti come parte della scansione regolare.';
 $help_lang['Cat_ServiceDetails_750_head'] = 'Non posso modificare tutti i campi.';

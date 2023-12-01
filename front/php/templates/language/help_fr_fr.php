@@ -374,13 +374,15 @@ $help_lang['Cat_Service_700_text'] = 'There are 5 different color codes in total
 $help_lang['Cat_Service_701_head'] = 'What are the HTTP status codes?';
 // from json
 $help_lang['Cat_Service_702_head'] = 'What changes are reported?';
-$help_lang['Cat_Service_702_text'] = 'Detectable events are:<br>
-										<ul>
-											<li>Changing the HTTP status code</li>
-											<li>Change IP</li>
-											<li>Response time of the server or the missing of the response.</li>
-										</ul>
-									 Depending on the choice of notification, either everything is reported, or only the absence of a server response.';
+$help_lang['Cat_Service_702_text'] = 'Les événements détectables comprennent :<br>
+  									<ul>
+  										<li>Changement du code d&apos;état HTTP</li>
+  										<li>Changement d&apos;adresse IP</li>
+  										<li>Temps de réponse du serveur ou absence de réponse</li>
+  										<li>Modifications du certificat SSL</li>
+  									</ul>
+  								 Selon le choix de la notification, soit tout est signalé, soit seulement l&apos;absence d&apos;une réponse du serveur. Pour les modifications apportées au certificat, un code est utilisé, qui est calculé comme suit.
+  								 Dans ce cas, les valeurs 8 = Subject, 4 = Issuer, 2 = Valid from et 1 = Valid to sont attribuées aux champs individuels. Ainsi, un code de 13 signifie qu&apos;il y a eu des modifications dans les champs de Subject, Issuer et Valid to.';
 $help_lang['Cat_Service_703_head'] = 'General information about "Web Service Monitoring".';
 $help_lang['Cat_Service_703_text'] = 'The monitoring is based exclusively on the responses of HTTP requests sent to the page. Depending on the state of the server, meaningful error patterns can be detected here. If the server does not respond at all, this is considered as "Down/Offline". These web server requests are performed every 10 min as part of the normal scan.';
 $help_lang['Cat_ServiceDetails_750_head'] = 'I cannot edit all the fields.';
