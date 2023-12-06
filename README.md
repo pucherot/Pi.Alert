@@ -23,11 +23,13 @@
 
 WIFI / LAN intruder detector with web service monitoring.
 
-Scan the devices connected to your WIFI / LAN and alert you the connection of
-unknown devices. It also warns if a "always connected" device disconnects. In addition, it is 
-possible to check web services for availability. For this purpose HTTP status codes and the 
-response time of the service are evaluated. If a service fails or the HTTP status code changes, 
-a notification can be sent.
+Scan your WIFI/LAN-connected devices and receive alerts for unknown device connections. Get warnings 
+if an "always connected" device disconnects. Additionally, assess web service availability by evaluating 
+the HTTP status code, SSL certificate, and service response time. Receive notifications if the SSL 
+certificate changes, the HTTP status code changes, or if the service becomes unreachable. Other features 
+include the detection of unwanted/foreign DHCP servers and device monitoring using the ping command.
+
+
 
 ![Main screen][main]
 [Compare this fork with the main project](docs/VERSIONCOMPARE.md)
