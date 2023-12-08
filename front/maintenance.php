@@ -516,18 +516,21 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                                           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdownButtonSkinSelection">
                                             <span class="fa fa-caret-down"></span></button>
                                           <ul id="dropdownSkinSelection" class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black-light');">Black-light</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black');">Black</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue-light');">Blue-light</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue');">Blue</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green-light');">Green-light</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green');">Green</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple-light');">Purple-light</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple');">Purple</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red-light');">Red-light</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red');">Red</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow-light');">Yellow-light</a></li>
-                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow');">Yellow</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','leiweibau_dark');">Theme leiweibau-dark</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','leiweibau_light');">Theme leiweibau-light</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black-light');">Skin Black-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-black');">Skin Black</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue-light');">Skin Blue-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-blue');">Skin Blue</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green-light');">Skin Green-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-green');">Skin Green</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple-light');">Skin Purple-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-purple');">Skin Purple</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red-light');">Skin Red-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-red');">Skin Red</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow-light');">Skin Yellow-light</a></li>
+                                            <li><a href="javascript:void(0)" onclick="setTextValue('txtSkinSelection','skin-yellow');">Skin Yellow</a></li>
                                           </ul>
                                         </div>
                                       </div>
@@ -536,7 +539,7 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                                 </div>
                             </div>
 <!-- Toggle DarkMode ------------------------------------------------------ -->
-                            <div class="settings_button_wrapper">
+                            <div class="settings_button_wrapper" id="Darkmode_button_container">
                                 <div class="settings_button_box">
                                 	<?php $state = convert_state($ENABLED_DARKMODE, 1);?>
                                     <button type="button" class="btn btn-default dbtools-button" id="btnEnableDarkmode" onclick="askEnableDarkmode()"><?=$pia_lang['Maintenance_Tool_darkmode'] . '<br>' . $state;?></button>

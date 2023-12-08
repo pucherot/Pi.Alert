@@ -215,17 +215,38 @@ function set_iconcolor_for_skin($skinname) {
 	if ($skinname == 'skin-black-light' || $skinname == 'skin-black') {
 		return 'pialertLogoBlack';
 	} else {return 'pialertLogoWhite';}
-
 }
-// Darkmode
-if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;} else { $ENABLED_DARKMODE = False;}
 // Arp Histroy Graph
 if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;} else { $ENABLED_HISTOY_GRAPH = True;}
-// Theme
-foreach (glob("../db/setting_skin*") as $filename) {
-	$pia_skin_selected = str_replace('setting_', '', basename($filename));
+
+// Prüfe ob es ein Theme gibt, wenn ja, Darkmode soll über css ausgeblendet werden
+$themefile = '../db/setting_theme*';
+$theme_result = glob($themefile);
+// Check if any matching files were found
+if (!empty($theme_result)) {
+	foreach ($theme_result as $file) {
+		$ENABLED_THEMEMODE = True;
+		$ENABLED_DARKMODE = False;
+		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-blue.min.css">';
+		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" onLoad="show_pia_servertime();" >';
+		$theme_selected_head = '<link rel="stylesheet" href="css/themes/' . str_replace('setting_theme_', '', basename($file)) . '/' . str_replace('setting_theme_', '', basename($file)) . '.css">';
+	}
+} else {
+	// Darkmode
+	if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;} else { $ENABLED_DARKMODE = False;}
+
+	// Use saved AdminLTE Skin
+	foreach (glob("../db/setting_skin*") as $filename) {
+		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/' . str_replace('setting_', '', basename($filename)) . '.min.css">';
+		$skin_selected_body = '<body class="hold-transition ' . str_replace('setting_', '', basename($filename)) . ' sidebar-mini" onLoad="show_pia_servertime();" >';
+	}
+	// Use fallback AdminLTE Skin
+	if (strlen($skin_selected_head) == 0) {
+		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-blue.min.css">';
+		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" onLoad="show_pia_servertime();" >';
+	}
 }
-if (strlen($pia_skin_selected) == 0) {$pia_skin_selected = 'skin-blue';}
+
 // Language
 foreach (glob("../db/setting_language*") as $filename) {
 	$pia_lang_selected = str_replace('setting_language_', '', basename($filename));
