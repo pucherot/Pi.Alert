@@ -34,6 +34,11 @@ include the detection of unwanted/foreign DHCP servers and device monitoring usi
 ![Main screen][main]
 [Compare this fork with the main project](docs/VERSIONCOMPARE.md)
 
+Two upcoming themes will look like this:
+
+| ![leiweibau-dark](https://github.com/leiweibau/Pi.Alert/assets/105860611/91e2f874-b3ea-4845-84dd-4df48b117a61) | ![leiweibau-light](https://github.com/leiweibau/Pi.Alert/assets/105860611/a53c5383-5e13-4d25-920f-8c3e034bbea7) |
+| ------ | ------ |
+
 ## Scan Methods
 
   - **arp-scan**. The arp-scan system utility is used to search
@@ -81,7 +86,7 @@ There is a configurable login to prevent unauthorized use. The default password 
   - Manual Nmap scans and Wake-on-LAN (must be supported by the target device) for regular devices and speedtest for the device "Internet" in the details view
   - Simple [network relationship](docs/NETWORK_RELATIONSHIP.md) display
   - Various maintenance tasks and settings (Selection):
-    - Language selection *(english, german, spanish, french)* 
+    - Language selection *(english, german, spanish, french, italian)* 
     - Set API-key
     - Enable/Disable login
     - DB maintenance tools
