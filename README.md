@@ -80,7 +80,7 @@ Two upcoming themes will look like this:
 
 </details>
 
-#### Additional components and Informations
+#### :bulb: Additional components and Informations
 
   - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
   - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
@@ -109,7 +109,7 @@ There is a configurable login to prevent unauthorized use. The default password 
 
 </details>
 
-#### Additional components and Informations
+#### :bulb: Additional components and Informations
 
   - Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
   - [List of Favicons/Homescreen icons](docs/ICONS.md)
@@ -131,7 +131,7 @@ Currently the API offers the possibility to query 6 things:
 
 </details>
 
-#### Additional components and Informations
+#### :bulb: Additional components and Informations
 
  - [Pi.Alert API Usage and Examples / Home Assistant integration](docs/API-USAGE.md)
 
@@ -147,7 +147,7 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
-#### Additional components and Informations
+#### :bulb: Additional components and Informations
 
  - [Things to keep in mind when using different Linux distributions (will be updated if necessary)](docs/LINUX-DISTRIBUTIONS.md)
  - If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
@@ -182,10 +182,12 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
   GPL 3.0
   [Read more here](LICENSE.txt)
 
-### Additionally used components
+### Additionally used components and services
   - Animated GIF (Loading Animation) https://commons.wikimedia.org/wiki/File:Loading_Animation.gif
   - Selfhosted Fonts https://github.com/adobe-fonts/source-sans
   - Bootstrap Icons https://github.com/twbs/icons
+  - For final processing of background images https://www.imgonline.com.ua/eng/make-seamless-texture.php
+  - Translations: https://www.deepl.com and ChatGPT (https://chat.openai.com)
 
 ### Special thanks
 
