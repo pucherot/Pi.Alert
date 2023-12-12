@@ -44,7 +44,7 @@ require 'php/templates/language/' . $pia_lang_selected . '.php';
   <!-- Theme style -->
   <link rel="stylesheet" href="lib/AdminLTE/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. -->
-  <link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/<?=$pia_skin_selected;?>.min.css">
+  <?=$skin_selected_head;?>
   <!-- Pi.Alert CSS -->
   <link rel="stylesheet" href="css/pialert.css?<?=$conf_data['VERSION_DATE'];?>">
   <!-- Offline Font -->
@@ -59,9 +59,10 @@ require 'php/templates/language/' . $pia_lang_selected . '.php';
 <?php
 if ($ENABLED_DARKMODE === True) {
 	echo '<link rel="stylesheet" href="css/dark-patch.css?' . $conf_data['VERSION_DATE'] . '">';
-	$BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/boxed-bg-dark.png\');"';
-} else {
-	$BACKGROUND_IMAGE_PATCH = 'style="background-image: url(\'img/background.png\');"';
+}
+if ($ENABLED_THEMEMODE === True) {
+	echo $theme_selected_head;
+	// echo '<link rel="stylesheet" href="css/miranda.css?' . $conf_data['VERSION_DATE'] . '">';
 }
 ?>
   <!-- Servertime to the right of the hostname -->
@@ -93,7 +94,7 @@ if ($ENABLED_DARKMODE === True) {
 </head>
 
 <!-- Layout Boxed Yellow -->
-<body class="hold-transition <?=$pia_skin_selected;?> sidebar-mini" <?=$BACKGROUND_IMAGE_PATCH;?> onLoad="show_pia_servertime();" >
+<?=$skin_selected_body;?>
 <!-- Site wrapper -->
 <div class="wrapper">
 

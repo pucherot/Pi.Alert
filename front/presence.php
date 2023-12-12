@@ -91,7 +91,7 @@ $Pia_Graph_Device_Arch = $graph_arrays[4];
               <div class="inner"> <h3 id="devicesNew"> -- </h3>
                 <p class="infobox_label"><?=$pia_lang['Presence_Shortcut_NewDevices'];?></p>
               </div>
-              <div class="icon"> <i class="ion ion-plus-round text-yellow-40"></i> </div>
+              <div class="icon"> <i class="fa fa-plus text-yellow-40"></i> </div>
             </div>
           </a>
         </div>
@@ -174,7 +174,7 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
                 <div class="panel panel-default pa_spinner">
                   <table>
                     <td width="130px" align="middle">Loading...</td>
-                    <td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td>
+                    <td><i class="ion ion-ios-sync fa-spin fa-2x fa-fw"></td>
                   </table>
                 </div>
               </div>

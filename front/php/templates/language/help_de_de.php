@@ -375,12 +375,12 @@ $help_lang['Cat_Network_601_text'] = 'Die Seite besteht aus 2 Komponenten: Der D
 									 Verwaltungsseite hat auschließlich Auswirkungen auf die Darstellungsseite, jedoch nicht auf die Geräte Liste selbst. <br>
 									 <br>
 									 Auf der Verwaltungsseite wird z.B. ein Switch erstellt. Bereits erkannte Geräte werden in der Auswahlliste angezeigt. Du gibt\'s zusätzlich den Typ und die Portanzahl an.<br><br>
-										 In der Detailansicht eines jeden erkannten Gerätes, hast du nun die Möglichkeit, diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
-										 Jetzt zeigt dir die Netzwerk Darstellunsseite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit,
+									 In der Detailansicht eines jeden erkannten Gerätes, hast du nun die Möglichkeit, diesen gerade erstellten Switch und den belegten Port zu speichern.<br><br>
+									 Jetzt zeigt dir die Netzwerk Darstellunsseite den Switch mit seinen Ports und den daran angeschlossenen Geräten an. Du hast bei jedem Gerät in der Detailansicht die Möglichkeit,
 									 mehrere Ports an einem Switch, die du mit einem Komma trennst, zu belegen (z.B. bei Link-Aggregation). Auch ist es möglich, mehrere Geräte einem Port zuzuordnen (z.B. ein Server
 									 mit mehreren virtuellen Maschinen).<br>
 									 <br>
-										 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Verwaltungsseite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab
+									 Einen Switch kannst du analog dazu auch einem Router zuweisen, wenn du diesen zuvor auf der Verwaltungsseite erstellt hast. Im Normalfall wird dieser Switch nun auf dem Router-Tab
 									 angezeigt. Was aber nicht geschieht ist, dass der Router auf dem Switchport angezeigt wird. Hierfür ist es nötig und möglich, eine manuelle Port-Konfiguration zu speichern. Dazu
 									 rufst du die Verwaltungsseite auf und wählst den Switch in der Bearbeitung aus. Nachdem du den Typ und die Portanzahl erneut eingegeben hast (falls das automatische Ausfüllen nicht
 									 funktioniert), hast du im untersten Feld eine Auswahlliste an möglichen Geräte. Nach der Auswahl ist nur noch die MAC-Adresse, gefolgt von einem "," zu sehen. Füge hier nun einfach
@@ -403,8 +403,10 @@ $help_lang['Cat_Service_702_text'] = 'Feststellbare Events sind:<br>
 											<li>Änderung des HTTP Status Codes</li>
 											<li>Änderung der IP</li>
 											<li>Antwortzeit des Servers bzw. das Ausbleiben der Antwort</li>
+											<li>Änderungen am SSL Zertifikat</li>
 										</ul>
-									 Je nach Wahl der Benachrichtigung, wird entweder alles gemeldet, oder nur das Ausbleiben einer Serverantwort.';
+									 Je nach Wahl der Benachrichtigung, wird entweder alles gemeldet, oder nur das Ausbleiben einer Serverantwort. Bei Änderungen am Zertifikat kommt ein Code zum Einsatz, der folgendermaßen berechnet wird.
+									 Hierbei werden den einzelnen Feldern die Werte 8 = Subject, 4 = Issuer, 2 = Valid from und 1 = Valid to zugewiesen. Ein Code 13 bedeutet also, dass es Änderungen in den Feldern Subject, Issuer und Valid to gab.';
 $help_lang['Cat_Service_703_head'] = 'Allgemeines zum "Web Service Monitoring".';
 $help_lang['Cat_Service_703_text'] = 'Das Monitoring basiert ausschließlich auf den Antworten von  HTTP-Requests, welche an die Seite gesendet werden. Je nach Zustand des Servers können hier sinnvolle Fehlerbilder erkannt werden. Falls der Server überhaupt nicht reagiert, wird dies als "Down/Offline" gewertet. Diese Webserver-Anfragen werden alle 10min im Rahmen der Rahmen des normalen Scans durchgeführt.';
 $help_lang['Cat_ServiceDetails_750_head'] = 'Ich kann nicht alle Felder bearbeiten.';

@@ -561,7 +561,7 @@ function SetAPIKey() {
 function setTheme() {
 	global $pia_lang;
 
-	$pia_installed_skins = array('skin-black-light',
+	$installed_skins = array('skin-black-light',
 		'skin-black',
 		'skin-blue-light',
 		'skin-blue',
@@ -574,24 +574,57 @@ function setTheme() {
 		'skin-yellow-light',
 		'skin-yellow');
 
+	$installed_themes = array('leiweibau_dark',
+		'leiweibau_light');
+
 	if (isset($_REQUEST['SkinSelection'])) {
-		$pia_skin_set_dir = '../../../db/';
+		$skin_set_dir = '../../../db/';
 		// echo "Enter Level 1";
-		$pia_skin_selector = htmlspecialchars($_REQUEST['SkinSelection']);
-		if (in_array($pia_skin_selector, $pia_installed_skins)) {
-			foreach ($pia_installed_skins as $file) {
-				unlink($pia_skin_set_dir . '/setting_' . $file);
+		$skin_selector = htmlspecialchars($_REQUEST['SkinSelection']);
+		if (in_array($skin_selector, $installed_skins)) {
+			// lösche alle vorherigen skins
+			foreach ($installed_skins as $file) {
+				unlink($skin_set_dir . '/setting_' . $file);
 			}
-			foreach ($pia_installed_skins as $file) {
-				if (file_exists($pia_skin_set_dir . '/setting_' . $file)) {
-					$pia_skin_error = True;
+			// lösche alle vorherigen themes
+			foreach ($installed_themes as $file) {
+				unlink($skin_set_dir . '/setting_theme_' . $file);
+			}
+			foreach ($installed_skins as $file) {
+				if (file_exists($skin_set_dir . '/setting_' . $file)) {
+					$skin_error = True;
 					break;
 				} else {
-					$pia_skin_error = False;
+					$skin_error = False;
 				}
 			}
-			if ($pia_skin_error == False) {
-				$testskin = fopen($pia_skin_set_dir . 'setting_' . $pia_skin_selector, 'w');
+			if ($skin_error == False) {
+				$testskin = fopen($skin_set_dir . 'setting_' . $skin_selector, 'w');
+				echo $pia_lang['BackDevices_Theme_set'] . ': ' . $_REQUEST['SkinSelection'];
+				echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
+			} else {
+				echo $pia_lang['BackDevices_Theme_notset'];
+				echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
+			}
+		} elseif (in_array($skin_selector, $installed_themes)) {
+			// lösche alle vorherigen skins
+			foreach ($installed_skins as $file) {
+				unlink($skin_set_dir . '/setting_' . $file);
+			}
+			// lösche alle vorherigen themes
+			foreach ($installed_themes as $file) {
+				unlink($skin_set_dir . '/setting_theme_' . $file);
+			}
+			foreach ($installed_skins as $file) {
+				if (file_exists($skin_set_dir . '/setting_theme_' . $file)) {
+					$skin_error = True;
+					break;
+				} else {
+					$skin_error = False;
+				}
+			}
+			if ($skin_error == False) {
+				$testskin = fopen($skin_set_dir . 'setting_theme_' . $skin_selector, 'w');
 				echo $pia_lang['BackDevices_Theme_set'] . ': ' . $_REQUEST['SkinSelection'];
 				echo "<meta http-equiv='refresh' content='2; URL=./maintenance.php?tab=4'>";
 			} else {
@@ -601,7 +634,7 @@ function setTheme() {
 		} else {echo $pia_lang['BackDevices_Theme_invalid'];}
 	}
 	// Logging
-	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0053', '', $pia_skin_selector);
+	pialert_logging('a_005', $_SERVER['REMOTE_ADDR'], 'LogStr_0053', '', $skin_selector);
 }
 
 //  Set Language

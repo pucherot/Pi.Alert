@@ -662,7 +662,7 @@ if ($_REQUEST['mac'] != 'Internet') {
                   <div id="loading" style="display: none">
                     <div class="pa_semitransparent-panel"></div>
                     <div class="panel panel-default pa_spinner">
-                      <table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td></table>
+                      <table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-sync fa-spin fa-2x fa-fw"></td></table>
                     </div>
                   </div>
 
@@ -1055,7 +1055,7 @@ function initializeDatatables () {
     'processing'  : true,
     'language'    : {
       processing: '<table><td width="130px" align="middle">Loading...</td>'+
-                  '<td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw">'+
+                  '<td><i class="ion ion-ios-sync fa-spin fa-2x fa-fw">'+
                   '</td></table>',
       emptyTable: 'No data',
       "lengthMenu": "<?=$pia_lang['Events_Tablelenght'];?>",
@@ -1094,7 +1094,7 @@ function initializeDatatables () {
     'processing'  : true,
     'language'    : {
       processing: '<table><td width="130px" align="middle">Loading...</td>'+
-                  '<td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw">'+
+                  '<td><i class="ion ion-ios-sync fa-spin fa-2x fa-fw">'+
                   '</td></table>',
       emptyTable: 'No data',
       "lengthMenu": "<?=$pia_lang['Events_Tablelenght'];?>",
@@ -1573,7 +1573,7 @@ function initializeSpeedtest () {
     // Processing
     'processing'  : true,
     'language'    : {
-      processing: '<table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td></table>',
+      processing: '<table><td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-sync fa-spin fa-2x fa-fw"></td></table>',
       emptyTable: 'No data',
       "lengthMenu": "<?=$pia_lang['Events_Tablelenght'];?>",
       "search":     "<?=$pia_lang['Events_Searchbox'];?>: ",

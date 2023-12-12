@@ -486,7 +486,7 @@ if ($_REQUEST['mod'] == 'bulkedit') {
             <div class="inner"><h3 id="devicesNew"> -- </h3>
                 <p class="infobox_label"><?=$pia_lang['Device_Shortcut_NewDevices'];?></p>
             </div>
-            <div class="icon"><i class="ion ion-plus-round text-yellow-40"></i></div>
+            <div class="icon"><i class="fa fa-plus text-yellow-40"></i></div>
           </div>
           </a>
         </div>
@@ -766,7 +766,7 @@ function initializeDatatable () {
     // Processing
     'processing'  : true,
     'language'    : {
-      processing: '<table> <td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-loop-strong fa-spin fa-2x fa-fw"></td> </table>',
+      processing: '<table> <td width="130px" align="middle">Loading...</td><td><i class="ion ion-ios-sync fa-spin fa-2x fa-fw"></td> </table>',
       emptyTable: 'No data',
       "lengthMenu": "<?=$pia_lang['Device_Tablelenght'];?>",
       "search":     "<?=$pia_lang['Device_Searchbox'];?>: ",

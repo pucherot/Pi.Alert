@@ -23,19 +23,16 @@
 
 WIFI / LAN intruder detector with web service monitoring.
 
-Scan the devices connected to your WIFI / LAN and alert you the connection of
-unknown devices. It also warns if a "always connected" device disconnects. In addition, it is 
-possible to check web services for availability. For this purpose HTTP status codes and the 
-response time of the service are evaluated. If a service fails or the HTTP status code changes, 
-a notification can be sent.
+Scan your WIFI/LAN-connected devices and receive alerts for unknown device connections. Get warnings 
+if an "always connected" device disconnects. Additionally, assess web service availability by evaluating 
+the HTTP status code, SSL certificate, and service response time. Receive notifications if the SSL 
+certificate changes, the HTTP status code changes, or if the service becomes unreachable. Other features 
+include the detection of unwanted/foreign DHCP servers and device monitoring using the ping command.
+
 
 ![Main screen][main]
 [Compare this fork with the main project](docs/VERSIONCOMPARE.md)
 
-Two upcoming themes will look like this:
-
-| ![leiweibau-dark](https://github.com/leiweibau/Pi.Alert/assets/105860611/91e2f874-b3ea-4845-84dd-4df48b117a61) | ![leiweibau-light](https://github.com/leiweibau/Pi.Alert/assets/105860611/a53c5383-5e13-4d25-920f-8c3e034bbea7) |
-| ------ | ------ |
 
 ## Scan Methods
 
@@ -66,25 +63,37 @@ Two upcoming themes will look like this:
 
 ### Back
 
+<details>
+  <summary>:information_source: Expand for further information</summary>
+
   - Scan the network searching connected devices using the scanning methods described earlier
   - Checks the reachability of web services and informs about SSL certificate changes
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services ([Pushsafer](https://www.pushsafer.com/), [Pushover](https://pushover.net/), NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
   - automated DB cleanup tasks
   - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
-  - Additional information
-    - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
-    - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
+
+</details>
+
+#### :bulb: Additional components and Informations
+
+  - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
+  - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
 
 ### Front
 
 There is a configurable login to prevent unauthorized use. The default password is "123456". By default, this is disabled. If you want to use password protection, enable it in the configuration file `~/pialert/config/pialert.conf` or via [pialert-cli](docs/PIALERTCLI.md).
+
+<details>
+  <summary>:information_source: Expand for further information</summary>
+
   - Manage the devices inventory and the characteristics (individually or with a [bulk editor](docs/BULKEDITOR.md))
   - Display in a visual way all the information collected by the back *(Sessions, Connected devices, Favorites, Events, Presence, Internet IP address changes, ...)*
   - Manual Nmap scans and Wake-on-LAN (must be supported by the target device) for regular devices and speedtest for the device "Internet" in the details view
   - Simple [network relationship](docs/NETWORK_RELATIONSHIP.md) display
   - Various maintenance tasks and settings (Selection):
-    - Language selection *(english, german, spanish, french, italian)* 
+    - Language selection *(english, german, spanish, french, italian)*
+    - AdminLTE-Skins/Theme/FavIcon selection
     - Set API-key
     - Enable/Disable login
     - DB maintenance tools
@@ -93,19 +102,21 @@ There is a configurable login to prevent unauthorized use. The default password 
   - Notification page with download options
   - Journal that tracks operations via the frontend, pialert-cli and cronjob
 
-Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
+</details>
 
-```
-https://raw.githubusercontent.com/leiweibau/Pi.Alert/main/front/img/favicons/glass_black_white.png
-```
+#### :bulb: Additional components and Informations
 
-Instead of "glass_black_white.png" you can use one of the following files.
-
-[List of Favicons/Homescreen icons](docs/ICONS.md)
+  - Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
+  - [List of Favicons/Homescreen icons](docs/ICONS.md)
 
 ### API
 
-A possibility to send a request to the Pi.Alert backend via different ways. Currently the API offers the possibility to query 6 things:
+There are various ways to submit a request to the backend. I will use curl/bash and curl/php as examples in the following. 
+
+<details>
+  <summary>:information_source: Expand for further information</summary>
+
+Currently the API offers the possibility to query 6 things:
   - System status *(Scan on or off, Counts all, online, offline, archived and new devices)*
   - All online devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
   - All offline devices *(MAC, Name, Vendor, LastIP, Infrastructure, Infrastructure_port)*
@@ -113,12 +124,16 @@ A possibility to send a request to the Pi.Alert backend via different ways. Curr
   - All offline ICMP devices *(IP, Name)*
   - Information about a specific device *(all information, without events and presence)*
 
-[Pi.Alert API Usage and Examples / Home Assistant integration](docs/API-USAGE.md)
+</details>
+
+#### :bulb: Additional components and Informations
+
+ - [Pi.Alert API Usage and Examples / Home Assistant integration](docs/API-USAGE.md)
 
 # Installation
 <!--- --------------------------------------------------------------------- --->
 Initially designed to run on a Raspberry Pi, probably it can run on some other
-Linux distributions which use the "apt" package manager. With minor adjustments (FAQ page) I tested Pi.Alert on Dietpi and Ubuntu Server.
+Linux distributions which use the "apt" package manager. Check "[Things to keep in mind when using different Linux distributions](docs/LINUX-DISTRIBUTIONS.md)" before using Pi.Alert with another Debian based distribution like DietPi or Ubuntu Server to see, if there are any special notes to follow.
 
 - One-step Automated Install:
 ```
@@ -127,13 +142,12 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
-If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
+#### :bulb: Additional components and Informations
 
-### Other Pi.Alert projects
-
-Another active developed fork of Pi.Alert based on Docker can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
-
-The original, but unmaintained, Pi.Alert can be found here [pucherot/Pi.Alert](https://github.com/pucherot/Pi.Alert/)
+ - [Things to keep in mind when using different Linux distributions](docs/LINUX-DISTRIBUTIONS.md) (will be updated if necessary)
+ - If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
+ - Another active developed fork of Pi.Alert based on Docker can be found here: [jokob-sk/Pi.Alert](https://github.com/jokob-sk/Pi.Alert)
+ - The original, but unmaintained, Pi.Alert can be found here [pucherot/Pi.Alert](https://github.com/pucherot/Pi.Alert/)
 
 # Update
 <!--- --------------------------------------------------------------------- --->
@@ -163,10 +177,12 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
   GPL 3.0
   [Read more here](LICENSE.txt)
 
-### Additionally used components
+### Additionally used components and services
   - Animated GIF (Loading Animation) https://commons.wikimedia.org/wiki/File:Loading_Animation.gif
   - Selfhosted Fonts https://github.com/adobe-fonts/source-sans
   - Bootstrap Icons https://github.com/twbs/icons
+  - For final processing of background images https://www.imgonline.com.ua/eng/make-seamless-texture.php
+  - Translations: https://www.deepl.com and ChatGPT (https://chat.openai.com)
 
 ### Special thanks
 
