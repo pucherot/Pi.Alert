@@ -30,14 +30,9 @@ certificate changes, the HTTP status code changes, or if the service becomes unr
 include the detection of unwanted/foreign DHCP servers and device monitoring using the ping command.
 
 
-
 ![Main screen][main]
 [Compare this fork with the main project](docs/VERSIONCOMPARE.md)
 
-Two upcoming themes will look like this:
-
-| ![leiweibau-dark](https://github.com/leiweibau/Pi.Alert/assets/105860611/91e2f874-b3ea-4845-84dd-4df48b117a61) | ![leiweibau-light](https://github.com/leiweibau/Pi.Alert/assets/105860611/a53c5383-5e13-4d25-920f-8c3e034bbea7) |
-| ------ | ------ |
 
 ## Scan Methods
 
