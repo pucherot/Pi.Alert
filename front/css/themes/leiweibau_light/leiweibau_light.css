@@ -618,19 +618,12 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .table-responsive {
   border: 0px;
 }
-.login-page {
-  background-color: transparent;
-}
+.login-page { background-color: transparent;}
 .login-logo a {
   color: white;
 }
-.login-box-body {
-  color: #4A4B50;
-  background-color: #272c30;
-}
-#modal-warning-title {
-  color: #fff;
-}
+.login-box-body { color: #4A4B50; background-color: #272c30;}
+#modal-warning-title { color: #fff;}
 .skin-blue .sidebar-menu>li.active>a {
  background-color: rgba(255, 255, 255, 0.3);
  border-left-color: #3c8dbc;
@@ -649,9 +642,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 #custom-menu-default-button { color: #4A4B50;}
 #custom-menu-default-button:hover, #custom-menu-report-button:hover, #custom-menu-logout-button:hover { color: #000;}
 .systemstatusbox { color: #4A4B50 !important;}
-.panel { 
-  background-color: rgba(255, 255, 255, 0.3) !important; 
-}
+.panel { background-color: rgba(255, 255, 255, 0.3) !important; }
 .help_table_gen {border: solid 1px #d2d6de;}
 .help_table_gen_a {border: solid 1px #d2d6de;}
 .help_table_gen_b {border: solid 1px #d2d6de;}
@@ -663,18 +654,12 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .navbar-custom-menu > .navbar-nav > li > .dropdown-menu { background-color: #c7c9f3;}
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer { background-color: transparent;}
 .skin-blue .main-header .navbar .sidebar-toggle:hover { background-color: rgba(255, 255, 255, 0.1);}
-.box {
-  box-shadow: none;
-  border-radius: 4px;
-  background-color: rgba(255,255,255,0.3);
-  border-radius: 10px;
-}
+.box { box-shadow: none; border-radius: 4px; background-color: rgba(255,255,255,0.3); border-radius: 10px;}
 .sidebar { background-color: rgba(255,255,255,0.3); border-bottom-right-radius: 15px;}
 #Darkmode_button_container {display: none; }
 .fc-sat, .fc-sun, .fc-widget-header { background-color: rgba(255, 255, 255, 0.3) !important;}
 .fc-today {background-color: rgba(0, 180, 0, 0.3) !important;}
 #btnPrevious, #btnNext, #txtRecord, #btnPrevious_down, #btnNext_down, #txtRecord_down { background-color: rgba(255, 255, 255, 0.5);}
-
 .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
   z-index: 3;
   color: #fff;
@@ -687,13 +672,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 .main-footer { border: none;}
 .small-box {border-radius: 10px;opacity: 0.8;}
-.skin-blue .sidebar a {
-  color: #4A4B50;
-}
-.dataTables_info, .dataTables_paginate, .dataTables_length, .dataTables_filter {
-  color: #4A4B50;
-}
-
-.box-header.with-border {
-  border-bottom: 1px solid #d2d6de;
-}
+.skin-blue .sidebar a { color: #4A4B50;}
+.dataTables_info, .dataTables_paginate, .dataTables_length, .dataTables_filter {color: #4A4B50;}
+.box-header.with-border { border-bottom: 1px solid #d2d6de;}
+#configeditor_innerbox { border-radius: 8px;}

@@ -806,7 +806,7 @@ echo '</div>';
     </div>
 
     <div class="box box-solid box-danger collapsed-box" style="margin-top: -15px;">
-    <div class="box-header with-border" data-widget="collapse">
+    <div class="box-header with-border" data-widget="collapse" id="configeditor_innerbox">
            <h3 class="box-title"><?=$pia_lang['Maintenance_ConfEditor_Hint'];?></h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>

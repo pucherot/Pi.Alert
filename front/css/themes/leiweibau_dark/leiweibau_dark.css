@@ -640,28 +640,16 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .top_small_box_gray_text {
   color: white !important;
 }
-
 /* remove white border that appears on mobile screen sizes */
-.box-body {
-    border: 0px;
-}
+.box-body {border: 0px;}
 /* remove white border that appears on mobile screen sizes */
-.table-responsive {
-  border: 0px;
-}
-.login-page {
-  background-color: transparent;
-}
+.table-responsive { border: 0px;}
+.login-page { background-color: transparent;}
 .login-logo a {
   color: white;
 }
-.login-box-body {
-  color: #bec5cb;
-  background-color: #272c30;
-}
-#modal-warning-title {
-  color: #fff;
-}
+.login-box-body { color: #bec5cb; background-color: #272c30;}
+#modal-warning-title { color: #fff;}
 .skin-blue .sidebar-menu>li.active>a {
  background-color: rgba(0, 0, 0, 0.3);
  border-left-color: #3c8dbc;
@@ -680,9 +668,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 #custom-menu-default-button { color: #fff;}
 #custom-menu-default-button:hover { color: #000;}
 .systemstatusbox { color: #fff;}
-.panel { 
-  background-color: rgba(0, 0, 0, 0.3) !important; 
-}
+.panel { background-color: rgba(0, 0, 0, 0.3) !important; }
 .help_table_gen {border: solid 1px #666;}
 .help_table_gen_a {border: solid 1px #666;}
 .help_table_gen_b {border: solid 1px #666;}
@@ -694,18 +680,12 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .navbar-custom-menu > .navbar-nav > li > .dropdown-menu { background-color: rgba(30, 30, 40, 1);}
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer { background-color: transparent;}
 .skin-blue .main-header .navbar .sidebar-toggle:hover { background-color: rgba(0, 0, 0, 0.1);}
-.box {
-  box-shadow: none;
-  border-radius: 4px;
-  background-color: rgba(0,0,0,0.3);
-  border-radius: 10px;
-}
+.box { box-shadow: none; border-radius: 4px; background-color: rgba(0,0,0,0.3); border-radius: 10px; }
 .sidebar { background-color: rgba(0,0,0,0.3); border-bottom-right-radius: 15px;}
 #Darkmode_button_container {display: none; }
 .fc-sat, .fc-sun, .fc-widget-header { background-color: rgba(0, 0, 0, 0.3) !important;}
 .fc-today {background-color: rgba(0, 180, 0, 0.3) !important;}
 #btnPrevious, #btnNext, #txtRecord, #btnPrevious_down, #btnNext_down, #txtRecord_down { background-color: rgba(0, 0, 0, 0.5);}
-
 .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
   z-index: 3;
   color: #fff;
@@ -718,3 +698,4 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 .main-footer { border: none;}
 .small-box {border-radius: 10px;opacity: 0.8;}
+#configeditor_innerbox { border-radius: 8px;}
