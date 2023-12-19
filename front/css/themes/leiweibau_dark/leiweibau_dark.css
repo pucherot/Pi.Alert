@@ -676,8 +676,12 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .wrapper, .main-sidebar, .left-side, .main-footer, .skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side, .content-wrapper, .skin-blue .main-header li.user-header {
   background-color: transparent;
 }
+
+#custom-menu-report-button:hover { color: #000;}
+#custom-menu-logout-button:hover { color: #000;}
+
 .skin-blue .main-header .logo , .skin-blue .main-header .logo:hover, .skin-blue .main-header .navbar { background-color: rgba(0, 0, 0, 0.5);}
-.navbar-custom-menu > .navbar-nav > li > .dropdown-menu { background-color: rgba(30, 30, 40, 1);}
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu { background-color: rgba(25, 27, 58, 1);}
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer { background-color: transparent;}
 .skin-blue .main-header .navbar .sidebar-toggle:hover { background-color: rgba(0, 0, 0, 0.1);}
 .box { box-shadow: none; border-radius: 4px; background-color: rgba(0,0,0,0.3); border-radius: 10px; }
