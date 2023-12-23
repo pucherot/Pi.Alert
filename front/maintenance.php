@@ -283,9 +283,9 @@ if ($_REQUEST['tab'] == '1') {
                     </div>
                 </div>
                 <div class="db_info_table_row">
-                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_database_lastmod'].' '.$buffer_indicator;?></div>
+                    <div class="db_info_table_cell"><?=$pia_lang['Maintenance_database_lastmod'];?></div>
                     <div class="db_info_table_cell">
-                        <?=$DB_MOD_DATA;?>
+                        <?=$DB_MOD_DATA.' '.$buffer_indicator;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">

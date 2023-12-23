@@ -479,7 +479,7 @@ $pia_lang['Maintenance_ConfEditor_Restore_info'] = 'Diese Funktion stellt die Ko
 $pia_lang['Maintenance_ConfEditor_Save_info'] = 'Der Inhalt des Textfeldes mit eventuellen Änderungen wird in die Datei "pialert.conf" ge&shy;spei&shy;chert. Die vorherige Kon&shy;figu&shy;ration wird als "pialert-prev.bak" gesichert. Mit jeder Speicherung wird die Datei "pialert-prev.bak" wieder mit der vorherigen Version der Kon&shy;figu&shy;rationsdatei überschrieben.';
 $pia_lang['Maintenance_Tool_ConfBackup'] = 'Config-Backup anlegen';
 $pia_lang['Maintenance_Tool_ConfBackup_text'] = 'Neben der Datei "pialert-prev.bak" wird eine weitere Sicherung mit dem aktuellen Da&shy;tum inkl. Uhrzeit an&shy;ge&shy;legt. Diese Sicherung muss im Bedarfsfall ma&shy;nuell wieder&shy;hergestellt werden (umbenennen in "pialert.conf").';
-$pia_lang['FavIcon_color_white'] = 'weis';
+$pia_lang['FavIcon_color_white'] = 'weiß';
 $pia_lang['FavIcon_color_black'] = 'schwarz';
 $pia_lang['FavIcon_color_red'] = 'rot';
 $pia_lang['FavIcon_color_blue'] = 'blau';
@@ -491,7 +491,7 @@ $pia_lang['FavIcon_logo_black'] = 'dunkles Logo';
 $pia_lang['FavIcon_mode_glass'] = 'glanz';
 $pia_lang['FavIcon_mode_flat'] = 'matt';
 $pia_lang['FavIcon_local'] = 'lokal';
-$pia_lang['FavIcon_remote'] = 'remote';
+$pia_lang['FavIcon_remote'] = 'GitHub';
 
 //////////////////////////////////////////////////////////////////
 // Maintenance Page (Backend)
