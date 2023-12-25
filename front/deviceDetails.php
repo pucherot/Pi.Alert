@@ -1528,6 +1528,12 @@ function setDeviceData (refreshCallback='') {
       refreshCallback();
     }
   });
+
+  // refresh Sidebar
+  setTimeout(function(){
+      updateTotals();
+  }, 1000);
+  
 }
 
 function initializeSpeedtest () {

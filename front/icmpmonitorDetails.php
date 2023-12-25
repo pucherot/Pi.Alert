@@ -835,6 +835,12 @@ function setICMPHostData(refreshCallback='') {
       refreshCallback();
     }
   });
+
+  // refresh Sidebar
+  setTimeout(function(){
+      updateTotals();
+  }, 1000);
+
 }
 
 // -----------------------------------------------------------------------------
