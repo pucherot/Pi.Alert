@@ -437,39 +437,47 @@ if ($_REQUEST['mod'] == 'bulkedit') {
 
       <div class="row">
         <div class="col-lg-3 col-sm-3 col-xs-6">
+        	<a href="#" onclick="javascript: getDevicesList('all');">
           <div class="small-box bg-aqua">
             <div class="inner"><h3 id="devicesAll"> -- </h3>
                 <p class="infobox_label"><?=$pia_lang['Device_Shortcut_AllDevices'];?></p>
             </div>
             <div class="icon"><i class="fa fa-laptop text-aqua-40"></i></div>
           </div>
+        </a>
         </div>
 
         <div class="col-lg-3 col-sm-3 col-xs-6">
+        	<a href="#" onclick="javascript: getDevicesList('connected');">
           <div class="small-box bg-green">
             <div class="inner"><h3 id="devicesConnected"> -- </h3>
                 <p class="infobox_label"><?=$pia_lang['Device_Shortcut_Connected'];?></p>
             </div>
             <div class="icon"><i class="fa fa-plug text-green-40"></i></div>
           </div>
+        	</a>
         </div>
 
         <div class="col-lg-3 col-sm-3 col-xs-6">
+        	<a href="#" onclick="javascript: getDevicesList('favorites');">
           <div class="small-box bg-yellow">
             <div class="inner"><h3 id="devicesFavorites"> -- </h3>
                 <p class="infobox_label"><?=$pia_lang['Device_Shortcut_Favorites'];?></p>
             </div>
             <div class="icon"><i class="fa fa-star text-yellow-40"></i></div>
           </div>
+        	</a>
         </div>
 
         <div class="col-lg-3 col-sm-3 col-xs-6">
+        	<a href="#" onclick="javascript: getDevicesList('down');">
           <div class="small-box bg-red">
             <div class="inner"><h3 id="devicesDown"> -- </h3>
                 <p class="infobox_label"><?=$pia_lang['Device_Shortcut_DownAlerts'];?></p>
             </div>
             <div class="icon"><i class="fa fa-warning text-red-40"></i></div>
           </div>
+        	</a>
         </div>
 
       </div>
@@ -546,7 +554,6 @@ If ($ENABLED_HISTOY_GRAPH !== False) {
     <!-- ----------------------------------------------------------------------- -->
 
     </section>
-
   </div>
   <!-- /.content-wrapper -->
 
@@ -563,7 +570,8 @@ require 'php/templates/footer.php';
 <script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 
 <script>
-main();
+	var deviceStatus = 'all';
+	main();
 
 // -----------------------------------------------------------------------------
 function initializeiCheck () {
@@ -667,10 +675,34 @@ function initializeDatatable () {
 };
 
 // -----------------------------------------------------------------------------
-function getDevicesList () {
+// function getDevicesList () {
+//   // Define new datasource URL and reload
+//   $('#tableDevices').DataTable().ajax.url(
+//     'php/server/icmpmonitor.php?action=getDevicesList').load();
+// };
+
+
+function getDevicesList(status) {
+  // Save status selected
+  deviceStatus = status;
+
+  // Define color & title for the status selected
+  switch (deviceStatus) {
+    case 'all':        tableTitle = '<?=$pia_lang['Device_Shortcut_AllDevices']?>';  color = 'aqua';    break;
+    case 'connected':  tableTitle = '<?=$pia_lang['Device_Shortcut_Connected']?>';   color = 'green';   break;
+    case 'favorites':  tableTitle = '<?=$pia_lang['Device_Shortcut_Favorites']?>';   color = 'yellow';  break;
+    case 'down':       tableTitle = '<?=$pia_lang['Device_Shortcut_DownAlerts']?>';  color = 'red';     break;
+    default:           tableTitle = '<?=$pia_lang['Device_Shortcut_AllDevices']?>';  color = 'aqua';    break;
+  }
+
+  // Set title and color
+  $('#tableDevicesTitle')[0].className = 'box-title text-'+ color;
+  $('#tableDevicesBox')[0].className = 'box box-'+ color;
+  $('#tableDevicesTitle').html (tableTitle);
+
   // Define new datasource URL and reload
   $('#tableDevices').DataTable().ajax.url(
-    'php/server/icmpmonitor.php?action=getDevicesList').load();
+    'php/server/icmpmonitor.php?action=getDevicesList&status=' + deviceStatus).load();
 };
 
 // -----------------------------------------------------------------------------

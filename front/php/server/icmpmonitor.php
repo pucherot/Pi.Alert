@@ -76,7 +76,13 @@ function getICMPHostTotals() {
 function getDevicesList() {
 	global $db;
 
-	$sql = 'SELECT rowid,* FROM ICMP_Mon';
+	$condition = getDeviceCondition($_REQUEST['status']);
+	$sql = 'SELECT rowid, *, CASE
+            WHEN icmp_AlertDown=1 AND icmp_PresentLastScan=0 THEN "Down"
+            WHEN icmp_PresentLastScan=1 THEN "On-line"
+            ELSE "Off-line"
+          END AS icmp_Status
+          FROM ICMP_Mon ' . $condition;
 	$result = $db->query($sql);
 	// arrays of rows
 	$tableData = array();
@@ -99,6 +105,22 @@ function getDevicesList() {
 	}
 	// Return json
 	echo (json_encode($tableData));
+}
+
+//  Status Where conditions
+function getDeviceCondition($deviceStatus) {
+	switch ($deviceStatus) {
+	case 'all':return '';
+		break;
+	case 'connected':return 'WHERE icmp_PresentLastScan=1';
+		break;
+	case 'favorites':return 'WHERE icmp_Favorite=1';
+		break;
+	case 'down':return 'WHERE icmp_AlertDown=1 AND icmp_PresentLastScan=0';
+		break;
+	default:return '';
+		break;
+	}
 }
 
 //  Set ICMP Host Data
