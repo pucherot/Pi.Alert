@@ -139,6 +139,12 @@ function read_arpscan_timer() {
 	echo $timer_output;
 }
 
+// Buffer active --------------------------------------------------------------
+	$file = '../db/pialert_journal_buffer';
+	if (file_exists($file)) {
+		$buffer_indicator = '(*)';
+	} else {$buffer_indicator = '';}
+
 // Get Device List Columns ----------------------------------------------------
 function read_DevListCol() {
 	$file = '../db/setting_devicelist';
@@ -279,7 +285,7 @@ if ($_REQUEST['tab'] == '1') {
                 <div class="db_info_table_row">
                     <div class="db_info_table_cell"><?=$pia_lang['Maintenance_database_lastmod'];?></div>
                     <div class="db_info_table_cell">
-                        <?=$DB_MOD_DATA;?>
+                        <?=$DB_MOD_DATA.' '.$buffer_indicator;?>
                     </div>
                 </div>
                 <div class="db_info_table_row">
@@ -806,7 +812,7 @@ echo '</div>';
     </div>
 
     <div class="box box-solid box-danger collapsed-box" style="margin-top: -15px;">
-    <div class="box-header with-border" data-widget="collapse">
+    <div class="box-header with-border" data-widget="collapse" id="configeditor_innerbox">
            <h3 class="box-title"><?=$pia_lang['Maintenance_ConfEditor_Hint'];?></h3>
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></button>

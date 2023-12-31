@@ -28,7 +28,7 @@ function get_notification_class($filename) {
 	$headtitle = explode("-", $filename);
 	$headeventtype = explode("_", $filename);
 	$temp_class[0] = substr($headeventtype[1], 0, -4);
-	if ($temp_class[0] == "Events" || $temp_class[0] == "Down" || $temp_class[0] == "New Devices") {
+	if ($temp_class[0] == "Events" || $temp_class[0] == "Devices Down" || $temp_class[0] == "New Devices") {
 		$temp_class[1] = 'arp';
 		$temp_class[2] = substr($headtitle[0], 6, 2) . '.' . substr($headtitle[0], 4, 2) . '.' . substr($headtitle[0], 2, 2) . '/' . substr($headtitle[1], 0, 2) . ':' . substr($headtitle[1], 2, 2);
 		return $temp_class;

@@ -33,9 +33,9 @@ function get_speedtestresults_table() {
             <td>' . $row['speed_date'] . '</td>
             <td>' . $row['speed_isp'] . '</td>
             <td>' . $row['speed_server'] . '</td>
-            <td>' . $row['speed_ping'] . '</td>
-            <td>' . $row['speed_down'] . '</td>
-            <td>' . $row['speed_up'] . '</td>
+            <td style="color: rgb(22, 122, 196)">' . $row['speed_ping'] . '</td>
+            <td style="color: rgb(0, 166, 89)">' . $row['speed_down'] . '</td>
+            <td style="color: rgb(185, 0, 43)">' . $row['speed_up'] . '</td>
           </tr>';
 	}
 }
@@ -1528,6 +1528,12 @@ function setDeviceData (refreshCallback='') {
       refreshCallback();
     }
   });
+
+  // refresh Sidebar
+  setTimeout(function(){
+      updateTotals();
+  }, 1000);
+  
 }
 
 function initializeSpeedtest () {

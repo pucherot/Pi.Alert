@@ -234,7 +234,6 @@ if (!empty($theme_result)) {
 } else {
 	// Darkmode
 	if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;} else { $ENABLED_DARKMODE = False;}
-
 	// Use saved AdminLTE Skin
 	foreach (glob("../db/setting_skin*") as $filename) {
 		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/' . str_replace('setting_', '', basename($filename)) . '.min.css">';

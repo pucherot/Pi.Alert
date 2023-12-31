@@ -233,11 +233,11 @@ format_temperature($celsius, $temperaturelimit);
           <a href="devices.php">
             <i class="fa fa-laptop"></i>
             <span><?=$pia_lang['Navigation_Devices'];?></span>
-            <span class="pull-right-container">
+            <!-- <span class="pull-right-container"> -->
               <small class="label pull-right bg-yellow" id="header_dev_count_new"></small>
               <small class="label pull-right bg-red" id="header_dev_count_down"></small>
               <small class="label pull-right bg-green" id="header_dev_count_on"></small>
-            </span>
+            <!-- </span> -->
           </a>
         </li>
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('network.php', 'networkSettings.php'))) {echo 'active';}?>">
