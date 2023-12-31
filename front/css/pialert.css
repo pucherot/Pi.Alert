@@ -406,12 +406,14 @@ body.modal-open {
 .text-orange-custom { color: #FE4C00 !important;}
 #custom-menu-report-button { background-color: #d58512; color: #FFF; width: 190px;}
 #custom-menu-default-button { color: #000; width: 190px;}
+#custom-menu-report-button:hover { color: #000;}
 .custom-menu-button-text {display: inline-block; width: 140px; text-align: left;}
 .custom-menu-button-icon {width: 15px; margin-right: 10px;}
 .custom-menu-icon-links {display: inline-block; width: 30%; text-align: center;}
 
 /* ----------------- Header ------------------------------------------------- */
 #custom-menu-logout-button {background-color: #d73925; color: #FFF;}
+#custom-menu-logout-button:hover { color: #000;}
 #navbar-reload-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
 #navbar-reload-button:hover {background-color: rgba(0, 0, 0, 0.1);}
 #navbar-back-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
