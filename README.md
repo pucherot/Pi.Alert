@@ -137,7 +137,7 @@ Linux distributions which use the "apt" package manager. Check "[Things to keep 
 
 | One-step Automated Install |
 | :------------------------- |
-| ``` bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh)" ``` | 
+| `bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh)"`| 
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
@@ -161,7 +161,7 @@ I recommend uninstalling it first. If you backup the database, it may be possibl
 
 | One-step Automated Update |
 | :------------------------ |
-| ``` bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)" ``` |
+| `bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)" ` |
 
 # Closing words
 <!--- --------------------------------------------------------------------- --->
