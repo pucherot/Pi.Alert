@@ -75,7 +75,7 @@ include the detection of unwanted/foreign DHCP servers and device monitoring usi
 
 </details>
 
-<br><ins> :bulb: Additional components and information</ins>
+<ins> :bulb: Additional components and information</ins>
 
   - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
   - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
@@ -104,7 +104,7 @@ There is a configurable login to prevent unauthorized use. The default password 
 
 </details>
 
-<br><ins> :bulb: Additional components and information</ins>
+<ins> :bulb: Additional components and information</ins>
 
   - Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
   - [List of Favicons/Homescreen icons](docs/ICONS.md)
@@ -126,7 +126,7 @@ Currently the API offers the possibility to query 6 things:
 
 </details>
 
-<br><ins> :bulb: Additional components and information</ins>
+<ins> :bulb: Additional components and information</ins>
 
  - [Pi.Alert API Usage and Examples / Home Assistant integration](docs/API-USAGE.md)
 
@@ -142,7 +142,7 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
-<br><ins> :bulb: Additional components and information</ins>
+<ins> :bulb: Additional components and information</ins>
 
  - [Things to keep in mind when using different Linux distributions](docs/LINUX-DISTRIBUTIONS.md) (will be updated if necessary)
  - If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
