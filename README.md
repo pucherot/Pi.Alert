@@ -135,9 +135,22 @@ Currently the API offers the possibility to query 6 things:
 Initially designed to run on a Raspberry Pi, probably it can run on some other
 Linux distributions which use the "apt" package manager. Check "[Things to keep in mind when using different Linux distributions](docs/LINUX-DISTRIBUTIONS.md)" before using Pi.Alert with another Debian based distribution like DietPi or Ubuntu Server to see, if there are any special notes to follow.
 
-| One-step Automated Install |
-| :------------------------- |
-| `bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh)"`| 
+<table>
+<thead>
+<tr>
+<th align="left">One-step Automated Install</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+```
+bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_install.sh)"
+```
+</td>
+</tr></tbody></table>
+
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
@@ -159,9 +172,21 @@ a new archive is created, which is used as the source for the update.
 This update script is only recommended for an already existing installation of this fork. If you are using another fork, 
 I recommend uninstalling it first. If you backup the database, it may be possible to continue using it with my fork after a patch ([pialert-cli](docs/PIALERTCLI.md)).
 
-| One-step Automated Update |
-| :------------------------ |
-| `bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)" ` |
+<table>
+<thead>
+<tr>
+<th align="left">One-step Automated Update</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+```
+bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)"
+```
+</td>
+</tr></tbody></table>
 
 # Closing words
 <!--- --------------------------------------------------------------------- --->
