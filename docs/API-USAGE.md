@@ -2,7 +2,7 @@
 <!--- --------------------------------------------------------------------- --->
 This is my first attempt at building an API, so if I've done basic things wrong, I'm happy to see improvements.
 
-Depending on the system configuration, it may be necessary to specify the path "/pialert" (e.g. `http://192.168.0.10` or `http://192.168.0.10/pialert/`) in the URL in addition to the IP or host name.
+Depending on the system configuration, it may be necessary to specify the path "/pialert" (e.g. `http://192.168.0.10` or `http://192.168.0.10/pialert/`) in the URL in addition to the IP or host name. Whether "http" or "https" is used also depends on the configuration you are using.
 
 For the API, I limited myself to basic things. There are only 4 queries possible at the moment (system-status, mac-status, all-online, 
 all-offline). For a query we need the API key, which can be created via the frontend (maintenance page) or 
@@ -110,7 +110,7 @@ The API can also be used to make information available in Home Assistant.
 
 Prepare post fields
 ```php
-$api_url = 'https://[URL]/api/'; //Pi.Alert URL
+$api_url = 'http://[URL]/api/'; //Pi.Alert URL
 $api_key = 'YourApi-Key'; //api-key
 $api_action = 'system-status';
 ```
@@ -147,7 +147,7 @@ print_r(json_decode($response));
 
 Prepare post fields
 ```php
-$api_url = 'https://[URL]/api/'; //Pi.Alert URL
+$api_url = 'http://[URL]/api/'; //Pi.Alert URL
 $api_key = 'YourApi-Key'; //api-key
 $api_action = 'mac-status';
 $api_macquery = '00:0d:93:89:15:90'; // single mac address
@@ -185,7 +185,7 @@ print_r(json_decode($response));
 
 Prepare post fields
 ```php
-$api_url = 'https://[URL]/api/'; //Pi.Alert URL
+$api_url = 'http://[URL]/api/'; //Pi.Alert URL
 $api_key = 'YourApi-Key'; //api-key
 $api_action = 'all-online'; //all-online, all-offline
 ```
@@ -221,18 +221,18 @@ print_r(json_decode($response));
 
 ### Example of a query with the commandline tool curl (system-status)
 ```bash
-curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
 ```
 
 ### Example of a query with the commandline tool curl (mac-status)
 ```bash
-curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=mac-status' -F 'mac=00:11:22:aa:bb:cc' https://[URL]/api/
+curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=mac-status' -F 'mac=00:11:22:aa:bb:cc' http://[URL]/api/
 ```
 
 ### Example of a query with the commandline tool curl (all-online or all-offline)
 
 ```bash
-curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=all-offline' https://[URL]/api/
+curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=all-offline' http://[URL]/api/
 ```
 <hr>
 
@@ -245,48 +245,48 @@ For actual versions of Home Assistant
 command_line:
   - sensor:
       name: "PiAlert - Last Scan"
-      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' http://[URL]/pialert/api/
       scan_interval: 200
       unique_id: pialert.status.lastscan
       value_template: "{{ value_json.Last_Scan }}"
   - sensor:
       name: "PiAlert - All Devices"
-      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' http://[URL]/pialert/api/
       scan_interval: 200
       unique_id: pialert.status.alldevices
       unit_of_measurement: ""
       value_template: "{{ value_json.All_Devices }}"
   - sensor:
       name: "PiAlert - Online Devices"
-      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' http://[URL]/pialert/api/
       scan_interval: 200
       unique_id: pialert.status.onlinedevices
       unit_of_measurement: ""
       value_template: "{{ value_json.Online_Devices }}"
   - sensor:
       name: "PiAlert - Offline Devices"
-      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' http://[URL]/pialert/api/
       scan_interval: 200
       unique_id: pialert.status.offlinedevices
       unit_of_measurement: ""
       value_template: "{{ value_json.Offline_Devices }}"
   - sensor:
       name: "PiAlert - Archived Devices"
-      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' http://[URL]/pialert/api/
       scan_interval: 200
       unique_id: pialert.status.archiveddevices
       unit_of_measurement: ""
       value_template: "{{ value_json.Archived_Devices }}"
   - sensor:
       name: "PiAlert - New Devices"
-      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' http://[URL]/pialert/api/
       scan_interval: 200
       unique_id: pialert.status.newdevices
       unit_of_measurement: ""
       value_template: "{{ value_json.New_Devices }}"
   - sensor:
       name: "PiAlert - Scanning"
-      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' https://[URL]/pialert/api/
+      command: curl -k -X POST -F 'api-key=[APIKEY]' -F 'get=system-status' http://[URL]/pialert/api/
       scan_interval: 120
       unique_id: pialert.status.scanning
       value_template: "{{ value_json.Scanning }}"
@@ -296,14 +296,14 @@ For older versions of Home Assistant
 sensor:
   - platform: command_line
     name: "PiAlert - Last Scan"
-    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
     scan_interval: 200
     unique_id: pialert.status.lastscan
     value_template: '{{ value_json.Last_Scan }}'
 
   - platform: command_line
     name: "PiAlert - All Devices"
-    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
     scan_interval: 200
     unique_id: pialert.status.alldevices
     unit_of_measurement: ""
@@ -311,7 +311,7 @@ sensor:
 
   - platform: command_line
     name: "PiAlert - Online Devices"
-    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
     scan_interval: 200
     unique_id: pialert.status.onlinedevices
     unit_of_measurement: ""
@@ -319,7 +319,7 @@ sensor:
 
   - platform: command_line
     name: "PiAlert - Offline Devices"
-    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
     scan_interval: 200
     unique_id: pialert.status.offlinedevices
     unit_of_measurement: ""
@@ -327,7 +327,7 @@ sensor:
 
   - platform: command_line
     name: "PiAlert - Archived Devices"
-    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
     scan_interval: 200
     unique_id: pialert.status.archiveddevices
     unit_of_measurement: ""
@@ -335,7 +335,7 @@ sensor:
 
   - platform: command_line
     name: "PiAlert - New Devices"
-    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
     scan_interval: 200
     unique_id: pialert.status.newdevices
     unit_of_measurement: ""
@@ -343,7 +343,7 @@ sensor:
 
   - platform: command_line
     name: "PiAlert - Scanning"
-    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' https://[URL]/api/
+    command: curl -k -X POST -F 'api-key=yourApi-Key' -F 'get=system-status' http://[URL]/api/
     scan_interval: 120
     unique_id: pialert.status.scanning
     value_template: '{{ value_json.Scanning }}'
