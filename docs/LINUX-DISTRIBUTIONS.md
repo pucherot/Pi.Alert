@@ -8,8 +8,8 @@
 ## Ubuntu Server
 
 - It may happen that during the installation, the installation pauses after the text output "Scanning linux images..." without any further notice. At this point, pressing the Enter key will continue the installation. This can be repeated several times.
-
-![linuxdist1][linuxdist1] 
+  
+  ![linuxdist1][linuxdist1] 
 
 
 [Back](https://github.com/leiweibau/Pi.Alert#installation)
