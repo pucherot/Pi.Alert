@@ -304,8 +304,9 @@ def get_previous_internet_IP():
 #-------------------------------------------------------------------------------
 def save_new_internet_IP(pNewIP):
     # Log new IP into logfile
-    append_line_to_file (LOG_PATH + '/IP_changes.log',
-        str(startTime) +'\t'+ pNewIP +'\n')
+    append_line_to_file(
+        f'{LOG_PATH}/IP_changes.log', str(startTime) + '\t' + pNewIP + '\n'
+    )
     # Save event
     sql.execute ("""INSERT INTO Events (eve_MAC, eve_IP, eve_DateTime,
                         eve_EventType, eve_AdditionalInfo,
@@ -395,7 +396,7 @@ def update_devices_MAC_vendors(pArg = ''):
         # progress bar
         print ('.', end='')
         sys.stdout.flush()
-            
+
     print ('')
     print ("    Devices Ignored:  ", ignored)
     print ("    Vendors Not Found:", notFound)
@@ -407,7 +408,7 @@ def update_devices_MAC_vendors(pArg = ''):
         mac = MacLookup()
         mac.update_vendors()
         print ('    Update successful')
-    except:
+    except Exception:
         print ('\nFallback')
         print ('    Backup old mac-vendors.txt for mac-vendor-lookup')
         p = subprocess.call(["cp $HOME/.cache/mac-vendors.txt $HOME/.cache/mac-vendors.bak"], shell=True)
@@ -643,7 +644,7 @@ def execute_arpscan_on_interface (SCAN_SUBNETS):
     return result
 
 #-------------------------------------------------------------------------------
-def copy_pihole_network ():
+def copy_pihole_network():
     # empty Fritzbox Network table
     sql.execute ("DELETE FROM PiHole_Network")
 
@@ -653,7 +654,7 @@ def copy_pihole_network ():
         return
 
     # Open Pi-hole DB
-    sql.execute ("ATTACH DATABASE '"+ PIHOLE_DB +"' AS PH")
+    sql.execute(f"ATTACH DATABASE '{PIHOLE_DB}' AS PH")
 
     # Copy Pi-hole Network table
     sql.execute ("""INSERT INTO PiHole_Network (PH_MAC, PH_Vendor, PH_LastQuery,
@@ -898,70 +899,72 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
 def remove_entries_from_table():
     try:
         MAC_IGNORE_LIST
-        print ('        Delete ' + str(len(MAC_IGNORE_LIST)) + ' ignored devices from scan on appearance')
+        print(
+            f'        Delete {len(MAC_IGNORE_LIST)} ignored devices from scan on appearance'
+        )
 
-        mac_addresses = ','.join(['"{}"'.format(mac) for mac in MAC_IGNORE_LIST])
-        query = 'DELETE FROM CurrentScan WHERE cur_MAC IN ({})'.format(mac_addresses)
+        mac_addresses = ','.join([f'"{mac}"' for mac in MAC_IGNORE_LIST])
+        query = f'DELETE FROM CurrentScan WHERE cur_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM PiHole_Network WHERE PH_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM PiHole_Network WHERE PH_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM DHCP_Leases WHERE DHCP_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM DHCP_Leases WHERE DHCP_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM Fritzbox_Network WHERE FB_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM Fritzbox_Network WHERE FB_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM Mikrotik_Network WHERE MT_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM Mikrotik_Network WHERE MT_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM Unifi_Network WHERE UF_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM Unifi_Network WHERE UF_MAC IN ({mac_addresses})'
         sql.execute(query)
     except NameError:
         print("        No ignore list defined")
 
 #-------------------------------------------------------------------------------
-def print_scan_stats ():
+def print_scan_stats():
     # Devices Detected
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanCycle = ? """,
                     (cycle,))
-    print ('    Devices Detected.......:', str (sql.fetchone()[0]) )
+    print('    Devices Detected.......:', sql.fetchone()[0])
     # Devices arp-scan
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='arp-scan' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        arp-scan Method....:', str (sql.fetchone()[0]) )
+    print('        arp-scan Method....:', sql.fetchone()[0])
     # Devices Pi-hole
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Pi-hole' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        Pi-hole Method.....: +' + str (sql.fetchone()[0]) )
+    print(f'        Pi-hole Method.....: +{str(sql.fetchone()[0])}')
     # Devices Fritzbox
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Fritzbox' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        Fritzbox Method....: +' + str (sql.fetchone()[0]) )
+    print(f'        Fritzbox Method....: +{str(sql.fetchone()[0])}')
     # Devices Mikrotik
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Mikrotik' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        Mikrotik Method....: +' + str (sql.fetchone()[0]) )
+    print(f'        Mikrotik Method....: +{str(sql.fetchone()[0])}')
     # Devices UniFi
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='UniFi' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        UniFi Method.......: +' + str (sql.fetchone()[0]) )
+    print(f'        UniFi Method.......: +{str(sql.fetchone()[0])}')
     # New Devices
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanCycle = ? 
                       AND NOT EXISTS (SELECT 1 FROM Devices
                                       WHERE dev_MAC = cur_MAC) """,
                     (cycle,))
-    print ('        New Devices........: ' + str (sql.fetchone()[0]) )
+    print(f'        New Devices........: {str(sql.fetchone()[0])}')
     # Devices in this ScanCycle
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
                       AND dev_ScanCycle = ? """,
                     (cycle,))
     print ('')
-    print ('    Devices in this scan...: ' + str (sql.fetchone()[0]) )
+    print(f'    Devices in this scan...: {str(sql.fetchone()[0])}')
     # Down Alerts
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_AlertDeviceDown = 1
@@ -970,7 +973,7 @@ def print_scan_stats ():
                                       WHERE dev_MAC = cur_MAC
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
-    print ('        Down Alerts........: ' + str (sql.fetchone()[0]) )
+    print(f'        Down Alerts........: {str(sql.fetchone()[0])}')
     # New Down Alerts
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_AlertDeviceDown = 1
@@ -980,14 +983,14 @@ def print_scan_stats ():
                                       WHERE dev_MAC = cur_MAC
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
-    print ('        New Down Alerts....: ' + str (sql.fetchone()[0]) )
+    print(f'        New Down Alerts....: {str(sql.fetchone()[0])}')
     # New Connections
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
                       AND dev_PresentLastScan = 0
                       AND dev_ScanCycle = ? """,
                     (cycle,))
-    print ('        New Connections....: ' + str ( sql.fetchone()[0]) )
+    print(f'        New Connections....: {str(sql.fetchone()[0])}')
     # Disconnections
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_PresentLastScan = 1
@@ -996,14 +999,14 @@ def print_scan_stats ():
                                       WHERE dev_MAC = cur_MAC
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
-    print ('        Disconnections.....: ' + str ( sql.fetchone()[0]) )
+    print(f'        Disconnections.....: {str(sql.fetchone()[0])}')
     # IP Changes
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
                       AND dev_ScanCycle = ?
                       AND dev_LastIP <> cur_IP """,
                     (cycle,))
-    print ('        IP Changes.........: ' + str ( sql.fetchone()[0]) )
+    print(f'        IP Changes.........: {str(sql.fetchone()[0])}')
 
 #------------------------------------------------------------------------------
 def calc_activity_history_main_scan ():
@@ -1506,7 +1509,7 @@ def rogue_dhcp_detection():
     rogue_dhcp_notification ()
 
 # -----------------------------------------------------------------------------------
-def rogue_dhcp_notification ():
+def rogue_dhcp_notification():
     sql.execute("SELECT DISTINCT dhcp_server FROM Nmap_DHCP_Server")
     rows = sql.fetchall()
 
@@ -1517,10 +1520,10 @@ def rogue_dhcp_notification ():
 
     if len(rows) == 2:
         if validate_dhcp_address(rows[1][0]):
-            if rows[1][0] == DHCP_SERVER_ADDRESS :
-                print ('    One DHCP Server detected......: ' + rows[1][0] + ' (valid)')
+            if rows[1][0] == DHCP_SERVER_ADDRESS:
+                print(f'    One DHCP Server detected......: {rows[1][0]} (valid)')
             else:
-                print ('    One DHCP Server detected......: ' + rows[1][0] + ' (invalid)')
+                print(f'    One DHCP Server detected......: {rows[1][0]} (invalid)')
                 rogue_dhcp_server_list.append(rows[1][0])
         else:
             print ('    Detection Error')
@@ -1529,15 +1532,15 @@ def rogue_dhcp_notification ():
         print ('    Multiple DHCP Servers detected:')
         for i in range(1, len(rows)):
             if validate_dhcp_address(rows[i][0]):
-                if rows[i][0] == DHCP_SERVER_ADDRESS :
-                    print ('        ' + rows[i][0] + ' (valid)' )
+                if rows[i][0] == DHCP_SERVER_ADDRESS:
+                    print(f'        {rows[i][0]} (valid)')
                 else:
-                    print ('        ' + rows[i][0] + ' (rogue)' )
+                    print(f'        {rows[i][0]} (rogue)')
                     rogue_dhcp_server_list.append(rows[i][0])
             else:
                 print ('    Detection Error')
 
-    rogue_dhcp_reports = glob.glob(REPORTPATH_WEBGUI + "*Rogue DHCP Server*.txt")    
+    rogue_dhcp_reports = glob.glob(f"{REPORTPATH_WEBGUI}*Rogue DHCP Server*.txt")    
 
     if rogue_dhcp_server_list and not rogue_dhcp_reports:
         rogue_dhcp_server_string = "Report Date: " + rows[0][0] + "\nServer: " + socket.gethostname() + "\n\nRogue DHCP Server\nDetected Server(s): "
@@ -1566,7 +1569,7 @@ def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatenc
     ssl_fc = str(_mon_ssl_fc)
 
     if _mon_Redirect != 200 and _mon_lastStatus == 200:
-        _mon_Redirect_Text = "Redirected by " + str(_mon_Redirect)
+        _mon_Redirect_Text = f"Redirected by {str(_mon_Redirect)}"
     else:
         _mon_Redirect_Text = ""
 
@@ -1776,7 +1779,9 @@ def print_service_monitoring_changes():
     print("        Changed Reachability....:", str(changedLatency))
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
         monitor_logfile.write("\nServices Monitoring Changes:\n")
-        monitor_logfile.write("    Changed StatusCodes.....: " + str(changedStatusCode))
+        monitor_logfile.write(
+            f"    Changed StatusCodes.....: {str(changedStatusCode)}"
+        )
         monitor_logfile.write("\n    Changed Reachability....: " + str(changedLatency))
         monitor_logfile.write("\n")
         monitor_logfile.close()
@@ -1940,7 +1945,7 @@ def service_monitoring():
                 redirect_state = ""
                 ssl_info = ""
 
-            service_monitoring_log(site + ' ' + site_retry, status, latency)
+            service_monitoring_log(f'{site} {site_retry}', status, latency)
             ssl_fc = set_services_current_scan(site, scantime, status, latency, domain_ip, ssl_info)
             set_services_events(site, scantime, status, latency, domain_ip, ssl_fc)
 #            set_services_current_scan(site, scantime, status, latency, domain_ip, ssl_info)
@@ -2181,7 +2186,7 @@ def icmphost_monitoring_notification():
     for eventAlert in sql :
 
         hostname = get_icmphost_name(eventAlert['cur_ip'])
-        print(hostname)
+        # print(hostname)
 
         mail_section_icmphost_down = True
         mail_text_icmphost_down += text_line_template.format (
@@ -2213,7 +2218,7 @@ def icmphost_monitoring_notification():
         mail_section_events = True
 
         hostname = get_icmphost_name(eventAlert['cur_ip'])
-        print(hostname)
+        # print(hostname)
 
         icmp_online_status = 'Up' if eventAlert['cur_Present'] == 1 else 'Down'
         mail_text_events += text_line_template.format (
