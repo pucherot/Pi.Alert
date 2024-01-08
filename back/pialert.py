@@ -30,23 +30,23 @@ import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, req
 # CONFIG CONSTANTS
 #===============================================================================
 PIALERT_BACK_PATH = os.path.dirname(os.path.abspath(__file__))
-PIALERT_PATH = PIALERT_BACK_PATH + "/.."
-PIALERT_WEBSERVICES_LOG = PIALERT_PATH + "/log/pialert.webservices.log"
-STOPPIALERT = PIALERT_PATH + "/db/setting_stoppialert"
-PIALERT_DB_FILE = PIALERT_PATH + "/db/pialert.db"
-REPORTPATH_WEBGUI = PIALERT_PATH + "/front/reports/"
+PIALERT_PATH = f"{PIALERT_BACK_PATH}/.."
+PIALERT_WEBSERVICES_LOG = f"{PIALERT_PATH}/log/pialert.webservices.log"
+STOPPIALERT = f"{PIALERT_PATH}/db/setting_stoppialert"
+PIALERT_DB_FILE = f"{PIALERT_PATH}/db/pialert.db"
+REPORTPATH_WEBGUI = f"{PIALERT_PATH}/front/reports/"
 
 if (sys.version_info > (3,0)):
-    exec(open(PIALERT_PATH + "/config/version.conf").read())
-    exec(open(PIALERT_PATH + "/config/pialert.conf").read())
+    exec(open(f"{PIALERT_PATH}/config/version.conf").read())
+    exec(open(f"{PIALERT_PATH}/config/pialert.conf").read())
 else:
-    execfile (PIALERT_PATH + "/config/version.conf")
-    execfile (PIALERT_PATH + "/config/pialert.conf")
+    execfile(f"{PIALERT_PATH}/config/version.conf")
+    execfile(f"{PIALERT_PATH}/config/pialert.conf")
 
 #===============================================================================
 # MAIN
 #===============================================================================
-def main ():
+def main():
     global startTime
     global cycle
     global log_timestamp
@@ -57,7 +57,7 @@ def main ():
     print ('\nPi.Alert ' + VERSION +' ('+ VERSION_DATE +')')
     print ('---------------------------------------------------------')
     print("Current User: %s \n" % get_username())
-    
+
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
 
@@ -90,14 +90,14 @@ def main ():
         res = scan_network()
     else:
         res = 0
-    
+
     # Check error
     if res != 0 :
         closeDB()
         return res
-    
+
     # Reporting
-    if cycle != 'internet_IP' and cycle != 'cleanup':
+    if cycle not in ['internet_IP', 'cleanup']:
         email_reporting()
 
     # Close SQL
@@ -115,13 +115,13 @@ def get_username():
 
 # ------------------------------------------------------------------------------
 def set_pia_reports_permissions():
-    os.system("sudo chown -R " + get_username() + ":www-data " + REPORTPATH_WEBGUI)
-    os.system("sudo chmod -R 775 " + REPORTPATH_WEBGUI)
+    os.system(f"sudo chown -R {get_username()}:www-data {REPORTPATH_WEBGUI}")
+    os.system(f"sudo chmod -R 775 {REPORTPATH_WEBGUI}")
 
 #===============================================================================
 # Countdown
 #===============================================================================
-def start_arpscan_countdown ():
+def start_arpscan_countdown():
 
     openDB()
     if os.path.exists(STOPPIALERT):
@@ -132,9 +132,9 @@ def start_arpscan_countdown ():
 
         FILETIME = int(os.path.getctime(STOPPIALERT))
 
-        print("Timer Start: %s" % time.ctime(FILETIME))
+        print(f"Timer Start: {time.ctime(FILETIME)}")
         STOPTIME = FILETIME+data*60
-        print("Timer Ende : %s" % time.ctime(STOPTIME))
+        print(f"Timer Ende : {time.ctime(STOPTIME)}")
         print ("----------------------------------------")
 
         ACTUALTIME = int(time.time())
@@ -157,15 +157,12 @@ def start_arpscan_countdown ():
 #===============================================================================
 # INTERNET IP CHANGE
 #===============================================================================
-def check_internet_IP ():
+def check_internet_IP():
     # Header
     print ('Check Internet IP')
     print ('    Timestamp:', startTime )
     print ('\nRetrieving Internet IP...')
     internet_IP = get_internet_IP()
-    # TESTING - Force IP
-        # internet_IP = "1.2.3.4"
-
     # Check result = IP
     if internet_IP == "" :
         print ('    Error retrieving Internet IP')
@@ -211,15 +208,15 @@ def check_internet_IP ():
         print ('\nSkipping Dynamic DNS update...')
 
     # Run automated Speedtest
-    if SPEEDTEST_TASK_ACTIVE :
+    if SPEEDTEST_TASK_ACTIVE:
         # Check if Speedtest is installed
-        speedtest_binary = PIALERT_BACK_PATH + '/speedtest/speedtest'
+        speedtest_binary = f'{PIALERT_BACK_PATH}/speedtest/speedtest'
         if os.path.exists(speedtest_binary):
             print ('\nRun daily Speedtest...')
             run_speedtest_task()
         else:
             print('\nSkipping Speedtest... Not installed!')
-    else :
+    else:
         print ('\nSkipping Speedtest...')
     return 0
 
@@ -272,48 +269,44 @@ def run_speedtest_task ():
     return 0
 
 #-------------------------------------------------------------------------------
-def get_internet_IP ():
+def get_internet_IP():
     # dig_args = ['dig', '+short', '-4', 'myip.opendns.com', '@resolver1.opendns.com']
     # cmd_output = subprocess.check_output (dig_args, universal_newlines=True)
     curl_args = ['curl', '-s', QUERY_MYIP_SERVER]
     cmd_output = subprocess.check_output (curl_args, universal_newlines=True)
-    # Check result is an IP
-    IP = check_IP_format (cmd_output)
-    return IP
+    return check_IP_format (cmd_output)
 
 #-------------------------------------------------------------------------------
-def get_dynamic_DNS_IP ():
+def get_dynamic_DNS_IP():
     # Using default or OpenDNS DNS server
     dig_args = ['dig', '+short', DDNS_DOMAIN]
     # dig_args = ['dig', '+short', DDNS_DOMAIN, '@resolver1.opendns.com']
     dig_output = subprocess.check_output (dig_args, universal_newlines=True)
-    # Check result is an IP
-    IP = check_IP_format (dig_output)
-    return IP
+    return check_IP_format (dig_output)
 
 #-------------------------------------------------------------------------------
-def set_dynamic_DNS_IP ():
-    # Update Dynamic IP
-    curl_output = subprocess.check_output (['curl', '-s',
-        DDNS_UPDATE_URL +
-        'username='  + DDNS_USER +
-        '&password=' + DDNS_PASSWORD +
-        '&hostname=' + DDNS_DOMAIN],
-        universal_newlines=True)
-    return curl_output
+def set_dynamic_DNS_IP():
+    return subprocess.check_output(
+        [
+            'curl',
+            '-s',
+            f'{DDNS_UPDATE_URL}username={DDNS_USER}&password={DDNS_PASSWORD}&hostname={DDNS_DOMAIN}',
+        ],
+        universal_newlines=True,
+    )
     
 #-------------------------------------------------------------------------------
-def get_previous_internet_IP ():
+def get_previous_internet_IP():
     # get previos internet IP stored in DB
     sql.execute ("SELECT dev_LastIP FROM Devices WHERE dev_MAC = 'Internet' ")
-    previous_IP = sql.fetchone()[0]
-    return previous_IP
+    return sql.fetchone()[0]
 
 #-------------------------------------------------------------------------------
-def save_new_internet_IP (pNewIP):
+def save_new_internet_IP(pNewIP):
     # Log new IP into logfile
-    append_line_to_file (LOG_PATH + '/IP_changes.log',
-        str(startTime) +'\t'+ pNewIP +'\n')
+    append_line_to_file(
+        f'{LOG_PATH}/IP_changes.log', str(startTime) + '\t' + pNewIP + '\n'
+    )
     # Save event
     sql.execute ("""INSERT INTO Events (eve_MAC, eve_IP, eve_DateTime,
                         eve_EventType, eve_AdditionalInfo,
@@ -328,20 +321,20 @@ def save_new_internet_IP (pNewIP):
     sql_connection.commit()
     
 #-------------------------------------------------------------------------------
-def check_IP_format (pIP):
+def check_IP_format(pIP):
     # Check IP format
     IPv4SEG  = r'(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])'
-    IPv4ADDR = r'(?:(?:' + IPv4SEG + r'\.){3,3}' + IPv4SEG + r')'
+    IPv4ADDR = f'(?:(?:{IPv4SEG}' + r'\.){3,3}' + IPv4SEG + r')'
+    # IPv4ADDR = r'(?:(?:' + IPv4SEG + r'\.){3,3}' + IPv4SEG + r')'
     IP = re.search(IPv4ADDR, pIP)
     # Return error if not IP
-    if IP is None :
-        return ""
-    return IP.group(0)
+    #return "" if IP is None else IP.group(0)
+    return "" if IP is None else IP[0]
 
 #===============================================================================
 # Cleanup Tasks
 #===============================================================================
-def cleanup_database ():
+def cleanup_database():
     print ('Cleanup Database')
     print ('    Timestamp:', startTime )
     openDB()
@@ -353,35 +346,45 @@ def cleanup_database ():
         strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(90) # 90 days
-    print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
-    print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
-    sql.execute ("DELETE FROM Events WHERE eve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
-    print ('    Services_Events, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
-    print ('    ICMP_Mon_Events, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
+    print(f'    Online_History, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM Online_History WHERE Scan_Date <= date('now', '-{strdaystokeepOH} day')"
+    )
+    print(f'    Events, up to the lastest {strdaystokeepEV} days...')
+    sql.execute(
+        f"DELETE FROM Events WHERE eve_DateTime <= date('now', '-{strdaystokeepEV} day')"
+    )
+    print(f'    Services_Events, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-{strdaystokeepOH} day')"
+    )
+    print(f'    ICMP_Mon_Events, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-{strdaystokeepOH} day')"
+    )
     print ('    Trim Journal to the lastest 1000 entries')
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
-    print ('    Speedtest_History, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM Tools_Speedtest_History WHERE speed_date <= date('now', '-"+strdaystokeepOH+" day')")
+    print(f'    Speedtest_History, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM Tools_Speedtest_History WHERE speed_date <= date('now', '-{strdaystokeepOH} day')"
+    )
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
     sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
                     VALUES (?, 'c_010', 'cronjob', 'LogStr_0101', '', '') """, (startTime,))
-    closeDB()    
+    closeDB()
     return 0
 
 #===============================================================================
 # UPDATE DEVICE MAC VENDORS
 #===============================================================================
-def update_devices_MAC_vendors (pArg = ''):
+def update_devices_MAC_vendors(pArg = ''):
     print ('Update HW Vendors')
     print ('    Timestamp:', startTime )
 
     # Update vendors DB (oui)
     print ('\nUpdating vendors DB...')
-    update_args = ['sh', PIALERT_BACK_PATH + '/update_vendors.sh', pArg]
+    update_args = ['sh', f'{PIALERT_BACK_PATH}/update_vendors.sh', pArg]
     update_output = subprocess.check_output (update_args)
 
     # Initialize variables
@@ -405,7 +408,7 @@ def update_devices_MAC_vendors (pArg = ''):
         # progress bar
         print ('.', end='')
         sys.stdout.flush()
-            
+
     print ('')
     print ("    Devices Ignored:  ", ignored)
     print ("    Vendors Not Found:", notFound)
@@ -417,7 +420,7 @@ def update_devices_MAC_vendors (pArg = ''):
         mac = MacLookup()
         mac.update_vendors()
         print ('    Update successful')
-    except:
+    except Exception:
         print ('\nFallback')
         print ('    Backup old mac-vendors.txt for mac-vendor-lookup')
         p = subprocess.call(["cp $HOME/.cache/mac-vendors.txt $HOME/.cache/mac-vendors.bak"], shell=True)
@@ -431,10 +434,10 @@ def update_devices_MAC_vendors (pArg = ''):
     closeDB()
 
 #-------------------------------------------------------------------------------
-def query_MAC_vendor (pMAC):
-    try :
+def query_MAC_vendor(pMAC):
+    try:
         pMACstr = str(pMAC)
-        
+
         # Check MAC parameter
         mac = pMACstr.replace (':','')
         if len(pMACstr) != 17 or len(mac) != 12 :
@@ -447,17 +450,14 @@ def query_MAC_vendor (pMAC):
 
         # Return Vendor
         vendor = grep_output[7:]
-        vendor = vendor.rstrip()
-        return vendor
-
-    # not Found
+        return vendor.rstrip()
     except subprocess.CalledProcessError :
         return -1
             
 #===============================================================================
 # SCAN NETWORK
 #===============================================================================
-def scan_network ():
+def scan_network():
     # Header
     print ('Scan Devices')
     print ('    Timestamp:', startTime )
@@ -467,7 +467,7 @@ def scan_network ():
     scanCycle_data = query_ScanCycle_Data (True)
     if scanCycle_data is None:
         print ('\n*************** ERROR ***************')
-        print ('ScanCycle %s not found' % cycle )
+        print(f'ScanCycle {cycle} not found')
         print ('    Exiting...\n')
         return 1
 
@@ -481,27 +481,19 @@ def scan_network ():
     arpscan_devices = execute_arpscan ()
     print_log ('arp-scan ends')
     # Pi-hole
-    print ('    Pi-hole Method...')
-    openDB()
-    print_log ('Pi-hole copy starts...')
+    init_import_methode('    Pi-hole Method...', 'Pi-hole copy starts...')
     copy_pihole_network()
     # DHCP Leases
     print ('    DHCP Leases Method...')
     read_DHCP_leases ()
     # Fritzbox
-    print ('    Fritzbox Method...')
-    openDB()
-    print_log ('Fritzbox copy starts...')
+    init_import_methode('    Fritzbox Method...', 'Fritzbox copy starts...')
     read_fritzbox_active_hosts()
     # Mikrotik
-    print ('    Mikrotik Method...')
-    openDB()
-    print_log ('Mikrotik copy starts...')
+    init_import_methode('    Mikrotik Method...', 'Mikrotik copy starts...')
     read_mikrotik_leases()
-    # UniFi
-    print ('    UniFi Method...')
-    openDB()
-    print_log ('UniFi copy starts...')
+    # Unifi
+    init_import_methode('    UniFi Method...', 'UniFi copy starts...')
     read_unifi_clients()
     # Load current scan data 1/2
     print ('\nProcessing scan results...')
@@ -511,7 +503,6 @@ def scan_network ():
     # Process Ignore list
     print ('    Processing ignore list...')
     remove_entries_from_table()
-        # Print stats
     print_log ('Print Stats')
     print_scan_stats()
     print_log ('Stats end')
@@ -549,22 +540,21 @@ def scan_network ():
         enable_services_monitoring = SCAN_WEBSERVICES
     except NameError:
         enable_services_monitoring = False
-    if enable_services_monitoring == True:
-        if str(startTime)[15] == "0":
-            service_monitoring()
+    if enable_services_monitoring and str(startTime)[15] == "0":
+        service_monitoring()
     # ICMP Monitoring
     try:
         enable_icmp_monitoring = ICMPSCAN_ACTIVE
     except NameError:
         enable_icmp_monitoring = False
-    if enable_icmp_monitoring == True:
+    if enable_icmp_monitoring:
         icmp_monitoring()
     # Check Rogue DHCP
     try:
         enable_rogue_dhcp_detection = SCAN_ROGUE_DHCP
     except NameError:
         enable_rogue_dhcp_detection = False
-    if enable_rogue_dhcp_detection == True:
+    if enable_rogue_dhcp_detection:
         print ('\nLooking for Rogue DHCP Servers...')
         rogue_dhcp_detection ()
 
@@ -572,6 +562,12 @@ def scan_network ():
     closeDB()
 
     return 0
+
+
+def init_import_methode(arg0, arg1):
+    print(arg0)
+    openDB()
+    print_log(arg1)
 
 #-------------------------------------------------------------------------------
 def query_ScanCycle_Data (pOpenCloseDB = False):
@@ -592,18 +588,16 @@ def query_ScanCycle_Data (pOpenCloseDB = False):
     return sqlRow
 
 #-------------------------------------------------------------------------------
-def execute_arpscan ():
+def execute_arpscan():
 
     # check if arp-scan is active
     try:
         module_arpscan_status = ARPSCAN_ACTIVE
     except NameError:
         module_arpscan_status = True
-    if not module_arpscan_status :
+    if not module_arpscan_status:
         print('        ...Skipped')
-        unique_devices = []
-        return unique_devices
-
+        return []
     # output of possible multiple interfaces
     arpscan_output = ""
 
@@ -628,7 +622,7 @@ def execute_arpscan ():
         for device in re.finditer (re_pattern, arpscan_output)]
 
     # Delete duplicate MAC
-    unique_mac = [] 
+    unique_mac = []
     unique_devices = [] 
 
     for device in devices_list :
@@ -657,7 +651,7 @@ def execute_arpscan_on_interface (SCAN_SUBNETS):
     return result
 
 #-------------------------------------------------------------------------------
-def copy_pihole_network ():
+def copy_pihole_network():
     # empty Fritzbox Network table
     sql.execute ("DELETE FROM PiHole_Network")
 
@@ -667,7 +661,7 @@ def copy_pihole_network ():
         return
 
     # Open Pi-hole DB
-    sql.execute ("ATTACH DATABASE '"+ PIHOLE_DB +"' AS PH")
+    sql.execute(f"ATTACH DATABASE '{PIHOLE_DB}' AS PH")
 
     # Copy Pi-hole Network table
     sql.execute ("""INSERT INTO PiHole_Network (PH_MAC, PH_Vendor, PH_LastQuery,
@@ -714,7 +708,7 @@ def read_fritzbox_active_hosts ():
     for index, host in enumerate(hosts, start=1):
         if host['status'] :
             # status = 'active' if host['status'] else  '-'
-            ip = host['ip'] if host['ip'] else 'no IP'
+            ip = host['ip'] or 'no IP'
             mac = host['mac'].lower() if host['mac'] else '-'
             hostname = host['name']
             try:
@@ -912,70 +906,72 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
 def remove_entries_from_table():
     try:
         MAC_IGNORE_LIST
-        print ('        Delete ' + str(len(MAC_IGNORE_LIST)) + ' ignored devices from scan on appearance')
+        print(
+            f'        Delete {len(MAC_IGNORE_LIST)} ignored devices from scan on appearance'
+        )
 
-        mac_addresses = ','.join(['"{}"'.format(mac) for mac in MAC_IGNORE_LIST])
-        query = 'DELETE FROM CurrentScan WHERE cur_MAC IN ({})'.format(mac_addresses)
+        mac_addresses = ','.join([f'"{mac}"' for mac in MAC_IGNORE_LIST])
+        query = f'DELETE FROM CurrentScan WHERE cur_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM PiHole_Network WHERE PH_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM PiHole_Network WHERE PH_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM DHCP_Leases WHERE DHCP_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM DHCP_Leases WHERE DHCP_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM Fritzbox_Network WHERE FB_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM Fritzbox_Network WHERE FB_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM Mikrotik_Network WHERE MT_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM Mikrotik_Network WHERE MT_MAC IN ({mac_addresses})'
         sql.execute(query)
-        query = 'DELETE FROM Unifi_Network WHERE UF_MAC IN ({})'.format(mac_addresses)
+        query = f'DELETE FROM Unifi_Network WHERE UF_MAC IN ({mac_addresses})'
         sql.execute(query)
     except NameError:
         print("        No ignore list defined")
 
 #-------------------------------------------------------------------------------
-def print_scan_stats ():
+def print_scan_stats():
     # Devices Detected
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanCycle = ? """,
                     (cycle,))
-    print ('    Devices Detected.......:', str (sql.fetchone()[0]) )
+    print('    Devices Detected.......:', sql.fetchone()[0])
     # Devices arp-scan
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='arp-scan' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        arp-scan Method....:', str (sql.fetchone()[0]) )
+    print('        arp-scan Method....:', sql.fetchone()[0])
     # Devices Pi-hole
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Pi-hole' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        Pi-hole Method.....: +' + str (sql.fetchone()[0]) )
+    print(f'        Pi-hole Method.....: +{str(sql.fetchone()[0])}')
     # Devices Fritzbox
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Fritzbox' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        Fritzbox Method....: +' + str (sql.fetchone()[0]) )
+    print(f'        Fritzbox Method....: +{str(sql.fetchone()[0])}')
     # Devices Mikrotik
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='Mikrotik' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        Mikrotik Method....: +' + str (sql.fetchone()[0]) )
+    print(f'        Mikrotik Method....: +{str(sql.fetchone()[0])}')
     # Devices UniFi
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanMethod='UniFi' AND cur_ScanCycle = ? """,
                     (cycle,))
-    print ('        UniFi Method.......: +' + str (sql.fetchone()[0]) )
+    print(f'        UniFi Method.......: +{str(sql.fetchone()[0])}')
     # New Devices
     sql.execute ("""SELECT COUNT(*) FROM CurrentScan
                     WHERE cur_ScanCycle = ? 
                       AND NOT EXISTS (SELECT 1 FROM Devices
                                       WHERE dev_MAC = cur_MAC) """,
                     (cycle,))
-    print ('        New Devices........: ' + str (sql.fetchone()[0]) )
+    print(f'        New Devices........: {str(sql.fetchone()[0])}')
     # Devices in this ScanCycle
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
                       AND dev_ScanCycle = ? """,
                     (cycle,))
     print ('')
-    print ('    Devices in this scan...: ' + str (sql.fetchone()[0]) )
+    print(f'    Devices in this scan...: {str(sql.fetchone()[0])}')
     # Down Alerts
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_AlertDeviceDown = 1
@@ -984,7 +980,7 @@ def print_scan_stats ():
                                       WHERE dev_MAC = cur_MAC
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
-    print ('        Down Alerts........: ' + str (sql.fetchone()[0]) )
+    print(f'        Down Alerts........: {str(sql.fetchone()[0])}')
     # New Down Alerts
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_AlertDeviceDown = 1
@@ -994,14 +990,14 @@ def print_scan_stats ():
                                       WHERE dev_MAC = cur_MAC
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
-    print ('        New Down Alerts....: ' + str (sql.fetchone()[0]) )
+    print(f'        New Down Alerts....: {str(sql.fetchone()[0])}')
     # New Connections
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
                       AND dev_PresentLastScan = 0
                       AND dev_ScanCycle = ? """,
                     (cycle,))
-    print ('        New Connections....: ' + str ( sql.fetchone()[0]) )
+    print(f'        New Connections....: {str(sql.fetchone()[0])}')
     # Disconnections
     sql.execute ("""SELECT COUNT(*) FROM Devices
                     WHERE dev_PresentLastScan = 1
@@ -1010,14 +1006,14 @@ def print_scan_stats ():
                                       WHERE dev_MAC = cur_MAC
                                         AND dev_ScanCycle = cur_ScanCycle) """,
                     (cycle,))
-    print ('        Disconnections.....: ' + str ( sql.fetchone()[0]) )
+    print(f'        Disconnections.....: {str(sql.fetchone()[0])}')
     # IP Changes
     sql.execute ("""SELECT COUNT(*) FROM Devices, CurrentScan
                     WHERE dev_MAC = cur_MAC AND dev_ScanCycle = cur_ScanCycle
                       AND dev_ScanCycle = ?
                       AND dev_LastIP <> cur_IP """,
                     (cycle,))
-    print ('        IP Changes.........: ' + str ( sql.fetchone()[0]) )
+    print(f'        IP Changes.........: {str(sql.fetchone()[0])}')
 
 #------------------------------------------------------------------------------
 def calc_activity_history_main_scan ():
@@ -1180,7 +1176,7 @@ def insert_events ():
     print_log ('Events end')
 
 #-------------------------------------------------------------------------------
-def update_devices_data_from_scan ():
+def update_devices_data_from_scan():
     # Update Last Connection
     print_log ('Update devices - 1 Last Connection')
     sql.execute ("""UPDATE Devices SET dev_LastConnection = ?,
@@ -1271,9 +1267,9 @@ def update_devices_data_from_scan ():
                WHERE dev_Vendor = '(unknown)' OR dev_Vendor =''
                   OR dev_Vendor IS NULL"""
 
-    for device in sql.execute (query) :
+    for device in sql.execute (query):
         vendor = query_MAC_vendor (device['dev_MAC'])
-        if vendor != -1 and vendor != -2 :
+        if vendor not in [-1, -2]:
             recordsToUpdate.append ([vendor, device['dev_MAC']])
 
     sql.executemany ("UPDATE Devices SET dev_Vendor = ? WHERE dev_MAC = ? ",
@@ -1485,7 +1481,7 @@ def validate_dhcp_address(ip_string):
        return False
 
 # -----------------------------------------------------------------------------------
-def rogue_dhcp_detection ():
+def rogue_dhcp_detection():
     # Create Table is not exist
     sql_create_table = """ CREATE TABLE IF NOT EXISTS Nmap_DHCP_Server(
                                 scan_num INTEGER NOT NULL,
@@ -1500,28 +1496,27 @@ def rogue_dhcp_detection ():
 
     # Execute 10 probes and insert in list
     dhcp_probes = 15
-    dhcp_server_list = []
-    dhcp_server_list.append(strftime("%Y-%m-%d %H:%M:%S"))
+    dhcp_server_list = [strftime("%Y-%m-%d %H:%M:%S")]
     for _ in range(dhcp_probes):
         stream = os.popen('sudo nmap --script broadcast-dhcp-discover 2>/dev/null | grep "Server Identifier" | awk \'{ print $4 }\'')
         output = stream.read()
         dhcp_server_list.append(output.replace("\n", ""))
 
-    for i in range(len(dhcp_server_list)):
-        # Insert list in database
-        sqlite_insert = """INSERT INTO Nmap_DHCP_Server
+    # Insert list in database
+    sqlite_insert = """INSERT INTO Nmap_DHCP_Server
                          (scan_num, dhcp_server) 
                          VALUES (?, ?);"""
 
+    for i in range(len(dhcp_server_list)):
         table_data = (i, dhcp_server_list[i])
         sql.execute(sqlite_insert, table_data)
-    
+
     sql_connection.commit()
 
     rogue_dhcp_notification ()
 
 # -----------------------------------------------------------------------------------
-def rogue_dhcp_notification ():
+def rogue_dhcp_notification():
     sql.execute("SELECT DISTINCT dhcp_server FROM Nmap_DHCP_Server")
     rows = sql.fetchall()
 
@@ -1532,27 +1527,27 @@ def rogue_dhcp_notification ():
 
     if len(rows) == 2:
         if validate_dhcp_address(rows[1][0]):
-            if rows[1][0] == DHCP_SERVER_ADDRESS :
-                print ('    One DHCP Server detected......: ' + rows[1][0] + ' (valid)')
+            if rows[1][0] == DHCP_SERVER_ADDRESS:
+                print(f'    One DHCP Server detected......: {rows[1][0]} (valid)')
             else:
-                print ('    One DHCP Server detected......: ' + rows[1][0] + ' (invalid)')
+                print(f'    One DHCP Server detected......: {rows[1][0]} (invalid)')
                 rogue_dhcp_server_list.append(rows[1][0])
         else:
             print ('    Detection Error')
 
     if len(rows) > 2:
         print ('    Multiple DHCP Servers detected:')
-        for i in range(1,len(rows),1):
+        for i in range(1, len(rows)):
             if validate_dhcp_address(rows[i][0]):
-                if rows[i][0] == DHCP_SERVER_ADDRESS :
-                    print ('        ' + rows[i][0] + ' (valid)' )
+                if rows[i][0] == DHCP_SERVER_ADDRESS:
+                    print(f'        {rows[i][0]} (valid)')
                 else:
-                    print ('        ' + rows[i][0] + ' (rogue)' )
+                    print(f'        {rows[i][0]} (rogue)')
                     rogue_dhcp_server_list.append(rows[i][0])
             else:
                 print ('    Detection Error')
 
-    rogue_dhcp_reports = glob.glob(REPORTPATH_WEBGUI + "*Rogue DHCP Server*.txt")    
+    rogue_dhcp_reports = glob.glob(f"{REPORTPATH_WEBGUI}*Rogue DHCP Server*.txt")    
 
     if rogue_dhcp_server_list and not rogue_dhcp_reports:
         rogue_dhcp_server_string = "Report Date: " + rows[0][0] + "\nServer: " + socket.gethostname() + "\n\nRogue DHCP Server\nDetected Server(s): "
@@ -1581,7 +1576,7 @@ def set_service_update(_mon_URL, _mon_lastScan, _mon_lastStatus, _mon_lastLatenc
     ssl_fc = str(_mon_ssl_fc)
 
     if _mon_Redirect != 200 and _mon_lastStatus == 200:
-        _mon_Redirect_Text = "Redirected by " + str(_mon_Redirect)
+        _mon_Redirect_Text = f"Redirected by {str(_mon_Redirect)}"
     else:
         _mon_Redirect_Text = ""
 
@@ -1621,23 +1616,22 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _mon_ssl_valid_to = row[13] # FC value 1
         _mon_ssl_fc = row[14] # FC value between 0 and 15
 
+    _cur_ssl_fc = 0
     # SSL Info change - Calc FC
     if len(_cur_ssl_info) == 4:
-        _cur_ssl_fc = 0
-        if _cur_ssl_info['Subject'] != _mon_ssl_subject :
-            _cur_ssl_fc = _cur_ssl_fc + 8
+        if _cur_ssl_info['Subject'] != _mon_ssl_subject:
+            _cur_ssl_fc += 8
         _cur_ssl_subject = _cur_ssl_info['Subject']
-        if _cur_ssl_info['Issuer'] != _mon_ssl_issuer :
-            _cur_ssl_fc = _cur_ssl_fc + 4
+        if _cur_ssl_info['Issuer'] != _mon_ssl_issuer:
+            _cur_ssl_fc += 4
         _cur_ssl_issuer = _cur_ssl_info['Issuer']
-        if _cur_ssl_info['Valid_from'] != _mon_ssl_valid_from :
-            _cur_ssl_fc = _cur_ssl_fc + 2
+        if _cur_ssl_info['Valid_from'] != _mon_ssl_valid_from:
+            _cur_ssl_fc += 2
         _cur_ssl_valid_from = _cur_ssl_info['Valid_from']
-        if _cur_ssl_info['Valid_to'] != _mon_ssl_valid_to :
-            _cur_ssl_fc = _cur_ssl_fc + 1
+        if _cur_ssl_info['Valid_to'] != _mon_ssl_valid_to:
+            _cur_ssl_fc += 1
         _cur_ssl_valid_to = _cur_ssl_info['Valid_to']
     else:
-        _cur_ssl_fc = 0
         _cur_ssl_subject = ""
         _cur_ssl_issuer = ""
         _cur_ssl_valid_from = ""
@@ -1648,11 +1642,8 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _cur_StatusChanged += 1
 
     # IP change
-    if _mon_TargetIP != _cur_TargetIP:
+    if _mon_TargetIP != _cur_TargetIP or _mon_StatusCode != _cur_StatusCode:
         _cur_StatusChanged += 1
-    elif _mon_StatusCode != _cur_StatusCode:
-        _cur_StatusChanged += 1
-
     # Down or Online
     if _mon_Latency == "99999999" and _mon_Latency != _cur_Latency:
         _cur_LatencyChanged = 0
@@ -1663,11 +1654,7 @@ def set_services_current_scan(_cur_URL, _cur_DateTime, _cur_StatusCode, _cur_Lat
         _cur_LatencyChanged = 0 
 
     # Merge Changes from all Events to 1 or 0
-    if _cur_StatusChanged > 0 :
-        StatusChanged = 1
-    else:
-        StatusChanged = 0
-
+    StatusChanged = 1 if _cur_StatusChanged > 0 else 0
     sqlite_insert = """INSERT INTO Services_CurrentScan
                      (cur_URL, cur_DateTime, cur_StatusCode, cur_Latency, cur_AlertEvents, cur_AlertDown, cur_StatusChanged, cur_LatencyChanged, cur_TargetIP, cur_StatusCode_prev, cur_TargetIP_prev, cur_ssl_subject, cur_ssl_issuer, cur_ssl_valid_from, cur_ssl_valid_to, cur_ssl_fc) 
                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
@@ -1684,12 +1671,9 @@ def service_monitoring_log(site, status, latency):
 
     # Log status message to log file
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
-        monitor_logfile.write("{} |        {} |     {} | {}\n".format(strftime("%Y-%m-%d %H:%M:%S"),
-                                                status_str.zfill(3),
-                                                latency,
-                                                site
-                                                )
-                             )
+        monitor_logfile.write(
+            f'{strftime("%Y-%m-%d %H:%M:%S")} |        {status_str.zfill(3)} |     {latency} | {site}\n'
+        )
 
 # -----------------------------------------------------------------------------
 def check_services_health(site):
@@ -1731,10 +1715,7 @@ def get_ssl_cert_info(url, timeout=10):
     try:
         parsed_url = urlparse(url)
         hostname = parsed_url.hostname
-        port = parsed_url.port
-
-        if not port :
-            port = 443
+        port = parsed_url.port or 443
 
         socket.setdefaulttimeout(timeout)
 
@@ -1749,14 +1730,12 @@ def get_ssl_cert_info(url, timeout=10):
                 cert_data = ssock.getpeercert(binary_form=True)
                 cert = x509.load_der_x509_certificate(cert_data, default_backend())
 
-                ssl_info = dict();
-                ssl_info['Subject'] = f"""{cert.subject}"""
-                ssl_info['Issuer'] = f"""{cert.issuer}"""
-                ssl_info['Valid_from'] = f"""{cert.not_valid_before}"""
-                ssl_info['Valid_to'] = f"""{cert.not_valid_after}"""
-
-                return ssl_info
-
+                return {
+                    'Subject': f"""{cert.subject}""",
+                    'Issuer': f"""{cert.issuer}""",
+                    'Valid_from': f"""{cert.not_valid_before}""",
+                    'Valid_to': f"""{cert.not_valid_after}""",
+                }
     except socket.timeout:
         return "SSL certificate could not be found (Timeout)"
 
@@ -1782,11 +1761,7 @@ def get_services_list():
     sql.execute("SELECT mon_URL FROM Services")
     rows = sql.fetchall()
 
-    sites = []
-    for row in rows:
-        sites.append(row[0])
-
-    return sites
+    return [row[0] for row in rows]
 
 # -----------------------------------------------------------------------------
 def flush_services_current_scan():
@@ -1808,7 +1783,9 @@ def print_service_monitoring_changes():
     print("        Changed Reachability....:", str(changedLatency))
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
         monitor_logfile.write("\nServices Monitoring Changes:\n")
-        monitor_logfile.write("    Changed StatusCodes.....: " + str(changedStatusCode))
+        monitor_logfile.write(
+            f"    Changed StatusCodes.....: {str(changedStatusCode)}"
+        )
         monitor_logfile.write("\n    Changed Reachability....: " + str(changedLatency))
         monitor_logfile.write("\n")
         monitor_logfile.close()
@@ -1817,20 +1794,14 @@ def print_service_monitoring_changes():
 def service_monitoring_notification():
     global mail_text_webservice
     global mail_html_webservice
-    
+
     # Reporting section
     print ('\nReporting (Web Services) ...')
 
-    # Open text Template
-    template_file = open(PIALERT_BACK_PATH + '/report_template_webservice.txt', 'r') 
-    mail_text_webservice = template_file.read() 
-    template_file.close() 
-
-    # Open html Template
-    template_file = open(PIALERT_BACK_PATH + '/report_template_webservice.html', 'r') 
-    mail_html_webservice = template_file.read() 
-    template_file.close() 
-
+    with open(f'{PIALERT_BACK_PATH}/report_template_webservice.txt', 'r') as template_file:
+        mail_text_webservice = template_file.read()
+    with open(f'{PIALERT_BACK_PATH}/report_template_webservice.html', 'r') as template_file:
+        mail_html_webservice = template_file.read()
     # Report Header & footer
     timeFormated = startTime.strftime ('%Y-%m-%d %H:%M')
     mail_text_webservice = mail_text_webservice.replace ('<REPORT_DATE>', timeFormated)
@@ -1955,14 +1926,14 @@ def service_monitoring():
         for site in sites:
             status,latency = check_services_health(site)
             site_retry = ''
-            if latency == "99999999" :
+            if latency == "99999999":
                 # 2nd Retry if the first attempt fails
                 status,latency = check_services_health(site)
                 site_retry = '*'
-                if latency == "99999999" :
-                    # 3rd Retry if the second attempt fails
-                    status,latency = check_services_health(site)
-                    site_retry = '**'
+            if latency == "99999999" :
+                # 3rd Retry if the second attempt fails
+                status,latency = check_services_health(site)
+                site_retry = '**'
 
             #Get IP from Domain
             if latency != "99999999":
@@ -1978,7 +1949,7 @@ def service_monitoring():
                 redirect_state = ""
                 ssl_info = ""
 
-            service_monitoring_log(site + ' ' + site_retry, status, latency)
+            service_monitoring_log(f'{site} {site_retry}', status, latency)
             ssl_fc = set_services_current_scan(site, scantime, status, latency, domain_ip, ssl_info)
             set_services_events(site, scantime, status, latency, domain_ip, ssl_fc)
 #            set_services_current_scan(site, scantime, status, latency, domain_ip, ssl_info)
@@ -2004,7 +1975,7 @@ def icmp_monitoring():
     print("    Get Host/Domain List...")
     icmphosts = get_icmphost_list()
     icmphostscount = len(icmphosts)
-    print("        List contains " + str(icmphostscount) + " entries")
+    print(f"        List contains {icmphostscount} entries")
     print("    Flush previous ping results...")
     flush_icmphost_current_scan()
     print("    Ping Hosts...")
@@ -2012,61 +1983,63 @@ def icmp_monitoring():
     closeDB()
     scantime = startTime.strftime("%Y-%m-%d %H:%M")
 
-    icmp_scan_results = {}
-
     icmphosts_all = len(icmphosts)
-    icmphosts_online = 0
-    icmphosts_offline = 0
-
     try:
         ping_retries = ICMP_ONLINE_TEST
     except NameError: # variable not defined, use a default
         ping_retries = 1 # 1
 
-    icmphosts_index = 0
-
-    if icmphosts_all > 0 :
-        while icmphosts_index < icmphosts_all:
-            host_ip = icmphosts[icmphosts_index]
-            for i in range(ping_retries):
-                # print("Host %s retry %s" % (host_ip, str(i+1)))
-                icmp_status = ping(host_ip)
-                if icmp_status == "1":
-                    break;
-
-            if icmp_status == "1":
-                icmp_rtt = ping_avg(host_ip)
-                # print("Host %s RTT %s" % (host_ip, str(icmp_rtt)))
-                icmphosts_online+=1
-            else:
-                icmp_rtt = "99999"
-                icmphosts_offline+=1
-
-            current_data = {
-                "host_ip": host_ip,
-                "scantime": scantime,
-                "icmp_status": icmp_status,
-                "icmp_rtt": icmp_rtt
-            }
-
-            icmp_scan_results[host_ip] = current_data
-            sys.stdout.flush()
-
-            icmphosts_index += 1
-
-        print("        Online Host(s)  : " + str(icmphosts_online))
-        print("        Offline Host(s) : " + str(icmphosts_offline))
-
-        openDB()
-        # Save Scan Results
-        icmp_save_scandata(icmp_scan_results)
-
-        print("    Calculate Activity History...")
-        calc_activity_history_icmp(icmphosts_online, icmphosts_offline)
-
+    if icmphosts_all > 0:
+        _extracted_from_icmp_monitoring_15(
+            icmphosts_all, icmphosts, ping_retries, scantime
+        )
     else:
         openDB()
         print("    No Hosts(s) to monitor!")
+
+
+# TODO Rename this here and in `icmp_monitoring`
+def _extracted_from_icmp_monitoring_15(icmphosts_all, icmphosts, ping_retries, scantime):
+    icmp_scan_results = {}
+
+    icmphosts_online = 0
+    icmphosts_offline = 0
+
+    for icmphosts_index in range(icmphosts_all):
+        host_ip = icmphosts[icmphosts_index]
+        for _ in range(ping_retries):
+            # print("Host %s retry %s" % (host_ip, str(i+1)))
+            icmp_status = ping(host_ip)
+            if icmp_status == "1":
+                break;
+
+        if icmp_status == "1":
+            icmp_rtt = ping_avg(host_ip)
+            # print("Host %s RTT %s" % (host_ip, str(icmp_rtt)))
+            icmphosts_online+=1
+        else:
+            icmp_rtt = "99999"
+            icmphosts_offline+=1
+
+        current_data = {
+            "host_ip": host_ip,
+            "scantime": scantime,
+            "icmp_status": icmp_status,
+            "icmp_rtt": icmp_rtt
+        }
+
+        icmp_scan_results[host_ip] = current_data
+        sys.stdout.flush()
+
+    print(f"        Online Host(s)  : {str(icmphosts_online)}")
+    print(f"        Offline Host(s) : {str(icmphosts_offline)}")
+
+    openDB()
+    # Save Scan Results
+    icmp_save_scandata(icmp_scan_results)
+
+    print("    Calculate Activity History...")
+    calc_activity_history_icmp(icmphosts_online, icmphosts_offline)
 
 # -----------------------------------------------------------------------------
 def icmp_save_scandata(data):
@@ -2084,11 +2057,7 @@ def get_icmphost_list():
     sql.execute("SELECT icmp_ip FROM ICMP_Mon")
     rows = sql.fetchall()
 
-    icmphost = []
-    for row in rows:
-        icmphost.append(row[0])
-
-    return icmphost
+    return [row[0] for row in rows]
 
 # -----------------------------------------------------------------------------
 def ping(host):
@@ -2113,8 +2082,7 @@ def ping_avg(host):
     tail_process = subprocess.Popen(['tail', '-1'], stdin=ping_process.stdout, stdout=subprocess.PIPE)
     awk_process = subprocess.Popen(['awk', '-F/', '{print $5}'], stdin=tail_process.stdout, stdout=subprocess.PIPE)
     output, error = awk_process.communicate()
-    output_string = output.decode('utf-8').strip()
-    return output_string
+    return output.decode('utf-8').strip()
 
 # -----------------------------------------------------------------------------
 def set_icmphost_events(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt):
@@ -2190,20 +2158,14 @@ def calc_activity_history_icmp(History_Online_Devices, History_Offline_Devices):
 def icmphost_monitoring_notification():
     global mail_text_icmphost
     global mail_html_icmphost
-    
+
     # Reporting section
     print ('\nReporting (ICMP Monitoring) ...')
 
-    # Open text Template
-    template_file = open(PIALERT_BACK_PATH + '/report_template_icmpmon.txt', 'r') 
-    mail_text_icmphost = template_file.read() 
-    template_file.close() 
-
-    # Open html Template
-    template_file = open(PIALERT_BACK_PATH + '/report_template_icmpmon.html', 'r') 
-    mail_html_icmphost = template_file.read() 
-    template_file.close() 
-
+    with open(f'{PIALERT_BACK_PATH}/report_template_icmpmon.txt', 'r') as template_file:
+        mail_text_icmphost = template_file.read()
+    with open(f'{PIALERT_BACK_PATH}/report_template_icmpmon.html', 'r') as template_file:
+        mail_html_icmphost = template_file.read()
     # Report Header & footer
     timeFormated = startTime.strftime ('%Y-%m-%d %H:%M')
     mail_text_icmphost = mail_text_icmphost.replace ('<REPORT_DATE>', timeFormated)
@@ -2228,8 +2190,8 @@ def icmphost_monitoring_notification():
     for eventAlert in sql :
 
         hostname = get_icmphost_name(eventAlert['cur_ip'])
-        print(hostname)
-        
+        # print(hostname)
+
         mail_section_icmphost_down = True
         mail_text_icmphost_down += text_line_template.format (
             'IP: ', eventAlert['cur_ip'],
@@ -2256,17 +2218,13 @@ def icmphost_monitoring_notification():
                     WHERE cur_AlertEvents = 1 AND cur_PresentChanged = 1
                     ORDER BY cur_LastScan""")
 
-    for eventAlert in sql :
+    for eventAlert in sql:
         mail_section_events = True
 
         hostname = get_icmphost_name(eventAlert['cur_ip'])
-        print(hostname)
+        # print(hostname)
 
-        if eventAlert['cur_Present'] == 1 :
-            icmp_online_status = 'Up'
-        else :
-            icmp_online_status = 'Down'
-
+        icmp_online_status = 'Up' if eventAlert['cur_Present'] == 1 else 'Down'
         mail_text_events += text_line_template.format (
             'IP: ', eventAlert['cur_ip'],
             'Hostname:', hostname,
@@ -2290,10 +2248,10 @@ def icmphost_monitoring_notification():
 #===============================================================================
 # REPORTING
 #===============================================================================
-def email_reporting ():
+def email_reporting():
     global mail_text
     global mail_html
-    
+
     # Reporting section
     print ('\nReporting...')
     openDB()
@@ -2310,16 +2268,10 @@ def email_reporting ():
                             SELECT dev_MAC FROM Devices WHERE dev_AlertDeviceDown = 0 
                         )""")
 
-    # Open text Template
-    template_file = open(PIALERT_BACK_PATH + '/report_template.txt', 'r') 
-    mail_text = template_file.read() 
-    template_file.close() 
-
-    # Open html Template
-    template_file = open(PIALERT_BACK_PATH + '/report_template.html', 'r') 
-    mail_html = template_file.read() 
-    template_file.close() 
-
+    with open(f'{PIALERT_BACK_PATH}/report_template.txt', 'r') as template_file:
+        mail_text = template_file.read()
+    with open(f'{PIALERT_BACK_PATH}/report_template.html', 'r') as template_file:
+        mail_html = template_file.read()
     # Report Header & footer
     timeFormated = startTime.strftime ('%Y-%m-%d %H:%M')
     mail_text = mail_text.replace ('<REPORT_DATE>', timeFormated)
@@ -2364,7 +2316,7 @@ def email_reporting ():
     html_line_template    = '<tr>\n'+ \
         '  <td> <a href="{}{}"> {} </a> </td>\n  <td> {} </td>\n'+\
         '  <td> {} </td>\n  <td> {} </td>\n  <td> {} </td>\n</tr>\n'
-    
+
     sql.execute ("""SELECT * FROM Events_Devices
                     WHERE eve_PendingAlertEmail = 1
                       AND eve_EventType = 'New Device'
@@ -2465,21 +2417,20 @@ def email_reporting ():
         enable_services_monitoring = SCAN_WEBSERVICES
     except NameError:
         enable_services_monitoring = False
-    if enable_services_monitoring == True:
-        if str(startTime)[15] == "0":
-            service_monitoring_notification()
+    if enable_services_monitoring and str(startTime)[15] == "0":
+        service_monitoring_notification()
 
     try:
         enable_icmp_monitoring = ICMPSCAN_ACTIVE
     except NameError:
         enable_icmp_monitoring = False
-    if enable_icmp_monitoring == True:
+    if enable_icmp_monitoring:
         icmphost_monitoring_notification()
 
     closeDB()
 
 #-------------------------------------------------------------------------------
-def send_pushsafer (_Text):
+def send_pushsafer(_Text):
     try:
         notification_target = PUSHSAFER_DEVICE
     except NameError:
@@ -2492,21 +2443,21 @@ def send_pushsafer (_Text):
     subheadline = findsubheadline[3]
     url = 'https://www.pushsafer.com/api'
     post_fields = {
-        "t" : 'Pi.Alert Message - '+subheadline,
-        "m" : _pushsafer_Text,
-        "s" : 22,
-        "v" : 3,
-        "i" : 148,
-        "c" : '#ef7f7f',
-        "d" : notification_target,
-        "u" : REPORT_DASHBOARD_URL,
-        "ut" : 'Open Pi.Alert',
-        "k" : PUSHSAFER_TOKEN,
-        }
+        "t": f'Pi.Alert Message - {subheadline}',
+        "m": _pushsafer_Text,
+        "s": 22,
+        "v": 3,
+        "i": 148,
+        "c": '#ef7f7f',
+        "d": notification_target,
+        "u": REPORT_DASHBOARD_URL,
+        "ut": 'Open Pi.Alert',
+        "k": PUSHSAFER_TOKEN,
+    }
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
-def send_pushover (_Text):
+def send_pushover(_Text):
     # Remove one linebrake between "Server" and the headline of the event type
     _pushover_Text = _Text.replace('\n\n\n', '\n\n')
     # Text-layout tweak
@@ -2518,13 +2469,13 @@ def send_pushover (_Text):
     post_fields = {
         "token": PUSHOVER_TOKEN,
         "user": PUSHOVER_USER,
-        "title" : 'Pi.Alert Message - '+subheadline,
-        "message" : _pushover_Text,
-        }
+        "title": f'Pi.Alert Message - {subheadline}',
+        "message": _pushover_Text,
+    }
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
-def send_ntfy (_Text):
+def send_ntfy(_Text):
     # Prepare header
     headers = {
         "Title": "Pi.Alert Notification",
@@ -2535,28 +2486,30 @@ def send_ntfy (_Text):
     # if username and password are set generate hash and update header
     if NTFY_USER != "" and NTFY_PASSWORD != "":
     # Generate hash for basic auth
-        usernamepassword = "{}:{}".format(NTFY_USER,NTFY_PASSWORD)
-        basichash = b64encode(bytes(NTFY_USER + ':' + NTFY_PASSWORD, "utf-8")).decode("ascii")
+        usernamepassword = f"{NTFY_USER}:{NTFY_PASSWORD}"
+        basichash = b64encode(
+            bytes(f'{NTFY_USER}:{NTFY_PASSWORD}', "utf-8")
+        ).decode("ascii")
 
     # add authorization header with hash
-        headers["Authorization"] = "Basic {}".format(basichash)
+        headers["Authorization"] = f"Basic {basichash}"
 
-    requests.post("{}/{}".format( NTFY_HOST, NTFY_TOPIC),
-    data=_Text,
-    headers=headers)
+    requests.post(f"{NTFY_HOST}/{NTFY_TOPIC}", data=_Text, headers=headers)
 
 #-------------------------------------------------------------------------------
-def send_telegram (_Text):
+def send_telegram(_Text):
     # Remove one linebrake between "Server" and the headline of the event type
     _telegram_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
     findsubheadline = _telegram_Text.split('\n')
     subheadline = findsubheadline[3]
     runningpath = os.path.abspath(os.path.dirname(__file__))
-    stream = os.popen(runningpath+'/shoutrrr/'+SHOUTRRR_BINARY+'/shoutrrr send --url "'+TELEGRAM_BOT_TOKEN_URL+'" --message "'+_telegram_Text+'" --title "Pi.Alert - '+subheadline+'"')
+    stream = os.popen(
+        f'{runningpath}/shoutrrr/{SHOUTRRR_BINARY}/shoutrrr send --url "{TELEGRAM_BOT_TOKEN_URL}" --message "{_telegram_Text}" --title "Pi.Alert - {subheadline}"'
+    )
 
 #-------------------------------------------------------------------------------
-def send_webgui (_Text):
+def send_webgui(_Text):
     # Remove one linebrake between "Server" and the headline of the event type
     _webgui_Text = _Text.replace('\n\n\n', '\n\n')
     # extract event type headline to use it in the notification headline
@@ -2564,17 +2517,16 @@ def send_webgui (_Text):
     subheadline = findsubheadline[3]
     _webgui_filename = time.strftime("%Y%m%d-%H%M%S") + "_" + subheadline + ".txt"
     if (os.path.exists(REPORTPATH_WEBGUI + _webgui_filename) == False):
-        f = open(REPORTPATH_WEBGUI + _webgui_filename, "w")
-        f.write(_webgui_Text)
-        f.close()
+        with open(REPORTPATH_WEBGUI + _webgui_filename, "w") as f:
+            f.write(_webgui_Text)
     set_pia_reports_permissions()
 
 #===============================================================================
 # Sending Notofications
 #===============================================================================
-def sending_notifications (_type, _html_text, _txt_text):
+def sending_notifications(_type, _html_text, _txt_text):
 
-    if _type == 'webservice' or _type == 'rogue_dhcp' :
+    if _type in ['webservice', 'rogue_dhcp']:
         if REPORT_MAIL_WEBMON :
             print ('    Sending report by email...')
             send_email (_txt_text, _html_text)
@@ -2605,7 +2557,7 @@ def sending_notifications (_type, _html_text, _txt_text):
             send_webgui (_txt_text)
         else :
             print ('    Skip WebUI...')
-    elif _type == 'pialert' or _type == 'rogue_dhcp' or _type == 'icmp_mon' :
+    elif _type in ['pialert', 'icmp_mon']:
         if REPORT_MAIL :
             print ('    Sending report by email...')
             send_email (_txt_text, _html_text)
@@ -2638,93 +2590,94 @@ def sending_notifications (_type, _html_text, _txt_text):
             print ('    Skip WebUI...')
 
 #-------------------------------------------------------------------------------
-def format_report_section (pActive, pSection, pTable, pText, pHTML):
+def format_report_section(pActive, pSection, pTable, pText, pHTML):
     global mail_text
     global mail_html
 
     # Replace section text
-    if pActive :
-        mail_text = mail_text.replace ('<'+ pTable +'>', pText)
-        mail_html = mail_html.replace ('<'+ pTable +'>', pHTML)       
+    if pActive:
+        mail_text = mail_text.replace(f'<{pTable}>', pText)
+        mail_html = mail_html.replace(f'<{pTable}>', pHTML)       
 
-        mail_text = remove_tag (mail_text, pSection)       
+        mail_text = remove_tag (mail_text, pSection)
         mail_html = remove_tag (mail_html, pSection)
     else:
         mail_text = remove_section (mail_text, pSection)
         mail_html = remove_section (mail_html, pSection)
 
 #-------------------------------------------------------------------------------
-def format_report_section_services (pActive, pSection, pTable, pText, pHTML):
+def format_report_section_services(pActive, pSection, pTable, pText, pHTML):
     global mail_text_webservice
     global mail_html_webservice
 
     # Replace section text
-    if pActive :
-        mail_text_webservice = mail_text_webservice.replace ('<'+ pTable +'>', pText)
-        mail_html_webservice = mail_html_webservice.replace ('<'+ pTable +'>', pHTML)       
+    if pActive:
+        mail_text_webservice = mail_text_webservice.replace(f'<{pTable}>', pText)
+        mail_html_webservice = mail_html_webservice.replace(f'<{pTable}>', pHTML)       
 
-        mail_text_webservice = remove_tag (mail_text_webservice, pSection)       
+        mail_text_webservice = remove_tag (mail_text_webservice, pSection)
         mail_html_webservice = remove_tag (mail_html_webservice, pSection)
     else:
         mail_text_webservice = remove_section (mail_text_webservice, pSection)
         mail_html_webservice = remove_section (mail_html_webservice, pSection)
 
 #-------------------------------------------------------------------------------
-def format_report_section_icmp (pActive, pSection, pTable, pText, pHTML):
+def format_report_section_icmp(pActive, pSection, pTable, pText, pHTML):
     global mail_html_icmphost
     global mail_text_icmphost
 
     # Replace section text
-    if pActive :
-        mail_text_icmphost = mail_text_icmphost.replace ('<'+ pTable +'>', pText)
-        mail_html_icmphost = mail_html_icmphost.replace ('<'+ pTable +'>', pHTML)       
+    if pActive:
+        mail_text_icmphost = mail_text_icmphost.replace(f'<{pTable}>', pText)
+        mail_html_icmphost = mail_html_icmphost.replace(f'<{pTable}>', pHTML)       
 
-        mail_text_icmphost = remove_tag (mail_text_icmphost, pSection)       
+        mail_text_icmphost = remove_tag (mail_text_icmphost, pSection)
         mail_html_icmphost = remove_tag (mail_html_icmphost, pSection)
     else:
         mail_text_icmphost = remove_section (mail_text_icmphost, pSection)
         mail_html_icmphost = remove_section (mail_html_icmphost, pSection)
 
 #-------------------------------------------------------------------------------
-def remove_section (pText, pSection):
+def remove_section(pText, pSection):
     # Search section into the text
-    if pText.find ('<'+ pSection +'>') >=0 \
-    and pText.find ('</'+ pSection +'>') >=0 : 
+    if pText.find(f'<{pSection}>') >= 0 and pText.find(f'</{pSection}>') >= 0: 
         # return text without the section
-        return pText[:pText.find ('<'+ pSection+'>')] + \
-               pText[pText.find ('</'+ pSection +'>') + len (pSection) +3:]
-    else :
+        return (
+            pText[: pText.find(f'<{pSection}>')]
+            + pText[pText.find(f'</{pSection}>') + len(pSection) + 3 :]
+        )
+    else:
         # return all text
         return pText
 
 #-------------------------------------------------------------------------------
-def remove_tag (pText, pTag):
+def remove_tag(pText, pTag):
     # return text without the tag
-    return pText.replace ('<'+ pTag +'>','').replace ('</'+ pTag +'>','')
+    return pText.replace(f'<{pTag}>', '').replace(f'</{pTag}>', '')
 
 #-------------------------------------------------------------------------------
-def write_file (pPath, pText):
+def write_file(pPath, pText):
     # Write the text depending using the correct python version
     if sys.version_info < (3, 0):
         file = io.open (pPath , mode='w', encoding='utf-8')
-        file.write ( pText.decode('unicode_escape') ) 
-        file.close() 
+        file.write ( pText.decode('unicode_escape') )
     else:
-        file = open (pPath, 'w', encoding='utf-8') 
+        file = open (pPath, 'w', encoding='utf-8')
         file.write (pText) 
-        file.close() 
+
+    file.close() 
 
 #-------------------------------------------------------------------------------
-def append_line_to_file (pPath, pText):
+def append_line_to_file(pPath, pText):
     # append the line depending using the correct python version
     if sys.version_info < (3, 0):
         file = io.open (pPath , mode='a', encoding='utf-8')
-        file.write ( pText.decode('unicode_escape') ) 
-        file.close() 
+        file.write ( pText.decode('unicode_escape') )
     else:
-        file = open (pPath, 'a', encoding='utf-8') 
+        file = open (pPath, 'a', encoding='utf-8')
         file.write (pText) 
-        file.close() 
+
+    file.close() 
 
 #-------------------------------------------------------------------------------
 def send_email (pText, pHTML):
@@ -2750,9 +2703,7 @@ def send_email (pText, pHTML):
 
 #-------------------------------------------------------------------------------
 def SafeParseGlobalBool(boolVariable):
-    if boolVariable in globals():
-        return eval(boolVariable)
-    return False
+    return eval(boolVariable) if boolVariable in globals() else False
 
 #===============================================================================
 # DB
@@ -2776,12 +2727,12 @@ def openDB ():
     sql = sql_connection.cursor()
 
 #-------------------------------------------------------------------------------
-def closeDB ():
+def closeDB():
     global sql_connection
     global sql
 
     # Check if DB is open
-    if sql_connection == None :
+    if sql_connection is None:
         return
 
     # Log    
