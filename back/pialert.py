@@ -324,10 +324,12 @@ def save_new_internet_IP(pNewIP):
 def check_IP_format(pIP):
     # Check IP format
     IPv4SEG  = r'(?:25[0-5]|(?:2[0-4]|1{0,1}[0-9]){0,1}[0-9])'
-    IPv4ADDR = r'(?:(?:' + IPv4SEG + r'\.){3,3}' + IPv4SEG + r')'
+    IPv4ADDR = f'(?:(?:{IPv4SEG}' + r'\.){3,3}' + IPv4SEG + r')'
+    # IPv4ADDR = r'(?:(?:' + IPv4SEG + r'\.){3,3}' + IPv4SEG + r')'
     IP = re.search(IPv4ADDR, pIP)
     # Return error if not IP
-    return "" if IP is None else IP.group(0)
+    #return "" if IP is None else IP.group(0)
+    return "" if IP is None else IP[0]
 
 #===============================================================================
 # Cleanup Tasks
@@ -344,23 +346,33 @@ def cleanup_database():
         strdaystokeepEV = str(DAYS_TO_KEEP_EVENTS)
     except NameError: # variable not defined, use a default
         strdaystokeepEV = str(90) # 90 days
-    print ('    Online_History, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM Online_History WHERE Scan_Date <= date('now', '-"+strdaystokeepOH+" day')")
-    print ('    Events, up to the lastest '+strdaystokeepEV+' days...')
-    sql.execute ("DELETE FROM Events WHERE eve_DateTime <= date('now', '-"+strdaystokeepEV+" day')")
-    print ('    Services_Events, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
-    print ('    ICMP_Mon_Events, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-"+strdaystokeepOH+" day')")
+    print(f'    Online_History, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM Online_History WHERE Scan_Date <= date('now', '-{strdaystokeepOH} day')"
+    )
+    print(f'    Events, up to the lastest {strdaystokeepEV} days...')
+    sql.execute(
+        f"DELETE FROM Events WHERE eve_DateTime <= date('now', '-{strdaystokeepEV} day')"
+    )
+    print(f'    Services_Events, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM Services_Events WHERE moneve_DateTime <= date('now', '-{strdaystokeepOH} day')"
+    )
+    print(f'    ICMP_Mon_Events, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM ICMP_Mon_Events WHERE icmpeve_DateTime <= date('now', '-{strdaystokeepOH} day')"
+    )
     print ('    Trim Journal to the lastest 1000 entries')
     sql.execute ("DELETE FROM pialert_journal WHERE journal_id NOT IN (SELECT journal_id FROM pialert_journal ORDER BY journal_id DESC LIMIT 1000) AND (SELECT COUNT(*) FROM pialert_journal) > 1000")
-    print ('    Speedtest_History, up to the lastest '+strdaystokeepOH+' days...')
-    sql.execute ("DELETE FROM Tools_Speedtest_History WHERE speed_date <= date('now', '-"+strdaystokeepOH+" day')")
+    print(f'    Speedtest_History, up to the lastest {strdaystokeepOH} days...')
+    sql.execute(
+        f"DELETE FROM Tools_Speedtest_History WHERE speed_date <= date('now', '-{strdaystokeepOH} day')"
+    )
     print ('    Shrink Database...')
     sql.execute ("VACUUM;")
     sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
                     VALUES (?, 'c_010', 'cronjob', 'LogStr_0101', '', '') """, (startTime,))
-    closeDB()    
+    closeDB()
     return 0
 
 #===============================================================================
@@ -372,7 +384,7 @@ def update_devices_MAC_vendors(pArg = ''):
 
     # Update vendors DB (oui)
     print ('\nUpdating vendors DB...')
-    update_args = ['sh', PIALERT_BACK_PATH + '/update_vendors.sh', pArg]
+    update_args = ['sh', f'{PIALERT_BACK_PATH}/update_vendors.sh', pArg]
     update_output = subprocess.check_output (update_args)
 
     # Initialize variables
@@ -422,10 +434,10 @@ def update_devices_MAC_vendors(pArg = ''):
     closeDB()
 
 #-------------------------------------------------------------------------------
-def query_MAC_vendor (pMAC):
-    try :
+def query_MAC_vendor(pMAC):
+    try:
         pMACstr = str(pMAC)
-        
+
         # Check MAC parameter
         mac = pMACstr.replace (':','')
         if len(pMACstr) != 17 or len(mac) != 12 :
@@ -438,10 +450,7 @@ def query_MAC_vendor (pMAC):
 
         # Return Vendor
         vendor = grep_output[7:]
-        vendor = vendor.rstrip()
-        return vendor
-
-    # not Found
+        return vendor.rstrip()
     except subprocess.CalledProcessError :
         return -1
             
@@ -458,7 +467,7 @@ def scan_network():
     scanCycle_data = query_ScanCycle_Data (True)
     if scanCycle_data is None:
         print ('\n*************** ERROR ***************')
-        print ('ScanCycle %s not found' % cycle )
+        print(f'ScanCycle {cycle} not found')
         print ('    Exiting...\n')
         return 1
 
@@ -472,27 +481,19 @@ def scan_network():
     arpscan_devices = execute_arpscan ()
     print_log ('arp-scan ends')
     # Pi-hole
-    print ('    Pi-hole Method...')
-    openDB()
-    print_log ('Pi-hole copy starts...')
+    init_import_methode('    Pi-hole Method...', 'Pi-hole copy starts...')
     copy_pihole_network()
     # DHCP Leases
     print ('    DHCP Leases Method...')
     read_DHCP_leases ()
     # Fritzbox
-    print ('    Fritzbox Method...')
-    openDB()
-    print_log ('Fritzbox copy starts...')
+    init_import_methode('    Fritzbox Method...', 'Fritzbox copy starts...')
     read_fritzbox_active_hosts()
     # Mikrotik
-    print ('    Mikrotik Method...')
-    openDB()
-    print_log ('Mikrotik copy starts...')
+    init_import_methode('    Mikrotik Method...', 'Mikrotik copy starts...')
     read_mikrotik_leases()
-    # UniFi
-    print ('    UniFi Method...')
-    openDB()
-    print_log ('UniFi copy starts...')
+    # Unifi
+    init_import_methode('    UniFi Method...', 'UniFi copy starts...')
     read_unifi_clients()
     # Load current scan data 1/2
     print ('\nProcessing scan results...')
@@ -561,6 +562,12 @@ def scan_network():
     closeDB()
 
     return 0
+
+
+def init_import_methode(arg0, arg1):
+    print(arg0)
+    openDB()
+    print_log(arg1)
 
 #-------------------------------------------------------------------------------
 def query_ScanCycle_Data (pOpenCloseDB = False):
@@ -1664,12 +1671,9 @@ def service_monitoring_log(site, status, latency):
 
     # Log status message to log file
     with open(PIALERT_WEBSERVICES_LOG, 'a') as monitor_logfile:
-        monitor_logfile.write("{} |        {} |     {} | {}\n".format(strftime("%Y-%m-%d %H:%M:%S"),
-                                                status_str.zfill(3),
-                                                latency,
-                                                site
-                                                )
-                             )
+        monitor_logfile.write(
+            f'{strftime("%Y-%m-%d %H:%M:%S")} |        {status_str.zfill(3)} |     {latency} | {site}\n'
+        )
 
 # -----------------------------------------------------------------------------
 def check_services_health(site):
@@ -2586,69 +2590,70 @@ def sending_notifications(_type, _html_text, _txt_text):
             print ('    Skip WebUI...')
 
 #-------------------------------------------------------------------------------
-def format_report_section (pActive, pSection, pTable, pText, pHTML):
+def format_report_section(pActive, pSection, pTable, pText, pHTML):
     global mail_text
     global mail_html
 
     # Replace section text
-    if pActive :
-        mail_text = mail_text.replace ('<'+ pTable +'>', pText)
-        mail_html = mail_html.replace ('<'+ pTable +'>', pHTML)       
+    if pActive:
+        mail_text = mail_text.replace(f'<{pTable}>', pText)
+        mail_html = mail_html.replace(f'<{pTable}>', pHTML)       
 
-        mail_text = remove_tag (mail_text, pSection)       
+        mail_text = remove_tag (mail_text, pSection)
         mail_html = remove_tag (mail_html, pSection)
     else:
         mail_text = remove_section (mail_text, pSection)
         mail_html = remove_section (mail_html, pSection)
 
 #-------------------------------------------------------------------------------
-def format_report_section_services (pActive, pSection, pTable, pText, pHTML):
+def format_report_section_services(pActive, pSection, pTable, pText, pHTML):
     global mail_text_webservice
     global mail_html_webservice
 
     # Replace section text
-    if pActive :
-        mail_text_webservice = mail_text_webservice.replace ('<'+ pTable +'>', pText)
-        mail_html_webservice = mail_html_webservice.replace ('<'+ pTable +'>', pHTML)       
+    if pActive:
+        mail_text_webservice = mail_text_webservice.replace(f'<{pTable}>', pText)
+        mail_html_webservice = mail_html_webservice.replace(f'<{pTable}>', pHTML)       
 
-        mail_text_webservice = remove_tag (mail_text_webservice, pSection)       
+        mail_text_webservice = remove_tag (mail_text_webservice, pSection)
         mail_html_webservice = remove_tag (mail_html_webservice, pSection)
     else:
         mail_text_webservice = remove_section (mail_text_webservice, pSection)
         mail_html_webservice = remove_section (mail_html_webservice, pSection)
 
 #-------------------------------------------------------------------------------
-def format_report_section_icmp (pActive, pSection, pTable, pText, pHTML):
+def format_report_section_icmp(pActive, pSection, pTable, pText, pHTML):
     global mail_html_icmphost
     global mail_text_icmphost
 
     # Replace section text
-    if pActive :
-        mail_text_icmphost = mail_text_icmphost.replace ('<'+ pTable +'>', pText)
-        mail_html_icmphost = mail_html_icmphost.replace ('<'+ pTable +'>', pHTML)       
+    if pActive:
+        mail_text_icmphost = mail_text_icmphost.replace(f'<{pTable}>', pText)
+        mail_html_icmphost = mail_html_icmphost.replace(f'<{pTable}>', pHTML)       
 
-        mail_text_icmphost = remove_tag (mail_text_icmphost, pSection)       
+        mail_text_icmphost = remove_tag (mail_text_icmphost, pSection)
         mail_html_icmphost = remove_tag (mail_html_icmphost, pSection)
     else:
         mail_text_icmphost = remove_section (mail_text_icmphost, pSection)
         mail_html_icmphost = remove_section (mail_html_icmphost, pSection)
 
 #-------------------------------------------------------------------------------
-def remove_section (pText, pSection):
+def remove_section(pText, pSection):
     # Search section into the text
-    if pText.find ('<'+ pSection +'>') >=0 \
-    and pText.find ('</'+ pSection +'>') >=0 : 
+    if pText.find(f'<{pSection}>') >= 0 and pText.find(f'</{pSection}>') >= 0: 
         # return text without the section
-        return pText[:pText.find ('<'+ pSection+'>')] + \
-               pText[pText.find ('</'+ pSection +'>') + len (pSection) +3:]
-    else :
+        return (
+            pText[: pText.find(f'<{pSection}>')]
+            + pText[pText.find(f'</{pSection}>') + len(pSection) + 3 :]
+        )
+    else:
         # return all text
         return pText
 
 #-------------------------------------------------------------------------------
-def remove_tag (pText, pTag):
+def remove_tag(pText, pTag):
     # return text without the tag
-    return pText.replace ('<'+ pTag +'>','').replace ('</'+ pTag +'>','')
+    return pText.replace(f'<{pTag}>', '').replace(f'</{pTag}>', '')
 
 #-------------------------------------------------------------------------------
 def write_file(pPath, pText):
