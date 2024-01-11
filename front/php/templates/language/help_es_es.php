@@ -240,9 +240,9 @@ $help_lang['Cat_General_107_text'] = 'The file <span class="text-maroon help_faq
 									<table class="help_table_gen">
 									    <tr><td class="help_table_gen_section" colspan="2">Automatic Speedtest</td></tr>
 									    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_ACTIVE</td>
-									        <td class="help_table_gen_b"></td></tr>
+									        <td class="help_table_gen_b">Activar/desactivar el test de velocidad automático. Para ello, instale el test de velocidad Ookla en la pestaña "Herramientas" del dispositivo "Internet". Siga las instrucciones durante la instalación.</td></tr>
 									    <tr><td class="help_table_gen_a">SPEEDTEST_TASK_HOUR</td>
-									        <td class="help_table_gen_b"></td></tr>
+									        <td class="help_table_gen_b">Hora completa, u horas separadas por comas, a la que debe iniciarse la prueba de velocidad.</td></tr>
 									</table>
 									<table class="help_table_gen">
 									    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
