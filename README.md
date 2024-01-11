@@ -203,11 +203,18 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
   - For final processing of background images https://www.imgonline.com.ua/eng/make-seamless-texture.php
   - Translations: https://www.deepl.com and ChatGPT (https://chat.openai.com)
 
-### Special thanks
+### Special contributors
 
   This code is a collaborative body of work, with special thanks to:
 
 [Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert), [tteck](https://github.com/tteck/Proxmox) and many more
+
+### :purple_heart: Special thanks
+
+  A personal thank you to every sponsor of my fork.
+
+  [jbierwiler](https://github.com/jbierwiler), [tcoombs](https://github.com/tcoombs), [hspindel](https://github.com/hspindel)
+
 
 ### Contact
 
