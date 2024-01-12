@@ -115,15 +115,15 @@ function get_host_statistic($hostip) {
 
 	$statistic = array();
 
-	$query = "SELECT AVG(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+	$query = "SELECT AVG(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt != '' AND icmpeve_ip='$hostip'";
 	$result = $db->querySingle($query);
 	$statistic['avg_rtt_all'] = round($result, 3) . ' ms';
 
-	$query_max = "SELECT MAX(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+	$query_max = "SELECT MAX(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt != '' AND icmpeve_ip='$hostip'";
 	$result_max = $db->querySingle($query_max);
 	$statistic['rtt_max_all'] = '<i class="bi bi-speedometer2 flip-horizontal text-red"></i> ' . round($result_max, 3) . ' ms';
 
-	$query_min = "SELECT MIN(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt IS NOT NULL AND icmpeve_ip=\"$hostip\"";
+	$query_min = "SELECT MIN(icmpeve_avgrtt) FROM ICMP_Mon_Events WHERE icmpeve_avgrtt != 99999 AND icmpeve_avgrtt != '' AND icmpeve_ip='$hostip'";
 	$result_min = $db->querySingle($query_min);
 	$statistic['rtt_min_all'] = '<i class="bi bi-speedometer2 text-green"></i> ' . round($result_min, 3) . ' ms';
 
