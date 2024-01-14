@@ -1207,8 +1207,6 @@ function GetARPStatus() {
   } );
 }
 
-setInterval(GetARPStatus, 15000);
-
 function GetModalLogContent() {
   $.get('php/server/files.php?action=GetLogfiles', function(data) {
     var logcollection = JSON.parse(data);
@@ -1221,8 +1219,12 @@ function GetModalLogContent() {
   } );
 }
 
-setInterval(GetModalLogContent, 15000);
+function UpdateStatusBox() {
+	GetModalLogContent();
+	GetARPStatus();
+}
 
+setInterval(UpdateStatusBox, 15000);
 GetModalLogContent();
 startCountdown();
 </script>
