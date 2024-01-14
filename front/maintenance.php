@@ -1221,6 +1221,7 @@ function startCountdown() {
                 // Reset countdown for the next 5-minute interval
                 countdownMinutes = 4;
                 countdownSeconds = 59;
+                GetARPStatus();
             }
         }
         displayCountdown(countdownMinutes, countdownSeconds);
@@ -1235,6 +1236,17 @@ function displayCountdown(minutes, seconds) {
 function formatTime(time) {
     return time < 10 ? '0' + time : time;
 }
+
+function GetARPStatus() {
+  // get totals and put in boxes
+  $.get('php/server/devices.php?action=GetARPStatus', function(data) {
+    var arpproccount = JSON.parse(data);
+
+    $('#arpproccounter').html(arpproccount[0].toLocaleString());
+  } );
+}
+
+setInterval(GetARPStatus, 15000);
 
 startCountdown();
 </script>

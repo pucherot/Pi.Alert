@@ -82,10 +82,20 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'EnableMainScan':EnableMainScan();
 		break;
+	case 'GetARPStatus':GetARPStatus();
+		break;
 	default:logServerConsole('Action: ' . $action);
 		break;
 	}
 }
+function GetARPStatus() {
+	$execstring = 'ps -aux | grep "/pialert/back/pialert.py 1" | grep -v grep | sed \'/>~\/pialert\/log\/pialert.1.log/d\'';
+	$pia_arpscans = "";
+	exec($execstring, $pia_arpscans);
+	$result = array(sizeof($pia_arpscans));
+	echo (json_encode($result));
+}
+
 
 //  Query Device Data
 function getDeviceData() {
