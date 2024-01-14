@@ -22,11 +22,12 @@ function delete_single_webgui_report() {
 function arpscanstatus() {
 	global $pia_lang;
 	if (!file_exists('../db/setting_stoppialert')) {
-		$execstring = 'ps aux | grep "~/pialert/back/pialert.py 1" 2>&1';
+		$execstring = 'ps -aux | grep "/pialert/back/pialert.py 1" | grep -v grep | sed \'/>~\/pialert\/log\/pialert.1.log/d\'';
 		$pia_arpscans = "";
 		exec($execstring, $pia_arpscans);
+		$arp_proc_count = sizeof($pia_arpscans);
 		unset($_SESSION['arpscan_timerstart']);
-		$_SESSION['arpscan_result'] = sizeof($pia_arpscans) - 2 . ' ' . $pia_lang['Maintenance_arp_status_on'] . ' <div id="nextscancountdown" style="display: inline-block;"></div>';
+		$_SESSION['arpscan_result'] = '<span id="arpproccounter">' . $arp_proc_count . '</span> ' . $pia_lang['Maintenance_arp_status_on'] . ' <div id="nextscancountdown" style="display: inline-block;"></div>';
 		$_SESSION['arpscan_sidebarstate'] = 'Active';
 		$_SESSION['arpscan_sidebarstate_light'] = 'green-light fa-gradient-green';
 	} else {
@@ -143,14 +144,6 @@ function toggle_webservices_menu($section) {
                 </a>
               </li>';
 	}
-
-	// if (($_SESSION['Scan_WebServices'] == True) && ($section == "Event")) {
-	// 	echo '<li class="';
-	// 	if (in_array(basename($_SERVER['SCRIPT_NAME']), array('servicesEvents.php'))) {echo 'active';}
-	// 	echo '">
-	//           <a href="servicesEvents.php"><i class="fa fa-globe"></i><span>' . $pia_lang['Navigation_Events_Serv'] . '</span></a>
-	//         </li>';
-	// }
 }
 // ICPMScan Menu Items
 function toggle_icmpscan_menu($section) {

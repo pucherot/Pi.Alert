@@ -74,9 +74,37 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'setFavIconURL':setFavIconURL();
 		break;
+	case 'GetLogfiles':GetLogfiles();
+		break;
 	default:logServerConsole('Action: ' . $action);
 		break;
 	}
+}
+
+// Read logfiles --------------------------------------------------------------
+function GetLogfiles() {
+	global $pia_lang;
+
+	$logfiles = ["pialert.1.log", "pialert.IP.log", "pialert.vendors.log", "pialert.cleanup.log", "pialert.webservices.log"];
+	$logmessage = [$pia_lang['Maintenance_Tools_Logviewer_Scan_empty'], $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty'], '', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty'], $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']];
+
+	$i = 0;
+	$logs = array();
+	while($i < count($logfiles)) {
+		$file = file_get_contents($logfiles[$i], true);
+		if ($file == "") {
+			array_push($logs, $logmessage[$i]);
+		} else {
+			if ($logfile[$i] == "pialert.webservices.log") {
+				$file = str_replace("Start Services Monitoring\n\n", "Start Services Monitoring\n\n<pre style=\"border: solid 1px #666; background-color: transparent;\">", $file);
+				$file = str_replace("\nServices Monitoring Changes:", "\n</pre>Services Monitoring Changes:", $file);
+			}
+			$templog = str_replace("\n", '<br>', str_replace("    ", '&nbsp;&nbsp;&nbsp;&nbsp;', str_replace("        ", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $file)));
+			array_push($logs, $templog);
+		}
+	    $i++;
+	}
+	echo (json_encode($logs));
 }
 
 function convert_bool($var) {
