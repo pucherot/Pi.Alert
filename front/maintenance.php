@@ -173,39 +173,6 @@ function set_column_checkboxes($table_config) {
 	return $col_checkbox;
 }
 
-// Read logfiles --------------------------------------------------------------
-function read_logfile($logfile, $logmessage) {
-	$file = file_get_contents('./php/server/' . $logfile, true);
-	if ($file == "") {echo $logmessage;}
-	if ($logfile == "pialert.webservices.log") {
-		$file = str_replace("Start Services Monitoring\n\n", "Start Services Monitoring\n\n<pre style=\"border: solid 1px #666; background-color: transparent;\">", $file);
-		$file = str_replace("\nServices Monitoring Changes:", "\n</pre>Services Monitoring Changes:", $file);
-	}
-	echo str_replace("\n", '<br>', str_replace("    ", '&nbsp;&nbsp;&nbsp;&nbsp;', str_replace("        ", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $file)));
-}
-
-// Read Vendor logfiles -------------------------------------------------------
-function read_logfile_vendor() {
-	global $pia_lang;
-
-	$file = file_get_contents('./php/server/pialert.vendors.log');
-	if ($file == "") {echo $pia_lang['Maintenance_Tools_Logviewer_Vendor_empty'];} else {
-		$temp_log = explode("\n", $file);
-		$x = 0;
-		while ($x < sizeof($temp_log)) {
-			if (strlen($temp_log[$x]) == 0) {
-				$y = $x;
-				while ($y < sizeof($temp_log)) {
-					echo $temp_log[$y] . '<br>';
-					$y++;
-				}
-				break;
-			}
-			$x++;
-		}
-	}
-}
-
 // Top Modal Block ------------------------------------------------------------
 function print_logviewer_modal_head($id, $title) {
 	echo '<div class="modal fade" id="modal-logviewer-' . $id . '">
@@ -217,7 +184,7 @@ function print_logviewer_modal_head($id, $title) {
                     <h4 class="modal-title">Viewer: ' . $title . '</h4>
                 </div>
                 <div class="modal-body main_logviwer_text_layout">
-                    <div class="main_logviwer_log" style="max-height: 70vh;">';
+                    <div class="main_logviwer_log" style="max-height: 70vh;" id="modal_'.$id.'_content">';
 }
 
 // Bottom Modal Block ---------------------------------------------------------
@@ -362,29 +329,24 @@ if ($_SESSION['Scan_WebServices'] == True) {
 // Log Viewer - Modals
 // Scan
 print_logviewer_modal_head('scan', 'pialert.1.log (File)');
-read_logfile('pialert.1.log', $pia_lang['Maintenance_Tools_Logviewer_Scan_empty']);
 print_logviewer_modal_foot();
-// Internet IP
+// // Internet IP
 print_logviewer_modal_head('iplog', 'pialert.IP.log (File)');
-read_logfile('pialert.IP.log', $pia_lang['Maintenance_Tools_Logviewer_IPLog_empty']);
 print_logviewer_modal_foot();
-// Vendor Update
+// // Vendor Update
 print_logviewer_modal_head('vendor', 'pialert.vendors.log (File)');
-read_logfile_vendor();
 print_logviewer_modal_foot();
-// Cleanup
+// // Cleanup
 print_logviewer_modal_head('cleanup', 'pialert.cleanup.log (File)');
-read_logfile('pialert.cleanup.log', $pia_lang['Maintenance_Tools_Logviewer_Cleanup_empty']);
 print_logviewer_modal_foot();
-// Nmap
+// // Nmap
 print_logviewer_modal_head('nmap', 'last Nmap Scan (Memory)');
 if (!isset($_SESSION['ScanShortMem_NMAP'])) {echo $pia_lang['Maintenance_Tools_Logviewer_Nmap_empty'];} else {echo $_SESSION['ScanShortMem_NMAP'];}
 print_logviewer_modal_foot();
-// WebServices
+// // WebServices
 if ($_SESSION['Scan_WebServices'] == True) {
-	print_logviewer_modal_head('webservices', 'pialert.webservices.log (File)');
-	read_logfile('pialert.webservices.log', $pia_lang['Maintenance_Tools_Logviewer_WebServices_empty']);
-	print_logviewer_modal_foot();
+ 	print_logviewer_modal_head('webservices', 'pialert.webservices.log (File)');
+ 	print_logviewer_modal_foot();
 }
 ?>
 
@@ -1238,7 +1200,6 @@ function formatTime(time) {
 }
 
 function GetARPStatus() {
-  // get totals and put in boxes
   $.get('php/server/devices.php?action=GetARPStatus', function(data) {
     var arpproccount = JSON.parse(data);
 
@@ -1248,6 +1209,21 @@ function GetARPStatus() {
 
 setInterval(GetARPStatus, 15000);
 
+function GetModalLogContent() {
+  $.get('php/server/files.php?action=GetLogfiles', function(data) {
+    var logcollection = JSON.parse(data);
+
+    $('#modal_scan_content').html(logcollection[0].toLocaleString());
+    $('#modal_iplog_content').html(logcollection[1].toLocaleString());
+    $('#modal_vendor_content').html(logcollection[2].toLocaleString());
+    $('#modal_cleanup_content').html(logcollection[3].toLocaleString());
+    $('#modal_webservices_content').html(logcollection[4].toLocaleString());
+  } );
+}
+
+setInterval(GetModalLogContent, 15000);
+
+GetModalLogContent();
 startCountdown();
 </script>
 
