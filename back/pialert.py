@@ -2062,7 +2062,7 @@ def get_icmphost_list():
 # -----------------------------------------------------------------------------
 def ping(host):
 
-    command = ['ping', '-c', '1', host]
+    command = ['sudo', 'ping', '-c' , '1', host]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     output = result.stdout.decode('utf8')
     if "Request timed out." in output or "100% packet loss" in output:
@@ -2077,7 +2077,7 @@ def ping_avg(host):
     except NameError: # variable not defined, use a default
         ping_count = str(2) # 1
 
-    command = ['ping', '-c', ping_count, host]
+    command = ['sudo', 'ping', '-c', ping_count, host]
     ping_process = subprocess.Popen(command, stdout=subprocess.PIPE)
     tail_process = subprocess.Popen(['tail', '-1'], stdin=ping_process.stdout, stdout=subprocess.PIPE)
     awk_process = subprocess.Popen(['awk', '-F/', '{print $5}'], stdin=tail_process.stdout, stdout=subprocess.PIPE)

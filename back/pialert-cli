@@ -633,6 +633,7 @@ EOM
     echo "${PIA_USER} ALL=(ALL) NOPASSWD: /usr/sbin/arp-scan" | sudo tee -a /etc/sudoers.d/pialert-backend
     echo "${PIA_USER} ALL=(ALL) NOPASSWD: /usr/bin/nmap" | sudo tee -a /etc/sudoers.d/pialert-backend
     echo "${PIA_USER} ALL=(ALL) NOPASSWD: ${SCRIPTPATH}/speedtest/speedtest" | sudo tee -a /etc/sudoers.d/pialert-backend
+    echo "${PIA_USER} ALL=(ALL) NOPASSWD: /usr/bin/ping" | sudo tee -a /etc/sudoers.d/pialert-backend
     ;;
 
   unset_sudoers)
