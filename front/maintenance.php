@@ -1160,6 +1160,8 @@ function initializeiCheck () {
 
 }
 
+var StatusBoxARPCountdown; 
+
 function startCountdown() {
     var currentTime = new Date();
     var minutes = currentTime.getMinutes();
@@ -1169,11 +1171,14 @@ function startCountdown() {
     var countdownMinutes = (4 - (minutes % 5)) % 5;
     var countdownSeconds = 60 - seconds;
 
+    // Stop Countdown
+    clearInterval(StatusBoxARPCountdown);
+
     // Display initial countdown
     displayCountdown(countdownMinutes, countdownSeconds);
 
     // Update countdown every second
-    setInterval(function() {
+    StatusBoxARPCountdown = setInterval(function() {
         countdownSeconds--;
         if (countdownSeconds < 0) {
             countdownSeconds = 59;
@@ -1222,6 +1227,7 @@ function GetModalLogContent() {
 function UpdateStatusBox() {
 	GetModalLogContent();
 	GetARPStatus();
+	startCountdown();
 }
 
 setInterval(UpdateStatusBox, 15000);
