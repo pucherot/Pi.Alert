@@ -76,10 +76,18 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'GetLogfiles':GetLogfiles();
 		break;
+	case 'GetServerTime':GetServerTime();
+		break;
 	default:logServerConsole('Action: ' . $action);
 		break;
 	}
 }
+function GetServerTime() {
+	echo date("Y,n,j,G,i,s");
+	//echo "2024,1,18,12,42,11";
+	//echo (json_encode(date("Y, n, j, G, i, s")));
+}
+
 
 // Read logfiles --------------------------------------------------------------
 function GetLogfiles() {

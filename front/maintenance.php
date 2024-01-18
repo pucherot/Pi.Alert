@@ -142,7 +142,7 @@ function read_arpscan_timer() {
 // Buffer active --------------------------------------------------------------
 	$file = '../db/pialert_journal_buffer';
 	if (file_exists($file)) {
-		$buffer_indicator = '(*)';
+		$buffer_indicator = '(<span style="color:red;">*</span>)';
 	} else {$buffer_indicator = '';}
 
 // Get Device List Columns ----------------------------------------------------

@@ -330,6 +330,9 @@ $help_lang['Cat_General_108_text'] = '<ol>
 										<li>Segui le istruzioni.</li>
 										<li>Dopo un aggiornamento riuscito, Pi.Alert dovrebbe riavviarsi automaticamente. In alternativa, puoi riavviarlo manualmente nella pagina delle impostazioni.</li>
 									</ol>';
+$help_lang['Cat_General_109_head'] = 'Cosa significa "(<span style="color:red;">*</span>)" accanto all&apos;ultima data di modifica?';
+$help_lang['Cat_General_109_text'] = 'Se il journal desidera scrivere un&apos;voce nel database mentre è attualmente in uso, viene creato un file di buffer, che verrà incorporato nel database la prossima volta che il journal vorrà scrivere nel database. In caso contrario, il file di buffer continua a essere utilizzato. Questo file è utilizzato solo per il journal.';
+
 $help_lang['Cat_Device_200_head'] = 'Ho dispositivi nella mia lista che sono sconosciuti o che non uso più. Dopo averli cancellati, ricompaiono sempre.';
 $help_lang['Cat_Device_200_text'] = 'Se stai utilizzando Pi-hole, tieni presente che Pi.Alert recupera informazioni da Pi-hole. Sospendi Pi.Alert, vai alla pagina Impostazioni di Pi-hole e cancella eventuali lease DHCP
 									relativi ai dispositivi che desideri rimuovere. Successivamente, controlla anche nella sezione Strumenti -> Rete di Pi-hole se trovi i dispositivi che riappaiono. Se li trovi, cancellali

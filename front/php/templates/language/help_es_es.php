@@ -329,6 +329,9 @@ $help_lang['Cat_General_108_text'] = '<ol>
 										<li>Sigue las instrucciones.</li>
 										<li>Después de una actualización exitosa, Pi.Alert debería iniciarse automáticamente. Alternativamente, puedes reiniciarlo manualmente en la página de configuración.</li>
 									</ol>';
+$help_lang['Cat_General_109_head'] = '¿Qué significa "(<span style="color:red;">*</span>)" al lado de la fecha de la última modificación?';
+$help_lang['Cat_General_109_text'] = 'Si el diario desea escribir una entrada en la base de datos mientras esta se encuentra en uso, se crea un archivo de búfer, que se incorporará a la base de datos la próxima vez que el diario quiera escribir en la base de datos. De lo contrario, el archivo de búfer continúa siendo utilizado. Este archivo se utiliza solo para el diario.';
+
 $help_lang['Cat_Device_200_head'] = 'Tengo dispositivos en mi lista que no conozco. Después de borrarlos, siempre vuelven a aparecer.';
 $help_lang['Cat_Device_200_text'] = 'Si utiliza Pi-hole, tenga en cuenta que Pi.Alert recupera información de Pi-hole. Ponga en pausa Pi.Alert, vaya a la página de configuración de Pi-hole y
 									elimine la concesión DHCP si es necesario. Luego, también en Pi-hole, revise en Herramientas -> Red para ver si puede encontrar los hosts recurrentes allí.

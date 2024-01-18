@@ -325,6 +325,9 @@ $help_lang['Cat_General_108_text'] = '<ol>
 										<li>Suivez les instructions.</li>
 										<li>Après une mise à jour réussie, Pi.Alert devrait redémarrer automatiquement. Vous pouvez également le redémarrer manuellement sur la page des paramètres.</li>
 									</ol>';
+$help_lang['Cat_General_109_head'] = 'Que signifie "(<span style="color:red;">*</span>)" à côté de la date de dernière modification?';
+$help_lang['Cat_General_109_text'] = 'Si le journal souhaite écrire une entrée dans la base de données alors qu&apos;elle est actuellement en cours d&apos;utilisation, un fichier tampon est créé, qui sera incorporé à la base de données la prochaine fois que le journal voudra écrire dans la base de données. Sinon, le fichier tampon continue d&apos;être utilisé. Ce fichier est utilisé uniquement pour le journal.';
+
 $help_lang['Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $help_lang['Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and
  									delete the DHCP lease if necessary. Then, also in Pi-hole, look under Tools -> Network to see if you can find the recurring hosts there.

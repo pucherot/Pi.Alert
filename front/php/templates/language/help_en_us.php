@@ -335,6 +335,9 @@ $help_lang['Cat_General_108_text'] = '<ol>
 										<li>Follow the instructions.</li>
 										<li>After a successful update, Pi.Alert should start automatically. Alternatively, you can manually restart it on the settings page.</li>
 									</ol>';
+$help_lang['Cat_General_109_head'] = 'What does "(<span style="color:red;">*</span>)" mean next to the last modification date?';
+$help_lang['Cat_General_109_text'] = 'If the journal wants to write an entry to the database while it is currently in use, a buffer file is created, which will be incorporated into the database the next time the journal wants to write to the database. Otherwise, the buffer file continues to be used. This file is used only for the journal.';
+
 $help_lang['Cat_Device_200_head'] = 'I have devices in my list that I do not know about. After deleting them, they always reappear.';
 $help_lang['Cat_Device_200_text'] = 'If you use Pi-hole, please note that Pi.Alert retrieves information from Pi-hole. Pause Pi.Alert, go to the settings page in Pi-hole and
  									delete the DHCP lease if necessary. Then, also in Pi-hole, look under Tools -> Network to see if you can find the recurring hosts there.
