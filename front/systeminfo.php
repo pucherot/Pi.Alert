@@ -20,6 +20,14 @@ if ($_SESSION["login"] != 1) {
 
 require 'php/templates/header.php';
 
+
+$prevVal = shell_exec("sudo ../back/pialert-cli show_usercron");
+$prevArr = explode("\n", trim($prevVal));
+function filterValues($value) {
+    return (substr($value, 0, 1) !== '#');
+}
+$cleancron = array_filter($prevArr, 'filterValues');
+$stat['usercron'] = implode("\n", $cleancron);
 // https://stackoverflow.com/a/19209082
 $os_version = '';
 // Raspbian
@@ -178,6 +186,16 @@ echo '<script>
 	var resolutionDiv = document.getElementById("resolution");
 	resolutionDiv.innerHTML = "Width: " + w + "px / Height: " + h + "px<br> " + "Width: " + rw + "px / Height: " + rh + "px (native)";
 </script>';
+
+// User Crontab -----------------------------------------------------
+echo '<div class="box box-solid">
+            <div class="box-header">
+              <h3 class="box-title sysinfo_headline"><i class="bi bi-list-task"></i> User Crontab</h3>
+            </div>
+            <div class="box-body">
+            <pre style="background-color: transparent; border: none;">'.$stat['usercron'].'</pre>
+            </div>
+      </div>';
 
 // Storage ----------------------------------------------------------
 echo '<div class="box box-solid">
