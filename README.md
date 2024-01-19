@@ -78,7 +78,7 @@ The backend is started at regular intervals via cronjobs of the user who install
 
 </details>
 
-:bulb: <ins> Additional components and information</ins>
+:bulb: <ins>Additional components and information</ins>
 
   - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
   - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
