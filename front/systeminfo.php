@@ -292,8 +292,8 @@ exec('systemctl --type=service --state=running', $running_services);
 echo '<table class="table table-bordered table-hover table-striped dataTable no-footer" style="margin-bottom: 10px;">';
 echo '<thead>
 		<tr role="row">
-			<th style="padding: 8px;">Service Name</th>
-			<th style="padding: 8px;">Service Description</th>
+			<th class="sysinfo_services" style="padding: 8px;">Service Name</th>
+			<th class="sysinfo_services" style="padding: 8px;">Service Description</th>
 		</tr>
 	  </thead>';
 $table_color = 'odd';

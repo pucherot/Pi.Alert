@@ -676,3 +676,6 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .dataTables_info, .dataTables_paginate, .dataTables_length, .dataTables_filter {color: #4A4B50;}
 .box-header.with-border { border-bottom: 1px solid #d2d6de;}
 #configeditor_innerbox { border-radius: 8px;}
+.sysinfo_headline {color: #1B70B7;}
+
+
