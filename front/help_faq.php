@@ -141,6 +141,16 @@ $trip_div_close = '
               <?=$help_lang['Cat_General_108_text'];?>
         <?=$trip_div_close;?>
 
+        <?=$help_faq_toptemp;?>
+              <a data-toggle="collapse" data-parent="#accordion_gen" href="#collapse109">
+              <?=$help_lang['Cat_General_109_head'];?></a>
+            </h4>
+          </div>
+          <div id="collapse109" class="panel-collapse collapse help_question">
+            <div class="panel-body">
+              <?=$help_lang['Cat_General_109_text'];?>
+        <?=$trip_div_close;?>
+
       </div>
 
 <!-- Devices -->

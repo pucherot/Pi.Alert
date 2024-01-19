@@ -26,7 +26,6 @@ $DBFILE = '../db/pialert.db';
 OpenDB();
 
 // Add New Network Devices
-// #####################################
 if ($_REQUEST['Networkinsert'] == "yes") {
 	if (isset($_REQUEST['NetworkDeviceName']) && isset($_REQUEST['NetworkDeviceTyp'])) {
 		$sql = 'INSERT INTO "network_infrastructure" ("net_device_name", "net_device_typ", "net_device_port") VALUES("' . $_REQUEST['NetworkDeviceName'] . '", "' . $_REQUEST['NetworkDeviceTyp'] . '", "' . $_REQUEST['NetworkDevicePort'] . '")';
@@ -36,7 +35,6 @@ if ($_REQUEST['Networkinsert'] == "yes") {
 	}
 }
 // Edit Network Devices
-// #####################################
 if ($_REQUEST['Networkedit'] == "yes") {
 	if (($_REQUEST['NewNetworkDeviceName'] != "") && isset($_REQUEST['NewNetworkDeviceTyp'])) {
 		$sql = 'UPDATE "network_infrastructure" SET "net_device_name" = "' . $_REQUEST['NewNetworkDeviceName'] . '", "net_device_typ" = "' . $_REQUEST['NewNetworkDeviceTyp'] . '", "net_device_port" = "' . $_REQUEST['NewNetworkDevicePort'] . '", "net_downstream_devices" = "' . $_REQUEST['NetworkDeviceDownlink'] . '" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
@@ -52,7 +50,6 @@ if ($_REQUEST['Networkedit'] == "yes") {
 
 }
 // remove Network Devices
-// #####################################
 if ($_REQUEST['Networkdelete'] == "yes") {
 	if (isset($_REQUEST['NetworkDeviceID'])) {
 		$sql = 'DELETE FROM "network_infrastructure" WHERE "device_id"="' . $_REQUEST['NetworkDeviceID'] . '"';
@@ -63,7 +60,6 @@ if ($_REQUEST['Networkdelete'] == "yes") {
 }
 
 // Add New unmanaged Device
-// #####################################
 if ($_REQUEST['NetworkUnmanagedDevinsert'] == "yes") {
 	if (isset($_REQUEST['NetworkUnmanagedDevName']) && isset($_REQUEST['NetworkUnmanagedDevConnect'])) {
 		$ip = 'Unmanaged';
@@ -75,7 +71,6 @@ if ($_REQUEST['NetworkUnmanagedDevinsert'] == "yes") {
 	}
 }
 // Edit  unmanaged Device
-// #####################################
 if ($_REQUEST['NetworkUnmanagedDevedit'] == "yes") {
 	if (($_REQUEST['NewNetworkUnmanagedDevName'] != "") && isset($_REQUEST['NewNetworkUnmanagedDevConnect']) && isset($_REQUEST['NetworkUnmanagedDevID'])) {
 		$sql = 'UPDATE "network_dumb_dev" SET "dev_Name" = "' . $_REQUEST['NewNetworkUnmanagedDevName'] . '", "dev_Infrastructure" = "' . $_REQUEST['NewNetworkUnmanagedDevConnect'] . '", "dev_Infrastructure_port" = "' . $_REQUEST['NewNetworkUnmanagedDevPort'] . '" WHERE "id "="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
@@ -90,7 +85,6 @@ if ($_REQUEST['NetworkUnmanagedDevedit'] == "yes") {
 	pialert_logging('a_040', $_SERVER['REMOTE_ADDR'], 'LogStr_0034', '', '');
 }
 // remove unmanaged Device
-// #####################################
 if ($_REQUEST['NetworkUnmanagedDevdelete'] == "yes") {
 	if (isset($_REQUEST['NetworkUnmanagedDevID'])) {
 		$sql = 'DELETE FROM "network_dumb_dev" WHERE "id"="' . $_REQUEST['NetworkUnmanagedDevID'] . '"';
@@ -219,7 +213,6 @@ foreach ($netdev_all_ids as $key => $value) {
 }
 echo '    };';
 ?>
-
     var netdev_name = netdev_arrays[value][1];
     $('#NewNetworkDeviceName').val(netdev_name);
     var netdev_type = netdev_arrays[value][2];
@@ -289,7 +282,6 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
 	if (!isset($res['device_id'])) {
 		continue;
 	}
-
 	echo '<option value="' . $res['device_id'] . '">' . $res['net_device_name'] . ' / ' . substr($res['net_device_typ'], 2) . '</option>';
 }
 ?>
@@ -446,8 +438,12 @@ while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
 
 <script>
 function setTextValue (textElement, textValue) {
-  $('#'+textElement).val (textValue);
+  $('#'+textElement).val(textValue);
 }
+function appendTextValue(textElement, textValue) {
+  var existingText = $('#' + textElement).val();
+        $('#' + textElement).val(existingText + textValue);
+    }
 </script>
 
 <?php
@@ -456,7 +452,6 @@ function setTextValue (textElement, textValue) {
 // #####################################
 function network_infrastructurelist() {
 	global $db;
-	//$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
 	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" IN ("Router", "Switch", "AP", "Access Point", "Hypervisor") OR "dev_MAC" = "Internet"';
 
 	$func_result = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
@@ -467,17 +462,15 @@ function network_infrastructurelist() {
 
 function network_device_downlink_mac() {
 	global $db;
-	//$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" = "Router" OR "dev_DeviceType"  = "Switch" OR "dev_DeviceType"  = "AP" OR "dev_DeviceType"  = "Access Point" OR "dev_MAC"  = "Internet"';
 	$func_sql = 'SELECT * FROM "Devices" WHERE "dev_DeviceType" IN ("Router", "Switch", "AP", "Access Point") OR "dev_MAC" = "Internet"';
 	$func_result = $db->query($func_sql); //->fetchArray(SQLITE3_ASSOC);
 	while ($func_res = $func_result->fetchArray(SQLITE3_ASSOC)) {
-		echo '<li><a href="javascript:void(0)" onclick="setTextValue(\'txtNetworkDeviceDownlinkMac\',\'' . $func_res['dev_MAC'] . ',\')">' . $func_res['dev_Name'] . '</a></li>';
+		echo '<li><a href="javascript:void(0)" onclick="appendTextValue(\'txtNetworkDeviceDownlinkMac\',\'' . $func_res['dev_MAC'] . ',\')">' . $func_res['dev_Name'] . '</a></li>';
 	}
 }
 // #####################################
 // ## End Function Setup
 // #####################################
-
 ?>
 
   <div style="width: 100%; height: 20px;"></div>

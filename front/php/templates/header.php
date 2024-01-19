@@ -67,22 +67,6 @@ if ($ENABLED_THEMEMODE === True) {
 ?>
   <!-- Servertime to the right of the hostname -->
   <script>
-    var pia_servertime = new Date(<?php echo date("Y, n, j, G, i, s") ?>);
-
-    function show_pia_servertime() {
-        if (!document.getElementById) {
-            return;
-        }
-        var pia_hour = pia_servertime.getHours();
-        var pia_minute = pia_servertime.getMinutes();
-        var pia_second = pia_servertime.getSeconds();
-        pia_servertime.setSeconds(pia_second + 1);
-        if (pia_hour <= 9) { pia_hour = "0" + pia_hour; }
-        if (pia_minute <= 9) { pia_minute = "0" + pia_minute; }
-        if (pia_second <= 9) { pia_second = "0" + pia_second; } realtime_pia_servertime = "(" + pia_hour + ":" + pia_minute + ":" + pia_second + ")";
-        if (document.getElementById) { document.getElementById("PIA_Servertime_place").innerHTML = realtime_pia_servertime; } setTimeout("show_pia_servertime()", 1000);
-    }
-
     if (window.navigator.standalone || document.referrer.includes("android-app://") ||  window.matchMedia("(display-mode: standalone)").matches) {
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {

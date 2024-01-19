@@ -36,7 +36,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
   <script src="js/pialert_common.js"></script>
 
   <script>
-    function getDevicesTotalsBadge () {
+    function getDevicesTotalsBadge() {
       // get totals and put in boxes
       $.get('php/server/devices.php?action=getDevicesTotals', function(data) {
         var totalsDevicesbadge = JSON.parse(data);
@@ -48,7 +48,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       } );
     }
 
-    function getICMPTotalsBadge () {
+    function getICMPTotalsBadge() {
       // get totals and put in boxes
       $.get('php/server/icmpmonitor.php?action=getICMPHostTotals', function(data) {
         var totalsICMPbadge = JSON.parse(data);
@@ -59,7 +59,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       } );
     }
 
-    function getServicesTotalsBadge () {
+    function getServicesTotalsBadge() {
       // get totals and put in boxes
       $.get('php/server/services.php?action=getServiceMonTotals', function(data) {
         var totalsServicesbadge = JSON.parse(data);
@@ -71,7 +71,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       } );
     }
 
-    function getReportTotalsBadge () {
+    function getReportTotalsBadge() {
       // get totals and put in boxes
       $.get('php/server/files.php?action=getReportTotals', function(data) {
         var totalsReportbadge = JSON.parse(data);
@@ -87,7 +87,37 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       });
     }
 
-    function initializeiCheck () {
+    var pia_servertime;
+    var TopServerClock;
+
+    function GetPiAlertServerTime() {
+      clearTimeout(TopServerClock);
+      $.get('php/server/files.php?action=GetServerTime', function(data) {
+          var dateArray = data.split(',').map(Number);
+          pia_servertime = new Date(dateArray[0], dateArray[1] - 1, dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
+          ShowPiAlertServerTime();
+      });
+    }
+
+    function ShowPiAlertServerTime() {
+        if (!document.getElementById) {
+            return;
+        }
+        var pia_hour = pia_servertime.getHours();
+        var pia_minute = pia_servertime.getMinutes();
+        var pia_second = pia_servertime.getSeconds();
+        pia_servertime.setSeconds(pia_second + 1);
+        if (pia_hour <= 9) { pia_hour = "0" + pia_hour; }
+        if (pia_minute <= 9) { pia_minute = "0" + pia_minute; }
+        if (pia_second <= 9) { pia_second = "0" + pia_second; } 
+        var realtime_pia_servertime = "(" + pia_hour + ":" + pia_minute + ":" + pia_second + ")";
+        if (document.getElementById) { 
+            document.getElementById("PIA_Servertime_place").innerHTML = realtime_pia_servertime; 
+        } 
+        TopServerClock = setTimeout(ShowPiAlertServerTime, 1000);
+    }
+
+    function initializeiCheck() {
        // Blue
        $('input[type="checkbox"].blue').iCheck({
          checkboxClass: 'icheckbox_flat-blue',
@@ -100,6 +130,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       getDevicesTotalsBadge();
       getICMPTotalsBadge();
       getServicesTotalsBadge();
+      GetPiAlertServerTime();
     }
 
     // Init functions

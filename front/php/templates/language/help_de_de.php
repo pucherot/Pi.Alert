@@ -337,6 +337,8 @@ $help_lang['Cat_General_108_text'] = '<ol>
 										<li>Folge nun den Anweisungen</li>
 										<li>Nach dem erfolgreichen Update, sollte Pi.Alert wieder von allein starten. Alternativ kann du auf der Einsellungsseite auch manuell wieder starten.</li>
 									</ol>';
+$help_lang['Cat_General_109_head'] = 'Was bedeutet "(<span style="color:red;">*</span>)" hinter dem letzem Änderungsdatum?';
+$help_lang['Cat_General_109_text'] = 'Wenn das Journal einen Eintrag in die Datenbank schreiben möchte, während diese gerade in Verwendung ist, wird eine Pufferdatei erzeugt, die, sobald das Journal erneut in die Datenbank schreiben möchte, ebenfalls in die Datenbank übernommen wird. Andernfalls wird die Pufferdatei weiterverwendet. Diese Datei kommt nur für das Journal zum Einsatz.';
 
 $help_lang['Cat_Device_200_head'] = 'Ich habe Geräte in meiner Liste, die mir unbekannt sind, oder die ich nicht mehr verwende. Nach dem Löschen tauchen diese immer wieder auf.';
 $help_lang['Cat_Device_200_text'] = 'Wenn du Pi-hole verwendest, beachte bitte, dass Pi.Alert Informationen von Pi-hole abruft. Pausiere Pi.Alert, gehe in Pi-hole auf die Settings-Seite und

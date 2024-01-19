@@ -221,7 +221,7 @@ if (!empty($theme_result)) {
 		$ENABLED_THEMEMODE = True;
 		$ENABLED_DARKMODE = False;
 		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-blue.min.css">';
-		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" onLoad="show_pia_servertime();" >';
+		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" >';
 		$theme_selected_head = '<link rel="stylesheet" href="css/themes/' . str_replace('setting_theme_', '', basename($file)) . '/' . str_replace('setting_theme_', '', basename($file)) . '.css">';
 	}
 } else {
@@ -230,12 +230,12 @@ if (!empty($theme_result)) {
 	// Use saved AdminLTE Skin
 	foreach (glob("../db/setting_skin*") as $filename) {
 		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/' . str_replace('setting_', '', basename($filename)) . '.min.css">';
-		$skin_selected_body = '<body class="hold-transition ' . str_replace('setting_', '', basename($filename)) . ' sidebar-mini" onLoad="show_pia_servertime();" >';
+		$skin_selected_body = '<body class="hold-transition ' . str_replace('setting_', '', basename($filename)) . ' sidebar-mini" >';
 	}
 	// Use fallback AdminLTE Skin
 	if (strlen($skin_selected_head) == 0) {
 		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-blue.min.css">';
-		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" onLoad="show_pia_servertime();" >';
+		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" >';
 	}
 }
 

@@ -120,8 +120,7 @@ occupies on this switch. In this example, I use port "1".
 | ------------------------------------------------------------------------|-------------------------------------------------------------------------|
 
 After saving, you can now see the router in the switch's tab. If you want to edit the switch again, you also have to enter the "manual port configuration" again. 
-You can also assign multiple devices in manual. The syntax for this is then "MAC address 1,port;MAC address 2,port;MAC address 3,port;". However, only the 1st 
-Mac address can be selected from the drop-down list. Further MAC addresses must be entered manually.
+You can also assign multiple devices in manual. The syntax for this is then "MAC address 1,port;MAC address 2,port;MAC address 3,port;".
 
 ***Attention:***<br>
 ***Switches (e. g. unmanaged switches) or Routers which do not appear in the devices list cannot be assigned to any other network component, not even via the "manual port configuration".***
