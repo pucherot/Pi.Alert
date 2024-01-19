@@ -63,6 +63,8 @@ include the detection of unwanted/foreign DHCP servers and device monitoring usi
 
 ### Back
 
+The backend is started at regular intervals via cronjobs of the user who installed Pi.Alert.
+
 <details>
   <summary>:information_source: Expand for further information</summary>
 
@@ -71,11 +73,12 @@ include the detection of unwanted/foreign DHCP servers and device monitoring usi
   - Store the information in the DB
   - Report the changes detected by e-mail and/or other services ([Pushsafer](https://www.pushsafer.com/), [Pushover](https://pushover.net/), NTFY, Gotify and Telegram via [shoutrrr](https://github.com/containrrr/shoutrrr/)) and to the Frontend
   - automated DB cleanup tasks
+  - Optional speed tests of the Internet connection
   - a [pialert-cli](docs/PIALERTCLI.md) that helps to configure login, password and some other things
 
 </details>
 
-<ins> :bulb: Additional components and information</ins>
+:bulb: <ins> Additional components and information</ins>
 
   - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
   - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
@@ -104,7 +107,7 @@ There is a configurable login to prevent unauthorized use. The default password 
 
 </details>
 
-<ins> :bulb: Additional components and information</ins>
+:bulb: <ins>Additional components and information</ins>
 
   - Based on the original, I have created new icons according to the skins. Since I made the experience that iOS devices do not load homescreen icons from insecure sources (no SSL or selfsigned SSL), you can also link the icons directly from this repository.
   - [List of Favicons/Homescreen icons](docs/ICONS.md)
@@ -126,7 +129,7 @@ Currently the API offers the possibility to query 6 things:
 
 </details>
 
-<ins> :bulb: Additional components and information</ins>
+:bulb: <ins>Additional components and information</ins>
 
  - [Pi.Alert API Usage and Examples / Home Assistant integration](docs/API-USAGE.md)
 
@@ -152,7 +155,7 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
 
 - [Installation Guide (step by step)](docs/INSTALL.md)
 
-<ins> :bulb: Additional components and information</ins>
+:bulb: <ins>Additional components and information</ins>
 
  - [Things to keep in mind when using different Linux distributions](docs/LINUX-DISTRIBUTIONS.md) (will be updated if necessary)
  - If you want to use my fork as LXC container, feel free to check out the awesome Helper scripts from [tteck/Proxmox](https://github.com/tteck/Proxmox)
@@ -184,17 +187,22 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
   </tbody>
 </table>
 
+An archive of older versions can be found at [https://leiweibau.net/archive/pialert](https://leiweibau.net/archive/pialert/). This archive contains all release notes of my fork.
+
 # Closing words
 <!--- --------------------------------------------------------------------- --->
 
-### Versions History
-  [Versions History](docs/VERSIONS_HISTORY.md)
-  
-  An archive of older versions can be found at [https://leiweibau.net/archive/pialert](https://leiweibau.net/archive/pialert/). This archive contains all release notes of my fork.
+### Support
 
-### License
-  GPL 3.0
-  [Read more here](LICENSE.txt)
+  If you would like to support me and my work, I offer the following options.
+
+  | [GitHub Sponsors](https://github.com/sponsors/leiweibau) | [<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" height="30px">](https://www.buymeacoffee.com/leiweibau) |
+  | ---- | ---- |
+
+  A personal thank you :pray: to every sponsor of my fork.
+
+  [jbierwiler](https://github.com/jbierwiler), [tcoombs](https://github.com/tcoombs), [hspindel](https://github.com/hspindel)
+
 
 ### Additionally used components and services
   - Animated GIF (Loading Animation) https://commons.wikimedia.org/wiki/File:Loading_Animation.gif
@@ -203,18 +211,17 @@ bash -c "$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pi
   - For final processing of background images https://www.imgonline.com.ua/eng/make-seamless-texture.php
   - Translations: https://www.deepl.com and ChatGPT (https://chat.openai.com)
 
+
+### License
+  GPL 3.0
+  [Read more here](LICENSE.txt)
+
+
 ### Special contributors
 
   This code is a collaborative body of work, with special thanks to:
 
 [Macleykun](https://github.com/Macleykun), [Final-Hawk](https://github.com/Final-Hawk), [TeroRERO](https://github.com/terorero), [jokob-sk](https://github.com/jokob-sk/Pi.Alert), [tteck](https://github.com/tteck/Proxmox) and many more
-
-### :purple_heart: Special thanks
-
-  A personal thank you to every sponsor of my fork.
-
-  [jbierwiler](https://github.com/jbierwiler), [tcoombs](https://github.com/tcoombs), [hspindel](https://github.com/hspindel)
-
 
 ### Contact
 
