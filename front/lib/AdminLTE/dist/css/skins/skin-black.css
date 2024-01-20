@@ -159,9 +159,6 @@
   border-top-color: #222;
   border-left-color: #222;
 }
-#navbar-reload-button {
-    color:  #000;
-}
-#navbar-back-button {
-    color:  #000;
+#navbar-back-button, .navbar-servertime, #navbar-reload-button {
+    color:  #000 !important;
 }

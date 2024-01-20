@@ -62,7 +62,6 @@ if ($ENABLED_DARKMODE === True) {
 }
 if ($ENABLED_THEMEMODE === True) {
 	echo $theme_selected_head;
-	// echo '<link rel="stylesheet" href="css/miranda.css?' . $conf_data['VERSION_DATE'] . '">';
 }
 ?>
   <!-- Servertime to the right of the hostname -->
@@ -100,7 +99,6 @@ if ($ENABLED_THEMEMODE === True) {
       </a>
 <?php
 insert_back_button();
-$PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
 ?>
       <a id="navbar-reload-button" href="" role="button" onclick="window.location.href=window.location.href" style="">
         <i class="fa fa-repeat"></i>
@@ -115,14 +113,14 @@ $PIALERTLOGO_LINK = set_iconcolor_for_skin($pia_skin_selected);
         <ul class="nav navbar-nav">
 
           <!-- Server Name -->
-          <li><a style="pointer-events:none; display: inline-block; height: 50px; padding-top: 15px"><?php echo gethostname(); ?> <span id="PIA_Servertime_place"></span></a></li>
+          <li><div class="a navbar-servertime"><?php echo gethostname(); ?> <span id="PIA_Servertime_place"></span></div></li>
 
           <!-- Header right info -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height: 50px; padding-top: 15px">
               <!-- The user image in the navbar-->
-              <img src="img/<?=$PIALERTLOGO_LINK;?>.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
+              <img src="img/<?=$_SESSION['UserLogo'];?>.png" class="user-image" style="border-radius: initial" alt="Pi.Alert Logo">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <!-- <span class="hidden-xs">Pi.Alert</span> -->
               <span class="label label-danger" id="Menu_Report_Counter_Badge"></span>

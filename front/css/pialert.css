@@ -418,6 +418,9 @@ body.modal-open {
 #navbar-reload-button:hover {background-color: rgba(0, 0, 0, 0.1);}
 #navbar-back-button {position: relative; left:0px; width: 42px; height: 50px; display: inline-block; padding-top: 15px; text-align: center;}
 #navbar-back-button:hover {background-color: rgba(0, 0, 0, 0.1);}
+.navbar-servertime {
+    display: inline-block; height: 50px; padding-top: 15px;
+}
 /* ----------------- System Info -------------------------------------------- */
 .user-panel {padding-left: 0px;}
 .sysinfo_headline {color: #00c0ef;}
@@ -492,3 +495,6 @@ body.modal-open {
 .network_tab_icon {font-size: 16px; position: relative;}
 .flip-horizontal { transform: scaleX(-1); display: inline-block;}
 /* ----------------- Network ------------------------------------------------ */
+.navbar-servertime{
+  color: #fff;
+}
