@@ -15,4 +15,4 @@
 [Back](https://github.com/leiweibau/Pi.Alert#installation)
 
 
-[linuxdist1]: ./img/install_hints_linuxdist.png       "linuxdist1"
+[linuxdist1]: https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/install_hints_linuxdist.png       "linuxdist1"
