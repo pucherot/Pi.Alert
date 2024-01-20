@@ -350,7 +350,9 @@ sensor:
 ```
 Restart Home Assistant after the change. Then open the developer tools in Home Assistant and switch to the States tab. Here you should now find the PiAlert sensors. Now you can create a new card on the dashboard and add the individual sensors as you wish. For illustration here is a picture of my Pi.Alert Card (It is configured in german for me, but it should be enough for understanding)
 
-![pialert_card.png](https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/pialert_card.png)
+![pialert_card.png][pialert_card] 
+
 
 [Back](https://github.com/leiweibau/Pi.Alert#api)
 
+[pialert_card]:    https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/pialert_card.png       "pialert_card.png"
