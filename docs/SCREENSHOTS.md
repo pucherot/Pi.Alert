@@ -10,7 +10,7 @@
 
   | ![Screen Main 01][Screen_Main_01]   | ![Screen Main 02][Screen_Main_02] |
   | ----------------------------------- | --------------------------------- |
-  | ![leiweibau-dark](https://github.com/leiweibau/Pi.Alert/assets/105860611/91e2f874-b3ea-4845-84dd-4df48b117a61) | ![leiweibau-light](https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/screen_main_theme_01.png) |
+  | ![leiweibau-dark](https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/screen_main_theme_02.png) | ![leiweibau-light](https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/screen_main_theme_01.png) |
 
 
 ### Frontend - Devices
