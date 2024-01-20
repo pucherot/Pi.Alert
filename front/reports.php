@@ -65,7 +65,7 @@ function process_standard_notifications($class_name, $event_time, $filename, $di
 	$x = 0;
 	foreach ($lines as $line) {
 		$x++;
-		if ($x < (sizeof($lines) - 2)) {
+		if ($x < (sizeof($lines) - 1)) {
 			if (stristr($line, "MAC:")) {
 				// edit MAC line - add link
 				$tempmac = explode(": ", $line);
@@ -92,7 +92,16 @@ function process_standard_notifications($class_name, $event_time, $filename, $di
 				} else {
 					$webgui_report .= "\tHTTP Status Code:\t<span class=\"text-green\">" . $tempmac[1] . "</span>\n";
 				}
-			} else {
+			} elseif (stristr($line, "\tSSL Status:")) {
+				// edit Event line - add color depending on status
+				$tempmac = explode(": ", $line);
+				$tempmac[1] = trim($tempmac[1]);
+				if ($tempmac[1] != "0") {
+					$webgui_report .= "\tSSL Status:\t\t<span class=\"text-red\">" . $tempmac[1] . "</span>\n";
+				} else {
+					$webgui_report .= "\tSSL Status:\t\t<span class=\"text-green\">" . $tempmac[1] . "</span>\n";
+				}
+			}else {
 				// Default handling
 				$webgui_report .= $line;
 			}
