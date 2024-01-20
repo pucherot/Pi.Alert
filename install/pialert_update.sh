@@ -209,32 +209,6 @@ update_config() {
 
   print_msg "- Updating config file..."
 
-# 2023-06-30
-if ! grep -q "MAC_IGNORE_LIST" "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
-
-# MAC_IGNORE_LIST = ['11:22:33:aa:bb:cc']
-EOF
-fi
-
-# 2023-08-10
-if ! grep -q "ARPSCAN_ACTIVE" "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
-
-ARPSCAN_ACTIVE = True
-EOF
-fi
-
-# 2023-08-18
-if ! grep -q "ICMPSCAN_ACTIVE" "$PIALERT_HOME/config/pialert.conf" ; then
-  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
-
-# Other Modules
-# ----------------------
-ICMPSCAN_ACTIVE = True
-EOF
-fi
-
 # 2023-09-22
 if ! grep -Fq "# Mikrotik Configuration" "$PIALERT_HOME/config/pialert.conf" ; then
   cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
