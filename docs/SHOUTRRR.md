@@ -2,7 +2,7 @@
 
 This fork comes with 3 binaries of "shoutrrr" (arm64, armhf and x86). Depending on the system you use Pi.Alert on, you have to define in the configuration file in the parameter "SHOUTRRR_BINARY" which binary should be used.
 
-[Shoutrrr Documentation - Telegram](https://containrrr.dev/shoutrrr/0.7/services/telegram/)
+[Shoutrrr Documentation - Telegram](https://containrrr.dev/shoutrrr/v0.8/services/telegram/)
 
 <hr>
 

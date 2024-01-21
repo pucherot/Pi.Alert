@@ -483,8 +483,11 @@ fieldset[disabled] .form-control {
   color: #bec5cb;
   border: 1px solid #171c20;
 }
-.table-striped > tbody > tr:nth-of-type(2n + 1) {
+.table-striped > tbody > tr:nth-of-type(2n) {
   background-color: rgba(0, 0, 0, 0.3);
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+  background-color: transparent;
 }
 .panel,
 .panel-body,
@@ -703,3 +706,6 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .main-footer { border: none;}
 .small-box {border-radius: 10px;opacity: 0.8;}
 #configeditor_innerbox { border-radius: 8px;}
+.sysinfo_services {
+  background-color: rgba(0, 0, 0, 0.3);
+}

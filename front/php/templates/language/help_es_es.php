@@ -13,7 +13,7 @@ $help_lang['Cat_General_101_text'] = 'Es muy posible que los dispositivos de baj
 									si estos dispositivos se comunican con la red a través de WLAN. Las soluciones aquí serían cambiar a una conexión por cable si es posible o, si el dispositivo sólo se va a utilizar durante un período de tiempo limitado, utilizar el arp scan.
 									pausar el arp scan en la página de mantenimiento.';
 $help_lang['Cat_General_102_head'] = 'Me aparece el mensaje de que la base de datos es de sólo de lectura.';
-$help_lang['Cat_General_102_text'] = 'Es posible que en este momento el backend esté escribiendo cambios en la base de datos. Por favor, inténtalo de nuevo después de una breve espera. Si el comportamiento no cambia, sigue las instrucciones a continuación.<br><br>
+$help_lang['Cat_General_102_text'] = 'Es posible que en este momento se estén escribiendo cambios en la base de datos a través del backend. Inténtalo nuevamente después de una breve espera. Si deseas realizar cambios importantes en la lista de dispositivos, es recomendable pausar Pi.Alert durante el tiempo de edición en la página de configuración. Si el comportamiento persiste, sigue las indicaciones a continuación.<br><br>
 									 Compruebe en el directorio Pi.Alert si la carpeta de la base de datos (db) tiene asignados los permisos correctos:<br>
       								 <span class="text-maroon help_faq_code">drwxrwxr-x  2 (nombre de usuario) www-data</span><br>
       								 Si el permiso no es correcto, puede establecerlo de nuevo con los siguientes comandos en la terminal o la consola:<br>

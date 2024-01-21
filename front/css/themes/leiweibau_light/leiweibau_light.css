@@ -29,7 +29,7 @@ h4 {
 .table > thead > tr.odd,
 .table > tbody > tr.odd,
 .table > tfoot > tr.odd {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 .table > thead > tr.odd:hover,
 .table > tbody > tr.odd:hover,
@@ -50,12 +50,12 @@ h4 {
 }
 .dataTables_wrapper input[type="search"] {
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border: 0;
   color: #4A4B50;
 }
 .dataTables_paginate .pagination li > a {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   border-color: #d2d6de;
 }
 .pagination > .disabled > a,
@@ -66,7 +66,7 @@ h4 {
 .pagination > .disabled > span:hover {
   cursor: not-allowed;
   color: #4A4B50;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-color: #d2d6de;
 }
 .pagination > li > a:focus,
@@ -75,7 +75,7 @@ h4 {
 .pagination > li > span:hover {
   z-index: 2;
   color: #4A4B50;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-color: #d2d6de;
 }
 
@@ -93,7 +93,7 @@ h4 {
 .sidebar-menu > li > a:focus,
 .sidebar-menu > li.active > a {
   color: #fff;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-color: #3c8dbc;
 }
 .sidebar-menu > li > .treeview-menu {
@@ -193,7 +193,7 @@ h4 {
   color: #f6f6f6;
 }
 .main-header .navbar .sidebar-toggle {
-  color: #4A4B50;
+  color: #4A4B50 !important;
 }
 .main-header .navbar .sidebar-toggle:hover {
   color: #f6f6f6;
@@ -232,7 +232,7 @@ h4 {
 .nav-tabs-custom > .nav-tabs > li.active:hover > a {
   border-left-color: #d2d6de;
   border-right-color: #d2d6de;
-  /* background-color: rgba(255, 255, 255, 0.3); */
+  /* background-color: rgba(255, 255, 255, 0.4); */
   color: #4A4B50;
 }
 .nav-tabs-custom > .nav-tabs > li:not(.active):hover {
@@ -356,7 +356,7 @@ td.highlight {
 }
 .btn-default {
   box-shadow: none;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   color: #4A4B50;
   border: 1px solid #d2d6de;
 }
@@ -440,22 +440,25 @@ select.form-control,
 .daterangepicker select.ampmselect,
 .form-control,
 div.dataTables_wrapper div.dataTables_length select {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   color: #4A4B50;
 /*  border: 1px solid #3d444b;*/
 }
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   opacity: 1;
 }
 .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
   color: #4A4B50;
   border: 1px solid #d2d6de;
 }
-.table-striped > tbody > tr:nth-of-type(2n + 1) {
-  background-color: rgba(255, 255, 255, 0.3);
+.table-striped > tbody > tr:nth-of-type(2n) {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+  background-color: transparent;
 }
 .panel,
 .panel-body,
@@ -585,24 +588,24 @@ input[type="password"]::-webkit-caps-lock-indicator {
 }
 
 .nav-tabs-custom > .nav-tabs > li:hover > a, .nav-tabs-custom > .nav-tabs > li.active:hover > a {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   color: #4A4B50;
 }
 
 .nav-tabs-custom > .nav-tabs > li.active > a {
   border-left-color: #d2d6de;
   border-right-color: #d2d6de;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   color: #4A4B50;
 }
 .nav-tabs-custom > .nav-tabs {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border-bottom-color: #d2d6de;
 }
 .nav-tabs-custom .tab-content {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
 }
@@ -625,24 +628,24 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .login-box-body { color: #4A4B50; background-color: #272c30;}
 #modal-warning-title { color: #fff;}
 .skin-blue .sidebar-menu>li.active>a {
- background-color: rgba(255, 255, 255, 0.3);
+ background-color: rgba(255, 255, 255, 0.4);
  border-left-color: #3c8dbc;
 }
 .skin-blue .sidebar-menu>li:hover>a,
 .skin-blue .sidebar-menu>li.active>a,
 .skin-blue .sidebar-menu>li.menu-open>a {
- color:#fff;
- background-color: rgba(255, 255, 255, 0.3);
+ color:#888;
+ background-color: rgba(255, 255, 255, 0.4);
  border-left-color: #3c8dbc;
 }
 .skin-blue .sidebar-menu > li.header {
   color: #6c7477;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 #custom-menu-default-button { color: #4A4B50;}
 #custom-menu-default-button:hover, #custom-menu-report-button:hover, #custom-menu-logout-button:hover { color: #000;}
 .systemstatusbox { color: #4A4B50 !important;}
-.panel { background-color: rgba(255, 255, 255, 0.3) !important; }
+.panel { background-color: rgba(255, 255, 255, 0.4) !important; }
 .help_table_gen {border: solid 1px #d2d6de;}
 .help_table_gen_a {border: solid 1px #d2d6de;}
 .help_table_gen_b {border: solid 1px #d2d6de;}
@@ -650,21 +653,21 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .wrapper, .main-sidebar, .left-side, .main-footer, .skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side, .content-wrapper, .skin-blue .main-header li.user-header {
   background-color: transparent;
 }
-.skin-blue .main-header .logo , .skin-blue .main-header .logo:hover, .skin-blue .main-header .navbar { background-color: rgba(255, 255, 255, 0.5);}
-.navbar-custom-menu > .navbar-nav > li > .dropdown-menu { background-color: #c7c9f3;}
+.skin-blue .main-header .logo , .skin-blue .main-header .logo:hover, .skin-blue .main-header .navbar { background-color: rgba(255, 255, 255, 0.7);}
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu { background-color: rgb(150, 184, 250);}
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer { background-color: transparent;}
 .skin-blue .main-header .navbar .sidebar-toggle:hover { background-color: rgba(255, 255, 255, 0.1);}
-.box { box-shadow: none; border-radius: 4px; background-color: rgba(255,255,255,0.3); border-radius: 10px;}
-.sidebar { background-color: rgba(255,255,255,0.3); border-bottom-right-radius: 15px;}
+.box { box-shadow: none; border-radius: 4px; background-color: rgba(255, 255, 255, 0.4); border-radius: 10px;}
+.sidebar { background-color: rgba(255, 255, 255, 0.4); border-bottom-right-radius: 15px;}
 #Darkmode_button_container {display: none; }
-.fc-sat, .fc-sun, .fc-widget-header { background-color: rgba(255, 255, 255, 0.3) !important;}
+.fc-sat, .fc-sun, .fc-widget-header { background-color: rgba(255, 255, 255, 0.4) !important;}
 .fc-today {background-color: rgba(0, 180, 0, 0.3) !important;}
-#btnPrevious, #btnNext, #txtRecord, #btnPrevious_down, #btnNext_down, #txtRecord_down { background-color: rgba(255, 255, 255, 0.5);}
+#btnPrevious, #btnNext, #txtRecord, #btnPrevious_down, #btnNext_down, #txtRecord_down { background-color: rgba(255, 255, 255, 0.7);}
 .pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
   z-index: 3;
   color: #fff;
   cursor: default;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   border-color: #d2d6de;
 }
 .fc-unthemed .fc-content, .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-list-view, .fc-unthemed .fc-popover, .fc-unthemed .fc-row, .fc-unthemed tbody, .fc-unthemed td, .fc-unthemed th, .fc-unthemed thead {
@@ -676,3 +679,11 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .dataTables_info, .dataTables_paginate, .dataTables_length, .dataTables_filter {color: #4A4B50;}
 .box-header.with-border { border-bottom: 1px solid #d2d6de;}
 #configeditor_innerbox { border-radius: 8px;}
+.sysinfo_headline {color: #1B70B7;}
+.logo-lg, .logo-mini, #navbar-reload-button, #PIA_Servertime_place, .navbar-servertime, #navbar-back-button {
+  color: #4A4B50 !important;
+}
+.sysinfo_services {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.text-gray {color: #888 !important;}

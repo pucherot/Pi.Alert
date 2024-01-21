@@ -53,9 +53,9 @@ A code "12" therefore means changes in the fields "Subject" and "Issuer", a code
 [Back](https://github.com/leiweibau/Pi.Alert#front)
 
 
-[enable_wsm]:         ./img/wsm_enable.png             "Enable WSM"
-[wsm_addURL_1]:       ./img/wsm_addURL_1.png   		   "WSM add URL"
-[wsm_addURL_2]:       ./img/wsm_addURL_2.png   		   "WSM add URL Details"
-[wsm_newURL_1]:       ./img/wsm_newURL_1.png   		   "WSM new URL"
-[wsm_newURL_2]:       ./img/wsm_newURL_2.png   		   "WSM new URL Scans"
-[wsm_statuscode]:     ./img/wsm_statuscode.png   	   "WSM statuscode"
+[enable_wsm]:         https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/wsm_enable.png             "Enable WSM"
+[wsm_addURL_1]:       https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/wsm_addURL_1.png   		   "WSM add URL"
+[wsm_addURL_2]:       https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/wsm_addURL_2.png   		   "WSM add URL Details"
+[wsm_newURL_1]:       https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/wsm_newURL_1.png   		   "WSM new URL"
+[wsm_newURL_2]:       https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/wsm_newURL_2.png   		   "WSM new URL Scans"
+[wsm_statuscode]:     https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/wsm_statuscode.png   	   "WSM statuscode"

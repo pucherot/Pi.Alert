@@ -204,11 +204,12 @@ function insert_back_button() {
 	}
 }
 // Adjust Logo Color
-function set_iconcolor_for_skin($skinname) {
-	if ($skinname == 'skin-black-light' || $skinname == 'skin-black') {
-		return 'pialertLogoBlack';
-	} else {return 'pialertLogoWhite';}
+function set_userimage($skinname) {
+	if ($skinname == 'skin-black-light' || $skinname == 'skin-black'|| $skinname == 'leiweibau_light') {
+		$_SESSION['UserLogo'] = 'pialertLogoBlack';
+	} else {$_SESSION['UserLogo'] = 'pialertLogoWhite';}
 }
+
 // Arp Histroy Graph
 if (file_exists('../db/setting_noonlinehistorygraph')) {$ENABLED_HISTOY_GRAPH = False;} else { $ENABLED_HISTOY_GRAPH = True;}
 
@@ -218,24 +219,29 @@ $theme_result = glob($themefile);
 // Check if any matching files were found
 if (!empty($theme_result)) {
 	foreach ($theme_result as $file) {
+		$themename_file = str_replace('setting_theme_', '', basename($file));
 		$ENABLED_THEMEMODE = True;
 		$ENABLED_DARKMODE = False;
 		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-blue.min.css">';
 		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" >';
-		$theme_selected_head = '<link rel="stylesheet" href="css/themes/' . str_replace('setting_theme_', '', basename($file)) . '/' . str_replace('setting_theme_', '', basename($file)) . '.css">';
+		$theme_selected_head = '<link rel="stylesheet" href="css/themes/' . $themename_file . '/' . $themename_file . '.css">';
+		set_userimage($themename_file);
 	}
 } else {
 	// Darkmode
 	if (file_exists('../db/setting_darkmode')) {$ENABLED_DARKMODE = True;} else { $ENABLED_DARKMODE = False;}
 	// Use saved AdminLTE Skin
 	foreach (glob("../db/setting_skin*") as $filename) {
-		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/' . str_replace('setting_', '', basename($filename)) . '.min.css">';
-		$skin_selected_body = '<body class="hold-transition ' . str_replace('setting_', '', basename($filename)) . ' sidebar-mini" >';
+		$skinname_file = str_replace('setting_', '', basename($filename));
+		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/' . $skinname_file . '.min.css">';
+		$skin_selected_body = '<body class="hold-transition ' . $skinname_file . ' sidebar-mini" >';
+		set_userimage($skinname_file);
 	}
 	// Use fallback AdminLTE Skin
 	if (strlen($skin_selected_head) == 0) {
 		$skin_selected_head = '<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-blue.min.css">';
 		$skin_selected_body = '<body class="hold-transition skin-blue sidebar-mini" >';
+		set_userimage("skin-blue");
 	}
 }
 

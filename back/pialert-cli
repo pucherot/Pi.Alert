@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION='v1.15'
+SCRIPTVERSION='v1.16'
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
 PIA_CONF_FILE=${SCRIPTPATH}'/../config/pialert.conf'
@@ -607,8 +607,6 @@ EOM
             echo "Group Permissions set"
             ;;
     esac
-
-
     ;;
 
   set_sudoers)
@@ -651,8 +649,13 @@ EOM
     echo "Test executed"
     ;;
 
+  show_usercron)
+    PIA_USER=$(echo ${SCRIPTPATH} | xargs dirname | xargs dirname | xargs basename)
+    sudo crontab -l -u ${PIA_USER}
+    ;;
+
   arg_list)
-    echo disable_scan disable_mainscan disable_icmp_mon disable_service_mon enable_scan enable_mainscan enable_icmp_mon enable_service_mon reporting_test set_apikey set_autopassword set_login set_password set_permissions set_sudoers unset_login unset_sudoers update_db
+    echo disable_scan disable_mainscan disable_icmp_mon disable_service_mon enable_scan enable_mainscan enable_icmp_mon enable_service_mon reporting_test set_apikey set_autopassword set_login set_password set_permissions set_sudoers unset_login unset_sudoers update_db show_usercron
     ;;
 
   *)

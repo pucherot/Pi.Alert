@@ -18,6 +18,6 @@ With the Save button, the changes are saved in the database without further ques
 
 [Back](https://github.com/leiweibau/Pi.Alert#front)
 
-[open_bulkeditor]:    ./img/bulkeditor_open.png           "Open bulkeditor"
-[bulkeditor_list]:    ./img/bulkeditor_list.png           "Bulkeditor list"
-[Enable_field]:       ./img/bulkeditor_enable_field.png   "Bulkeditor enable field"
+[open_bulkeditor]:    https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/bulkeditor_open.png           "Open bulkeditor"
+[bulkeditor_list]:    https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/bulkeditor_list.png           "Bulkeditor list"
+[Enable_field]:       https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/bulkeditor_enable_field.png   "Bulkeditor enable field"

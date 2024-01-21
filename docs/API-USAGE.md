@@ -355,4 +355,4 @@ Restart Home Assistant after the change. Then open the developer tools in Home A
 
 [Back](https://github.com/leiweibau/Pi.Alert#api)
 
-[pialert_card]:    /docs/img/pialert_card.png       "pialert_card.png"
+[pialert_card]:    https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/pialert_card.png       "pialert_card.png"
