@@ -245,14 +245,6 @@ if ($_REQUEST['mac'] == 'Internet') {
                         </div>
                       </div>
 
-                      <!-- Favorite -->
-                      <div class="form-group">
-                        <label class="col-sm-3 control-label"><?=$pia_lang['DevDetail_MainInfo_Favorite'];?></label>
-                        <div class="col-sm-9" style="padding-top:6px;">
-                          <input class="checkbox blue hidden" id="chkFavorite" type="checkbox">
-                        </div>
-                      </div>
-
                       <!-- Group -->
                       <div class="form-group">
                         <label class="col-sm-3 control-label"><?=$pia_lang['DevDetail_MainInfo_Group'];?></label>
@@ -472,6 +464,14 @@ if ($_REQUEST['mac'] == 'Internet') {
                         <label class="col-sm-5 control-label"><?=$pia_lang['DevDetail_EveandAl_NewDevice'];?>:</label>
                         <div class="col-sm-7" style="padding-top:6px;">
                           <input class="checkbox orange hidden" id="chkNewDevice" type="checkbox">
+                        </div>
+                      </div>
+
+                      <!-- Favorite -->
+                      <div class="form-group">
+                        <label class="col-sm-5 control-label"><?=$pia_lang['DevDetail_MainInfo_Favorite'];?></label>
+                        <div class="col-sm-7" style="padding-top:6px;">
+                          <input class="checkbox blue hidden" id="chkFavorite" type="checkbox">
                         </div>
                       </div>
 
