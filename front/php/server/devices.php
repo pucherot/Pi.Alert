@@ -89,7 +89,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 	}
 }
 function GetARPStatus() {
-	$execstring = 'ps -aux | grep "/pialert/back/pialert.py 1" | grep -v grep | sed \'/>~\/pialert\/log\/pialert.1.log/d\'';
+	$execstring = 'ps -aux | grep "/pialert/back/pialert.py 1" | grep -v grep | grep -v "/pialert/log/pialert.1.log"';
 	$pia_arpscans = "";
 	exec($execstring, $pia_arpscans);
 	$result = array(sizeof($pia_arpscans));
