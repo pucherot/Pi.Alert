@@ -78,7 +78,7 @@ The backend is started at regular intervals via cronjobs of the user who install
 
 </details>
 
-:bulb: <ins>Additional components and information</ins>
+:bulb: <ins> Additional components and information</ins>
 
   - [pialert-cli - Overview of supported commands](docs/PIALERTCLI.md)
   - [shoutrrr - Implementation notes](docs/SHOUTRRR.md)
@@ -228,5 +228,5 @@ An archive of older versions can be found at [https://leiweibau.net/archive/pial
   leiweibau@gmail.com
 
 <!--- --------------------------------------------------------------------- --->
-[main]:    ./docs/img/screen_main.png          "Main screen"
+[main]:    https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/screen_main.png          "Main screen"
 
