@@ -680,7 +680,7 @@ input[type="password"]::-webkit-caps-lock-indicator {
 .box-header.with-border { border-bottom: 1px solid #d2d6de;}
 #configeditor_innerbox { border-radius: 8px;}
 .sysinfo_headline {color: #1B70B7;}
-.logo-lg, .logo-mini, #navbar-reload-button, #PIA_Servertime_place, .navbar-servertime{
+.logo-lg, .logo-mini, #navbar-reload-button, #PIA_Servertime_place, .navbar-servertime, #navbar-back-button {
   color: #4A4B50 !important;
 }
 .sysinfo_services {
