@@ -196,7 +196,7 @@ An archive of older versions can be found at [https://leiweibau.net/archive/pial
 
   If you would like to support me and my work, I offer the following options.
 
-  | [GitHub Sponsors](https://github.com/sponsors/leiweibau) | [<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" height="30px">](https://www.buymeacoffee.com/leiweibau) |
+  | [<img src="https://raw.githubusercontent.com/leiweibau/Pi.Alert/assets/githubsponsor.png" height="30px">](https://github.com/sponsors/leiweibau) | [<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" height="30px">](https://www.buymeacoffee.com/leiweibau) |
   | ---- | ---- |
 
   A personal thank you :pray: to every sponsor of my fork.

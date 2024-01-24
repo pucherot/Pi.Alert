@@ -497,4 +497,5 @@ body.modal-open {
 /* ----------------- Network ------------------------------------------------ */
 .navbar-servertime{
   color: #fff;
+  margin-right: 5px;
 }
