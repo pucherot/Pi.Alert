@@ -906,23 +906,30 @@ def save_scanned_devices (p_arpscan_devices, p_cycle_interval):
 def remove_entries_from_table():
     try:
         MAC_IGNORE_LIST
-        print(
-            f'        Delete {len(MAC_IGNORE_LIST)} ignored devices from scan on appearance'
-        )
 
-        mac_addresses = ','.join([f'"{mac}"' for mac in MAC_IGNORE_LIST])
-        query = f'DELETE FROM CurrentScan WHERE cur_MAC IN ({mac_addresses})'
-        sql.execute(query)
-        query = f'DELETE FROM PiHole_Network WHERE PH_MAC IN ({mac_addresses})'
-        sql.execute(query)
-        query = f'DELETE FROM DHCP_Leases WHERE DHCP_MAC IN ({mac_addresses})'
-        sql.execute(query)
-        query = f'DELETE FROM Fritzbox_Network WHERE FB_MAC IN ({mac_addresses})'
-        sql.execute(query)
-        query = f'DELETE FROM Mikrotik_Network WHERE MT_MAC IN ({mac_addresses})'
-        sql.execute(query)
-        query = f'DELETE FROM Unifi_Network WHERE UF_MAC IN ({mac_addresses})'
-        sql.execute(query)
+        if len(MAC_IGNORE_LIST) > 0:
+            print(f'        Delete {len(MAC_IGNORE_LIST)} ignored devices/MAC ranges from scan on appearance')
+            # incomplete and complete MAC addresses
+            mac_addresses = ' OR '.join([f'cur_MAC LIKE "{mac}%"' for mac in MAC_IGNORE_LIST])
+            query = f'DELETE FROM CurrentScan WHERE {mac_addresses}'
+            sql.execute(query)
+            mac_addresses = ' OR '.join([f'PH_MAC LIKE "{mac}%"' for mac in MAC_IGNORE_LIST])
+            query = f'DELETE FROM PiHole_Network WHERE {mac_addresses}'
+            sql.execute(query)
+            mac_addresses = ' OR '.join([f'DHCP_MAC LIKE "{mac}%"' for mac in MAC_IGNORE_LIST])
+            query = f'DELETE FROM DHCP_Leases WHERE {mac_addresses}'
+            sql.execute(query)
+            mac_addresses = ' OR '.join([f'FB_MAC LIKE "{mac}%"' for mac in MAC_IGNORE_LIST])
+            query = f'DELETE FROM Fritzbox_Network WHERE {mac_addresses}'
+            sql.execute(query)
+            mac_addresses = ' OR '.join([f'MT_MAC LIKE "{mac}%"' for mac in MAC_IGNORE_LIST])
+            query = f'DELETE FROM Mikrotik_Network WHERE {mac_addresses}'
+            sql.execute(query)
+            mac_addresses = ' OR '.join([f'UF_MAC LIKE "{mac}%"' for mac in MAC_IGNORE_LIST])
+            query = f'DELETE FROM Unifi_Network WHERE {mac_addresses}'
+            sql.execute(query)
+        else:
+            print(f'        Ignore list is empty')
     except NameError:
         print("        No ignore list defined")
 
