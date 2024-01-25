@@ -246,9 +246,10 @@ $help_lang['Cat_General_107_text'] = 'The file <span class="text-maroon help_faq
 									</table>
 									<table class="help_table_gen">
 									    <tr><td class="help_table_gen_section" colspan="2">Arp-scan Options & Samples</td></tr>
+									    <tr><td class="help_table_gen_a">MAC_IGNORE_LIST</td>
 									        <td class="help_table_gen_b">
 									            <span class="text-maroon help_faq_code">[&apos;MAC-Address 1&apos;, &apos;MAC-Address 2&apos;]</span><br>
-									            Estas direcciones MAC (guardadas con letras minúsculas) se filtran de los resultados del escaneo.</td></tr>
+									            Estas direcciones MAC (guardadas con letras minúsculas) se filtran de los resultados del escaneo. También es posible especificar solo el comienzo de una dirección MAC. Todas las direcciones con el mismo prefijo también se filtrarán.</td></tr>
 									    <tr><td class="help_table_gen_a">SCAN_SUBNETS</td>
 										    <td class="help_table_gen_b">
 										        &lsquo;<span class="text-maroon help_faq_code">--localnet</span>&rsquo;<br>
