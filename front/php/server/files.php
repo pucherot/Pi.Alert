@@ -84,8 +84,6 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 }
 function GetServerTime() {
 	echo date("Y,n,j,G,i,s");
-	//echo "2024,1,18,12,42,11";
-	//echo (json_encode(date("Y, n, j, G, i, s")));
 }
 
 
@@ -149,6 +147,9 @@ function SaveConfigFile() {
 	if (substr($configArray['SCAN_SUBNETS'], 0, 2) == "--") {$configArray['SCAN_SUBNETS'] = "'" . $configArray['SCAN_SUBNETS'] . "'";} else {
 		$configArray['SCAN_SUBNETS'] = str_replace($ignorlist_search, $ignorlist_replace, $configArray['SCAN_SUBNETS']);
 	}
+	if ($configArray['PUSHSAFER_PRIO'] == "") {$configArray['PUSHSAFER_PRIO'] = 0;}
+	if ($configArray['PUSHOVER_PRIO'] == "") {$configArray['PUSHOVER_PRIO'] = 0;}
+
 
 	$config_template = "# General Settings
 # ----------------------
@@ -200,6 +201,7 @@ REPORT_PUSHSAFER         = " . convert_bool($configArray['REPORT_PUSHSAFER']) . 
 REPORT_PUSHSAFER_WEBMON  = " . convert_bool($configArray['REPORT_PUSHSAFER_WEBMON']) . "
 PUSHSAFER_TOKEN          = '" . $configArray['PUSHSAFER_TOKEN'] . "'
 PUSHSAFER_DEVICE         = '" . $configArray['PUSHSAFER_DEVICE'] . "'
+PUSHSAFER_PRIO           = " . $configArray['PUSHSAFER_PRIO'] . "
 
 # Pushover
 # ----------------------
@@ -207,6 +209,7 @@ REPORT_PUSHOVER         = " . convert_bool($configArray['REPORT_PUSHOVER']) . "
 REPORT_PUSHOVER_WEBMON  = " . convert_bool($configArray['REPORT_PUSHOVER_WEBMON']) . "
 PUSHOVER_TOKEN          = '" . $configArray['PUSHOVER_TOKEN'] . "'
 PUSHOVER_USER           = '" . $configArray['PUSHOVER_USER'] . "'
+PUSHOVER_PRIO           = " . $configArray['PUSHOVER_PRIO'] . "
 
 # NTFY
 #---------------------------

@@ -181,6 +181,11 @@ def send_pushsafer_test (_notiMessage):
     except NameError:
         notification_target = "a"
 
+    try:
+        result = PUSHSAFER_PRIO
+    except NameError:
+        PUSHSAFER_PRIO = 0
+
     url = 'https://www.pushsafer.com/api'
     post_fields = {
         "t" : 'Pi.Alert Message',
@@ -193,17 +198,24 @@ def send_pushsafer_test (_notiMessage):
         "u" : REPORT_DASHBOARD_URL,
         "ut" : 'Open Pi.Alert',
         "k" : PUSHSAFER_TOKEN,
+        "pr" : PUSHSAFER_PRIO,
         }
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
 def send_pushover_test (_notiMessage):
+    try:
+        result = PUSHOVER_PRIO
+    except NameError:
+        PUSHOVER_PRIO = 0
+
     url = 'https://api.pushover.net/1/messages.json'
     post_fields = {
         "token": PUSHOVER_TOKEN,
         "user": PUSHOVER_USER,
         "title" : 'Pi.Alert Message',
         "message" : _notiMessage,
+        "priority" : PUSHOVER_PRIO,
         }
     requests.post(url, data=post_fields)
 
