@@ -149,6 +149,7 @@ function SaveConfigFile() {
 	}
 	if ($configArray['PUSHSAFER_PRIO'] == "") {$configArray['PUSHSAFER_PRIO'] = 0;}
 	if ($configArray['PUSHOVER_PRIO'] == "") {$configArray['PUSHOVER_PRIO'] = 0;}
+	if ($configArray['NETWORK_DNS_SERVER'] == "") {$configArray['NETWORK_DNS_SERVER'] = "localhost";}
 
 
 	$config_template = "# General Settings
@@ -161,6 +162,7 @@ VENDORS_DB             = '" . $configArray['VENDORS_DB'] . "'
 PIALERT_APIKEY         = '" . $configArray['PIALERT_APIKEY'] . "'
 PIALERT_WEB_PROTECTION = " . convert_bool($configArray['PIALERT_WEB_PROTECTION']) . "
 PIALERT_WEB_PASSWORD   = '" . $configArray['PIALERT_WEB_PASSWORD'] . "'
+NETWORK_DNS_SERVER     = '" . $configArray['NETWORK_DNS_SERVER'] . "'
 
 # Other Modules
 # ----------------------

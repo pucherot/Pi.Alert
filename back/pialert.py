@@ -1333,7 +1333,13 @@ def update_devices_names():
 
 #-------------------------------------------------------------------------------
 def resolve_device_name(pMAC, pIP):
-    try :
+    try:
+        # DNS Server Fallback
+        try:
+            temp = NETWORK_DNS_SERVER
+        except NameError:
+            NETWORK_DNS_SERVER = "localhost"
+
         pMACstr = str(pMAC)
         
         # Check MAC parameter
@@ -1341,20 +1347,20 @@ def resolve_device_name(pMAC, pIP):
         if len(pMACstr) != 17 or len(mac) != 12 :
             return -2
 
-        # Resolve name with avahi-resolve
         avahi_args = ['avahi-resolve', '-a', pIP]
-        newName = subprocess.check_output (avahi_args, universal_newlines=True)
-
-        ip_regex = re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b')
-        newName = re.sub(ip_regex, '', newName)
-
-        if "Failed to resolve address" in newName:
-            # Resolve name with DIG
-            dig_args = ['dig', '+short', '-x', pIP]
-            newName = subprocess.check_output (dig_args, universal_newlines=True)
-
-            if "communications error" in newName:
-                return -2
+        newName = subprocess.run(avahi_args, capture_output=True, text=True, timeout=10)
+        
+        if newName.returncode == 0:
+            if newName.stdout:
+                #print("avahi Output")
+                ip_regex = re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b')
+                newName = re.sub(ip_regex, '', newName.stdout)
+                #print(newName)
+            else:
+                #print("dig Output")
+                dig_args = ['dig', '+short', '-x', pIP, '@'+NETWORK_DNS_SERVER]
+                newName = subprocess.check_output (dig_args, universal_newlines=True)
+                #print(newName)
 
         # Check returns
         newName = newName.strip()
@@ -1374,9 +1380,13 @@ def resolve_device_name(pMAC, pIP):
 
         return newName
 
-    # not Found
+    except subprocess.TimeoutExpired:
+        return -1
+        # not Found
+
     except subprocess.CalledProcessError :
-        return -1               
+        return -1
+        # not Found
 
 #-------------------------------------------------------------------------------
 def void_ghost_disconnections():

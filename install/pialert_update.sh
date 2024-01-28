@@ -266,6 +266,7 @@ if ! grep -Fq "PUSHOVER_PRIO" "$PIALERT_HOME/config/pialert.conf" ; then
 
 PUSHOVER_PRIO = 0
 PUSHSAFER_PRIO = 0
+NETWORK_DNS_SERVER = 'localhost'
 EOF
 fi
 
