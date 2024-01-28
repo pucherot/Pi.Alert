@@ -1362,9 +1362,11 @@ def resolve_device_name(pMAC, pIP):
                 newName = subprocess.check_output (dig_args, universal_newlines=True)
                 #print(newName)
 
+                if ";; communications error to" in newName:
+                    return -2
+
         # Check returns
         newName = newName.strip()
-
         if len(newName) == 0 :
             return -2
             
