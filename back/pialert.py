@@ -1332,63 +1332,82 @@ def update_devices_names():
     sql.executemany ("UPDATE Devices SET dev_Name = ? WHERE dev_MAC = ? ", recordsToUpdate )
 
 #-------------------------------------------------------------------------------
-def resolve_device_name(pMAC, pIP):
+def resolve_device_name_avahi(pIP):
     try:
-        # DNS Server Fallback
-        try:
-            temp = NETWORK_DNS_SERVER
-        except NameError:
-            NETWORK_DNS_SERVER = "localhost"
-
-        pMACstr = str(pMAC)
-        
-        # Check MAC parameter
-        mac = pMACstr.replace (':','')
-        if len(pMACstr) != 17 or len(mac) != 12 :
-            return -2
-
         avahi_args = ['avahi-resolve', '-a', pIP]
-        newName = subprocess.run(avahi_args, capture_output=True, text=True, timeout=10)
-        
-        if newName.returncode == 0:
-            if newName.stdout:
-                #print("avahi Output")
+        newName = subprocess.run(avahi_args, capture_output=True, text=True, timeout=5)
+        if newName.returncode == 0 and newName.stdout:
                 ip_regex = re.compile(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b')
                 newName = re.sub(ip_regex, '', newName.stdout)
-                #print(newName)
-            else:
-                #print("dig Output")
-                dig_args = ['dig', '+short', '-x', pIP, '@'+NETWORK_DNS_SERVER]
-                newName = subprocess.check_output (dig_args, universal_newlines=True)
-                #print(newName)
-
-                if ";; communications error to" in newName:
-                    return -2
-
-        # Check returns
-        newName = newName.strip()
-        if len(newName) == 0 :
-            return -2
-            
-        # Eliminate local domain
-        if newName.endswith('.') :
-            newName = newName[:-1]
-        if newName.endswith('.lan') :
-            newName = newName[:-4]
-        if newName.endswith('.local') :
-            newName = newName[:-6]
-        if newName.endswith('.home') :
-            newName = newName[:-5]
+        else:
+            newName = ""
 
         return newName
-
+    
+    # Error handling
     except subprocess.TimeoutExpired:
-        return -1
-        # not Found
+        newName = ""
+        return newName
 
-    except subprocess.CalledProcessError :
-        return -1
-        # not Found
+    except subprocess.CalledProcessError:
+        newName = ""
+        return newName
+
+#-------------------------------------------------------------------------------
+def resolve_device_name_dig(pIP):
+    # DNS Server Fallback
+    try:
+        temp = NETWORK_DNS_SERVER
+    except NameError:
+        NETWORK_DNS_SERVER = "localhost"
+
+    try: 
+        dig_args = ['dig', '+short', '-x', pIP, '@'+NETWORK_DNS_SERVER]
+        newName = subprocess.check_output (dig_args, universal_newlines=True, timeout=5)
+        if ";; communications error to" in newName:
+            newName = ""
+        
+        return newName.strip()
+
+    # Error handling
+    except subprocess.TimeoutExpired:
+        newName = ""
+        return newName
+
+    except subprocess.CalledProcessError:
+        newName = ""
+        return newName
+
+#-------------------------------------------------------------------------------
+def resolve_device_name(pMAC, pIP):
+    pMACstr = str(pMAC)
+    
+    # Check MAC parameter
+    mac = pMACstr.replace (':','')
+    if len(pMACstr) != 17 or len(mac) != 12 :
+        return -2
+
+    newName = resolve_device_name_avahi(pIP)
+
+    if newName == "":
+        newName = resolve_device_name_dig(pIP)
+
+    # Check returns
+    newName = newName.strip()
+    if len(newName) == 0 :
+        return -2
+        
+    # Eliminate local domain
+    if newName.endswith('.') :
+        newName = newName[:-1]
+    if newName.endswith('.lan') :
+        newName = newName[:-4]
+    if newName.endswith('.local') :
+        newName = newName[:-6]
+    if newName.endswith('.home') :
+        newName = newName[:-5]
+
+    return newName
 
 #-------------------------------------------------------------------------------
 def void_ghost_disconnections():
