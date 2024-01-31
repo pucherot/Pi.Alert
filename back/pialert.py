@@ -1332,6 +1332,25 @@ def update_devices_names():
     sql.executemany ("UPDATE Devices SET dev_Name = ? WHERE dev_MAC = ? ", recordsToUpdate )
 
 #-------------------------------------------------------------------------------
+def resolve_device_name_netbios(pIP):
+    try:
+        nbtscan_args =['nbtscan', '-v', '-s', ':', pIP+'/32']
+        newName = subprocess.run(nbtscan_args, capture_output=True, text=True, timeout=5)
+        if newName.returncode == 0 and newName.stdout:
+            lines = newName.stdout.strip().split('\n')
+            for line in lines:
+                if "00U" in line:
+                    segments = line.split(':')
+                    newName = segments[1].strip()
+        else:
+            newName = ""
+        return newName
+    # Error handling
+    except subprocess.TimeoutExpired:
+        newName = ""
+        return newName
+
+#-------------------------------------------------------------------------------
 def resolve_device_name_avahi(pIP):
     try:
         avahi_args = ['avahi-resolve', '-a', pIP]
@@ -1341,14 +1360,11 @@ def resolve_device_name_avahi(pIP):
                 newName = re.sub(ip_regex, '', newName.stdout)
         else:
             newName = ""
-
-        return newName
-    
+        return newName.strip()
     # Error handling
     except subprocess.TimeoutExpired:
         newName = ""
         return newName
-
     except subprocess.CalledProcessError:
         newName = ""
         return newName
@@ -1366,14 +1382,11 @@ def resolve_device_name_dig(pIP):
         newName = subprocess.check_output (dig_args, universal_newlines=True, timeout=5)
         if ";; communications error to" in newName:
             newName = ""
-        
         return newName.strip()
-
     # Error handling
     except subprocess.TimeoutExpired:
         newName = ""
         return newName
-
     except subprocess.CalledProcessError:
         newName = ""
         return newName
@@ -1388,9 +1401,10 @@ def resolve_device_name(pMAC, pIP):
         return -2
 
     newName = resolve_device_name_avahi(pIP)
-
     if newName == "":
         newName = resolve_device_name_dig(pIP)
+    if newName == "":
+        newName = resolve_device_name_netbios(pIP)
 
     # Check returns
     newName = newName.strip()
@@ -1406,7 +1420,6 @@ def resolve_device_name(pMAC, pIP):
         newName = newName[:-6]
     if newName.endswith('.home') :
         newName = newName[:-5]
-
     return newName
 
 #-------------------------------------------------------------------------------
@@ -1806,15 +1819,12 @@ def get_ssl_cert_info(url, timeout=10):
 
     except socket.timeout:
         return "SSL certificate could not be found (Timeout)"
-
     except socket.gaierror:
         return "SSL certificate could not be found (Host down or does not exists)"
         # return 0
-
     except ConnectionRefusedError:
         return "SSL certificate could not be found (Connection Refused)"
         # return 0
-
     except Exception as e:
         return "SSL certificate could not be found (General Error)"
         # print(e)
@@ -2119,7 +2129,6 @@ def icmp_save_scandata(data):
 
 # -----------------------------------------------------------------------------
 def get_icmphost_list():
-
     sql.execute("SELECT icmp_ip FROM ICMP_Mon")
     rows = sql.fetchall()
 
@@ -2127,7 +2136,6 @@ def get_icmphost_list():
 
 # -----------------------------------------------------------------------------
 def ping(host):
-
     command = ['ping', '-c', '1', host]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
     output = result.stdout.decode('utf8')
@@ -2137,7 +2145,6 @@ def ping(host):
 
 # -----------------------------------------------------------------------------
 def ping_avg(host):
-
     try:
         ping_count = str(ICMP_GET_AVG_RTT)
     except NameError: # variable not defined, use a default
@@ -2152,7 +2159,6 @@ def ping_avg(host):
 
 # -----------------------------------------------------------------------------
 def set_icmphost_events(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt):
-
     #print(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpeve_avgrtt)
     sqlite_insert = """INSERT INTO ICMP_Mon_Events
                      (icmpeve_ip, icmpeve_DateTime, icmpeve_Present, icmpeve_avgrtt) 
@@ -2164,7 +2170,6 @@ def set_icmphost_events(_icmpeve_ip, _icmpeve_DateTime, _icmpeve_Present, _icmpe
 
 # -----------------------------------------------------------------------------
 def set_icmphost_current_scan(_cur_ip, _cur_DateTime, _cur_Present, _cur_avgrrt):
-
     sql.execute("SELECT * FROM ICMP_Mon WHERE icmp_ip = ?", [_cur_ip])
     rows = sql.fetchall()
     for row in rows:
@@ -2187,7 +2192,6 @@ def set_icmphost_current_scan(_cur_ip, _cur_DateTime, _cur_Present, _cur_avgrrt)
 
 # -----------------------------------------------------------------------------
 def set_icmphost_update(_icmp_ip, _icmp_LastScan, _icmp_PresentLastScan, _icmp_avgrtt):
-
     sqlite_insert = """UPDATE ICMP_Mon SET icmp_LastScan=?, icmp_PresentLastScan=?, icmp_avgrtt=? WHERE icmp_ip=?;"""
     table_data = (_icmp_LastScan, _icmp_PresentLastScan, _icmp_avgrtt, _icmp_ip)
     sql.execute(sqlite_insert, table_data)
@@ -2195,7 +2199,6 @@ def set_icmphost_update(_icmp_ip, _icmp_LastScan, _icmp_PresentLastScan, _icmp_a
 
 # -----------------------------------------------------------------------------
 def flush_icmphost_current_scan():
-
     sql.execute("DELETE FROM ICMP_Mon_CurrentScan")
     sql_connection.commit()
 
@@ -2214,7 +2217,6 @@ def get_icmphost_name(_icmp_ip):
 
 # -----------------------------------------------------------------------------
 def calc_activity_history_icmp(History_Online_Devices, History_Offline_Devices):
-
     History_ALL_Devices = History_Online_Devices + History_Offline_Devices
     sql.execute ("INSERT INTO Online_History (Scan_Date, Online_Devices, Down_Devices, All_Devices, Data_Source) "+
                  "VALUES ( ?, ?, ?, ?, ?)", (startTime, History_Online_Devices, History_Offline_Devices, History_ALL_Devices, 'icmp_scan') )
@@ -2227,7 +2229,6 @@ def icmphost_monitoring_notification():
     
     # Reporting section
     print('\nReporting (ICMP Monitoring) ...')
-
     # Open text Templates
     with open(f'{PIALERT_BACK_PATH}/report_template_icmpmon.txt', 'r') as template_file:
         mail_text_icmphost = template_file.read()
@@ -2612,7 +2613,6 @@ def send_webgui (_Text):
 # Sending Notofications
 #===============================================================================
 def sending_notifications (_type, _html_text, _txt_text):
-
     if _type in ['webservice']:
         if REPORT_MAIL_WEBMON :
             print('    Sending report by email...')

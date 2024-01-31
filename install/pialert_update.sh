@@ -148,7 +148,7 @@ clean_files() {
 # ------------------------------------------------------------------------------
 check_packages() {
   sudo apt-get update 2>&1 >>"$LOG"
-  packages=("apt-utils" "sqlite3" "dnsutils" "net-tools" "wakeonlan" "avahi-utils" "php-curl" "php-xml" "python3-requests" "python3-cryptography" "libwww-perl" "mmdb-bin" "libtext-csv-perl" "aria2")
+  packages=("apt-utils" "sqlite3" "dnsutils" "net-tools" "wakeonlan" "nbtscan" "avahi-utils" "php-curl" "php-xml" "python3-requests" "python3-cryptography" "libwww-perl" "mmdb-bin" "libtext-csv-perl" "aria2")
   print_msg "- Checking packages..."
   missing_packages=()
   for package in "${packages[@]}"; do
