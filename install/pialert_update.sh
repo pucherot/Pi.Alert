@@ -148,7 +148,7 @@ clean_files() {
 # ------------------------------------------------------------------------------
 check_packages() {
   sudo apt-get update 2>&1 >>"$LOG"
-  packages=("apt-utils" "sqlite3" "dnsutils" "net-tools" "wakeonlan" "php-curl" "php-xml" "python3-requests" "python3-cryptography" "libwww-perl" "mmdb-bin" "libtext-csv-perl" "aria2")
+  packages=("apt-utils" "sqlite3" "dnsutils" "net-tools" "wakeonlan" "nbtscan" "avahi-utils" "php-curl" "php-xml" "python3-requests" "python3-cryptography" "libwww-perl" "mmdb-bin" "libtext-csv-perl" "aria2")
   print_msg "- Checking packages..."
   missing_packages=()
   for package in "${packages[@]}"; do
@@ -257,6 +257,16 @@ if ! grep -Fq "# Automatic Speedtest" "$PIALERT_HOME/config/pialert.conf" ; then
 # ----------------------
 SPEEDTEST_TASK_ACTIVE = False
 SPEEDTEST_TASK_HOUR   = []
+EOF
+fi
+
+# 2024-01-28
+if ! grep -Fq "PUSHOVER_PRIO" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+PUSHOVER_PRIO = 0
+PUSHSAFER_PRIO = 0
+NETWORK_DNS_SERVER = 'localhost'
 EOF
 fi
 

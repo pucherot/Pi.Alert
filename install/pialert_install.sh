@@ -352,6 +352,9 @@ install_arpscan() {
   print_msg "- Installing dnsutils & net-tools..."
   sudo apt-get install dnsutils net-tools libwww-perl libtext-csv-perl -y   2>&1 >> "$LOG"
 
+  print_msg "- Installation of tools for hostname detection..."
+  sudo apt-get install avahi-utils nbtscan -y                               2>&1 >> "$LOG"
+
   print_msg "- Installing nmap, zip, aria2 and wakeonlan"
   sudo apt-get install nmap zip wakeonlan aria2 -y                          2>&1 >> "$LOG"
 }
