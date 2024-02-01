@@ -717,9 +717,7 @@ function initializeDatatable () {
         	} else {
             $(td).html ('<b><a href="deviceDetails.php?mac='+ rowData[11] +'" class="">'+ cellData +'</a></b>');
         	}
-
       } },
-
       // Favorite
       {targets: [4],
         'createdCell': function (td, cellData, rowData, row, col) {
@@ -729,13 +727,11 @@ function initializeDatatable () {
             $(td).html ('');
           }
       } },
-
       // Dates
       {targets: [7, 8],
         'createdCell': function (td, cellData, rowData, row, col) {
           $(td).html (translateHTMLcodes (cellData));
       } },
-
       // Random MAC
       {targets: [10],
         'createdCell': function (td, cellData, rowData, row, col) {
@@ -745,13 +741,11 @@ function initializeDatatable () {
             $(td).html ('');
           }
       } },
-
       //MAC-Address
       {targets: [11],
         'createdCell': function (td, cellData, rowData, row, col) {
             $(td).html (rowData[11]);
       } },
-
       // Status color
       {targets: [12],
         'createdCell': function (td, cellData, rowData, row, col) {
@@ -763,18 +757,23 @@ function initializeDatatable () {
             case 'Archived':  color='gray text-white';  break;
             default:          color='aqua';             break;
           };
-
           $(td).html ('<a href="deviceDetails.php?mac='+ rowData[11] +'" class="badge bg-'+ color +'">'+ rowData[12].replace('-', '') +'</a>');
       } },
+      // WakeonLAN
+      {targets: -1, // last column
+         data : null,
+         orderable: false,
+         "render": function (data, type, row, meta) {
+         	 // Deactivation of WoL buttons for devices where it probably makes no sense
+         	 var excludeValues = ["Switch", "Router", "Smartphone", "Tablet", "Powerline"];
 
-      {
-          targets: -1, // letzte Spalte
-          data : null,
-          "render": function (data, type, row, meta) {
+         	 if (excludeValues.indexOf(row[3]) === -1 && row[11] !== "Internet") {
               return '<a href="#" onclick="askwakeonlan(\'' + row[11] + '\', \'' + row[9] + '\')"><i class="fa-solid fa-power-off text-danger"></i></a>';
-          }
+           } else {
+           	return '';
+           }
+         }
       },
-
     ],
 
     // Processing
