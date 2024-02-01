@@ -152,7 +152,7 @@ function read_DevListCol() {
 		$get = file_get_contents($file, true);
 		$output_array = json_decode($get, true);
 	} else {
-		$output_array = array('ConnectionType' => 0, 'Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'MACAddress' => 0, 'Location' => 0);
+		$output_array = array('ConnectionType' => 0, 'Favorites' => 1, 'Group' => 1, 'Owner' => 1, 'Type' => 1, 'FirstSession' => 1, 'LastSession' => 1, 'LastIP' => 1, 'MACType' => 1, 'MACAddress' => 0, 'Location' => 0, 'WakeOnLAN' => 0);
 	}
 	return $output_array;
 }
@@ -170,6 +170,7 @@ function set_column_checkboxes($table_config) {
 	if ($table_config['MACType'] == 1) {$col_checkbox['MACType'] = "checked";}
 	if ($table_config['MACAddress'] == 1) {$col_checkbox['MACAddress'] = "checked";}
 	if ($table_config['Location'] == 1) {$col_checkbox['Location'] = "checked";}
+	if ($table_config['WakeOnLAN'] == 1) {$col_checkbox['WakeOnLAN'] = "checked";}
 	return $col_checkbox;
 }
 
@@ -667,6 +668,10 @@ if (strtolower($_SESSION['WebProtection']) != 'true') {
                               <input class="checkbox blue" id="chkMACaddress" type="checkbox" <?=$col_checkbox['MACAddress'];?>>
                               <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_MAC'];?>-Address</label>
                             </div>
+                            <div class="table_settings_col_box" style="">
+                              <input class="checkbox blue" id="chkWakeOnLAN" type="checkbox" <?=$col_checkbox['WakeOnLAN'];?>>
+                              <label class="control-label" style="margin-left: 5px"><?=$pia_lang['Device_TableHead_WakeOnLAN'];?> (WakeOnLAN)</label>
+                            </div>
                             <br>
                             <button type="button" class="btn btn-default" style="margin-top:10px; width:160px;" id="btnSaveDeviceListCol" onclick="askDeviceListCol()" ><?=$pia_lang['Gen_Save'];?></button>
                         </div>
@@ -1109,6 +1114,7 @@ function setDeviceListCol() {
     + '&mactype='        + ($('#chkMACtype')[0].checked * 1)
     + '&macaddress='     + ($('#chkMACaddress')[0].checked * 1)
     + '&location='       + ($('#chkLocation')[0].checked * 1)
+    + '&wakeonlan='      + ($('#chkWakeOnLAN')[0].checked * 1)
     , function(msg) {
     showMessage (msg);
   });

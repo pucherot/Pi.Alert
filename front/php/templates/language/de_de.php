@@ -89,6 +89,7 @@ $pia_lang['Device_TableHead_LastIPOrder'] = 'Last IP Order';
 $pia_lang['Device_TableHead_Rowid'] = 'Zeilennummer';
 $pia_lang['Device_TableHead_Status'] = 'Status';
 $pia_lang['Device_TableHead_ConnectionType'] = 'Verbindungstyp';
+$pia_lang['Device_TableHead_WakeOnLAN'] = 'WoL';
 $pia_lang['Device_Searchbox'] = 'Suche';
 $pia_lang['Device_Tablelenght'] = 'Zeige _MENU_ Einträge';
 $pia_lang['Device_Tablelenght_all'] = 'Alle';

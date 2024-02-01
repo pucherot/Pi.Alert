@@ -1727,7 +1727,7 @@ function setTextValue (textElement, textValue) {
   activateSaveRestoreData ();
 }
 
-// Restore Configfile
+// WakeOnLAN
 function askwakeonlan() {
   // Ask
   showModalWarning('<?=$pia_lang['DevDetail_Tools_WOL_noti'];?>', '<?=$pia_lang['DevDetail_Tools_WOL_noti_text'];?>',
