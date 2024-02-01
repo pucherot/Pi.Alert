@@ -86,7 +86,6 @@ function GetServerTime() {
 	echo date("Y,n,j,G,i,s");
 }
 
-
 // Read logfiles --------------------------------------------------------------
 function GetLogfiles() {
 	global $pia_lang;
@@ -149,7 +148,15 @@ function SaveConfigFile() {
 	}
 	if ($configArray['PUSHSAFER_PRIO'] == "") {$configArray['PUSHSAFER_PRIO'] = 0;}
 	if ($configArray['PUSHOVER_PRIO'] == "") {$configArray['PUSHOVER_PRIO'] = 0;}
-	if ($configArray['NETWORK_DNS_SERVER'] == "") {$configArray['NETWORK_DNS_SERVER'] = "localhost";}
+	
+	$configArray['NETWORK_DNS_SERVER'] = str_replace(" ", "", $configArray['NETWORK_DNS_SERVER']);
+	if ($configArray['NETWORK_DNS_SERVER'] == "") {
+		$configArray['NETWORK_DNS_SERVER'] = "localhost";
+	} else {
+		if (filter_var(gethostbyname($configArray['NETWORK_DNS_SERVER']), FILTER_VALIDATE_IP)) {
+		    $configArray['NETWORK_DNS_SERVER'] = $configArray['NETWORK_DNS_SERVER'];
+		} else {$configArray['NETWORK_DNS_SERVER'] = "localhost";}
+	}
 
 
 	$config_template = "# General Settings
