@@ -65,10 +65,7 @@ def main ():
     print ('\nPi.Alert ' + VERSION +' ('+ VERSION_DATE +')')
     print ('---------------------------------------------------------')
     print("Current User: %s \n" % get_username())
-    
-    # If user is a sudoer, you can uncomment the line below to set the correct db permission every scan
-    # set_pia_file_permissions()
-    
+
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
 
@@ -101,10 +98,6 @@ def main ():
 #===============================================================================
 def get_username():
     return pwd.getpwuid(os.getuid())[0]
-
-# ------------------------------------------------------------------------------
-def set_pia_file_permissions():
-  os.system(f"sudo chown {get_username()}:www-data {PIALERT_DB_FILE}")
 
 # ------------------------------------------------------------------------------
 def set_pia_reports_permissions():
