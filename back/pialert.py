@@ -24,6 +24,7 @@ from base64 import b64encode
 from urllib.parse import urlparse
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
+from pathlib import Path
 import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl, json
 
 #===============================================================================
@@ -114,7 +115,20 @@ def get_username():
     return pwd.getpwuid(os.getuid())[0]
 
 # ------------------------------------------------------------------------------
-def set_pia_reports_permissions():
+def set_db_file_permissions():
+    print(f"\nPrepare Scan...")
+    print(f"    Force file permissions on Pi.Alert db...")
+    # Set permissions
+    os.system("sudo chown " + get_username() + ":www-data " + PIALERT_DB_FILE)
+    os.system("sudo chmod 775 " + PIALERT_DB_FILE)
+    # Get permissions
+    fileinfo = Path(PIALERT_DB_FILE)
+    file_stat = fileinfo.stat()
+    print(f"        DB permission mask: {oct(file_stat.st_mode)[-3:]}")
+    print(f"        DB Owner and Group: {fileinfo.owner()}:{fileinfo.group()}")
+
+# ------------------------------------------------------------------------------
+def set_reports_file_permissions():
     os.system("sudo chown -R " + get_username() + ":www-data " + REPORTPATH_WEBGUI)
     os.system("sudo chmod -R 775 " + REPORTPATH_WEBGUI)
 
@@ -453,6 +467,9 @@ def scan_network():
     # Header
     print('Scan Devices')
     print('    Timestamp:', startTime )
+
+    # correct db permission every scan (user must/should be sudoer)
+    set_db_file_permissions()
 
     # Query ScanCycle properties
     print_log ('Query ScanCycle confinguration...')
@@ -1566,7 +1583,7 @@ def rogue_dhcp_detection():
     sql.execute("DELETE FROM Nmap_DHCP_Server")
     sql_connection.commit()
 
-    # Execute 10 probes and insert in list
+    # Execute 15 probes and insert in list
     dhcp_probes = 15
     dhcp_server_list = []
     dhcp_server_list.append(strftime("%Y-%m-%d %H:%M:%S"))
@@ -2607,7 +2624,7 @@ def send_webgui (_Text):
         f = open(REPORTPATH_WEBGUI + _webgui_filename, "w")
         f.write(_webgui_Text)
         f.close()
-    set_pia_reports_permissions()
+    set_reports_file_permissions()
 
 #===============================================================================
 # Sending Notofications
