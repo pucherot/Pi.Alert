@@ -176,12 +176,17 @@ block is not necessary
   sudo apt-get install dnsutils net-tools libwww-perl libtext-csv-perl -y
   ```
 
-4.3 - Installing nmap, zip and wakeonlan
+4.3 - Installation of tools for hostname detection
+  ```
+  sudo apt-get install avahi-utils nbtscan -y
+  ```
+
+4.4 - Installing nmap, zip and wakeonlan
   ```
   sudo apt-get install nmap zip wakeonlan aria2 -y
   ```
 
-4.4 - Test Python
+4.5 - Test Python
 
   New versions of 'Raspberry Pi OS' includes Python. You can check that 
   Python is installed with the command:
@@ -201,18 +206,18 @@ block is not necessary
   sudo apt-get install python3-pip python3-cryptography python3-requests
   ```
 
-4.5 - If Python 3 is not installed in your system, you can install it with this
+4.6 - If Python 3 is not installed in your system, you can install it with this
   command:
   ```
   sudo apt-get install python3 python3-pip python3-cryptography python3-requests
   ```
 
-4.6 - Install additional packages
+4.7 - Install additional packages
   ```
   pip3 install mac-vendor-lookup
   pip3 install fritzconnection
   pip3 install routeros_api
-  pip3 install unifi
+  pip3 install pyunifi
   ```
 
 ### Pi.Alert
