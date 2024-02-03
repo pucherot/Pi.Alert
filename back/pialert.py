@@ -55,9 +55,9 @@ def main():
     global sql
 
     # Header
-    print('\nPi.Alert ' + VERSION +' ('+ VERSION_DATE +')')
+    print('\nPi.Alert v'+ VERSION_DATE)
     print('---------------------------------------------------------')
-    print("Current User: %s \n" % get_username())
+    print(f"Executing user: {get_username()}")
 
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()

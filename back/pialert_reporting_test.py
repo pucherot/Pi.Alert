@@ -62,12 +62,9 @@ def main ():
     global log_timestamp
 
     # Header
-    print ('\nPi.Alert ' + VERSION +' ('+ VERSION_DATE +')')
-    print ('---------------------------------------------------------')
-    print("Current User: %s \n" % get_username())
-    
-    # If user is a sudoer, you can uncomment the line below to set the correct db permission every scan
-    # set_pia_file_permissions()
+    print('\nPi.Alert v'+ VERSION_DATE)
+    print('---------------------------------------------------------')
+    print(f"Executing user: {get_username()}")
     
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
@@ -103,11 +100,7 @@ def get_username():
     return pwd.getpwuid(os.getuid())[0]
 
 # ------------------------------------------------------------------------------
-def set_pia_file_permissions():
-  os.system(f"sudo chown {get_username()}:www-data {PIALERT_DB_FILE}")
-
-# ------------------------------------------------------------------------------
-def set_pia_reports_permissions():
+def set_reports_file_permissions():
   os.system(f"sudo chown -R {get_username()}:www-data {REPORTPATH_WEBGUI}")
   os.system(f"sudo chmod -R 775 {REPORTPATH_WEBGUI}")
 
@@ -228,13 +221,11 @@ def send_telegram_test(_notiMessage):
 
 #-------------------------------------------------------------------------------
 def send_webgui_test(_notiMessage):
-  # Remove one linebrake between "Server" and the headline of the event type
-  # extract event type headline to use it in the notification headline
   _webgui_filename = time.strftime("%Y%m%d-%H%M%S") + "_Test.txt"
   if (os.path.exists(REPORTPATH_WEBGUI + _webgui_filename) == False):
     with open(REPORTPATH_WEBGUI + _webgui_filename, "w") as f:
       f.write(_notiMessage)
-  set_pia_reports_permissions()
+  set_reports_file_permissions()
 
 #-------------------------------------------------------------------------------
 def remove_tag(pText, pTag):
