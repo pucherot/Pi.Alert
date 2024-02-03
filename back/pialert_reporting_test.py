@@ -56,7 +56,7 @@ else:
 #===============================================================================
 # MAIN
 #===============================================================================
-def main ():
+def main():
     global startTime
     global cycle
     global log_timestamp
@@ -64,7 +64,7 @@ def main ():
     # Header
     print('\nPi.Alert v'+ VERSION_DATE)
     print('---------------------------------------------------------')
-    print(f"Executing user: {get_username()}")
+    print(f"Executing user: {get_username()}\n")
     
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
@@ -107,7 +107,7 @@ def set_reports_file_permissions():
 #===============================================================================
 # Sending Notofications
 #===============================================================================
-def sending_notifications_test (_Mode):
+def sending_notifications_test(_Mode):
     if _Mode == 'Test' :
         notiMessage = "Test-Notification"
     elif _Mode == 'noti_Timerstart' :
@@ -168,7 +168,7 @@ def send_ntfy_test(_notiMessage):
   requests.post(f"{NTFY_HOST}/{NTFY_TOPIC}", data=_notiMessage, headers=headers)
 
 #-------------------------------------------------------------------------------
-def send_pushsafer_test (_notiMessage):
+def send_pushsafer_test(_notiMessage):
     try:
         notification_target = PUSHSAFER_DEVICE
     except NameError:
@@ -196,7 +196,7 @@ def send_pushsafer_test (_notiMessage):
     requests.post(url, data=post_fields)
 
 #-------------------------------------------------------------------------------
-def send_pushover_test (_notiMessage):
+def send_pushover_test(_notiMessage):
     try:
         result = PUSHOVER_PRIO
     except NameError:
@@ -257,7 +257,7 @@ def append_line_to_file(pPath, pText):
   file.close() 
 
 #-------------------------------------------------------------------------------
-def send_email (pText, pHTML):
+def send_email(pText, pHTML):
     # Compose email
     msg = MIMEMultipart('alternative')
     msg['Subject'] = 'Pi.Alert Report'
@@ -285,7 +285,7 @@ def SafeParseGlobalBool(boolVariable):
 #===============================================================================
 # UTIL
 #===============================================================================
-def print_log (pText):
+def print_log(pText):
     global log_timestamp
 
     # Check LOG actived

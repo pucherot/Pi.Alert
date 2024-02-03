@@ -57,7 +57,7 @@ def main():
     # Header
     print('\nPi.Alert v'+ VERSION_DATE)
     print('---------------------------------------------------------')
-    print(f"Executing user: {get_username()}")
+    print(f"Executing user: {get_username()}\n")
 
     # Initialize global variables
     log_timestamp  = datetime.datetime.now()
