@@ -76,6 +76,10 @@ $Speedtest_Graph_Up = $speedtest_graph_array[3];
 <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
+    <div id="sticky-back-button" class="navbar navbar-default navbar-fixed-bottom" style="background-color: #000;">
+      <a class="btn btn-lg btn-default btn-block" href="./devices.php" role="button"><?=$pia_lang['Device_Table_nav_prev'];?></a>
+    </div>
+
 <!-- top small box  ------------------------------------------------------- -->
       <div class="row">
 

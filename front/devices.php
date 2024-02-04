@@ -765,10 +765,10 @@ function initializeDatatable () {
          orderable: false,
          "render": function (data, type, row, meta) {
          	 // Deactivation of WoL buttons for devices where it probably makes no sense
-         	 var excludeValues = ["Switch", "Router", "Smartphone", "Tablet", "Powerline"];
+         	 var includeValues = ["Mini PC", "Server", "Laptop", "NAS", "PC"];
 
-         	 if (excludeValues.indexOf(row[3]) === -1 && row[11] !== "Internet") {
-              return '<a href="#" onclick="askwakeonlan(\'' + row[11] + '\', \'' + row[9] + '\')"><i class="fa-solid fa-power-off text-danger"></i></a>';
+         	 if (includeValues.indexOf(row[3]) !== -1 && row[11] !== "Internet") {
+              return '<a href="#" onclick="askwakeonlan(\'' + row[11] + '\', \'' + row[9] + '\')"><i class="fa-solid fa-power-off text-red"></i></a>';
            } else {
            	return '';
            }

@@ -283,6 +283,10 @@ function get_service_statistic($service) {
 <!-- Main content ---------------------------------------------------------- -->
     <section class="content">
 
+    <div id="sticky-back-button" class="navbar navbar-default navbar-fixed-bottom" style="background-color: #000;">
+      <a class="btn btn-lg btn-default btn-block" href="./services.php" role="button"><?=$pia_lang['Device_Table_nav_prev'];?></a>
+    </div>
+
 <!-- top small boxes -->
       <div class="row">
 

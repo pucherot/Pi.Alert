@@ -499,3 +499,11 @@ body.modal-open {
   color: #fff;
   margin-right: 5px;
 }
+
+@media (min-width: 768px) {
+    #sticky-back-button{
+        display: none;
+        visibility: hidden;
+    }
+}
+
