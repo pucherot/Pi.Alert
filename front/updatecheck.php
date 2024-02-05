@@ -38,6 +38,51 @@ require 'php/server/journal.php';
 
         <div id="updatecheck_result"></div>
     	<div style="width: 100%; height: 20px;"></div>
+
+<?php
+if (file_exists("auto_Update.info")) {
+    $content = file_get_contents("auto_Update.info");
+    $content_array = explode("\n", $content);
+    $content_array = array_filter($content_array);
+    echo '<div class="box" id="auto_update_releasenotes">
+        <div class="box-body">
+            <h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Auto_Updatecheck_RN'] . '</h4><div>';
+    // Transform release notes
+        foreach ($content_array as $row) {
+            $row = str_replace("BREAKING CHANGES", "<span class=\"text-red\">BREAKING CHANGES</span>", $row);
+            if (stristr($row, "Update Notes: ")) {
+                echo '<span style="font-size: 16px; font-weight: bold; text-decoration: underline;">' . $row . '</span><br>';
+            } elseif (stristr($row, "New:")) {
+                echo '<br><span style="font-size: 16px; font-weight: bold;">' . $row . '</span><br>';
+            } elseif (stristr($row, "Fixed:")) {
+                echo '<br><span style="font-size: 16px; font-weight: bold;">' . $row . '</span><br>';
+            } elseif (stristr($row, "Updated:")) {
+                echo '<br><span style="font-size: 16px; font-weight: bold;">' . $row . '</span><br>';
+            } elseif (stristr($row, "Changed:")) {
+                echo '<br><span style="font-size: 16px; font-weight: bold;">' . $row . '</span><br>';
+            } elseif (stristr($row, "Note:")) {
+                echo '<br><span style="font-size: 16px; font-weight: bold;">' . $row . '</span><br>';
+            } elseif (stristr($row, "Removed:")) {
+                echo '<br><span style="font-size: 16px; font-weight: bold;">' . $row . '</span><br>';
+            } else {
+                echo '<div style="display: list-item; margin-left : 2em;">' . str_replace('* ', '', $row) . '</div>';
+            }
+        }
+        echo '<br><br>
+                <lable for="bashupdatecommand" class="text-red"><i>Update command:</i></lable>
+                <input id="bashupdatecommand" readonly value="bash -c &quot;$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)&quot;" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
+              <br><br>
+            </div>
+        <div class="box-footer">
+            <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
+        </div>
+    </div>';
+}
+
+
+?>
+
+
     </section>
 
 </div>
@@ -46,6 +91,7 @@ require 'php/server/journal.php';
 function check_github_for_updates() {
     $("#updatecheck_result").empty();
     $("#rewwejwejpjo").hide();
+    $("#auto_update_releasenotes").hide();
     $.ajaxSetup({ cache: false });
     $.ajax({
         method: "POST",

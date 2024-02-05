@@ -615,6 +615,7 @@ $pia_lang['Updatecheck_new'] = 'Latest Pi.Alert Version on Github';
 $pia_lang['GeoLiteDB_Title'] = 'GeoLite2 DB Check';
 $pia_lang['GeoLiteDB_cur'] = 'GeoLite2 DB loaded on';
 $pia_lang['GeoLiteDB_new'] = 'Latest GeoLite2 DB on Github';
+$pia_lang['Auto_Updatecheck_RN'] = 'Automatic Update Check';
 $pia_lang['Updatecheck_RN'] = 'Pi.Alert Update Notes';
 $pia_lang['Updatecheck_RN2'] = 'Pi.Alert Update Check';
 $pia_lang['Updatecheck_U2D'] = 'You are already using the latest version';

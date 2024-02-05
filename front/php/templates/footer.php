@@ -71,6 +71,16 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       } );
     }
 
+    function GetUpdateStatus() {
+      // get totals and put in boxes
+      $.get('php/server/files.php?action=GetUpdateStatus', function(data) {
+        var UpdateCheckbadge = JSON.parse(data);
+
+        $('#header_updatecheck_notification').html(UpdateCheckbadge[0].toLocaleString());
+      } );
+    }
+
+
     function getReportTotalsBadge() {
       // get totals and put in boxes
       $.get('php/server/files.php?action=getReportTotals', function(data) {
@@ -131,6 +141,7 @@ echo '' . $conf_data['VERSION'] . '&nbsp;&nbsp;<small>(' . $conf_data['VERSION_D
       getICMPTotalsBadge();
       getServicesTotalsBadge();
       GetPiAlertServerTime();
+      GetUpdateStatus();
     }
 
     // Init functions

@@ -247,7 +247,11 @@ format_temperature($celsius, $temperaturelimit);
           <a href="help_faq.php"><i class="fa fa-question"></i> <span><?=$pia_lang['Navigation_HelpFAQ'];?></span></a>
         </li>
         <li class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('updatecheck.php'))) {echo 'active';}?>">
-          <a href="updatecheck.php"><i class="fa fa-rotate-right"></i> <span> <?=$pia_lang['Navigation_UpdateCheck'];?></span></a>
+          <a href="updatecheck.php">
+            <i class="fa fa-rotate-right"></i>
+            <span> <?=$pia_lang['Navigation_UpdateCheck'];?></span>
+            <small class="label pull-right bg-red" id="header_updatecheck_notification"></small>
+          </a>
         </li>
 
       </ul>

@@ -78,10 +78,24 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 		break;
 	case 'GetServerTime':GetServerTime();
 		break;
+	case 'GetUpdateStatus':GetUpdateStatus();
+		break;
 	default:logServerConsole('Action: ' . $action);
 		break;
 	}
 }
+
+function GetUpdateStatus() {
+	$updatenotification = '../../auto_Update.info';
+	if (file_exists($updatenotification)) {
+		$answer[0] = "!";
+		echo (json_encode($answer));
+	} else {
+		$answer[0] = "";
+		echo (json_encode($answer));
+	}
+}
+
 function GetServerTime() {
 	echo date("Y,n,j,G,i,s");
 }

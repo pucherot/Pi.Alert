@@ -237,14 +237,15 @@ def check_internet_IP():
 
     # Run automated UpdateCheck
     if AUTO_UPDATE_CHECK :
-        if startTime.hour in [9, 14, 20] and startTime.minute == 30:
+        # if startTime.hour in [9, 14, 20] and startTime.minute == 30:
+        if startTime.hour in [9, 15, 21] and startTime.minute == 0:
             checkNewVersion()
 
     return 0
 
 # ------------------------------------------------------------------------------
 def NewVersion_FrontendNotification(newVersion,update_notes):
-    file_path = PIALERT_PATH + "/front/auto_Update.txt"
+    file_path = PIALERT_PATH + "/front/auto_Update.info"
     if newVersion == True:
         if not os.path.exists(file_path):
             # with open(file_path, 'w') as file:

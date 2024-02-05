@@ -150,6 +150,7 @@ if ($pialert_cur_version != $pialert_new_version) {
 		<h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Updatecheck_RN'] . '</h4><div>';
 // Transform release notes
 	foreach ($updatenotes_array as $row) {
+		$row = str_replace("BREAKING CHANGES", "<span class=\"text-red\">BREAKING CHANGES</span>", $row);
 		if (stristr($row, "Update Notes: ")) {
 			echo '<span style="font-size: 16px; font-weight: bold; text-decoration: underline;">' . $row . '</span><br>';
 		} elseif (stristr($row, "New:")) {
