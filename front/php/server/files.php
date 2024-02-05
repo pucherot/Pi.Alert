@@ -170,6 +170,7 @@ PIALERT_APIKEY         = '" . $configArray['PIALERT_APIKEY'] . "'
 PIALERT_WEB_PROTECTION = " . convert_bool($configArray['PIALERT_WEB_PROTECTION']) . "
 PIALERT_WEB_PASSWORD   = '" . $configArray['PIALERT_WEB_PASSWORD'] . "'
 NETWORK_DNS_SERVER     = '" . $configArray['NETWORK_DNS_SERVER'] . "'
+AUTO_UPDATE_CHECK      = " . convert_bool($configArray['AUTO_UPDATE_CHECK']) . "
 
 # Other Modules
 # ----------------------

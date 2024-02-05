@@ -76,8 +76,6 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 				' . $pia_lang['GeoLiteDB_new'] . ': 	<span class="text-red">		' . $geolite_new_version . '</span>
 				</p>
 
-
-
           <div class="row" style="margin-top: 30px;">
             <style>
                 .downloader {

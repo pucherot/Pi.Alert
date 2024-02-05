@@ -25,6 +25,7 @@ from urllib.parse import urlparse
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
 from pathlib import Path
+from datetime import datetime
 import sys, subprocess, os, re, datetime, sqlite3, socket, io, smtplib, csv, requests, time, pwd, glob, ipaddress, ssl, json
 
 #===============================================================================
@@ -233,7 +234,61 @@ def check_internet_IP():
             print('\nSkipping Speedtest... Not installed!')
     else :
         print('\nSkipping Speedtest...')
+
+    # Run automated UpdateCheck
+    if AUTO_UPDATE_CHECK :
+        if startTime.hour in [1, 13] and startTime.minute == 0:
+            checkNewVersion()
+
     return 0
+
+# ------------------------------------------------------------------------------
+def NewVersion_FrontendNotification(newVersion,update_notes):
+    file_path = PIALERT_PATH + "/front/auto_Update.txt"
+    if newVersion == True:
+        if not os.path.exists(file_path):
+            with open(file_path, 'w') as file:
+                file.write(update_notes)
+                print("    Create Frontend Notification.")
+    else:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            print("    Remove Frontend Notification.")
+
+# ------------------------------------------------------------------------------
+def checkNewVersion():
+    newVersion = False
+    #VERSION_DATE = "2024-01-21"
+    currentversion = VERSION_DATE
+
+    print(f"\nAuto Update-Check...")
+    print(f"    Current Version: {currentversion}")
+
+    UPDATE_CHECK_URL = "https://api.github.com/repos/leiweibau/Pi.Alert/commits?path=tar%2Fpialert_latest.tar&page=1&per_page=1"
+    data = ""
+    update_notes = ""
+
+    try:
+        url = requests.get(UPDATE_CHECK_URL)
+        text = url.text
+        data = json.loads(text)
+    except requests.exceptions.ConnectionError as e:
+        print("    ERROR: Couldn't check for new release.")
+        data = ""
+
+    if data != "" and len(data) > 0 and isinstance(data, list) and "commit" in data[0]:
+        dateTimeStr = data[0]['commit']['author']['date']
+        update_notes = data[0]['commit']['message']
+        date_obj = datetime.datetime.strptime(dateTimeStr, '%Y-%m-%dT%H:%M:%SZ')
+        latestversion = date_obj.strftime('%Y-%m-%d')
+
+        if latestversion > currentversion:
+            print(f"    New version {latestversion} is available!")
+            newVersion = True
+            NewVersion_FrontendNotification(newVersion,update_notes)
+        else:
+            print("    Running the latest version.")
+            NewVersion_FrontendNotification(newVersion,update_notes)
 
 #-------------------------------------------------------------------------------
 def run_speedtest_task():
@@ -241,10 +296,8 @@ def run_speedtest_task():
     command = ["sudo", PIALERT_BACK_PATH + "/speedtest/speedtest", "-p", "no", "-f", "json"]
     if len(SPEEDTEST_TASK_HOUR) != 0:
         openDB()
-        speedtest_actual_hour = startTime.hour
-        speedtest_actual_min = startTime.minute
         for value in SPEEDTEST_TASK_HOUR:
-            if value == speedtest_actual_hour and speedtest_actual_min == 0:
+            if value == startTime.hour and startTime.minute == 0:
                 try:
                     output = subprocess.check_output(command, text=True)
                     # Parse the JSON output
@@ -1998,7 +2051,7 @@ def service_monitoring():
     print("\nStart Services Monitoring...")
     print("    Prepare Logfile...")
     with open(PIALERT_WEBSERVICES_LOG, 'w') as monitor_logfile:
-        monitor_logfile.write("\nPi.Alert " + VERSION + " (" + VERSION_DATE + "):\n---------------------------------------------------------\n")
+        monitor_logfile.write("\nPi.Alert v" + VERSION_DATE + ":\n---------------------------------------------------------\n")
         monitor_logfile.write("Current User: %s \n\n" % get_username())
         monitor_logfile.write("Monitor Web-Services\n")
         monitor_logfile.write("    Timestamp: " + strftime("%Y-%m-%d %H:%M:%S") + "\n")
