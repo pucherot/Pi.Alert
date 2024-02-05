@@ -237,7 +237,7 @@ def check_internet_IP():
 
     # Run automated UpdateCheck
     if AUTO_UPDATE_CHECK :
-        if startTime.hour in [1, 13] and startTime.minute == 0:
+        if startTime.hour in [9, 14, 20] and startTime.minute == 30:
             checkNewVersion()
 
     return 0
@@ -247,9 +247,11 @@ def NewVersion_FrontendNotification(newVersion,update_notes):
     file_path = PIALERT_PATH + "/front/auto_Update.txt"
     if newVersion == True:
         if not os.path.exists(file_path):
-            with open(file_path, 'w') as file:
-                file.write(update_notes)
-                print("    Create Frontend Notification.")
+            # with open(file_path, 'w') as file:
+            #     file.write(update_notes)
+            print("    Create Frontend Notification.")
+        with open(file_path, 'w') as file:
+            file.write(update_notes)
     else:
         if os.path.exists(file_path):
             os.remove(file_path)
@@ -293,7 +295,7 @@ def checkNewVersion():
 #-------------------------------------------------------------------------------
 def run_speedtest_task():
     # Define the command and arguments
-    command = ["sudo", PIALERT_BACK_PATH + "/speedtest/speedtest", "-p", "no", "-f", "json"]
+    command = ["sudo", PIALERT_BACK_PATH + "/speedtest/speedtest", "--accept-license", "--accept-gdpr", "-p", "no", "-f", "json"]
     if len(SPEEDTEST_TASK_HOUR) != 0:
         openDB()
         for value in SPEEDTEST_TASK_HOUR:

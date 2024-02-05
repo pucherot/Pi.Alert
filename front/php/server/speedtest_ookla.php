@@ -29,7 +29,7 @@ $DBFILE = '../../../db/pialert.db';
 OpenDB();
 
 $speedtest_binary = '../../../back/speedtest/speedtest';
-$speedtest_option = ' -p no -f json';
+$speedtest_option = ' --accept-license --accept-gdpr -p no -f json';
 $supported_arch = array('i386', 'x86_64', 'armel', 'armhf', 'aarch64');
 $mod = $_REQUEST['mod'];
 
