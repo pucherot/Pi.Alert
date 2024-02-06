@@ -22,6 +22,7 @@ $pia_lang['Gen_Save'] = 'Speichern';
 $pia_lang['Gen_Close'] = 'Schließen';
 $pia_lang['Gen_on'] = 'An';
 $pia_lang['Gen_off'] = 'Aus';
+$pia_lang['Gen_error'] = 'Fehler';
 
 //////////////////////////////////////////////////////////////////
 // Login Page
@@ -737,6 +738,7 @@ $pia_journ_lang['LogStr_0062'] = 'Kein Pi.Alert Update verfügbar';
 $pia_journ_lang['LogStr_0063'] = 'GeoLite2 DB Update verfügbar';
 $pia_journ_lang['LogStr_0064'] = 'Kein GeoLite2 DB Update verfügbar';
 $pia_journ_lang['LogStr_0065'] = 'GeoLite2 DB nicht installiert';
+$pia_journ_lang['LogStr_0066'] = 'Fehler: Ungültige Updateinformationen';
 $pia_journ_lang['LogStr_0101'] = 'Datenbank aufgeräumt und optimiert';
 $pia_journ_lang['LogStr_0210'] = 'Individuellen nmap Scan durchgeführt';
 $pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';

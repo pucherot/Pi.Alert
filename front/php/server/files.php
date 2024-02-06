@@ -88,7 +88,7 @@ if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
 function GetUpdateStatus() {
 	$updatenotification = '../../auto_Update.info';
 	if (file_exists($updatenotification)) {
-		$answer[0] = "!";
+		$answer[0] = "i";
 		echo (json_encode($answer));
 	} else {
 		$answer[0] = "";

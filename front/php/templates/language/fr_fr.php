@@ -732,6 +732,7 @@ $pia_journ_lang['LogStr_0062'] = 'Aucune mise à jour Pi.Alert disponible';
 $pia_journ_lang['LogStr_0063'] = 'Mise à jour de la base de données GeoLite2 disponible';
 $pia_journ_lang['LogStr_0064'] = 'Aucune mise à jour de la base de données GeoLite2 disponible';
 $pia_journ_lang['LogStr_0065'] = 'Base de données GeoLite2 non installée';
+$pia_journ_lang['LogStr_0066'] = 'Erreur : Informations de mise à jour invalides';
 $pia_journ_lang['LogStr_0101'] = 'Base de données nettoyée et optimisée';
 $pia_journ_lang['LogStr_0210'] = 'Exécution d&apos;un scan nmap individuel';
 $pia_journ_lang['LogStr_0251'] = 'Exécution de Wake-on-lan';

@@ -732,6 +732,7 @@ $pia_journ_lang['LogStr_0062'] = 'No Pi.Alert update available';
 $pia_journ_lang['LogStr_0063'] = 'GeoLite2 DB update available';
 $pia_journ_lang['LogStr_0064'] = 'No GeoLite2 DB update available';
 $pia_journ_lang['LogStr_0065'] = 'GeoLite2 DB not installed';
+$pia_journ_lang['LogStr_0066'] = 'Error: Invalid update information';
 $pia_journ_lang['LogStr_0101'] = 'Database cleaned and optimized';
 $pia_journ_lang['LogStr_0210'] = 'Performed individual nmap scan';
 $pia_journ_lang['LogStr_0251'] = 'Wake-on-lan executed';
