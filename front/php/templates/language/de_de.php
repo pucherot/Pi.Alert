@@ -262,6 +262,9 @@ $pia_lang['DevDetail_Tools_WOL_noti'] = 'Wake-on-LAN';
 $pia_lang['DevDetail_Tools_WOL_noti_text'] = 'Das Wake-on-LAN Kommando wird an die Broadcast Adresse gesendet. Wenn das Ziel nicht in dem Subnet/vlan von Pi.Alert ist, wird das Ziel-Gerät nicht reagieren.';
 $pia_lang['BackDevDetail_Tools_WOL_okay'] = 'Das Kommando wurde ausgeführt';
 $pia_lang['BackDevDetail_Tools_WOL_error'] = 'Das Kommando wurde nicht ausgeführt';
+$pia_lang['DevDetail_Speedtest_note_a'] = 'Der automatische Speedtest startet ';
+$pia_lang['DevDetail_Speedtest_note_b'] = ' und ';
+$pia_lang['DevDetail_Speedtest_note_c'] = ' Uhr';
 
 //////////////////////////////////////////////////////////////////
 // WebServices Details Page
