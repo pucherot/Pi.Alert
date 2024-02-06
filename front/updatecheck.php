@@ -38,15 +38,15 @@ require 'php/server/journal.php';
 
         <div id="updatecheck_result"></div>
     	<div style="width: 100%; height: 20px;"></div>
-
 <?php
 if (file_exists("auto_Update.info")) {
     $content = file_get_contents("auto_Update.info");
     $content_array = explode("\n", $content);
     $content_array = array_filter($content_array);
     echo '<div class="box" id="auto_update_releasenotes">
-        <div class="box-body">
-            <h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Auto_Updatecheck_RN'] . '</h4><div>';
+            <div class="box-body">
+                <h4 class="text-aqua" style="text-align: center;">' . $pia_lang['Auto_Updatecheck_RN'] . '</h4>
+                <div>';
     // Transform release notes
         foreach ($content_array as $row) {
             $row = str_replace("BREAKING CHANGES", "<span class=\"text-red\">BREAKING CHANGES</span>", $row);
@@ -68,25 +68,21 @@ if (file_exists("auto_Update.info")) {
                 echo '<div style="display: list-item; margin-left : 2em;">' . str_replace('* ', '', $row) . '</div>';
             }
         }
-        echo '<br><br>
+        echo '  <br><br>
                 <lable for="bashupdatecommand" class="text-red"><i>Update command:</i></lable>
                 <input id="bashupdatecommand" readonly value="bash -c &quot;$(wget -qLO - https://github.com/leiweibau/Pi.Alert/raw/main/install/pialert_update.sh)&quot;" style="width:100%; overflow-x: scroll; border: none; background: transparent; margin: 0px; padding: 0px;">
-              <br><br>
+                <br><br>
+                </div>
             </div>
-        <div class="box-footer">
-            <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
+            <div class="box-footer">
+                <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
+            </div>
         </div>
-    </div>';
+        <div style="width: 100%; height: 20px;"></div>';
 }
-
-
 ?>
-
-
     </section>
-
 </div>
-
 <script>
 function check_github_for_updates() {
     $("#updatecheck_result").empty();
@@ -105,9 +101,7 @@ function check_github_for_updates() {
         }
     })
 }
-
 </script>
-
 <?php
 require 'php/templates/footer.php';
 ?>
