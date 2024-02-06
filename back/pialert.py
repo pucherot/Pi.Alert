@@ -237,8 +237,7 @@ def check_internet_IP():
 
     # Run automated UpdateCheck
     if AUTO_UPDATE_CHECK :
-        # if startTime.hour in [9, 14, 20] and startTime.minute == 30:
-        if startTime.hour in [9, 15, 21] and startTime.minute == 0:
+        if startTime.hour in [9, 19, 21] and startTime.minute == 0:
             checkNewVersion()
 
     return 0
@@ -248,8 +247,6 @@ def NewVersion_FrontendNotification(newVersion,update_notes):
     file_path = PIALERT_PATH + "/front/auto_Update.info"
     if newVersion == True:
         if not os.path.exists(file_path):
-            # with open(file_path, 'w') as file:
-            #     file.write(update_notes)
             print("    Create Frontend Notification.")
         with open(file_path, 'w') as file:
             file.write(update_notes)
@@ -285,13 +282,17 @@ def checkNewVersion():
         date_obj = datetime.datetime.strptime(dateTimeStr, '%Y-%m-%dT%H:%M:%SZ')
         latestversion = date_obj.strftime('%Y-%m-%d')
 
+        openDB()
         if latestversion > currentversion:
             print(f"    New version {latestversion} is available!")
             newVersion = True
             NewVersion_FrontendNotification(newVersion,update_notes)
+            sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
+                           VALUES (?, 'c_060', 'cronjob', 'LogStr_0061', '', '') """, (startTime,))
         else:
             print("    Running the latest version.")
             NewVersion_FrontendNotification(newVersion,update_notes)
+        closeDB()
 
 #-------------------------------------------------------------------------------
 def run_speedtest_task():
