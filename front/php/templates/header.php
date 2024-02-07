@@ -250,7 +250,11 @@ format_temperature($celsius, $temperaturelimit);
           <a href="updatecheck.php">
             <i class="fa fa-rotate-right"></i>
             <span> <?=$pia_lang['Navigation_UpdateCheck'];?></span>
-            <small class="label pull-right bg-red" id="header_updatecheck_notification"></small>
+            <?php
+            if ($_SESSION['Auto_Update_Check']) {
+              echo '<small class="label pull-right bg-red" id="header_updatecheck_notification"></small>';
+            }
+            ?>
           </a>
         </li>
 

@@ -110,10 +110,8 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
             </div>
           </div>
 
-
 			</div>
 		  </div>';
-	// Logging
 	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0063', '', '');
 } elseif ($geolite_cur_version == "###") {
 // No DB present
@@ -124,7 +122,6 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 				<p>' . $pia_lang['GeoLiteDB_Installnotes'] . '</p>
 			</div>
 		  </div>';
-	// Logging
 	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0065', '', '');
 } else {
 // DB present an newer as github version
@@ -134,7 +131,6 @@ if (($temp_geolite_new_version > $temp_geolite_cur_version) && ($geolite_cur_ver
 				<p class="text-green" style="font-size: 16px; font-weight: bold;">' . $pia_lang['Updatecheck_U2D'] . '</p>
 			</div>
 		  </div>';
-	// Logging
 	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0064', '', '');
 }
 
@@ -161,7 +157,6 @@ if ($pialert_cur_version != $pialert_new_version && $valid_update_notes) {
 				</p>
 			</div>
 		  </div>';
-// Logging
 	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0066', '', '');
 }
 
@@ -200,7 +195,6 @@ if ($pialert_cur_version != $pialert_new_version && $valid_update_notes) {
         <a class="btn btn-default pull-left" href="https://leiweibau.net/archive/pialert/" target="_blank">Version History (leiweibau.net)</a>
     </div>
 </div>';
-// Logging
 	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0061', '', '');
 
 }
@@ -213,10 +207,8 @@ if ($pialert_cur_version == $pialert_new_version) {
 				<p class="text-green" style="font-size: 16px; font-weight: bold;">' . $pia_lang['Updatecheck_U2D'] . '</p>
 			</div>
 		  </div>';
-// Logging
 	pialert_logging('a_060', $_SERVER['REMOTE_ADDR'], 'LogStr_0062', '', '');
 }
-
 echo '</div>';
 echo '</div>';
 
