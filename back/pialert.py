@@ -237,7 +237,7 @@ def check_internet_IP():
 
     # Run automated UpdateCheck
     if AUTO_UPDATE_CHECK :
-        if startTime.hour in [9, 19, 21] and startTime.minute == 0:
+        if startTime.hour in [9, 15, 21] and startTime.minute == 0:
             checkNewVersion()
 
     return 0
@@ -248,6 +248,8 @@ def NewVersion_FrontendNotification(newVersion,update_notes):
     if newVersion == True:
         if not os.path.exists(file_path):
             print("    Create Frontend Notification.")
+        else:
+            print("    Update Frontend Notification.")    
         with open(file_path, 'w') as file:
             file.write(update_notes)
     else:
@@ -272,17 +274,17 @@ def checkNewVersion():
         url = requests.get(UPDATE_CHECK_URL)
         text = url.text
         data = json.loads(text)
-    except requests.exceptions.ConnectionError as e:
+    except (requests.exceptions.ConnectionError, json.decoder.JSONDecodeError) as e:
         print("    ERROR: Couldn't check for new release.")
         data = ""
 
+    openDB()
     if data != "" and len(data) > 0 and isinstance(data, list) and "commit" in data[0]:
         dateTimeStr = data[0]['commit']['author']['date']
         update_notes = data[0]['commit']['message']
         date_obj = datetime.datetime.strptime(dateTimeStr, '%Y-%m-%dT%H:%M:%SZ')
         latestversion = date_obj.strftime('%Y-%m-%d')
 
-        openDB()
         if latestversion > currentversion:
             print(f"    New version {latestversion} is available!")
             newVersion = True
@@ -292,7 +294,13 @@ def checkNewVersion():
         else:
             print("    Running the latest version.")
             NewVersion_FrontendNotification(newVersion,update_notes)
-        closeDB()
+            sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
+                           VALUES (?, 'c_060', 'cronjob', 'LogStr_0067', '', '') """, (startTime,))
+    else:
+        NewVersion_FrontendNotification(newVersion,update_notes)
+        sql.execute ("""INSERT INTO pialert_journal (Journal_DateTime, LogClass, Trigger, LogString, Hash, Additional_Info)
+               VALUES (?, 'c_060', 'cronjob', 'LogStr_0066', '', '') """, (startTime,))
+    closeDB()
 
 #-------------------------------------------------------------------------------
 def run_speedtest_task():

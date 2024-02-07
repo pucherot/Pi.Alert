@@ -688,6 +688,7 @@ $pia_journ_lang['b_032'] = $pia_journ_lang['a_032'];
 // cronjob
 $pia_journ_lang['c_002'] = $pia_journ_lang['a_002'];
 $pia_journ_lang['c_010'] = $pia_journ_lang['a_010'];
+$pia_journ_lang['c_060'] = $pia_journ_lang['a_060'];
 //LogStrings
 $pia_journ_lang['LogStr_0001'] = 'Eintrag hinzugefügt';
 $pia_journ_lang['LogStr_0002'] = 'Eintrag bearbeitet';
@@ -739,6 +740,7 @@ $pia_journ_lang['LogStr_0063'] = 'GeoLite2 DB Update verfügbar';
 $pia_journ_lang['LogStr_0064'] = 'Kein GeoLite2 DB Update verfügbar';
 $pia_journ_lang['LogStr_0065'] = 'GeoLite2 DB nicht installiert';
 $pia_journ_lang['LogStr_0066'] = 'Fehler: Ungültige Updateinformationen';
+$pia_journ_lang['LogStr_0067'] = 'Es wurde keine neuere Version gefunden';
 $pia_journ_lang['LogStr_0101'] = 'Datenbank aufgeräumt und optimiert';
 $pia_journ_lang['LogStr_0210'] = 'Individuellen nmap Scan durchgeführt';
 $pia_journ_lang['LogStr_0251'] = 'Wake-on-lan ausgeführt';
