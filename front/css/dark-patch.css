@@ -74,10 +74,11 @@ h4 {
 .pagination > .disabled > span:focus,
 .pagination > .disabled > span:hover {
   cursor: not-allowed;
-  color: #bec5cb;
+  color: #666;
   background-color: #353c42;
   border-color: #353c42;
 }
+.pagination > li > a,
 .pagination > li > a:focus,
 .pagination > li > a:hover,
 .pagination > li > span:focus,
