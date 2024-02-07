@@ -239,6 +239,8 @@ def check_internet_IP():
     if AUTO_UPDATE_CHECK :
         if startTime.hour in [9, 15, 21] and startTime.minute == 0:
             checkNewVersion()
+    else:
+        NewVersion_FrontendNotification(False,"")
 
     return 0
 
@@ -260,7 +262,6 @@ def NewVersion_FrontendNotification(newVersion,update_notes):
 # ------------------------------------------------------------------------------
 def checkNewVersion():
     newVersion = False
-    #VERSION_DATE = "2024-01-21"
     currentversion = VERSION_DATE
 
     print(f"\nAuto Update-Check...")
