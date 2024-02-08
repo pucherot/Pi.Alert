@@ -270,6 +270,14 @@ NETWORK_DNS_SERVER = 'localhost'
 EOF
 fi
 
+# 2024-02-08
+if ! grep -Fq "AUTO_UPDATE_CHECK" "$PIALERT_HOME/config/pialert.conf" ; then
+  cat << EOF >> "$PIALERT_HOME/config/pialert.conf"
+
+AUTO_UPDATE_CHECK      = True
+EOF
+fi
+
 }
 
 # ------------------------------------------------------------------------------
